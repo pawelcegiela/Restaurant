@@ -2,14 +2,14 @@ package pi.restaurant.management
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 
-class AuthenticationActivity : AppCompatActivity() {
+class AuthenticationActivity : BaseActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
     private lateinit var auth: FirebaseAuth
 
@@ -18,6 +18,8 @@ class AuthenticationActivity : AppCompatActivity() {
 
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+
         auth = Firebase.auth
 
         setButtonLogInListener()
@@ -30,6 +32,8 @@ class AuthenticationActivity : AppCompatActivity() {
             startMainActivity()
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu) = true
 
     private fun setButtonLogInListener() {
         binding.buttonLogIn.setOnClickListener {

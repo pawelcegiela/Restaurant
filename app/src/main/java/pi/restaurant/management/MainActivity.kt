@@ -3,62 +3,46 @@ package pi.restaurant.management
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, false) //TODO: Co z innymi klasami?
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
+        setButtonListeners()
+    }
+
+    private fun setButtonListeners() {
+        binding.buttonRestaurantData.setOnClickListener {
+            startActivity(Intent(this, RestaurantDataActivity::class.java))
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            R.id.action_log_out -> {
-                logOut()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        binding.buttonWorkers.setOnClickListener {
+            startActivity(Intent(this, WorkersActivity::class.java))
         }
-    }
 
-    private fun logOut() {
-        Firebase.auth.signOut()
-        startActivity(Intent(this, AuthenticationActivity::class.java))
-        finish()
+        binding.buttonMenu.setOnClickListener {
+            startActivity(Intent(this, MenuActivity::class.java))
+        }
+
+        binding.buttonOrders.setOnClickListener {
+            startActivity(Intent(this, OrdersActivity::class.java))
+        }
+
+        binding.buttonIngredients.setOnClickListener {
+            startActivity(Intent(this, IngredientsActivity::class.java))
+        }
+
+        binding.buttonDiscounts.setOnClickListener {
+            startActivity(Intent(this, DiscountsActivity::class.java))
+        }
     }
 }
