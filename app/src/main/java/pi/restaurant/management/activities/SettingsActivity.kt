@@ -1,6 +1,7 @@
 package pi.restaurant.management.activities
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,7 +11,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ActivitySettingsBinding
 
 
-class SettingsActivity : BaseActivity() {
+class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
