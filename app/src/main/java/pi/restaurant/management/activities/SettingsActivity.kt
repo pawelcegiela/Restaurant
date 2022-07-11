@@ -7,6 +7,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ActivitySettingsBinding
 
@@ -27,12 +29,16 @@ class SettingsActivity : AppCompatActivity() {
 
         val navController = navHostFragment.navController
 
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayoutSettings)
+
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val navView: NavigationView = findViewById(R.id.nav_view_settings)
+        navView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.navHostFragmentMain)
+        val navController = findNavController(R.id.navHostFragmentSettings)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }

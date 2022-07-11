@@ -17,7 +17,7 @@
     <string name="orders">Orders</string>
     <string name="ingredients">Ingredients</string>
     <string name="discounts">Discounts</string>
-    <string name="temp">Temp button</string>
+    <string name="temp">Temporary string</string>
     <string name="my_data">My data</string>
     <string name="save">Save</string>
     <string name="first_name">First name</string>
@@ -29,4 +29,11 @@
     <string name="passwords_differ">Entered passwords differ</string>
     <string name="password_changed">Your password has been changed</string>
     <string name="auth_failed_try_again">Authentication failed. Try again</string>
+    <string name="title_activity_settings2">SettingsActivity2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_home">Home</string>
 </resources>

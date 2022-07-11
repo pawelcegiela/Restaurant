@@ -89,10 +89,6 @@ class MyDataFragment : Fragment() {
                 ).show()
             }
         }
-
-        binding.buttonTempPassword.setOnClickListener {
-            findNavController().navigate(R.id.actionMyDataToPassword)
-        }
     }
 
     override fun onDestroyView() {

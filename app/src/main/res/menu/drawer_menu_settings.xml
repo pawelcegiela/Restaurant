@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupMain">
+        <item
+            android:id="@+id/MainActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/menu_home" />
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupSettings">
+        <item
+            android:id="@+id/MyDataFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/my_data" />
+
+        <item
+            android:id="@+id/PasswordFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/password" />
+    </group>
+</menu>

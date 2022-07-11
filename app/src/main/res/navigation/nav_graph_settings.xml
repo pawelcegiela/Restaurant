@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/nav_graph_settings"
     app:startDestination="@id/MyDataFragment">
 
     <fragment
@@ -21,4 +21,10 @@
         android:name="pi.restaurant.management.fragments.PasswordFragment"
         android:label="@string/password"
         tools:layout="@layout/fragment_password" />
+
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="pi.restaurant.management.activities.MainActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_main" />
 </navigation>

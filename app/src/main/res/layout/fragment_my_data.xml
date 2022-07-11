@@ -48,14 +48,6 @@
             android:layout_marginTop="25dp"
             android:text="@string/save" />
 
-        <Button
-            android:id="@+id/buttonTempPassword"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/password" />
-
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

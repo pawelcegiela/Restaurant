@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/nav_graph_main"
     app:startDestination="@id/MainFragment">
 
     <fragment
@@ -71,4 +71,11 @@
         android:name="pi.restaurant.management.fragments.WorkersFragment"
         android:label="@string/workers"
         tools:layout="@layout/fragment_workers" />
+
+    <activity
+        android:id="@+id/SettingsActivity"
+        android:name="pi.restaurant.management.activities.SettingsActivity"
+        android:label="Settings"
+        tools:layout="@layout/activity_settings" />
+
 </navigation>

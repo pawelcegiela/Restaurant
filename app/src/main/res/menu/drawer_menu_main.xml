@@ -1,0 +1,52 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/groupMain"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/MainFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/RestaurantDataFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/restaurant_data" />
+
+        <item
+            android:id="@+id/WorkersFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/workers" />
+
+        <item
+            android:id="@+id/MenuFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/menu" />
+
+        <item
+            android:id="@+id/OrdersFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/orders" />
+
+        <item
+            android:id="@+id/IngredientsFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/ingredients" />
+
+        <item
+            android:id="@+id/DiscountsFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/discounts" />
+    </group>
+
+    <group
+        android:id="@+id/groupSettings"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/SettingsActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/action_settings" />
+    </group>
+</menu>
