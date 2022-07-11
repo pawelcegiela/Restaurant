@@ -16,8 +16,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
-            R.id.action_my_data -> {
+            R.id.action_settings -> {
                 startMyData()
                 true
             }
@@ -30,7 +29,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun startMyData() {
-        startActivity(Intent(this, MyDataActivity::class.java))
+        startActivity(Intent(this, SettingsActivity::class.java))
     }
 
     private fun logOut() {

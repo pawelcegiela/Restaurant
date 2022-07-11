@@ -5,19 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.MyDataActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    tools:context=".fragments.MyDataFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,40 +40,21 @@
             android:importantForAutofill="no"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/editTextCurrentPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/current_password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/editTextNewPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/new_password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/editTextRepeatNewPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/repeat_new_password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword" />
-
         <Button
-            android:id="@+id/buttonSave"
+            android:id="@+id/buttonSaveData"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
             android:text="@string/save" />
+
+        <Button
+            android:id="@+id/buttonTempPassword"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="@string/password" />
 
     </LinearLayout>
 

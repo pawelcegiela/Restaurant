@@ -6,9 +6,14 @@ import android.view.Menu
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
+
 
 class AuthenticationActivity : BaseActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
@@ -30,7 +35,18 @@ class AuthenticationActivity : BaseActivity() {
     public override fun onStart() {
         super.onStart()
         if (auth.currentUser != null) {
-            startMainActivity()
+            val databaseRef = Firebase.database.getReference("users")
+            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.child(auth.currentUser!!.uid).exists()) {
+                        startMainActivity()
+                    } else {
+                        startMyDataActivity()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
         }
     }
 
@@ -75,6 +91,13 @@ class AuthenticationActivity : BaseActivity() {
                     }
                 }
         }
+    }
+
+    private fun startMyDataActivity() {
+        val intent = Intent(this, SettingsActivity::class.java)
+        intent.putExtra("firstTime", true)
+        startActivity(intent)
+        finish()
     }
 
     private fun startMainActivity() {

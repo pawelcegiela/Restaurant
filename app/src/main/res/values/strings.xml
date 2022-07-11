@@ -8,7 +8,7 @@
     <string name="info_enter_email_password">Please enter email and password</string>
     <string name="log_out">Log out</string>
     <string name="password_reset_email_sent">Password reset email sent</string>
-    <string name="authentication_failed">Authentication failed. Wrong email or password</string>
+    <string name="authentication_failed">Authentication failed</string>
     <string name="enter_email_password">Enter email and password</string>
     <string name="enter_email">Enter email</string>
     <string name="restaurant_data">Restaurant data</string>
@@ -25,9 +25,8 @@
     <string name="current_password">Current password</string>
     <string name="new_password">New password</string>
     <string name="repeat_new_password">Repeat new password</string>
-    <string name="next">next</string>
-    <string name="lorem_ipsum">lorem</string>
-    <string name="previous">prev</string>
-    <string name="first_fragment_label">first label</string>
-    <string name="second_fragment_label">snd label</string>
+    <string name="your_data_has_been_changed">Your data has been changed</string>
+    <string name="passwords_differ">Entered passwords differ</string>
+    <string name="password_changed">Your password has been changed</string>
+    <string name="auth_failed_try_again">Authentication failed. Try again</string>
 </resources>
