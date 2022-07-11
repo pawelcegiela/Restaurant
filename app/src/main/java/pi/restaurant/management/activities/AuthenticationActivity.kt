@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -19,22 +21,16 @@ import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
     private lateinit var auth: FirebaseAuth
+    private var keep = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityAuthenticationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
+            return@KeepOnScreenCondition keep
+        })
 
         auth = Firebase.auth
-
-        setButtonLogInListener()
-        setResetPasswordListener()
-    }
-
-    public override fun onStart() {
-        super.onStart()
         if (auth.currentUser != null) {
             val databaseRef = Firebase.database.getReference("users")
             databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -48,7 +44,16 @@ class AuthenticationActivity : AppCompatActivity() {
 
                 override fun onCancelled(error: DatabaseError) {}
             })
+        } else {
+            keep = false
         }
+
+        binding = ActivityAuthenticationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+
+        setButtonLogInListener()
+        setResetPasswordListener()
     }
 
     private fun setButtonLogInListener() {
