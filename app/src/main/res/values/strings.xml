@@ -18,4 +18,16 @@
     <string name="ingredients">Ingredients</string>
     <string name="discounts">Discounts</string>
     <string name="temp">Temp button</string>
+    <string name="my_data">My data</string>
+    <string name="save">Save</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="repeat_new_password">Repeat new password</string>
+    <string name="next">next</string>
+    <string name="lorem_ipsum">lorem</string>
+    <string name="previous">prev</string>
+    <string name="first_fragment_label">first label</string>
+    <string name="second_fragment_label">snd label</string>
 </resources>

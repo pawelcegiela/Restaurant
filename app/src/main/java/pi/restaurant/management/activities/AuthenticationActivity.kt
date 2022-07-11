@@ -1,4 +1,4 @@
-package pi.restaurant.management
+package pi.restaurant.management.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 
 class AuthenticationActivity : BaseActivity() {

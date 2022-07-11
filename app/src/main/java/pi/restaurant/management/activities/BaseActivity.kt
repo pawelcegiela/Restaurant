@@ -1,4 +1,4 @@
-package pi.restaurant.management
+package pi.restaurant.management.activities
 
 import android.content.Intent
 import android.view.Menu
@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import pi.restaurant.management.R
 
 open class BaseActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -16,12 +17,20 @@ open class BaseActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_my_data -> {
+                startMyData()
+                true
+            }
             R.id.action_log_out -> {
                 logOut()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun startMyData() {
+        startActivity(Intent(this, MyDataActivity::class.java))
     }
 
     private fun logOut() {

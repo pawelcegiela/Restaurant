@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.AuthenticationActivity">
+    tools:context=".activities.MyDataActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -25,60 +25,67 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_margin="15dp"
-            android:text="@string/log_in" />
+            android:hint="@string/first_name"
+            android:importantForAutofill="no"
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/editTextLogInEmail"
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/last_name"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="@string/e_mail"
-            android:inputType="textWebEmailAddress"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editTextLogInPassword"
+            android:id="@+id/editTextCurrentPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:importantForAutofill="no" />
+            android:hint="@string/current_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/buttonLogIn"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editTextNewPassword"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="@string/log_in" />
+            android:hint="@string/new_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editTextRepeatNewPassword"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/repeat_new_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:text="@string/reset_password" />
-
-        <EditText
-            android:id="@+id/editTextResetPassEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/e_mail"
-            android:inputType="textWebEmailAddress"
-            android:importantForAutofill="no" />
-
-        <Button
-            android:id="@+id/buttonResetPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="@string/reset_password" />
+            android:layout_marginTop="25dp"
+            android:text="@string/save" />
 
     </LinearLayout>
 
