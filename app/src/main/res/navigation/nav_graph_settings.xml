@@ -3,22 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_settings"
-    app:startDestination="@id/MyDataFragment">
+    app:startDestination="@id/SettingsMainFragment">
 
     <fragment
-        android:id="@+id/MyDataFragment"
-        android:name="pi.restaurant.management.fragments.MyDataFragment"
-        android:label="@string/my_data"
-        tools:layout="@layout/fragment_my_data">
+        android:id="@+id/SettingsMainFragment"
+        android:name="pi.restaurant.management.fragments.settings.SettingsMainFragment"
+        android:label="@string/action_settings"
+        tools:layout="@layout/fragment_settings_main">
+        <action
+            android:id="@+id/actionSettingsToMyData"
+            app:destination="@id/MyDataFragment" />
 
         <action
-            android:id="@+id/actionMyDataToPassword"
+            android:id="@+id/actionSettingsToPassword"
             app:destination="@id/PasswordFragment" />
     </fragment>
 
+
+    <fragment
+        android:id="@+id/MyDataFragment"
+        android:name="pi.restaurant.management.fragments.settings.MyDataFragment"
+        android:label="@string/my_data"
+        tools:layout="@layout/fragment_my_data"/>
+
     <fragment
         android:id="@+id/PasswordFragment"
-        android:name="pi.restaurant.management.fragments.PasswordFragment"
+        android:name="pi.restaurant.management.fragments.settings.PasswordFragment"
         android:label="@string/password"
         tools:layout="@layout/fragment_password" />
 

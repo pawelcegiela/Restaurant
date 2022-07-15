@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.main.MainFragment">
+    tools:context=".fragments.restaurantdata.RDMainFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,53 +14,36 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <Button
-            android:id="@+id/buttonRestaurantData"
+            android:id="@+id/buttonAboutRestaurant"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="@string/restaurant_data" />
+            android:text="@string/about_restaurant" />
 
         <Button
-            android:id="@+id/buttonWorkers"
+            android:id="@+id/buttonOpeningHours"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="@string/workers" />
+            android:text="@string/opening_hours" />
 
         <Button
-            android:id="@+id/buttonMenu"
+            android:id="@+id/buttonLocation"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="@string/menu" />
-        <!--    TODO: Change this name -->
+            android:text="@string/location" />
 
         <Button
-            android:id="@+id/buttonOrders"
+            android:id="@+id/buttonDelivery"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="@string/orders" />
-
-        <Button
-            android:id="@+id/buttonIngredients"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/ingredients" />
-
-        <Button
-            android:id="@+id/buttonDiscounts"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/discounts" />
+            android:text="@string/delivery" />
 
     </LinearLayout>
 

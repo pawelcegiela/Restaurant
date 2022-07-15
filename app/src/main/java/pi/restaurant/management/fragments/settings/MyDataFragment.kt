@@ -1,4 +1,4 @@
-package pi.restaurant.management.fragments
+package pi.restaurant.management.fragments.settings
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -38,11 +37,11 @@ class MyDataFragment : Fragment() {
 
         firstTime = activity!!.intent.getBooleanExtra("firstTime", false)
 
-        getData()
+        loadData()
         setButtonListener()
     }
 
-    private fun getData() {
+    private fun loadData() {
         val user = Firebase.auth.currentUser ?: return
         val databaseRef = Firebase.database.getReference("users").child(user.uid)
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -72,6 +71,18 @@ class MyDataFragment : Fragment() {
         binding.buttonSaveData.setOnClickListener {
             val firstName = binding.editTextFirstName.text.toString()
             val lastName = binding.editTextLastName.text.toString()
+
+            if (firstName.trim().isEmpty()) {
+                binding.editTextFirstName.error =
+                    getString(R.string.is_required, getString(R.string.first_name))
+            }
+            if (lastName.trim().isEmpty()) {
+                binding.editTextLastName.error =
+                    getString(R.string.is_required, getString(R.string.last_name))
+            }
+            if (firstName.trim().isEmpty() || lastName.trim().isEmpty()) {
+                return@setOnClickListener
+            }
 
             val map = HashMap<String, String>()
             map["firstName"] = firstName

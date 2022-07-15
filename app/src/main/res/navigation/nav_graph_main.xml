@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/MainFragment"
-        android:name="pi.restaurant.management.fragments.MainFragment"
+        android:name="pi.restaurant.management.fragments.main.MainFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_main">
 
@@ -28,49 +28,45 @@
             app:destination="@id/OrdersFragment" />
 
         <action
-            android:id="@+id/actionMainToRestaurantData"
-            app:destination="@id/RestaurantDataFragment" />
-
-        <action
             android:id="@+id/actionMainToWorkers"
             app:destination="@id/WorkersFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/DiscountsFragment"
-        android:name="pi.restaurant.management.fragments.DiscountsFragment"
+        android:name="pi.restaurant.management.fragments.main.DiscountsFragment"
         android:label="@string/discounts"
         tools:layout="@layout/fragment_discounts" />
 
     <fragment
         android:id="@+id/IngredientsFragment"
-        android:name="pi.restaurant.management.fragments.IngredientsFragment"
+        android:name="pi.restaurant.management.fragments.main.IngredientsFragment"
         android:label="@string/ingredients"
         tools:layout="@layout/fragment_ingredients" />
 
     <fragment
         android:id="@+id/MenuFragment"
-        android:name="pi.restaurant.management.fragments.MenuFragment"
+        android:name="pi.restaurant.management.fragments.main.MenuFragment"
         android:label="@string/menu"
         tools:layout="@layout/fragment_menu" />
 
     <fragment
         android:id="@+id/OrdersFragment"
-        android:name="pi.restaurant.management.fragments.OrdersFragment"
+        android:name="pi.restaurant.management.fragments.main.OrdersFragment"
         android:label="@string/orders"
         tools:layout="@layout/fragment_orders" />
 
     <fragment
-        android:id="@+id/RestaurantDataFragment"
-        android:name="pi.restaurant.management.fragments.RestaurantDataFragment"
-        android:label="@string/restaurant_data"
-        tools:layout="@layout/fragment_restaurant_data" />
-
-    <fragment
         android:id="@+id/WorkersFragment"
-        android:name="pi.restaurant.management.fragments.WorkersFragment"
+        android:name="pi.restaurant.management.fragments.main.WorkersFragment"
         android:label="@string/workers"
         tools:layout="@layout/fragment_workers" />
+
+    <activity
+        android:id="@+id/RestaurantDataActivity"
+        android:name="pi.restaurant.management.activities.RestaurantDataActivity"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/activity_restaurant_data" />
 
     <activity
         android:id="@+id/SettingsActivity"

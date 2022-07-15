@@ -11,11 +11,6 @@
             android:title="@string/menu_home" />
 
         <item
-            android:id="@+id/RestaurantDataFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/restaurant_data" />
-
-        <item
             android:id="@+id/WorkersFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/workers" />
@@ -39,6 +34,15 @@
             android:id="@+id/DiscountsFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/discounts" />
+    </group>
+
+    <group
+        android:id="@+id/groupRestaurantData"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/RestaurantDataActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/restaurant_data" />
     </group>
 
     <group

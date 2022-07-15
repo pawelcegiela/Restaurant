@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.settings.MyDataFragment">
+    tools:context=".fragments.restaurantdata.RDMainFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,34 +14,28 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
-            android:id="@+id/editTextFirstName"
+            android:id="@+id/editTextRestaurantName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/first_name"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:hint="@string/restaurant_name"
             android:importantForAutofill="no"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/editTextLastName"
+            android:id="@+id/editTextRestaurantDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/last_name"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/restaurant_description"
             android:importantForAutofill="no"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/e_mail"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress" />
+            android:inputType="textMultiLine" />
 
         <Button
-            android:id="@+id/buttonSaveData"
+            android:id="@+id/buttonSave"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"

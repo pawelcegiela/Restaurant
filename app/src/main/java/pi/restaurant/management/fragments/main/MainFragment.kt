@@ -1,5 +1,6 @@
-package pi.restaurant.management.fragments
+package pi.restaurant.management.fragments.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
+import pi.restaurant.management.activities.RestaurantDataActivity
 import pi.restaurant.management.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -29,7 +31,7 @@ class MainFragment : Fragment() {
 
     private fun setButtonListeners() {
         binding.buttonRestaurantData.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToRestaurantData)
+            startActivity(Intent(activity, RestaurantDataActivity::class.java))
         }
 
         binding.buttonWorkers.setOnClickListener {

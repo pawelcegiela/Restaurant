@@ -1,4 +1,4 @@
-package pi.restaurant.management.fragments
+package pi.restaurant.management.fragments.main
 
 import android.os.Bundle
 import android.view.LayoutInflater

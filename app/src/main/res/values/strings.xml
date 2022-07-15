@@ -36,4 +36,24 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="menu_home">Home</string>
+    <string name="restaurant_name">Restaurant name</string>
+    <string name="restaurant_description">Restaurant description</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="is_required">%1$s is required</string>
+    <string name="restaurant_data_changed">Restaurant data changed successfully</string>
+    <string name="enter_correct_hours">Enter correct hours in format HH:MM or H:MM</string>
+    <string name="default_opening_hours">Default opening hours</string>
+    <string name="default_">Default</string>
+    <string name="opening_hours">Opening hours</string>
+    <string name="about_restaurant">About restaurant</string>
+    <string name="location">Location</string>
+    <string name="delivery">Delivery</string>
 </resources>

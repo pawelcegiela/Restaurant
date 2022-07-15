@@ -11,20 +11,30 @@
     </group>
 
     <group android:checkableBehavior="single"
-        android:id="@+id/groupSettings">
+        android:id="@+id/groupRestaurantData">
         <item
-            android:id="@+id/SettingsMainFragment"
+            android:id="@+id/RDMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/action_settings" />
+            android:title="@string/restaurant_data" />
 
         <item
-            android:id="@+id/MyDataFragment"
+            android:id="@+id/AboutRestaurantFragment"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/my_data" />
+            android:title="@string/about_restaurant" />
 
         <item
-            android:id="@+id/PasswordFragment"
+            android:id="@+id/OpeningHoursFragment"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/password" />
+            android:title="@string/opening_hours" />
+
+        <item
+            android:id="@+id/LocationFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/location" />
+
+        <item
+            android:id="@+id/DeliveryFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/delivery" />
     </group>
 </menu>

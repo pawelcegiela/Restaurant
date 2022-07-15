@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_restaurant_data"
+    app:startDestination="@id/RDMainFragment">
+
+    <fragment
+        android:id="@+id/RDMainFragment"
+        android:name="pi.restaurant.management.fragments.restaurantdata.RDMainFragment"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/fragment_rd_main">
+
+        <action
+            android:id="@+id/actionRDtoAboutRestaurant"
+            app:destination="@id/AboutRestaurantFragment" />
+
+        <action
+            android:id="@+id/actionRDtoOpeningHours"
+            app:destination="@id/OpeningHoursFragment" />
+
+        <action
+            android:id="@+id/actionRDtoLocation"
+            app:destination="@id/LocationFragment" />
+
+        <action
+            android:id="@+id/actionRDtoDelivery"
+            app:destination="@id/DeliveryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AboutRestaurantFragment"
+        android:name="pi.restaurant.management.fragments.restaurantdata.AboutRestaurantFragment"
+        android:label="@string/about_restaurant"
+        tools:layout="@layout/fragment_about_restaurant" />
+
+    <fragment
+        android:id="@+id/OpeningHoursFragment"
+        android:name="pi.restaurant.management.fragments.restaurantdata.OpeningHoursFragment"
+        android:label="@string/opening_hours"
+        tools:layout="@layout/fragment_opening_hours" />
+
+    <fragment
+        android:id="@+id/LocationFragment"
+        android:name="pi.restaurant.management.fragments.restaurantdata.LocationFragment"
+        android:label="@string/location"
+        tools:layout="@layout/fragment_location" />
+
+    <fragment
+        android:id="@+id/DeliveryFragment"
+        android:name="pi.restaurant.management.fragments.restaurantdata.DeliveryFragment"
+        android:label="@string/delivery"
+        tools:layout="@layout/fragment_delivery" />
+
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="pi.restaurant.management.activities.MainActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_main" />
+</navigation>
