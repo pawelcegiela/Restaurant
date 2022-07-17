@@ -3,7 +3,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single"
-        android:id="@+id/groupMain">
+        android:id="@+id/groupHome">
         <item
             android:id="@+id/MainActivity"
             android:icon="@drawable/ic_launcher_foreground"
@@ -36,5 +36,24 @@
             android:id="@+id/DeliveryFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/delivery" />
+    </group>
+
+    <group
+        android:id="@+id/groupMain"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/WorkersActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/workers" />
+
+        <item
+            android:id="@+id/SettingsActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/action_settings" />
+
+        <item
+            android:id="@+id/LogOut"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/log_out" />
     </group>
 </menu>

@@ -26,10 +26,6 @@
         <action
             android:id="@+id/actionMainToOrders"
             app:destination="@id/OrdersFragment" />
-
-        <action
-            android:id="@+id/actionMainToWorkers"
-            app:destination="@id/WorkersFragment" />
     </fragment>
 
     <fragment
@@ -56,12 +52,6 @@
         android:label="@string/orders"
         tools:layout="@layout/fragment_orders" />
 
-    <fragment
-        android:id="@+id/WorkersFragment"
-        android:name="pi.restaurant.management.fragments.main.WorkersFragment"
-        android:label="@string/workers"
-        tools:layout="@layout/fragment_workers" />
-
     <activity
         android:id="@+id/RestaurantDataActivity"
         android:name="pi.restaurant.management.activities.RestaurantDataActivity"
@@ -69,9 +59,27 @@
         tools:layout="@layout/activity_restaurant_data" />
 
     <activity
+        android:id="@+id/WorkersActivity"
+        android:name="pi.restaurant.management.activities.WorkersActivity"
+        android:label="@string/workers"
+        tools:layout="@layout/activity_workers" />
+
+    <activity
         android:id="@+id/SettingsActivity"
         android:name="pi.restaurant.management.activities.SettingsActivity"
-        android:label="Settings"
+        android:label="@string/action_settings"
         tools:layout="@layout/activity_settings" />
+
+    <activity
+        android:id="@+id/LogOut"
+        android:name="pi.restaurant.management.activities.AuthenticationActivity"
+        android:label="@string/log_out"
+        tools:layout="@layout/activity_authentication">
+
+        <argument
+            android:name="logOut"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </activity>
 
 </navigation>

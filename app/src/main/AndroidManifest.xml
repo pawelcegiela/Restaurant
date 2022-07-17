@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="pi.restaurant.management" >
+    package="pi.restaurant.management">
 
     <application
         android:allowBackup="true"
@@ -12,23 +12,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantManagement"
-        tools:targetApi="31" >
-        <activity
-            android:name=".activities.MainActivity"
-            android:exported="true" >
-        </activity>
+        tools:targetApi="31">
         <activity
             android:name=".activities.AuthenticationActivity"
-            android:theme="@style/Theme.App.Starting"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RestaurantDataActivity" />
-        <activity android:name=".activities.SettingsActivity" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.RestaurantDataActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.WorkersActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:screenOrientation="nosensor" />
     </application>
 
 </manifest>

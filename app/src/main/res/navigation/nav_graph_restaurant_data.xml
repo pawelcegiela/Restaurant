@@ -57,4 +57,29 @@
         android:name="pi.restaurant.management.activities.MainActivity"
         android:label="Home"
         tools:layout="@layout/activity_main" />
+
+    <activity
+        android:id="@+id/WorkersActivity"
+        android:name="pi.restaurant.management.activities.WorkersActivity"
+        android:label="@string/workers"
+        tools:layout="@layout/activity_workers" />
+
+    <activity
+        android:id="@+id/SettingsActivity"
+        android:name="pi.restaurant.management.activities.SettingsActivity"
+        android:label="@string/action_settings"
+        tools:layout="@layout/activity_settings" />
+
+    <activity
+        android:id="@+id/LogOut"
+        android:name="pi.restaurant.management.activities.AuthenticationActivity"
+        android:label="@string/log_out"
+        tools:layout="@layout/activity_authentication">
+
+        <argument
+            android:name="logOut"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </activity>
+
 </navigation>

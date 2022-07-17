@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_workers"
+    app:startDestination="@id/WorkersMainFragment">
+
+    <fragment
+        android:id="@+id/WorkersMainFragment"
+        android:name="pi.restaurant.management.fragments.workers.WorkersMainFragment"
+        android:label="@string/workers"
+        tools:layout="@layout/fragment_workers_main">
+        <action
+            android:id="@+id/actionWorkersToEditWorker"
+            app:destination="@id/EditWorkerFragment" />
+
+        <action
+            android:id="@+id/actionWorkersToAddWorker"
+            app:destination="@id/AddWorkerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/EditWorkerFragment"
+        android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
+        android:label="@string/edit_worker"
+        tools:layout="@layout/fragment_user_data">
+        <argument
+            android:name="id"
+            android:defaultValue="0"
+            app:argType="string" />
+
+        <argument
+            android:name="myRole"
+            android:defaultValue="3"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/actionEditWorkersToWorker"
+            app:destination="@id/WorkersMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddWorkerFragment"
+        android:name="pi.restaurant.management.fragments.workers.AddWorkerFragment"
+        android:label="@string/add_new_worker"
+        tools:layout="@layout/fragment_user_data">
+        <action
+            android:id="@+id/actionAddWorkersToWorker"
+            app:destination="@id/WorkersMainFragment" />
+    </fragment>
+
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="pi.restaurant.management.activities.MainActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_main" />
+
+    <activity
+        android:id="@+id/RestaurantDataActivity"
+        android:name="pi.restaurant.management.activities.RestaurantDataActivity"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/activity_restaurant_data" />
+
+    <activity
+        android:id="@+id/SettingsActivity"
+        android:name="pi.restaurant.management.activities.SettingsActivity"
+        android:label="@string/action_settings"
+        tools:layout="@layout/activity_settings" />
+
+    <activity
+        android:id="@+id/LogOut"
+        android:name="pi.restaurant.management.activities.AuthenticationActivity"
+        android:label="@string/log_out"
+        tools:layout="@layout/activity_authentication">
+
+        <argument
+            android:name="logOut"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </activity>
+</navigation>

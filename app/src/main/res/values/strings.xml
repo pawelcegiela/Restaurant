@@ -56,4 +56,54 @@
     <string name="about_restaurant">About restaurant</string>
     <string name="location">Location</string>
     <string name="delivery">Delivery</string>
+    <string name="city">City</string>
+    <string name="postal_code">Postal code</string>
+    <string name="street">Street</string>
+    <string name="house_number">House number</string>
+    <string name="flat_number">Flat number</string>
+    <string name="admin">Admin</string>
+    <string name="owner">Owner</string>
+    <string name="manager">Manager</string>
+    <string name="worker">Worker</string>
+    <string name="disable_user">Disable user</string>
+    <string name="edit_worker">Edit worker</string>
+    <string name="user_data_has_been_changed">User data has been changed</string>
+    <string name="enter_password">Enter password to save changes</string>
+    <string name="add_new_worker">Add new worker</string>
+    <string name="user_password">User password</string>
+    <string name="repeat_user_password">Repeat user password</string>
+    <string name="created_new_user">You have created a new user. You\'re now logged in as %1$s</string>
+    <string name="no_permission_user_data">You don\'t have permission to browse or modify this user\'s data</string>
+    <string name="account_has_been_disabled">This account has been disabled</string>
+    <string name="temp_first_name">Temporary first name</string>
+    <string name="temp_last_name">Temporary last  name</string>
+    <string name="no_user_data_found">No user data found. Default user data has been set. You can always change it in Settings</string>
+    <string name="enable_user">Enable user</string>
+    <string name="you_can_set_lower_roles">You can only set roles which are lower than yours</string>
+    <string name="to_manage_go_to_settings">To manage your account, go to Settings</string>
+
+    <string-array name="roles">
+        <item>Admin</item>
+        <item>Owner</item>
+        <item>Manager</item>
+        <item>Worker</item>
+    </string-array>
+
+    <string-array name="roles_admin">
+        <item>Owner</item>
+        <item>Manager</item>
+        <item>Worker</item>
+    </string-array>
+
+    <string-array name="roles_owner">
+        <item>Manager</item>
+        <item>Worker</item>
+    </string-array>
+
+    <string-array name="roles_manager">
+        <item>Worker</item>
+    </string-array>
+
+    <string-array name="roles_worker" />
+
 </resources>

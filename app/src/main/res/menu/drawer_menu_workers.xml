@@ -3,49 +3,28 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single"
-        android:id="@+id/groupHome">
+        android:id="@+id/groupGome">
         <item
             android:id="@+id/MainActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/menu_home" />
     </group>
 
-    <group
-        android:id="@+id/groupMain"
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupWorkers">
         <item
-            android:id="@+id/MenuFragment"
+            android:id="@+id/WorkersMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/menu" />
-
-        <item
-            android:id="@+id/OrdersFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/orders" />
-
-        <item
-            android:id="@+id/IngredientsFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/ingredients" />
-
-        <item
-            android:id="@+id/DiscountsFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/discounts" />
+            android:title="@string/workers" />
     </group>
 
     <group
-        android:id="@+id/groupRestaurantData"
+        android:id="@+id/groupMain"
         android:checkableBehavior="single">
         <item
             android:id="@+id/RestaurantDataActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/restaurant_data" />
-
-        <item
-            android:id="@+id/WorkersActivity"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/workers" />
 
         <item
             android:id="@+id/SettingsActivity"
@@ -57,5 +36,4 @@
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/log_out" />
     </group>
-
 </menu>

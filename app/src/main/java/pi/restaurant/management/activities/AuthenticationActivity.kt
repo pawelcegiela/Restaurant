@@ -13,8 +13,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
+import pi.restaurant.management.data.UserData
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 
 
@@ -30,22 +32,10 @@ class AuthenticationActivity : AppCompatActivity() {
             return@KeepOnScreenCondition keep
         })
 
-        auth = Firebase.auth
-        if (auth.currentUser != null) {
-            val databaseRef = Firebase.database.getReference("users")
-            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.child(auth.currentUser!!.uid).exists()) {
-                        startMainActivity()
-                    } else {
-                        startMyDataActivity()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
+        if (intent.getBooleanExtra("logOut", false)) {
+            logOut()
         } else {
-            keep = false
+            authenticate()
         }
 
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
@@ -56,24 +46,78 @@ class AuthenticationActivity : AppCompatActivity() {
         setResetPasswordListener()
     }
 
+    private fun logOut() {
+        Firebase.auth.signOut()
+        startActivity(Intent(this, AuthenticationActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        })
+        finish()
+    }
+
+    private fun authenticate() {
+        auth = Firebase.auth
+        val user = auth.currentUser
+        if (user == null) {
+            keep = false
+            return
+        }
+
+        val databaseRef = Firebase.database.getReference("users").child(user.uid)
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var data = dataSnapshot.getValue<UserData>()
+                if (data == null) {
+                    data = UserData(
+                        user.uid,
+                        getString(R.string.temp_first_name),
+                        getString(R.string.temp_last_name),
+                        user.email!!,
+                        3
+                    )
+                    databaseRef.setValue(data)
+                    Toast.makeText(
+                        this@AuthenticationActivity,
+                        getString(R.string.no_user_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                if (!data.disabled) {
+                    startMainActivity()
+                } else {
+                    keep = false
+                    Toast.makeText(
+                        this@AuthenticationActivity,
+                        getString(R.string.account_has_been_disabled),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
     private fun setButtonLogInListener() {
         binding.buttonLogIn.setOnClickListener {
             val email = binding.editTextLogInEmail.text.toString()
             val password = binding.editTextLogInPassword.text.toString()
 
             if (email == "" || password == "") {
-                Toast.makeText(this, getString(R.string.enter_email_password), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.enter_email_password), Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
 
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        startMainActivity()
+                        authenticate()
                     } else {
                         binding.editTextLogInPassword.setText("")
-                        Toast.makeText(baseContext, getString(R.string.authentication_failed),
-                            Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            baseContext, getString(R.string.authentication_failed),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
         }
@@ -91,17 +135,14 @@ class AuthenticationActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         binding.editTextResetPassEmail.setText("")
-                        Toast.makeText(this, getString(R.string.password_reset_email_sent), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.password_reset_email_sent),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
         }
-    }
-
-    private fun startMyDataActivity() {
-        val intent = Intent(this, SettingsActivity::class.java)
-        intent.putExtra("firstTime", true)
-        startActivity(intent)
-        finish()
     }
 
     private fun startMainActivity() {

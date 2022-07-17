@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.activities.RestaurantDataActivity
+import pi.restaurant.management.activities.WorkersActivity
 import pi.restaurant.management.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -35,7 +36,7 @@ class MainFragment : Fragment() {
         }
 
         binding.buttonWorkers.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToWorkers)
+            startActivity(Intent(activity, WorkersActivity::class.java))
         }
 
         binding.buttonMenu.setOnClickListener {

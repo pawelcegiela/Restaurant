@@ -146,7 +146,7 @@ class OpeningHoursFragment : Fragment() {
     }
 
     private fun setButtonListener() {
-        val databaseRef = Firebase.database.getReference("restaurantData")
+        val databaseRef = Firebase.database.getReference("restaurantData").child("openingHours")
         binding.buttonSave.setOnClickListener {
             try {
                 databaseRef.setValue(getData())

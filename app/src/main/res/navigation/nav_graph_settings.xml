@@ -24,7 +24,7 @@
         android:id="@+id/MyDataFragment"
         android:name="pi.restaurant.management.fragments.settings.MyDataFragment"
         android:label="@string/my_data"
-        tools:layout="@layout/fragment_my_data"/>
+        tools:layout="@layout/fragment_user_data"/>
 
     <fragment
         android:id="@+id/PasswordFragment"
@@ -37,4 +37,28 @@
         android:name="pi.restaurant.management.activities.MainActivity"
         android:label="Home"
         tools:layout="@layout/activity_main" />
+
+    <activity
+        android:id="@+id/RestaurantDataActivity"
+        android:name="pi.restaurant.management.activities.RestaurantDataActivity"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/activity_restaurant_data" />
+
+    <activity
+        android:id="@+id/WorkersActivity"
+        android:name="pi.restaurant.management.activities.WorkersActivity"
+        android:label="@string/workers"
+        tools:layout="@layout/activity_workers" />
+
+    <activity
+        android:id="@+id/LogOut"
+        android:name="pi.restaurant.management.activities.AuthenticationActivity"
+        android:label="@string/log_out"
+        tools:layout="@layout/activity_authentication">
+
+        <argument
+            android:name="logOut"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </activity>
 </navigation>
