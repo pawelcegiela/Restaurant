@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -17,8 +16,10 @@ import pi.restaurant.management.R
 import pi.restaurant.management.adapters.WorkersRecyclerAdapter
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.databinding.FragmentWorkersMainBinding
+import pi.restaurant.management.fragments.SplashScreenFragment
+import pi.restaurant.management.utils.Role
 
-class WorkersMainFragment : Fragment() {
+class WorkersMainFragment : SplashScreenFragment() {
     private var _binding: FragmentWorkersMainBinding? = null
     private val binding get() = _binding!!
 
@@ -42,6 +43,10 @@ class WorkersMainFragment : Fragment() {
                 val userRole = data[Firebase.auth.currentUser?.uid]?.role as Int
                 binding.recyclerView.adapter =
                     WorkersRecyclerAdapter(list, this@WorkersMainFragment, userId, userRole)
+                if (userRole == Role.WORKER.ordinal) {
+                    binding.fabNewWorker.visibility = View.GONE
+                }
+                keepSplashScreen = false
             }
 
             override fun onCancelled(error: DatabaseError) {}

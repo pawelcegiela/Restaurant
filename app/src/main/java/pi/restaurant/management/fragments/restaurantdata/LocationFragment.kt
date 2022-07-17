@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -14,8 +13,9 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.data.Location
 import pi.restaurant.management.databinding.FragmentLocationBinding
+import pi.restaurant.management.fragments.SplashScreenFragment
 
-class LocationFragment : Fragment() {
+class LocationFragment : SplashScreenFragment() {
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
 
@@ -41,6 +41,7 @@ class LocationFragment : Fragment() {
                 val data = dataSnapshot.getValue<Location>() ?: return
 
                 setLocation(data)
+                keepSplashScreen = false
             }
 
             override fun onCancelled(error: DatabaseError) {

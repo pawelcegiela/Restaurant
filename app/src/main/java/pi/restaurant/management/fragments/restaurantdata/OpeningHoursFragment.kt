@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -18,11 +17,12 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.OpeningHours
 import pi.restaurant.management.databinding.FragmentOpeningHoursBinding
+import pi.restaurant.management.fragments.SplashScreenFragment
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OpeningHoursFragment : Fragment() {
+class OpeningHoursFragment : SplashScreenFragment() {
     private var _binding: FragmentOpeningHoursBinding? = null
     private val binding get() = _binding!!
 
@@ -93,6 +93,7 @@ class OpeningHoursFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val data = dataSnapshot.getValue<OpeningHours>() ?: return
                 setOpeningHours(data)
+                keepSplashScreen = false
             }
 
             override fun onCancelled(error: DatabaseError) {

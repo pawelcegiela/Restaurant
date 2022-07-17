@@ -1,16 +1,13 @@
 package pi.restaurant.management.fragments.settings
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
-import pi.restaurant.management.activities.MainActivity
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.fragments.UserDataFragment
 

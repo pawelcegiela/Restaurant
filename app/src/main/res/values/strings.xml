@@ -89,21 +89,4 @@
         <item>Worker</item>
     </string-array>
 
-    <string-array name="roles_admin">
-        <item>Owner</item>
-        <item>Manager</item>
-        <item>Worker</item>
-    </string-array>
-
-    <string-array name="roles_owner">
-        <item>Manager</item>
-        <item>Worker</item>
-    </string-array>
-
-    <string-array name="roles_manager">
-        <item>Worker</item>
-    </string-array>
-
-    <string-array name="roles_worker" />
-
 </resources>

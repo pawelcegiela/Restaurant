@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -17,7 +16,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.databinding.FragmentUserDataBinding
 
-abstract class UserDataFragment : Fragment() {
+abstract class UserDataFragment : SplashScreenFragment() {
     private var _binding: FragmentUserDataBinding? = null
     val binding get() = _binding!!
     var id: String = ""
@@ -54,6 +53,7 @@ abstract class UserDataFragment : Fragment() {
                 if (data.disabled) {
                     binding.buttonDisableUser.text = getString(R.string.enable_user)
                 }
+                keepSplashScreen = false
             }
 
             override fun onCancelled(error: DatabaseError) {}

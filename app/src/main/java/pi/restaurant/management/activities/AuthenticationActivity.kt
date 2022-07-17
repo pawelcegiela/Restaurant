@@ -23,13 +23,13 @@ import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
     private lateinit var auth: FirebaseAuth
-    private var keep = true
+    private var keepSplashScreen = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
-            return@KeepOnScreenCondition keep
+            return@KeepOnScreenCondition keepSplashScreen
         })
 
         if (intent.getBooleanExtra("logOut", false)) {
@@ -58,7 +58,7 @@ class AuthenticationActivity : AppCompatActivity() {
         auth = Firebase.auth
         val user = auth.currentUser
         if (user == null) {
-            keep = false
+            keepSplashScreen = false
             return
         }
 
@@ -84,7 +84,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 if (!data.disabled) {
                     startMainActivity()
                 } else {
-                    keep = false
+                    keepSplashScreen = false
                     Toast.makeText(
                         this@AuthenticationActivity,
                         getString(R.string.account_has_been_disabled),

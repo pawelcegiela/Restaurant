@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -16,9 +15,10 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AboutRestaurant
 import pi.restaurant.management.databinding.FragmentAboutRestaurantBinding
+import pi.restaurant.management.fragments.SplashScreenFragment
 import java.text.ParseException
 
-class AboutRestaurantFragment : Fragment() {
+class AboutRestaurantFragment : SplashScreenFragment() {
     private var _binding: FragmentAboutRestaurantBinding? = null
     private val binding get() = _binding!!
 
@@ -44,6 +44,7 @@ class AboutRestaurantFragment : Fragment() {
                 val data = dataSnapshot.getValue<AboutRestaurant>() ?: return
                 binding.editTextRestaurantName.setText(data.name)
                 binding.editTextRestaurantDescription.setText(data.description)
+                keepSplashScreen = false
             }
 
             override fun onCancelled(error: DatabaseError) {
