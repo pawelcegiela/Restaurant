@@ -22,7 +22,7 @@ class OrdersActivity : AppCompatActivity() {
 
         binding = ActivityOrdersBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar.toolbar)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragmentOrders) as NavHostFragment

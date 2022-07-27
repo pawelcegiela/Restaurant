@@ -1,6 +1,7 @@
 package pi.restaurant.management.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -22,7 +23,7 @@ class WorkersActivity : AppCompatActivity() {
 
         binding = ActivityWorkersBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar.toolbar)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragmentWorkers) as NavHostFragment

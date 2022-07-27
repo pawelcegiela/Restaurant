@@ -17,6 +17,10 @@
         <action
             android:id="@+id/actionWorkersToAddWorker"
             app:destination="@id/AddWorkerFragment" />
+
+        <action
+            android:id="@+id/actionWorkersToSettings"
+            app:destination="@id/SettingsActivity" />
     </fragment>
 
     <fragment

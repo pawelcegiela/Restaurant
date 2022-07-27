@@ -22,7 +22,7 @@ class MenuActivity : AppCompatActivity() {
 
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar.toolbar)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragmentMenu) as NavHostFragment

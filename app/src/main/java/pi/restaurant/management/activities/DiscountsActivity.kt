@@ -22,7 +22,7 @@ class DiscountsActivity : AppCompatActivity() {
 
         binding = ActivityDiscountsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar.toolbar)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragmentDiscounts) as NavHostFragment

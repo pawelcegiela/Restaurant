@@ -22,7 +22,7 @@ class RestaurantDataActivity : AppCompatActivity() {
 
         binding = ActivityRestaurantDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar.toolbar)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragmentRestaurantData) as NavHostFragment
