@@ -49,7 +49,7 @@ class EditWorkerFragment : UserDataFragment() {
         Toast.makeText(activity, getString(R.string.user_data_has_been_changed), Toast.LENGTH_SHORT)
             .show()
 
-        findNavController().navigate(R.id.actionEditWorkersToWorker)
+        findNavController().navigate(R.id.actionEditWorkerToWorkers)
     }
 
     private fun setDisableUserListener() {

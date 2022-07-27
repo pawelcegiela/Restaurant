@@ -13,44 +13,44 @@
 
         <action
             android:id="@+id/actionMainToDiscounts"
-            app:destination="@id/DiscountsFragment" />
+            app:destination="@id/DiscountsActivity" />
 
         <action
             android:id="@+id/actionMainToIngredients"
-            app:destination="@id/IngredientsFragment" />
+            app:destination="@id/IngredientsActivity" />
 
         <action
             android:id="@+id/actionMainToMenu"
-            app:destination="@id/MenuFragment" />
+            app:destination="@id/MenuActivity" />
 
         <action
             android:id="@+id/actionMainToOrders"
-            app:destination="@id/OrdersFragment" />
+            app:destination="@id/OrdersActivity" />
     </fragment>
 
-    <fragment
-        android:id="@+id/DiscountsFragment"
-        android:name="pi.restaurant.management.fragments.main.DiscountsFragment"
+    <activity
+        android:id="@+id/DiscountsActivity"
+        android:name="pi.restaurant.management.activities.DiscountsActivity"
         android:label="@string/discounts"
-        tools:layout="@layout/fragment_discounts" />
+        tools:layout="@layout/activity_discounts" />
 
-    <fragment
-        android:id="@+id/IngredientsFragment"
-        android:name="pi.restaurant.management.fragments.main.IngredientsFragment"
+    <activity
+        android:id="@+id/IngredientsActivity"
+        android:name="pi.restaurant.management.activities.IngredientsActivity"
         android:label="@string/ingredients"
-        tools:layout="@layout/fragment_ingredients" />
+        tools:layout="@layout/activity_ingredients" />
 
-    <fragment
-        android:id="@+id/MenuFragment"
-        android:name="pi.restaurant.management.fragments.main.MenuFragment"
+    <activity
+        android:id="@+id/MenuActivity"
+        android:name="pi.restaurant.management.activities.MenuActivity"
         android:label="@string/menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/activity_menu" />
 
-    <fragment
-        android:id="@+id/OrdersFragment"
-        android:name="pi.restaurant.management.fragments.main.OrdersFragment"
+    <activity
+        android:id="@+id/OrdersActivity"
+        android:name="pi.restaurant.management.activities.OrdersActivity"
         android:label="@string/orders"
-        tools:layout="@layout/fragment_orders" />
+        tools:layout="@layout/activity_orders" />
 
     <activity
         android:id="@+id/RestaurantDataActivity"

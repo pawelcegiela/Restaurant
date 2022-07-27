@@ -1,21 +1,21 @@
-package pi.restaurant.management.fragments.main
+package pi.restaurant.management.fragments.orders
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import pi.restaurant.management.databinding.FragmentDiscountsBinding
+import pi.restaurant.management.databinding.FragmentOrdersMainBinding
 
-class DiscountsFragment : Fragment() {
-    private var _binding: FragmentDiscountsBinding? = null
+class OrdersMainFragment : Fragment() {
+    private var _binding: FragmentOrdersMainBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDiscountsBinding.inflate(inflater, container, false)
+        _binding = FragmentOrdersMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 

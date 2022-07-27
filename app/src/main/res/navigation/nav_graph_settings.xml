@@ -19,7 +19,6 @@
             app:destination="@id/PasswordFragment" />
     </fragment>
 
-
     <fragment
         android:id="@+id/MyDataFragment"
         android:name="pi.restaurant.management.fragments.settings.MyDataFragment"
@@ -37,6 +36,30 @@
         android:name="pi.restaurant.management.activities.MainActivity"
         android:label="Home"
         tools:layout="@layout/activity_main" />
+
+    <activity
+        android:id="@+id/DiscountsActivity"
+        android:name="pi.restaurant.management.activities.DiscountsActivity"
+        android:label="@string/discounts"
+        tools:layout="@layout/activity_discounts" />
+
+    <activity
+        android:id="@+id/IngredientsActivity"
+        android:name="pi.restaurant.management.activities.IngredientsActivity"
+        android:label="@string/ingredients"
+        tools:layout="@layout/activity_ingredients" />
+
+    <activity
+        android:id="@+id/MenuActivity"
+        android:name="pi.restaurant.management.activities.MenuActivity"
+        android:label="@string/menu"
+        tools:layout="@layout/activity_menu" />
+
+    <activity
+        android:id="@+id/OrdersActivity"
+        android:name="pi.restaurant.management.activities.OrdersActivity"
+        android:label="@string/orders"
+        tools:layout="@layout/activity_orders" />
 
     <activity
         android:id="@+id/RestaurantDataActivity"

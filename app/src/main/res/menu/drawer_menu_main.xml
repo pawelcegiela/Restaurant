@@ -14,29 +14,25 @@
         android:id="@+id/groupMain"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/MenuFragment"
+            android:id="@+id/DiscountsActivity"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/menu" />
+            android:title="@string/discounts" />
 
         <item
-            android:id="@+id/OrdersFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/orders" />
-
-        <item
-            android:id="@+id/IngredientsFragment"
+            android:id="@+id/IngredientsActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/ingredients" />
 
         <item
-            android:id="@+id/DiscountsFragment"
+            android:id="@+id/MenuActivity"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/discounts" />
-    </group>
+            android:title="@string/menu" />
 
-    <group
-        android:id="@+id/groupRestaurantData"
-        android:checkableBehavior="single">
+        <item
+            android:id="@+id/OrdersActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/orders" />
+
         <item
             android:id="@+id/RestaurantDataActivity"
             android:icon="@drawable/ic_launcher_foreground"
@@ -46,7 +42,10 @@
             android:id="@+id/WorkersActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/workers" />
+    </group>
 
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupSettings">
         <item
             android:id="@+id/SettingsActivity"
             android:icon="@drawable/ic_launcher_foreground"

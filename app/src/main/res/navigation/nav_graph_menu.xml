@@ -2,51 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_workers"
-    app:startDestination="@id/WorkersMainFragment">
+    android:id="@+id/nav_graph_menu"
+    app:startDestination="@id/MenuMainFragment">
 
     <fragment
-        android:id="@+id/WorkersMainFragment"
-        android:name="pi.restaurant.management.fragments.workers.WorkersMainFragment"
-        android:label="@string/workers"
-        tools:layout="@layout/fragment_workers_main">
-        <action
-            android:id="@+id/actionWorkersToEditWorker"
-            app:destination="@id/EditWorkerFragment" />
-
-        <action
-            android:id="@+id/actionWorkersToAddWorker"
-            app:destination="@id/AddWorkerFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/EditWorkerFragment"
-        android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
-        android:label="@string/edit_worker"
-        tools:layout="@layout/fragment_user_data">
-        <argument
-            android:name="id"
-            android:defaultValue="0"
-            app:argType="string" />
-
-        <argument
-            android:name="myRole"
-            android:defaultValue="3"
-            app:argType="integer" />
-
-        <action
-            android:id="@+id/actionEditWorkerToWorkers"
-            app:destination="@id/WorkersMainFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/AddWorkerFragment"
-        android:name="pi.restaurant.management.fragments.workers.AddWorkerFragment"
-        android:label="@string/add_new_worker"
-        tools:layout="@layout/fragment_user_data">
-        <action
-            android:id="@+id/actionAddWorkerToWorkers"
-            app:destination="@id/WorkersMainFragment" />
+        android:id="@+id/MenuMainFragment"
+        android:name="pi.restaurant.management.fragments.menu.MenuMainFragment"
+        android:label="@string/menu"
+        tools:layout="@layout/fragment_menu_main">
     </fragment>
 
     <activity
@@ -68,12 +31,6 @@
         tools:layout="@layout/activity_ingredients" />
 
     <activity
-        android:id="@+id/MenuActivity"
-        android:name="pi.restaurant.management.activities.MenuActivity"
-        android:label="@string/menu"
-        tools:layout="@layout/activity_menu" />
-
-    <activity
         android:id="@+id/OrdersActivity"
         android:name="pi.restaurant.management.activities.OrdersActivity"
         android:label="@string/orders"
@@ -84,6 +41,12 @@
         android:name="pi.restaurant.management.activities.RestaurantDataActivity"
         android:label="@string/restaurant_data"
         tools:layout="@layout/activity_restaurant_data" />
+
+    <activity
+        android:id="@+id/WorkersActivity"
+        android:name="pi.restaurant.management.activities.WorkersActivity"
+        android:label="@string/workers"
+        tools:layout="@layout/activity_workers" />
 
     <activity
         android:id="@+id/SettingsActivity"

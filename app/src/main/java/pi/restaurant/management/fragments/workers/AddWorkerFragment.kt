@@ -20,7 +20,7 @@ class AddWorkerFragment : UserDataFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //TODO: Zablokowanie dla Workerów
         binding.editTextPassword.visibility = View.GONE //TODO: Temp
         binding.buttonDisableUser.visibility = View.GONE
 
@@ -35,6 +35,7 @@ class AddWorkerFragment : UserDataFragment() {
 
         initializeSpinner()
         setSaveButtonListener()
+        keepSplashScreen = false
     }
 
     override fun setValue(data: UserData) {
@@ -69,7 +70,7 @@ class AddWorkerFragment : UserDataFragment() {
                     databaseRef.setValue(data)
                     Toast.makeText(context, getString(R.string.created_new_user, data.firstName + " " + data.lastName),
                         Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.actionAddWorkersToWorker)
+                    findNavController().navigate(R.id.actionAddWorkerToWorkers)
                 } else {
                     Toast.makeText(context, getString(R.string.authentication_failed),
                         Toast.LENGTH_SHORT).show()

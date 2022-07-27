@@ -27,6 +27,18 @@
             android:name=".activities.MainActivity"
             android:screenOrientation="nosensor" />
         <activity
+            android:name=".activities.DiscountsActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.IngredientsActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.MenuActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.OrdersActivity"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".activities.RestaurantDataActivity"
             android:screenOrientation="nosensor" />
         <activity

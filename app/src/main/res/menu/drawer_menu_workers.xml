@@ -3,7 +3,7 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single"
-        android:id="@+id/groupGome">
+        android:id="@+id/groupHome">
         <item
             android:id="@+id/MainActivity"
             android:icon="@drawable/ic_launcher_foreground"
@@ -16,16 +16,44 @@
             android:id="@+id/WorkersMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/workers" />
+
+        <item
+            android:id="@+id/AddWorkerFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/add_new_worker" />
     </group>
 
     <group
         android:id="@+id/groupMain"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/DiscountsActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/discounts" />
+
+        <item
+            android:id="@+id/IngredientsActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/ingredients" />
+
+        <item
+            android:id="@+id/MenuActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/menu" />
+
+        <item
+            android:id="@+id/OrdersActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/orders" />
+
+        <item
             android:id="@+id/RestaurantDataActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/restaurant_data" />
+    </group>
 
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupSettings">
         <item
             android:id="@+id/SettingsActivity"
             android:icon="@drawable/ic_launcher_foreground"

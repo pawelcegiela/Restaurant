@@ -11,31 +11,11 @@
     </group>
 
     <group android:checkableBehavior="single"
-        android:id="@+id/groupRestaurantData">
+        android:id="@+id/groupIngredients">
         <item
-            android:id="@+id/RDMainFragment"
+            android:id="@+id/IngredientsMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/restaurant_data" />
-
-        <item
-            android:id="@+id/AboutRestaurantFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/about_restaurant" />
-
-        <item
-            android:id="@+id/OpeningHoursFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/opening_hours" />
-
-        <item
-            android:id="@+id/LocationFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/location" />
-
-        <item
-            android:id="@+id/DeliveryFragment"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/delivery" />
+            android:title="@string/ingredients" />
     </group>
 
     <group
@@ -47,11 +27,6 @@
             android:title="@string/discounts" />
 
         <item
-            android:id="@+id/IngredientsActivity"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/ingredients" />
-
-        <item
             android:id="@+id/MenuActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/menu" />
@@ -60,6 +35,11 @@
             android:id="@+id/OrdersActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/orders" />
+
+        <item
+            android:id="@+id/RestaurantDataActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/restaurant_data" />
 
         <item
             android:id="@+id/WorkersActivity"
