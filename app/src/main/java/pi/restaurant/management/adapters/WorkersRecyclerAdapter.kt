@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.fragments.workers.WorkersMainFragment
-import pi.restaurant.management.utils.Role
+import pi.restaurant.management.enums.Role
 
 
 class WorkersRecyclerAdapter(

@@ -81,12 +81,21 @@
     <string name="enable_user">Enable user</string>
     <string name="you_can_set_lower_roles">You can only set roles which are lower than yours</string>
     <string name="to_manage_go_to_settings">To manage your account, go to Settings</string>
+    <string name="add_discount">Add discount</string>
+    <string name="zero">0</string>
+    <string name="code">Code</string>
+    <string name="discount_added">Discount has been added</string>
 
     <string-array name="roles">
         <item>Admin</item>
         <item>Owner</item>
         <item>Manager</item>
         <item>Worker</item>
+    </string-array>
+
+    <string-array name="types">
+        <item>%</item>
+        <item>zł</item>
     </string-array>
 
 </resources>

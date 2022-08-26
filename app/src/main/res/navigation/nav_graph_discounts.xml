@@ -10,6 +10,20 @@
         android:name="pi.restaurant.management.fragments.discounts.DiscountsMainFragment"
         android:label="@string/discounts"
         tools:layout="@layout/fragment_discounts_main">
+
+        <action
+            android:id="@+id/actionDiscountsToAddDiscount"
+            app:destination="@id/AddDiscountFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddDiscountFragment"
+        android:name="pi.restaurant.management.fragments.discounts.AddDiscountFragment"
+        android:label="@string/add_discount"
+        tools:layout="@layout/fragment_add_discount">
+        <action
+            android:id="@+id/actionAddDiscountToDiscounts"
+            app:destination="@id/DiscountsMainFragment" />
     </fragment>
 
     <activity

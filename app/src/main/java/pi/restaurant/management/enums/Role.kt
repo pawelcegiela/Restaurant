@@ -1,4 +1,4 @@
-package pi.restaurant.management.utils
+package pi.restaurant.management.enums
 
 import pi.restaurant.management.R
 

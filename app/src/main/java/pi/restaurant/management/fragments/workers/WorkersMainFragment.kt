@@ -17,7 +17,7 @@ import pi.restaurant.management.adapters.WorkersRecyclerAdapter
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.databinding.FragmentWorkersMainBinding
 import pi.restaurant.management.fragments.SplashScreenFragment
-import pi.restaurant.management.utils.Role
+import pi.restaurant.management.enums.Role
 
 class WorkersMainFragment : SplashScreenFragment() {
     private var _binding: FragmentWorkersMainBinding? = null
@@ -41,7 +41,7 @@ class WorkersMainFragment : SplashScreenFragment() {
                 val list = data.toList().map { it.second }
                 val userId = data[Firebase.auth.currentUser?.uid]?.id as String
                 val userRole = data[Firebase.auth.currentUser?.uid]?.role as Int
-                binding.recyclerView.adapter =
+                binding.recyclerViewWorkers.adapter =
                     WorkersRecyclerAdapter(list, this@WorkersMainFragment, userId, userRole)
                 if (userRole == Role.WORKER.ordinal) {
                     binding.fabNewWorker.visibility = View.GONE
