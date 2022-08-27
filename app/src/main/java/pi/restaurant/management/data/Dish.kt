@@ -2,19 +2,17 @@ package pi.restaurant.management.data
 
 import java.util.*
 
-class Ingredient {
+class Dish {
     lateinit var id: String
     lateinit var name: String
-    var amount: Int = 0
-    var unit: Int = 0
+    var price: Double = 0.0
 
     @Suppress("unused")
     constructor()
 
-    constructor(name: String, amount: Int, unit: Int) {
+    constructor(name: String, price: Double) {
         this.id = name.replace(" ", "_") + Date().time + Random().nextInt(1000)
         this.name = name
-        this.amount = amount
-        this.unit = unit
+        this.price = price
     }
 }

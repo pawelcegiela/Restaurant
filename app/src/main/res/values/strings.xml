@@ -93,6 +93,9 @@
     <string name="gram">g</string>
     <string name="mililiter">ml</string>
     <string name="piece">pcs</string>
+    <string name="add_dish">Add dish</string>
+    <string name="add_new_dish">Add new dish</string>
+    <string name="price">Price</string>
 
     <string-array name="roles">
         <item>Admin</item>

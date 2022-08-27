@@ -8,8 +8,7 @@ class UserData {
     var role = 3
     var disabled: Boolean = false
 
-
-    // Firebase constructor
+    @Suppress("unused")
     constructor()
 
     constructor(id: String, firstName: String, lastName: String, email: String, role: Int) {

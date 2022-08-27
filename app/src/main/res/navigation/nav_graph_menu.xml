@@ -10,6 +10,19 @@
         android:name="pi.restaurant.management.fragments.menu.MenuMainFragment"
         android:label="@string/menu"
         tools:layout="@layout/fragment_menu_main">
+        <action
+            android:id="@+id/actionMenuToAddDish"
+            app:destination="@id/AddDishFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddDishFragment"
+        android:name="pi.restaurant.management.fragments.menu.AddDishFragment"
+        android:label="@string/add_dish"
+        tools:layout="@layout/fragment_add_dish">
+        <action
+            android:id="@+id/actionAddDishToMenu"
+            app:destination="@id/MenuMainFragment" />
     </fragment>
 
     <activity

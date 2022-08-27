@@ -13,6 +13,7 @@ class DiscountGroup {
     var amount: Double = 0.0
     lateinit var expirationDate: Date
 
+    @Suppress("unused")
     constructor()
 
     constructor(
