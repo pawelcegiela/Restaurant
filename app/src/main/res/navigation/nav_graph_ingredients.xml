@@ -10,6 +10,20 @@
         android:name="pi.restaurant.management.fragments.ingredients.IngredientsMainFragment"
         android:label="@string/ingredients"
         tools:layout="@layout/fragment_ingredients_main">
+
+        <action
+            android:id="@+id/actionIngredientsToAddIngredient"
+            app:destination="@id/AddIngredientFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddIngredientFragment"
+        android:name="pi.restaurant.management.fragments.ingredients.AddIngredientFragment"
+        android:label="@string/add_ingredient"
+        tools:layout="@layout/fragment_add_ingredient">
+        <action
+            android:id="@+id/actionAddIngredientToIngredients"
+            app:destination="@id/IngredientsMainFragment" />
     </fragment>
 
     <activity

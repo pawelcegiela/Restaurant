@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.discounts.AddDiscountFragment">
+    tools:context=".fragments.ingredients.AddIngredientFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,39 +14,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
-            android:id="@+id/editTextAvailable"
+            android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:hint="@string/zero"
-            android:importantForAutofill="no"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/editTextAssigned"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/zero"
-            android:importantForAutofill="no"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/editTextUsed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/zero"
-            android:importantForAutofill="no"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/editTextCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="25dp"
-            android:layout_marginHorizontal="15dp"
-            android:hint="@string/code"
+            android:hint="@string/name"
             android:importantForAutofill="no"
             android:inputType="text" />
 
@@ -55,17 +27,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:hint="@string/zero"
+            android:hint="@string/amount"
             android:importantForAutofill="no"
             android:inputType="number" />
 
         <Spinner
-            android:id="@+id/spinnerType"
+            android:id="@+id/spinnerUnit"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="15dp" />
-
-<!--        TODO: Data-->
 
         <Button
             android:id="@+id/buttonSaveData"

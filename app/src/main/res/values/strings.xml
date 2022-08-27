@@ -85,6 +85,14 @@
     <string name="zero">0</string>
     <string name="code">Code</string>
     <string name="discount_added">Discount has been added</string>
+    <string name="add_new_discount">Add new discount</string>
+    <string name="name">Name</string>
+    <string name="amount">Amount</string>
+    <string name="add_ingredient">Add ingredient</string>
+    <string name="ingredient_added">Ingredient has been added</string>
+    <string name="gram">g</string>
+    <string name="mililiter">ml</string>
+    <string name="piece">pcs</string>
 
     <string-array name="roles">
         <item>Admin</item>
@@ -96,6 +104,12 @@
     <string-array name="types">
         <item>%</item>
         <item>zł</item>
+    </string-array>
+
+    <string-array name="units">
+        <item>g</item>
+        <item>ml</item>
+        <item>pcs</item>
     </string-array>
 
 </resources>
