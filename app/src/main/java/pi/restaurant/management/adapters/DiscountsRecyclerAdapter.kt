@@ -5,24 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.DiscountGroup
-import pi.restaurant.management.enums.DiscountType
-import pi.restaurant.management.fragments.discounts.DiscountsMainFragment
 
 
 class DiscountsRecyclerAdapter(
     private val dataSet: List<DiscountGroup>,
-    private val fragment: DiscountsMainFragment,
+    private val fragment: Fragment,
 ) :
     RecyclerView.Adapter<DiscountsRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View,
         val context: Context,
-        val fragment: DiscountsMainFragment,
-        private val dataSet: List<DiscountGroup>,
+        val fragment: Fragment,
     ) : RecyclerView.ViewHolder(view) {
         val textViewCode: TextView
         val textViewNumber: TextView
@@ -47,7 +45,7 @@ class DiscountsRecyclerAdapter(
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_discounts, viewGroup, false)
 
-        return ViewHolder(view, viewGroup.context, fragment, dataSet)
+        return ViewHolder(view, viewGroup.context, fragment)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {

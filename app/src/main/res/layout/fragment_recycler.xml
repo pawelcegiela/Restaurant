@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.discounts.DiscountsMainFragment">
+    tools:context=".fragments.RecyclerFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewDiscounts"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="LinearLayoutManager"/>
@@ -22,12 +22,12 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabNewDiscount"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_launcher_foreground"
-        android:contentDescription="@string/add_new_worker"
+        android:src="@drawable/plus"
+        android:contentDescription="@string/add_new_position"
         android:layout_margin="16dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

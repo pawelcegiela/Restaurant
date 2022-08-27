@@ -8,17 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
-import pi.restaurant.management.fragments.workers.WorkersMainFragment
 import pi.restaurant.management.enums.Role
 
 
 class WorkersRecyclerAdapter(
     private val dataSet: List<UserData>,
-    private val fragment: WorkersMainFragment,
+    private val fragment: Fragment,
     private val userId: String,
     private val userRole: Int
 ) :
@@ -27,7 +27,7 @@ class WorkersRecyclerAdapter(
     class ViewHolder(
         view: View,
         val context: Context,
-        val fragment: WorkersMainFragment,
+        val fragment: Fragment,
         private val dataSet: List<UserData>,
         private val userId: String,
         private val userRole: Int

@@ -69,7 +69,6 @@
     <string name="edit_worker">Edit worker</string>
     <string name="user_data_has_been_changed">User data has been changed</string>
     <string name="enter_password">Enter password to save changes</string>
-    <string name="add_new_worker">Add new worker</string>
     <string name="user_password">User password</string>
     <string name="repeat_user_password">Repeat user password</string>
     <string name="created_new_user">You have created a new user. You\'re now logged in as %1$s</string>
@@ -85,7 +84,6 @@
     <string name="zero">0</string>
     <string name="code">Code</string>
     <string name="discount_added">Discount has been added</string>
-    <string name="add_new_discount">Add new discount</string>
     <string name="name">Name</string>
     <string name="amount">Amount</string>
     <string name="add_ingredient">Add ingredient</string>
@@ -94,8 +92,9 @@
     <string name="mililiter">ml</string>
     <string name="piece">pcs</string>
     <string name="add_dish">Add dish</string>
-    <string name="add_new_dish">Add new dish</string>
     <string name="price">Price</string>
+    <string name="add_worker">Add worker</string>
+    <string name="add_new_position">Add new position</string>
 
     <string-array name="roles">
         <item>Admin</item>

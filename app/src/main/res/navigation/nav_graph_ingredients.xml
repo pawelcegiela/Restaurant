@@ -9,7 +9,7 @@
         android:id="@+id/IngredientsMainFragment"
         android:name="pi.restaurant.management.fragments.ingredients.IngredientsMainFragment"
         android:label="@string/ingredients"
-        tools:layout="@layout/fragment_ingredients_main">
+        tools:layout="@layout/fragment_recycler">
 
         <action
             android:id="@+id/actionIngredientsToAddIngredient"

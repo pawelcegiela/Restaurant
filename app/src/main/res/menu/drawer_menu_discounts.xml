@@ -16,6 +16,11 @@
             android:id="@+id/DiscountsMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/discounts" />
+
+        <item
+            android:id="@+id/AddDiscountFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/add_discount" />
     </group>
 
     <group

@@ -16,6 +16,11 @@
             android:id="@+id/MenuMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/menu" />
+
+        <item
+            android:id="@+id/AddDishFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/add_dish" />
     </group>
 
     <group

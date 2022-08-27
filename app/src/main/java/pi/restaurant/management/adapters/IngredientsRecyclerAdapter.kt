@@ -5,24 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Ingredient
-import pi.restaurant.management.enums.Role
-import pi.restaurant.management.fragments.ingredients.IngredientsMainFragment
 import pi.restaurant.management.enums.Unit
 
 
 class IngredientsRecyclerAdapter(
     private val dataSet: List<Ingredient>,
-    private val fragment: IngredientsMainFragment,
+    private val fragment: Fragment,
 ) :
     RecyclerView.Adapter<IngredientsRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View,
         val context: Context,
-        val fragment: IngredientsMainFragment,
+        val fragment: Fragment,
     ) : RecyclerView.ViewHolder(view) {
         val textViewName: TextView
         val textViewAmount: TextView

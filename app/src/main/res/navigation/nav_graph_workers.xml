@@ -9,7 +9,7 @@
         android:id="@+id/WorkersMainFragment"
         android:name="pi.restaurant.management.fragments.workers.WorkersMainFragment"
         android:label="@string/workers"
-        tools:layout="@layout/fragment_workers_main">
+        tools:layout="@layout/fragment_recycler">
         <action
             android:id="@+id/actionWorkersToEditWorker"
             app:destination="@id/EditWorkerFragment" />
@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/AddWorkerFragment"
         android:name="pi.restaurant.management.fragments.workers.AddWorkerFragment"
-        android:label="@string/add_new_worker"
+        android:label="@string/add_worker"
         tools:layout="@layout/fragment_user_data">
         <action
             android:id="@+id/actionAddWorkerToWorkers"

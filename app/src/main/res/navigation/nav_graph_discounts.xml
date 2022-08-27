@@ -9,7 +9,7 @@
         android:id="@+id/DiscountsMainFragment"
         android:name="pi.restaurant.management.fragments.discounts.DiscountsMainFragment"
         android:label="@string/discounts"
-        tools:layout="@layout/fragment_discounts_main">
+        tools:layout="@layout/fragment_recycler">
 
         <action
             android:id="@+id/actionDiscountsToAddDiscount"

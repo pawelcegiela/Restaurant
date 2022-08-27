@@ -5,22 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Dish
-import pi.restaurant.management.fragments.menu.MenuMainFragment
 
 
 class MenuRecyclerAdapter(
     private val dataSet: List<Dish>,
-    private val fragment: MenuMainFragment,
+    private val fragment: Fragment,
 ) :
     RecyclerView.Adapter<MenuRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View,
         val context: Context,
-        val fragment: MenuMainFragment,
+        val fragment: Fragment,
     ) : RecyclerView.ViewHolder(view) {
         val textViewName: TextView
         val textViewPrice: TextView

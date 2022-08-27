@@ -16,6 +16,11 @@
             android:id="@+id/IngredientsMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/ingredients" />
+
+        <item
+            android:id="@+id/AddIngredientFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/add_ingredient" />
     </group>
 
     <group
