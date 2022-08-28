@@ -19,7 +19,8 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
 
     override val databasePath = "discounts"
     override val linearLayout get() = binding.linearLayout
-    override val saveButton get() = binding.buttonSaveData
+    override val saveButton get() = binding.buttonSave
+    override val removeButton get() = binding.buttonRemove
     override var itemId = ""
 
     override fun onCreateView(
@@ -43,7 +44,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     }
 
     fun setSaveButtonListener() {
-        binding.buttonSaveData.setOnClickListener {
+        saveButton.setOnClickListener {
             if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
                 return@setOnClickListener
             }

@@ -15,8 +15,9 @@ import pi.restaurant.management.data.UserData
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
-    override val saveActionId = R.id.actionEditWorkerToWorkers
-    override val toastMessageId = 0 // Warning: unused
+    override val nextActionId = R.id.actionEditWorkerToWorkers
+    override val saveMessageId = 0 // Warning: unused
+    override val removeMessageId = 0 // Warning: unused
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +43,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.editTextEmail.setText(data.email)
         binding.spinnerRole.setSelection(data.role)
         if (data.disabled) {
-            binding.buttonDisableUser.text = getString(R.string.enable_user)
+            removeButton.text = getString(R.string.enable_user)
         }
     }
 
@@ -62,11 +63,11 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         Toast.makeText(activity, getString(R.string.user_data_has_been_changed), Toast.LENGTH_SHORT)
             .show()
 
-        findNavController().navigate(saveActionId)
+        findNavController().navigate(nextActionId)
     }
 
     private fun setDisableButtonListener() {
-        binding.buttonDisableUser.setOnClickListener {
+        removeButton.setOnClickListener {
             val databaseRef = Firebase.database.getReference("users").child(itemId)
             databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {

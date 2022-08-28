@@ -79,7 +79,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/buttonSaveData"
+            android:id="@+id/buttonSave"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -87,7 +87,7 @@
             android:text="@string/save" />
 
         <Button
-            android:id="@+id/buttonDisableUser"
+            android:id="@+id/buttonRemove"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"

@@ -61,7 +61,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
                 binding.editTextEmail.setText(data.email)
                 binding.spinnerRole.setSelection(data.role)
                 if (data.disabled) {
-                    binding.buttonDisableUser.text = getString(R.string.enable_user)
+                    binding.buttonRemove.text = getString(R.string.enable_user)
                 }
                 keepSplashScreen = false
             }
@@ -71,7 +71,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
     }
 
     private fun setSaveButtonListener() {
-        binding.buttonSaveData.setOnClickListener {
+        binding.buttonSave.setOnClickListener {
             if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
                 return@setOnClickListener
             }
@@ -106,7 +106,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
         binding.spinnerRole.isEnabled = false
         binding.editTextUserPassword.visibility = View.GONE
         binding.editTextRepeatUserPassword.visibility = View.GONE
-        binding.buttonDisableUser.visibility = View.GONE
+        binding.buttonRemove.visibility = View.GONE
 
         initializeSpinner()
         loadData()

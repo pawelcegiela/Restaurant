@@ -4,6 +4,7 @@ import pi.restaurant.management.R
 
 class AddDiscountFragment : AbstractModifyDiscountFragment() {
 
-    override val saveActionId = R.id.actionAddDiscountToDiscounts
-    override val toastMessageId = R.string.discount_added
+    override val nextActionId = R.id.actionAddDiscountToDiscounts
+    override val saveMessageId = R.string.discount_added
+    override val removeMessageId = 0
 }

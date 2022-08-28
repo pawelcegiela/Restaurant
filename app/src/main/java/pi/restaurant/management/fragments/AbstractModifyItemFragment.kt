@@ -24,9 +24,11 @@ abstract class AbstractModifyItemFragment : AbstractSplashScreenFragment() {
     abstract val databasePath: String
     abstract val linearLayout: LinearLayout
     abstract val saveButton: Button
+    abstract val removeButton: Button
     abstract var itemId: String
-    abstract val saveActionId: Int
-    abstract val toastMessageId: Int
+    abstract val nextActionId: Int
+    abstract val saveMessageId: Int
+    abstract val removeMessageId: Int
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,6 +57,7 @@ abstract class AbstractModifyItemFragment : AbstractSplashScreenFragment() {
             view.isEnabled = true
         }
         saveButton.text = getText(R.string.save)
+        removeButton.text = getText(R.string.remove_item)
     }
 
     abstract fun initializeUI()
@@ -76,8 +79,26 @@ abstract class AbstractModifyItemFragment : AbstractSplashScreenFragment() {
         val databaseRef = Firebase.database.getReference(databasePath).child(data.id)
         databaseRef.setValue(data)
 
-        Toast.makeText(activity, getString(toastMessageId), Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
+        findNavController().navigate(nextActionId)
+    }
 
-        findNavController().navigate(saveActionId)
+    fun setRemoveButtonListener() {
+        removeButton.setOnClickListener {
+            val databaseRef = Firebase.database.getReference(databasePath).child(itemId)
+
+            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (snapshot in dataSnapshot.children) {
+                        snapshot.ref.removeValue()
+                    }
+
+                    Toast.makeText(activity, getString(removeMessageId), Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(nextActionId)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
+        }
     }
 }

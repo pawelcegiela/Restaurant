@@ -13,13 +13,14 @@ import pi.restaurant.management.data.UserData
 
 class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
-    override val saveActionId = R.id.actionAddWorkerToWorkers
-    override val toastMessageId = 0 // Warning: unused
+    override val nextActionId = R.id.actionAddWorkerToWorkers
+    override val saveMessageId = 0 // Warning: unused
+    override val removeMessageId = 0 // Warning: unused
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.editTextPassword.visibility = View.GONE //TODO: Temp
-        binding.buttonDisableUser.visibility = View.GONE
+        removeButton.visibility = View.GONE
     }
 
     override fun initializeUI() {
@@ -59,7 +60,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
                     databaseRef.setValue(data)
                     Toast.makeText(context, getString(R.string.created_new_user, data.firstName + " " + data.lastName),
                         Toast.LENGTH_LONG).show()
-                    findNavController().navigate(saveActionId)
+                    findNavController().navigate(nextActionId)
                 } else {
                     Toast.makeText(context, getString(R.string.authentication_failed),
                         Toast.LENGTH_SHORT).show()

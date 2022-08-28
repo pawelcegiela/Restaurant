@@ -4,6 +4,7 @@ import pi.restaurant.management.R
 
 class AddIngredientFragment : AbstractModifyIngredientFragment() {
 
-    override val saveActionId = R.id.actionAddIngredientToIngredients
-    override val toastMessageId = R.string.ingredient_added
+    override val nextActionId = R.id.actionAddIngredientToIngredients
+    override val saveMessageId = R.string.ingredient_added
+    override val removeMessageId = 0
 }

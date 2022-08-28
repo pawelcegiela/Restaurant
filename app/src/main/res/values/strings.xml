@@ -106,6 +106,10 @@
     <string name="discount_modified">Discount has been modified</string>
     <string name="ingredient_modified">Ingredient has been modified</string>
     <string name="dish_modified">Dish has been modified</string>
+    <string name="remove_item">Remove item</string>
+    <string name="discount_removed">Discount has been removed</string>
+    <string name="ingredient_removed">Ingredient has been removed</string>
+    <string name="dish_removed">Dish has been removed</string>
 
     <string-array name="roles">
         <item>Admin</item>
