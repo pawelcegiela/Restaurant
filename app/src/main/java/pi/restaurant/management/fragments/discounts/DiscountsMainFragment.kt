@@ -5,9 +5,9 @@ import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DiscountsRecyclerAdapter
 import pi.restaurant.management.data.DiscountGroup
-import pi.restaurant.management.fragments.RecyclerFragment
+import pi.restaurant.management.fragments.AbstractItemListFragment
 
-class DiscountsMainFragment : RecyclerFragment() {
+class DiscountsMainFragment : AbstractItemListFragment() {
     override val databasePath = "discounts"
     override val fabActionId = R.id.actionDiscountsToAddDiscount
 

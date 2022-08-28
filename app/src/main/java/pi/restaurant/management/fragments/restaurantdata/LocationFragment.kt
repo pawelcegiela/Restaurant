@@ -13,9 +13,9 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.data.Location
 import pi.restaurant.management.databinding.FragmentLocationBinding
-import pi.restaurant.management.fragments.SplashScreenFragment
+import pi.restaurant.management.fragments.AbstractSplashScreenFragment
 
-class LocationFragment : SplashScreenFragment() {
+class LocationFragment : AbstractSplashScreenFragment() {
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
 

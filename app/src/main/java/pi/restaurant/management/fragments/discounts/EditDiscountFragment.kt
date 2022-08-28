@@ -2,7 +2,7 @@ package pi.restaurant.management.fragments.discounts
 
 import pi.restaurant.management.R
 
-class EditDiscountFragment : ModifyDiscountFragment() {
+class EditDiscountFragment : AbstractModifyDiscountFragment() {
 
     override val saveActionId = R.id.actionEditDiscountToDiscounts
     override val toastMessageId = R.string.discount_modified

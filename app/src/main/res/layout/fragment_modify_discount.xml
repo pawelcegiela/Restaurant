@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.discounts.ModifyDiscountFragment">
+    tools:context=".fragments.discounts.AbstractModifyDiscountFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"

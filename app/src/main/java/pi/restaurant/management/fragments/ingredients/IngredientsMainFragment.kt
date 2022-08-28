@@ -5,9 +5,9 @@ import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.IngredientsRecyclerAdapter
 import pi.restaurant.management.data.Ingredient
-import pi.restaurant.management.fragments.RecyclerFragment
+import pi.restaurant.management.fragments.AbstractItemListFragment
 
-class IngredientsMainFragment : RecyclerFragment() {
+class IngredientsMainFragment : AbstractItemListFragment() {
     override val databasePath = "ingredients"
     override val fabActionId = R.id.actionIngredientsToAddIngredient
 

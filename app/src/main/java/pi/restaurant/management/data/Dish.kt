@@ -2,7 +2,7 @@ package pi.restaurant.management.data
 
 import java.util.*
 
-class Dish : BaseDataObject {
+class Dish : AbstractDataObject {
     lateinit var name: String
     var price: Double = 0.0
 

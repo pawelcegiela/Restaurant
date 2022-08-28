@@ -13,7 +13,7 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
 
-class EditWorkerFragment : ModifyWorkerFragment() {
+class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
     override val saveActionId = R.id.actionEditWorkerToWorkers
     override val toastMessageId = 0 // Warning: unused

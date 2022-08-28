@@ -15,10 +15,10 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
-import pi.restaurant.management.data.BaseDataObject
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.enums.Role
 
-abstract class ModifyItemFragment : SplashScreenFragment() {
+abstract class AbstractModifyItemFragment : AbstractSplashScreenFragment() {
     var myRole: Int = 3
 
     abstract val databasePath: String
@@ -72,7 +72,7 @@ abstract class ModifyItemFragment : SplashScreenFragment() {
 
     open fun setData(dataSnapshot: DataSnapshot) {}
 
-    fun setValue(data: BaseDataObject) {
+    fun setValue(data: AbstractDataObject) {
         val databaseRef = Firebase.database.getReference(databasePath).child(data.id)
         databaseRef.setValue(data)
 

@@ -8,11 +8,11 @@ import android.widget.*
 import pi.restaurant.management.R
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.databinding.FragmentModifyDiscountBinding
-import pi.restaurant.management.fragments.ModifyItemFragment
+import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.Utils
 import java.util.*
 
-abstract class ModifyDiscountFragment : ModifyItemFragment() {
+abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
     private var _binding: FragmentModifyDiscountBinding? = null
     val binding get() = _binding!!

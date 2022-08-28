@@ -10,10 +10,10 @@ import android.widget.Spinner
 import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.databinding.FragmentUserDataBinding
-import pi.restaurant.management.fragments.ModifyItemFragment
+import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.Utils
 
-abstract class ModifyWorkerFragment : ModifyItemFragment() {
+abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentUserDataBinding? = null
     val binding get() = _binding!!
 

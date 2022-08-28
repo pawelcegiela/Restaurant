@@ -19,13 +19,13 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.databinding.FragmentUserDataBinding
-import pi.restaurant.management.fragments.SplashScreenFragment
+import pi.restaurant.management.fragments.AbstractSplashScreenFragment
 import pi.restaurant.management.utils.Utils
 
 
 //TODO: Ten fragment powinien dziedziczyć po UserDataFragment (ModifyWorkerFragment). Należy przemyśleć jak to rozpracować
 
-class MyDataFragment : SplashScreenFragment() {
+class MyDataFragment : AbstractSplashScreenFragment() {
 
     private var _binding: FragmentUserDataBinding? = null
     val binding get() = _binding!!

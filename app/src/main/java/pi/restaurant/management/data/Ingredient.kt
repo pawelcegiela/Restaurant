@@ -2,7 +2,7 @@ package pi.restaurant.management.data
 
 import java.util.*
 
-class Ingredient : BaseDataObject {
+class Ingredient : AbstractDataObject {
     lateinit var name: String
     var amount: Int = 0
     var unit: Int = 0

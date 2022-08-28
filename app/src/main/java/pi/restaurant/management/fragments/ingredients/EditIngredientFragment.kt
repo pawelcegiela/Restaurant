@@ -5,7 +5,7 @@ import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Ingredient
 
-class EditIngredientFragment : ModifyIngredientFragment() {
+class EditIngredientFragment : AbstractModifyIngredientFragment() {
 
     override val saveActionId = R.id.actionEditIngredientToIngredients
     override val toastMessageId = R.string.ingredient_modified

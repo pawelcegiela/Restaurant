@@ -12,7 +12,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.databinding.FragmentRecyclerBinding
 
-abstract class RecyclerFragment : SplashScreenFragment() {
+abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
 
     private var _binding: FragmentRecyclerBinding? = null
     protected val binding get() = _binding!!

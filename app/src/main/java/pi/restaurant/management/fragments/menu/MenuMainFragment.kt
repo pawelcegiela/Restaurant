@@ -5,9 +5,9 @@ import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.MenuRecyclerAdapter
 import pi.restaurant.management.data.Dish
-import pi.restaurant.management.fragments.RecyclerFragment
+import pi.restaurant.management.fragments.AbstractItemListFragment
 
-class MenuMainFragment : RecyclerFragment() {
+class MenuMainFragment : AbstractItemListFragment() {
     override val databasePath = "menu"
     override val fabActionId = R.id.actionMenuToAddDish
 

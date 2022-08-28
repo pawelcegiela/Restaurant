@@ -17,12 +17,12 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.OpeningHours
 import pi.restaurant.management.databinding.FragmentOpeningHoursBinding
-import pi.restaurant.management.fragments.SplashScreenFragment
+import pi.restaurant.management.fragments.AbstractSplashScreenFragment
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OpeningHoursFragment : SplashScreenFragment() {
+class OpeningHoursFragment : AbstractSplashScreenFragment() {
     private var _binding: FragmentOpeningHoursBinding? = null
     private val binding get() = _binding!!
 

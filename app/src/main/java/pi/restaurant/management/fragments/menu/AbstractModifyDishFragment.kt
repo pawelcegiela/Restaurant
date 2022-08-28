@@ -8,11 +8,11 @@ import android.widget.EditText
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
-import pi.restaurant.management.fragments.ModifyItemFragment
+import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.Utils
 import java.util.HashMap
 
-abstract class ModifyDishFragment : ModifyItemFragment() {
+abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
     private var _binding: FragmentModifyDishBinding? = null
     val binding get() = _binding!!

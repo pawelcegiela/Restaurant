@@ -15,10 +15,10 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AboutRestaurant
 import pi.restaurant.management.databinding.FragmentAboutRestaurantBinding
-import pi.restaurant.management.fragments.SplashScreenFragment
+import pi.restaurant.management.fragments.AbstractSplashScreenFragment
 import java.text.ParseException
 
-class AboutRestaurantFragment : SplashScreenFragment() {
+class AboutRestaurantFragment : AbstractSplashScreenFragment() {
     private var _binding: FragmentAboutRestaurantBinding? = null
     private val binding get() = _binding!!
 

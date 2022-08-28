@@ -9,9 +9,9 @@ import pi.restaurant.management.R
 import pi.restaurant.management.adapters.WorkersRecyclerAdapter
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.enums.Role
-import pi.restaurant.management.fragments.RecyclerFragment
+import pi.restaurant.management.fragments.AbstractItemListFragment
 
-class WorkersMainFragment : RecyclerFragment() {
+class WorkersMainFragment : AbstractItemListFragment() {
     override val databasePath = "users"
     override val fabActionId = R.id.actionWorkersToAddWorker
 

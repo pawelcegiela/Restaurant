@@ -1,5 +1,5 @@
 package pi.restaurant.management.data
 
-abstract class BaseDataObject {
+abstract class AbstractDataObject {
     lateinit var id: String
 }
