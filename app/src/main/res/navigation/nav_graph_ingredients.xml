@@ -14,15 +14,29 @@
         <action
             android:id="@+id/actionIngredientsToAddIngredient"
             app:destination="@id/AddIngredientFragment" />
+
+        <action
+            android:id="@+id/actionIngredientsToEditIngredient"
+            app:destination="@id/EditIngredientFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/AddIngredientFragment"
         android:name="pi.restaurant.management.fragments.ingredients.AddIngredientFragment"
         android:label="@string/add_ingredient"
-        tools:layout="@layout/fragment_add_ingredient">
+        tools:layout="@layout/fragment_modify_ingredient">
         <action
             android:id="@+id/actionAddIngredientToIngredients"
+            app:destination="@id/IngredientsMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/EditIngredientFragment"
+        android:name="pi.restaurant.management.fragments.ingredients.EditIngredientFragment"
+        android:label="@string/edit_ingredient"
+        tools:layout="@layout/fragment_modify_ingredient">
+        <action
+            android:id="@+id/actionEditIngredientToIngredients"
             app:destination="@id/IngredientsMainFragment" />
     </fragment>
 

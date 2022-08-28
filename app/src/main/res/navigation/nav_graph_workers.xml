@@ -28,16 +28,6 @@
         android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
         android:label="@string/edit_worker"
         tools:layout="@layout/fragment_user_data">
-        <argument
-            android:name="id"
-            android:defaultValue="0"
-            app:argType="string" />
-
-        <argument
-            android:name="myRole"
-            android:defaultValue="3"
-            app:argType="integer" />
-
         <action
             android:id="@+id/actionEditWorkerToWorkers"
             app:destination="@id/WorkersMainFragment" />

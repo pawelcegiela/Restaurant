@@ -10,20 +10,36 @@
         android:name="pi.restaurant.management.fragments.menu.MenuMainFragment"
         android:label="@string/menu"
         tools:layout="@layout/fragment_recycler">
+
         <action
             android:id="@+id/actionMenuToAddDish"
             app:destination="@id/AddDishFragment" />
+
+        <action
+            android:id="@+id/actionMenuToEditDish"
+            app:destination="@id/EditDishFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/AddDishFragment"
         android:name="pi.restaurant.management.fragments.menu.AddDishFragment"
         android:label="@string/add_dish"
-        tools:layout="@layout/fragment_add_dish">
+        tools:layout="@layout/fragment_modify_dish">
         <action
             android:id="@+id/actionAddDishToMenu"
             app:destination="@id/MenuMainFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/EditDishFragment"
+        android:name="pi.restaurant.management.fragments.menu.EditDishFragment"
+        android:label="@string/edit_dish"
+        tools:layout="@layout/fragment_modify_dish">
+        <action
+            android:id="@+id/actionEditDishToMenu"
+            app:destination="@id/MenuMainFragment" />
+    </fragment>
+
 
     <activity
         android:id="@+id/MainActivity"

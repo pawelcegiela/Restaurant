@@ -43,7 +43,6 @@ class WorkersRecyclerAdapter(
                 if (dataSet[layoutPosition].role > userRole) {
                     val bundle = Bundle()
                     bundle.putString("id", dataSet[layoutPosition].id)
-                    bundle.putInt("myRole", userRole)
 
                     fragment.findNavController().navigate(R.id.actionWorkersToEditWorker, bundle)
                 } else if (dataSet[layoutPosition].id == userId) {

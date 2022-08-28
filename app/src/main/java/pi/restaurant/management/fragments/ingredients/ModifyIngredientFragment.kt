@@ -1,0 +1,71 @@
+package pi.restaurant.management.fragments.ingredients
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Spinner
+import pi.restaurant.management.R
+import pi.restaurant.management.data.Ingredient
+import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
+import pi.restaurant.management.fragments.ModifyItemFragment
+import pi.restaurant.management.utils.Utils
+import java.util.*
+
+abstract class ModifyIngredientFragment : ModifyItemFragment() {
+
+    private var _binding: FragmentModifyIngredientBinding? = null
+    val binding get() = _binding!!
+
+    override val databasePath = "ingredients"
+    override val linearLayout get() = binding.linearLayout
+    override val saveButton get() = binding.buttonSaveData
+    override var itemId = ""
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentModifyIngredientBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun initializeUI() {
+        initializeSpinner()
+        setSaveButtonListener()
+    }
+
+    private fun initializeSpinner() {
+        val spinner: Spinner = binding.spinnerUnit
+        ArrayAdapter.createFromResource(
+            context!!,
+            R.array.units,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+    }
+
+    private fun setSaveButtonListener() {
+        binding.buttonSaveData.setOnClickListener {
+            if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
+                return@setOnClickListener
+            }
+
+            val name = binding.editTextName.text.toString()
+            val amount = binding.editTextAmount.text.toString().toInt()
+
+            setValue(Ingredient(itemId, name, amount, binding.spinnerUnit.selectedItemPosition))
+        }
+    }
+
+    private fun getEditTextMap(): Map<EditText, Int> {
+        val map = HashMap<EditText, Int>()
+        map[binding.editTextName] = R.string.name
+        map[binding.editTextAmount] = R.string.amount
+        return map
+    }
+}

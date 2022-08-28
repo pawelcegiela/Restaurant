@@ -2,40 +2,29 @@ package pi.restaurant.management.fragments.workers
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
-import pi.restaurant.management.fragments.UserDataFragment
 
-class AddWorkerFragment : UserDataFragment() {
-    private var myRole: Int = 3
+class AddWorkerFragment : ModifyWorkerFragment() {
+
+    override val saveActionId = R.id.actionAddWorkerToWorkers
+    override val toastMessageId = 0 // Warning: unused
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //TODO: Zablokowanie dla Workerów
         binding.editTextPassword.visibility = View.GONE //TODO: Temp
         binding.buttonDisableUser.visibility = View.GONE
+    }
 
-        val databaseRef = Firebase.database.getReference("users").child(Firebase.auth.currentUser!!.uid).child("role")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                myRole = dataSnapshot.getValue<Int>() ?: return
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
-
+    override fun initializeUI() {
         initializeSpinner()
         setSaveButtonListener()
-        keepSplashScreen = false
     }
 
     override fun setValue(data: UserData) {
@@ -70,7 +59,7 @@ class AddWorkerFragment : UserDataFragment() {
                     databaseRef.setValue(data)
                     Toast.makeText(context, getString(R.string.created_new_user, data.firstName + " " + data.lastName),
                         Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.actionAddWorkerToWorkers)
+                    findNavController().navigate(saveActionId)
                 } else {
                     Toast.makeText(context, getString(R.string.authentication_failed),
                         Toast.LENGTH_SHORT).show()
@@ -79,5 +68,12 @@ class AddWorkerFragment : UserDataFragment() {
                 }
             }
         }
+    }
+
+    override fun getEditTextMap(): Map<EditText, Int> {
+        val map = super.getEditTextMap().toMutableMap()
+        map[binding.editTextUserPassword] = R.string.user_password
+        map[binding.editTextRepeatUserPassword] = R.string.repeat_user_password
+        return map
     }
 }

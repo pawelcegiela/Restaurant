@@ -95,6 +95,17 @@
     <string name="price">Price</string>
     <string name="add_worker">Add worker</string>
     <string name="add_new_position">Add new position</string>
+    <string name="number_of_available_discounts">Number of available discounts</string>
+    <string name="number_of_assigned_discounts">Number of assigned discounts</string>
+    <string name="number_of_used_discounts">Number of used discounts</string>
+    <string name="no_permission">No permission</string>
+    <string name="edit_discount">Edit discount</string>
+    <string name="edit_ingredient">Edit ingredient</string>
+    <string name="edit_dish">Edit dish</string>
+    <string name="dish_added">Dish has been added to menu</string>
+    <string name="discount_modified">Discount has been modified</string>
+    <string name="ingredient_modified">Ingredient has been modified</string>
+    <string name="dish_modified">Dish has been modified</string>
 
     <string-array name="roles">
         <item>Admin</item>

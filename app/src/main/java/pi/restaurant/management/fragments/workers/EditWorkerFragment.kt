@@ -12,25 +12,38 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.UserData
-import pi.restaurant.management.fragments.UserDataFragment
 
-class EditWorkerFragment : UserDataFragment() {
-    private var myRole: Int = 3
+class EditWorkerFragment : ModifyWorkerFragment() {
+
+    override val saveActionId = R.id.actionEditWorkerToWorkers
+    override val toastMessageId = 0 // Warning: unused
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        id = arguments?.getString("id").toString()
-        myRole = arguments?.getInt("myRole")!!
+        itemId = arguments?.getString("id").toString()
         binding.editTextEmail.isEnabled = false
         binding.editTextUserPassword.visibility = View.GONE
         binding.editTextRepeatUserPassword.visibility = View.GONE
         binding.editTextPassword.visibility = View.GONE
+    }
 
+    override fun initializeUI() {
         initializeSpinner()
         loadData()
         setSaveButtonListener()
-        setDisableUserListener()
+        setDisableButtonListener()
+    }
+
+    override fun setData(dataSnapshot: DataSnapshot) {
+        val data = dataSnapshot.getValue<UserData>() ?: return
+        binding.editTextFirstName.setText(data.firstName)
+        binding.editTextLastName.setText(data.lastName)
+        binding.editTextEmail.setText(data.email)
+        binding.spinnerRole.setSelection(data.role)
+        if (data.disabled) {
+            binding.buttonDisableUser.text = getString(R.string.enable_user)
+        }
     }
 
     override fun setValue(data: UserData) {
@@ -43,18 +56,18 @@ class EditWorkerFragment : UserDataFragment() {
             return
         }
 
-        val databaseRef = Firebase.database.getReference("users").child(id)
+        val databaseRef = Firebase.database.getReference("users").child(itemId)
         databaseRef.setValue(data)
 
         Toast.makeText(activity, getString(R.string.user_data_has_been_changed), Toast.LENGTH_SHORT)
             .show()
 
-        findNavController().navigate(R.id.actionEditWorkerToWorkers)
+        findNavController().navigate(saveActionId)
     }
 
-    private fun setDisableUserListener() {
+    private fun setDisableButtonListener() {
         binding.buttonDisableUser.setOnClickListener {
-            val databaseRef = Firebase.database.getReference("users").child(id)
+            val databaseRef = Firebase.database.getReference("users").child(itemId)
             databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val data = dataSnapshot.getValue<UserData>() ?: return

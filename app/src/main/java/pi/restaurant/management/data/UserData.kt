@@ -1,7 +1,6 @@
 package pi.restaurant.management.data
 
-class UserData {
-    var id: String = ""
+class UserData : BaseDataObject {
     var firstName = ""
     var lastName = ""
     var email: String = ""
@@ -9,7 +8,9 @@ class UserData {
     var disabled: Boolean = false
 
     @Suppress("unused")
-    constructor()
+    constructor() {
+        this.id = ""
+    }
 
     constructor(id: String, firstName: String, lastName: String, email: String, role: Int) {
         this.id = id

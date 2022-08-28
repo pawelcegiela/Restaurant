@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".fragments.settings.MyDataFragment">
+<!--    TODO - inne fragmenty dla MyData i ModifyUser -->
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -44,8 +46,8 @@
             android:id="@+id/editTextUserPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="25dp"
             android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="25dp"
             android:hint="@string/user_password"
             android:importantForAutofill="no"
             android:inputType="textPassword" />
@@ -54,8 +56,8 @@
             android:id="@+id/editTextRepeatUserPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="25dp"
             android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="25dp"
             android:hint="@string/repeat_user_password"
             android:importantForAutofill="no"
             android:inputType="textPassword" />
@@ -70,8 +72,8 @@
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="25dp"
             android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="25dp"
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword" />

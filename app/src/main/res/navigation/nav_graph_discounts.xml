@@ -14,15 +14,29 @@
         <action
             android:id="@+id/actionDiscountsToAddDiscount"
             app:destination="@id/AddDiscountFragment" />
+
+        <action
+            android:id="@+id/actionDiscountsToEditDiscount"
+            app:destination="@id/EditDiscountFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/AddDiscountFragment"
         android:name="pi.restaurant.management.fragments.discounts.AddDiscountFragment"
         android:label="@string/add_discount"
-        tools:layout="@layout/fragment_add_discount">
+        tools:layout="@layout/fragment_modify_discount">
         <action
             android:id="@+id/actionAddDiscountToDiscounts"
+            app:destination="@id/DiscountsMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/EditDiscountFragment"
+        android:name="pi.restaurant.management.fragments.discounts.EditDiscountFragment"
+        android:label="@string/edit_discount"
+        tools:layout="@layout/fragment_modify_discount">
+        <action
+            android:id="@+id/actionEditDiscountToDiscounts"
             app:destination="@id/DiscountsMainFragment" />
     </fragment>
 
