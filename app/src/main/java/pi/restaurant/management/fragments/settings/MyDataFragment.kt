@@ -81,7 +81,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
             val email = binding.editTextEmail.text.toString()
             val role = binding.spinnerRole.selectedItemId.toInt()
 
-            setValue(UserData(id, firstName, lastName, email, role))
+            setValue(UserData(id, firstName, lastName, email, role, false))
         }
     }
 

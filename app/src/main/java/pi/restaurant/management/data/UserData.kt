@@ -12,11 +12,12 @@ class UserData : AbstractDataObject {
         this.id = ""
     }
 
-    constructor(id: String, firstName: String, lastName: String, email: String, role: Int) {
+    constructor(id: String, firstName: String, lastName: String, email: String, role: Int, disabled: Boolean) {
         this.id = id
         this.firstName = firstName
         this.lastName = lastName
         this.email = email
         this.role = role
+        this.disabled = disabled
     }
 }

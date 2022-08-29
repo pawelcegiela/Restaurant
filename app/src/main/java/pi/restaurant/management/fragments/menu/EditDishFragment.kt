@@ -18,10 +18,10 @@ class EditDishFragment : AbstractModifyDishFragment() {
         removeButton.visibility = View.VISIBLE
 
         setRemoveButtonListener()
-        loadData()
+        getDataFromDatabase()
     }
 
-    override fun setData(dataSnapshot: DataSnapshot) {
+    override fun fillInData(dataSnapshot: DataSnapshot) {
         val data = dataSnapshot.getValue<Dish>() ?: return
         binding.editTextName.setText(data.name)
         binding.editTextPrice.setText(data.price.toString())

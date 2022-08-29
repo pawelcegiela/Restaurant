@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
@@ -35,20 +36,14 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         setSaveButtonListener()
     }
 
-    private fun setSaveButtonListener() {
-        saveButton.setOnClickListener {
-            if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
-                return@setOnClickListener
-            }
+    override fun getDataObject(): AbstractDataObject {
+        val name = binding.editTextName.text.toString()
+        val price = binding.editTextPrice.text.toString().toDouble()
 
-            val name = binding.editTextName.text.toString()
-            val price = binding.editTextPrice.text.toString().toDouble()
-
-            setValue(Dish(itemId, name, price))
-        }
+        return Dish(itemId, name, price)
     }
 
-    private fun getEditTextMap(): Map<EditText, Int> {
+    override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
         map[binding.editTextName] = R.string.name
         map[binding.editTextPrice] = R.string.price

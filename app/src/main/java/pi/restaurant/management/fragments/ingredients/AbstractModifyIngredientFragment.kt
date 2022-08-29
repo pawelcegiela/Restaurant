@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
@@ -50,20 +51,14 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         }
     }
 
-    private fun setSaveButtonListener() {
-        saveButton.setOnClickListener {
-            if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
-                return@setOnClickListener
-            }
+    override fun getDataObject(): AbstractDataObject {
+        val name = binding.editTextName.text.toString()
+        val amount = binding.editTextAmount.text.toString().toInt()
 
-            val name = binding.editTextName.text.toString()
-            val amount = binding.editTextAmount.text.toString().toInt()
-
-            setValue(Ingredient(itemId, name, amount, binding.spinnerUnit.selectedItemPosition))
-        }
+        return Ingredient(itemId, name, amount, binding.spinnerUnit.selectedItemPosition)
     }
 
-    private fun getEditTextMap(): Map<EditText, Int> {
+    override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
         map[binding.editTextName] = R.string.name
         map[binding.editTextAmount] = R.string.amount

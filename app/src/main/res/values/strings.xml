@@ -67,11 +67,11 @@
     <string name="worker">Worker</string>
     <string name="disable_user">Disable user</string>
     <string name="edit_worker">Edit worker</string>
-    <string name="user_data_has_been_changed">User data has been changed</string>
+    <string name="worker_modified">Worker has been modified</string>
     <string name="enter_password">Enter password to save changes</string>
     <string name="user_password">User password</string>
     <string name="repeat_user_password">Repeat user password</string>
-    <string name="created_new_user">You have created a new user. You\'re now logged in as %1$s</string>
+    <string name="created_new_user">You have created a new user. You\'re now logged in as the new user</string>
     <string name="no_permission_user_data">You don\'t have permission to browse or modify this user\'s data</string>
     <string name="account_has_been_disabled">This account has been disabled</string>
     <string name="temp_first_name">Temporary first name</string>
@@ -110,6 +110,11 @@
     <string name="discount_removed">Discount has been removed</string>
     <string name="ingredient_removed">Ingredient has been removed</string>
     <string name="dish_removed">Dish has been removed</string>
+    <string name="warning">Warning</string>
+    <string name="do_you_want_to_remove">Do you want to remove this item? You won\'t be able to undo it.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="password_too_weak">Your password is too weak. It should contain at least 8 characters, uppercase and lowercase letters and numbers</string>
 
     <string-array name="roles">
         <item>Admin</item>

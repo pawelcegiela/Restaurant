@@ -72,7 +72,8 @@ class AuthenticationActivity : AppCompatActivity() {
                         getString(R.string.temp_first_name),
                         getString(R.string.temp_last_name),
                         user.email!!,
-                        3
+                        3,
+                        false
                     )
                     databaseRef.setValue(data)
                     Toast.makeText(

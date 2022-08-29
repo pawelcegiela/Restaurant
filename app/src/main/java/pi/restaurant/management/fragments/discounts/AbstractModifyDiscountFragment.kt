@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.databinding.FragmentModifyDiscountBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
@@ -48,29 +49,23 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
         }
     }
 
-    private fun setSaveButtonListener() {
-        saveButton.setOnClickListener {
-            if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
-                return@setOnClickListener
-            }
+    override fun getDataObject(): AbstractDataObject {
+        val availableNumber = binding.editTextAvailable.text.toString().toInt()
+        val assignedNumber = binding.editTextAssigned.text.toString().toInt()
+        val usedNumber = binding.editTextUsed.text.toString().toInt()
+        val code = binding.editTextCode.text.toString()
+        val type = binding.spinnerType.selectedItemId.toInt()
+        val amount = binding.editTextAmount.text.toString().toDouble()
+        val date = Date() //TODO
 
-            val availableNumber = binding.editTextAvailable.text.toString().toInt()
-            val assignedNumber = binding.editTextAssigned.text.toString().toInt()
-            val usedNumber = binding.editTextUsed.text.toString().toInt()
-            val code = binding.editTextCode.text.toString()
-            val type = binding.spinnerType.selectedItemId.toInt()
-            val amount = binding.editTextAmount.text.toString().toDouble()
-            val date = Date() //TODO
+        val available = Utils.createDiscounts(code, availableNumber, 0)
+        val assigned = Utils.createDiscounts(code, assignedNumber, availableNumber)
+        val used = Utils.createDiscounts(code, usedNumber, availableNumber + assignedNumber)
 
-            val available = Utils.createDiscounts(code, availableNumber, 0)
-            val assigned = Utils.createDiscounts(code, assignedNumber, availableNumber)
-            val used = Utils.createDiscounts(code, usedNumber, availableNumber + assignedNumber)
-
-            setValue(DiscountGroup(available, assigned, used, code, type, amount, date))
-        }
+        return DiscountGroup(available, assigned, used, code, type, amount, date)
     }
 
-    private fun getEditTextMap(): Map<EditText, Int> {
+    override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
         map[binding.editTextAvailable] = R.string.number_of_available_discounts
         map[binding.editTextAssigned] = R.string.number_of_assigned_discounts

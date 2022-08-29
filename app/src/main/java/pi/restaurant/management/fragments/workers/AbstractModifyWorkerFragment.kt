@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.UserData
 import pi.restaurant.management.databinding.FragmentUserDataBinding
+import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.Utils
 
@@ -17,11 +20,13 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentUserDataBinding? = null
     val binding get() = _binding!!
 
-    override val databasePath = "discounts"
+    override val databasePath = "users"
     override val linearLayout get() = binding.linearLayout
     override val saveButton get() = binding.buttonSave
     override val removeButton get() = binding.buttonRemove
     override var itemId = ""
+
+    var disabled = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,22 +48,16 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         }
     }
 
-    fun setSaveButtonListener() {
-        saveButton.setOnClickListener {
-            if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
-                return@setOnClickListener
-            }
+    override fun getDataObject(): AbstractDataObject {
+        val firstName = binding.editTextFirstName.text.toString()
+        val lastName = binding.editTextLastName.text.toString()
+        val email = binding.editTextEmail.text.toString()
+        val role = binding.spinnerRole.selectedItemId.toInt()
 
-            val firstName = binding.editTextFirstName.text.toString()
-            val lastName = binding.editTextLastName.text.toString()
-            val email = binding.editTextEmail.text.toString()
-            val role = binding.spinnerRole.selectedItemId.toInt()
-
-            setValue(UserData(itemId, firstName, lastName, email, role))
-        }
+        return UserData(itemId, firstName, lastName, email, role, disabled)
     }
 
-    open fun getEditTextMap(): Map<EditText, Int> {
+    override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
         map[binding.editTextFirstName] = R.string.first_name
         map[binding.editTextLastName] = R.string.last_name
@@ -66,7 +65,12 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         return map
     }
 
-    abstract fun setValue(data: UserData)
+    override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+        if (super.checkSavePreconditions(data) != Precondition.OK) {
+            return super.checkSavePreconditions(data)
+        }
+        return Utils.compareRoles(myRole, (data as UserData).role)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
