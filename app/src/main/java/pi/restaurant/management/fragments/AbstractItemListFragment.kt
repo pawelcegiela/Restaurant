@@ -1,15 +1,23 @@
 package pi.restaurant.management.fragments
 
+import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import pi.restaurant.management.R
+import pi.restaurant.management.utils.SwipeCallback
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.databinding.FragmentRecyclerBinding
 
 abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
@@ -18,7 +26,9 @@ abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
     protected val binding get() = _binding!!
 
     abstract val databasePath: String
-    abstract val fabActionId: Int
+    abstract val addActionId: Int
+    abstract val editActionId: Int
+    var adapterData: MutableList<AbstractDataObject> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +40,8 @@ abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeFragment(databasePath, fabActionId)
+        initializeFragment(databasePath, addActionId)
+        addSwipeToEditCallback()
     }
 
     private fun initializeFragment(databasePath: String, actionId: Int) {
@@ -55,5 +66,63 @@ abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun addSwipeToEditCallback() {
+        val swipeToEditCallback: SwipeCallback =
+            object : SwipeCallback(
+                activity!!.applicationContext,
+                Color.YELLOW,
+                com.google.android.material.R.drawable.material_ic_edit_black_24dp
+            ) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
+                    checkPrerequisitesAndOpenPreview(adapterData[viewHolder.adapterPosition])
+                }
+            }
+        val itemTouchHelper = ItemTouchHelper(swipeToEditCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }
+
+    open fun checkPrerequisitesAndOpenPreview(item: AbstractDataObject) {
+        openPreview(item)
+    }
+
+    fun openPreview(item: AbstractDataObject) {
+        val bundle = Bundle()
+        bundle.putString("id", item.id)
+
+        findNavController().navigate(editActionId, bundle)
+    }
+
+    @Suppress("unused") // To be used in the future
+    private fun removeItem(position: Int) {
+        val dialogBuilder = AlertDialog.Builder(this.context)
+        dialogBuilder.setTitle(getString(R.string.warning))
+        dialogBuilder.setMessage(getString(R.string.do_you_want_to_remove))
+        dialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+            removeFromDatabase(adapterData[position].id)
+            adapterData.removeAt(position)
+            binding.recyclerView.adapter?.notifyItemRemoved(position)
+            Toast.makeText(context, getString(R.string.item_removed), Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        dialogBuilder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        dialogBuilder.create().show()
+    }
+
+    private fun removeFromDatabase(itemId: String) {
+        val databaseRef = Firebase.database.getReference(databasePath).child(itemId)
+
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    snapshot.ref.removeValue()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 }

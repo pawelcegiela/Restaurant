@@ -1,12 +1,10 @@
 package pi.restaurant.management.fragments.workers
 
 import android.view.View
-import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.UserData
+import pi.restaurant.management.data.User
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
@@ -29,7 +27,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
     }
 
     override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<UserData>() ?: return
+        val data = dataSnapshot.getValue<User>() ?: return
         binding.editTextFirstName.setText(data.firstName)
         binding.editTextLastName.setText(data.lastName)
         binding.editTextEmail.setText(data.email)

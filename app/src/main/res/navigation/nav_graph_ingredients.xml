@@ -18,6 +18,10 @@
         <action
             android:id="@+id/actionIngredientsToEditIngredient"
             app:destination="@id/EditIngredientFragment" />
+
+        <action
+            android:id="@+id/actionIngredientsToPreviewIngredient"
+            app:destination="@id/PreviewIngredientFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +42,13 @@
         <action
             android:id="@+id/actionEditIngredientToIngredients"
             app:destination="@id/IngredientsMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PreviewIngredientFragment"
+        android:name="pi.restaurant.management.fragments.ingredients.PreviewIngredientFragment"
+        android:label="@string/preview_ingredient"
+        tools:layout="@layout/fragment_preview_ingredient">
     </fragment>
 
     <activity

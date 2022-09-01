@@ -7,7 +7,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.UserData
+import pi.restaurant.management.data.User
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.utils.Utils
 
@@ -26,7 +26,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
     //TODO Pomysł na większe połączenie kodu z superklasą
     override fun saveToDatabase() {
-        val data = getDataObject() as UserData
+        val data = getDataObject() as User
 
         val precondition = checkSavePreconditions(data)
         if (precondition != Precondition.OK) {

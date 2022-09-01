@@ -10,13 +10,18 @@
         android:name="pi.restaurant.management.fragments.workers.WorkersMainFragment"
         android:label="@string/workers"
         tools:layout="@layout/fragment_recycler">
+
+        <action
+            android:id="@+id/actionWorkersToAddWorker"
+            app:destination="@id/AddWorkerFragment" />
+
         <action
             android:id="@+id/actionWorkersToEditWorker"
             app:destination="@id/EditWorkerFragment" />
 
         <action
-            android:id="@+id/actionWorkersToAddWorker"
-            app:destination="@id/AddWorkerFragment" />
+            android:id="@+id/actionWorkersToPreviewWorker"
+            app:destination="@id/PreviewWorkerFragment" />
 
         <action
             android:id="@+id/actionWorkersToSettings"
@@ -41,6 +46,13 @@
         <action
             android:id="@+id/actionAddWorkerToWorkers"
             app:destination="@id/WorkersMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PreviewWorkerFragment"
+        android:name="pi.restaurant.management.fragments.workers.PreviewWorkerFragment"
+        android:label="@string/preview_worker"
+        tools:layout="@layout/fragment_preview_worker">
     </fragment>
 
     <activity

@@ -2,7 +2,6 @@ package pi.restaurant.management.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
@@ -16,7 +15,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
-import pi.restaurant.management.data.UserData
+import pi.restaurant.management.data.User
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 
 
@@ -65,9 +64,9 @@ class AuthenticationActivity : AppCompatActivity() {
         val databaseRef = Firebase.database.getReference("users").child(user.uid)
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var data = dataSnapshot.getValue<UserData>()
+                var data = dataSnapshot.getValue<User>()
                 if (data == null) {
-                    data = UserData(
+                    data = User(
                         user.uid,
                         getString(R.string.temp_first_name),
                         getString(R.string.temp_last_name),

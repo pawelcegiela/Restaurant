@@ -115,6 +115,11 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="password_too_weak">Your password is too weak. It should contain at least 8 characters, uppercase and lowercase letters and numbers</string>
+    <string name="item_removed">Item was removed from the list</string>
+    <string name="preview_discount">Preview discount</string>
+    <string name="preview_ingredient">Preview ingredient</string>
+    <string name="preview_dish">Preview dish</string>
+    <string name="preview_worker">Preview worker</string>
 
     <string-array name="roles">
         <item>Admin</item>

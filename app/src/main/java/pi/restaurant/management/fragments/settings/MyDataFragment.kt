@@ -17,7 +17,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
-import pi.restaurant.management.data.UserData
+import pi.restaurant.management.data.User
 import pi.restaurant.management.databinding.FragmentUserDataBinding
 import pi.restaurant.management.fragments.AbstractSplashScreenFragment
 import pi.restaurant.management.utils.Utils
@@ -55,7 +55,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
         val databaseRef = Firebase.database.getReference("users").child(id)
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = dataSnapshot.getValue<UserData>() ?: return
+                val data = dataSnapshot.getValue<User>() ?: return
                 binding.editTextFirstName.setText(data.firstName)
                 binding.editTextLastName.setText(data.lastName)
                 binding.editTextEmail.setText(data.email)
@@ -81,7 +81,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
             val email = binding.editTextEmail.text.toString()
             val role = binding.spinnerRole.selectedItemId.toInt()
 
-            setValue(UserData(id, firstName, lastName, email, role, false))
+            setValue(User(id, firstName, lastName, email, role, false))
         }
     }
 
@@ -113,7 +113,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
         setSaveButtonListener()
     }
 
-    fun setValue(data: UserData) {
+    fun setValue(data: User) {
         val user = Firebase.auth.currentUser ?: return
         val databaseRef = Firebase.database.getReference("users").child(id)
         val password = binding.editTextPassword.text.toString()

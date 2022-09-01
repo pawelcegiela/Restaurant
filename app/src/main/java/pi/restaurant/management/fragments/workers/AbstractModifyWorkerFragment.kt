@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
-import android.widget.Toast
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.UserData
+import pi.restaurant.management.data.User
 import pi.restaurant.management.databinding.FragmentUserDataBinding
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
@@ -54,7 +53,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         val email = binding.editTextEmail.text.toString()
         val role = binding.spinnerRole.selectedItemId.toInt()
 
-        return UserData(itemId, firstName, lastName, email, role, disabled)
+        return User(itemId, firstName, lastName, email, role, disabled)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
@@ -69,7 +68,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return Utils.compareRoles(myRole, (data as UserData).role)
+        return Utils.compareRoles(myRole, (data as User).role)
     }
 
     override fun onDestroyView() {

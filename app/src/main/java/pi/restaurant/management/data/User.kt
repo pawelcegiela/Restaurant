@@ -1,6 +1,6 @@
 package pi.restaurant.management.data
 
-class UserData : AbstractDataObject {
+class User : AbstractDataObject {
     var firstName = ""
     var lastName = ""
     var email: String = ""

@@ -18,6 +18,10 @@
         <action
             android:id="@+id/actionDiscountsToEditDiscount"
             app:destination="@id/EditDiscountFragment" />
+
+        <action
+            android:id="@+id/actionDiscountsToPreviewDiscount"
+            app:destination="@id/PreviewDiscountFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +42,13 @@
         <action
             android:id="@+id/actionEditDiscountToDiscounts"
             app:destination="@id/DiscountsMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PreviewDiscountFragment"
+        android:name="pi.restaurant.management.fragments.discounts.PreviewDiscountFragment"
+        android:label="@string/preview_discount"
+        tools:layout="@layout/fragment_preview_discount">
     </fragment>
 
     <activity

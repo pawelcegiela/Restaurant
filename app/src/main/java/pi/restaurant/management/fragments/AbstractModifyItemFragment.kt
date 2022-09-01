@@ -128,14 +128,13 @@ abstract class AbstractModifyItemFragment : AbstractSplashScreenFragment() {
     }
 
     private fun removeFromDatabase(dataSnapshot: DataSnapshot) {
-        for (snapshot in dataSnapshot.children) {
-            snapshot.ref.removeValue()
-        }
-
         val dialogBuilder = AlertDialog.Builder(this.context)
         dialogBuilder.setTitle(getString(R.string.warning))
         dialogBuilder.setMessage(getString(R.string.do_you_want_to_remove))
         dialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+            for (snapshot in dataSnapshot.children) {
+                snapshot.ref.removeValue()
+            }
             dialog.dismiss()
             Toast.makeText(activity, getString(removeMessageId), Toast.LENGTH_SHORT).show()
             findNavController().navigate(nextActionId)

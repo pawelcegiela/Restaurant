@@ -1,9 +1,15 @@
 package pi.restaurant.management.utils
 
+import android.content.Context
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import pi.restaurant.management.R
+import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.enums.Precondition
+import pi.restaurant.management.enums.Unit
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Utils {
     companion object {
@@ -30,6 +36,16 @@ class Utils {
             return discounts
         }
 
+        fun getNumberOfDiscounts(discount: DiscountGroup): String {
+            return discount.availableDiscounts.size.toString() + " / " +
+                    discount.assignedDiscounts.size.toString() + " / " +
+                    discount.usedDiscounts.size.toString()
+        }
+
+        fun getDiscountAmount(discount: DiscountGroup): String {
+            return discount.amount.toString() + discount.type.toString()
+        }
+
         fun checkUserPasswords(password1: String, password2: String): Precondition {
             if (password1 != password2) {
                 return Precondition.PASSWORDS_DIFFER
@@ -53,6 +69,15 @@ class Utils {
                 return Precondition.TOO_LOW_ROLE
             }
             return Precondition.OK
+        }
+
+        fun formatAmountWithUnit(context: Context, amount: Int, unit: Int): String {
+            return "$amount ${context.getString(Unit.getNameResById(unit))}"
+        }
+
+        fun formatDate(date: Date): String {
+            val sdf = SimpleDateFormat("dd.MM.yyyy")
+            return sdf.format(date)
         }
     }
 }

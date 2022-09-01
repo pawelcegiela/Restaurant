@@ -18,6 +18,10 @@
         <action
             android:id="@+id/actionMenuToEditDish"
             app:destination="@id/EditDishFragment" />
+
+        <action
+            android:id="@+id/actionMenuToPreviewDish"
+            app:destination="@id/PreviewDishFragment" />
     </fragment>
 
     <fragment
@@ -40,6 +44,12 @@
             app:destination="@id/MenuMainFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/PreviewDishFragment"
+        android:name="pi.restaurant.management.fragments.menu.PreviewDishFragment"
+        android:label="@string/preview_dish"
+        tools:layout="@layout/fragment_preview_dish">
+    </fragment>
 
     <activity
         android:id="@+id/MainActivity"

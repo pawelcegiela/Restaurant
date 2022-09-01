@@ -1,14 +1,16 @@
 package pi.restaurant.management.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.DiscountGroup
+import pi.restaurant.management.databinding.ItemDiscountsBinding
+import pi.restaurant.management.utils.Utils
 
 
 class DiscountsRecyclerAdapter(
@@ -18,51 +20,40 @@ class DiscountsRecyclerAdapter(
     RecyclerView.Adapter<DiscountsRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
-        view: View,
+        val binding: ItemDiscountsBinding,
         val context: Context,
         val fragment: Fragment,
-    ) : RecyclerView.ViewHolder(view) {
-        val textViewCode: TextView
-        val textViewNumber: TextView
-        val textViewDiscountAmount: TextView
-        val textViewExpirationDate: TextView
+        private val dataSet: List<DiscountGroup>
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            textViewCode = view.findViewById(R.id.textViewCode)
-            textViewNumber = view.findViewById(R.id.textViewNumber)
-            textViewDiscountAmount = view.findViewById(R.id.textViewDiscountAmount)
-            textViewExpirationDate = view.findViewById(R.id.textViewExpirationDate)
+            binding.root.setOnClickListener {
+                openItemPreview()
+            }
+        }
 
-//            view.setOnClickListener {
-//                val bundle = Bundle()
-//                bundle.putString("id", dataSet[layoutPosition].id)
-//                fragment.findNavController().navigate(R.id.actionDiscountsToEditDiscount, bundle)
-//            }
+        private fun openItemPreview() {
+            val bundle = Bundle()
+            bundle.putString("id", dataSet[layoutPosition].id)
+
+            fragment.findNavController()
+                .navigate(R.id.actionDiscountsToPreviewDiscount, bundle)
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_discounts, viewGroup, false)
+        val binding = ItemDiscountsBinding
+            .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
-        return ViewHolder(view, viewGroup.context, fragment)
+        return ViewHolder(binding, viewGroup.context, fragment, dataSet)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.textViewCode.text = dataSet[position].id
-        viewHolder.textViewNumber.text = getNumberOfDiscounts(position)
-        viewHolder.textViewDiscountAmount.text = getDiscountAmount(position)
-        viewHolder.textViewExpirationDate.text = dataSet[position].expirationDate.toString()
-    }
-
-    private fun getNumberOfDiscounts(position: Int): String {
-        return dataSet[position].availableDiscounts.size.toString() + " / " +
-                dataSet[position].assignedDiscounts.size.toString() + " / " +
-                dataSet[position].usedDiscounts.size.toString()
-    }
-
-    private fun getDiscountAmount(position: Int): String {
-        return dataSet[position].amount.toString() + dataSet[position].type.toString()
+        viewHolder.binding.textViewCode.text = dataSet[position].id
+        viewHolder.binding.textViewNumber.text = Utils.getNumberOfDiscounts(dataSet[position])
+        viewHolder.binding.textViewDiscountAmount.text = Utils.getDiscountAmount(dataSet[position])
+        viewHolder.binding.textViewExpirationDate.text =
+            Utils.formatDate(dataSet[position].expirationDate)
     }
 
     override fun getItemCount() = dataSet.size
