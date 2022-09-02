@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -22,7 +23,7 @@ import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.enums.Role
 import pi.restaurant.management.utils.Utils
 
-abstract class AbstractModifyItemFragment : AbstractSplashScreenFragment() {
+abstract class AbstractModifyItemFragment : Fragment() {
     var myRole: Int = 3
 
     abstract val databasePath: String
@@ -49,7 +50,7 @@ abstract class AbstractModifyItemFragment : AbstractSplashScreenFragment() {
                     unlockUI()
                     initializeUI()
                 }
-                keepSplashScreen = false
+//                keepSplashScreen = false TEMP
             }
 
             override fun onCancelled(error: DatabaseError) {}

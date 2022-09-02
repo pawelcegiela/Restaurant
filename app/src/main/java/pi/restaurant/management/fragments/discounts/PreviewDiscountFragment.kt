@@ -36,5 +36,6 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
         binding.textViewAmount.text = item.amount.toString()
         binding.textViewType.text = item.type.toString() //TODO
         binding.textViewExpirationDate.text = Utils.formatDate(item.expirationDate) // TODO
+        binding.progress.progressBar.visibility = View.GONE
     }
 }

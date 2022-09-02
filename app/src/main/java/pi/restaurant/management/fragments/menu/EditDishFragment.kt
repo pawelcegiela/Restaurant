@@ -25,5 +25,6 @@ class EditDishFragment : AbstractModifyDishFragment() {
         val data = dataSnapshot.getValue<Dish>() ?: return
         binding.editTextName.setText(data.name)
         binding.editTextPrice.setText(data.price.toString())
+        binding.progress.progressBar.visibility = View.GONE
     }
 }

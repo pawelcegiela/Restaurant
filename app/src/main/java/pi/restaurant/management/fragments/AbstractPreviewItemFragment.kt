@@ -3,6 +3,7 @@ package pi.restaurant.management.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -10,10 +11,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.enums.Role
 
-abstract class AbstractPreviewItemFragment : AbstractSplashScreenFragment() {
+abstract class AbstractPreviewItemFragment : Fragment() {
     var myRole: Int = 3
 
     abstract val databasePath: String
@@ -35,7 +35,6 @@ abstract class AbstractPreviewItemFragment : AbstractSplashScreenFragment() {
                 if (myRole < Role.WORKER.ordinal) {
                     getDataFromDatabase()
                 }
-                keepSplashScreen = false
             }
 
             override fun onCancelled(error: DatabaseError) {}

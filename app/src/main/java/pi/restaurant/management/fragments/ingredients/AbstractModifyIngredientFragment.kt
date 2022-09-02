@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.utils.Utils
-import java.util.*
+
 
 abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
@@ -35,6 +32,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
+        binding.progress.progressBar.visibility = View.GONE
         initializeSpinner()
         setSaveButtonListener()
     }

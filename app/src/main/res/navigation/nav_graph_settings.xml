@@ -23,7 +23,7 @@
         android:id="@+id/MyDataFragment"
         android:name="pi.restaurant.management.fragments.settings.MyDataFragment"
         android:label="@string/my_data"
-        tools:layout="@layout/fragment_user_data"/>
+        tools:layout="@layout/fragment_my_data"/>
 
     <fragment
         android:id="@+id/PasswordFragment"

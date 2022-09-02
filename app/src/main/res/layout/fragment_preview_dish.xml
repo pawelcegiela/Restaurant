@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="@string/temp"
+            android:text="@string/empty_string"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="@string/temp"
+            android:text="@string/empty_string"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -46,5 +46,7 @@
             android:visibility="gone" />
 
     </LinearLayout>
+
+    <include layout="@layout/progress_bar" android:id="@+id/progress"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

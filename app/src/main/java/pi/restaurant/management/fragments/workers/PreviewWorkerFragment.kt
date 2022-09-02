@@ -31,5 +31,6 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         binding.textViewName.text = "${item.firstName} ${item.lastName}"
         binding.textViewEmail.text = item.email
         binding.textViewRole.text = getString(Role.getNameResById(item.role))
+        binding.progress.progressBar.visibility = View.GONE
     }
 }

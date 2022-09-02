@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -18,11 +19,11 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.utils.SwipeCallback
 import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.databinding.FragmentRecyclerBinding
+import pi.restaurant.management.databinding.FragmentItemListBinding
 
-abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
+abstract class AbstractItemListFragment : Fragment() {
 
-    private var _binding: FragmentRecyclerBinding? = null
+    private var _binding: FragmentItemListBinding? = null
     protected val binding get() = _binding!!
 
     abstract val databasePath: String
@@ -34,7 +35,7 @@ abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRecyclerBinding.inflate(inflater, container, false)
+        _binding = FragmentItemListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,7 +50,6 @@ abstract class AbstractItemListFragment : AbstractSplashScreenFragment() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 setData(dataSnapshot)
-                keepSplashScreen = false
             }
 
             override fun onCancelled(error: DatabaseError) {}

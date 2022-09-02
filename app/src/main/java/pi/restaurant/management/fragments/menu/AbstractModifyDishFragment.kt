@@ -33,6 +33,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
+        binding.progress.progressBar.visibility = View.GONE
         setSaveButtonListener()
     }
 

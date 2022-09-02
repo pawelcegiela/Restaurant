@@ -28,6 +28,7 @@ class WorkersMainFragment : AbstractItemListFragment() {
             binding.fab.visibility = View.GONE
         }
         adapterData = list as MutableList<AbstractDataObject>
+        binding.progress.progressBar.visibility = View.GONE
     }
 
     override fun checkPrerequisitesAndOpenPreview(item: AbstractDataObject) {

@@ -39,6 +39,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         } else {
             removeButton.text = getText(R.string.disable_user)
         }
+        binding.progress.progressBar.visibility = View.GONE
     }
 
     override fun setRemoveButtonListener() {

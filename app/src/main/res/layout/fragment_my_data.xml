@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.discounts.AbstractModifyDiscountFragment">
+    tools:context=".fragments.settings.MyDataFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -15,64 +15,67 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
-            android:id="@+id/editTextAvailable"
+            android:id="@+id/editTextFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:enabled="false"
-            android:hint="@string/zero"
-            android:importantForAutofill="no"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/editTextAssigned"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:enabled="false"
-            android:hint="@string/zero"
-            android:importantForAutofill="no"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/editTextUsed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:enabled="false"
-            android:hint="@string/zero"
-            android:importantForAutofill="no"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/editTextCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="25dp"
-            android:enabled="false"
-            android:hint="@string/code"
+            android:hint="@string/first_name"
             android:importantForAutofill="no"
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/editTextAmount"
+            android:id="@+id/editTextLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:enabled="false"
-            android:hint="@string/zero"
+            android:hint="@string/last_name"
             android:importantForAutofill="no"
-            android:inputType="number" />
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:hint="@string/e_mail"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/editTextUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="25dp"
+            android:hint="@string/user_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/editTextRepeatUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="25dp"
+            android:hint="@string/repeat_user_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
 
         <Spinner
-            android:id="@+id/spinnerType"
+            android:id="@+id/spinnerRole"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_margin="15dp"
-            android:enabled="false" />
+            android:layout_margin="15dp" />
 
-        <!--        TODO: Data-->
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="25dp"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/buttonSave"
@@ -80,8 +83,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:enabled="false"
-            android:text="@string/no_permission" />
+            android:text="@string/save" />
 
         <Button
             android:id="@+id/buttonRemove"
@@ -90,12 +92,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
             android:backgroundTint="#DF0000"
-            android:enabled="false"
-            android:text="@string/no_permission"
-            android:visibility="gone" />
+            android:text="@string/disable_user" />
 
     </LinearLayout>
-
-    <include layout="@layout/progress_bar" android:id="@+id/progress"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

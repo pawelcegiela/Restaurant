@@ -30,5 +30,6 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         val item = dataSnapshot.getValue<Ingredient>() ?: return
         binding.textViewName.text = item.name
         binding.textViewAmountWithUnit.text = Utils.formatAmountWithUnit(context!!, item.amount, item.unit)
+        binding.progress.progressBar.visibility = View.GONE
     }
 }

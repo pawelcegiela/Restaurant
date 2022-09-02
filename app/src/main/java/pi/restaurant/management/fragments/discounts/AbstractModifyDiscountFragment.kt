@@ -33,6 +33,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
+        binding.progress.progressBar.visibility = View.GONE
         initializeSpinner()
         setSaveButtonListener()
     }

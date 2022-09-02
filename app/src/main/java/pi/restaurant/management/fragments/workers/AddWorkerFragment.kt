@@ -19,6 +19,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
     override fun initializeUI() {
         removeButton.visibility = View.GONE
+        binding.progress.progressBar.visibility = View.GONE
 
         initializeSpinner()
         setSaveButtonListener()

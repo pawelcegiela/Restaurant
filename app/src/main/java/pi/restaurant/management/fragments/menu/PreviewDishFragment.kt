@@ -30,5 +30,6 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         val item = dataSnapshot.getValue<Dish>() ?: return
         binding.textViewName.text = item.name
         binding.textViewPrice.text = "${item.price} zł"
+        binding.progress.progressBar.visibility = View.GONE
     }
 }

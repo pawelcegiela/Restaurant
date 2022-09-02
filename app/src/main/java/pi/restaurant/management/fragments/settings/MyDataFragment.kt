@@ -18,7 +18,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.User
-import pi.restaurant.management.databinding.FragmentUserDataBinding
+import pi.restaurant.management.databinding.FragmentMyDataBinding
 import pi.restaurant.management.fragments.AbstractSplashScreenFragment
 import pi.restaurant.management.utils.Utils
 
@@ -27,7 +27,7 @@ import pi.restaurant.management.utils.Utils
 
 class MyDataFragment : AbstractSplashScreenFragment() {
 
-    private var _binding: FragmentUserDataBinding? = null
+    private var _binding: FragmentMyDataBinding? = null
     val binding get() = _binding!!
     var id: String = ""
 
@@ -35,7 +35,7 @@ class MyDataFragment : AbstractSplashScreenFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUserDataBinding.inflate(inflater, container, false)
+        _binding = FragmentMyDataBinding.inflate(inflater, container, false)
         return binding.root
     }
 

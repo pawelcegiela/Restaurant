@@ -9,7 +9,7 @@
         android:id="@+id/MenuMainFragment"
         android:name="pi.restaurant.management.fragments.menu.MenuMainFragment"
         android:label="@string/menu"
-        tools:layout="@layout/fragment_recycler">
+        tools:layout="@layout/fragment_item_list">
 
         <action
             android:id="@+id/actionMenuToAddDish"

@@ -10,13 +10,13 @@ import android.widget.Spinner
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
-import pi.restaurant.management.databinding.FragmentUserDataBinding
+import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.Utils
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
-    private var _binding: FragmentUserDataBinding? = null
+    private var _binding: FragmentModifyWorkerBinding? = null
     val binding get() = _binding!!
 
     override val databasePath = "users"
@@ -31,7 +31,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUserDataBinding.inflate(inflater, container, false)
+        _binding = FragmentModifyWorkerBinding.inflate(inflater, container, false)
         return binding.root
     }
 

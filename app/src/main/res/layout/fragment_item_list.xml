@@ -30,4 +30,6 @@
         android:contentDescription="@string/add_new_position"
         android:layout_margin="16dp" />
 
+    <include layout="@layout/progress_bar" android:id="@+id/progress"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -9,7 +9,7 @@
         android:id="@+id/WorkersMainFragment"
         android:name="pi.restaurant.management.fragments.workers.WorkersMainFragment"
         android:label="@string/workers"
-        tools:layout="@layout/fragment_recycler">
+        tools:layout="@layout/fragment_item_list">
 
         <action
             android:id="@+id/actionWorkersToAddWorker"
@@ -32,7 +32,7 @@
         android:id="@+id/EditWorkerFragment"
         android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
         android:label="@string/edit_worker"
-        tools:layout="@layout/fragment_user_data">
+        tools:layout="@layout/fragment_modify_worker">
         <action
             android:id="@+id/actionEditWorkerToWorkers"
             app:destination="@id/WorkersMainFragment" />
@@ -42,7 +42,7 @@
         android:id="@+id/AddWorkerFragment"
         android:name="pi.restaurant.management.fragments.workers.AddWorkerFragment"
         android:label="@string/add_worker"
-        tools:layout="@layout/fragment_user_data">
+        tools:layout="@layout/fragment_modify_worker">
         <action
             android:id="@+id/actionAddWorkerToWorkers"
             app:destination="@id/WorkersMainFragment" />

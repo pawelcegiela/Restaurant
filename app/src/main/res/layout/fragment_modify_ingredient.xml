@@ -63,4 +63,6 @@
 
     </LinearLayout>
 
+    <include layout="@layout/progress_bar" android:id="@+id/progress"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
