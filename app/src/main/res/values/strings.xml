@@ -48,7 +48,7 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="is_required">%1$s is required</string>
-    <string name="restaurant_data_changed">Restaurant data changed successfully</string>
+    <string name="restaurant_data_modified">Restaurant data changed successfully</string>
     <string name="enter_correct_hours">Enter correct hours in format HH:MM or H:MM</string>
     <string name="default_opening_hours">Default opening hours</string>
     <string name="default_">Default</string>
@@ -122,6 +122,9 @@
     <string name="preview_worker">Preview worker</string>
     <string name="empty_string" />
     <string name="edit_my_data">Edit my data</string>
+    <string name="location_modified">Restaurant location has been modified</string>
+    <string name="opening_hours_modified">Opening hours have been modified</string>
+    <string name="temp_add_map">Dodać mapkę z wyborem lokalizacji</string>
 
     <string-array name="roles">
         <item>Admin</item>

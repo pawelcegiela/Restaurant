@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class OpeningHours {
+class OpeningHours : AbstractDataObject() {
+    override var id = "openingHours"
+
     var mondayEnabled: Boolean = false
     var tuesdayEnabled: Boolean = false
     var wednesdayEnabled: Boolean = false
@@ -13,13 +15,13 @@ class OpeningHours {
     var saturdayEnabled: Boolean = false
     var sundayEnabled: Boolean = false
 
-    var mondayStartHour: Date = Date()
-    var tuesdayStartHour: Date = Date()
-    var wednesdayStartHour: Date = Date()
-    var thursdayStartHour: Date = Date()
-    var fridayStartHour: Date = Date()
-    var saturdayStartHour: Date = Date()
-    var sundayStartHour: Date = Date()
+    var mondayStartHour = Date()
+    var tuesdayStartHour = Date()
+    var wednesdayStartHour = Date()
+    var thursdayStartHour = Date()
+    var fridayStartHour = Date()
+    var saturdayStartHour = Date()
+    var sundayStartHour = Date()
 
     var mondayEndHour: Date = Date()
     var tuesdayEndHour = Date()
@@ -32,6 +34,8 @@ class OpeningHours {
     private val sdf = SimpleDateFormat("HH:mm")
     var defaultStartHour = sdf.parse("9:00")
     var defaultEndHour = sdf.parse("21:00")
+
+    var isError = false
 
     fun getWeekDaysEnabled(): ArrayList<Boolean> {
         return arrayListOf(

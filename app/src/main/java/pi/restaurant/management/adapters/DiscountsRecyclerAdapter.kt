@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.databinding.ItemDiscountsBinding
+import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.Utils
 
 
@@ -53,7 +54,7 @@ class DiscountsRecyclerAdapter(
         viewHolder.binding.textViewNumber.text = Utils.getNumberOfDiscounts(dataSet[position])
         viewHolder.binding.textViewDiscountAmount.text = Utils.getDiscountAmount(dataSet[position])
         viewHolder.binding.textViewExpirationDate.text =
-            Utils.formatDate(dataSet[position].expirationDate)
+            StringFormatUtils.formatDate(dataSet[position].expirationDate)
     }
 
     override fun getItemCount() = dataSet.size

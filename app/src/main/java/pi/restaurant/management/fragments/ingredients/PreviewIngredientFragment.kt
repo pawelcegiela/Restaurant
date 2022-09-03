@@ -9,7 +9,7 @@ import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.databinding.FragmentPreviewIngredientBinding
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
-import pi.restaurant.management.utils.Utils
+import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     override val databasePath = "ingredients"
@@ -29,7 +29,8 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     override fun fillInData(dataSnapshot: DataSnapshot) {
         val item = dataSnapshot.getValue<Ingredient>() ?: return
         binding.textViewName.text = item.name
-        binding.textViewAmountWithUnit.text = Utils.formatAmountWithUnit(context!!, item.amount, item.unit)
+        binding.textViewAmountWithUnit.text =
+            StringFormatUtils.formatAmountWithUnit(context!!, item.amount, item.unit)
         binding.progress.progressBar.visibility = View.GONE
     }
 }

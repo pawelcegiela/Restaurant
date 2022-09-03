@@ -19,6 +19,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
     override val databasePath = "ingredients"
     override val linearLayout get() = binding.linearLayout
+    override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave
     override val removeButton get() = binding.buttonRemove
     override var itemId = ""
@@ -28,11 +29,12 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyIngredientBinding.inflate(inflater, container, false)
+        linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
 
     override fun initializeUI() {
-        binding.progress.progressBar.visibility = View.GONE
+        finishLoading()
         initializeSpinner()
         setSaveButtonListener()
     }

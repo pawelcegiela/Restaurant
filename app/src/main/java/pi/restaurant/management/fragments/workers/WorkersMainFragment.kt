@@ -33,7 +33,7 @@ class WorkersMainFragment : AbstractItemListFragment() {
         binding.progress.progressBar.visibility = View.GONE
     }
 
-    override fun checkPrerequisitesAndOpenPreview(item: AbstractDataObject) {
+    override fun checkPreconditionsAndOpenPreview(item: AbstractDataObject) {
         val user = item as User
         if (user.role > userRole) {
             openPreview(user)

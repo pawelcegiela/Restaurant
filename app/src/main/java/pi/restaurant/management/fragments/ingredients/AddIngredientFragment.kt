@@ -6,5 +6,5 @@ class AddIngredientFragment : AbstractModifyIngredientFragment() {
 
     override val nextActionId = R.id.actionAddIngredientToIngredients
     override val saveMessageId = R.string.ingredient_added
-    override val removeMessageId = 0
+    override val removeMessageId = 0 // Unused
 }

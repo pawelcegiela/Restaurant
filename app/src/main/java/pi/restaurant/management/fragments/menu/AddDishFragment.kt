@@ -6,5 +6,5 @@ class AddDishFragment : AbstractModifyDishFragment() {
 
     override val nextActionId = R.id.actionAddDishToMenu
     override val saveMessageId = R.string.dish_added
-    override val removeMessageId = 0
+    override val removeMessageId = 0 // Unused
 }

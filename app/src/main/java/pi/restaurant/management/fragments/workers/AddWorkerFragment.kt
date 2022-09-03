@@ -9,18 +9,18 @@ import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
 import pi.restaurant.management.enums.Precondition
-import pi.restaurant.management.utils.Utils
+import pi.restaurant.management.utils.PreconditionUtils
 
 class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
     override val nextActionId = R.id.actionAddWorkerToWorkers
     override val saveMessageId = R.string.created_new_user
-    override val removeMessageId = 0 // Warning: unused
+    override val removeMessageId = 0 // Unused
 
     override fun initializeUI() {
         removeButton.visibility = View.GONE
-        binding.progress.progressBar.visibility = View.GONE
 
+        finishLoading()
         initializeSpinner()
         setSaveButtonListener()
     }
@@ -59,7 +59,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
         }
         val password = binding.editTextUserPassword.text.toString()
         val repeatedPassword = binding.editTextRepeatUserPassword.text.toString()
-        return Utils.checkUserPasswords(password, repeatedPassword)
+        return PreconditionUtils.checkUserPasswords(password, repeatedPassword)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

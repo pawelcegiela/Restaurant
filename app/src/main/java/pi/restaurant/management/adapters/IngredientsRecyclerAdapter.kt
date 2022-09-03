@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.databinding.ItemIngredientsBinding
-import pi.restaurant.management.enums.Unit
-import pi.restaurant.management.utils.Utils
+import pi.restaurant.management.utils.StringFormatUtils
 
 
 class IngredientsRecyclerAdapter(
@@ -52,7 +51,7 @@ class IngredientsRecyclerAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewName.text = dataSet[position].name
         viewHolder.binding.textViewAmountWithUnit.text =
-            Utils.formatAmountWithUnit(fragment.context!!, dataSet[position].amount, dataSet[position].unit)
+            StringFormatUtils.formatAmountWithUnit(fragment.context!!, dataSet[position].amount, dataSet[position].unit)
     }
 
     override fun getItemCount() = dataSet.size

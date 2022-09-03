@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.restaurantdata.RDMainFragment">
+    tools:context=".fragments.restaurantdata.AboutRestaurantFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -43,5 +44,9 @@
             android:text="@string/save" />
 
     </LinearLayout>
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/progress_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

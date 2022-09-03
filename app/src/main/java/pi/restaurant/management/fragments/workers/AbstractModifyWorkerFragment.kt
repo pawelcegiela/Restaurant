@@ -13,7 +13,7 @@ import pi.restaurant.management.data.User
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.utils.Utils
+import pi.restaurant.management.utils.PreconditionUtils
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null
@@ -21,6 +21,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
 
     override val databasePath = "users"
     override val linearLayout get() = binding.linearLayout
+    override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave
     override val removeButton get() = binding.buttonRemove
     override var itemId = ""
@@ -32,6 +33,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyWorkerBinding.inflate(inflater, container, false)
+        linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
 
@@ -68,7 +70,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return Utils.compareRoles(myRole, (data as User).role)
+        return PreconditionUtils.compareRoles(myRole, (data as User).role)
     }
 
     override fun onDestroyView() {

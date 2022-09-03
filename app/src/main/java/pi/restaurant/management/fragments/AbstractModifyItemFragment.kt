@@ -3,10 +3,7 @@ package pi.restaurant.management.fragments
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -28,8 +25,9 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     abstract val databasePath: String
     abstract val linearLayout: LinearLayout
+    abstract val progressBar: ProgressBar
     abstract val saveButton: Button
-    abstract val removeButton: Button
+    abstract val removeButton: Button?
     abstract var itemId: String
     abstract val nextActionId: Int
     abstract val saveMessageId: Int
@@ -50,7 +48,6 @@ abstract class AbstractModifyItemFragment : Fragment() {
                     unlockUI()
                     initializeUI()
                 }
-//                keepSplashScreen = false TEMP
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -62,7 +59,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
             view.isEnabled = true
         }
         saveButton.text = getText(R.string.save)
-        removeButton.text = getText(R.string.remove_item)
+        removeButton?.text = getText(R.string.remove_item)
     }
 
     abstract fun initializeUI()
@@ -72,6 +69,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 fillInData(dataSnapshot)
+                finishLoading()
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -115,7 +113,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     }
 
     open fun setRemoveButtonListener() {
-        removeButton.setOnClickListener {
+        removeButton?.setOnClickListener {
             val databaseRef = Firebase.database.getReference(databasePath).child(itemId)
 
             databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -144,5 +142,10 @@ abstract class AbstractModifyItemFragment : Fragment() {
             dialog.dismiss()
         }
         dialogBuilder.create().show()
+    }
+
+    fun finishLoading() {
+        progressBar.visibility = View.GONE
+        linearLayout.visibility = View.VISIBLE
     }
 }

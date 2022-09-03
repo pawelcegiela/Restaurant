@@ -8,6 +8,7 @@
     tools:context=".fragments.restaurantdata.RDMainFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -367,5 +368,9 @@
             android:text="@string/save" />
 
     </LinearLayout>
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/progress_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

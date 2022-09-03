@@ -27,6 +27,5 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
         binding.editTextName.setText(data.name)
         binding.editTextAmount.setText(data.amount.toString())
         binding.spinnerUnit.setSelection(data.unit)
-        binding.progress.progressBar.visibility = View.GONE
     }
 }

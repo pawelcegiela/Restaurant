@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
-import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.databinding.FragmentPreviewDiscountBinding
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
-import pi.restaurant.management.utils.Utils
+import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     override val databasePath = "discounts"
@@ -35,7 +34,7 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
         binding.textViewCode.text = item.id
         binding.textViewAmount.text = item.amount.toString()
         binding.textViewType.text = item.type.toString() //TODO
-        binding.textViewExpirationDate.text = Utils.formatDate(item.expirationDate) // TODO
+        binding.textViewExpirationDate.text = StringFormatUtils.formatDate(item.expirationDate)
         binding.progress.progressBar.visibility = View.GONE
     }
 }

@@ -5,6 +5,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import pi.restaurant.management.R
 import pi.restaurant.management.data.DiscountGroup
+import pi.restaurant.management.data.OpeningHours
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.enums.Unit
 import java.text.SimpleDateFormat
@@ -44,40 +45,6 @@ class Utils {
 
         fun getDiscountAmount(discount: DiscountGroup): String {
             return discount.amount.toString() + discount.type.toString()
-        }
-
-        fun checkUserPasswords(password1: String, password2: String): Precondition {
-            if (password1 != password2) {
-                return Precondition.PASSWORDS_DIFFER
-            }
-
-            val length = password1.length >= 8
-            val uppercase = password1.contains(Regex("[A-Z]"))
-            val lowercase = password1.contains(Regex("[a-z]"))
-            val numbers = password1.contains(Regex("[0-9]"))
-            //TODO Dodać znaki specjalne
-
-            if (length && uppercase && lowercase && numbers) {
-                return Precondition.OK
-            }
-
-            return Precondition.PASSWORD_TOO_WEAK
-        }
-
-        fun compareRoles(myRole: Int, newUserRole: Int): Precondition {
-            if (myRole >= newUserRole) {
-                return Precondition.TOO_LOW_ROLE
-            }
-            return Precondition.OK
-        }
-
-        fun formatAmountWithUnit(context: Context, amount: Int, unit: Int): String {
-            return "$amount ${context.getString(Unit.getNameResById(unit))}"
-        }
-
-        fun formatDate(date: Date): String {
-            val sdf = SimpleDateFormat("dd.MM.yyyy")
-            return sdf.format(date)
         }
     }
 }
