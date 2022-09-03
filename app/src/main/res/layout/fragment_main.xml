@@ -62,6 +62,14 @@
             android:layout_marginTop="25dp"
             android:text="@string/discounts" />
 
+        <Button
+            android:id="@+id/buttonSettings"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="@string/action_settings" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

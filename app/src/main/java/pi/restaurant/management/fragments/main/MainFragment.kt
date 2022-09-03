@@ -54,6 +54,10 @@ class MainFragment : Fragment() {
         binding.buttonDiscounts.setOnClickListener {
             findNavController().navigate(R.id.actionMainToDiscounts)
         }
+
+        binding.buttonSettings.setOnClickListener {
+            findNavController().navigate(R.id.actionMainToSettings)
+        }
     }
 
     override fun onDestroyView() {

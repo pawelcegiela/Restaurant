@@ -26,6 +26,10 @@
         <action
             android:id="@+id/actionMainToOrders"
             app:destination="@id/OrdersActivity" />
+
+        <action
+            android:id="@+id/actionMainToSettings"
+            app:destination="@id/SettingsActivity" />
     </fragment>
 
     <activity

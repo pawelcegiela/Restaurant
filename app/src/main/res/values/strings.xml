@@ -121,6 +121,7 @@
     <string name="preview_dish">Preview dish</string>
     <string name="preview_worker">Preview worker</string>
     <string name="empty_string" />
+    <string name="edit_my_data">Edit my data</string>
 
     <string-array name="roles">
         <item>Admin</item>

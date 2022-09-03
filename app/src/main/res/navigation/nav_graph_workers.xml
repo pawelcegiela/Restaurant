@@ -20,6 +20,10 @@
             app:destination="@id/EditWorkerFragment" />
 
         <action
+            android:id="@+id/actionWorkersToEditMyData"
+            app:destination="@id/EditMyDataFragment" />
+
+        <action
             android:id="@+id/actionWorkersToPreviewWorker"
             app:destination="@id/PreviewWorkerFragment" />
 
@@ -45,6 +49,21 @@
         tools:layout="@layout/fragment_modify_worker">
         <action
             android:id="@+id/actionAddWorkerToWorkers"
+            app:destination="@id/WorkersMainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/EditMyDataFragment"
+        android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
+        android:label="@string/edit_my_data"
+        tools:layout="@layout/fragment_modify_worker">
+        <argument
+            android:name="myData"
+            android:defaultValue="true"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/actionEditMyDataToWorkers"
             app:destination="@id/WorkersMainFragment" />
     </fragment>
 

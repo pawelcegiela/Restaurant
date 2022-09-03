@@ -21,9 +21,18 @@
 
     <fragment
         android:id="@+id/MyDataFragment"
-        android:name="pi.restaurant.management.fragments.settings.MyDataFragment"
+        android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
         android:label="@string/my_data"
-        tools:layout="@layout/fragment_my_data"/>
+        tools:layout="@layout/fragment_modify_worker">
+        <argument
+            android:name="myData"
+            android:defaultValue="true"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/actionMyDataToSettings"
+            app:destination="@id/SettingsMainFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/PasswordFragment"

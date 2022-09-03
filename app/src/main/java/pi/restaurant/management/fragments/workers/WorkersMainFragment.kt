@@ -1,7 +1,9 @@
 package pi.restaurant.management.fragments.workers
 
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
@@ -22,7 +24,7 @@ class WorkersMainFragment : AbstractItemListFragment() {
     override fun setData(dataSnapshot: DataSnapshot) {
         val data = dataSnapshot.getValue<HashMap<String, User>>() ?: return
         val list = data.toList().map { it.second }.toMutableList()
-        val userRole = data[Firebase.auth.currentUser?.uid]?.role as Int
+        userRole = data[Firebase.auth.currentUser?.uid]?.role as Int
         binding.recyclerView.adapter = WorkersRecyclerAdapter(list, this@WorkersMainFragment)
         if (userRole == Role.WORKER.ordinal) {
             binding.fab.visibility = View.GONE
@@ -36,11 +38,7 @@ class WorkersMainFragment : AbstractItemListFragment() {
         if (user.role > userRole) {
             openPreview(user)
         } else if (user.id == Firebase.auth.uid) {
-            Toast.makeText(
-                context,
-                context?.getString(R.string.to_manage_go_to_settings) ?: "",
-                Toast.LENGTH_SHORT
-            ).show()
+            findNavController().navigate(R.id.actionWorkersToEditMyData)
         } else {
             Toast.makeText(
                 context,
