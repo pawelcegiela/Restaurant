@@ -132,6 +132,16 @@
     <string name="allergen_added">Allergen has been added</string>
     <string name="allergen_modified">Allergen has been modified</string>
     <string name="allergen_removed">Allergen has been removed</string>
+    <string name="description">Description</string>
+    <string name="active">Active</string>
+    <string name="base_price">Base price</string>
+    <string name="discount_price">Discount price</string>
+    <string name="discount">Discount</string>
+    <string name="dish">Dish</string>
+    <string name="warm_dish">Warm dish</string>
+    <string name="cold_dish">Cold dish</string>
+    <string name="non_alcoholic_drink">Non-alcoholic drink</string>
+    <string name="alcoholic_drink">Alcoholic drink</string>
 
     <string-array name="roles">
         <item>Admin</item>
@@ -149,6 +159,14 @@
         <item>g</item>
         <item>ml</item>
         <item>pcs</item>
+    </string-array>
+
+    <string-array name="dish_types">
+        <item>dish</item>
+        <item>warm dish</item>
+        <item>cold dish</item>
+        <item>non alcoholic drink</item>
+        <item>alcoholic drink</item>
     </string-array>
 
 </resources>

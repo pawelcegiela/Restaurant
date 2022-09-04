@@ -37,7 +37,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         return binding.root
     }
 
-    open fun initializeSpinner() {
+    fun initializeSpinner() {
         val spinner: Spinner = binding.spinnerRole
         ArrayAdapter.createFromResource(
             context!!,

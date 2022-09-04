@@ -7,7 +7,7 @@ import java.util.*
 
 class StringFormatUtils {
     companion object {
-        fun formatAmountWithUnit(context: Context, amount: Int, unit: Int): String {
+        fun formatAmountWithUnit(context: Context, amount: Number, unit: Int): String {
             return "$amount ${context.getString(Unit.getNameResById(unit))}"
         }
 

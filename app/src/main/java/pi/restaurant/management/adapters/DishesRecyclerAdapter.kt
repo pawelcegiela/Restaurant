@@ -49,7 +49,7 @@ class DishesRecyclerAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewName.text = dataSet[position].name
-        viewHolder.binding.textViewPrice.text = "${dataSet[position].price} zł"
+        viewHolder.binding.textViewPrice.text = "${dataSet[position].basePrice} zł" //TODO
     }
 
     override fun getItemCount() = dataSet.size

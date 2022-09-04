@@ -8,7 +8,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
+import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
+import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
     override val databasePath = "dishes"
@@ -28,7 +30,14 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
     override fun fillInData(dataSnapshot: DataSnapshot) {
         val item = dataSnapshot.getValue<Dish>() ?: return
         binding.textViewName.text = item.name
-        binding.textViewPrice.text = "${item.price} zł"
+        binding.textViewDescription.text = item.description
+        binding.checkBoxActive.isChecked = item.isActive
+        binding.textViewBasePrice.text = "${item.basePrice} zł"
+        binding.checkBoxDiscount.isChecked = item.isDiscounted
+        binding.textViewDiscountPrice.text = "${item.discountPrice} zł"
+        binding.textViewDishType.text = getString(DishType.getNameResById(item.dishType))
+        binding.textViewAmountWithUnit.text =
+            StringFormatUtils.formatAmountWithUnit(context!!, item.amount, item.unit)
         binding.progress.progressBar.visibility = View.GONE
     }
 }

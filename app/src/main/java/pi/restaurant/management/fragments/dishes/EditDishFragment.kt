@@ -24,6 +24,13 @@ class EditDishFragment : AbstractModifyDishFragment() {
     override fun fillInData(dataSnapshot: DataSnapshot) {
         val data = dataSnapshot.getValue<Dish>() ?: return
         binding.editTextName.setText(data.name)
-        binding.editTextPrice.setText(data.price.toString())
+        binding.editTextDescription.setText(data.description)
+        binding.checkBoxActive.isChecked = data.isActive
+        binding.editTextBasePrice.setText(data.basePrice.toString())
+        binding.checkBoxDiscount.isChecked = data.isDiscounted
+        binding.editTextDiscountPrice.setText(data.discountPrice.toString())
+        binding.spinnerDishType.setSelection(data.dishType)
+        binding.editTextAmount.setText(data.amount.toString())
+        binding.spinnerUnit.setSelection(data.unit)
     }
 }

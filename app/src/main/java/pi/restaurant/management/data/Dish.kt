@@ -8,7 +8,7 @@ class Dish : AbstractDataObject {
     var name: String = ""
     var description: String = ""
     var isActive = true
-    var price: Double = 0.0
+    var basePrice: Double = 0.0
     var isDiscounted: Boolean = false
     var discountPrice: Double = 0.0
     var baseIngredients: HashMap<String, IngredientItem> = HashMap()
@@ -22,7 +22,18 @@ class Dish : AbstractDataObject {
     @Suppress("unused")
     constructor()
 
-    constructor(id: String, name: String, price: Double) {
+    constructor(
+        id: String,
+        name: String,
+        description: String,
+        isActive: Boolean,
+        basePrice: Double,
+        isDiscounted: Boolean,
+        discountPrice: Double,
+        dishType: Int,
+        amount: Double,
+        unit: Int
+    ) {
         if (id.isEmpty()) {
             this.id =
                 name.trim().replace(" ", "_") + "_" + Date().time + "_" + Random().nextInt(1000)
@@ -30,7 +41,14 @@ class Dish : AbstractDataObject {
             this.id = id
         }
         this.name = name
-        this.price = price
+        this.description = description
+        this.isActive = isActive
+        this.basePrice = basePrice
+        this.isDiscounted = isDiscounted
+        this.discountPrice = discountPrice
+        this.dishType = dishType
+        this.amount = amount
+        this.unit = unit
     }
 
 

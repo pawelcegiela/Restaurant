@@ -29,14 +29,73 @@
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/editTextPrice"
+                android:id="@+id/editTextDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:enabled="false"
-                android:hint="@string/price"
+                android:hint="@string/description"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+
+            <CheckBox
+                android:id="@+id/checkBoxActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="15dp"
+                android:checked="true"
+                android:text="@string/active" />
+
+            <EditText
+                android:id="@+id/editTextBasePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:enabled="false"
+                android:hint="@string/base_price"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal" />
+
+            <CheckBox
+                android:id="@+id/checkBoxDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="15dp"
+                android:text="@string/discount" />
+
+            <EditText
+                android:id="@+id/editTextDiscountPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:enabled="false"
+                android:hint="@string/discount_price"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal" />
+
+            <Spinner
+                android:id="@+id/spinnerDishType"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp" />
+
+            <EditText
+                android:id="@+id/editTextAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:enabled="false"
+                android:hint="@string/amount"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal" />
+
+            <Spinner
+                android:id="@+id/spinnerUnit"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="15dp" />
 
             <Button
                 android:id="@+id/buttonSave"
