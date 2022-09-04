@@ -31,10 +31,10 @@ class WorkersMainFragment : AbstractItemListFragment() {
         adapterData = list as MutableList<AbstractDataObject>
     }
 
-    override fun checkPreconditionsAndOpenPreview(item: AbstractDataObject) {
+    override fun checkPreconditionsAndOpenEdit(item: AbstractDataObject) {
         val user = item as User
         if (user.role > userRole) {
-            openPreview(user)
+            openEdit(user)
         } else if (user.id == Firebase.auth.uid) {
             findNavController().navigate(R.id.actionWorkersToEditMyData)
         } else {

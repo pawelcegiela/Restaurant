@@ -142,6 +142,7 @@
     <string name="cold_dish">Cold dish</string>
     <string name="non_alcoholic_drink">Non-alcoholic drink</string>
     <string name="alcoholic_drink">Alcoholic drink</string>
+    <string name="edit">Edit</string>
 
     <string-array name="roles">
         <item>Admin</item>

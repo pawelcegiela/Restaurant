@@ -49,6 +49,9 @@
         android:name="pi.restaurant.management.fragments.dishes.PreviewDishFragment"
         android:label="@string/preview_dish"
         tools:layout="@layout/fragment_preview_dish">
+        <action
+            android:id="@+id/actionPreviewDishToEditDish"
+            app:destination="@id/EditDishFragment" />
     </fragment>
 
     <activity

@@ -2,9 +2,11 @@ package pi.restaurant.management.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,6 +21,8 @@ abstract class AbstractPreviewItemFragment : Fragment() {
 
     abstract val databasePath: String
     abstract val linearLayout: LinearLayout
+    abstract val editButton: Button
+    abstract val editActionId: Int
     lateinit var itemId: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,12 +38,23 @@ abstract class AbstractPreviewItemFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 myRole = dataSnapshot.getValue<Int>() ?: return
                 if (myRole < Role.WORKER.ordinal) {
+                    unlockUI()
                     getDataFromDatabase()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
+    }
+
+    open fun unlockUI() {
+        editButton.visibility = View.VISIBLE
+        editButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("id", itemId)
+
+            findNavController().navigate(editActionId, bundle)
+        }
     }
 
     fun getDataFromDatabase() {

@@ -78,18 +78,18 @@ abstract class AbstractItemListFragment : Fragment() {
                 com.google.android.material.R.drawable.material_ic_edit_black_24dp
             ) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
-                    checkPreconditionsAndOpenPreview(adapterData[viewHolder.adapterPosition])
+                    checkPreconditionsAndOpenEdit(adapterData[viewHolder.adapterPosition])
                 }
             }
         val itemTouchHelper = ItemTouchHelper(swipeToEditCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
 
-    open fun checkPreconditionsAndOpenPreview(item: AbstractDataObject) {
-        openPreview(item)
+    open fun checkPreconditionsAndOpenEdit(item: AbstractDataObject) {
+        openEdit(item)
     }
 
-    fun openPreview(item: AbstractDataObject) {
+    fun openEdit(item: AbstractDataObject) {
         val bundle = Bundle()
         bundle.putString("id", item.id)
 

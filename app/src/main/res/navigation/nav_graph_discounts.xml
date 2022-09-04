@@ -49,6 +49,9 @@
         android:name="pi.restaurant.management.fragments.discounts.PreviewDiscountFragment"
         android:label="@string/preview_discount"
         tools:layout="@layout/fragment_preview_discount">
+        <action
+            android:id="@+id/actionPreviewDiscountToEditDiscount"
+            app:destination="@id/EditDiscountFragment" />
     </fragment>
 
     <activity

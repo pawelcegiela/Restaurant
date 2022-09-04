@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
+import pi.restaurant.management.R
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.databinding.FragmentPreviewDiscountBinding
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
@@ -14,6 +15,8 @@ import pi.restaurant.management.utils.StringFormatUtils
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     override val databasePath = "discounts"
     override val linearLayout get() = binding.linearLayout
+    override val editButton get() = binding.buttonEdit
+    override val editActionId = R.id.actionPreviewDiscountToEditDiscount
 
     private var _binding: FragmentPreviewDiscountBinding? = null
     val binding get() = _binding!!

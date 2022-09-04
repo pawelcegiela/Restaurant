@@ -49,6 +49,9 @@
         android:name="pi.restaurant.management.fragments.allergens.PreviewAllergenFragment"
         android:label="@string/preview_allergen"
         tools:layout="@layout/fragment_preview_allergen">
+        <action
+            android:id="@+id/actionPreviewAllergenToEditAllergen"
+            app:destination="@id/EditAllergenFragment" />
     </fragment>
 
     <activity

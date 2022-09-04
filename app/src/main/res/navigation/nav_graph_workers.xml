@@ -72,6 +72,9 @@
         android:name="pi.restaurant.management.fragments.workers.PreviewWorkerFragment"
         android:label="@string/preview_worker"
         tools:layout="@layout/fragment_preview_worker">
+        <action
+            android:id="@+id/actionPreviewWorkerToEditWorker"
+            app:destination="@id/EditWorkerFragment" />
     </fragment>
 
     <activity

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
+import pi.restaurant.management.R
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.enums.DishType
@@ -15,6 +16,8 @@ import pi.restaurant.management.utils.StringFormatUtils
 class PreviewDishFragment : AbstractPreviewItemFragment() {
     override val databasePath = "dishes"
     override val linearLayout get() = binding.linearLayout
+    override val editButton get() = binding.buttonEdit
+    override val editActionId = R.id.actionPreviewDishToEditDish
 
     private var _binding: FragmentPreviewDishBinding? = null
     val binding get() = _binding!!

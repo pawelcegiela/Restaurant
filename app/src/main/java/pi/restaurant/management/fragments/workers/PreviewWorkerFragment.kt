@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
+import pi.restaurant.management.R
 import pi.restaurant.management.data.User
 import pi.restaurant.management.databinding.FragmentPreviewWorkerBinding
 import pi.restaurant.management.enums.Role
@@ -14,6 +15,8 @@ import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     override val databasePath = "users"
     override val linearLayout get() = binding.linearLayout
+    override val editButton get() = binding.buttonEdit
+    override val editActionId = R.id.actionPreviewWorkerToEditWorker
 
     private var _binding: FragmentPreviewWorkerBinding? = null
     val binding get() = _binding!!
@@ -33,4 +36,7 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         binding.textViewRole.text = getString(Role.getNameResById(item.role))
         binding.progress.progressBar.visibility = View.GONE
     }
+
+    // TODO Temporary - somehow check preconditions first!
+    override fun unlockUI() {}
 }

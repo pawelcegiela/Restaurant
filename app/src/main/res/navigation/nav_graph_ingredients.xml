@@ -49,6 +49,9 @@
         android:name="pi.restaurant.management.fragments.ingredients.PreviewIngredientFragment"
         android:label="@string/preview_ingredient"
         tools:layout="@layout/fragment_preview_ingredient">
+        <action
+            android:id="@+id/actionPreviewIngredientToEditIngredient"
+            app:destination="@id/EditIngredientFragment" />
     </fragment>
 
     <activity

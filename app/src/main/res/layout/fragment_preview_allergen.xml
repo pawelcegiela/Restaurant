@@ -34,9 +34,8 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:backgroundTint="#DF0000"
-                android:enabled="false"
-                android:text="@string/no_permission"
+                android:backgroundTint="#FFC107"
+                android:text="@string/edit"
                 android:visibility="gone" />
 
         </LinearLayout>
