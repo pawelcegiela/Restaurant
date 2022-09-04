@@ -2,53 +2,53 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_discounts"
-    app:startDestination="@id/DiscountsMainFragment">
+    android:id="@+id/nav_graph_allergens"
+    app:startDestination="@id/AllergensMainFragment">
 
     <fragment
-        android:id="@+id/DiscountsMainFragment"
-        android:name="pi.restaurant.management.fragments.discounts.DiscountsMainFragment"
-        android:label="@string/discounts"
+        android:id="@+id/AllergensMainFragment"
+        android:name="pi.restaurant.management.fragments.allergens.AllergensMainFragment"
+        android:label="@string/allergens"
         tools:layout="@layout/fragment_item_list">
 
         <action
-            android:id="@+id/actionDiscountsToAddDiscount"
-            app:destination="@id/AddDiscountFragment" />
+            android:id="@+id/actionAllergensToAddAllergen"
+            app:destination="@id/AddAllergenFragment" />
 
         <action
-            android:id="@+id/actionDiscountsToEditDiscount"
-            app:destination="@id/EditDiscountFragment" />
+            android:id="@+id/actionAllergensToEditAllergen"
+            app:destination="@id/EditAllergenFragment" />
 
         <action
-            android:id="@+id/actionDiscountsToPreviewDiscount"
-            app:destination="@id/PreviewDiscountFragment" />
+            android:id="@+id/actionAllergensToPreviewAllergen"
+            app:destination="@id/PreviewAllergenFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/AddDiscountFragment"
-        android:name="pi.restaurant.management.fragments.discounts.AddDiscountFragment"
-        android:label="@string/add_discount"
-        tools:layout="@layout/fragment_modify_discount">
+        android:id="@+id/AddAllergenFragment"
+        android:name="pi.restaurant.management.fragments.allergens.AddAllergenFragment"
+        android:label="@string/add_allergen"
+        tools:layout="@layout/fragment_modify_allergen">
         <action
-            android:id="@+id/actionAddDiscountToDiscounts"
-            app:destination="@id/DiscountsMainFragment" />
+            android:id="@+id/actionAddAllergenToAllergens"
+            app:destination="@id/AllergensMainFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/EditDiscountFragment"
-        android:name="pi.restaurant.management.fragments.discounts.EditDiscountFragment"
-        android:label="@string/edit_discount"
-        tools:layout="@layout/fragment_modify_discount">
+        android:id="@+id/EditAllergenFragment"
+        android:name="pi.restaurant.management.fragments.allergens.EditAllergenFragment"
+        android:label="@string/edit_allergen"
+        tools:layout="@layout/fragment_modify_allergen">
         <action
-            android:id="@+id/actionEditDiscountToDiscounts"
-            app:destination="@id/DiscountsMainFragment" />
+            android:id="@+id/actionEditAllergenToAllergens"
+            app:destination="@id/AllergensMainFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/PreviewDiscountFragment"
-        android:name="pi.restaurant.management.fragments.discounts.PreviewDiscountFragment"
-        android:label="@string/preview_discount"
-        tools:layout="@layout/fragment_preview_discount">
+        android:id="@+id/PreviewAllergenFragment"
+        android:name="pi.restaurant.management.fragments.allergens.PreviewAllergenFragment"
+        android:label="@string/preview_allergen"
+        tools:layout="@layout/fragment_preview_allergen">
     </fragment>
 
     <activity
@@ -56,6 +56,12 @@
         android:name="pi.restaurant.management.activities.MainActivity"
         android:label="Home"
         tools:layout="@layout/activity_main" />
+
+    <activity
+        android:id="@+id/DiscountsActivity"
+        android:name="pi.restaurant.management.activities.DiscountsActivity"
+        android:label="@string/discounts"
+        tools:layout="@layout/activity_discounts" />
 
     <activity
         android:id="@+id/IngredientsActivity"
@@ -68,12 +74,6 @@
         android:name="pi.restaurant.management.activities.DishesActivity"
         android:label="@string/dishes"
         tools:layout="@layout/activity_dishes" />
-
-    <activity
-        android:id="@+id/AllergensActivity"
-        android:name="pi.restaurant.management.activities.AllergensActivity"
-        android:label="@string/allergens"
-        tools:layout="@layout/activity_allergens" />
 
     <activity
         android:id="@+id/OrdersActivity"

@@ -125,6 +125,13 @@
     <string name="location_modified">Restaurant location has been modified</string>
     <string name="opening_hours_modified">Opening hours have been modified</string>
     <string name="temp_add_map">Dodać mapkę z wyborem lokalizacji</string>
+    <string name="allergens">Allergens</string>
+    <string name="add_allergen">Add allergen</string>
+    <string name="edit_allergen">Edit allergen</string>
+    <string name="preview_allergen">Preview allergen</string>
+    <string name="allergen_added">Allergen has been added</string>
+    <string name="allergen_modified">Allergen has been modified</string>
+    <string name="allergen_removed">Allergen has been removed</string>
 
     <string-array name="roles">
         <item>Admin</item>

@@ -39,8 +39,12 @@ class MainFragment : Fragment() {
             startActivity(Intent(activity, WorkersActivity::class.java))
         }
 
-        binding.buttonMenu.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToMenu)
+        binding.buttonDishes.setOnClickListener {
+            findNavController().navigate(R.id.actionMainToDishes)
+        }
+
+        binding.buttonAllergens.setOnClickListener {
+            findNavController().navigate(R.id.actionMainToAllergens)
         }
 
         binding.buttonOrders.setOnClickListener {

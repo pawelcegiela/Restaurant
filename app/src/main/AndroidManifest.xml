@@ -36,6 +36,9 @@
             android:name=".activities.DishesActivity"
             android:screenOrientation="nosensor" />
         <activity
+            android:name=".activities.AllergensActivity"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".activities.OrdersActivity"
             android:screenOrientation="nosensor" />
         <activity

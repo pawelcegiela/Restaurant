@@ -11,7 +11,7 @@
     </group>
 
     <group android:checkableBehavior="single"
-        android:id="@+id/groupMenu">
+        android:id="@+id/groupDishes">
         <item
             android:id="@+id/DishesMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
@@ -35,6 +35,11 @@
             android:id="@+id/IngredientsActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/ingredients" />
+
+        <item
+            android:id="@+id/AllergensActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/allergens" />
 
         <item
             android:id="@+id/OrdersActivity"

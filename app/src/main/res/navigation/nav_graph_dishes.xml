@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_menu"
+    android:id="@+id/nav_graph_dishes"
     app:startDestination="@id/DishesMainFragment">
 
     <fragment
@@ -30,7 +30,7 @@
         android:label="@string/add_dish"
         tools:layout="@layout/fragment_modify_dish">
         <action
-            android:id="@+id/actionAddDishToMenu"
+            android:id="@+id/actionAddDishToDishes"
             app:destination="@id/DishesMainFragment" />
     </fragment>
 
@@ -40,7 +40,7 @@
         android:label="@string/edit_dish"
         tools:layout="@layout/fragment_modify_dish">
         <action
-            android:id="@+id/actionEditDishToMenu"
+            android:id="@+id/actionEditDishToDishes"
             app:destination="@id/DishesMainFragment" />
     </fragment>
 
@@ -68,6 +68,12 @@
         android:name="pi.restaurant.management.activities.IngredientsActivity"
         android:label="@string/ingredients"
         tools:layout="@layout/activity_ingredients" />
+
+    <activity
+        android:id="@+id/AllergensActivity"
+        android:name="pi.restaurant.management.activities.AllergensActivity"
+        android:label="@string/allergens"
+        tools:layout="@layout/activity_allergens" />
 
     <activity
         android:id="@+id/OrdersActivity"

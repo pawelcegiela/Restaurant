@@ -24,6 +24,10 @@
             app:destination="@id/DishesActivity" />
 
         <action
+            android:id="@+id/actionMainToAllergens"
+            app:destination="@id/AllergensActivity" />
+
+        <action
             android:id="@+id/actionMainToOrders"
             app:destination="@id/OrdersActivity" />
 
@@ -49,6 +53,12 @@
         android:name="pi.restaurant.management.activities.DishesActivity"
         android:label="@string/dishes"
         tools:layout="@layout/activity_dishes" />
+
+    <activity
+        android:id="@+id/AllergensActivity"
+        android:name="pi.restaurant.management.activities.AllergensActivity"
+        android:label="@string/allergens"
+        tools:layout="@layout/activity_allergens" />
 
     <activity
         android:id="@+id/OrdersActivity"

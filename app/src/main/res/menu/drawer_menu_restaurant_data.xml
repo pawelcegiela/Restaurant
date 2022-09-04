@@ -57,6 +57,11 @@
             android:title="@string/dishes" />
 
         <item
+            android:id="@+id/AllergensActivity"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/allergens" />
+
+        <item
             android:id="@+id/OrdersActivity"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/orders" />

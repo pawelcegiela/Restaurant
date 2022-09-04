@@ -93,6 +93,12 @@
         tools:layout="@layout/activity_dishes" />
 
     <activity
+        android:id="@+id/AllergensActivity"
+        android:name="pi.restaurant.management.activities.AllergensActivity"
+        android:label="@string/allergens"
+        tools:layout="@layout/activity_allergens" />
+
+    <activity
         android:id="@+id/OrdersActivity"
         android:name="pi.restaurant.management.activities.OrdersActivity"
         android:label="@string/orders"

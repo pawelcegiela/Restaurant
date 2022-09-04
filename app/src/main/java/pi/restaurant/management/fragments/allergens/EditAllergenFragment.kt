@@ -1,16 +1,16 @@
-package pi.restaurant.management.fragments.dishes
+package pi.restaurant.management.fragments.allergens
 
 import android.view.View
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.Allergen
 
-class EditDishFragment : AbstractModifyDishFragment() {
+class EditAllergenFragment : AbstractModifyAllergenFragment() {
 
-    override val nextActionId = R.id.actionEditDishToDishes
-    override val saveMessageId = R.string.dish_modified
-    override val removeMessageId = R.string.dish_removed
+    override val nextActionId = R.id.actionEditAllergenToAllergens
+    override val saveMessageId = R.string.allergen_modified
+    override val removeMessageId = R.string.allergen_removed
 
     override fun initializeUI() {
         super.initializeUI()
@@ -22,8 +22,7 @@ class EditDishFragment : AbstractModifyDishFragment() {
     }
 
     override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<Dish>() ?: return
+        val data = dataSnapshot.getValue<Allergen>() ?: return
         binding.editTextName.setText(data.name)
-        binding.editTextPrice.setText(data.price.toString())
     }
 }
