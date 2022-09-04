@@ -5,30 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.restaurantdata.RDMainFragment">
+    tools:context=".fragments.settings.SettingsMainFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/buttonMyData"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/my_data" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <Button
-            android:id="@+id/buttonPassword"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/password" />
+            <Button
+                android:id="@+id/buttonMyData"
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:text="@string/my_data" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/buttonPassword"
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:text="@string/password" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

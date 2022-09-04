@@ -7,55 +7,63 @@
     android:fitsSystemWindows="true"
     tools:context=".fragments.dishes.AbstractModifyDishFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editTextName"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:enabled="false"
-            android:hint="@string/name"
-            android:importantForAutofill="no"
-            android:inputType="text" />
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <EditText
-            android:id="@+id/editTextPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:enabled="false"
-            android:hint="@string/price"
-            android:importantForAutofill="no"
-            android:inputType="numberDecimal" />
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:enabled="false"
+                android:hint="@string/name"
+                android:importantForAutofill="no"
+                android:inputType="text" />
 
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:enabled="false"
-            android:text="@string/no_permission" />
+            <EditText
+                android:id="@+id/editTextPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:enabled="false"
+                android:hint="@string/price"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal" />
 
-        <Button
-            android:id="@+id/buttonRemove"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:backgroundTint="#DF0000"
-            android:enabled="false"
-            android:text="@string/no_permission"
-            android:visibility="gone" />
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:enabled="false"
+                android:text="@string/no_permission" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/buttonRemove"
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="#DF0000"
+                android:enabled="false"
+                android:text="@string/no_permission"
+                android:visibility="gone" />
 
-    <include layout="@layout/progress_bar" android:id="@+id/progress"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/progress"
+        layout="@layout/progress_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

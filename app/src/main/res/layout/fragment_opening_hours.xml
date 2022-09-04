@@ -5,369 +5,375 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.restaurantdata.RDMainFragment">
+    tools:context=".fragments.restaurantdata.OpeningHoursFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <CheckBox
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:visibility="invisible" />
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/default_" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="invisible" />
 
-            <EditText
-                android:id="@+id/editTextDefaultStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/default_" />
 
-            <EditText
-                android:id="@+id/editTextDefaultEndHour"
-                android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/editTextDefaultStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextDefaultEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBoxMonday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/monday" />
+
+                <EditText
+                    android:id="@+id/editTextMondayStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextMondayEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBoxTuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/tuesday" />
+
+                <EditText
+                    android:id="@+id/editTextTuesdayStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextTuesdayEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBoxWednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/wednesday" />
+
+                <EditText
+                    android:id="@+id/editTextWednesdayStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextWednesdayEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBoxThursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/thursday" />
+
+                <EditText
+                    android:id="@+id/editTextThursdayStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextThursdayEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBoxFriday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/friday" />
+
+                <EditText
+                    android:id="@+id/editTextFridayStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextFridayEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBoxSaturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/saturday" />
+
+                <EditText
+                    android:id="@+id/editTextSaturdayStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextSaturdayEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBoxSunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/sunday" />
+
+                <EditText
+                    android:id="@+id/editTextSundayStartHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/start"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+                <EditText
+                    android:id="@+id/editTextSundayEndHour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/end"
+                    android:importantForAutofill="no"
+                    android:inputType="time" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:text="@string/save" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBoxMonday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/monday" />
-
-            <EditText
-                android:id="@+id/editTextMondayStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-            <EditText
-                android:id="@+id/editTextMondayEndHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBoxTuesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/tuesday" />
-
-            <EditText
-                android:id="@+id/editTextTuesdayStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-            <EditText
-                android:id="@+id/editTextTuesdayEndHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBoxWednesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/wednesday" />
-
-            <EditText
-                android:id="@+id/editTextWednesdayStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-            <EditText
-                android:id="@+id/editTextWednesdayEndHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBoxThursday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/thursday" />
-
-            <EditText
-                android:id="@+id/editTextThursdayStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-            <EditText
-                android:id="@+id/editTextThursdayEndHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBoxFriday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/friday" />
-
-            <EditText
-                android:id="@+id/editTextFridayStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-            <EditText
-                android:id="@+id/editTextFridayEndHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBoxSaturday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/saturday" />
-
-            <EditText
-                android:id="@+id/editTextSaturdayStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-            <EditText
-                android:id="@+id/editTextSaturdayEndHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/checkBoxSunday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:text="@string/sunday" />
-
-            <EditText
-                android:id="@+id/editTextSundayStartHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/start"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-            <EditText
-                android:id="@+id/editTextSundayEndHour"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="10dp"
-                android:layout_weight="1"
-                android:hint="@string/end"
-                android:importantForAutofill="no"
-                android:inputType="time" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/save" />
-
-    </LinearLayout>
+    </ScrollView>
 
     <include
         android:id="@+id/progress"
