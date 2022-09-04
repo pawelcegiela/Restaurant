@@ -1,4 +1,4 @@
-package pi.restaurant.management.fragments.menu
+package pi.restaurant.management.fragments.dishes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
-import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
-    override val databasePath = "menu"
+    override val databasePath = "dishes"
     override val linearLayout get() = binding.linearLayout
 
     private var _binding: FragmentPreviewDishBinding? = null

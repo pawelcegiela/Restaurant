@@ -44,9 +44,9 @@
             android:title="@string/ingredients" />
 
         <item
-            android:id="@+id/MenuActivity"
+            android:id="@+id/DishesActivity"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/menu" />
+            android:title="@string/dishes" />
 
         <item
             android:id="@+id/OrdersActivity"

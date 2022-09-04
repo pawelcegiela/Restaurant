@@ -30,13 +30,12 @@
             android:text="@string/workers" />
 
         <Button
-            android:id="@+id/buttonMenu"
+            android:id="@+id/buttonDishes"
             android:layout_width="280dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="@string/menu" />
-        <!--    TODO: Change this name -->
+            android:text="@string/dishes" />
 
         <Button
             android:id="@+id/buttonOrders"

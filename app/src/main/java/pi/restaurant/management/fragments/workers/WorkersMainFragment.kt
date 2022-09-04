@@ -1,6 +1,5 @@
 package pi.restaurant.management.fragments.workers
 
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -30,7 +29,6 @@ class WorkersMainFragment : AbstractItemListFragment() {
             binding.fab.visibility = View.GONE
         }
         adapterData = list as MutableList<AbstractDataObject>
-        binding.progress.progressBar.visibility = View.GONE
     }
 
     override fun checkPreconditionsAndOpenPreview(item: AbstractDataObject) {

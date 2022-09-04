@@ -1,6 +1,5 @@
 package pi.restaurant.management.fragments.discounts
 
-import android.view.View
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
@@ -20,6 +19,5 @@ class DiscountsMainFragment : AbstractItemListFragment() {
         binding.recyclerView.adapter =
             DiscountsRecyclerAdapter(list, this@DiscountsMainFragment)
         adapterData = list as MutableList<AbstractDataObject>
-        binding.progress.progressBar.visibility = View.GONE
     }
 }

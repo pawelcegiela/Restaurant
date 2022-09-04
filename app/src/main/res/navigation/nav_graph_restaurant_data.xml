@@ -87,10 +87,10 @@
         tools:layout="@layout/activity_ingredients" />
 
     <activity
-        android:id="@+id/MenuActivity"
-        android:name="pi.restaurant.management.activities.MenuActivity"
-        android:label="@string/menu"
-        tools:layout="@layout/activity_menu" />
+        android:id="@+id/DishesActivity"
+        android:name="pi.restaurant.management.activities.DishesActivity"
+        android:label="@string/dishes"
+        tools:layout="@layout/activity_dishes" />
 
     <activity
         android:id="@+id/OrdersActivity"

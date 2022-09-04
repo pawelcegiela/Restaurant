@@ -9,17 +9,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Dish
-import pi.restaurant.management.databinding.ItemMenuBinding
+import pi.restaurant.management.databinding.ItemDishesBinding
 
 
-class MenuRecyclerAdapter(
+class DishesRecyclerAdapter(
     private val dataSet: List<Dish>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<MenuRecyclerAdapter.ViewHolder>() {
+    RecyclerView.Adapter<DishesRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
-        val binding: ItemMenuBinding,
+        val binding: ItemDishesBinding,
         val context: Context,
         val fragment: Fragment,
         private val dataSet: List<Dish>
@@ -36,12 +36,12 @@ class MenuRecyclerAdapter(
             bundle.putString("id", dataSet[layoutPosition].id)
 
             fragment.findNavController()
-                .navigate(R.id.actionMenuToPreviewDish, bundle)
+                .navigate(R.id.actionDishesToPreviewDish, bundle)
         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemMenuBinding
+        val binding = ItemDishesBinding
             .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding, viewGroup.context, fragment, dataSet)

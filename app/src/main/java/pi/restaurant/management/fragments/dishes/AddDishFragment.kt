@@ -1,4 +1,4 @@
-package pi.restaurant.management.fragments.menu
+package pi.restaurant.management.fragments.dishes
 
 import pi.restaurant.management.R
 

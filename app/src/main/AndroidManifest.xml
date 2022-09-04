@@ -33,7 +33,7 @@
             android:name=".activities.IngredientsActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.MenuActivity"
+            android:name=".activities.DishesActivity"
             android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.OrdersActivity"

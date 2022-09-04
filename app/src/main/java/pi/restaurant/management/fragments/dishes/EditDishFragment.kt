@@ -1,4 +1,4 @@
-package pi.restaurant.management.fragments.menu
+package pi.restaurant.management.fragments.dishes
 
 import android.view.View
 import com.google.firebase.database.DataSnapshot

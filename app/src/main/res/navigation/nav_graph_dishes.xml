@@ -3,50 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_menu"
-    app:startDestination="@id/MenuMainFragment">
+    app:startDestination="@id/DishesMainFragment">
 
     <fragment
-        android:id="@+id/MenuMainFragment"
-        android:name="pi.restaurant.management.fragments.menu.MenuMainFragment"
-        android:label="@string/menu"
+        android:id="@+id/DishesMainFragment"
+        android:name="pi.restaurant.management.fragments.dishes.DishesMainFragment"
+        android:label="@string/dishes"
         tools:layout="@layout/fragment_item_list">
 
         <action
-            android:id="@+id/actionMenuToAddDish"
+            android:id="@+id/actionDishesToAddDish"
             app:destination="@id/AddDishFragment" />
 
         <action
-            android:id="@+id/actionMenuToEditDish"
+            android:id="@+id/actionDishesToEditDish"
             app:destination="@id/EditDishFragment" />
 
         <action
-            android:id="@+id/actionMenuToPreviewDish"
+            android:id="@+id/actionDishesToPreviewDish"
             app:destination="@id/PreviewDishFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/AddDishFragment"
-        android:name="pi.restaurant.management.fragments.menu.AddDishFragment"
+        android:name="pi.restaurant.management.fragments.dishes.AddDishFragment"
         android:label="@string/add_dish"
         tools:layout="@layout/fragment_modify_dish">
         <action
             android:id="@+id/actionAddDishToMenu"
-            app:destination="@id/MenuMainFragment" />
+            app:destination="@id/DishesMainFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/EditDishFragment"
-        android:name="pi.restaurant.management.fragments.menu.EditDishFragment"
+        android:name="pi.restaurant.management.fragments.dishes.EditDishFragment"
         android:label="@string/edit_dish"
         tools:layout="@layout/fragment_modify_dish">
         <action
             android:id="@+id/actionEditDishToMenu"
-            app:destination="@id/MenuMainFragment" />
+            app:destination="@id/DishesMainFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/PreviewDishFragment"
-        android:name="pi.restaurant.management.fragments.menu.PreviewDishFragment"
+        android:name="pi.restaurant.management.fragments.dishes.PreviewDishFragment"
         android:label="@string/preview_dish"
         tools:layout="@layout/fragment_preview_dish">
     </fragment>

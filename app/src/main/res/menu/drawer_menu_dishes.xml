@@ -13,9 +13,9 @@
     <group android:checkableBehavior="single"
         android:id="@+id/groupMenu">
         <item
-            android:id="@+id/MenuMainFragment"
+            android:id="@+id/DishesMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/menu" />
+            android:title="@string/dishes" />
 
         <item
             android:id="@+id/AddDishFragment"

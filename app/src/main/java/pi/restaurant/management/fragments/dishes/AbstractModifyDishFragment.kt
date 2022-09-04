@@ -1,4 +1,4 @@
-package pi.restaurant.management.fragments.menu
+package pi.restaurant.management.fragments.dishes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.utils.Utils
 import java.util.HashMap
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
@@ -18,7 +17,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDishBinding? = null
     val binding get() = _binding!!
 
-    override val databasePath = "menu"
+    override val databasePath = "dishes"
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave

@@ -10,17 +10,17 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import pi.restaurant.management.R
-import pi.restaurant.management.databinding.ActivityMenuBinding
+import pi.restaurant.management.databinding.ActivityDishesBinding
 
 
-class MenuActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMenuBinding
+class DishesActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDishesBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMenuBinding.inflate(layoutInflater)
+        binding = ActivityDishesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar.toolbar)
 

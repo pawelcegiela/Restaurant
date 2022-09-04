@@ -30,6 +30,7 @@ abstract class AbstractItemListFragment : Fragment() {
     abstract val addActionId: Int
     abstract val editActionId: Int
     var adapterData: MutableList<AbstractDataObject> = ArrayList()
+    val progressBar get() = binding.progress.progressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +51,7 @@ abstract class AbstractItemListFragment : Fragment() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 setData(dataSnapshot)
+                progressBar.visibility = View.GONE
             }
 
             override fun onCancelled(error: DatabaseError) {}

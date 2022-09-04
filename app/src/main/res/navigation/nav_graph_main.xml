@@ -20,8 +20,8 @@
             app:destination="@id/IngredientsActivity" />
 
         <action
-            android:id="@+id/actionMainToMenu"
-            app:destination="@id/MenuActivity" />
+            android:id="@+id/actionMainToDishes"
+            app:destination="@id/DishesActivity" />
 
         <action
             android:id="@+id/actionMainToOrders"
@@ -45,10 +45,10 @@
         tools:layout="@layout/activity_ingredients" />
 
     <activity
-        android:id="@+id/MenuActivity"
-        android:name="pi.restaurant.management.activities.MenuActivity"
-        android:label="@string/menu"
-        tools:layout="@layout/activity_menu" />
+        android:id="@+id/DishesActivity"
+        android:name="pi.restaurant.management.activities.DishesActivity"
+        android:label="@string/dishes"
+        tools:layout="@layout/activity_dishes" />
 
     <activity
         android:id="@+id/OrdersActivity"
