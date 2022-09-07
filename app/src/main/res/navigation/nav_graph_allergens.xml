@@ -31,7 +31,9 @@
         tools:layout="@layout/fragment_modify_allergen">
         <action
             android:id="@+id/actionAddAllergenToAllergens"
-            app:destination="@id/AllergensMainFragment" />
+            app:destination="@id/AllergensMainFragment"
+            app:popUpTo="@id/AllergensMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -41,7 +43,9 @@
         tools:layout="@layout/fragment_modify_allergen">
         <action
             android:id="@+id/actionEditAllergenToAllergens"
-            app:destination="@id/AllergensMainFragment" />
+            app:destination="@id/AllergensMainFragment"
+            app:popUpTo="@id/AllergensMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

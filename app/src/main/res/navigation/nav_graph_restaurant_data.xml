@@ -35,7 +35,9 @@
         tools:layout="@layout/fragment_about_restaurant">
         <action
             android:id="@+id/actionAboutRestaurantToRD"
-            app:destination="@id/RDMainFragment" />
+            app:destination="@id/RDMainFragment"
+            app:popUpTo="@id/RDMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -45,7 +47,9 @@
         tools:layout="@layout/fragment_opening_hours">
         <action
             android:id="@+id/actionOpeningHoursToRD"
-            app:destination="@id/RDMainFragment" />
+            app:destination="@id/RDMainFragment"
+            app:popUpTo="@id/RDMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -55,7 +59,9 @@
         tools:layout="@layout/fragment_location">
         <action
             android:id="@+id/actionLocationToRD"
-            app:destination="@id/RDMainFragment" />
+            app:destination="@id/RDMainFragment"
+            app:popUpTo="@id/RDMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -65,7 +71,9 @@
         tools:layout="@layout/fragment_delivery">
         <action
             android:id="@+id/actionDeliveryToRD"
-            app:destination="@id/RDMainFragment" />
+            app:destination="@id/RDMainFragment"
+            app:popUpTo="@id/RDMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity

@@ -39,7 +39,9 @@
         tools:layout="@layout/fragment_modify_worker">
         <action
             android:id="@+id/actionEditWorkerToWorkers"
-            app:destination="@id/WorkersMainFragment" />
+            app:destination="@id/WorkersMainFragment"
+            app:popUpTo="@id/WorkersMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -49,7 +51,9 @@
         tools:layout="@layout/fragment_modify_worker">
         <action
             android:id="@+id/actionAddWorkerToWorkers"
-            app:destination="@id/WorkersMainFragment" />
+            app:destination="@id/WorkersMainFragment"
+            app:popUpTo="@id/WorkersMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -64,7 +68,9 @@
 
         <action
             android:id="@+id/actionEditMyDataToWorkers"
-            app:destination="@id/WorkersMainFragment" />
+            app:destination="@id/WorkersMainFragment"
+            app:popUpTo="@id/WorkersMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

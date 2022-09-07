@@ -31,7 +31,9 @@
         tools:layout="@layout/fragment_modify_discount">
         <action
             android:id="@+id/actionAddDiscountToDiscounts"
-            app:destination="@id/DiscountsMainFragment" />
+            app:destination="@id/DiscountsMainFragment"
+            app:popUpTo="@id/DiscountsMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -41,7 +43,9 @@
         tools:layout="@layout/fragment_modify_discount">
         <action
             android:id="@+id/actionEditDiscountToDiscounts"
-            app:destination="@id/DiscountsMainFragment" />
+            app:destination="@id/DiscountsMainFragment"
+            app:popUpTo="@id/DiscountsMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

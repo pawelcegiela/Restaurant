@@ -31,7 +31,9 @@
 
         <action
             android:id="@+id/actionMyDataToSettings"
-            app:destination="@id/SettingsMainFragment" />
+            app:destination="@id/SettingsMainFragment"
+            app:popUpTo="@id/SettingsMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

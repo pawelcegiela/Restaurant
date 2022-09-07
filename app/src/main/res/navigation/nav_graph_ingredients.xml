@@ -31,7 +31,9 @@
         tools:layout="@layout/fragment_modify_ingredient">
         <action
             android:id="@+id/actionAddIngredientToIngredients"
-            app:destination="@id/IngredientsMainFragment" />
+            app:destination="@id/IngredientsMainFragment"
+            app:popUpTo="@id/IngredientsMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -41,7 +43,9 @@
         tools:layout="@layout/fragment_modify_ingredient">
         <action
             android:id="@+id/actionEditIngredientToIngredients"
-            app:destination="@id/IngredientsMainFragment" />
+            app:destination="@id/IngredientsMainFragment"
+            app:popUpTo="@id/IngredientsMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

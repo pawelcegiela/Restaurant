@@ -31,7 +31,9 @@
         tools:layout="@layout/fragment_modify_dish">
         <action
             android:id="@+id/actionAddDishToDishes"
-            app:destination="@id/DishesMainFragment" />
+            app:destination="@id/DishesMainFragment"
+            app:popUpTo="@id/DishesMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -41,7 +43,9 @@
         tools:layout="@layout/fragment_modify_dish">
         <action
             android:id="@+id/actionEditDishToDishes"
-            app:destination="@id/DishesMainFragment" />
+            app:destination="@id/DishesMainFragment"
+            app:popUpTo="@id/DishesMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
