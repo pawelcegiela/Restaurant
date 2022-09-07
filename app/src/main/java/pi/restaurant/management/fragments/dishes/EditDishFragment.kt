@@ -13,12 +13,14 @@ class EditDishFragment : AbstractModifyDishFragment() {
     override val removeMessageId = R.string.dish_removed
 
     override fun initializeUI() {
-        super.initializeUI()
         itemId = arguments?.getString("id").toString()
         removeButton.visibility = View.VISIBLE
 
+        initializeSpinners()
+        setSaveButtonListener()
         setRemoveButtonListener()
         getDataFromDatabase()
+        getIngredientListAndSetIngredientButtons()
     }
 
     override fun fillInData(dataSnapshot: DataSnapshot) {
@@ -32,5 +34,11 @@ class EditDishFragment : AbstractModifyDishFragment() {
         binding.spinnerDishType.setSelection(data.dishType)
         binding.editTextAmount.setText(data.amount.toString())
         binding.spinnerUnit.setSelection(data.unit)
+
+        baseIngredientsList = data.baseIngredients.toList().map { it.second }.toMutableList()
+        otherIngredientsList = data.otherIngredients.toList().map { it.second }.toMutableList()
+        possibleIngredientsList = data.possibleIngredients.toList().map { it.second }.toMutableList()
+        initializeRecyclerViews()
+        finishLoading()
     }
 }

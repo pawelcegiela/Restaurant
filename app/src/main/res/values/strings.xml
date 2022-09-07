@@ -143,6 +143,12 @@
     <string name="non_alcoholic_drink">Non-alcoholic drink</string>
     <string name="alcoholic_drink">Alcoholic drink</string>
     <string name="edit">Edit</string>
+    <string name="base_ingredients">Base ingredients</string>
+    <string name="other_ingredients">Other ingredients</string>
+    <string name="possible_ingredients">Possible ingredients</string>
+    <string name="ingredient_already_added">Ingredient is already added</string>
+    <string name="select_ingredient">Select ingredient</string>
+    <string name="search">Search…</string>
 
     <string-array name="roles">
         <item>Admin</item>

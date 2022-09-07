@@ -30,6 +30,9 @@ class Dish : AbstractDataObject {
         basePrice: Double,
         isDiscounted: Boolean,
         discountPrice: Double,
+        baseIngredients: HashMap<String, IngredientItem>,
+        otherIngredients: HashMap<String, IngredientItem>,
+        possibleIngredients: HashMap<String, IngredientItem>,
         dishType: Int,
         amount: Double,
         unit: Int
@@ -46,6 +49,9 @@ class Dish : AbstractDataObject {
         this.basePrice = basePrice
         this.isDiscounted = isDiscounted
         this.discountPrice = discountPrice
+        this.baseIngredients = baseIngredients
+        this.otherIngredients = otherIngredients
+        this.possibleIngredients = possibleIngredients
         this.dishType = dishType
         this.amount = amount
         this.unit = unit

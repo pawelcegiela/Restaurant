@@ -1,20 +1,36 @@
 package pi.restaurant.management.fragments.dishes
 
+import android.app.Dialog
+import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
+import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.Ingredient
+import pi.restaurant.management.data.IngredientItem
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
-import java.util.HashMap
+
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
+
+    // TODO Change Recycler to ListView!
 
     private var _binding: FragmentModifyDishBinding? = null
     val binding get() = _binding!!
@@ -25,6 +41,11 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     override val saveButton get() = binding.buttonSave
     override val removeButton get() = binding.buttonRemove
     override var itemId = ""
+
+    var baseIngredientsList: MutableList<IngredientItem> = ArrayList()
+    var otherIngredientsList: MutableList<IngredientItem> = ArrayList()
+    var possibleIngredientsList: MutableList<IngredientItem> = ArrayList()
+    lateinit var ingredients: MutableList<Ingredient>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +59,21 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     override fun initializeUI() {
         finishLoading()
         initializeSpinners()
+        initializeRecyclerViews()
         setSaveButtonListener()
+        getIngredientListAndSetIngredientButtons()
     }
 
     override fun getDataObject(): AbstractDataObject {
+        val baseIngredients = HashMap(baseIngredientsList.associateBy { it.id })
+        val otherIngredients = HashMap(otherIngredientsList.associateBy { it.id })
+        val possibleIngredients = HashMap(possibleIngredientsList.associateBy { it.id })
+
+        val discountPrice = if (binding.checkBoxDiscount.isChecked) {
+            binding.editTextDiscountPrice.text.toString().toDouble()
+        } else {
+            0.0
+        }
         return Dish(
             id = itemId,
             name = binding.editTextName.text.toString(),
@@ -49,7 +81,10 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             isActive = binding.checkBoxActive.isChecked,
             basePrice = binding.editTextBasePrice.text.toString().toDouble(),
             isDiscounted = binding.checkBoxDiscount.isChecked,
-            discountPrice = binding.editTextDiscountPrice.text.toString().toDouble(),
+            discountPrice = discountPrice,
+            baseIngredients = baseIngredients,
+            otherIngredients = otherIngredients,
+            possibleIngredients = possibleIngredients,
             dishType = binding.spinnerDishType.selectedItemId.toInt(),
             amount = binding.editTextAmount.text.toString().toDouble(),
             unit = binding.spinnerUnit.selectedItemId.toInt()
@@ -67,7 +102,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         return map
     }
 
-    private fun initializeSpinners() {
+    fun initializeSpinners() {
         val spinnerUnit: Spinner = binding.spinnerUnit
         ArrayAdapter.createFromResource(
             context!!,
@@ -87,5 +122,125 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerDishType.adapter = adapter
         }
+    }
+
+    fun initializeRecyclerViews() {
+        binding.recyclerViewBaseIngredients.adapter =
+            DishIngredientsRecyclerAdapter(baseIngredientsList, this@AbstractModifyDishFragment)
+
+        binding.recyclerViewOtherIngredients.adapter =
+            DishIngredientsRecyclerAdapter(otherIngredientsList, this@AbstractModifyDishFragment)
+
+        binding.recyclerViewPossibleIngredients.adapter =
+            DishIngredientsRecyclerAdapter(possibleIngredientsList, this@AbstractModifyDishFragment)
+    }
+
+    fun getIngredientListAndSetIngredientButtons() {
+        val databaseRef = Firebase.database.getReference("ingredients")
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val data = dataSnapshot.getValue<HashMap<String, Ingredient>>() ?: return
+                ingredients = data.toList().map { it.second }.toMutableList()
+                setIngredientsButtons()
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    fun setIngredientsButtons() {
+        val list = ingredients.map { it.name }.toMutableList()
+        setAddIngredientButton(
+            binding.buttonAddBaseIngredient,
+            list,
+            baseIngredientsList,
+            binding.recyclerViewBaseIngredients
+        )
+        setAddIngredientButton(
+            binding.buttonAddOtherIngredient,
+            list,
+            otherIngredientsList,
+            binding.recyclerViewOtherIngredients
+        )
+        setAddIngredientButton(
+            binding.buttonAddPossibleIngredient,
+            list,
+            possibleIngredientsList,
+            binding.recyclerViewPossibleIngredients
+        )
+    }
+
+    private fun setAddIngredientButton(
+        button: Button,
+        list: List<String>,
+        recyclerList: MutableList<IngredientItem>,
+        recyclerView: RecyclerView
+    ) {
+        setRecyclerSize(recyclerView, recyclerList.size)
+
+        button.setOnClickListener {
+            val dialog = Dialog(context!!)
+            val dialogWidth = Resources.getSystem().displayMetrics.widthPixels - 200
+            val dialogHeight = Resources.getSystem().displayMetrics.heightPixels - 500
+
+            dialog.setContentView(R.layout.dialog_searchable_spinner)
+            dialog.window!!.setLayout(dialogWidth, dialogHeight)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val editText = dialog.findViewById<EditText>(R.id.editTextSearch)
+            val listView = dialog.findViewById<ListView>(R.id.listViewIngredients)
+
+            val adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, list)
+            listView.adapter = adapter
+
+            editText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    adapter.filter.filter(s)
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+            listView.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+                    if (checkIfItemExists(ingredients[position].id)) {
+                        Toast.makeText(
+                            activity,
+                            getString(R.string.ingredient_already_added),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        val item =
+                            IngredientItem(ingredients[position].id, ingredients[position].name)
+                        recyclerList.add(item)
+                        recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+                        setRecyclerSize(recyclerView, recyclerList.size)
+                    }
+                    dialog.dismiss()
+                }
+        }
+    }
+
+    private fun checkIfItemExists(ingredientId: String): Boolean {
+        return baseIngredientsList.map { it.id }.contains(ingredientId)
+                || otherIngredientsList.map { it.id }.contains(ingredientId)
+                || possibleIngredientsList.map { it.id }.contains(ingredientId)
+    }
+
+    private fun setRecyclerSize(recyclerView: RecyclerView, size: Int) {
+        val itemSize = 60
+        val layoutParams = LinearLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            (itemSize * context!!.resources.displayMetrics.density * size).toInt()
+        )
+        recyclerView.layoutParams = layoutParams
     }
 }
