@@ -149,6 +149,14 @@
     <string name="ingredient_already_added">Ingredient is already added</string>
     <string name="select_ingredient">Select ingredient</string>
     <string name="search">Search…</string>
+    <string name="options">Options</string>
+    <string name="remove">Remove</string>
+    <string name="set_as_possible_ingredient">Set as possible ingredient</string>
+    <string name="set_as_other_ingredient">Set as other ingredient</string>
+    <string name="set_as_base_ingredient">Set as base ingredient</string>
+    <string name="change_amount">Change amount</string>
+    <string name="set_amount">Set amount</string>
+    <string name="enter">Enter</string>
 
     <string-array name="roles">
         <item>Admin</item>

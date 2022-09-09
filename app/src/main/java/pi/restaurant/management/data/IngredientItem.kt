@@ -9,8 +9,9 @@ class IngredientItem : AbstractDataObject {
     @Suppress("unused")
     constructor()
 
-    constructor(id: String, name: String) {
+    constructor(id: String, name: String, unit: Int) {
         this.id = id
         this.name = name
+        this.unit = unit
     }
 }

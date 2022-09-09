@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -126,13 +127,17 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
     fun initializeRecyclerViews() {
         binding.recyclerViewBaseIngredients.adapter =
-            DishIngredientsRecyclerAdapter(baseIngredientsList, this@AbstractModifyDishFragment)
+            DishIngredientsRecyclerAdapter(baseIngredientsList, this@AbstractModifyDishFragment, 0)
 
         binding.recyclerViewOtherIngredients.adapter =
-            DishIngredientsRecyclerAdapter(otherIngredientsList, this@AbstractModifyDishFragment)
+            DishIngredientsRecyclerAdapter(otherIngredientsList, this@AbstractModifyDishFragment, 1)
 
         binding.recyclerViewPossibleIngredients.adapter =
-            DishIngredientsRecyclerAdapter(possibleIngredientsList, this@AbstractModifyDishFragment)
+            DishIngredientsRecyclerAdapter(
+                possibleIngredientsList,
+                this@AbstractModifyDishFragment,
+                2
+            )
     }
 
     fun getIngredientListAndSetIngredientButtons() {
@@ -219,10 +224,8 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
                         ).show()
                     } else {
                         val item =
-                            IngredientItem(ingredients[position].id, ingredients[position].name)
-                        recyclerList.add(item)
-                        recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-                        setRecyclerSize(recyclerView, recyclerList.size)
+                            IngredientItem(ingredients[position].id, ingredients[position].name, ingredients[position].unit)
+                        addItemToList(recyclerList, recyclerView, item)
                     }
                     dialog.dismiss()
                 }
@@ -242,5 +245,75 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             (itemSize * context!!.resources.displayMetrics.density * size).toInt()
         )
         recyclerView.layoutParams = layoutParams
+    }
+
+    fun changeItemState(item: MenuItem, ingredientItem: IngredientItem, originalListId: Int) {
+        val targetListId = when (item.itemId) {
+            R.id.setBase -> 0
+            R.id.setOther -> 1
+            R.id.setPossible -> 2
+            R.id.changeAmount -> 3
+            else -> 4
+        }
+
+        if (originalListId == targetListId) {
+            return
+        }
+
+        val lists = arrayListOf(baseIngredientsList, otherIngredientsList, possibleIngredientsList)
+        val recyclers = arrayListOf(
+            binding.recyclerViewBaseIngredients,
+            binding.recyclerViewOtherIngredients,
+            binding.recyclerViewPossibleIngredients
+        )
+
+        if (targetListId != 3) { // TODO Czytelność tego kodu (magic number)
+            removeItemFromList(lists[originalListId], recyclers[originalListId], ingredientItem)
+        }
+        if (targetListId < 3) {
+            addItemToList(lists[targetListId], recyclers[targetListId], ingredientItem)
+        }
+        if (targetListId == 3) {
+            val dialog = Dialog(context!!)
+
+            dialog.setContentView(R.layout.dialog_dish_ingredient_amount)
+            dialog.window!!.setLayout(1000, 1000)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val editText = dialog.findViewById<EditText>(R.id.editTextAmount)
+            val button = dialog.findViewById<Button>(R.id.buttonEnter)
+
+            editText.setText(ingredientItem.amount.toString())
+            button.setOnClickListener {
+                if (editText.text.isEmpty()) {
+                    ingredientItem.amount = 0.0
+                } else {
+                    ingredientItem.amount = editText.text.toString().toDouble()
+                }
+                dialog.dismiss()
+                recyclers[originalListId].adapter?.notifyDataSetChanged() //TODO Zła praktyka
+            }
+        }
+    }
+
+    private fun removeItemFromList(
+        list: MutableList<IngredientItem>,
+        recyclerView: RecyclerView,
+        ingredientItem: IngredientItem
+    ) {
+        list.remove(ingredientItem)
+        recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        setRecyclerSize(recyclerView, list.size)
+    }
+
+    private fun addItemToList(
+        list: MutableList<IngredientItem>,
+        recyclerView: RecyclerView,
+        ingredientItem: IngredientItem
+    ) {
+        list.add(ingredientItem)
+        recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        setRecyclerSize(recyclerView, list.size)
     }
 }
