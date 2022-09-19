@@ -21,6 +21,7 @@ class EditDishFragment : AbstractModifyDishFragment() {
         setRemoveButtonListener()
         getDataFromDatabase()
         getIngredientListAndSetIngredientButtons()
+        getAllergenListAndSetAllergenButtons()
     }
 
     override fun fillInData(dataSnapshot: DataSnapshot) {
@@ -38,6 +39,7 @@ class EditDishFragment : AbstractModifyDishFragment() {
         baseIngredientsList = data.baseIngredients.toList().map { it.second }.toMutableList()
         otherIngredientsList = data.otherIngredients.toList().map { it.second }.toMutableList()
         possibleIngredientsList = data.possibleIngredients.toList().map { it.second }.toMutableList()
+        allergensList = data.allergens.toList().map { it.second }.toMutableList()
         initializeRecyclerViews()
         finishLoading()
     }

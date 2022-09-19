@@ -14,7 +14,7 @@ class Dish : AbstractDataObject {
     var baseIngredients: HashMap<String, IngredientItem> = HashMap()
     var otherIngredients: HashMap<String, IngredientItem> = HashMap()
     var possibleIngredients: HashMap<String, IngredientItem> = HashMap()
-    var allergens: HashMap<String, Boolean> = HashMap()
+    var allergens: HashMap<String, Allergen> = HashMap()
     var dishType: Int = 0
     var amount: Double = 0.0
     var unit: Int = 0
@@ -33,6 +33,7 @@ class Dish : AbstractDataObject {
         baseIngredients: HashMap<String, IngredientItem>,
         otherIngredients: HashMap<String, IngredientItem>,
         possibleIngredients: HashMap<String, IngredientItem>,
+        allergens: HashMap<String, Allergen>,
         dishType: Int,
         amount: Double,
         unit: Int
@@ -52,6 +53,7 @@ class Dish : AbstractDataObject {
         this.baseIngredients = baseIngredients
         this.otherIngredients = otherIngredients
         this.possibleIngredients = possibleIngredients
+        this.allergens = allergens
         this.dishType = dishType
         this.amount = amount
         this.unit = unit

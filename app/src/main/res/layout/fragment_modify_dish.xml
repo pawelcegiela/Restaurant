@@ -166,6 +166,29 @@
                 android:layout_gravity="center"
                 android:text="@string/add_ingredient" />
 
+            <TextView
+                android:id="@+id/textViewAllergens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/allergens"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_allergens"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layoutManager="LinearLayoutManager" />
+
+            <Button
+                android:id="@+id/buttonAddAllergen"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:text="@string/add_allergen" />
+
             <Button
                 android:id="@+id/buttonSave"
                 android:layout_width="280dp"

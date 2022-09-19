@@ -157,6 +157,7 @@
     <string name="change_amount">Change amount</string>
     <string name="set_amount">Set amount</string>
     <string name="enter">Enter</string>
+    <string name="allergen_already_added">Allergen has been already added</string>
 
     <string-array name="roles">
         <item>Admin</item>

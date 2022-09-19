@@ -1,0 +1,43 @@
+package pi.restaurant.management.listeners
+
+import android.app.Dialog
+import android.content.Context
+import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
+import pi.restaurant.management.R
+import pi.restaurant.management.data.Ingredient
+import pi.restaurant.management.data.IngredientItem
+import pi.restaurant.management.fragments.dishes.AbstractModifyDishFragment
+
+class IngredientModifyDishOnClickListener(
+    context: Context,
+    list: List<String>,
+    private val recyclerList: MutableList<IngredientItem>,
+    private val recyclerView: RecyclerView,
+    private val allIngredients: MutableList<Ingredient>,
+    private val fragment: AbstractModifyDishFragment
+) :
+    AbstractModifyDishOnClickListener(context, list) {
+
+    override fun setOnItemClickListener(dialog: Dialog, listView: ListView) {
+        listView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                if (fragment.checkIfIngredientItemExists(allIngredients[position].id)) {
+                    Toast.makeText(
+                        fragment.activity,
+                        fragment.getString(R.string.ingredient_already_added),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    val item =
+                        IngredientItem(
+                            allIngredients[position].id,
+                            allIngredients[position].name,
+                            allIngredients[position].unit
+                        )
+                    fragment.addItemToList(recyclerList, recyclerView, item)
+                }
+                dialog.dismiss()
+            }
+    }
+}

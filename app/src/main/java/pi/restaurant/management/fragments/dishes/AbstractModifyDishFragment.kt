@@ -1,12 +1,9 @@
 package pi.restaurant.management.fragments.dishes
 
 import android.app.Dialog
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -20,13 +17,14 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
+import pi.restaurant.management.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.Dish
-import pi.restaurant.management.data.Ingredient
-import pi.restaurant.management.data.IngredientItem
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
+import pi.restaurant.management.enums.IngredientItemState
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
+import pi.restaurant.management.listeners.AllergenModifyDishOnClickListener
+import pi.restaurant.management.listeners.IngredientModifyDishOnClickListener
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
@@ -46,7 +44,9 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     var baseIngredientsList: MutableList<IngredientItem> = ArrayList()
     var otherIngredientsList: MutableList<IngredientItem> = ArrayList()
     var possibleIngredientsList: MutableList<IngredientItem> = ArrayList()
-    lateinit var ingredients: MutableList<Ingredient>
+    var allergensList: MutableList<Allergen> = ArrayList()
+    lateinit var allIngredients: MutableList<Ingredient>
+    lateinit var allAllergens: MutableList<Allergen>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,12 +63,14 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         initializeRecyclerViews()
         setSaveButtonListener()
         getIngredientListAndSetIngredientButtons()
+        getAllergenListAndSetAllergenButtons()
     }
 
     override fun getDataObject(): AbstractDataObject {
         val baseIngredients = HashMap(baseIngredientsList.associateBy { it.id })
         val otherIngredients = HashMap(otherIngredientsList.associateBy { it.id })
         val possibleIngredients = HashMap(possibleIngredientsList.associateBy { it.id })
+        val allergens = HashMap(allergensList.associateBy { it.id })
 
         val discountPrice = if (binding.checkBoxDiscount.isChecked) {
             binding.editTextDiscountPrice.text.toString().toDouble()
@@ -86,6 +88,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             baseIngredients = baseIngredients,
             otherIngredients = otherIngredients,
             possibleIngredients = possibleIngredients,
+            allergens = allergens,
             dishType = binding.spinnerDishType.selectedItemId.toInt(),
             amount = binding.editTextAmount.text.toString().toDouble(),
             unit = binding.spinnerUnit.selectedItemId.toInt()
@@ -133,11 +136,10 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             DishIngredientsRecyclerAdapter(otherIngredientsList, this@AbstractModifyDishFragment, 1)
 
         binding.recyclerViewPossibleIngredients.adapter =
-            DishIngredientsRecyclerAdapter(
-                possibleIngredientsList,
-                this@AbstractModifyDishFragment,
-                2
-            )
+            DishIngredientsRecyclerAdapter(possibleIngredientsList, this@AbstractModifyDishFragment, 2)
+
+        binding.recyclerViewAllergens.adapter =
+            DishAllergensRecyclerAdapter(allergensList, this@AbstractModifyDishFragment)
     }
 
     fun getIngredientListAndSetIngredientButtons() {
@@ -145,7 +147,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val data = dataSnapshot.getValue<HashMap<String, Ingredient>>() ?: return
-                ingredients = data.toList().map { it.second }.toMutableList()
+                allIngredients = data.toList().map { it.second }.toMutableList()
                 setIngredientsButtons()
             }
 
@@ -154,24 +156,16 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     fun setIngredientsButtons() {
-        val list = ingredients.map { it.name }.toMutableList()
+        val list = allIngredients.map { it.name }.toMutableList()
+
         setAddIngredientButton(
-            binding.buttonAddBaseIngredient,
-            list,
-            baseIngredientsList,
-            binding.recyclerViewBaseIngredients
+            binding.buttonAddBaseIngredient, list, baseIngredientsList, binding.recyclerViewBaseIngredients
         )
         setAddIngredientButton(
-            binding.buttonAddOtherIngredient,
-            list,
-            otherIngredientsList,
-            binding.recyclerViewOtherIngredients
+            binding.buttonAddOtherIngredient, list, otherIngredientsList, binding.recyclerViewOtherIngredients
         )
         setAddIngredientButton(
-            binding.buttonAddPossibleIngredient,
-            list,
-            possibleIngredientsList,
-            binding.recyclerViewPossibleIngredients
+            binding.buttonAddPossibleIngredient, list, possibleIngredientsList, binding.recyclerViewPossibleIngredients
         )
     }
 
@@ -182,57 +176,45 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         recyclerView: RecyclerView
     ) {
         setRecyclerSize(recyclerView, recyclerList.size)
-
-        button.setOnClickListener {
-            val dialog = Dialog(context!!)
-            val dialogWidth = Resources.getSystem().displayMetrics.widthPixels - 200
-            val dialogHeight = Resources.getSystem().displayMetrics.heightPixels - 500
-
-            dialog.setContentView(R.layout.dialog_searchable_spinner)
-            dialog.window!!.setLayout(dialogWidth, dialogHeight)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-
-            val editText = dialog.findViewById<EditText>(R.id.editTextSearch)
-            val listView = dialog.findViewById<ListView>(R.id.listViewIngredients)
-
-            val adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, list)
-            listView.adapter = adapter
-
-            editText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    adapter.filter.filter(s)
-                }
-
-                override fun afterTextChanged(s: Editable) {}
-            })
-            listView.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, view, position, id ->
-                    if (checkIfItemExists(ingredients[position].id)) {
-                        Toast.makeText(
-                            activity,
-                            getString(R.string.ingredient_already_added),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        val item =
-                            IngredientItem(ingredients[position].id, ingredients[position].name, ingredients[position].unit)
-                        addItemToList(recyclerList, recyclerView, item)
-                    }
-                    dialog.dismiss()
-                }
-        }
+        button.setOnClickListener(
+            IngredientModifyDishOnClickListener(
+                context!!,
+                list,
+                recyclerList,
+                recyclerView,
+                allIngredients,
+                this
+            )
+        )
     }
 
-    private fun checkIfItemExists(ingredientId: String): Boolean {
+    fun getAllergenListAndSetAllergenButtons() {
+        val databaseRef = Firebase.database.getReference("allergens")
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val data = dataSnapshot.getValue<HashMap<String, Allergen>>() ?: return
+                allAllergens = data.toList().map { it.second }.toMutableList()
+                setAllergensButton()
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    private fun setAllergensButton() {
+        setRecyclerSize(binding.recyclerViewAllergens, allergensList.size)
+        binding.buttonAddAllergen.setOnClickListener(
+            AllergenModifyDishOnClickListener(
+                context!!,
+                allAllergens.map { it.name }.toMutableList(),
+                allergensList,
+                allAllergens,
+                this
+            )
+        )
+    }
+
+    fun checkIfIngredientItemExists(ingredientId: String): Boolean {
         return baseIngredientsList.map { it.id }.contains(ingredientId)
                 || otherIngredientsList.map { it.id }.contains(ingredientId)
                 || possibleIngredientsList.map { it.id }.contains(ingredientId)
@@ -247,16 +229,20 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         recyclerView.layoutParams = layoutParams
     }
 
-    fun changeItemState(item: MenuItem, ingredientItem: IngredientItem, originalListId: Int) {
-        val targetListId = when (item.itemId) {
-            R.id.setBase -> 0
-            R.id.setOther -> 1
-            R.id.setPossible -> 2
-            R.id.changeAmount -> 3
-            else -> 4
+    fun changeIngredientItemState(
+        item: MenuItem,
+        ingredientItem: IngredientItem,
+        originalListId: Int
+    ) {
+        val targetState = when (item.itemId) {
+            R.id.setBase -> IngredientItemState.BASE
+            R.id.setOther -> IngredientItemState.OTHER
+            R.id.setPossible -> IngredientItemState.POSSIBLE
+            R.id.changeAmount -> IngredientItemState.CHANGE_AMOUNT
+            else -> IngredientItemState.REMOVE
         }
 
-        if (originalListId == targetListId) {
+        if (originalListId == targetState.ordinal) {
             return
         }
 
@@ -267,53 +253,58 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             binding.recyclerViewPossibleIngredients
         )
 
-        if (targetListId != 3) { // TODO Czytelność tego kodu (magic number)
+        if (IngredientItemState.isActionRemove(targetState)) {
             removeItemFromList(lists[originalListId], recyclers[originalListId], ingredientItem)
         }
-        if (targetListId < 3) {
-            addItemToList(lists[targetListId], recyclers[targetListId], ingredientItem)
+        if (IngredientItemState.isActionAdd(targetState)) {
+            addItemToList(lists[targetState.ordinal], recyclers[targetState.ordinal], ingredientItem)
         }
-        if (targetListId == 3) {
-            val dialog = Dialog(context!!)
-
-            dialog.setContentView(R.layout.dialog_dish_ingredient_amount)
-            dialog.window!!.setLayout(1000, 1000)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-
-            val editText = dialog.findViewById<EditText>(R.id.editTextAmount)
-            val button = dialog.findViewById<Button>(R.id.buttonEnter)
-
-            editText.setText(ingredientItem.amount.toString())
-            button.setOnClickListener {
-                if (editText.text.isEmpty()) {
-                    ingredientItem.amount = 0.0
-                } else {
-                    ingredientItem.amount = editText.text.toString().toDouble()
-                }
-                dialog.dismiss()
-                recyclers[originalListId].adapter?.notifyDataSetChanged() //TODO Zła praktyka
-            }
+        if (targetState == IngredientItemState.CHANGE_AMOUNT) {
+            addChangeIngredientItemAmountDialog(recyclers[originalListId], ingredientItem)
         }
     }
 
-    private fun removeItemFromList(
-        list: MutableList<IngredientItem>,
-        recyclerView: RecyclerView,
-        ingredientItem: IngredientItem
-    ) {
-        list.remove(ingredientItem)
+    private fun addChangeIngredientItemAmountDialog(recyclerView: RecyclerView, item: IngredientItem) {
+        val dialog = Dialog(context!!)
+
+        dialog.setContentView(R.layout.dialog_dish_ingredient_amount)
+        dialog.window!!.setLayout(1000, 1000)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+
+        val editText = dialog.findViewById<EditText>(R.id.editTextAmount)
+        val button = dialog.findViewById<Button>(R.id.buttonEnter)
+
+        editText.setText(item.amount.toString())
+        button.setOnClickListener {
+            item.amount = if (editText.text.isEmpty()) 0.0 else editText.text.toString().toDouble()
+            dialog.dismiss()
+            recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        }
+    }
+
+    private fun removeItemFromList(list: MutableList<IngredientItem>, recyclerView: RecyclerView, item: IngredientItem) {
+        list.remove(item)
         recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
         setRecyclerSize(recyclerView, list.size)
     }
 
-    private fun addItemToList(
-        list: MutableList<IngredientItem>,
-        recyclerView: RecyclerView,
-        ingredientItem: IngredientItem
-    ) {
-        list.add(ingredientItem)
+    fun addItemToList(list: MutableList<IngredientItem>, recyclerView: RecyclerView, item: IngredientItem) {
+        list.add(item)
         recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
         setRecyclerSize(recyclerView, list.size)
+    }
+
+    // TODO problemy z mutable list
+    fun removeAllergenItem(allergenItem: Allergen) {
+        allergensList.remove(allergenItem)
+        binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        setRecyclerSize(binding.recyclerViewAllergens, allergensList.size)
+    }
+
+    fun addAllergenItem(allergenItem: Allergen) {
+        allergensList.add(allergenItem)
+        binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        setRecyclerSize(binding.recyclerViewAllergens, allergensList.size)
     }
 }
