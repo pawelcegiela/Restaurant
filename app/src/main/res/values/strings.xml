@@ -158,6 +158,8 @@
     <string name="set_amount">Set amount</string>
     <string name="enter">Enter</string>
     <string name="allergen_already_added">Allergen has been already added</string>
+    <string name="treat_sub_dish_temp">Treat this ingredient as a sub-dish? (consisting of many ingredients)</string>
+    <string name="add_sub_ingredient">Add sub-ingredient</string>
 
     <string-array name="roles">
         <item>Admin</item>

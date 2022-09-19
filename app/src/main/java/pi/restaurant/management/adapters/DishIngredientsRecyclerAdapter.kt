@@ -11,6 +11,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.data.IngredientItem
 import pi.restaurant.management.databinding.ItemDishIngredientBinding
 import pi.restaurant.management.fragments.dishes.AbstractModifyDishFragment
+import pi.restaurant.management.fragments.ingredients.AbstractModifyIngredientFragment
 import pi.restaurant.management.utils.StringFormatUtils
 
 
@@ -34,20 +35,36 @@ class DishIngredientsRecyclerAdapter(
         }
 
         private fun initialize() {
-            if (fragment is AbstractModifyDishFragment) {
-                binding.buttonOptions.setOnClickListener {
-                    val popup = PopupMenu(context, binding.buttonOptions)
-                    popup.menuInflater.inflate(R.menu.popup_menu_dish_ingredient, popup.menu)
+            when (fragment) {
+                is AbstractModifyDishFragment -> {
+                    binding.buttonOptions.setOnClickListener {
+                        val popup = PopupMenu(context, binding.buttonOptions)
+                        popup.menuInflater.inflate(R.menu.popup_menu_dish_ingredient, popup.menu)
 
-                    popup.setOnMenuItemClickListener { item ->
-                        fragment.changeIngredientItemState(item, dataSet[layoutPosition], listId)
-                        true
+                        popup.setOnMenuItemClickListener { item ->
+                            fragment.changeIngredientItemState(item, dataSet[layoutPosition], listId)
+                            true
+                        }
+
+                        popup.show()
                     }
-
-                    popup.show()
                 }
-            } else {
-                binding.buttonOptions.visibility = View.GONE
+                is AbstractModifyIngredientFragment -> {
+                    binding.buttonOptions.setOnClickListener {
+                        val popup = PopupMenu(context, binding.buttonOptions)
+                        popup.menuInflater.inflate(R.menu.popup_menu_sub_ingredient, popup.menu)
+
+                        popup.setOnMenuItemClickListener { item ->
+                            fragment.changeIngredientItemState(item, dataSet[layoutPosition])
+                            true
+                        }
+
+                        popup.show()
+                    }
+                }
+                else -> {
+                    binding.buttonOptions.visibility = View.GONE
+                }
             }
         }
     }

@@ -1,8 +1,5 @@
 package pi.restaurant.management.fragments.dishes
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -25,7 +22,7 @@ import pi.restaurant.management.enums.IngredientItemState
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.listeners.AllergenModifyDishOnClickListener
 import pi.restaurant.management.listeners.IngredientModifyDishOnClickListener
-import pi.restaurant.management.utils.Utils
+import pi.restaurant.management.utils.SubItemUtils
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
@@ -176,7 +173,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         recyclerList: MutableList<IngredientItem>,
         recyclerView: RecyclerView
     ) {
-        Utils.setRecyclerSize(recyclerView, recyclerList.size, context!!)
+        SubItemUtils.setRecyclerSize(recyclerView, recyclerList.size, context!!)
         button.setOnClickListener(
             IngredientModifyDishOnClickListener(
                 context!!,
@@ -203,7 +200,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     private fun setAllergensButton() {
-        Utils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
         binding.buttonAddAllergen.setOnClickListener(
             AllergenModifyDishOnClickListener(
                 context!!,
@@ -246,57 +243,26 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         )
 
         if (IngredientItemState.isActionRemove(targetState)) {
-            removeItemFromList(lists[originalListId], recyclers[originalListId], ingredientItem)
+            SubItemUtils.removeIngredientItem(lists[originalListId], recyclers[originalListId], ingredientItem, context!!)
         }
         if (IngredientItemState.isActionAdd(targetState)) {
-            addItemToList(lists[targetState.ordinal], recyclers[targetState.ordinal], ingredientItem)
+            SubItemUtils.addIngredientItem(lists[targetState.ordinal], recyclers[targetState.ordinal], ingredientItem, context!!)
         }
         if (targetState == IngredientItemState.CHANGE_AMOUNT) {
-            addChangeIngredientItemAmountDialog(recyclers[originalListId], ingredientItem)
+            SubItemUtils.addChangeIngredientItemAmountDialog(recyclers[originalListId], ingredientItem, context!!)
         }
-    }
-
-    private fun addChangeIngredientItemAmountDialog(recyclerView: RecyclerView, item: IngredientItem) {
-        val dialog = Dialog(context!!)
-
-        dialog.setContentView(R.layout.dialog_dish_ingredient_amount)
-        dialog.window!!.setLayout(1000, 1000)
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-
-        val editText = dialog.findViewById<EditText>(R.id.editTextAmount)
-        val button = dialog.findViewById<Button>(R.id.buttonEnter)
-
-        editText.setText(item.amount.toString())
-        button.setOnClickListener {
-            item.amount = if (editText.text.isEmpty()) 0.0 else editText.text.toString().toDouble()
-            dialog.dismiss()
-            recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        }
-    }
-
-    private fun removeItemFromList(list: MutableList<IngredientItem>, recyclerView: RecyclerView, item: IngredientItem) {
-        list.remove(item)
-        recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        Utils.setRecyclerSize(recyclerView, list.size, context!!)
-    }
-
-    fun addItemToList(list: MutableList<IngredientItem>, recyclerView: RecyclerView, item: IngredientItem) {
-        list.add(item)
-        recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        Utils.setRecyclerSize(recyclerView, list.size, context!!)
     }
 
     // TODO problemy z mutable list
     fun removeAllergenItem(allergenItem: Allergen) {
         allergensList.remove(allergenItem)
         binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        Utils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
     }
 
     fun addAllergenItem(allergenItem: Allergen) {
         allergensList.add(allergenItem)
         binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        Utils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
     }
 }

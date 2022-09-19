@@ -14,7 +14,7 @@ import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
-import pi.restaurant.management.utils.Utils
+import pi.restaurant.management.utils.SubItemUtils
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
     override val databasePath = "dishes"
@@ -52,18 +52,18 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
     private fun initializeRecyclerViews(item: Dish) {
         binding.recyclerViewBaseIngredients.adapter =
             DishIngredientsRecyclerAdapter(item.baseIngredients.toList().map { it.second }.toMutableList(), this, 0)
-        Utils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.baseIngredients.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.baseIngredients.size, context!!)
 
         binding.recyclerViewOtherIngredients.adapter =
             DishIngredientsRecyclerAdapter(item.otherIngredients.toList().map { it.second }.toMutableList(), this, 1)
-        Utils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.otherIngredients.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.otherIngredients.size, context!!)
 
         binding.recyclerViewPossibleIngredients.adapter =
             DishIngredientsRecyclerAdapter(item.possibleIngredients.toList().map { it.second }.toMutableList(), this, 2)
-        Utils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.possibleIngredients.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.possibleIngredients.size, context!!)
 
         binding.recyclerViewAllergens.adapter =
             DishAllergensRecyclerAdapter(item.allergens.toList().map { it.second }.toMutableList(), this)
-        Utils.setRecyclerSize(binding.recyclerViewAllergens, item.allergens.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, item.allergens.size, context!!)
     }
 }

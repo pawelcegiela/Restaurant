@@ -5,6 +5,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Ingredient
+import pi.restaurant.management.data.IngredientItem
 
 
 class EditIngredientFragment : AbstractModifyIngredientFragment() {
@@ -27,5 +28,10 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
         binding.editTextName.setText(data.name)
         binding.editTextAmount.setText(data.amount.toString())
         binding.spinnerUnit.setSelection(data.unit)
+        binding.checkBoxSubDish.isChecked = data.subDish
+        subIngredientsList = data.subIngredients ?: ArrayList()
+
+        getIngredientListAndSetIngredientButton()
+        finishLoading()
     }
 }
