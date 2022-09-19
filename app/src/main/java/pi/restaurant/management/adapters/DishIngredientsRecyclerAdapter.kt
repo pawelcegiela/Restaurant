@@ -2,8 +2,10 @@ package pi.restaurant.management.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.IngredientItem
@@ -14,7 +16,7 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class DishIngredientsRecyclerAdapter(
     private val dataSet: List<IngredientItem>,
-    private val fragment: AbstractModifyDishFragment,
+    private val fragment: Fragment,
     private val listId: Int
 ) :
     RecyclerView.Adapter<DishIngredientsRecyclerAdapter.ViewHolder>() {
@@ -22,26 +24,30 @@ class DishIngredientsRecyclerAdapter(
     class ViewHolder(
         val binding: ItemDishIngredientBinding,
         val context: Context,
-        val fragment: AbstractModifyDishFragment,
+        val fragment: Fragment,
         private val dataSet: List<IngredientItem>,
         private val listId: Int
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            setButtonListener()
+            initialize()
         }
 
-        private fun setButtonListener() {
-            binding.buttonOptions.setOnClickListener {
-                val popup = PopupMenu(context, binding.buttonOptions)
-                popup.menuInflater.inflate(R.menu.popup_menu_dish_ingredient, popup.menu)
+        private fun initialize() {
+            if (fragment is AbstractModifyDishFragment) {
+                binding.buttonOptions.setOnClickListener {
+                    val popup = PopupMenu(context, binding.buttonOptions)
+                    popup.menuInflater.inflate(R.menu.popup_menu_dish_ingredient, popup.menu)
 
-                popup.setOnMenuItemClickListener { item ->
-                    fragment.changeIngredientItemState(item, dataSet[layoutPosition], listId)
-                    true
+                    popup.setOnMenuItemClickListener { item ->
+                        fragment.changeIngredientItemState(item, dataSet[layoutPosition], listId)
+                        true
+                    }
+
+                    popup.show()
                 }
-
-                popup.show()
+            } else {
+                binding.buttonOptions.visibility = View.GONE
             }
         }
     }

@@ -25,6 +25,7 @@ import pi.restaurant.management.enums.IngredientItemState
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.listeners.AllergenModifyDishOnClickListener
 import pi.restaurant.management.listeners.IngredientModifyDishOnClickListener
+import pi.restaurant.management.utils.Utils
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
@@ -130,16 +131,16 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
     fun initializeRecyclerViews() {
         binding.recyclerViewBaseIngredients.adapter =
-            DishIngredientsRecyclerAdapter(baseIngredientsList, this@AbstractModifyDishFragment, 0)
+            DishIngredientsRecyclerAdapter(baseIngredientsList, this, 0)
 
         binding.recyclerViewOtherIngredients.adapter =
-            DishIngredientsRecyclerAdapter(otherIngredientsList, this@AbstractModifyDishFragment, 1)
+            DishIngredientsRecyclerAdapter(otherIngredientsList, this, 1)
 
         binding.recyclerViewPossibleIngredients.adapter =
-            DishIngredientsRecyclerAdapter(possibleIngredientsList, this@AbstractModifyDishFragment, 2)
+            DishIngredientsRecyclerAdapter(possibleIngredientsList, this, 2)
 
         binding.recyclerViewAllergens.adapter =
-            DishAllergensRecyclerAdapter(allergensList, this@AbstractModifyDishFragment)
+            DishAllergensRecyclerAdapter(allergensList, this)
     }
 
     fun getIngredientListAndSetIngredientButtons() {
@@ -175,7 +176,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         recyclerList: MutableList<IngredientItem>,
         recyclerView: RecyclerView
     ) {
-        setRecyclerSize(recyclerView, recyclerList.size)
+        Utils.setRecyclerSize(recyclerView, recyclerList.size, context!!)
         button.setOnClickListener(
             IngredientModifyDishOnClickListener(
                 context!!,
@@ -202,7 +203,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     private fun setAllergensButton() {
-        setRecyclerSize(binding.recyclerViewAllergens, allergensList.size)
+        Utils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
         binding.buttonAddAllergen.setOnClickListener(
             AllergenModifyDishOnClickListener(
                 context!!,
@@ -218,15 +219,6 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         return baseIngredientsList.map { it.id }.contains(ingredientId)
                 || otherIngredientsList.map { it.id }.contains(ingredientId)
                 || possibleIngredientsList.map { it.id }.contains(ingredientId)
-    }
-
-    private fun setRecyclerSize(recyclerView: RecyclerView, size: Int) {
-        val itemSize = 60
-        val layoutParams = LinearLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            (itemSize * context!!.resources.displayMetrics.density * size).toInt()
-        )
-        recyclerView.layoutParams = layoutParams
     }
 
     fun changeIngredientItemState(
@@ -286,25 +278,25 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     private fun removeItemFromList(list: MutableList<IngredientItem>, recyclerView: RecyclerView, item: IngredientItem) {
         list.remove(item)
         recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        setRecyclerSize(recyclerView, list.size)
+        Utils.setRecyclerSize(recyclerView, list.size, context!!)
     }
 
     fun addItemToList(list: MutableList<IngredientItem>, recyclerView: RecyclerView, item: IngredientItem) {
         list.add(item)
         recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        setRecyclerSize(recyclerView, list.size)
+        Utils.setRecyclerSize(recyclerView, list.size, context!!)
     }
 
     // TODO problemy z mutable list
     fun removeAllergenItem(allergenItem: Allergen) {
         allergensList.remove(allergenItem)
         binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        setRecyclerSize(binding.recyclerViewAllergens, allergensList.size)
+        Utils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
     }
 
     fun addAllergenItem(allergenItem: Allergen) {
         allergensList.add(allergenItem)
         binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        setRecyclerSize(binding.recyclerViewAllergens, allergensList.size)
+        Utils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, context!!)
     }
 }

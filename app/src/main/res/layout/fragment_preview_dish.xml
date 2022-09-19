@@ -97,6 +97,70 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/textViewBaseIngredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/base_ingredients"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewBaseIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layoutManager="LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/textViewOtherIngredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/other_ingredients"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewOtherIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layoutManager="LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/textViewPossibleIngredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/possible_ingredients"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_possible_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layoutManager="LinearLayoutManager" />
+
+            <TextView
+                android:id="@+id/textViewAllergens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/allergens"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_allergens"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layoutManager="LinearLayoutManager" />
+
             <Button
                 android:id="@+id/buttonEdit"
                 android:layout_width="280dp"

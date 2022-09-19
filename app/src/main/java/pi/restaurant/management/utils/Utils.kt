@@ -2,7 +2,10 @@ package pi.restaurant.management.utils
 
 import android.content.Context
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.data.OpeningHours
@@ -45,6 +48,15 @@ class Utils {
 
         fun getDiscountAmount(discount: DiscountGroup): String {
             return discount.amount.toString() + discount.type.toString()
+        }
+
+        fun setRecyclerSize(recyclerView: RecyclerView, size: Int, context: Context) {
+            val itemSize = 60
+            val layoutParams = LinearLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                (itemSize * context.resources.displayMetrics.density * size).toInt()
+            )
+            recyclerView.layoutParams = layoutParams
         }
     }
 }
