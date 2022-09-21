@@ -8,17 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.databinding.ItemDiscountsBinding
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.Utils
+import java.util.*
 
 
 class DiscountsRecyclerAdapter(
-    private val dataSet: List<DiscountGroup>,
+    private val dataSet: MutableList<DiscountGroup>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<DiscountsRecyclerAdapter.ViewHolder>() {
+    AbstractRecyclerAdapter<DiscountsRecyclerAdapter.ViewHolder>() {
+    override val allDataSet: MutableList<DiscountGroup> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemDiscountsBinding,
@@ -58,6 +61,21 @@ class DiscountsRecyclerAdapter(
     }
 
     override fun getItemCount() = dataSet.size
+
+    override fun clearDataSet() {
+        dataSet.clear()
+    }
+
+    override fun resetDataSet() {
+        dataSet.addAll(allDataSet)
+    }
+
+    override fun addItemToDataSet(item: AbstractDataObject, text: String) {
+        val discount = item as DiscountGroup
+        if (discount.id.lowercase(Locale.getDefault()).contains(text)) {
+            dataSet.add(discount)
+        }
+    }
 
 }
 

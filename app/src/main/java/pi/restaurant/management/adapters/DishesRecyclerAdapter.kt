@@ -8,15 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.databinding.ItemDishesBinding
+import java.util.*
 
 
 class DishesRecyclerAdapter(
-    private val dataSet: List<Dish>,
+    private val dataSet: MutableList<Dish>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<DishesRecyclerAdapter.ViewHolder>() {
+    AbstractRecyclerAdapter<DishesRecyclerAdapter.ViewHolder>() {
+    override val allDataSet: MutableList<Dish> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemDishesBinding,
@@ -53,6 +56,21 @@ class DishesRecyclerAdapter(
     }
 
     override fun getItemCount() = dataSet.size
+
+    override fun clearDataSet() {
+        dataSet.clear()
+    }
+
+    override fun resetDataSet() {
+        dataSet.addAll(allDataSet)
+    }
+
+    override fun addItemToDataSet(item: AbstractDataObject, text: String) {
+        val dish = item as Dish
+        if (dish.name.lowercase(Locale.getDefault()).contains(text)) {
+            dataSet.add(dish)
+        }
+    }
 
 }
 

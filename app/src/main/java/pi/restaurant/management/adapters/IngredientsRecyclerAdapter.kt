@@ -8,16 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.databinding.ItemIngredientsBinding
 import pi.restaurant.management.utils.StringFormatUtils
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class IngredientsRecyclerAdapter(
-    private val dataSet: List<Ingredient>,
+    private val dataSet: MutableList<Ingredient>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<IngredientsRecyclerAdapter.ViewHolder>() {
+    AbstractRecyclerAdapter<IngredientsRecyclerAdapter.ViewHolder>() {
+    override val allDataSet: MutableList<Ingredient> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemIngredientsBinding,
@@ -56,5 +60,19 @@ class IngredientsRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    override fun clearDataSet() {
+        dataSet.clear()
+    }
+
+    override fun resetDataSet() {
+        dataSet.addAll(allDataSet)
+    }
+
+    override fun addItemToDataSet(item: AbstractDataObject, text: String) {
+        val ingredient = item as Ingredient
+        if (ingredient.name.lowercase(Locale.getDefault()).contains(text)) {
+            dataSet.add(ingredient)
+        }
+    }
 }
 

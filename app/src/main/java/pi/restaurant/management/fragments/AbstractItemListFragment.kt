@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
+import pi.restaurant.management.adapters.AbstractRecyclerAdapter
+import pi.restaurant.management.adapters.WorkersRecyclerAdapter
 import pi.restaurant.management.utils.SwipeCallback
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.databinding.FragmentItemListBinding
@@ -61,6 +64,22 @@ abstract class AbstractItemListFragment : Fragment() {
         binding.fab.setOnClickListener {
             findNavController().navigate(actionId)
         }
+
+        initializeSearchView()
+    }
+
+    private fun initializeSearchView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                (binding.recyclerView.adapter as AbstractRecyclerAdapter?)?.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                (binding.recyclerView.adapter as AbstractRecyclerAdapter?)?.filter(newText)
+                return false
+            }
+        })
     }
 
     abstract fun setData(dataSnapshot: DataSnapshot)

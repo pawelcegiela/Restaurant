@@ -9,16 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
 import pi.restaurant.management.databinding.ItemWorkersBinding
 import pi.restaurant.management.enums.Role
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class WorkersRecyclerAdapter(
-    private val dataSet: List<User>,
+    private val dataSet: MutableList<User>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<WorkersRecyclerAdapter.ViewHolder>() {
+    AbstractRecyclerAdapter<WorkersRecyclerAdapter.ViewHolder>() {
+    override val allDataSet: MutableList<User> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemWorkersBinding,
@@ -63,5 +67,19 @@ class WorkersRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    override fun clearDataSet() {
+        dataSet.clear()
+    }
+
+    override fun resetDataSet() {
+        dataSet.addAll(allDataSet)
+    }
+
+    override fun addItemToDataSet(item: AbstractDataObject, text: String) {
+        val user = item as User
+        if (user.firstName.lowercase(Locale.getDefault()).contains(text) || user.lastName.lowercase(Locale.getDefault()).contains(text)) {
+            dataSet.add(user)
+        }
+    }
 }
 

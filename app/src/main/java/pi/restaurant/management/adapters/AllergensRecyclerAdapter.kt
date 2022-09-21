@@ -8,15 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Allergen
 import pi.restaurant.management.databinding.ItemAllergensBinding
+import java.util.*
 
 
 class AllergensRecyclerAdapter(
-    private val dataSet: List<Allergen>,
+    private val dataSet: MutableList<Allergen>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<AllergensRecyclerAdapter.ViewHolder>() {
+    AbstractRecyclerAdapter<AllergensRecyclerAdapter.ViewHolder>() {
+    override val allDataSet: MutableList<Allergen> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemAllergensBinding,
@@ -52,6 +55,21 @@ class AllergensRecyclerAdapter(
     }
 
     override fun getItemCount() = dataSet.size
+
+    override fun clearDataSet() {
+        dataSet.clear()
+    }
+
+    override fun resetDataSet() {
+        dataSet.addAll(allDataSet)
+    }
+
+    override fun addItemToDataSet(item: AbstractDataObject, text: String) {
+        val allergen = item as Allergen
+        if (allergen.name.lowercase(Locale.getDefault()).contains(text)) {
+            dataSet.add(allergen)
+        }
+    }
 
 }
 
