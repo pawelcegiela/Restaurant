@@ -56,6 +56,7 @@ class IngredientsRecyclerAdapter(
         viewHolder.binding.textViewName.text = dataSet[position].name
         viewHolder.binding.textViewAmountWithUnit.text =
             StringFormatUtils.formatAmountWithUnit(fragment.context!!, dataSet[position].amount, dataSet[position].unit)
+        viewHolder.binding.textViewIngredientType.text = if (dataSet[position].subDish) "Sub-Dish" else "Ingredient"
     }
 
     override fun getItemCount() = dataSet.size

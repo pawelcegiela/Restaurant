@@ -38,6 +38,20 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <CheckBox
+                android:id="@+id/checkBoxSubDish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:enabled="false"
+                android:text="@string/treat_sub_dish_temp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSubIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layoutManager="LinearLayoutManager" />
+
             <Button
                 android:id="@+id/buttonEdit"
                 android:layout_width="280dp"

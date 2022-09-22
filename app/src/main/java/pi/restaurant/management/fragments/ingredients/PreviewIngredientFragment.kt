@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
+import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
+import pi.restaurant.management.data.Dish
 import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.databinding.FragmentPreviewIngredientBinding
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
+import pi.restaurant.management.utils.SubItemUtils
 
 class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     override val databasePath = "ingredients"
@@ -34,6 +37,16 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         binding.textViewName.text = item.name
         binding.textViewAmountWithUnit.text =
             StringFormatUtils.formatAmountWithUnit(context!!, item.amount, item.unit)
+        binding.checkBoxSubDish.isChecked = item.subDish
+
+        if (item.subIngredients != null) {
+            binding.recyclerViewSubIngredients.adapter =
+                DishIngredientsRecyclerAdapter(item.subIngredients!!, this, 0)
+            SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, item.subIngredients!!.size, context!!)
+        } else {
+            SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, 0, context!!)
+        }
+
         binding.progress.progressBar.visibility = View.GONE
     }
 }

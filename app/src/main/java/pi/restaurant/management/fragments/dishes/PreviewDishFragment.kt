@@ -44,9 +44,10 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         binding.textViewDishType.text = getString(DishType.getNameResById(item.dishType))
         binding.textViewAmountWithUnit.text =
             StringFormatUtils.formatAmountWithUnit(context!!, item.amount, item.unit)
-        binding.progress.progressBar.visibility = View.GONE
 
         initializeRecyclerViews(item)
+
+        binding.progress.progressBar.visibility = View.GONE
     }
 
     private fun initializeRecyclerViews(item: Dish) {
