@@ -16,6 +16,11 @@
             android:id="@+id/OrdersMainFragment"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/orders" />
+
+        <item
+            android:id="@+id/AddOrderFragment"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/add_order" />
     </group>
 
     <group

@@ -90,6 +90,9 @@ abstract class AbstractItemListFragment : Fragment() {
     }
 
     private fun addSwipeToEditCallback() {
+        if (arguments?.getBoolean("swipeEnabled", true) == false) {
+            return
+        }
         val swipeToEditCallback: SwipeCallback =
             object : SwipeCallback(
                 activity!!.applicationContext,

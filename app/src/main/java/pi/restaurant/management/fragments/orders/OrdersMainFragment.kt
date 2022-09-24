@@ -1,34 +1,25 @@
 package pi.restaurant.management.fragments.orders
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import pi.restaurant.management.databinding.FragmentOrdersMainBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ktx.getValue
+import pi.restaurant.management.R
+import pi.restaurant.management.adapters.OrdersRecyclerAdapter
+import pi.restaurant.management.data.AbstractDataObject
+import pi.restaurant.management.data.Order
+import pi.restaurant.management.fragments.AbstractItemListFragment
 
-class OrdersMainFragment : Fragment() {
-    private var _binding: FragmentOrdersMainBinding? = null
-    private val binding get() = _binding!!
+class OrdersMainFragment : AbstractItemListFragment() {
+    override val databasePath = "orders"
+    override val addActionId = R.id.actionOrdersToAddOrder
+    override val editActionId = R.id.actionOrdersToEditOrder
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentOrdersMainBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun setData(dataSnapshot: DataSnapshot) {
+        val data = dataSnapshot.getValue<HashMap<String, Order>>() ?: return
+        val list = data.toList().map { it.second }.toMutableList()
+        binding.recyclerView.adapter =
+            OrdersRecyclerAdapter(list, this@OrdersMainFragment)
+        adapterData = list as MutableList<AbstractDataObject>
+        binding.searchView.visibility = View.GONE // No usage so far
     }
 }

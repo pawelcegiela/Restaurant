@@ -41,7 +41,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         binding.textViewBasePrice.text = "${item.basePrice} zł"
         binding.checkBoxDiscount.isChecked = item.isDiscounted
         binding.textViewDiscountPrice.text = "${item.discountPrice} zł"
-        binding.textViewDishType.text = getString(DishType.getNameResById(item.dishType))
+        binding.textViewDishType.text = DishType.getString(item.dishType, context!!)
         binding.textViewAmountWithUnit.text =
             StringFormatUtils.formatAmountWithUnit(context!!, item.amount, item.unit)
 

@@ -61,8 +61,7 @@ class WorkersRecyclerAdapter(
                 viewHolder.binding.textViewName.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
 
-        viewHolder.binding.textViewRole.text =
-            viewHolder.context.getString(Role.getNameResById(dataSet[position].role))
+        viewHolder.binding.textViewRole.text = Role.getString(dataSet[position].role, viewHolder.context)
     }
 
     override fun getItemCount() = dataSet.size

@@ -33,7 +33,7 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         val item = dataSnapshot.getValue<User>() ?: return
         binding.textViewName.text = "${item.firstName} ${item.lastName}"
         binding.textViewEmail.text = item.email
-        binding.textViewRole.text = getString(Role.getNameResById(item.role))
+        binding.textViewRole.text = Role.getString(item.role, context!!)
         binding.progress.progressBar.visibility = View.GONE
     }
 

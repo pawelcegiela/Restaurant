@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.IngredientItem
-import pi.restaurant.management.databinding.ItemDishIngredientBinding
+import pi.restaurant.management.databinding.ItemSubItemBinding
+import pi.restaurant.management.enums.IngredientItemState
 import pi.restaurant.management.fragments.dishes.AbstractModifyDishFragment
 import pi.restaurant.management.fragments.ingredients.AbstractModifyIngredientFragment
+import pi.restaurant.management.fragments.orders.CustomizeDishFragment
 import pi.restaurant.management.utils.StringFormatUtils
 
 
@@ -23,7 +25,7 @@ class DishIngredientsRecyclerAdapter(
     RecyclerView.Adapter<DishIngredientsRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
-        val binding: ItemDishIngredientBinding,
+        val binding: ItemSubItemBinding,
         val context: Context,
         val fragment: Fragment,
         private val dataSet: List<IngredientItem>,
@@ -62,6 +64,21 @@ class DishIngredientsRecyclerAdapter(
                         popup.show()
                     }
                 }
+                is CustomizeDishFragment -> {
+                    when (listId) {
+                        0 -> binding.buttonOptions.visibility = View.GONE
+                        1 -> binding.buttonOptions.text = context.getString(R.string.remove)
+                        2 -> binding.buttonOptions.text = context.getString(R.string.add)
+                    }
+
+                    binding.buttonOptions.setOnClickListener {
+                        if (listId == 1) {
+                            fragment.changeIngredientItemState(IngredientItemState.POSSIBLE, dataSet[layoutPosition])
+                        } else if (listId == 2) {
+                            fragment.changeIngredientItemState(IngredientItemState.REMOVE, dataSet[layoutPosition])
+                        }
+                    }
+                }
                 else -> {
                     binding.buttonOptions.visibility = View.GONE
                 }
@@ -70,7 +87,7 @@ class DishIngredientsRecyclerAdapter(
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemDishIngredientBinding
+        val binding = ItemSubItemBinding
             .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding, viewGroup.context, fragment, dataSet, listId)
@@ -83,7 +100,7 @@ class DishIngredientsRecyclerAdapter(
                 dataSet[position].amount,
                 dataSet[position].unit
             )
-        }]"
+        }" + if (listId == 2 || dataSet[position].extraPrice != 0.0) ",  + ${dataSet[position].extraPrice} zł]" else "]"
     }
 
     override fun getItemCount() = dataSet.size

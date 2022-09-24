@@ -32,9 +32,9 @@ class IngredientModifyDishOnClickListener(
                 } else {
                     val item =
                         IngredientItem(
-                            allIngredients[position].id,
-                            allIngredients[position].name,
-                            allIngredients[position].unit
+                            id = allIngredients[position].id,
+                            name = allIngredients[position].name,
+                            unit = allIngredients[position].unit,
                         )
                     SubItemUtils.addIngredientItem(recyclerList, recyclerView, item, fragment.context!!)
                 }

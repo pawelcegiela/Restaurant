@@ -18,7 +18,9 @@ import pi.restaurant.management.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
+import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.enums.IngredientItemState
+import pi.restaurant.management.enums.Unit
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.listeners.AllergenModifyDishOnClickListener
 import pi.restaurant.management.listeners.IngredientModifyDishOnClickListener
@@ -105,25 +107,11 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     fun initializeSpinners() {
-        val spinnerUnit: Spinner = binding.spinnerUnit
-        ArrayAdapter.createFromResource(
-            context!!,
-            R.array.units,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerUnit.adapter = adapter
-        }
+        binding.spinnerUnit.adapter =
+            ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, Unit.getArrayOfStrings(context!!))
 
-        val spinnerDishType: Spinner = binding.spinnerDishType
-        ArrayAdapter.createFromResource(
-            context!!,
-            R.array.dish_types,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinnerDishType.adapter = adapter
-        }
+        binding.spinnerDishType.adapter =
+            ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, DishType.getArrayOfStrings(context!!))
     }
 
     fun initializeRecyclerViews() {
@@ -228,6 +216,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             R.id.setOther -> IngredientItemState.OTHER
             R.id.setPossible -> IngredientItemState.POSSIBLE
             R.id.changeAmount -> IngredientItemState.CHANGE_AMOUNT
+            R.id.changeExtraPrice -> IngredientItemState.CHANGE_EXTRA_PRICE
             else -> IngredientItemState.REMOVE
         }
 
@@ -244,12 +233,20 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
         if (IngredientItemState.isActionRemove(targetState)) {
             SubItemUtils.removeIngredientItem(lists[originalListId], recyclers[originalListId], ingredientItem, context!!)
+            ingredientItem.extraPrice = 0.0
         }
         if (IngredientItemState.isActionAdd(targetState)) {
             SubItemUtils.addIngredientItem(lists[targetState.ordinal], recyclers[targetState.ordinal], ingredientItem, context!!)
         }
         if (targetState == IngredientItemState.CHANGE_AMOUNT) {
             SubItemUtils.addChangeIngredientItemAmountDialog(recyclers[originalListId], ingredientItem, context!!)
+        }
+        if (targetState == IngredientItemState.CHANGE_EXTRA_PRICE) {
+            if (originalListId != 2) {
+                Toast.makeText(context, getString(R.string.only_possible_have_extra_price), Toast.LENGTH_SHORT).show()
+            } else {
+                SubItemUtils.addChangeIngredientExtraPriceDialog(recyclers[originalListId], ingredientItem, context!!)
+            }
         }
     }
 

@@ -49,5 +49,11 @@ class Utils {
         fun getDiscountAmount(discount: DiscountGroup): String {
             return discount.amount.toString() + discount.type.toString()
         }
+
+        fun getTodayWithTime(time: String): Date {
+            val dateString = StringFormatUtils.formatDate(Date()) + " $time"
+            val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm")
+            return sdf.parse(dateString)!!
+        }
     }
 }

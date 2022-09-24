@@ -5,6 +5,10 @@
         android:title="@string/change_amount" />
 
     <item
+        android:id="@+id/changeExtraPrice"
+        android:title="@string/change_extra_price" />
+
+    <item
         android:id="@+id/setBase"
         android:title="@string/set_as_base_ingredient" />
 

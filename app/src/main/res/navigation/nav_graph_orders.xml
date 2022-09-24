@@ -10,6 +10,87 @@
         android:name="pi.restaurant.management.fragments.orders.OrdersMainFragment"
         android:label="@string/orders"
         tools:layout="@layout/fragment_orders_main">
+
+        <action
+            android:id="@+id/actionOrdersToAddOrder"
+            app:destination="@id/AddOrderFragment" />
+
+        <action
+            android:id="@+id/actionOrdersToEditOrder"
+            app:destination="@id/EditOrderFragment" />
+
+        <action
+            android:id="@+id/actionOrdersToPreviewOrder"
+            app:destination="@id/PreviewOrderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddOrderFragment"
+        android:name="pi.restaurant.management.fragments.orders.AddOrderFragment"
+        android:label="@string/add_order"
+        tools:layout="@layout/fragment_modify_order">
+        <action
+            android:id="@+id/actionAddOrderToOrders"
+            app:destination="@id/OrdersMainFragment"
+            app:popUpTo="@id/OrdersMainFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/actionAddOrderToDishes"
+            app:destination="@id/ChooseDishFragment">
+            <argument
+                android:name="swipeEnabled"
+                android:defaultValue="false"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/EditOrderFragment"
+        android:name="pi.restaurant.management.fragments.orders.EditOrderFragment"
+        android:label="@string/edit_order"
+        tools:layout="@layout/fragment_modify_order">
+        <action
+            android:id="@+id/actionEditOrderToOrders"
+            app:destination="@id/OrdersMainFragment"
+            app:popUpTo="@id/OrdersMainFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/actionEditOrderToDishes"
+            app:destination="@id/ChooseDishFragment">
+            <argument
+                android:name="swipeEnabled"
+                android:defaultValue="false"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/PreviewOrderFragment"
+        android:name="pi.restaurant.management.fragments.orders.PreviewOrderFragment"
+        android:label="@string/preview_order"
+        tools:layout="@layout/fragment_preview_order">
+        <action
+            android:id="@+id/actionPreviewOrderToEditOrder"
+            app:destination="@id/EditOrderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ChooseDishFragment"
+        android:name="pi.restaurant.management.fragments.dishes.DishesMainFragment"
+        android:label="@string/choose_dish"
+        tools:layout="@layout/fragment_item_list">
+        <action
+            android:id="@+id/actionChooseDishToCustomizeDish"
+            app:destination="@id/CustomizeDishFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CustomizeDishFragment"
+        android:name="pi.restaurant.management.fragments.orders.CustomizeDishFragment"
+        android:label="@string/customize_dish"
+        tools:layout="@layout/fragment_modify_dish">
     </fragment>
 
     <activity

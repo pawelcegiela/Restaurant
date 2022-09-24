@@ -7,22 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
-import pi.restaurant.management.data.Allergen
+import pi.restaurant.management.data.DishItem
 import pi.restaurant.management.databinding.ItemSubItemBinding
-import pi.restaurant.management.fragments.dishes.AbstractModifyDishFragment
+import pi.restaurant.management.fragments.orders.AbstractModifyOrderFragment
 
 
-class DishAllergensRecyclerAdapter(
-    private val dataSet: List<Allergen>,
+class OrderDishesRecyclerAdapter(
+    private val dataSet: List<DishItem>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<DishAllergensRecyclerAdapter.ViewHolder>() {
+    RecyclerView.Adapter<OrderDishesRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
         val binding: ItemSubItemBinding,
         val context: Context,
         val fragment: Fragment,
-        private val dataSet: List<Allergen>,
+        private val dataSet: List<DishItem>,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -30,10 +30,13 @@ class DishAllergensRecyclerAdapter(
         }
 
         private fun initialize() {
-            if (fragment is AbstractModifyDishFragment) {
+            if (fragment is AbstractModifyOrderFragment) {
                 binding.buttonOptions.text = fragment.getString(R.string.remove)
                 binding.buttonOptions.setOnClickListener {
-                    fragment.removeAllergenItem(dataSet[layoutPosition])
+                    fragment.removeDish(dataSet[layoutPosition])
+                }
+                binding.root.setOnClickListener {
+
                 }
             } else {
                 binding.buttonOptions.visibility = View.GONE
@@ -49,7 +52,7 @@ class DishAllergensRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewName.text = dataSet[position].name
+        viewHolder.binding.textViewName.text = dataSet[position].dish.name
     }
 
     override fun getItemCount() = dataSet.size

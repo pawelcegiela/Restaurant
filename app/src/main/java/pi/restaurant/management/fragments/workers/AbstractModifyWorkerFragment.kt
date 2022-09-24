@@ -11,7 +11,9 @@ import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
+import pi.restaurant.management.enums.DiscountType
 import pi.restaurant.management.enums.Precondition
+import pi.restaurant.management.enums.Role
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.PreconditionUtils
 
@@ -38,15 +40,8 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     }
 
     fun initializeSpinner() {
-        val spinner: Spinner = binding.spinnerRole
-        ArrayAdapter.createFromResource(
-            context!!,
-            R.array.roles,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-        }
+        binding.spinnerRole.adapter =
+            ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, Role.getArrayOfStrings(context!!))
     }
 
     override fun getDataObject(): AbstractDataObject {

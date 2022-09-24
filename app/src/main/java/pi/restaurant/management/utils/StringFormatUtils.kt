@@ -8,12 +8,25 @@ import java.util.*
 class StringFormatUtils {
     companion object {
         fun formatAmountWithUnit(context: Context, amount: Number, unit: Int): String {
-            return "$amount ${context.getString(Unit.getNameResById(unit))}"
+            return "$amount ${Unit.getString(unit, context)}"
         }
 
         fun formatDate(date: Date): String {
             val sdf = SimpleDateFormat("dd.MM.yyyy")
             return sdf.format(date)
+        }
+
+        fun formatTime(date: Date): String {
+            val sdf = SimpleDateFormat("HH:mm")
+            return sdf.format(date)
+        }
+
+        fun formatDateTime(date: Date): String {
+            return "${formatDate(date)} ${formatTime(date)}"
+        }
+
+        fun formatPrice(value: Double): String {
+            return "${String.format("%.2f", value)} zł"
         }
     }
 }

@@ -3,9 +3,9 @@ package pi.restaurant.management.enums
 import android.content.Context
 import pi.restaurant.management.R
 
-enum class DiscountType(val stringResourceId: Int) {
-    RELATIVE(R.string.relative_discount_ending),
-    ABSOLUTE(R.string.absolute_discount_ending);
+enum class OrderPlace(val stringResourceId: Int) {
+    TO_EAT_IN(R.string.to_eat_in),
+    TO_GO(R.string.to_go);
 
     companion object {
         fun getString(id: Int, context: Context): String {

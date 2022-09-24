@@ -42,6 +42,25 @@ class SubItemUtils {
             }
         }
 
+        fun addChangeIngredientExtraPriceDialog(recyclerView: RecyclerView, item: IngredientItem, context: Context) {
+            val dialog = Dialog(context)
+
+            dialog.setContentView(R.layout.dialog_dish_ingredient_amount) //TODO Można to kiedyś zmienić
+            dialog.window!!.setLayout(1000, 1000)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
+
+            val editText = dialog.findViewById<EditText>(R.id.editTextAmount)
+            val button = dialog.findViewById<Button>(R.id.buttonEnter)
+
+            editText.setText(item.extraPrice.toString())
+            button.setOnClickListener {
+                item.extraPrice = if (editText.text.isEmpty()) 0.0 else editText.text.toString().toDouble()
+                dialog.dismiss()
+                recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+            }
+        }
+
         fun removeIngredientItem(
             list: MutableList<IngredientItem>,
             recyclerView: RecyclerView,

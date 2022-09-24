@@ -19,6 +19,8 @@ import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.data.IngredientItem
 import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
 import pi.restaurant.management.enums.IngredientItemState
+import pi.restaurant.management.enums.Role
+import pi.restaurant.management.enums.Unit
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.listeners.SubIngredientOnClickListener
 import pi.restaurant.management.utils.SubItemUtils
@@ -55,15 +57,8 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     }
 
     private fun initializeSpinner() {
-        val spinner: Spinner = binding.spinnerUnit
-        ArrayAdapter.createFromResource(
-            context!!,
-            R.array.units,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-        }
+        binding.spinnerUnit.adapter =
+            ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, Unit.getArrayOfStrings(context!!))
     }
 
     private fun setCheckBoxListener() {

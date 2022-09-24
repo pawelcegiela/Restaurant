@@ -5,6 +5,7 @@ class IngredientItem : AbstractDataObject {
     var name: String = ""
     var amount: Double = 0.0
     var unit: Int = 0
+    var extraPrice: Double = 0.0
 
     @Suppress("unused")
     constructor()

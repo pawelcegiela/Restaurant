@@ -1,8 +1,9 @@
 package pi.restaurant.management.enums
 
+import android.content.Context
 import pi.restaurant.management.R
 
-enum class DishType(val nameRes: Int) {
+enum class DishType(val stringResourceId: Int) {
     DISH(R.string.dish),
     WARM_DISH(R.string.warm_dish),
     COLD_DISH(R.string.cold_dish),
@@ -10,8 +11,12 @@ enum class DishType(val nameRes: Int) {
     ALCOHOLIC_DRINK(R.string.alcoholic_drink);
 
     companion object {
-        fun getNameResById(id: Int): Int {
-            return values()[id].nameRes
+        fun getString(id: Int, context: Context): String {
+            return context.getString(values()[id].stringResourceId)
+        }
+
+        fun getArrayOfStrings(context: Context): Array<String> {
+            return values().map { context.getString(it.stringResourceId) }.toTypedArray()
         }
     }
 }

@@ -9,6 +9,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.databinding.FragmentModifyDiscountBinding
+import pi.restaurant.management.enums.DiscountType
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.Utils
 import java.util.*
@@ -42,14 +43,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
     private fun initializeSpinner() {
         val spinner: Spinner = binding.spinnerType
-        ArrayAdapter.createFromResource(
-            context!!,
-            R.array.types,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-        }
+        spinner.adapter = ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, DiscountType.getArrayOfStrings(context!!))
     }
 
     override fun getDataObject(): AbstractDataObject {

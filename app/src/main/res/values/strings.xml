@@ -160,31 +160,31 @@
     <string name="allergen_already_added">Allergen has been already added</string>
     <string name="treat_sub_dish_temp">Treat this ingredient as a sub-dish? (consisting of many ingredients)</string>
     <string name="add_sub_ingredient">Add sub-ingredient</string>
-
-    <string-array name="roles">
-        <item>Admin</item>
-        <item>Owner</item>
-        <item>Manager</item>
-        <item>Worker</item>
-    </string-array>
-
-    <string-array name="types">
-        <item>%</item>
-        <item>zł</item>
-    </string-array>
-
-    <string-array name="units">
-        <item>g</item>
-        <item>ml</item>
-        <item>pcs</item>
-    </string-array>
-
-    <string-array name="dish_types">
-        <item>dish</item>
-        <item>warm dish</item>
-        <item>cold dish</item>
-        <item>non alcoholic drink</item>
-        <item>alcoholic drink</item>
-    </string-array>
-
+    <string name="add_order">Add order</string>
+    <string name="edit_order">Edit order</string>
+    <string name="preview_order">Preview order</string>
+    <string name="order_added">Order has been added</string>
+    <string name="order_modified">Order has been modified</string>
+    <string name="order_removed">Order has been removed</string>
+    <string name="in_restaurant">In restaurant</string>
+    <string name="phone_call">Phone call</string>
+    <string name="client_app">Client app</string>
+    <string name="new_s">New</string>
+    <string name="accepted">Accepted</string>
+    <string name="preparing">Preparing</string>
+    <string name="awaiting">Awaiting</string>
+    <string name="finished">Finished</string>
+    <string name="self_pickup">Self-pickup</string>
+    <string name="relative_discount_ending">%</string>
+    <string name="absolute_discount_ending">zł</string>
+    <string name="collection_time">Collection time</string>
+    <string name="choose_dish">Choose dish</string>
+    <string name="customize_dish">Customize dish</string>
+    <string name="add">Add</string>
+    <string name="portions">Portions</string>
+    <string name="one">1</string>
+    <string name="change_extra_price">Change extra price</string>
+    <string name="only_possible_have_extra_price">Only possible ingredients may have extra price.</string>
+    <string name="to_eat_in">To eat in</string>
+    <string name="to_go">To go</string>
 </resources>

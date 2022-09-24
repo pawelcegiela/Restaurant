@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
@@ -21,7 +20,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
 
     abstract val databasePath: String
     abstract val linearLayout: LinearLayout
-    abstract val editButton: Button
+    abstract val editButton: Button?
     abstract val editActionId: Int
     lateinit var itemId: String
 
@@ -48,8 +47,8 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     }
 
     open fun unlockUI() {
-        editButton.visibility = View.VISIBLE
-        editButton.setOnClickListener {
+        editButton?.visibility = View.VISIBLE
+        editButton?.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("id", itemId)
 
