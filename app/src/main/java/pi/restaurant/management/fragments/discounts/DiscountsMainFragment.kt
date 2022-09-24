@@ -1,23 +1,21 @@
 package pi.restaurant.management.fragments.discounts
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ktx.getValue
+import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DiscountsRecyclerAdapter
-import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.DiscountGroup
 import pi.restaurant.management.fragments.AbstractItemListFragment
+import pi.restaurant.management.fragments.AbstractItemListViewModel
 
 class DiscountsMainFragment : AbstractItemListFragment() {
-    override val databasePath = "discounts"
     override val addActionId = R.id.actionDiscountsToAddDiscount
     override val editActionId = R.id.actionDiscountsToEditDiscount
+    override val viewModel : AbstractItemListViewModel get() = _viewModel
+    private val _viewModel : DiscountsMainViewModel by viewModels()
 
-    override fun setData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<HashMap<String, DiscountGroup>>() ?: return
-        val list = data.toList().map { it.second }.toMutableList()
+    override fun initializeUI() {
+        super.initializeUI()
         binding.recyclerView.adapter =
-            DiscountsRecyclerAdapter(list, this@DiscountsMainFragment)
-        adapterData = list as MutableList<AbstractDataObject>
+            DiscountsRecyclerAdapter(viewModel.liveDataList.value as MutableList<DiscountGroup>, this@DiscountsMainFragment)
     }
 }

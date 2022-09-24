@@ -1,24 +1,22 @@
 package pi.restaurant.management.fragments
 
 import android.app.AlertDialog
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
+import pi.restaurant.management.callbacks.FirebaseDataCallback
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.enums.Precondition
-import pi.restaurant.management.enums.Role
+import pi.restaurant.management.utils.FirebaseUtils
 import pi.restaurant.management.utils.Utils
 
 abstract class AbstractModifyItemFragment : Fragment() {
@@ -36,23 +34,12 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkPrivileges()
+        FirebaseUtils.checkPrivileges(this)
     }
 
-    private fun checkPrivileges() {
-        val userId = Firebase.auth.uid ?: return
-        val databaseRef = Firebase.database.getReference("users").child(userId).child("role")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                myRole = dataSnapshot.getValue<Int>() ?: return
-                if (myRole < Role.WORKER.ordinal) {
-                    unlockUI()
-                    initializeUI()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+    fun initializeUINew() {
+        unlockUI()
+        initializeUI()
     }
 
     private fun unlockUI() {
@@ -66,14 +53,11 @@ abstract class AbstractModifyItemFragment : Fragment() {
     abstract fun initializeUI()
 
     fun getDataFromDatabase() {
-        val databaseRef = Firebase.database.getReference(databasePath).child(itemId)
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+        FirebaseUtils.getDataFromDatabase(databasePath, itemId, object : FirebaseDataCallback {
+            override fun onCallback(dataSnapshot: DataSnapshot) {
                 fillInData(dataSnapshot)
                 finishLoading()
             }
-
-            override fun onCancelled(error: DatabaseError) {}
         })
     }
 

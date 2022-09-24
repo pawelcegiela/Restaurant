@@ -1,26 +1,24 @@
 package pi.restaurant.management.fragments.dishes
 
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishesRecyclerAdapter
-import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.data.DishItem
 import pi.restaurant.management.fragments.AbstractItemListFragment
+import pi.restaurant.management.fragments.AbstractItemListViewModel
 
 class DishesMainFragment : AbstractItemListFragment() {
-    override val databasePath = "dishes"
     override val addActionId = R.id.actionDishesToAddDish
     override val editActionId = R.id.actionDishesToEditDish
+    override val viewModel : AbstractItemListViewModel get() = _viewModel
+    private val _viewModel : DishesMainViewModel by viewModels()
 
-    override fun setData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<HashMap<String, Dish>>() ?: return
-        val list = data.toList().map { it.second }.toMutableList()
+    override fun initializeUI() {
+        super.initializeUI()
         binding.recyclerView.adapter =
-            DishesRecyclerAdapter(list, this@DishesMainFragment)
-        adapterData = list as MutableList<AbstractDataObject>
+            DishesRecyclerAdapter(viewModel.liveDataList.value as MutableList<Dish>, this@DishesMainFragment)
 
         //TODO: Czy da się pominąć ten krok?
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<DishItem>("newItem")

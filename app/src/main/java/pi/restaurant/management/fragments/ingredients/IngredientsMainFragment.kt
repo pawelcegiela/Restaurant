@@ -1,23 +1,21 @@
 package pi.restaurant.management.fragments.ingredients
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ktx.getValue
+import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.IngredientsRecyclerAdapter
-import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Ingredient
 import pi.restaurant.management.fragments.AbstractItemListFragment
+import pi.restaurant.management.fragments.AbstractItemListViewModel
 
 class IngredientsMainFragment : AbstractItemListFragment() {
-    override val databasePath = "ingredients"
     override val addActionId = R.id.actionIngredientsToAddIngredient
     override val editActionId = R.id.actionIngredientsToEditIngredient
+    override val viewModel : AbstractItemListViewModel get() = _viewModel
+    private val _viewModel : IngredientsMainViewModel by viewModels()
 
-    override fun setData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<HashMap<String, Ingredient>>() ?: return
-        val list = data.toList().map { it.second }.toMutableList()
+    override fun initializeUI() {
+        super.initializeUI()
         binding.recyclerView.adapter =
-            IngredientsRecyclerAdapter(list, this@IngredientsMainFragment)
-        adapterData = list as MutableList<AbstractDataObject>
+            IngredientsRecyclerAdapter(viewModel.liveDataList.value as MutableList<Ingredient>, this@IngredientsMainFragment)
     }
 }
