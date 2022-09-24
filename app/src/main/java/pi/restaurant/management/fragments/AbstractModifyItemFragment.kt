@@ -13,16 +13,15 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
-import pi.restaurant.management.callbacks.FirebaseDataCallback
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.enums.Precondition
-import pi.restaurant.management.utils.FirebaseUtils
+import pi.restaurant.management.enums.Role
 import pi.restaurant.management.utils.Utils
 
 abstract class AbstractModifyItemFragment : Fragment() {
+    abstract val viewModel: AbstractModifyItemViewModel
     var myRole: Int = 3
 
-    abstract val databasePath: String
     abstract val linearLayout: LinearLayout
     abstract val progressBar: ProgressBar
     abstract val saveButton: Button
@@ -34,12 +33,30 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        FirebaseUtils.checkPrivileges(this)
+        viewModel.getUserRole()
+        addLiveDataObservers()
     }
 
-    fun initializeUINew() {
-        unlockUI()
-        initializeUI()
+    private fun addLiveDataObservers() {
+        viewModel.liveUserRole.observe(viewLifecycleOwner) { role ->
+            if (role < Role.WORKER.ordinal) {
+                unlockUI()
+                initializeUI()
+                if (itemId.isNotEmpty()) {
+                    viewModel.getDataFromDatabase(itemId)
+                }
+            }
+        }
+
+        viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { dataSnapshot ->
+            fillInData(dataSnapshot)
+            finishLoading()
+        }
+
+        viewModel.liveSaveStatus.observe(viewLifecycleOwner) {
+            Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
+            findNavController().navigate(nextActionId)
+        }
     }
 
     private fun unlockUI() {
@@ -51,15 +68,6 @@ abstract class AbstractModifyItemFragment : Fragment() {
     }
 
     abstract fun initializeUI()
-
-    fun getDataFromDatabase() {
-        FirebaseUtils.getDataFromDatabase(databasePath, itemId, object : FirebaseDataCallback {
-            override fun onCallback(dataSnapshot: DataSnapshot) {
-                fillInData(dataSnapshot)
-                finishLoading()
-            }
-        })
-    }
 
     open fun fillInData(dataSnapshot: DataSnapshot) {}
 
@@ -84,11 +92,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
             return
         }
 
-        val databaseRef = Firebase.database.getReference(databasePath).child(data.id)
-        databaseRef.setValue(data)
-
-        Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
-        findNavController().navigate(nextActionId)
+        viewModel.saveToDatabase(data)
     }
 
     abstract fun getDataObject(): AbstractDataObject
@@ -99,15 +103,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     open fun setRemoveButtonListener() {
         removeButton?.setOnClickListener {
-            val databaseRef = Firebase.database.getReference(databasePath).child(itemId)
-
-            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    removeFromDatabase(dataSnapshot)
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {}
-            })
+            viewModel.liveDataSnapshot.value?.let { dataSnapshot -> removeFromDatabase(dataSnapshot) }
         }
     }
 

@@ -1,6 +1,7 @@
 package pi.restaurant.management.fragments.workers
 
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
@@ -10,6 +11,8 @@ import pi.restaurant.management.activities.SettingsActivity
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
 import pi.restaurant.management.enums.Precondition
+import pi.restaurant.management.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
@@ -17,6 +20,8 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
     override val saveMessageId = R.string.worker_modified
     override val removeMessageId = 0 // Warning: unused
     private var isMyData = false
+    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel : EditWorkerViewModel by viewModels()
 
     override fun initializeUI() {
         itemId = arguments?.getString("id").toString()
@@ -31,7 +36,6 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.editTextPassword.visibility = View.GONE
 
         initializeSpinner()
-        getDataFromDatabase()
         setSaveButtonListener()
         setRemoveButtonListener()
     }

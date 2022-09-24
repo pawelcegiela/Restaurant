@@ -1,16 +1,21 @@
 package pi.restaurant.management.fragments.dishes
 
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Dish
+import pi.restaurant.management.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.fragments.workers.EditWorkerViewModel
 
 class EditDishFragment : AbstractModifyDishFragment() {
 
     override val nextActionId = R.id.actionEditDishToDishes
     override val saveMessageId = R.string.dish_modified
     override val removeMessageId = R.string.dish_removed
+    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel : EditDishViewModel by viewModels()
 
     override fun initializeUI() {
         itemId = arguments?.getString("id").toString()
@@ -19,7 +24,6 @@ class EditDishFragment : AbstractModifyDishFragment() {
         initializeSpinners()
         setSaveButtonListener()
         setRemoveButtonListener()
-        getDataFromDatabase()
         getIngredientListAndSetIngredientButtons()
         getAllergenListAndSetAllergenButtons()
     }

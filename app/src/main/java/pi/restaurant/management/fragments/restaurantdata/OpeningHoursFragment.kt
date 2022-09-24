@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.fragment.app.viewModels
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
@@ -15,6 +16,8 @@ import pi.restaurant.management.data.OpeningHours
 import pi.restaurant.management.databinding.FragmentOpeningHoursBinding
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
+import pi.restaurant.management.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.fragments.orders.EditOrderViewModel
 import pi.restaurant.management.utils.PreconditionUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -24,7 +27,6 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentOpeningHoursBinding? = null
     private val binding get() = _binding!!
 
-    override val databasePath = "restaurantData"
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave
@@ -34,6 +36,9 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
     override val saveMessageId = R.string.opening_hours_modified
     override val removeMessageId = 0 // Unused
 
+    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel : OpeningHoursViewModel by viewModels()
+
     private lateinit var checkBoxes: ArrayList<CheckBox>
     private lateinit var etOpenings: ArrayList<EditText>
     private lateinit var etClosings: ArrayList<EditText>
@@ -42,7 +47,7 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
     private lateinit var daysOpeningValues: ArrayList<Date>
     private lateinit var daysClosingValues: ArrayList<Date>
 
-    private val sdf = SimpleDateFormat("HH:mm")
+    private val sdf = SimpleDateFormat("HH:mm", Locale.ROOT)
     private lateinit var defaultOpening: Date
     private lateinit var defaultClosing: Date
 
@@ -57,7 +62,6 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
 
     override fun initializeUI() {
         initializeArrays()
-        getDataFromDatabase()
         setCheckBoxListeners()
         setSaveButtonListener()
     }

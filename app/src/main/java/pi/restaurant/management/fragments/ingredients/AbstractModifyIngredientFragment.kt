@@ -31,7 +31,6 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyIngredientBinding? = null
     val binding get() = _binding!!
 
-    override val databasePath = "ingredients"
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave

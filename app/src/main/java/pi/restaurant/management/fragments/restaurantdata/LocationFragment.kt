@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.viewModels
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Location
 import pi.restaurant.management.databinding.FragmentLocationBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
+import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 
 class LocationFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
 
-    override val databasePath = "restaurantData"
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave
@@ -26,6 +27,9 @@ class LocationFragment : AbstractModifyItemFragment() {
     override val nextActionId = R.id.actionLocationToRD
     override val saveMessageId = R.string.location_modified
     override val removeMessageId = 0 // Unused
+
+    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel : LocationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +41,6 @@ class LocationFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
-        getDataFromDatabase()
         setSaveButtonListener()
     }
 

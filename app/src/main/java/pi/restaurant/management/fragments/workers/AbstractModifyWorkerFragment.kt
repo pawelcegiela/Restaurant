@@ -21,7 +21,6 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null
     val binding get() = _binding!!
 
-    override val databasePath = "users"
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave
@@ -41,7 +40,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
 
     fun initializeSpinner() {
         binding.spinnerRole.adapter =
-            ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, Role.getArrayOfStrings(context!!))
+            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, Role.getArrayOfStrings(requireContext()))
     }
 
     override fun getDataObject(): AbstractDataObject {

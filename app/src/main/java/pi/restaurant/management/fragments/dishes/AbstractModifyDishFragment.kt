@@ -34,7 +34,6 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDishBinding? = null
     val binding get() = _binding!!
 
-    override val databasePath = "dishes"
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave

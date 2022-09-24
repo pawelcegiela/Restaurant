@@ -31,7 +31,6 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyOrderBinding? = null
     val binding get() = _binding!!
 
-    override val databasePath = "orders"
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val saveButton get() = binding.buttonSave

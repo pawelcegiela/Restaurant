@@ -3,12 +3,14 @@ package pi.restaurant.management.fragments.workers
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
 import pi.restaurant.management.enums.Precondition
+import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.utils.PreconditionUtils
 
 class AddWorkerFragment : AbstractModifyWorkerFragment() {
@@ -16,6 +18,8 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
     override val nextActionId = R.id.actionAddWorkerToWorkers
     override val saveMessageId = R.string.created_new_user
     override val removeMessageId = 0 // Unused
+    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel : AddWorkerViewModel by viewModels()
 
     override fun initializeUI() {
         removeButton.visibility = View.GONE
