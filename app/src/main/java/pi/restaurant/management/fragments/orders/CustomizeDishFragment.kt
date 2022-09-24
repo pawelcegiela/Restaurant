@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
@@ -18,15 +19,17 @@ import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.enums.IngredientItemState
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
+import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
 
 
 class CustomizeDishFragment : AbstractPreviewItemFragment() {
-    override val databasePath = "dishes"
     override val linearLayout get() = binding.linearLayout
     override val editButton: Button? = null
     override val editActionId = R.id.actionPreviewDishToEditDish
+    override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
+    private val _viewModel : CustomizeDishViewModel by viewModels()
 
     private var _binding: FragmentPreviewDishBinding? = null
     val binding get() = _binding!!
@@ -44,8 +47,16 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun unlockUI() {
-        // TODO Edycja dania
+    // TODO Edycja dania
+    override fun initializeUI() {
+        binding.buttonAdd.visibility = View.VISIBLE
+        binding.editTextPortions.visibility = View.VISIBLE
+        binding.textViewFinalPrice.visibility = View.VISIBLE
+        binding.buttonAdd.setOnClickListener {
+            val navController = findNavController()
+            navController.previousBackStackEntry?.savedStateHandle?.set("newItem", getDataObject())
+            navController.popBackStack()
+        }
     }
 
     override fun fillInData(dataSnapshot: DataSnapshot) {
@@ -57,19 +68,18 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         binding.textViewName.text = item.name
         binding.textViewDescription.text = item.description
         binding.checkBoxActive.isChecked = item.isActive
-        binding.textViewBasePrice.text = "${item.basePrice} zł"
+        binding.textViewBasePrice.text = StringFormatUtils.formatPrice(item.basePrice)
         binding.checkBoxDiscount.isChecked = item.isDiscounted
-        binding.textViewDiscountPrice.text = "${item.discountPrice} zł"
-        binding.textViewDishType.text = DishType.getString(item.dishType, context!!)
+        binding.textViewDiscountPrice.text = StringFormatUtils.formatPrice(item.discountPrice)
+        binding.textViewDishType.text = DishType.getString(item.dishType, requireContext())
         binding.textViewAmountWithUnit.text =
-            StringFormatUtils.formatAmountWithUnit(context!!, item.amount, item.unit)
+            StringFormatUtils.formatAmountWithUnit(requireContext(), item.amount, item.unit)
         binding.textViewFinalPrice.text = StringFormatUtils.formatPrice(getFinalPrice())
 
         otherIngredientsList = item.otherIngredients.toList().map { it.second }.toMutableList()
         possibleIngredientsList = item.possibleIngredients.toList().map { it.second }.toMutableList()
 
         initializeRecyclerViews(item)
-        initializeUIElements()
 
         binding.progress.progressBar.visibility = View.GONE
     }
@@ -77,41 +87,30 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     private fun initializeRecyclerViews(item: Dish) {
         binding.recyclerViewBaseIngredients.adapter =
             DishIngredientsRecyclerAdapter(item.baseIngredients.toList().map { it.second }.toMutableList(), this, 0)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.baseIngredients.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.baseIngredients.size, requireContext())
 
         binding.recyclerViewOtherIngredients.adapter =
             DishIngredientsRecyclerAdapter(otherIngredientsList, this, 1)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.otherIngredients.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.otherIngredients.size, requireContext())
 
         binding.recyclerViewPossibleIngredients.adapter =
             DishIngredientsRecyclerAdapter(possibleIngredientsList, this, 2)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.possibleIngredients.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.possibleIngredients.size, requireContext())
 
         binding.recyclerViewAllergens.adapter =
             DishAllergensRecyclerAdapter(item.allergens.toList().map { it.second }.toMutableList(), this)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, item.allergens.size, context!!)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, item.allergens.size, requireContext())
     }
 
     fun changeIngredientItemState(state: IngredientItemState, ingredientItem: IngredientItem) {
         if (state == IngredientItemState.POSSIBLE) {
-            SubItemUtils.removeIngredientItem(otherIngredientsList, binding.recyclerViewOtherIngredients, ingredientItem, context!!)
-            SubItemUtils.addIngredientItem(possibleIngredientsList, binding.recyclerViewPossibleIngredients, ingredientItem, context!!)
+            SubItemUtils.removeIngredientItem(otherIngredientsList, binding.recyclerViewOtherIngredients, ingredientItem, requireContext())
+            SubItemUtils.addIngredientItem(possibleIngredientsList, binding.recyclerViewPossibleIngredients, ingredientItem, requireContext())
         } else {
-            SubItemUtils.removeIngredientItem(possibleIngredientsList, binding.recyclerViewPossibleIngredients, ingredientItem, context!!)
-            SubItemUtils.addIngredientItem(otherIngredientsList, binding.recyclerViewOtherIngredients, ingredientItem, context!!)
+            SubItemUtils.removeIngredientItem(possibleIngredientsList, binding.recyclerViewPossibleIngredients, ingredientItem, requireContext())
+            SubItemUtils.addIngredientItem(otherIngredientsList, binding.recyclerViewOtherIngredients, ingredientItem, requireContext())
         }
         binding.textViewFinalPrice.text = StringFormatUtils.formatPrice(getFinalPrice())
-    }
-
-    private fun initializeUIElements() {
-        binding.buttonAdd.visibility = View.VISIBLE
-        binding.editTextPortions.visibility = View.VISIBLE
-        binding.textViewFinalPrice.visibility = View.VISIBLE
-        binding.buttonAdd.setOnClickListener {
-            val navController = findNavController()
-            navController.previousBackStackEntry?.savedStateHandle?.set("newItem", getDataObject())
-            navController.popBackStack()
-        }
     }
 
     private fun getDataObject(): DishItem {

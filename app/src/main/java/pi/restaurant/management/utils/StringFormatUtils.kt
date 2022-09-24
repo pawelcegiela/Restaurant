@@ -12,12 +12,12 @@ class StringFormatUtils {
         }
 
         fun formatDate(date: Date): String {
-            val sdf = SimpleDateFormat("dd.MM.yyyy")
+            val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
             return sdf.format(date)
         }
 
         fun formatTime(date: Date): String {
-            val sdf = SimpleDateFormat("HH:mm")
+            val sdf = SimpleDateFormat("HH:mm", Locale.ROOT)
             return sdf.format(date)
         }
 
@@ -27,6 +27,10 @@ class StringFormatUtils {
 
         fun formatPrice(value: Double): String {
             return "${String.format("%.2f", value)} zł"
+        }
+
+        fun formatNames(firstName: String, lastName: String): String {
+            return "$firstName $lastName"
         }
     }
 }
