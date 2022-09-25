@@ -8,10 +8,11 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.Allergen
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentPreviewAllergenBinding
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 
 class PreviewAllergenFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
@@ -31,9 +32,15 @@ class PreviewAllergenFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val item = dataSnapshot.getValue<Allergen>() ?: return
-        binding.textViewName.text = item.name
+    private fun getItem(snapshotsPair: SnapshotsPair) : Allergen {
+        val basic = snapshotsPair.basic?.getValue<AllergenBasic>() ?: AllergenBasic()
+        val details = snapshotsPair.details?.getValue<AllergenDetails>() ?: AllergenDetails()
+        return Allergen(itemId, basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val item = getItem(snapshotsPair)
+        binding.textViewName.text = item.basic.name
         binding.progress.progressBar.visibility = View.GONE
     }
 }

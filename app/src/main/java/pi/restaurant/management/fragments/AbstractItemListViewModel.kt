@@ -21,7 +21,7 @@ abstract class AbstractItemListViewModel : ViewModel() {
     val liveEditPrecondition = MutableLiveData<Precondition>()
 
     fun loadData() {
-        val databaseRef = Firebase.database.getReference(databasePath)
+        val databaseRef = Firebase.database.getReference(databasePath).child("basic")
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 setDataList(dataSnapshot)
@@ -33,7 +33,7 @@ abstract class AbstractItemListViewModel : ViewModel() {
 
     fun getUserRole() {
         val userId = Firebase.auth.uid ?: return
-        val databaseRef = Firebase.database.getReference("users").child(userId).child("role")
+        val databaseRef = Firebase.database.getReference("users").child("basic").child(userId).child("role")
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 liveUserRole.value = dataSnapshot.getValue<Int>() ?: return

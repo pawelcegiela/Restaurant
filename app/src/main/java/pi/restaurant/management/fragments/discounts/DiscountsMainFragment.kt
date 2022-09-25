@@ -3,7 +3,8 @@ package pi.restaurant.management.fragments.discounts
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DiscountsRecyclerAdapter
-import pi.restaurant.management.data.DiscountGroup
+import pi.restaurant.management.data.Discount
+import pi.restaurant.management.data.DiscountBasic
 import pi.restaurant.management.fragments.AbstractItemListFragment
 import pi.restaurant.management.fragments.AbstractItemListViewModel
 
@@ -16,6 +17,6 @@ class DiscountsMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            DiscountsRecyclerAdapter(viewModel.liveDataList.value as MutableList<DiscountGroup>, this@DiscountsMainFragment)
+            DiscountsRecyclerAdapter(viewModel.liveDataList.value as MutableList<DiscountBasic>, this@DiscountsMainFragment)
     }
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Ingredient
+import pi.restaurant.management.data.IngredientBasic
 import pi.restaurant.management.databinding.ItemIngredientsBinding
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
@@ -17,17 +18,17 @@ import kotlin.collections.ArrayList
 
 
 class IngredientsRecyclerAdapter(
-    private val dataSet: MutableList<Ingredient>,
+    private val dataSet: MutableList<IngredientBasic>,
     private val fragment: Fragment,
 ) :
     AbstractRecyclerAdapter<IngredientsRecyclerAdapter.ViewHolder>() {
-    override val allDataSet: MutableList<Ingredient> = ArrayList(dataSet)
+    override val allDataSet: MutableList<IngredientBasic> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemIngredientsBinding,
         val context: Context,
         val fragment: Fragment,
-        private val dataSet: List<Ingredient>
+        private val dataSet: List<IngredientBasic>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -55,7 +56,7 @@ class IngredientsRecyclerAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewName.text = dataSet[position].name
         viewHolder.binding.textViewAmountWithUnit.text =
-            StringFormatUtils.formatAmountWithUnit(fragment.context!!, dataSet[position].amount, dataSet[position].unit)
+            StringFormatUtils.formatAmountWithUnit(fragment.requireContext(), dataSet[position].amount, dataSet[position].unit)
         viewHolder.binding.textViewIngredientType.text = if (dataSet[position].subDish) "Sub-Dish" else "Ingredient"
     }
 
@@ -70,7 +71,7 @@ class IngredientsRecyclerAdapter(
     }
 
     override fun addItemToDataSet(item: AbstractDataObject, text: String) {
-        val ingredient = item as Ingredient
+        val ingredient = item as IngredientBasic
         if (ingredient.name.lowercase(Locale.getDefault()).contains(text)) {
             dataSet.add(ingredient)
         }

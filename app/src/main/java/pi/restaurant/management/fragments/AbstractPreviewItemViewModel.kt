@@ -10,18 +10,43 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.enums.Role
+import pi.restaurant.management.utils.SnapshotsPair
 
 abstract class AbstractPreviewItemViewModel : ViewModel() {
     abstract val databasePath: String
 
     val liveUserRole = MutableLiveData(Role.WORKER.ordinal)
-    val liveDataSnapshot = MutableLiveData<DataSnapshot>()
+    val liveDataSnapshot = MutableLiveData(SnapshotsPair())
+
+    val snapshotsPair = SnapshotsPair()
 
     fun getDataFromDatabase(itemId: String) {
-        val databaseRef = Firebase.database.getReference(databasePath).child(itemId)
+        getBasicDataFromDatabase(itemId)
+        getDetailsDataFromDatabase(itemId)
+    }
+
+    private fun getBasicDataFromDatabase(itemId: String) {
+        val databaseRef = Firebase.database.getReference(databasePath).child("basic").child(itemId)
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                liveDataSnapshot.value = dataSnapshot
+                snapshotsPair.basic = dataSnapshot
+                if (snapshotsPair.isReady()) {
+                    liveDataSnapshot.value = snapshotsPair
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+    private fun getDetailsDataFromDatabase(itemId: String) {
+        val databaseRef = Firebase.database.getReference(databasePath).child("details").child(itemId)
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                snapshotsPair.details = dataSnapshot
+                if (snapshotsPair.isReady()) {
+                    liveDataSnapshot.value = snapshotsPair
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -30,7 +55,7 @@ abstract class AbstractPreviewItemViewModel : ViewModel() {
 
     fun getUserRole() {
         val userId = Firebase.auth.uid ?: return
-        val databaseRef = Firebase.database.getReference("users").child(userId).child("role")
+        val databaseRef = Firebase.database.getReference("users").child("basic").child(userId).child("role")
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 liveUserRole.value = dataSnapshot.getValue<Int>() ?: return

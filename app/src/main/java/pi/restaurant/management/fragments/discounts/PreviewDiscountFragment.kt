@@ -8,11 +8,12 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.DiscountGroup
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentPreviewDiscountBinding
 import pi.restaurant.management.enums.DiscountType
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
@@ -33,16 +34,22 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val item = dataSnapshot.getValue<DiscountGroup>() ?: return
+    private fun getItem(snapshotsPair: SnapshotsPair) : Discount {
+        val basic = snapshotsPair.basic?.getValue<DiscountBasic>() ?: DiscountBasic()
+        val details = snapshotsPair.details?.getValue<DiscountDetails>() ?: DiscountDetails()
+        return Discount(itemId, basic, details)
+    }
 
-        binding.textViewAvailable.text = item.availableDiscounts.size.toString()
-        binding.textViewAssigned.text = item.assignedDiscounts.size.toString()
-        binding.textViewUsed.text = item.usedDiscounts.size.toString()
-        binding.textViewCode.text = item.id
-        binding.textViewAmount.text = item.amount.toString()
-        binding.textViewType.text = DiscountType.getString(item.type, requireContext())
-        binding.textViewExpirationDate.text = StringFormatUtils.formatDate(item.expirationDate)
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val item = getItem(snapshotsPair)
+
+        binding.textViewAvailable.text = item.basic.availableDiscounts.size.toString()
+        binding.textViewAssigned.text = item.basic.assignedDiscounts.size.toString()
+        binding.textViewUsed.text = item.basic.usedDiscounts.size.toString()
+        binding.textViewCode.text = item.basic.id
+        binding.textViewAmount.text = item.basic.amount.toString()
+        binding.textViewType.text = DiscountType.getString(item.basic.type, requireContext())
+        binding.textViewExpirationDate.text = StringFormatUtils.formatDate(item.basic.expirationDate)
         binding.progress.progressBar.visibility = View.GONE
     }
 }

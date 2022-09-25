@@ -10,9 +10,12 @@ import pi.restaurant.management.R
 import pi.restaurant.management.activities.SettingsActivity
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
+import pi.restaurant.management.data.UserBasic
+import pi.restaurant.management.data.UserDetails
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
@@ -51,15 +54,21 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         }
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<User>() ?: return
-        binding.editTextFirstName.setText(data.firstName)
-        binding.editTextLastName.setText(data.lastName)
-        binding.editTextEmail.setText(data.email)
-        binding.spinnerRole.setSelection(data.role)
+    private fun getItem(snapshotsPair: SnapshotsPair) : User {
+        val basic = snapshotsPair.basic?.getValue<UserBasic>() ?: UserBasic()
+        val details = snapshotsPair.details?.getValue<UserDetails>() ?: UserDetails()
+        return User(itemId, basic, details)
+    }
 
-        disabled = data.disabled
-        if (data.disabled) {
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val data = getItem(snapshotsPair)
+        binding.editTextFirstName.setText(data.basic.firstName)
+        binding.editTextLastName.setText(data.basic.lastName)
+        binding.editTextEmail.setText(data.details.email)
+        binding.spinnerRole.setSelection(data.basic.role)
+
+        disabled = data.basic.disabled
+        if (disabled) {
             removeButton.text = getString(R.string.enable_user)
         } else {
             removeButton.text = getText(R.string.disable_user)

@@ -6,8 +6,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.DishBasic
+import pi.restaurant.management.data.DishDetails
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.fragments.workers.EditWorkerViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 
 class EditDishFragment : AbstractModifyDishFragment() {
 
@@ -28,22 +31,28 @@ class EditDishFragment : AbstractModifyDishFragment() {
         getAllergenListAndSetAllergenButtons()
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<Dish>() ?: return
-        binding.editTextName.setText(data.name)
-        binding.editTextDescription.setText(data.description)
-        binding.checkBoxActive.isChecked = data.isActive
-        binding.editTextBasePrice.setText(data.basePrice.toString())
-        binding.checkBoxDiscount.isChecked = data.isDiscounted
-        binding.editTextDiscountPrice.setText(data.discountPrice.toString())
-        binding.spinnerDishType.setSelection(data.dishType)
-        binding.editTextAmount.setText(data.amount.toString())
-        binding.spinnerUnit.setSelection(data.unit)
+    private fun getItem(snapshotsPair: SnapshotsPair) : Dish {
+        val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
+        val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
+        return Dish(itemId, basic, details)
+    }
 
-        baseIngredientsList = data.baseIngredients.toList().map { it.second }.toMutableList()
-        otherIngredientsList = data.otherIngredients.toList().map { it.second }.toMutableList()
-        possibleIngredientsList = data.possibleIngredients.toList().map { it.second }.toMutableList()
-        allergensList = data.allergens.toList().map { it.second }.toMutableList()
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val data = getItem(snapshotsPair)
+        binding.editTextName.setText(data.basic.name)
+        binding.editTextDescription.setText(data.details.description)
+        binding.checkBoxActive.isChecked = data.basic.isActive
+        binding.editTextBasePrice.setText(data.basic.basePrice.toString())
+        binding.checkBoxDiscount.isChecked = data.basic.isDiscounted
+        binding.editTextDiscountPrice.setText(data.basic.discountPrice.toString())
+        binding.spinnerDishType.setSelection(data.basic.dishType)
+        binding.editTextAmount.setText(data.details.amount.toString())
+        binding.spinnerUnit.setSelection(data.details.unit)
+
+        baseIngredientsList = data.details.baseIngredients.toList().map { it.second }.toMutableList()
+        otherIngredientsList = data.details.otherIngredients.toList().map { it.second }.toMutableList()
+        possibleIngredientsList = data.details.possibleIngredients.toList().map { it.second }.toMutableList()
+        allergensList = data.details.allergens.toList().map { it.second }.toMutableList()
         initializeRecyclerViews()
         finishLoading()
     }

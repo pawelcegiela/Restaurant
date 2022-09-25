@@ -1,12 +1,15 @@
 package pi.restaurant.management.data
 
-class Location : AbstractDataObject() {
+class Location : AbstractDataObject {
     override var id = "location"
-    var city = ""
-    var postalCode = ""
-    var street = ""
-    var houseNumber = ""
-    var flatNumber = ""
-    var latitude = ""
-    var longitude = ""
+    lateinit var basic: LocationBasic
+    lateinit var details: LocationDetails
+
+    @Suppress("unused")
+    constructor()
+
+    constructor(basic: LocationBasic, details: LocationDetails) {
+        this.basic = basic
+        this.details = details
+    }
 }

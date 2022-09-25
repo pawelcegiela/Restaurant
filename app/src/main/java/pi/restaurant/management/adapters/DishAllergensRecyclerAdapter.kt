@@ -8,12 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Allergen
+import pi.restaurant.management.data.AllergenBasic
 import pi.restaurant.management.databinding.ItemSubItemBinding
 import pi.restaurant.management.fragments.dishes.AbstractModifyDishFragment
 
 
 class DishAllergensRecyclerAdapter(
-    private val dataSet: List<Allergen>,
+    private val dataSet: List<AllergenBasic>,
     private val fragment: Fragment,
 ) :
     RecyclerView.Adapter<DishAllergensRecyclerAdapter.ViewHolder>() {
@@ -22,7 +23,7 @@ class DishAllergensRecyclerAdapter(
         val binding: ItemSubItemBinding,
         val context: Context,
         val fragment: Fragment,
-        private val dataSet: List<Allergen>,
+        private val dataSet: List<AllergenBasic>,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {

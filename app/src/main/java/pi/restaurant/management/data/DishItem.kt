@@ -1,5 +1,6 @@
 package pi.restaurant.management.data
 
+import pi.restaurant.management.utils.StringFormatUtils
 import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
@@ -22,12 +23,7 @@ class DishItem : AbstractDataObject, Serializable {
         usedPossibleIngredients: ArrayList<IngredientItem>,
         finalPrice: Double
     ) {
-        if (id.isEmpty()) {
-            this.id =
-                dish.name.trim().replace(" ", "_") + "_" + Date().time + "_" + Random().nextInt(1000)
-        } else {
-            this.id = id
-        }
+        this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.dish = dish
         this.amount = amount
         this.unusedOtherIngredients = unusedOtherIngredients

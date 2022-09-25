@@ -11,24 +11,26 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
+import pi.restaurant.management.data.UserBasic
 import pi.restaurant.management.databinding.ItemWorkersBinding
 import pi.restaurant.management.enums.Role
+import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class WorkersRecyclerAdapter(
-    private val dataSet: MutableList<User>,
+    private val dataSet: MutableList<UserBasic>,
     private val fragment: Fragment,
 ) :
     AbstractRecyclerAdapter<WorkersRecyclerAdapter.ViewHolder>() {
-    override val allDataSet: MutableList<User> = ArrayList(dataSet)
+    override val allDataSet: MutableList<UserBasic> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemWorkersBinding,
         val context: Context,
         val fragment: Fragment,
-        private val dataSet: List<User>
+        private val dataSet: List<UserBasic>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -53,8 +55,7 @@ class WorkersRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewName.text =
-            dataSet[position].firstName + " " + dataSet[position].lastName
+        viewHolder.binding.textViewName.text = StringFormatUtils.formatNames(dataSet[position].firstName, dataSet[position].lastName)
 
         if (dataSet[position].disabled) {
             viewHolder.binding.textViewName.paintFlags =
@@ -75,7 +76,7 @@ class WorkersRecyclerAdapter(
     }
 
     override fun addItemToDataSet(item: AbstractDataObject, text: String) {
-        val user = item as User
+        val user = item as UserBasic
         if (user.firstName.lowercase(Locale.getDefault()).contains(text) || user.lastName.lowercase(Locale.getDefault()).contains(text)) {
             dataSet.add(user)
         }

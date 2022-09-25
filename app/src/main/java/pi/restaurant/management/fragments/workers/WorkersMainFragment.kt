@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.WorkersRecyclerAdapter
 import pi.restaurant.management.data.User
+import pi.restaurant.management.data.UserBasic
 import pi.restaurant.management.fragments.AbstractItemListFragment
 import pi.restaurant.management.fragments.AbstractItemListViewModel
 
@@ -16,6 +17,6 @@ class WorkersMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            WorkersRecyclerAdapter(viewModel.liveDataList.value as MutableList<User>, this@WorkersMainFragment)
+            WorkersRecyclerAdapter(viewModel.liveDataList.value as MutableList<UserBasic>, this@WorkersMainFragment)
     }
 }

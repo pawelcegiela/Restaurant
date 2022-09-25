@@ -6,8 +6,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Allergen
+import pi.restaurant.management.data.AllergenBasic
+import pi.restaurant.management.data.AllergenDetails
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.fragments.workers.EditWorkerViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 
 class EditAllergenFragment : AbstractModifyAllergenFragment() {
 
@@ -25,8 +28,14 @@ class EditAllergenFragment : AbstractModifyAllergenFragment() {
         setRemoveButtonListener()
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<Allergen>() ?: return
-        binding.editTextName.setText(data.name)
+    private fun getItem(snapshotsPair: SnapshotsPair) : Allergen {
+        val basic = snapshotsPair.basic?.getValue<AllergenBasic>() ?: AllergenBasic()
+        val details = snapshotsPair.details?.getValue<AllergenDetails>() ?: AllergenDetails()
+        return Allergen(itemId, basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val data = getItem(snapshotsPair)
+        binding.editTextName.setText(data.basic.name)
     }
 }

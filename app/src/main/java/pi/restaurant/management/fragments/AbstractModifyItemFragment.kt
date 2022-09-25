@@ -7,15 +7,12 @@ import android.widget.*
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
+import pi.restaurant.management.data.SplitDataObject
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.enums.Role
+import pi.restaurant.management.utils.SnapshotsPair
 import pi.restaurant.management.utils.Utils
 
 abstract class AbstractModifyItemFragment : Fragment() {
@@ -48,9 +45,11 @@ abstract class AbstractModifyItemFragment : Fragment() {
             }
         }
 
-        viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { dataSnapshot ->
-            fillInData(dataSnapshot)
-            finishLoading()
+        viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { snapshotPair ->
+            if (snapshotPair.isReady()) {
+                fillInData(snapshotPair)
+                finishLoading()
+            }
         }
 
         viewModel.liveSaveStatus.observe(viewLifecycleOwner) {
@@ -69,7 +68,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     abstract fun initializeUI()
 
-    open fun fillInData(dataSnapshot: DataSnapshot) {}
+    open fun fillInData(snapshotsPair: SnapshotsPair) {}
 
     fun setSaveButtonListener() {
         saveButton.setOnClickListener {
@@ -86,7 +85,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     open fun saveToDatabase() {
         val data = getDataObject()
 
-        val precondition = checkSavePreconditions(data)
+        val precondition = checkSavePreconditions(data.basic)
         if (precondition != Precondition.OK) {
             Toast.makeText(activity, getString(precondition.nameRes), Toast.LENGTH_SHORT).show()
             return
@@ -95,7 +94,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
         viewModel.saveToDatabase(data)
     }
 
-    abstract fun getDataObject(): AbstractDataObject
+    abstract fun getDataObject(): SplitDataObject
 
     open fun checkSavePreconditions(data: AbstractDataObject): Precondition {
         return Precondition.OK
@@ -103,18 +102,22 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     open fun setRemoveButtonListener() {
         removeButton?.setOnClickListener {
-            viewModel.liveDataSnapshot.value?.let { dataSnapshot -> removeFromDatabase(dataSnapshot) }
+            viewModel.liveDataSnapshot.value?.let { snapshotsPair -> removeFromDatabase(snapshotsPair) }
         }
     }
 
-    private fun removeFromDatabase(dataSnapshot: DataSnapshot) {
+    private fun removeFromDatabase(snapshotsPair: SnapshotsPair) {
         val dialogBuilder = AlertDialog.Builder(this.context)
         dialogBuilder.setTitle(getString(R.string.warning))
         dialogBuilder.setMessage(getString(R.string.do_you_want_to_remove))
         dialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
-            for (snapshot in dataSnapshot.children) {
+            for (snapshot in snapshotsPair.basic!!.children) {
                 snapshot.ref.removeValue()
             }
+            for (snapshot in snapshotsPair.details!!.children) {
+                snapshot.ref.removeValue()
+            }
+
             dialog.dismiss()
             Toast.makeText(activity, getString(removeMessageId), Toast.LENGTH_SHORT).show()
             findNavController().navigate(nextActionId)

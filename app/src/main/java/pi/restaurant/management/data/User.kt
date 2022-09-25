@@ -1,23 +1,17 @@
 package pi.restaurant.management.data
 
 class User : AbstractDataObject {
-    var firstName = ""
-    var lastName = ""
-    var email: String = ""
-    var role = 3
-    var disabled: Boolean = false
+    lateinit var basic: UserBasic
+    lateinit var details: UserDetails
 
     @Suppress("unused")
     constructor() {
         this.id = ""
     }
 
-    constructor(id: String, firstName: String, lastName: String, email: String, role: Int, disabled: Boolean) {
+    constructor(id: String, basic: UserBasic, details: UserDetails) {
         this.id = id
-        this.firstName = firstName
-        this.lastName = lastName
-        this.email = email
-        this.role = role
-        this.disabled = disabled
+        this.basic = basic
+        this.details = details
     }
 }

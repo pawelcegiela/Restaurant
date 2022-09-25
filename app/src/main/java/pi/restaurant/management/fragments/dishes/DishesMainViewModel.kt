@@ -3,13 +3,14 @@ package pi.restaurant.management.fragments.dishes
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.DishBasic
 import pi.restaurant.management.fragments.AbstractItemListViewModel
 
 class DishesMainViewModel : AbstractItemListViewModel() {
     override val databasePath = "dishes"
 
     override fun setDataList(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<HashMap<String, Dish>>() ?: return
+        val data = dataSnapshot.getValue<HashMap<String, DishBasic>>() ?: HashMap()
         liveDataList.value = data.toList().map { it.second }.toMutableList()
     }
 }

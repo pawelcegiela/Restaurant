@@ -14,15 +14,13 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.Ingredient
-import pi.restaurant.management.data.IngredientItem
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
 import pi.restaurant.management.enums.IngredientItemState
-import pi.restaurant.management.enums.Role
 import pi.restaurant.management.enums.Unit
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.listeners.SubIngredientOnClickListener
+import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
 
 
@@ -38,7 +36,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     override var itemId = ""
 
     var subIngredientsList: MutableList<IngredientItem> = ArrayList()
-    lateinit var allIngredients: MutableList<Ingredient>
+    lateinit var allIngredients: MutableList<IngredientBasic>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +55,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
     private fun initializeSpinner() {
         binding.spinnerUnit.adapter =
-            ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, Unit.getArrayOfStrings(context!!))
+            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, Unit.getArrayOfStrings(requireContext()))
     }
 
     private fun setCheckBoxListener() {
@@ -72,10 +70,10 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     }
 
     fun getIngredientListAndSetIngredientButton() {
-        val databaseRef = Firebase.database.getReference("ingredients")
+        val databaseRef = Firebase.database.getReference("ingredients").child("basic")
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = dataSnapshot.getValue<HashMap<String, Ingredient>>() ?: return
+                val data = dataSnapshot.getValue<HashMap<String, IngredientBasic>>() ?: return
                 allIngredients = data.toList().map { it.second }.toMutableList()
                 SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, subIngredientsList.size, context!!)
                 binding.buttonAddSubIngredient.setOnClickListener(
@@ -103,22 +101,29 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         }
 
         if (targetState == IngredientItemState.REMOVE) {
-            SubItemUtils.removeIngredientItem(subIngredientsList, binding.recyclerViewSubIngredients, ingredientItem, context!!)
+            SubItemUtils.removeIngredientItem(subIngredientsList, binding.recyclerViewSubIngredients, ingredientItem, requireContext())
         }
         if (targetState == IngredientItemState.CHANGE_AMOUNT) {
-            SubItemUtils.addChangeIngredientItemAmountDialog(binding.recyclerViewSubIngredients, ingredientItem, context!!)
+            SubItemUtils.addChangeIngredientItemAmountDialog(binding.recyclerViewSubIngredients, ingredientItem, requireContext())
         }
     }
 
-    override fun getDataObject(): AbstractDataObject {
-        return Ingredient(
+    override fun getDataObject(): SplitDataObject {
+        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
+
+        val basic = IngredientBasic(
             id = itemId,
             name = binding.editTextName.text.toString(),
             amount = binding.editTextAmount.text.toString().toInt(),
             unit = binding.spinnerUnit.selectedItemPosition,
             subDish = binding.checkBoxSubDish.isChecked,
+        )
+        val details = IngredientDetails(
+            id = itemId,
             subIngredients = if (binding.checkBoxSubDish.isChecked) subIngredientsList else null
         )
+
+        return SplitDataObject(itemId, basic, details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

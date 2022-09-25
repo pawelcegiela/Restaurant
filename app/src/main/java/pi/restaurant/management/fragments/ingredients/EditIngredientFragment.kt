@@ -6,9 +6,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Ingredient
+import pi.restaurant.management.data.IngredientBasic
+import pi.restaurant.management.data.IngredientDetails
 import pi.restaurant.management.data.IngredientItem
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.fragments.workers.EditWorkerViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 
 
 class EditIngredientFragment : AbstractModifyIngredientFragment() {
@@ -27,13 +30,19 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
         setRemoveButtonListener()
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<Ingredient>() ?: return
-        binding.editTextName.setText(data.name)
-        binding.editTextAmount.setText(data.amount.toString())
-        binding.spinnerUnit.setSelection(data.unit)
-        binding.checkBoxSubDish.isChecked = data.subDish
-        subIngredientsList = data.subIngredients ?: ArrayList()
+    private fun getItem(snapshotsPair: SnapshotsPair) : Ingredient {
+        val basic = snapshotsPair.basic?.getValue<IngredientBasic>() ?: IngredientBasic()
+        val details = snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
+        return Ingredient(itemId, basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val data = getItem(snapshotsPair)
+        binding.editTextName.setText(data.basic.name)
+        binding.editTextAmount.setText(data.basic.amount.toString())
+        binding.spinnerUnit.setSelection(data.basic.unit)
+        binding.checkBoxSubDish.isChecked = data.basic.subDish
+        subIngredientsList = data.details.subIngredients ?: ArrayList()
 
         getIngredientListAndSetIngredientButton()
         finishLoading()

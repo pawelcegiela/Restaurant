@@ -3,7 +3,7 @@ package pi.restaurant.management.data
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DiscountGroup : AbstractDataObject {
+class DiscountBasic : AbstractDataObject {
     var availableDiscounts: ArrayList<String> = ArrayList()
     var assignedDiscounts: ArrayList<String> = ArrayList()
     var usedDiscounts: ArrayList<String> = ArrayList()
@@ -16,10 +16,10 @@ class DiscountGroup : AbstractDataObject {
     constructor()
 
     constructor(
+        id: String,
         availableDiscounts: ArrayList<String>,
         assignedDiscounts: ArrayList<String>,
         usedDiscounts: ArrayList<String>,
-        id: String,
         type: Int,
         amount: Double,
         expirationDate: Date

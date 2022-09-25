@@ -4,7 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishesRecyclerAdapter
-import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.DishBasic
 import pi.restaurant.management.data.DishItem
 import pi.restaurant.management.fragments.AbstractItemListFragment
 import pi.restaurant.management.fragments.AbstractItemListViewModel
@@ -18,7 +18,7 @@ class DishesMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            DishesRecyclerAdapter(viewModel.liveDataList.value as MutableList<Dish>, this@DishesMainFragment)
+            DishesRecyclerAdapter(viewModel.liveDataList.value as MutableList<DishBasic>, this@DishesMainFragment)
 
         //TODO: Czy da się pominąć ten krok?
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<DishItem>("newItem")

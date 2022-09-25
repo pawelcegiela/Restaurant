@@ -6,6 +6,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.User
+import pi.restaurant.management.data.UserBasic
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.enums.Role
 import pi.restaurant.management.fragments.AbstractItemListViewModel
@@ -14,12 +15,12 @@ class WorkersMainViewModel : AbstractItemListViewModel() {
     override val databasePath = "users"
 
     override fun setDataList(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<HashMap<String, User>>() ?: return
+        val data = dataSnapshot.getValue<HashMap<String, UserBasic>>() ?: HashMap()
         liveDataList.value = data.toList().map { it.second }.toMutableList()
     }
 
     override fun checkPreconditions(item: AbstractDataObject) {
-        val user = item as User
+        val user = item as UserBasic
         if (user.role > (liveUserRole.value ?: Role.WORKER.ordinal)) {
             liveEditPrecondition.value = Precondition.OK
         } else if (user.id == Firebase.auth.uid) {

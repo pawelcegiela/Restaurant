@@ -11,10 +11,13 @@ import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.DishBasic
+import pi.restaurant.management.data.DishDetails
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
 
@@ -36,18 +39,24 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val item = dataSnapshot.getValue<Dish>() ?: return
+    private fun getItem(snapshotsPair: SnapshotsPair) : Dish {
+        val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
+        val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
+        return Dish(itemId, basic, details)
+    }
 
-        binding.textViewName.text = item.name
-        binding.textViewDescription.text = item.description
-        binding.checkBoxActive.isChecked = item.isActive
-        binding.textViewBasePrice.text = StringFormatUtils.formatPrice(item.basePrice)
-        binding.checkBoxDiscount.isChecked = item.isDiscounted
-        binding.textViewDiscountPrice.text = StringFormatUtils.formatPrice(item.discountPrice)
-        binding.textViewDishType.text = DishType.getString(item.dishType, requireContext())
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val item = getItem(snapshotsPair)
+
+        binding.textViewName.text = item.basic.name
+        binding.textViewDescription.text = item.details.description
+        binding.checkBoxActive.isChecked = item.basic.isActive
+        binding.textViewBasePrice.text = StringFormatUtils.formatPrice(item.basic.basePrice)
+        binding.checkBoxDiscount.isChecked = item.basic.isDiscounted
+        binding.textViewDiscountPrice.text = StringFormatUtils.formatPrice(item.basic.discountPrice)
+        binding.textViewDishType.text = DishType.getString(item.basic.dishType, requireContext())
         binding.textViewAmountWithUnit.text =
-            StringFormatUtils.formatAmountWithUnit(requireContext(), item.amount, item.unit)
+            StringFormatUtils.formatAmountWithUnit(requireContext(), item.details.amount, item.details.unit)
 
         initializeRecyclerViews(item)
 
@@ -56,19 +65,19 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
 
     private fun initializeRecyclerViews(item: Dish) {
         binding.recyclerViewBaseIngredients.adapter =
-            DishIngredientsRecyclerAdapter(item.baseIngredients.toList().map { it.second }.toMutableList(), this, 0)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.baseIngredients.size, requireContext())
+            DishIngredientsRecyclerAdapter(item.details.baseIngredients.toList().map { it.second }.toMutableList(), this, 0)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.details.baseIngredients.size, requireContext())
 
         binding.recyclerViewOtherIngredients.adapter =
-            DishIngredientsRecyclerAdapter(item.otherIngredients.toList().map { it.second }.toMutableList(), this, 1)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.otherIngredients.size, requireContext())
+            DishIngredientsRecyclerAdapter(item.details.otherIngredients.toList().map { it.second }.toMutableList(), this, 1)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.details.otherIngredients.size, requireContext())
 
         binding.recyclerViewPossibleIngredients.adapter =
-            DishIngredientsRecyclerAdapter(item.possibleIngredients.toList().map { it.second }.toMutableList(), this, 2)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.possibleIngredients.size, requireContext())
+            DishIngredientsRecyclerAdapter(item.details.possibleIngredients.toList().map { it.second }.toMutableList(), this, 2)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.details.possibleIngredients.size, requireContext())
 
         binding.recyclerViewAllergens.adapter =
-            DishAllergensRecyclerAdapter(item.allergens.toList().map { it.second }.toMutableList(), this)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, item.allergens.size, requireContext())
+            DishAllergensRecyclerAdapter(item.details.allergens.toList().map { it.second }.toMutableList(), this)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, item.details.allergens.size, requireContext())
     }
 }

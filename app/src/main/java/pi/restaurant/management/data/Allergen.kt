@@ -1,20 +1,17 @@
 package pi.restaurant.management.data
 
-import java.util.*
+import pi.restaurant.management.utils.StringFormatUtils
 
 class Allergen : AbstractDataObject {
-    var name: String = ""
+    lateinit var basic: AllergenBasic
+    lateinit var details: AllergenDetails
 
     @Suppress("unused")
     constructor()
 
-    constructor(id: String, name: String) {
-        if (id.isEmpty()) {
-            this.id =
-                name.trim().replace(" ", "_") + "_" + Date().time + "_" + Random().nextInt(1000)
-        } else {
-            this.id = id
-        }
-        this.name = name
+    constructor(id: String, basic: AllergenBasic, details: AllergenDetails) {
+        this.id = id.ifEmpty { StringFormatUtils.formatId() }
+        this.basic = basic
+        this.details = details
     }
 }

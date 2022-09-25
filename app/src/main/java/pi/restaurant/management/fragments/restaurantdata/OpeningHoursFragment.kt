@@ -8,17 +8,16 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.OpeningHours
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentOpeningHoursBinding
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.fragments.orders.EditOrderViewModel
 import pi.restaurant.management.utils.PreconditionUtils
+import pi.restaurant.management.utils.SnapshotsPair
+import pi.restaurant.management.utils.StringFormatUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -98,11 +97,17 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
         )
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val openingHours = dataSnapshot.getValue<OpeningHours>() ?: OpeningHours()
+    private fun getItem(snapshotsPair: SnapshotsPair): OpeningHours {
+        val basic = snapshotsPair.basic?.getValue<OpeningHoursBasic>() ?: OpeningHoursBasic()
+        val details = snapshotsPair.details?.getValue<OpeningHoursDetails>() ?: OpeningHoursDetails()
+        return OpeningHours(basic, details)
+    }
 
-        defaultOpening = openingHours.defaultStartHour as Date
-        defaultClosing = openingHours.defaultEndHour as Date
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val openingHours = getItem(snapshotsPair)
+
+        defaultOpening = openingHours.basic.defaultStartHour as Date
+        defaultClosing = openingHours.basic.defaultEndHour as Date
 
         binding.editTextDefaultStartHour.setText(sdf.format(defaultOpening))
         binding.editTextDefaultEndHour.setText(sdf.format(defaultClosing))
@@ -157,16 +162,17 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.checkOpeningHoursError(data as OpeningHours)
+        return PreconditionUtils.checkOpeningHoursError(data as OpeningHoursBasic)
     }
 
-    override fun getDataObject(): OpeningHours {
-        val openingHours = OpeningHours()
+    override fun getDataObject(): SplitDataObject {
+        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
+        val basic = OpeningHoursBasic()
 
         try {
-            openingHours.defaultStartHour =
+            basic.defaultStartHour =
                 sdf.parse(binding.editTextDefaultStartHour.text.toString())
-            openingHours.defaultEndHour = sdf.parse(binding.editTextDefaultEndHour.text.toString())
+            basic.defaultEndHour = sdf.parse(binding.editTextDefaultEndHour.text.toString())
 
             for (i in daysEnabled.indices) {
                 daysEnabled[i] = checkBoxes[i].isChecked
@@ -179,14 +185,14 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
                     daysClosingValues[i] = sdf.parse(etClosings[i].text.toString()) as Date
                 }
             }
-            openingHours.setWeekDaysEnabled(daysEnabled)
-            openingHours.setWeekDaysStartHour(daysOpeningValues)
-            openingHours.setWeekDaysEndHour(daysClosingValues)
+            basic.setWeekDaysEnabled(daysEnabled)
+            basic.setWeekDaysStartHour(daysOpeningValues)
+            basic.setWeekDaysEndHour(daysClosingValues)
         } catch (ex: ParseException) {
-            openingHours.isError = true
+            basic.isError = true
         }
 
-        return openingHours
+        return SplitDataObject(itemId, basic, OpeningHoursDetails())
     }
 
     override fun onDestroyView() {

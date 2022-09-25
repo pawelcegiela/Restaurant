@@ -8,11 +8,12 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.User
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentPreviewWorkerBinding
 import pi.restaurant.management.enums.Role
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {
@@ -33,11 +34,18 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val item = dataSnapshot.getValue<User>() ?: return
-        binding.textViewName.text = StringFormatUtils.formatNames(item.firstName, item.lastName)
-        binding.textViewEmail.text = item.email
-        binding.textViewRole.text = Role.getString(item.role, requireContext())
+    private fun getItem(snapshotsPair: SnapshotsPair) : User {
+        val basic = snapshotsPair.basic?.getValue<UserBasic>() ?: UserBasic()
+        val details = snapshotsPair.details?.getValue<UserDetails>() ?: UserDetails()
+        return User(itemId, basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val item = getItem(snapshotsPair)
+
+        binding.textViewName.text = StringFormatUtils.formatNames(item.basic.firstName, item.basic.lastName)
+        binding.textViewEmail.text = item.details.email
+        binding.textViewRole.text = Role.getString(item.basic.role, requireContext())
         binding.progress.progressBar.visibility = View.GONE
     }
 

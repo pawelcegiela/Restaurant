@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.OrdersRecyclerAdapter
 import pi.restaurant.management.data.Order
+import pi.restaurant.management.data.OrderBasic
 import pi.restaurant.management.fragments.AbstractItemListFragment
 import pi.restaurant.management.fragments.AbstractItemListViewModel
 
@@ -17,7 +18,7 @@ class OrdersMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            OrdersRecyclerAdapter(viewModel.liveDataList.value as MutableList<Order>, this@OrdersMainFragment)
+            OrdersRecyclerAdapter(viewModel.liveDataList.value as MutableList<OrderBasic>, this@OrdersMainFragment)
         binding.searchView.visibility = View.GONE
     }
 }

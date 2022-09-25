@@ -5,13 +5,14 @@ import android.content.Context
 import android.widget.*
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Allergen
+import pi.restaurant.management.data.AllergenBasic
 import pi.restaurant.management.fragments.dishes.AbstractModifyDishFragment
 
 class AllergenModifyDishOnClickListener(
     context: Context,
     list: List<String>,
-    private val allergensList: MutableList<Allergen>,
-    private val allAllergens: MutableList<Allergen>,
+    private val allergensList: MutableList<AllergenBasic>,
+    private val allAllergens: MutableList<AllergenBasic>,
     private val fragment: AbstractModifyDishFragment
 ) :
     AbstractModifyDishOnClickListener(context, list) {

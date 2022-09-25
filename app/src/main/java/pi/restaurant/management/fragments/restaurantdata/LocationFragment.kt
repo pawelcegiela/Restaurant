@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.Location
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentLocationBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
+import pi.restaurant.management.utils.StringFormatUtils
 
 class LocationFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentLocationBinding? = null
@@ -28,8 +29,8 @@ class LocationFragment : AbstractModifyItemFragment() {
     override val saveMessageId = R.string.location_modified
     override val removeMessageId = 0 // Unused
 
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : LocationViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: LocationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,13 +45,19 @@ class LocationFragment : AbstractModifyItemFragment() {
         setSaveButtonListener()
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<Location>() ?: return
-        binding.editTextCity.setText(data.city)
-        binding.editTextPostalCode.setText(data.postalCode)
-        binding.editTextStreet.setText(data.street)
-        binding.editTextHouseNumber.setText(data.houseNumber)
-        binding.editTextFlatNumber.setText(data.flatNumber)
+    private fun getItem(snapshotsPair: SnapshotsPair): Location {
+        val basic = snapshotsPair.basic?.getValue<LocationBasic>() ?: LocationBasic()
+        val details = snapshotsPair.details?.getValue<LocationDetails>() ?: LocationDetails()
+        return Location(basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val data = getItem(snapshotsPair)
+        binding.editTextCity.setText(data.basic.city)
+        binding.editTextPostalCode.setText(data.basic.postalCode)
+        binding.editTextStreet.setText(data.basic.street)
+        binding.editTextHouseNumber.setText(data.basic.houseNumber)
+        binding.editTextFlatNumber.setText(data.basic.flatNumber)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
@@ -62,16 +69,18 @@ class LocationFragment : AbstractModifyItemFragment() {
         return map
     }
 
-    override fun getDataObject(): Location {
-        val location = Location()
+    override fun getDataObject(): SplitDataObject {
+        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
-        location.city = binding.editTextCity.text.toString()
-        location.postalCode = binding.editTextPostalCode.text.toString()
-        location.street = binding.editTextStreet.text.toString()
-        location.houseNumber = binding.editTextHouseNumber.text.toString()
-        location.flatNumber = binding.editTextFlatNumber.text.toString()
+        val basic = LocationBasic(
+            city = binding.editTextCity.text.toString(),
+            postalCode = binding.editTextPostalCode.text.toString(),
+            street = binding.editTextStreet.text.toString(),
+            houseNumber = binding.editTextHouseNumber.text.toString(),
+            flatNumber = binding.editTextFlatNumber.text.toString()
+        )
 
-        return location
+        return SplitDataObject(itemId, basic, LocationDetails())
     }
 
     override fun onDestroyView() {

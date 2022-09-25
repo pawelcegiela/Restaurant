@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import pi.restaurant.management.R
-import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.DiscountGroup
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyDiscountBinding
 import pi.restaurant.management.enums.DiscountType
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
+import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.Utils
 import java.util.*
 
@@ -42,23 +42,27 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
     private fun initializeSpinner() {
         val spinner: Spinner = binding.spinnerType
-        spinner.adapter = ArrayAdapter(context!!, R.layout.spinner_item_view, R.id.itemTextView, DiscountType.getArrayOfStrings(context!!))
+        spinner.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, DiscountType.getArrayOfStrings(requireContext()))
     }
 
-    override fun getDataObject(): AbstractDataObject {
+    override fun getDataObject(): SplitDataObject {
+        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val availableNumber = binding.editTextAvailable.text.toString().toInt()
         val assignedNumber = binding.editTextAssigned.text.toString().toInt()
         val usedNumber = binding.editTextUsed.text.toString().toInt()
         val code = binding.editTextCode.text.toString()
-        val type = binding.spinnerType.selectedItemId.toInt()
-        val amount = binding.editTextAmount.text.toString().toDouble()
-        val date = Date() //TODO
 
-        val available = Utils.createDiscounts(code, availableNumber, 0)
-        val assigned = Utils.createDiscounts(code, assignedNumber, availableNumber)
-        val used = Utils.createDiscounts(code, usedNumber, availableNumber + assignedNumber)
+        val basic = DiscountBasic(
+            id = code,
+            availableDiscounts = Utils.createDiscounts(code, availableNumber, 0),
+            assignedDiscounts = Utils.createDiscounts(code, assignedNumber, availableNumber),
+            usedDiscounts = Utils.createDiscounts(code, usedNumber, availableNumber + assignedNumber),
+            type = binding.spinnerType.selectedItemId.toInt(),
+            amount = binding.editTextAmount.text.toString().toDouble(),
+            expirationDate = Date() //TODO Zrobić
+        )
 
-        return DiscountGroup(available, assigned, used, code, type, amount, date)
+        return SplitDataObject(code, basic, DiscountDetails())
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

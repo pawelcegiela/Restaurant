@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurant.management.R
-import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.Allergen
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyAllergenBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
+import pi.restaurant.management.utils.StringFormatUtils
 import java.util.HashMap
 
 abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
@@ -37,10 +37,14 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
         setSaveButtonListener()
     }
 
-    override fun getDataObject(): AbstractDataObject {
-        val name = binding.editTextName.text.toString()
+    override fun getDataObject(): SplitDataObject {
+        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
+        val basic = AllergenBasic(
+            id = itemId,
+            name = binding.editTextName.text.toString()
+        )
 
-        return Allergen(itemId, name)
+        return SplitDataObject(itemId, basic, AllergenDetails())
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

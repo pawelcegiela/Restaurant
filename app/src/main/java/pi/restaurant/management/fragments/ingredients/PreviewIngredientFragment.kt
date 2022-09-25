@@ -9,10 +9,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurant.management.data.Ingredient
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentPreviewIngredientBinding
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
 
@@ -34,17 +35,24 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val item = dataSnapshot.getValue<Ingredient>() ?: return
-        binding.textViewName.text = item.name
-        binding.textViewAmountWithUnit.text =
-            StringFormatUtils.formatAmountWithUnit(requireContext(), item.amount, item.unit)
-        binding.checkBoxSubDish.isChecked = item.subDish
+    private fun getItem(snapshotsPair: SnapshotsPair) : Ingredient {
+        val basic = snapshotsPair.basic?.getValue<IngredientBasic>() ?: IngredientBasic()
+        val details = snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
+        return Ingredient(itemId, basic, details)
+    }
 
-        if (item.subIngredients != null) {
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val item = getItem(snapshotsPair)
+
+        binding.textViewName.text = item.basic.name
+        binding.textViewAmountWithUnit.text =
+            StringFormatUtils.formatAmountWithUnit(requireContext(), item.basic.amount, item.basic.unit)
+        binding.checkBoxSubDish.isChecked = item.basic.subDish
+
+        if (item.details.subIngredients != null) {
             binding.recyclerViewSubIngredients.adapter =
-                DishIngredientsRecyclerAdapter(item.subIngredients!!, this, 0)
-            SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, item.subIngredients!!.size, requireContext())
+                DishIngredientsRecyclerAdapter(item.details.subIngredients!!, this, 0)
+            SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, item.details.subIngredients!!.size, requireContext())
         } else {
             SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, 0, requireContext())
         }

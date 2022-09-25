@@ -6,16 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Spinner
 import pi.restaurant.management.R
-import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.User
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
-import pi.restaurant.management.enums.DiscountType
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.enums.Role
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.PreconditionUtils
+import pi.restaurant.management.utils.StringFormatUtils
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null
@@ -40,16 +38,30 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
 
     fun initializeSpinner() {
         binding.spinnerRole.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, Role.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                Role.getArrayOfStrings(requireContext())
+            )
     }
 
-    override fun getDataObject(): AbstractDataObject {
-        val firstName = binding.editTextFirstName.text.toString()
-        val lastName = binding.editTextLastName.text.toString()
-        val email = binding.editTextEmail.text.toString()
-        val role = binding.spinnerRole.selectedItemId.toInt()
+    override fun getDataObject(): SplitDataObject {
+        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
-        return User(itemId, firstName, lastName, email, role, disabled)
+        val basic = UserBasic(
+            id = itemId,
+            firstName = binding.editTextFirstName.text.toString(),
+            lastName = binding.editTextLastName.text.toString(),
+            role = binding.spinnerRole.selectedItemId.toInt(),
+            disabled = disabled
+        )
+        val details = UserDetails(
+            id = itemId,
+            email = binding.editTextEmail.text.toString()
+        )
+
+        return SplitDataObject(itemId, basic, details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
@@ -64,7 +76,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.compareRoles(myRole, (data as User).role)
+        return PreconditionUtils.compareRoles(myRole, (data as UserBasic).role)
     }
 
     override fun onDestroyView() {

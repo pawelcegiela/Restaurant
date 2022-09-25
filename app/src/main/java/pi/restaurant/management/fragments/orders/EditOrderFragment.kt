@@ -6,8 +6,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Order
+import pi.restaurant.management.data.OrderBasic
+import pi.restaurant.management.data.OrderDetails
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.fragments.workers.EditWorkerViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 
 
@@ -29,14 +32,20 @@ class EditOrderFragment : AbstractModifyOrderFragment() {
         setRemoveButtonListener()
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<Order>() ?: return
-        binding.spinnerType.setSelection(data.orderType)
-        binding.spinnerStatus.setSelection(data.orderStatus)
-        binding.editTextCollectionTime.setText(StringFormatUtils.formatTime(data.collectionDate))
-        binding.spinnerDelivery.setSelection(data.deliveryType)
-        binding.spinnerPlace.setSelection(data.orderPlace)
-        dishesList = data.dishes.toList().map { it.second }.toMutableList()
+    private fun getItem(snapshotsPair: SnapshotsPair) : Order {
+        val basic = snapshotsPair.basic?.getValue<OrderBasic>() ?: OrderBasic()
+        val details = snapshotsPair.details?.getValue<OrderDetails>() ?: OrderDetails()
+        return Order(itemId, basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val data = getItem(snapshotsPair)
+        binding.spinnerType.setSelection(data.details.orderType)
+        binding.spinnerStatus.setSelection(data.basic.orderStatus)
+        binding.editTextCollectionTime.setText(StringFormatUtils.formatTime(data.basic.collectionDate))
+        binding.spinnerDelivery.setSelection(data.basic.deliveryType)
+        binding.spinnerPlace.setSelection(data.details.orderPlace)
+        dishesList = data.details.dishes.toList().map { it.second }.toMutableList()
 
         addLiveDataListener()
         initializeRecycler()

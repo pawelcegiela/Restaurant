@@ -52,7 +52,7 @@ class OrderDishesRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewName.text = dataSet[position].dish.name
+        viewHolder.binding.textViewName.text = dataSet[position].dish.basic.name
     }
 
     override fun getItemCount() = dataSet.size

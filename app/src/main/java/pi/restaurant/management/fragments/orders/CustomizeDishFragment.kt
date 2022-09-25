@@ -12,14 +12,13 @@ import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurant.management.data.Dish
-import pi.restaurant.management.data.DishItem
-import pi.restaurant.management.data.IngredientItem
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.enums.IngredientItemState
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.utils.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
 
@@ -59,25 +58,31 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         }
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
+    private fun getItem(snapshotsPair: SnapshotsPair) : Dish {
+        val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
+        val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
+        return Dish(itemId, basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
         binding.checkBoxActive.visibility = View.GONE
 
-        val item = dataSnapshot.getValue<Dish>() ?: return
+        val item = getItem(snapshotsPair)
         dish = item
 
-        binding.textViewName.text = item.name
-        binding.textViewDescription.text = item.description
-        binding.checkBoxActive.isChecked = item.isActive
-        binding.textViewBasePrice.text = StringFormatUtils.formatPrice(item.basePrice)
-        binding.checkBoxDiscount.isChecked = item.isDiscounted
-        binding.textViewDiscountPrice.text = StringFormatUtils.formatPrice(item.discountPrice)
-        binding.textViewDishType.text = DishType.getString(item.dishType, requireContext())
+        binding.textViewName.text = item.basic.name
+        binding.textViewDescription.text = item.details.description
+        binding.checkBoxActive.isChecked = item.basic.isActive
+        binding.textViewBasePrice.text = StringFormatUtils.formatPrice(item.basic.basePrice)
+        binding.checkBoxDiscount.isChecked = item.basic.isDiscounted
+        binding.textViewDiscountPrice.text = StringFormatUtils.formatPrice(item.basic.discountPrice)
+        binding.textViewDishType.text = DishType.getString(item.basic.dishType, requireContext())
         binding.textViewAmountWithUnit.text =
-            StringFormatUtils.formatAmountWithUnit(requireContext(), item.amount, item.unit)
+            StringFormatUtils.formatAmountWithUnit(requireContext(), item.details.amount, item.details.unit)
         binding.textViewFinalPrice.text = StringFormatUtils.formatPrice(getFinalPrice())
 
-        otherIngredientsList = item.otherIngredients.toList().map { it.second }.toMutableList()
-        possibleIngredientsList = item.possibleIngredients.toList().map { it.second }.toMutableList()
+        otherIngredientsList = item.details.otherIngredients.toList().map { it.second }.toMutableList()
+        possibleIngredientsList = item.details.possibleIngredients.toList().map { it.second }.toMutableList()
 
         initializeRecyclerViews(item)
 
@@ -86,20 +91,20 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
 
     private fun initializeRecyclerViews(item: Dish) {
         binding.recyclerViewBaseIngredients.adapter =
-            DishIngredientsRecyclerAdapter(item.baseIngredients.toList().map { it.second }.toMutableList(), this, 0)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.baseIngredients.size, requireContext())
+            DishIngredientsRecyclerAdapter(item.details.baseIngredients.toList().map { it.second }.toMutableList(), this, 0)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.details.baseIngredients.size, requireContext())
 
         binding.recyclerViewOtherIngredients.adapter =
             DishIngredientsRecyclerAdapter(otherIngredientsList, this, 1)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.otherIngredients.size, requireContext())
+        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.details.otherIngredients.size, requireContext())
 
         binding.recyclerViewPossibleIngredients.adapter =
             DishIngredientsRecyclerAdapter(possibleIngredientsList, this, 2)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.possibleIngredients.size, requireContext())
+        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.details.possibleIngredients.size, requireContext())
 
         binding.recyclerViewAllergens.adapter =
-            DishAllergensRecyclerAdapter(item.allergens.toList().map { it.second }.toMutableList(), this)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, item.allergens.size, requireContext())
+            DishAllergensRecyclerAdapter(item.details.allergens.toList().map { it.second }.toMutableList(), this)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, item.details.allergens.size, requireContext())
     }
 
     fun changeIngredientItemState(state: IngredientItemState, ingredientItem: IngredientItem) {
@@ -127,7 +132,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     private fun getUnusedOtherIngredients() : ArrayList<IngredientItem> {
         val list = ArrayList<IngredientItem>()
         for (ingredientItem in possibleIngredientsList) {
-            if (dish.otherIngredients.containsKey(ingredientItem.id)) {
+            if (dish.details.otherIngredients.containsKey(ingredientItem.id)) {
                 list.add(ingredientItem)
             }
         }
@@ -137,7 +142,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     private fun getUsedPossibleIngredients() : ArrayList<IngredientItem> {
         val list = ArrayList<IngredientItem>()
         for (ingredientItem in otherIngredientsList) {
-            if (dish.possibleIngredients.containsKey(ingredientItem.id)) {
+            if (dish.details.possibleIngredients.containsKey(ingredientItem.id)) {
                 list.add(ingredientItem)
             }
         }
@@ -145,7 +150,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     }
 
     private fun getFinalPrice() : Double {
-        var price = if (dish.isDiscounted) dish.discountPrice else dish.basePrice
+        var price = if (dish.basic.isDiscounted) dish.basic.discountPrice else dish.basic.basePrice
         price += otherIngredientsList.sumOf { it.extraPrice }
         return price * binding.editTextPortions.text.toString().toInt()
     }

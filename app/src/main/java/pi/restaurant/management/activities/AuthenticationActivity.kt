@@ -16,6 +16,8 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.User
+import pi.restaurant.management.data.UserBasic
+import pi.restaurant.management.data.UserDetails
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 
 
@@ -61,27 +63,14 @@ class AuthenticationActivity : AppCompatActivity() {
             return
         }
 
-        val databaseRef = Firebase.database.getReference("users").child(user.uid)
+        val databaseRef = Firebase.database.getReference("users").child("basic").child(user.uid)
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var data = dataSnapshot.getValue<User>()
+                val data = dataSnapshot.getValue<UserBasic>()
                 if (data == null) {
-                    data = User(
-                        user.uid,
-                        getString(R.string.temp_first_name),
-                        getString(R.string.temp_last_name),
-                        user.email!!,
-                        3,
-                        false
-                    )
-                    databaseRef.setValue(data)
-                    Toast.makeText(
-                        this@AuthenticationActivity,
-                        getString(R.string.no_user_data_found),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    addUserToDatabase()
                 }
-                if (!data.disabled) {
+                if (data == null || !data.disabled) {
                     startMainActivity()
                 } else {
                     keepSplashScreen = false
@@ -95,6 +84,19 @@ class AuthenticationActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {}
         })
+    }
+
+    private fun addUserToDatabase() {
+        val basic =
+            UserBasic(Firebase.auth.uid!!, getString(R.string.temp_first_name), getString(R.string.temp_last_name), 3, false)
+        val details = UserDetails(Firebase.auth.uid!!, Firebase.auth.currentUser?.email!!)
+        Firebase.database.getReference("users").child("basic").child(Firebase.auth.uid!!).setValue(basic)
+        Firebase.database.getReference("users").child("details").child(Firebase.auth.uid!!).setValue(details)
+        Toast.makeText(
+            this@AuthenticationActivity,
+            getString(R.string.no_user_data_found),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     private fun setButtonLogInListener() {

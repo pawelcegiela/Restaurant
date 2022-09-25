@@ -11,24 +11,24 @@ import pi.restaurant.management.R
 import pi.restaurant.management.activities.DishesActivity
 import pi.restaurant.management.activities.OrdersActivity
 import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.DishBasic
 import pi.restaurant.management.databinding.ItemDishesBinding
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
 
 
 class DishesRecyclerAdapter(
-    private val dataSet: MutableList<Dish>,
+    private val dataSet: MutableList<DishBasic>,
     private val fragment: Fragment,
 ) :
     AbstractRecyclerAdapter<DishesRecyclerAdapter.ViewHolder>() {
-    override val allDataSet: MutableList<Dish> = ArrayList(dataSet)
+    override val allDataSet: MutableList<DishBasic> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemDishesBinding,
         val context: Context,
         val fragment: Fragment,
-        private val dataSet: List<Dish>
+        private val dataSet: List<DishBasic>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -72,7 +72,7 @@ class DishesRecyclerAdapter(
     }
 
     override fun addItemToDataSet(item: AbstractDataObject, text: String) {
-        val dish = item as Dish
+        val dish = item as DishBasic
         if (dish.name.lowercase(Locale.getDefault()).contains(text)) {
             dataSet.add(dish)
         }

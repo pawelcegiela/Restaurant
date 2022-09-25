@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.data.AboutRestaurant
+import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentAboutRestaurantBinding
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.fragments.orders.EditOrderViewModel
+import pi.restaurant.management.utils.SnapshotsPair
+import pi.restaurant.management.utils.StringFormatUtils
 
 class AboutRestaurantFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentAboutRestaurantBinding? = null
@@ -45,10 +45,16 @@ class AboutRestaurantFragment : AbstractModifyItemFragment() {
         setSaveButtonListener()
     }
 
-    override fun fillInData(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<AboutRestaurant>() ?: return
-        binding.editTextRestaurantName.setText(data.name)
-        binding.editTextRestaurantDescription.setText(data.description)
+    private fun getItem(snapshotsPair: SnapshotsPair) : AboutRestaurant {
+        val basic = snapshotsPair.basic?.getValue<AboutRestaurantBasic>() ?: AboutRestaurantBasic()
+        val details = snapshotsPair.details?.getValue<AboutRestaurantDetails>() ?: AboutRestaurantDetails()
+        return AboutRestaurant(basic, details)
+    }
+
+    override fun fillInData(snapshotsPair: SnapshotsPair) {
+        val data = getItem(snapshotsPair)
+        binding.editTextRestaurantName.setText(data.basic.name)
+        binding.editTextRestaurantDescription.setText(data.basic.description)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
@@ -58,13 +64,15 @@ class AboutRestaurantFragment : AbstractModifyItemFragment() {
         return map
     }
 
-    override fun getDataObject(): AboutRestaurant {
-        val data = AboutRestaurant()
+    override fun getDataObject(): SplitDataObject {
+        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
-        data.name = binding.editTextRestaurantName.text.toString()
-        data.description = binding.editTextRestaurantDescription.text.toString()
+        val basic = AboutRestaurantBasic(
+            name = binding.editTextRestaurantName.text.toString(),
+            description = binding.editTextRestaurantDescription.text.toString()
+        )
 
-        return data
+        return SplitDataObject(itemId, basic, AboutRestaurantDetails())
     }
 
     override fun onDestroyView() {

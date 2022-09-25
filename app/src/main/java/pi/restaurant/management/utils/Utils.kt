@@ -1,16 +1,11 @@
 package pi.restaurant.management.utils
 
-import android.content.Context
 import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
-import pi.restaurant.management.data.DiscountGroup
-import pi.restaurant.management.data.OpeningHours
-import pi.restaurant.management.enums.Precondition
-import pi.restaurant.management.enums.Unit
+import pi.restaurant.management.data.Discount
+import pi.restaurant.management.data.DiscountBasic
+import pi.restaurant.management.data.DiscountDetails
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,19 +35,19 @@ class Utils {
             return discounts
         }
 
-        fun getNumberOfDiscounts(discount: DiscountGroup): String {
+        fun getNumberOfDiscounts(discount: DiscountBasic): String {
             return discount.availableDiscounts.size.toString() + " / " +
                     discount.assignedDiscounts.size.toString() + " / " +
                     discount.usedDiscounts.size.toString()
         }
 
-        fun getDiscountAmount(discount: DiscountGroup): String {
+        fun getDiscountAmount(discount: DiscountBasic): String {
             return discount.amount.toString() + discount.type.toString()
         }
 
         fun getTodayWithTime(time: String): Date {
             val dateString = StringFormatUtils.formatDate(Date()) + " $time"
-            val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm")
+            val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT)
             return sdf.parse(dateString)!!
         }
     }

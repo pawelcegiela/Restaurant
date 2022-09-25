@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.Order
+import pi.restaurant.management.data.OrderBasic
 import pi.restaurant.management.databinding.ItemOrdersBinding
 import pi.restaurant.management.enums.OrderStatus
 import pi.restaurant.management.utils.StringFormatUtils
@@ -17,17 +18,17 @@ import java.util.*
 
 
 class OrdersRecyclerAdapter(
-    private val dataSet: MutableList<Order>,
+    private val dataSet: MutableList<OrderBasic>,
     private val fragment: Fragment,
 ) :
     AbstractRecyclerAdapter<OrdersRecyclerAdapter.ViewHolder>() {
-    override val allDataSet: MutableList<Order> = ArrayList(dataSet)
+    override val allDataSet: MutableList<OrderBasic> = ArrayList(dataSet)
 
     class ViewHolder(
         val binding: ItemOrdersBinding,
         val context: Context,
         val fragment: Fragment,
-        private val dataSet: List<Order>
+        private val dataSet: List<OrderBasic>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -53,7 +54,7 @@ class OrdersRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewOrderDate.text = StringFormatUtils.formatDate(dataSet[position].orderDate)
+        viewHolder.binding.textViewCollectionDate.text = StringFormatUtils.formatDate(dataSet[position].collectionDate)
         viewHolder.binding.textViewStatus.text = OrderStatus.getString(dataSet[position].orderStatus, viewHolder.context)
         viewHolder.binding.textViewValue.text = StringFormatUtils.formatPrice(dataSet[position].value)
     }
@@ -69,7 +70,7 @@ class OrdersRecyclerAdapter(
     }
 
     override fun addItemToDataSet(item: AbstractDataObject, text: String) {
-        val order = item as Order
+        val order = item as OrderBasic
         if (order.name.lowercase(Locale.getDefault()).contains(text)) {
             dataSet.add(order)
         }

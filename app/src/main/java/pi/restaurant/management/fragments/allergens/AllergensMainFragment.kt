@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.AllergensRecyclerAdapter
 import pi.restaurant.management.data.Allergen
+import pi.restaurant.management.data.AllergenBasic
 import pi.restaurant.management.fragments.AbstractItemListFragment
 import pi.restaurant.management.fragments.AbstractItemListViewModel
 
@@ -16,6 +17,6 @@ class AllergensMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            AllergensRecyclerAdapter(viewModel.liveDataList.value as MutableList<Allergen>, this@AllergensMainFragment)
+            AllergensRecyclerAdapter(viewModel.liveDataList.value as MutableList<AllergenBasic>, this@AllergensMainFragment)
     }
 }

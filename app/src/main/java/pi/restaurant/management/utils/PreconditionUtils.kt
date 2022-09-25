@@ -1,6 +1,7 @@
 package pi.restaurant.management.utils
 
 import pi.restaurant.management.data.OpeningHours
+import pi.restaurant.management.data.OpeningHoursBasic
 import pi.restaurant.management.enums.Precondition
 
 class PreconditionUtils {
@@ -30,7 +31,7 @@ class PreconditionUtils {
             return Precondition.OK
         }
 
-        fun checkOpeningHoursError(data: OpeningHours) : Precondition {
+        fun checkOpeningHoursError(data: OpeningHoursBasic) : Precondition {
             if (data.isError) {
                 return Precondition.OPENING_HOURS_FORMAT
             }

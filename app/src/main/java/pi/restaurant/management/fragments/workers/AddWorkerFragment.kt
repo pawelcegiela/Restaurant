@@ -8,7 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
-import pi.restaurant.management.data.User
+import pi.restaurant.management.data.UserDetails
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.utils.PreconditionUtils
@@ -31,16 +31,16 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
     //TODO Pomysł na większe połączenie kodu z superklasą
     override fun saveToDatabase() {
-        val data = getDataObject() as User
+        val data = getDataObject()
 
-        val precondition = checkSavePreconditions(data)
+        val precondition = checkSavePreconditions(data.basic)
         if (precondition != Precondition.OK) {
             Toast.makeText(activity, getString(precondition.nameRes), Toast.LENGTH_SHORT).show()
             return
         }
 
         val password = binding.editTextUserPassword.text.toString()
-        Firebase.auth.createUserWithEmailAndPassword(data.email, password)
+        Firebase.auth.createUserWithEmailAndPassword((data.details as UserDetails).email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     //TODO: Żeby nie przelogowywało

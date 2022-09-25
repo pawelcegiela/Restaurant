@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DataSnapshot
 import pi.restaurant.management.enums.Role
+import pi.restaurant.management.utils.SnapshotsPair
 
 abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val viewModel: AbstractPreviewItemViewModel
@@ -32,8 +33,10 @@ abstract class AbstractPreviewItemFragment : Fragment() {
             }
         }
 
-        viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { dataSnapshot ->
-            fillInData(dataSnapshot)
+        viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { snapshotPair ->
+            if (snapshotPair.isReady()) {
+                fillInData(snapshotPair)
+            }
         }
     }
 
@@ -47,5 +50,5 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         }
     }
 
-    abstract fun fillInData(dataSnapshot: DataSnapshot)
+    abstract fun fillInData(snapshotsPair: SnapshotsPair)
 }
