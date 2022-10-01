@@ -16,6 +16,7 @@ class AddOrderFragment : AbstractModifyOrderFragment() {
 
     override fun initializeUI() {
         super.initializeUI()
+        setNavigationCardsSave()
         initializeRecycler()
         addLiveDataListener()
         finishLoading()

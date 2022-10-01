@@ -56,6 +56,11 @@
         <action
             android:id="@+id/actionPreviewIngredientToEditIngredient"
             app:destination="@id/EditIngredientFragment" />
+        <action
+            android:id="@+id/actionPreviewIngredientToIngredients"
+            app:destination="@id/IngredientsMainFragment"
+            app:popUpTo="@id/IngredientsMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity

@@ -23,8 +23,9 @@ import pi.restaurant.management.utils.SubItemUtils
 
 class PreviewOrderFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
-    override val editButton get() = binding.buttonEdit
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewOrderToEditOrder
+    override val backActionId = R.id.actionPreviewOrderToOrders
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel : PreviewOrderViewModel by viewModels()
 

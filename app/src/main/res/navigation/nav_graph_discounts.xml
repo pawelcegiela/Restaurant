@@ -56,6 +56,11 @@
         <action
             android:id="@+id/actionPreviewDiscountToEditDiscount"
             app:destination="@id/EditDiscountFragment" />
+        <action
+            android:id="@+id/actionPreviewDiscountToDiscounts"
+            app:destination="@id/DiscountsMainFragment"
+            app:popUpTo="@id/DiscountsMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity

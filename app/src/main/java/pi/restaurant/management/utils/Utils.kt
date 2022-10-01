@@ -1,11 +1,16 @@
 package pi.restaurant.management.utils
 
+import android.content.res.Resources
+import android.util.TypedValue
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Discount
 import pi.restaurant.management.data.DiscountBasic
 import pi.restaurant.management.data.DiscountDetails
+import pi.restaurant.management.databinding.CardViewWideBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -49,6 +54,18 @@ class Utils {
             val dateString = StringFormatUtils.formatDate(Date()) + " $time"
             val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT)
             return sdf.parse(dateString)!!
+        }
+
+        fun setCardView(cardView: CardViewWideBinding, drawableId: Int, stringId: Int, navController: NavController, actionId: Int) {
+            cardView.imageIcon.setImageResource(drawableId)
+            cardView.textViewName.setText(stringId)
+            cardView.root.setOnClickListener {
+                navController.navigate(actionId)
+            }
+        }
+
+        fun dpToPx(dp: Int, resources: Resources): Float {
+            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics)
         }
     }
 }

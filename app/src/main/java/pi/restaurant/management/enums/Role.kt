@@ -17,5 +17,9 @@ enum class Role(val stringResourceId: Int) {
         fun getArrayOfStrings(context: Context): Array<String> {
             return values().map { context.getString(it.stringResourceId) }.toTypedArray()
         }
+
+        fun getPlaceholder() : Int {
+            return 999
+        }
     }
 }

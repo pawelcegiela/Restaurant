@@ -81,6 +81,11 @@
         <action
             android:id="@+id/actionPreviewWorkerToEditWorker"
             app:destination="@id/EditWorkerFragment" />
+        <action
+            android:id="@+id/actionPreviewWorkerToWorkers"
+            app:destination="@id/WorkersMainFragment"
+            app:popUpTo="@id/WorkersMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity

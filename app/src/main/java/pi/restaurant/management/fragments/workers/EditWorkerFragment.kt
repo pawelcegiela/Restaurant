@@ -3,7 +3,6 @@ package pi.restaurant.management.fragments.workers
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
@@ -14,7 +13,6 @@ import pi.restaurant.management.data.UserBasic
 import pi.restaurant.management.data.UserDetails
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.utils.SnapshotsPair
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
@@ -30,7 +28,10 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         itemId = arguments?.getString("id").toString()
         isMyData = arguments?.getBoolean("myData") != null && arguments?.getBoolean("myData")!!
         if (isMyData) {
+            setNavigationCardsSave()
             setMyDataSettings()
+        } else {
+            setNavigationCardsSaveRemove()
         }
 
         binding.editTextEmail.isEnabled = false
@@ -39,13 +40,10 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.editTextPassword.visibility = View.GONE
 
         initializeSpinner()
-        setSaveButtonListener()
-        setRemoveButtonListener()
     }
 
     private fun setMyDataSettings() {
         itemId = Firebase.auth.uid ?: return
-        binding.buttonRemove.visibility = View.GONE
         binding.spinnerRole.isEnabled = false
         nextActionId = if (activity is SettingsActivity) {
             R.id.actionMyDataToSettings
@@ -67,12 +65,13 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.editTextEmail.setText(data.details.email)
         binding.spinnerRole.setSelection(data.basic.role)
 
+        creationDate = data.details.creationDate
         disabled = data.basic.disabled
-        if (disabled) {
-            removeButton.text = getString(R.string.enable_user)
-        } else {
-            removeButton.text = getText(R.string.disable_user)
-        }
+//        if (disabled) {
+//            cardSetNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getString(R.string.enable_user)
+//        } else {
+//            cardSetNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getText(R.string.disable_user)
+//        } TODO Przywrócić
     }
 
     override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
@@ -83,8 +82,9 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         }
     }
 
-    override fun setRemoveButtonListener() {
-        removeButton.setOnClickListener {
+    override fun setNavigationCardsSaveRemove() {
+        super.setNavigationCardsSaveRemove()
+        cardSetNavigation.cardSaveRemoveBack.cardRemove.setOnClickListener {
             disabled = !disabled
             saveToDatabase()
         }

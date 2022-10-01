@@ -5,6 +5,7 @@ import kotlin.collections.HashMap
 
 class DishDetails : AbstractDataObject {
     var description: String = ""
+    var recipe: String = ""
     var baseIngredients: HashMap<String, IngredientItem> = HashMap()
     var otherIngredients: HashMap<String, IngredientItem> = HashMap()
     var possibleIngredients: HashMap<String, IngredientItem> = HashMap()
@@ -18,6 +19,7 @@ class DishDetails : AbstractDataObject {
     constructor(
         id: String,
         description: String,
+        recipe: String,
         baseIngredients: HashMap<String, IngredientItem>,
         otherIngredients: HashMap<String, IngredientItem>,
         possibleIngredients: HashMap<String, IngredientItem>,
@@ -27,6 +29,7 @@ class DishDetails : AbstractDataObject {
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.description = description
+        this.recipe = recipe
         this.baseIngredients = baseIngredients
         this.otherIngredients = otherIngredients
         this.possibleIngredients = possibleIngredients

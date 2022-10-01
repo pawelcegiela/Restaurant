@@ -31,8 +31,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val saveButton get() = binding.buttonSave
-    override val removeButton get() = binding.buttonRemove
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = ""
 
     var subIngredientsList: MutableList<IngredientItem> = ArrayList()
@@ -49,7 +48,6 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
     override fun initializeUI() {
         initializeSpinner()
-        setSaveButtonListener()
         setCheckBoxListener()
     }
 

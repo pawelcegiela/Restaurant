@@ -12,6 +12,14 @@
         tools:layout="@layout/fragment_main">
 
         <action
+            android:id="@+id/actionMainToRestaurantData"
+            app:destination="@id/RestaurantDataActivity" />
+
+        <action
+            android:id="@+id/actionMainToWorkers"
+            app:destination="@id/WorkersActivity" />
+
+        <action
             android:id="@+id/actionMainToDiscounts"
             app:destination="@id/DiscountsActivity" />
 

@@ -187,4 +187,23 @@
     <string name="only_possible_have_extra_price">Only possible ingredients may have extra price.</string>
     <string name="to_eat_in">To eat in</string>
     <string name="to_go">To go</string>
+    <string name="icon">Icon</string>
+    <string name="back">Back</string>
+    <string name="info">Info</string>
+    <string name="dish_unavailable">This dish is currently unavailable</string>
+    <string name="dish_details">Dish details</string>
+    <string name="description_colon">Description:</string>
+    <string name="estimated_amount_weight_colon">Estimated amount/weight:</string>
+    <string name="recipe_and_info_colon">Recipe and info for cooks:</string>
+    <string name="no_dish_description">This dish has no description.</string>
+    <string name="no_amount_dish">This dish has no estimated amount/weight.</string>
+    <string name="no_dish_recipe">This dish has no recipe or info for cooks.</string>
+    <string name="show_more">Show more...</string>
+    <string name="show_less">Show less...</string>
+    <string name="ingredients_you_can_add">Ingredients you can add</string>
+    <string name="ingredients_you_can_add_colon">Ingredients you can add:</string>
+    <string name="email_colon">Email:</string>
+    <string name="account_creation_date_colon">Account creation date:</string>
+    <string name="no_creation_date_to_display">No creation date to display</string>
+    <string name="recipe">Recipe</string>
 </resources>

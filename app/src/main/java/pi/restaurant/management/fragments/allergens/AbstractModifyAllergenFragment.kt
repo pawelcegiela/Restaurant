@@ -19,8 +19,7 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val saveButton get() = binding.buttonSave
-    override val removeButton get() = binding.buttonRemove
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = ""
 
     override fun onCreateView(
@@ -30,11 +29,6 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyAllergenBinding.inflate(inflater, container, false)
         linearLayout.visibility = View.INVISIBLE
         return binding.root
-    }
-
-    override fun initializeUI() {
-        finishLoading()
-        setSaveButtonListener()
     }
 
     override fun getDataObject(): SplitDataObject {

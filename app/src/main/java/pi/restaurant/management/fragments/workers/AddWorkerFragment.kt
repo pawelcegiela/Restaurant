@@ -22,11 +22,9 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
     private val _viewModel : AddWorkerViewModel by viewModels()
 
     override fun initializeUI() {
-        removeButton.visibility = View.GONE
-
         finishLoading()
         initializeSpinner()
-        setSaveButtonListener()
+        setNavigationCardsSave()
     }
 
     //TODO Pomysł na większe połączenie kodu z superklasą

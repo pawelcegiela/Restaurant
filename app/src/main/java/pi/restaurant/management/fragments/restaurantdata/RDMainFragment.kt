@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentRdMainBinding
+import pi.restaurant.management.utils.Utils
 
 class RDMainFragment : Fragment() {
     private var _binding: FragmentRdMainBinding? = null
@@ -23,22 +24,29 @@ class RDMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setCardViews()
+    }
 
-        binding.buttonAboutRestaurant.setOnClickListener {
-            findNavController().navigate(R.id.actionRDtoAboutRestaurant)
-        }
+    private fun setCardViews() {
+        Utils.setCardView(
+            binding.cardAboutRestaurant, R.drawable.about_restaurant, R.string.about_restaurant,
+            findNavController(), R.id.actionRDtoAboutRestaurant
+        )
 
-        binding.buttonOpeningHours.setOnClickListener {
-            findNavController().navigate(R.id.actionRDtoOpeningHours)
-        }
+        Utils.setCardView(
+            binding.cardOpeningHours, R.drawable.hours, R.string.opening_hours,
+            findNavController(), R.id.actionRDtoOpeningHours
+        )
 
-        binding.buttonLocation.setOnClickListener {
-            findNavController().navigate(R.id.actionRDtoLocation)
-        }
+        Utils.setCardView(
+            binding.cardLocation, R.drawable.location, R.string.location,
+            findNavController(), R.id.actionRDtoLocation
+        )
 
-        binding.buttonDelivery.setOnClickListener {
-            findNavController().navigate(R.id.actionRDtoDelivery)
-        }
+        Utils.setCardView(
+            binding.cardDelivery, R.drawable.delivery, R.string.delivery,
+            findNavController(), R.id.actionRDtoDelivery
+        )
     }
 
     override fun onDestroyView() {

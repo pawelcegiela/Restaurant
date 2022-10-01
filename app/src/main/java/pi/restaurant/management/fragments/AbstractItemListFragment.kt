@@ -52,8 +52,10 @@ abstract class AbstractItemListFragment : Fragment() {
         }
 
         viewModel.liveUserRole.observe(viewLifecycleOwner) { role ->
-            if (role < Role.WORKER.ordinal) {
-                binding.fab.visibility = View.VISIBLE
+            if (role != Role.getPlaceholder()) {
+                if (role < Role.WORKER.ordinal) {
+                    binding.fab.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -61,7 +63,11 @@ abstract class AbstractItemListFragment : Fragment() {
             when (precondition) {
                 Precondition.OK -> openEdit()
                 Precondition.SAME_USER -> findNavController().navigate(R.id.actionWorkersToEditMyData)
-                Precondition.TOO_LOW_ROLE -> Toast.makeText(context, getString(R.string.no_permission_user_data), Toast.LENGTH_SHORT).show()
+                Precondition.TOO_LOW_ROLE -> Toast.makeText(
+                    context,
+                    getString(R.string.no_permission_user_data),
+                    Toast.LENGTH_SHORT
+                ).show()
                 else -> {}
             }
             if (precondition != null) {
@@ -94,22 +100,23 @@ abstract class AbstractItemListFragment : Fragment() {
     }
 
     private fun addSwipeToEditCallback() {
-        if (arguments?.getBoolean("swipeEnabled", true) == false) {
-            return
-        }
-        val swipeToEditCallback: SwipeCallback =
-            object : SwipeCallback(
-                requireActivity().applicationContext,
-                Color.YELLOW,
-                com.google.android.material.R.drawable.material_ic_edit_black_24dp
-            ) {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
-                    chosenItemId = viewModel.liveDataList.value!![viewHolder.adapterPosition].id
-                    viewModel.checkPreconditions(viewModel.liveDataList.value!![viewHolder.adapterPosition])
-                }
-            }
-        val itemTouchHelper = ItemTouchHelper(swipeToEditCallback)
-        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+        // TODO Przemyśleć i przywrócić
+//        if (arguments?.getBoolean("swipeEnabled", true) == false) {
+//            return
+//        }
+//        val swipeToEditCallback: SwipeCallback =
+//            object : SwipeCallback(
+//                requireActivity().applicationContext,
+//                Color.YELLOW,
+//                com.google.android.material.R.drawable.material_ic_edit_black_24dp
+//            ) {
+//                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
+//                    chosenItemId = viewModel.liveDataList.value!![viewHolder.adapterPosition].id
+//                    viewModel.checkPreconditions(viewModel.liveDataList.value!![viewHolder.adapterPosition])
+//                }
+//            }
+//        val itemTouchHelper = ItemTouchHelper(swipeToEditCallback)
+//        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
 
     private fun openEdit() {

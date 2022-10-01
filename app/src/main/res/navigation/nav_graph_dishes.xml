@@ -56,6 +56,11 @@
         <action
             android:id="@+id/actionPreviewDishToEditDish"
             app:destination="@id/EditDishFragment" />
+        <action
+            android:id="@+id/actionPreviewDishToDishes"
+            app:destination="@id/DishesMainFragment"
+            app:popUpTo="@id/DishesMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity

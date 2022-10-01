@@ -15,7 +15,7 @@ import pi.restaurant.management.utils.SnapshotsPair
 abstract class AbstractPreviewItemViewModel : ViewModel() {
     abstract val databasePath: String
 
-    val liveUserRole = MutableLiveData(Role.WORKER.ordinal)
+    val liveUserRole = MutableLiveData(Role.getPlaceholder())
     val liveDataSnapshot = MutableLiveData(SnapshotsPair())
 
     val snapshotsPair = SnapshotsPair()

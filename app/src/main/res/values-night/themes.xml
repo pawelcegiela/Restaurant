@@ -1,7 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.RestaurantManagement" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/blue_5</item>
+        <item name="colorSecondary">@color/blue_2a</item>
+<!--        TEMP FOR TESTS: -->
+        <item name="colorPrimaryVariant">@color/pink</item>
+        <item name="colorSecondaryVariant">@color/orange</item>
+
+        <item name="colorOnPrimary">@color/light_grey</item>
+
+        <item name="android:textColor">@color/light_grey</item>
+
+        <item name="android:colorBackground">@color/dark_grey</item>
     </style>
 </resources>

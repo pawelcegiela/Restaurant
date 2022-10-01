@@ -19,6 +19,7 @@ import pi.restaurant.management.data.User
 import pi.restaurant.management.data.UserBasic
 import pi.restaurant.management.data.UserDetails
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
+import java.util.*
 
 
 class AuthenticationActivity : AppCompatActivity() {
@@ -89,7 +90,7 @@ class AuthenticationActivity : AppCompatActivity() {
     private fun addUserToDatabase() {
         val basic =
             UserBasic(Firebase.auth.uid!!, getString(R.string.temp_first_name), getString(R.string.temp_last_name), 3, false)
-        val details = UserDetails(Firebase.auth.uid!!, Firebase.auth.currentUser?.email!!)
+        val details = UserDetails(Firebase.auth.uid!!, Firebase.auth.currentUser?.email!!, Date())
         Firebase.database.getReference("users").child("basic").child(Firebase.auth.uid!!).setValue(basic)
         Firebase.database.getReference("users").child("details").child(Firebase.auth.uid!!).setValue(details)
         Toast.makeText(

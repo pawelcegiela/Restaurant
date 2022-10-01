@@ -56,6 +56,11 @@
         <action
             android:id="@+id/actionPreviewAllergenToEditAllergen"
             app:destination="@id/EditAllergenFragment" />
+        <action
+            android:id="@+id/actionPreviewAllergenToAllergens"
+            app:destination="@id/AllergensMainFragment"
+            app:popUpTo="@id/AllergensMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <activity

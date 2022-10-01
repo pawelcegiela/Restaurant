@@ -20,7 +20,7 @@
 
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
              animated drawable. One of these is required. -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/restaurant_small</item>
         <!-- Required for animated icons -->
         <item name="windowSplashScreenAnimationDuration">200</item>
 

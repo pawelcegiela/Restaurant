@@ -21,8 +21,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val saveButton get() = binding.buttonSave
-    override val removeButton get() = binding.buttonRemove
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = ""
 
     override fun onCreateView(
@@ -37,7 +36,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     override fun initializeUI() {
         finishLoading()
         initializeSpinner()
-        setSaveButtonListener()
+        setNavigationCardsSave() // TODO Przy dodawaniu edycji uważać!
     }
 
     private fun initializeSpinner() {

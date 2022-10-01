@@ -2,11 +2,10 @@ package pi.restaurant.management.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.database.DataSnapshot
+import pi.restaurant.management.databinding.CardSetEditBackBinding
 import pi.restaurant.management.enums.Role
 import pi.restaurant.management.utils.SnapshotsPair
 
@@ -14,8 +13,9 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val viewModel: AbstractPreviewItemViewModel
 
     abstract val linearLayout: LinearLayout
-    abstract val editButton: Button?
+    abstract val cardSetNavigation: CardSetEditBackBinding?
     abstract val editActionId: Int
+    abstract val backActionId: Int
     lateinit var itemId: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,27 +27,43 @@ abstract class AbstractPreviewItemFragment : Fragment() {
 
     private fun addLiveDataObservers() {
         viewModel.liveUserRole.observe(viewLifecycleOwner) { role ->
-            if (role < Role.WORKER.ordinal) {
-                initializeUI()
-                viewModel.getDataFromDatabase(itemId)
+            if (role != Role.getPlaceholder()) {
+                if (role < Role.WORKER.ordinal) {
+                    initializeUI()
+                    viewModel.getDataFromDatabase(itemId)
+                } else {
+                    initializeWorkerUI()
+                }
             }
         }
 
         viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { snapshotPair ->
             if (snapshotPair.isReady()) {
                 fillInData(snapshotPair)
+                linearLayout.visibility = View.VISIBLE
             }
         }
     }
 
     open fun initializeUI() {
-        editButton?.visibility = View.VISIBLE
-        editButton?.setOnClickListener {
+        cardSetNavigation?.cardBack?.root?.visibility = View.GONE
+        cardSetNavigation?.cardEditBack?.root?.visibility = View.VISIBLE
+        cardSetNavigation?.cardEditBack?.cardEdit?.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("id", itemId)
 
             findNavController().navigate(editActionId, bundle)
         }
+        cardSetNavigation?.cardEditBack?.cardBack?.setOnClickListener {
+            findNavController().navigate(backActionId)
+        }
+    }
+
+    fun initializeWorkerUI() {
+        cardSetNavigation?.cardBack?.root?.setOnClickListener {
+            findNavController().navigate(backActionId)
+        }
+        linearLayout.visibility = View.VISIBLE
     }
 
     abstract fun fillInData(snapshotsPair: SnapshotsPair)

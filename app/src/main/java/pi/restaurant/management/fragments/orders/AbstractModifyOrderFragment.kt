@@ -32,8 +32,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val saveButton get() = binding.buttonSave
-    override val removeButton get() = binding.buttonRemove
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = ""
 
     var dishesList: MutableList<DishItem> = ArrayList()
@@ -50,7 +49,6 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
-        setSaveButtonListener()
         initializeSpinners()
         initializeButton()
     }

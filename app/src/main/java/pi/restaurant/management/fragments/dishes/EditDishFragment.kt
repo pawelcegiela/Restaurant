@@ -1,15 +1,12 @@
 package pi.restaurant.management.fragments.dishes
 
-import android.view.View
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.Dish
 import pi.restaurant.management.data.DishBasic
 import pi.restaurant.management.data.DishDetails
 import pi.restaurant.management.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.fragments.workers.EditWorkerViewModel
 import pi.restaurant.management.utils.SnapshotsPair
 
 class EditDishFragment : AbstractModifyDishFragment() {
@@ -22,11 +19,9 @@ class EditDishFragment : AbstractModifyDishFragment() {
 
     override fun initializeUI() {
         itemId = arguments?.getString("id").toString()
-        removeButton.visibility = View.VISIBLE
 
         initializeSpinners()
-        setSaveButtonListener()
-        setRemoveButtonListener()
+        setNavigationCardsSaveRemove()
         getIngredientListAndSetIngredientButtons()
         getAllergenListAndSetAllergenButtons()
     }
@@ -41,6 +36,7 @@ class EditDishFragment : AbstractModifyDishFragment() {
         val data = getItem(snapshotsPair)
         binding.editTextName.setText(data.basic.name)
         binding.editTextDescription.setText(data.details.description)
+        binding.editTextRecipe.setText(data.details.recipe)
         binding.checkBoxActive.isChecked = data.basic.isActive
         binding.editTextBasePrice.setText(data.basic.basePrice.toString())
         binding.checkBoxDiscount.isChecked = data.basic.isDiscounted
@@ -53,7 +49,8 @@ class EditDishFragment : AbstractModifyDishFragment() {
         otherIngredientsList = data.details.otherIngredients.toList().map { it.second }.toMutableList()
         possibleIngredientsList = data.details.possibleIngredients.toList().map { it.second }.toMutableList()
         allergensList = data.details.allergens.toList().map { it.second }.toMutableList()
-        initializeRecyclerViews()
+        setIngredientViews()
+        setAllergenViews()
         finishLoading()
     }
 }

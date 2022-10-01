@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import com.google.firebase.database.ktx.getValue
@@ -22,8 +21,7 @@ class LocationFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val saveButton get() = binding.buttonSave
-    override val removeButton: Button? = null
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = "location"
     override val nextActionId = R.id.actionLocationToRD
     override val saveMessageId = R.string.location_modified
@@ -42,7 +40,7 @@ class LocationFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
-        setSaveButtonListener()
+        setNavigationCardsSave()
     }
 
     private fun getItem(snapshotsPair: SnapshotsPair): Location {

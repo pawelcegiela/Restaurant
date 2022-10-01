@@ -363,13 +363,9 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/buttonSave"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/save" />
+            <include
+                android:id="@+id/cardSetNavigation"
+                layout="@layout/card_set_navigation_modify" />
 
         </LinearLayout>
 

@@ -17,69 +17,37 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <Button
-                android:id="@+id/buttonRestaurantData"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/restaurant_data" />
+            <include
+                android:id="@+id/cardRestaurantData"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonWorkers"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/workers" />
+            <include
+                android:id="@+id/cardWorkers"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonDishes"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/dishes" />
+            <include
+                android:id="@+id/cardDishes"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonAllergens"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/allergens" />
+            <include
+                android:id="@+id/cardAllergens"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonOrders"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/orders" />
+            <include
+                android:id="@+id/cardOrders"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonIngredients"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/ingredients" />
+            <include
+                android:id="@+id/cardIngredients"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonDiscounts"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/discounts" />
+            <include
+                android:id="@+id/cardDiscounts"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonSettings"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/action_settings" />
+            <include
+                android:id="@+id/cardSettings"
+                layout="@layout/card_view_wide" />
 
         </LinearLayout>
 

@@ -55,7 +55,7 @@ class IngredientsRecyclerAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewName.text = dataSet[position].name
-        viewHolder.binding.textViewAmountWithUnit.text =
+        viewHolder.binding.textViewAmount.text =
             StringFormatUtils.formatAmountWithUnit(fragment.requireContext(), dataSet[position].amount, dataSet[position].unit)
         viewHolder.binding.textViewIngredientType.text = if (dataSet[position].subDish) "Sub-Dish" else "Ingredient"
     }

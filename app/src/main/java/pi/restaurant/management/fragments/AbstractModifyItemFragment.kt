@@ -1,6 +1,7 @@
 package pi.restaurant.management.fragments
 
 import android.app.AlertDialog
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -10,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.data.AbstractDataObject
 import pi.restaurant.management.data.SplitDataObject
+import pi.restaurant.management.databinding.CardSetNavigationModifyBinding
+import pi.restaurant.management.databinding.CardViewSaveRemoveBackBinding
 import pi.restaurant.management.enums.Precondition
 import pi.restaurant.management.enums.Role
 import pi.restaurant.management.utils.SnapshotsPair
@@ -17,12 +20,10 @@ import pi.restaurant.management.utils.Utils
 
 abstract class AbstractModifyItemFragment : Fragment() {
     abstract val viewModel: AbstractModifyItemViewModel
-    var myRole: Int = 3
 
     abstract val linearLayout: LinearLayout
     abstract val progressBar: ProgressBar
-    abstract val saveButton: Button
-    abstract val removeButton: Button?
+    abstract val cardSetNavigation: CardSetNavigationModifyBinding
     abstract var itemId: String
     abstract val nextActionId: Int
     abstract val saveMessageId: Int
@@ -36,11 +37,14 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     private fun addLiveDataObservers() {
         viewModel.liveUserRole.observe(viewLifecycleOwner) { role ->
-            if (role < Role.WORKER.ordinal) {
-                unlockUI()
-                initializeUI()
-                if (itemId.isNotEmpty()) {
-                    viewModel.getDataFromDatabase(itemId)
+            if (role != Role.getPlaceholder()) {
+                if (role < Role.WORKER.ordinal) {
+                    initializeUI()
+                    if (itemId.isNotEmpty()) {
+                        viewModel.getDataFromDatabase(itemId)
+                    }
+                } else {
+                    initializeWorkerUI()
                 }
             }
         }
@@ -58,27 +62,49 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
     }
 
-    private fun unlockUI() {
-        for (view in linearLayout.children) {
-            view.isEnabled = true
-        }
-        saveButton.text = getText(R.string.save)
-        removeButton?.text = getText(R.string.remove_item)
-    }
-
     abstract fun initializeUI()
+
+    private fun initializeWorkerUI() {
+        Toast.makeText(requireContext(), R.string.no_permission, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(nextActionId)
+    }
 
     open fun fillInData(snapshotsPair: SnapshotsPair) {}
 
-    fun setSaveButtonListener() {
-        saveButton.setOnClickListener {
+    fun setNavigationCardsSave() {
+        cardSetNavigation.cardSaveBack.cardSave.setOnClickListener {
             if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
                 return@setOnClickListener
             }
 
             saveToDatabase()
         }
+
+        cardSetNavigation.cardSaveBack.cardBack.setOnClickListener {
+            findNavController().navigate(nextActionId)
+        }
     }
+
+    open fun setNavigationCardsSaveRemove() {
+        cardSetNavigation.cardSaveBack.root.visibility = View.GONE
+        cardSetNavigation.cardSaveRemoveBack.root.visibility = View.VISIBLE
+        cardSetNavigation.cardSaveRemoveBack.cardSave.setOnClickListener {
+            if (!Utils.checkRequiredFields(getEditTextMap(), this)) {
+                return@setOnClickListener
+            }
+
+            saveToDatabase()
+        }
+
+        cardSetNavigation.cardSaveRemoveBack.cardRemove.setOnClickListener {
+            viewModel.liveDataSnapshot.value?.let { snapshotsPair -> removeFromDatabase(snapshotsPair) }
+        }
+
+        cardSetNavigation.cardSaveRemoveBack.cardBack.setOnClickListener {
+            findNavController().navigate(nextActionId)
+        }
+    }
+
 
     abstract fun getEditTextMap(): Map<EditText, Int>
 
@@ -98,12 +124,6 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     open fun checkSavePreconditions(data: AbstractDataObject): Precondition {
         return Precondition.OK
-    }
-
-    open fun setRemoveButtonListener() {
-        removeButton?.setOnClickListener {
-            viewModel.liveDataSnapshot.value?.let { snapshotsPair -> removeFromDatabase(snapshotsPair) }
-        }
     }
 
     private fun removeFromDatabase(snapshotsPair: SnapshotsPair) {

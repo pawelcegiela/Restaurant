@@ -13,37 +13,21 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <Button
-            android:id="@+id/buttonAboutRestaurant"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/about_restaurant" />
+        <include
+            android:id="@+id/cardAboutRestaurant"
+            layout="@layout/card_view_wide" />
 
-        <Button
-            android:id="@+id/buttonOpeningHours"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/opening_hours" />
+        <include
+            android:id="@+id/cardOpeningHours"
+            layout="@layout/card_view_wide" />
 
-        <Button
-            android:id="@+id/buttonLocation"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/location" />
+        <include
+            android:id="@+id/cardLocation"
+            layout="@layout/card_view_wide" />
 
-        <Button
-            android:id="@+id/buttonDelivery"
-            android:layout_width="280dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/delivery" />
+        <include
+            android:id="@+id/cardDelivery"
+            layout="@layout/card_view_wide" />
 
     </LinearLayout>
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.data.*
@@ -18,8 +17,9 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
-    override val editButton get() = binding.buttonEdit
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewWorkerToEditWorker
+    override val backActionId = R.id.actionPreviewWorkerToWorkers
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel : PreviewWorkerViewModel by viewModels()
 
@@ -46,9 +46,11 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         binding.textViewName.text = StringFormatUtils.formatNames(item.basic.firstName, item.basic.lastName)
         binding.textViewEmail.text = item.details.email
         binding.textViewRole.text = Role.getString(item.basic.role, requireContext())
-        binding.progress.progressBar.visibility = View.GONE
-    }
+        binding.textViewCreationDate.text = StringFormatUtils.formatDate(item.details.creationDate)
+        binding.progress.progressBar.visibility = View.GONE    }
 
     // TODO Temporary - somehow check preconditions first!
-    override fun initializeUI() {}
+    override fun initializeUI() {
+        initializeWorkerUI()
+    }
 }

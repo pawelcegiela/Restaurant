@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.viewModels
@@ -28,8 +27,7 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val saveButton get() = binding.buttonSave
-    override val removeButton: Button? = null
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = "openingHours"
     override val nextActionId = R.id.actionOpeningHoursToRD
     override val saveMessageId = R.string.opening_hours_modified
@@ -62,7 +60,7 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
     override fun initializeUI() {
         initializeArrays()
         setCheckBoxListeners()
-        setSaveButtonListener()
+        setNavigationCardsSave()
     }
 
     private fun initializeArrays() {

@@ -16,7 +16,7 @@ import pi.restaurant.management.enums.Role
 abstract class AbstractItemListViewModel : ViewModel() {
     abstract val databasePath: String
 
-    val liveUserRole = MutableLiveData(Role.WORKER.ordinal)
+    val liveUserRole = MutableLiveData(Role.getPlaceholder())
     val liveDataList = MutableLiveData<MutableList<AbstractDataObject>>()
     val liveEditPrecondition = MutableLiveData<Precondition>()
 

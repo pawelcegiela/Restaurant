@@ -16,8 +16,9 @@ import pi.restaurant.management.utils.SnapshotsPair
 
 class PreviewAllergenFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
-    override val editButton get() = binding.buttonEdit
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewAllergenToEditAllergen
+    override val backActionId = R.id.actionPreviewAllergenToAllergens
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel : PreviewAllergenViewModel by viewModels()
 

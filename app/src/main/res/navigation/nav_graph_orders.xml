@@ -74,6 +74,11 @@
         <action
             android:id="@+id/actionPreviewOrderToEditOrder"
             app:destination="@id/EditOrderFragment" />
+        <action
+            android:id="@+id/actionPreviewOrderToOrders"
+            app:destination="@id/OrdersMainFragment"
+            app:popUpTo="@id/OrdersMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

@@ -6,7 +6,7 @@
         android:id="@+id/groupHome">
         <item
             android:id="@+id/MainActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/home"
             android:title="@string/menu_home" />
     </group>
 
@@ -14,12 +14,12 @@
         android:id="@+id/groupDiscounts">
         <item
             android:id="@+id/DiscountsMainFragment"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/discount"
             android:title="@string/discounts" />
 
         <item
             android:id="@+id/AddDiscountFragment"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/add"
             android:title="@string/add_discount" />
     </group>
 
@@ -28,32 +28,32 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/IngredientsActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/ingredient"
             android:title="@string/ingredients" />
 
         <item
             android:id="@+id/DishesActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/dish"
             android:title="@string/dishes" />
 
         <item
             android:id="@+id/AllergensActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/allergen"
             android:title="@string/allergens" />
 
         <item
             android:id="@+id/OrdersActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/order"
             android:title="@string/orders" />
 
         <item
             android:id="@+id/RestaurantDataActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/restaurant_data"
             android:title="@string/restaurant_data" />
 
         <item
             android:id="@+id/WorkersActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/worker"
             android:title="@string/workers" />
     </group>
 
@@ -61,12 +61,12 @@
         android:id="@+id/groupSettings">
         <item
             android:id="@+id/SettingsActivity"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/settings"
             android:title="@string/action_settings" />
 
         <item
             android:id="@+id/LogOut"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/logout"
             android:title="@string/log_out" />
     </group>
 </menu>

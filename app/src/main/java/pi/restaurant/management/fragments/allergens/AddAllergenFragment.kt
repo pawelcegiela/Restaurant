@@ -12,4 +12,9 @@ class AddAllergenFragment : AbstractModifyAllergenFragment() {
     override val removeMessageId = 0 // Unused
     override val viewModel : AbstractModifyItemViewModel get() = _viewModel
     private val _viewModel : AddAllergenViewModel by viewModels()
+
+    override fun initializeUI() {
+        finishLoading()
+        setNavigationCardsSave()
+    }
 }

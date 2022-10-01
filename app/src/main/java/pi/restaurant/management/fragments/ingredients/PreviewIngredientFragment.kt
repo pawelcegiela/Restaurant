@@ -19,8 +19,9 @@ import pi.restaurant.management.utils.SubItemUtils
 
 class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
-    override val editButton get() = binding.buttonEdit
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewIngredientToEditIngredient
+    override val backActionId = R.id.actionPreviewIngredientToIngredients
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel : PreviewIngredientViewModel by viewModels()
 
@@ -45,7 +46,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         val item = getItem(snapshotsPair)
 
         binding.textViewName.text = item.basic.name
-        binding.textViewAmountWithUnit.text =
+        binding.textViewAmount.text =
             StringFormatUtils.formatAmountWithUnit(requireContext(), item.basic.amount, item.basic.unit)
         binding.checkBoxSubDish.isChecked = item.basic.subDish
 

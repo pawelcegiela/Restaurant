@@ -18,21 +18,13 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <Button
-                android:id="@+id/buttonMyData"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/my_data" />
+            <include
+                android:id="@+id/cardMyData"
+                layout="@layout/card_view_wide" />
 
-            <Button
-                android:id="@+id/buttonPassword"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/password" />
+            <include
+                android:id="@+id/cardPassword"
+                layout="@layout/card_view_wide" />
 
         </LinearLayout>
 

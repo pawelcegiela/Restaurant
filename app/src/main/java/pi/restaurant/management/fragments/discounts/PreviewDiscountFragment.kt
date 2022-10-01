@@ -18,8 +18,9 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
-    override val editButton get() = binding.buttonEdit
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewDiscountToEditDiscount
+    override val backActionId = R.id.actionPreviewDiscountToDiscounts
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel : PreviewDiscountViewModel by viewModels()
 

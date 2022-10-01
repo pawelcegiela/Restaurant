@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentSettingsMainBinding
+import pi.restaurant.management.utils.Utils
 
 class SettingsMainFragment : Fragment() {
     private var _binding: FragmentSettingsMainBinding? = null
@@ -23,14 +24,19 @@ class SettingsMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setCardViews()
+    }
 
-        binding.buttonMyData.setOnClickListener {
-            findNavController().navigate(R.id.actionSettingsToMyData)
-        }
+    private fun setCardViews() {
+        Utils.setCardView(
+            binding.cardMyData, R.drawable.my_data, R.string.my_data,
+            findNavController(), R.id.actionSettingsToMyData
+        )
 
-        binding.buttonPassword.setOnClickListener {
-            findNavController().navigate(R.id.actionSettingsToPassword)
-        }
+        Utils.setCardView(
+            binding.cardPassword, R.drawable.password, R.string.password,
+            findNavController(), R.id.actionSettingsToPassword
+        )
     }
 
     override fun onDestroyView() {

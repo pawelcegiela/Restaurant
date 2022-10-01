@@ -8,6 +8,7 @@
     tools:context=".fragments.workers.PreviewWorkerFragment">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,47 +17,97 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:visibility="gone"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
+            <pi.restaurant.management.views.CardViewPreviewElement
+                android:id="@+id/cardDishDetails"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_margin="10dp">
 
-            <TextView
-                android:id="@+id/textViewEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="25dp"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewRole"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    <LinearLayout
+                        android:id="@+id/workerHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/buttonEdit"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#FFC107"
-                android:text="@string/edit"
-                android:visibility="gone" />
+                        <ImageView
+                            android:id="@+id/imageIcon"
+                            android:layout_width="80dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="10dp"
+                            android:contentDescription="@string/icon"
+                            android:padding="6dp"
+                            android:src="@drawable/worker" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="15dp"
+                            android:orientation="vertical">
+
+                            <pi.restaurant.management.views.TextViewItemName
+                                android:id="@+id/textViewName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="7dp" />
+
+                            <pi.restaurant.management.views.TextViewItemType
+                                android:id="@+id/textViewRole"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <pi.restaurant.management.views.TextViewDetailTitle
+                        android:id="@+id/textViewEmailTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/email_colon" />
+
+                    <pi.restaurant.management.views.TextViewDetail
+                        android:id="@+id/textViewEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <pi.restaurant.management.views.TextViewDetailTitle
+                        android:id="@+id/textViewCreationDateTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/account_creation_date_colon" />
+
+                    <pi.restaurant.management.views.TextViewDetail
+                        android:id="@+id/textViewCreationDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_creation_date_to_display" />
+
+                </LinearLayout>
+
+            </pi.restaurant.management.views.CardViewPreviewElement>
+
+            <include
+                android:id="@+id/cardSetNavigation"
+                layout="@layout/card_set_edit_back" />
 
         </LinearLayout>
 
@@ -64,6 +115,8 @@
 
     <include
         android:id="@+id/progress"
-        layout="@layout/progress_bar" />
+        layout="@layout/progress_bar"
+        app:layout_anchor="@+id/scrollView2"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

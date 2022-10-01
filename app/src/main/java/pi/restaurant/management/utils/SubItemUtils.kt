@@ -15,7 +15,7 @@ import pi.restaurant.management.data.IngredientItem
 class SubItemUtils {
     companion object {
         fun setRecyclerSize(recyclerView: RecyclerView, size: Int, context: Context) {
-            val itemSize = 60
+            val itemSize = 50
             val layoutParams = LinearLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 (itemSize * context.resources.displayMetrics.density * size).toInt()

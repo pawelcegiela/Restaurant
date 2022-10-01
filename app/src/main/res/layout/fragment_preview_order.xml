@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/textViewType"
@@ -84,15 +85,9 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/buttonEdit"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#FFC107"
-                android:text="@string/edit"
-                android:visibility="gone" />
+            <include
+                android:id="@+id/cardSetNavigation"
+                layout="@layout/card_set_edit_back" />
 
         </LinearLayout>
 

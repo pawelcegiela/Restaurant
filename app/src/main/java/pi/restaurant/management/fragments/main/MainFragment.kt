@@ -11,6 +11,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.activities.RestaurantDataActivity
 import pi.restaurant.management.activities.WorkersActivity
 import pi.restaurant.management.databinding.FragmentMainBinding
+import pi.restaurant.management.utils.Utils
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -27,41 +28,49 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setButtonListeners()
+        setCardViews()
     }
 
-    private fun setButtonListeners() {
-        binding.buttonRestaurantData.setOnClickListener {
-            startActivity(Intent(activity, RestaurantDataActivity::class.java))
-        }
+    private fun setCardViews() {
+        Utils.setCardView(
+            binding.cardRestaurantData, R.drawable.restaurant_data, R.string.restaurant_data,
+            findNavController(), R.id.actionMainToRestaurantData
+        )
 
-        binding.buttonWorkers.setOnClickListener {
-            startActivity(Intent(activity, WorkersActivity::class.java))
-        }
+        Utils.setCardView(
+            binding.cardWorkers, R.drawable.worker, R.string.workers,
+            findNavController(), R.id.actionMainToWorkers
+        )
 
-        binding.buttonDishes.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToDishes)
-        }
+        Utils.setCardView(
+            binding.cardDishes, R.drawable.dish, R.string.dishes,
+            findNavController(), R.id.actionMainToDishes
+        )
 
-        binding.buttonAllergens.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToAllergens)
-        }
+        Utils.setCardView(
+            binding.cardAllergens, R.drawable.allergen, R.string.allergens,
+            findNavController(), R.id.actionMainToAllergens
+        )
 
-        binding.buttonOrders.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToOrders)
-        }
+        Utils.setCardView(
+            binding.cardOrders, R.drawable.order, R.string.orders,
+            findNavController(), R.id.actionMainToOrders
+        )
 
-        binding.buttonIngredients.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToIngredients)
-        }
+        Utils.setCardView(
+            binding.cardIngredients, R.drawable.ingredient, R.string.ingredients,
+            findNavController(), R.id.actionMainToIngredients
+        )
 
-        binding.buttonDiscounts.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToDiscounts)
-        }
+        Utils.setCardView(
+            binding.cardDiscounts, R.drawable.discount, R.string.discounts,
+            findNavController(), R.id.actionMainToDiscounts
+        )
 
-        binding.buttonSettings.setOnClickListener {
-            findNavController().navigate(R.id.actionMainToSettings)
-        }
+        Utils.setCardView(
+            binding.cardSettings, R.drawable.settings, R.string.action_settings,
+            findNavController(), R.id.actionMainToSettings
+        )
     }
 
     override fun onDestroyView() {

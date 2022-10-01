@@ -14,6 +14,8 @@ import pi.restaurant.management.enums.Role
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
+import java.util.*
+import kotlin.collections.HashMap
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null
@@ -21,11 +23,11 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val saveButton get() = binding.buttonSave
-    override val removeButton get() = binding.buttonRemove
+    override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = ""
 
     var disabled = false
+    var creationDate = Date()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,8 +60,9 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         )
         val details = UserDetails(
             id = itemId,
-            email = binding.editTextEmail.text.toString()
-        )
+            email = binding.editTextEmail.text.toString(),
+            creationDate = creationDate
+        ) // TODO Temp creation date
 
         return SplitDataObject(itemId, basic, details)
     }
@@ -76,7 +79,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.compareRoles(myRole, (data as UserBasic).role)
+        return PreconditionUtils.compareRoles(viewModel.liveUserRole.value!!, (data as UserBasic).role)
     }
 
     override fun onDestroyView() {

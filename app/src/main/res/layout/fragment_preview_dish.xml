@@ -16,86 +16,159 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:visibility="gone"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            <include
+                android:id="@+id/cardViewDisabled"
+                layout="@layout/card_view_info"
+                android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/textViewDescription"
-                android:layout_width="wrap_content"
+            <pi.restaurant.management.views.CardViewPreviewElement
+                android:id="@+id/cardDishDetails"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_margin="10dp">
 
-            <CheckBox
-                android:id="@+id/checkBoxActive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="15dp"
-                android:checked="true"
-                android:enabled="false"
-                android:text="@string/active" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewBasePrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    <LinearLayout
+                        android:id="@+id/dishHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/checkBoxDiscount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="15dp"
-                android:enabled="false"
-                android:text="@string/discount" />
+                        <ImageView
+                            android:id="@+id/imageIcon"
+                            android:layout_width="80dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="10dp"
+                            android:contentDescription="@string/icon"
+                            android:padding="6dp"
+                            android:src="@drawable/dish" />
 
-            <TextView
-                android:id="@+id/textViewDiscountPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="15dp"
+                            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewDishType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                            <pi.restaurant.management.views.TextViewItemName
+                                android:id="@+id/textViewName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="7dp" />
 
-            <TextView
-                android:id="@+id/textViewAmountWithUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/empty_string"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                            <pi.restaurant.management.views.TextViewItemType
+                                android:id="@+id/textViewDishType"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textViewOriginalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/textViewPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginTop="10dp"
+                        android:textSize="22sp" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutDetailsUnexpanded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <pi.restaurant.management.views.TextViewLessMore
+                            android:id="@+id/textViewDetailsMore"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/show_more" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutDetailsExpanded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <pi.restaurant.management.views.TextViewDetailTitle
+                            android:id="@+id/textViewDescriptionTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/description_colon" />
+
+                        <pi.restaurant.management.views.TextViewDetail
+                            android:id="@+id/textViewDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_dish_description" />
+
+                        <pi.restaurant.management.views.TextViewDetailTitle
+                            android:id="@+id/textViewAmountTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/estimated_amount_weight_colon" />
+
+                        <pi.restaurant.management.views.TextViewDetail
+                            android:id="@+id/textViewAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_amount_dish" />
+
+                        <pi.restaurant.management.views.TextViewDetailTitle
+                            android:id="@+id/textViewRecipeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/recipe_and_info_colon" />
+
+                        <pi.restaurant.management.views.TextViewDetail
+                            android:id="@+id/textViewRecipe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_dish_recipe" />
+
+                        <pi.restaurant.management.views.TextViewLessMore
+                            android:id="@+id/textViewDetailsLess"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/show_less" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </pi.restaurant.management.views.CardViewPreviewElement>
 
             <EditText
                 android:id="@+id/editTextPortions"
@@ -103,10 +176,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:hint="@string/portions"
-                android:text="@string/one"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:visibility="gone"/>
+                android:text="@string/one"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textViewFinalPrice"
@@ -117,81 +190,110 @@
                 android:text="@string/empty_string"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/textViewBaseIngredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/base_ingredients"
-                android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewBaseIngredients"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:layoutManager="LinearLayoutManager" />
-
-            <TextView
-                android:id="@+id/textViewOtherIngredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/other_ingredients"
-                android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewOtherIngredients"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:layoutManager="LinearLayoutManager" />
-
-            <TextView
-                android:id="@+id/textViewPossibleIngredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/possible_ingredients"
-                android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_possible_ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:layoutManager="LinearLayoutManager" />
-
-            <TextView
-                android:id="@+id/textViewAllergens"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/allergens"
-                android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_allergens"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:layoutManager="LinearLayoutManager" />
-
-            <Button
-                android:id="@+id/buttonEdit"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#FFC107"
-                android:text="@string/edit"
                 android:visibility="gone" />
+
+            <pi.restaurant.management.views.CardViewPreviewElement
+                android:id="@+id/cardIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <pi.restaurant.management.views.TextViewCardTitle
+                        android:id="@+id/textViewIngredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="20dp"
+                        android:text="@string/ingredients" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewBaseOtherIngredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:layoutManager="LinearLayoutManager" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutIngredientsUnexpanded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <pi.restaurant.management.views.TextViewLessMore
+                            android:id="@+id/textViewIngredientsMore"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/show_more" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutIngredientsExpanded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <pi.restaurant.management.views.TextViewDetailTitle
+                            android:id="@+id/textViewPossibleIngredients"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="35dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="@string/ingredients_you_can_add_colon" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_possible_ingredients"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            app:layoutManager="LinearLayoutManager" />
+
+                        <pi.restaurant.management.views.TextViewLessMore
+                            android:id="@+id/textViewIngredientsLess"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/show_less" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </pi.restaurant.management.views.CardViewPreviewElement>
+
+            <pi.restaurant.management.views.CardViewPreviewElement
+                android:id="@+id/cardAllergens"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <pi.restaurant.management.views.TextViewCardTitle
+                        android:id="@+id/textViewAllergens"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="20dp"
+                        android:text="@string/allergens" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_allergens"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:layoutManager="LinearLayoutManager" />
+
+                </LinearLayout>
+            </pi.restaurant.management.views.CardViewPreviewElement>
 
             <Button
                 android:id="@+id/buttonAdd"
@@ -202,6 +304,11 @@
                 android:backgroundTint="#FFC107"
                 android:text="@string/add"
                 android:visibility="gone" />
+
+            <include
+                android:id="@+id/cardSetNavigation"
+                layout="@layout/card_set_edit_back" />
+
         </LinearLayout>
 
     </ScrollView>

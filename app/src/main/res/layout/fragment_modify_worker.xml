@@ -81,22 +81,9 @@
                 android:importantForAutofill="no"
                 android:inputType="textPassword" />
 
-            <Button
-                android:id="@+id/buttonSave"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:text="@string/save" />
-
-            <Button
-                android:id="@+id/buttonRemove"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#DF0000"
-                android:text="@string/disable_user" />
+            <include
+                android:id="@+id/cardSetNavigation"
+                layout="@layout/card_set_navigation_modify" />
 
         </LinearLayout>
 

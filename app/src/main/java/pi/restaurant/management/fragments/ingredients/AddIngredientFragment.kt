@@ -16,6 +16,7 @@ class AddIngredientFragment : AbstractModifyIngredientFragment() {
     override fun initializeUI() {
         super.initializeUI()
         getIngredientListAndSetIngredientButton()
+        setNavigationCardsSave()
         finishLoading()
     }
 }

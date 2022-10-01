@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/textViewName"
@@ -29,7 +30,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textViewAmountWithUnit"
+                android:id="@+id/textViewAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -52,15 +53,9 @@
                 android:layout_height="250dp"
                 app:layoutManager="LinearLayoutManager" />
 
-            <Button
-                android:id="@+id/buttonEdit"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#FFC107"
-                android:text="@string/edit"
-                android:visibility="gone" />
+            <include
+                android:id="@+id/cardSetNavigation"
+                layout="@layout/card_set_edit_back" />
 
         </LinearLayout>
 

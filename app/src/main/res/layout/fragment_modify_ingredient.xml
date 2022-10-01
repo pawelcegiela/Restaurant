@@ -23,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:enabled="false"
                 android:hint="@string/name"
                 android:importantForAutofill="no"
                 android:inputType="text" />
@@ -33,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:enabled="false"
                 android:hint="@string/amount"
                 android:importantForAutofill="no"
                 android:inputType="number" />
@@ -42,8 +40,7 @@
                 android:id="@+id/spinnerUnit"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_margin="15dp"
-                android:enabled="false" />
+                android:layout_margin="15dp" />
 
             <CheckBox
                 android:id="@+id/checkBoxSubDish"
@@ -67,25 +64,9 @@
                 android:text="@string/add_sub_ingredient"
                 android:visibility="gone" />
 
-            <Button
-                android:id="@+id/buttonSave"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:enabled="false"
-                android:text="@string/no_permission" />
-
-            <Button
-                android:id="@+id/buttonRemove"
-                android:layout_width="280dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#DF0000"
-                android:enabled="false"
-                android:text="@string/no_permission"
-                android:visibility="gone" />
+            <include
+                android:id="@+id/cardSetNavigation"
+                layout="@layout/card_set_navigation_modify" />
 
         </LinearLayout>
 
