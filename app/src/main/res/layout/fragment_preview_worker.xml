@@ -22,7 +22,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <pi.restaurant.management.views.CardViewPreviewElement
-                android:id="@+id/cardDishDetails"
+                android:id="@+id/cardWorkerDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -53,7 +53,7 @@
                             android:src="@drawable/worker" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginHorizontal="15dp"

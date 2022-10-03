@@ -55,16 +55,36 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     private fun initializeSpinners() {
         binding.spinnerType.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, OrderType.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                OrderType.getArrayOfStrings(requireContext())
+            )
 
         binding.spinnerStatus.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, OrderStatus.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                OrderStatus.getArrayOfStrings(requireContext())
+            )
 
         binding.spinnerDelivery.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, DeliveryType.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                DeliveryType.getArrayOfStrings(requireContext())
+            )
 
         binding.spinnerPlace.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, OrderPlace.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                OrderPlace.getArrayOfStrings(requireContext())
+            )
     }
 
     fun initializeRecycler() {
@@ -96,9 +116,25 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
             orderDate = orderDate ?: Date(),
             orderPlace = binding.spinnerPlace.selectedItemId.toInt(),
             dishes = HashMap(dishesList.associateBy { it.id }),
+            address = getAddress()
         )
 
         return SplitDataObject(itemId, basic, details)
+    }
+
+    private fun getAddress(): AddressBasic? {
+        return if (binding.spinnerDelivery.selectedItemId.toInt() == DeliveryType.DELIVERY.ordinal) {
+            AddressBasic(
+                id = itemId,
+                city = binding.address.editTextCity.text.toString(),
+                postalCode = binding.address.editTextPostalCode.text.toString(),
+                street = binding.address.editTextStreet.text.toString(),
+                houseNumber = binding.address.editTextHouseNumber.text.toString(),
+                flatNumber = binding.address.editTextFlatNumber.text.toString()
+            )
+        } else {
+            null
+        }
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

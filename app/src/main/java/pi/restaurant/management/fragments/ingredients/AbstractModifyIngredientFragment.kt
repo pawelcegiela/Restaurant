@@ -6,22 +6,18 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
 import pi.restaurant.management.enums.IngredientItemState
+import pi.restaurant.management.enums.IngredientStatus
 import pi.restaurant.management.enums.Unit
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.listeners.SubIngredientOnClickListener
+import pi.restaurant.management.listeners.AddIngredientButtonListener
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
+import pi.restaurant.management.views.DialogIngredientProperties
 
 
 abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
@@ -53,7 +49,12 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
     private fun initializeSpinner() {
         binding.spinnerUnit.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, Unit.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                Unit.getArrayOfStrings(requireContext())
+            )
     }
 
     private fun setCheckBoxListener() {
@@ -68,42 +69,49 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     }
 
     fun getIngredientListAndSetIngredientButton() {
-        val databaseRef = Firebase.database.getReference("ingredients").child("basic")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = dataSnapshot.getValue<HashMap<String, IngredientBasic>>() ?: return
-                allIngredients = data.toList().map { it.second }.toMutableList()
-                SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, subIngredientsList.size, context!!)
-                binding.buttonAddSubIngredient.setOnClickListener(
-                    SubIngredientOnClickListener(
-                        context!!,
-                        allIngredients.map { it.name }.toMutableList(),
-                        subIngredientsList,
-                        binding.recyclerViewSubIngredients,
-                        allIngredients,
-                        this@AbstractModifyIngredientFragment
-                    )
+        (viewModel as AbstractModifyIngredientViewModel).getAllIngredients()
+        (viewModel as AbstractModifyIngredientViewModel).liveAllIngredients.observe(viewLifecycleOwner) { list ->
+            allIngredients = list
+            SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, subIngredientsList.size, requireContext())
+            binding.buttonAddSubIngredient.setOnClickListener(
+                AddIngredientButtonListener(
+                    subIngredientsList,
+                    allIngredients,
+                    this@AbstractModifyIngredientFragment
                 )
-                binding.recyclerViewSubIngredients.adapter =
-                    DishIngredientsRecyclerAdapter(subIngredientsList, this@AbstractModifyIngredientFragment, 0)
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+            )
+            binding.recyclerViewSubIngredients.adapter =
+                DishIngredientsRecyclerAdapter(subIngredientsList, this@AbstractModifyIngredientFragment, IngredientStatus.BASE)
+        }
     }
 
-    fun changeIngredientItemState(item: MenuItem, ingredientItem: IngredientItem) {
-        val targetState = when (item.itemId) {
-            R.id.changeAmount -> IngredientItemState.CHANGE_AMOUNT
-            else -> IngredientItemState.REMOVE
-        }
+    fun changeSubIngredientProperties(ingredientItem: IngredientItem) {
+        DialogIngredientProperties(this, Pair(ingredientItem, IngredientStatus.BASE), false)
+    }
 
-        if (targetState == IngredientItemState.REMOVE) {
-            SubItemUtils.removeIngredientItem(subIngredientsList, binding.recyclerViewSubIngredients, ingredientItem, requireContext())
+    fun removeSubIngredient(item: Pair<IngredientItem, IngredientStatus>) {
+        SubItemUtils.removeIngredientItem(
+            subIngredientsList,
+            binding.recyclerViewSubIngredients,
+            item.first,
+            requireContext()
+        )
+    }
+
+    fun saveSubIngredient(
+        oldItem: IngredientItem,
+        newItem: IngredientItem,
+        isNew: Boolean
+    ) {
+        if (isNew) {
+            subIngredientsList.add(newItem)
+        } else {
+            subIngredientsList
+                .find { it == oldItem }.also { it?.amount = newItem.amount }
+                .also { it?.extraPrice = newItem.extraPrice }
         }
-        if (targetState == IngredientItemState.CHANGE_AMOUNT) {
-            SubItemUtils.addChangeIngredientItemAmountDialog(binding.recyclerViewSubIngredients, ingredientItem, requireContext())
-        }
+        binding.recyclerViewSubIngredients.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        SubItemUtils.setRecyclerSize(binding.recyclerViewSubIngredients, subIngredientsList.size, requireContext())
     }
 
     override fun getDataObject(): SplitDataObject {
@@ -112,7 +120,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         val basic = IngredientBasic(
             id = itemId,
             name = binding.editTextName.text.toString(),
-            amount = binding.editTextAmount.text.toString().toInt(),
+            amount = if (binding.checkBoxSubDish.isChecked) binding.editTextAmount.text.toString().toInt() else 0,
             unit = binding.spinnerUnit.selectedItemPosition,
             subDish = binding.checkBoxSubDish.isChecked,
         )

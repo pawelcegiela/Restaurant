@@ -43,42 +43,42 @@ class LocationFragment : AbstractModifyItemFragment() {
         setNavigationCardsSave()
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair): Location {
-        val basic = snapshotsPair.basic?.getValue<LocationBasic>() ?: LocationBasic()
-        val details = snapshotsPair.details?.getValue<LocationDetails>() ?: LocationDetails()
-        return Location(basic, details)
+    private fun getItem(snapshotsPair: SnapshotsPair): Address {
+        val basic = snapshotsPair.basic?.getValue<AddressBasic>() ?: AddressBasic()
+        val details = snapshotsPair.details?.getValue<AddressDetails>() ?: AddressDetails()
+        return Address(basic, details)
     }
 
     override fun fillInData(snapshotsPair: SnapshotsPair) {
         val data = getItem(snapshotsPair)
-        binding.editTextCity.setText(data.basic.city)
-        binding.editTextPostalCode.setText(data.basic.postalCode)
-        binding.editTextStreet.setText(data.basic.street)
-        binding.editTextHouseNumber.setText(data.basic.houseNumber)
-        binding.editTextFlatNumber.setText(data.basic.flatNumber)
+        binding.address.editTextCity.setText(data.basic.city)
+        binding.address.editTextPostalCode.setText(data.basic.postalCode)
+        binding.address.editTextStreet.setText(data.basic.street)
+        binding.address.editTextHouseNumber.setText(data.basic.houseNumber)
+        binding.address.editTextFlatNumber.setText(data.basic.flatNumber)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
-        map[binding.editTextStreet] = R.string.street
-        map[binding.editTextHouseNumber] = R.string.house_number
-        map[binding.editTextPostalCode] = R.string.postal_code
-        map[binding.editTextCity] = R.string.city
+        map[binding.address.editTextStreet] = R.string.street
+        map[binding.address.editTextHouseNumber] = R.string.house_number
+        map[binding.address.editTextPostalCode] = R.string.postal_code
+        map[binding.address.editTextCity] = R.string.city
         return map
     }
 
     override fun getDataObject(): SplitDataObject {
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
-        val basic = LocationBasic(
-            city = binding.editTextCity.text.toString(),
-            postalCode = binding.editTextPostalCode.text.toString(),
-            street = binding.editTextStreet.text.toString(),
-            houseNumber = binding.editTextHouseNumber.text.toString(),
-            flatNumber = binding.editTextFlatNumber.text.toString()
+        val basic = AddressBasic(
+            city = binding.address.editTextCity.text.toString(),
+            postalCode = binding.address.editTextPostalCode.text.toString(),
+            street = binding.address.editTextStreet.text.toString(),
+            houseNumber = binding.address.editTextHouseNumber.text.toString(),
+            flatNumber = binding.address.editTextFlatNumber.text.toString()
         )
 
-        return SplitDataObject(itemId, basic, LocationDetails())
+        return SplitDataObject(itemId, basic, AddressDetails())
     }
 
     override fun onDestroyView() {

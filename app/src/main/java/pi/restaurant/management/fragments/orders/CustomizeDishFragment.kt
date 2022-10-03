@@ -17,6 +17,7 @@ import pi.restaurant.management.databinding.CardSetEditBackBinding
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.enums.IngredientItemState
+import pi.restaurant.management.enums.IngredientStatus
 import pi.restaurant.management.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.utils.SnapshotsPair
@@ -26,6 +27,7 @@ import pi.restaurant.management.utils.SubItemUtils
 
 class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
+    override val progressBar get() = binding.progress.progressBar
     override val cardSetNavigation: CardSetEditBackBinding? = null
     override val editActionId = R.id.actionPreviewDishToEditDish
     override val backActionId = R.id.actionPreviewOrderToOrders // TODO czy ok?
@@ -90,20 +92,20 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
 
         initializeRecyclerViews(item)
 
-        binding.progress.progressBar.visibility = View.GONE
+        viewModel.liveReadyToUnlock.value = true
     }
 
     private fun initializeRecyclerViews(item: Dish) {
 //        binding.recyclerViewBaseIngredients.adapter =
-//            DishIngredientsRecyclerAdapter(item.details.baseIngredients.toList().map { it.second }.toMutableList(), this, 0)
+//            DishIngredientsRecyclerAdapter(item.details.baseIngredients.toList().map { it.second }.toMutableList(), this, IngredientStatus.BASE)
 //        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.details.baseIngredients.size, requireContext())
 //
 //        binding.recyclerViewOtherIngredients.adapter =
-//            DishIngredientsRecyclerAdapter(otherIngredientsList, this, 1)
+//            DishIngredientsRecyclerAdapter(otherIngredientsList, this, IngredientStatus.OTHER)
 //        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.details.otherIngredients.size, requireContext())
 
         binding.recyclerViewPossibleIngredients.adapter =
-            DishIngredientsRecyclerAdapter(possibleIngredientsList, this, 2)
+            DishIngredientsRecyclerAdapter(possibleIngredientsList, this, IngredientStatus.POSSIBLE)
         SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.details.possibleIngredients.size, requireContext())
 
         binding.recyclerViewAllergens.adapter =

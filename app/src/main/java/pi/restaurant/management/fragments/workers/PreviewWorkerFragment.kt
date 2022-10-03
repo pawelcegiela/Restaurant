@@ -17,11 +17,12 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
+    override val progressBar get() = binding.progress.progressBar
     override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewWorkerToEditWorker
     override val backActionId = R.id.actionPreviewWorkerToWorkers
-    override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
-    private val _viewModel : PreviewWorkerViewModel by viewModels()
+    override val viewModel: AbstractPreviewItemViewModel get() = _viewModel
+    private val _viewModel: PreviewWorkerViewModel by viewModels()
 
     private var _binding: FragmentPreviewWorkerBinding? = null
     val binding get() = _binding!!
@@ -34,7 +35,7 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair) : User {
+    private fun getItem(snapshotsPair: SnapshotsPair): User {
         val basic = snapshotsPair.basic?.getValue<UserBasic>() ?: UserBasic()
         val details = snapshotsPair.details?.getValue<UserDetails>() ?: UserDetails()
         return User(itemId, basic, details)
@@ -47,10 +48,17 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         binding.textViewEmail.text = item.details.email
         binding.textViewRole.text = Role.getString(item.basic.role, requireContext())
         binding.textViewCreationDate.text = StringFormatUtils.formatDate(item.details.creationDate)
-        binding.progress.progressBar.visibility = View.GONE    }
 
-    // TODO Temporary - somehow check preconditions first!
+        viewModel.liveReadyToUnlock.value = true
+    }
+
     override fun initializeUI() {
-        initializeWorkerUI()
+        val myRole = viewModel.liveUserRole.value ?: Role.getPlaceholder()
+        val previewedUserRole = viewModel.liveDataSnapshot.value?.basic?.getValue<UserBasic>()?.role ?: Role.getPlaceholder()
+        if (myRole < previewedUserRole) {
+            super.initializeUI()
+        } else {
+            initializeWorkerUI()
+        }
     }
 }

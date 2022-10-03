@@ -4,13 +4,13 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.widget.Button
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.data.IngredientItem
+import pi.restaurant.management.enums.IngredientStatus
+import pi.restaurant.management.views.DialogIngredientProperties
 
 class SubItemUtils {
     companion object {
@@ -21,44 +21,6 @@ class SubItemUtils {
                 (itemSize * context.resources.displayMetrics.density * size).toInt()
             )
             recyclerView.layoutParams = layoutParams
-        }
-
-        fun addChangeIngredientItemAmountDialog(recyclerView: RecyclerView, item: IngredientItem, context: Context) {
-            val dialog = Dialog(context)
-
-            dialog.setContentView(R.layout.dialog_dish_ingredient_amount)
-            dialog.window!!.setLayout(1000, 1000)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-
-            val editText = dialog.findViewById<EditText>(R.id.editTextAmount)
-            val button = dialog.findViewById<Button>(R.id.buttonEnter)
-
-            editText.setText(item.amount.toString())
-            button.setOnClickListener {
-                item.amount = if (editText.text.isEmpty()) 0.0 else editText.text.toString().toDouble()
-                dialog.dismiss()
-                recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-            }
-        }
-
-        fun addChangeIngredientExtraPriceDialog(recyclerView: RecyclerView, item: IngredientItem, context: Context) {
-            val dialog = Dialog(context)
-
-            dialog.setContentView(R.layout.dialog_dish_ingredient_amount) //TODO Można to kiedyś zmienić
-            dialog.window!!.setLayout(1000, 1000)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-
-            val editText = dialog.findViewById<EditText>(R.id.editTextAmount)
-            val button = dialog.findViewById<Button>(R.id.buttonEnter)
-
-            editText.setText(item.extraPrice.toString())
-            button.setOnClickListener {
-                item.extraPrice = if (editText.text.isEmpty()) 0.0 else editText.text.toString().toDouble()
-                dialog.dismiss()
-                recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-            }
         }
 
         fun removeIngredientItem(
@@ -72,15 +34,5 @@ class SubItemUtils {
             setRecyclerSize(recyclerView, list.size, context)
         }
 
-        fun addIngredientItem(
-            list: MutableList<IngredientItem>,
-            recyclerView: RecyclerView,
-            item: IngredientItem,
-            context: Context
-        ) {
-            list.add(item)
-            recyclerView.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-            setRecyclerSize(recyclerView, list.size, context)
-        }
     }
 }

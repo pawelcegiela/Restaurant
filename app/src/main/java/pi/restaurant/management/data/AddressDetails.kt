@@ -1,5 +1,5 @@
 package pi.restaurant.management.data
 
-class LocationDetails : AbstractDataObject() {
+class AddressDetails : AbstractDataObject() {
     override var id = "location"
 }

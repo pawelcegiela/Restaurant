@@ -17,6 +17,7 @@ abstract class AbstractPreviewItemViewModel : ViewModel() {
 
     val liveUserRole = MutableLiveData(Role.getPlaceholder())
     val liveDataSnapshot = MutableLiveData(SnapshotsPair())
+    val liveReadyToUnlock = MutableLiveData<Boolean>()
 
     val snapshotsPair = SnapshotsPair()
 

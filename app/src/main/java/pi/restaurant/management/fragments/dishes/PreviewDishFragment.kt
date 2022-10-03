@@ -26,6 +26,7 @@ import pi.restaurant.management.utils.SubItemUtils
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
+    override val progressBar get() = binding.progress.progressBar
     override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewDishToEditDish
     override val backActionId = R.id.actionPreviewDishToDishes
@@ -53,8 +54,12 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         val item = getItem(snapshotsPair)
 
         binding.textViewName.text = item.basic.name
-        binding.textViewDescription.text = item.details.description
-        binding.textViewRecipe.text = item.details.recipe
+        if (item.details.description.isNotEmpty()) {
+            binding.textViewDescription.text = item.details.description
+        }
+        if (item.details.recipe.isNotEmpty()) {
+            binding.textViewRecipe.text = item.details.recipe
+        }
         if (!item.basic.isActive) {
             binding.cardViewDisabled.root.visibility = View.VISIBLE
             binding.cardViewDisabled.textViewInfo.text = getText(R.string.dish_unavailable)
@@ -62,7 +67,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         if (item.basic.isDiscounted) {
             binding.textViewPrice.text = StringFormatUtils.formatPrice(item.basic.discountPrice)
             binding.textViewOriginalPrice.paintFlags =
-                binding.textViewFinalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG // TODO NIE DZIALA
+                binding.textViewFinalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             binding.textViewOriginalPrice.visibility = View.VISIBLE
             binding.textViewOriginalPrice.text = StringFormatUtils.formatPrice(item.basic.basePrice)
         } else {
@@ -75,7 +80,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         initializeRecyclerViews(item)
         initializeMoreLessButtons()
 
-        binding.progress.progressBar.visibility = View.GONE
+        viewModel.liveReadyToUnlock.value = true
     }
 
     private fun initializeRecyclerViews(item: Dish) {
@@ -87,7 +92,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
             PreviewDishIngredientRecyclerAdapter(baseOtherIngredients, this)
         SubItemUtils.setRecyclerSize(binding.recyclerViewBaseOtherIngredients, baseOtherIngredients.size, requireContext())
 
-        val possibleIngredients = item.details.possibleIngredients.toList().map { it.second to IngredientStatus.POSSIBLE}
+        val possibleIngredients = item.details.possibleIngredients.toList().map { it.second to IngredientStatus.POSSIBLE }
 
         binding.recyclerViewPossibleIngredients.adapter =
             PreviewDishIngredientRecyclerAdapter(possibleIngredients, this)

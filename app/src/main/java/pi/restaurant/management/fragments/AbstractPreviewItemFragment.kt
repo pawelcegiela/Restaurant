@@ -3,6 +3,7 @@ package pi.restaurant.management.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.databinding.CardSetEditBackBinding
@@ -13,6 +14,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val viewModel: AbstractPreviewItemViewModel
 
     abstract val linearLayout: LinearLayout
+    abstract val progressBar: ProgressBar
     abstract val cardSetNavigation: CardSetEditBackBinding?
     abstract val editActionId: Int
     abstract val backActionId: Int
@@ -29,7 +31,6 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         viewModel.liveUserRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
                 if (role < Role.WORKER.ordinal) {
-                    initializeUI()
                     viewModel.getDataFromDatabase(itemId)
                 } else {
                     initializeWorkerUI()
@@ -40,7 +41,14 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { snapshotPair ->
             if (snapshotPair.isReady()) {
                 fillInData(snapshotPair)
+                initializeUI()
+            }
+        }
+
+        viewModel.liveReadyToUnlock.observe(viewLifecycleOwner) { ready ->
+            if (ready) {
                 linearLayout.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
             }
         }
     }
@@ -63,7 +71,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         cardSetNavigation?.cardBack?.root?.setOnClickListener {
             findNavController().navigate(backActionId)
         }
-        linearLayout.visibility = View.VISIBLE
+        viewModel.liveReadyToUnlock.value = true
     }
 
     abstract fun fillInData(snapshotsPair: SnapshotsPair)

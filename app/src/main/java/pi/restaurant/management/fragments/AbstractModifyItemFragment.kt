@@ -127,10 +127,14 @@ abstract class AbstractModifyItemFragment : Fragment() {
     }
 
     private fun removeFromDatabase(snapshotsPair: SnapshotsPair) {
+        if (!checkRemovePreconditions()) {
+            return
+        }
         val dialogBuilder = AlertDialog.Builder(this.context)
         dialogBuilder.setTitle(getString(R.string.warning))
         dialogBuilder.setMessage(getString(R.string.do_you_want_to_remove))
         dialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+            viewModel.removeAdditionalElements()
             for (snapshot in snapshotsPair.basic!!.children) {
                 snapshot.ref.removeValue()
             }
@@ -147,6 +151,8 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
         dialogBuilder.create().show()
     }
+
+    open fun checkRemovePreconditions() = true
 
     fun finishLoading() {
         progressBar.visibility = View.GONE

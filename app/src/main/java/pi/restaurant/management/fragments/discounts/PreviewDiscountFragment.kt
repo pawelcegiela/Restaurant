@@ -18,6 +18,7 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
+    override val progressBar get() = binding.progress.progressBar
     override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewDiscountToEditDiscount
     override val backActionId = R.id.actionPreviewDiscountToDiscounts
@@ -51,6 +52,7 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
         binding.textViewAmount.text = item.basic.amount.toString()
         binding.textViewType.text = DiscountType.getString(item.basic.type, requireContext())
         binding.textViewExpirationDate.text = StringFormatUtils.formatDate(item.basic.expirationDate)
-        binding.progress.progressBar.visibility = View.GONE
+
+        viewModel.liveReadyToUnlock.value = true
     }
 }

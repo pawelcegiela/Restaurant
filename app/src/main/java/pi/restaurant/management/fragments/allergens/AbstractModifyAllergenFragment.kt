@@ -37,8 +37,12 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
             id = itemId,
             name = binding.editTextName.text.toString()
         )
+        val details = AllergenDetails(
+            id = itemId,
+            description = binding.editTextDescription.text.toString()
+        )
 
-        return SplitDataObject(itemId, basic, AllergenDetails())
+        return SplitDataObject(itemId, basic, details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

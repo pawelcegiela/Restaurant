@@ -27,6 +27,15 @@
                 android:importantForAutofill="no"
                 android:inputType="text" />
 
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:hint="@string/description"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+
             <include
                 android:id="@+id/cardSetNavigation"
                 layout="@layout/card_set_navigation_modify" />

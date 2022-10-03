@@ -40,6 +40,11 @@ class EditOrderFragment : AbstractModifyOrderFragment() {
         binding.editTextCollectionTime.setText(StringFormatUtils.formatTime(data.basic.collectionDate))
         binding.spinnerDelivery.setSelection(data.basic.deliveryType)
         binding.spinnerPlace.setSelection(data.details.orderPlace)
+        binding.address.editTextCity.setText(data.details.address?.city)
+        binding.address.editTextPostalCode.setText(data.details.address?.postalCode)
+        binding.address.editTextStreet.setText(data.details.address?.street)
+        binding.address.editTextHouseNumber.setText(data.details.address?.houseNumber)
+        binding.address.editTextFlatNumber.setText(data.details.address?.flatNumber)
         dishesList = data.details.dishes.toList().map { it.second }.toMutableList()
 
         addLiveDataListener()

@@ -3,6 +3,7 @@ package pi.restaurant.management.adapters
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -55,8 +56,12 @@ class IngredientsRecyclerAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewName.text = dataSet[position].name
-        viewHolder.binding.textViewAmount.text =
-            StringFormatUtils.formatAmountWithUnit(fragment.requireContext(), dataSet[position].amount, dataSet[position].unit)
+        if (dataSet[position].subDish) {
+            viewHolder.binding.textViewAmount.visibility = View.GONE
+        } else {
+            viewHolder.binding.textViewAmount.text =
+                StringFormatUtils.formatAmountWithUnit(fragment.requireContext(), dataSet[position].amount, dataSet[position].unit)
+        }
         viewHolder.binding.textViewIngredientType.text = if (dataSet[position].subDish) "Sub-Dish" else "Ingredient"
     }
 

@@ -7,12 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
@@ -20,12 +14,14 @@ import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
 import pi.restaurant.management.enums.DishType
 import pi.restaurant.management.enums.IngredientItemState
+import pi.restaurant.management.enums.IngredientStatus
 import pi.restaurant.management.enums.Unit
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.listeners.AllergenModifyDishOnClickListener
-import pi.restaurant.management.listeners.IngredientModifyDishOnClickListener
+import pi.restaurant.management.listeners.AddIngredientButtonListener
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
+import pi.restaurant.management.views.DialogIngredientProperties
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
@@ -46,6 +42,14 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     var allergensList: MutableList<AllergenBasic> = ArrayList()
     lateinit var allIngredients: MutableList<IngredientBasic>
     lateinit var allAllergens: MutableList<AllergenBasic>
+
+    private val lists get() = arrayListOf(baseIngredientsList, otherIngredientsList, possibleIngredientsList)
+    private val recyclers
+        get() = arrayListOf(
+            binding.recyclerViewBaseIngredients,
+            binding.recyclerViewOtherIngredients,
+            binding.recyclerViewPossibleIngredients
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,80 +113,61 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
     fun initializeSpinners() {
         binding.spinnerUnit.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, Unit.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                Unit.getArrayOfStrings(requireContext())
+            )
 
         binding.spinnerDishType.adapter =
-            ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, DishType.getArrayOfStrings(requireContext()))
+            ArrayAdapter(
+                requireContext(),
+                R.layout.spinner_item_view,
+                R.id.itemTextView,
+                DishType.getArrayOfStrings(requireContext())
+            )
     }
 
     fun getIngredientListAndSetIngredientButtons() {
-        val databaseRef = Firebase.database.getReference("ingredients").child("basic")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = dataSnapshot.getValue<HashMap<String, IngredientBasic>>() ?: return
-                allIngredients = data.toList().map { it.second }.toMutableList()
-                setIngredientViews()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        (viewModel as AbstractModifyDishViewModel).getAllIngredients()
+        (viewModel as AbstractModifyDishViewModel).liveAllIngredients.observe(viewLifecycleOwner) { list ->
+            allIngredients = list
+            setIngredientViews()
+        }
     }
 
     fun setIngredientViews() {
-        val list = allIngredients.map { it.name }.toMutableList()
+        val list =
+            ArrayList(baseIngredientsList).also { it.addAll(otherIngredientsList) }.also { it.addAll(possibleIngredientsList) }
 
-        setAddIngredientButton(
-            binding.buttonAddBaseIngredient, list, baseIngredientsList, binding.recyclerViewBaseIngredients
-        )
-        setAddIngredientButton(
-            binding.buttonAddOtherIngredient, list, otherIngredientsList, binding.recyclerViewOtherIngredients
-        )
-        setAddIngredientButton(
-            binding.buttonAddPossibleIngredient, list, possibleIngredientsList, binding.recyclerViewPossibleIngredients
-        )
-
-        binding.recyclerViewBaseIngredients.adapter =
-            DishIngredientsRecyclerAdapter(baseIngredientsList, this, 0)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, baseIngredientsList.size, requireContext())
-
-        binding.recyclerViewOtherIngredients.adapter =
-            DishIngredientsRecyclerAdapter(otherIngredientsList, this, 1)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, otherIngredientsList.size, requireContext())
-
-        binding.recyclerViewPossibleIngredients.adapter =
-            DishIngredientsRecyclerAdapter(possibleIngredientsList, this, 2)
-        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, possibleIngredientsList.size, requireContext())
-    }
-
-    private fun setAddIngredientButton(
-        button: Button,
-        list: List<String>,
-        recyclerList: MutableList<IngredientItem>,
-        recyclerView: RecyclerView
-    ) {
-        button.setOnClickListener(
-            IngredientModifyDishOnClickListener(
-                requireContext(),
+        binding.buttonAddIngredient.setOnClickListener(
+            AddIngredientButtonListener(
                 list,
-                recyclerList,
-                recyclerView,
                 allIngredients,
                 this
             )
         )
+
+        binding.recyclerViewBaseIngredients.adapter =
+            DishIngredientsRecyclerAdapter(baseIngredientsList, this, IngredientStatus.BASE)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, baseIngredientsList.size, requireContext())
+
+        binding.recyclerViewOtherIngredients.adapter =
+            DishIngredientsRecyclerAdapter(otherIngredientsList, this, IngredientStatus.OTHER)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, otherIngredientsList.size, requireContext())
+
+        binding.recyclerViewPossibleIngredients.adapter =
+            DishIngredientsRecyclerAdapter(possibleIngredientsList, this, IngredientStatus.POSSIBLE)
+        SubItemUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, possibleIngredientsList.size, requireContext())
     }
 
     fun getAllergenListAndSetAllergenButtons() {
-        val databaseRef = Firebase.database.getReference("allergens").child("basic")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = dataSnapshot.getValue<HashMap<String, AllergenBasic>>() ?: return
-                allAllergens = data.toList().map { it.second }.toMutableList()
-                setAllergenViews()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        (viewModel as AbstractModifyDishViewModel).getAllAllergens()
+        (viewModel as AbstractModifyDishViewModel).liveAllAllergens.observe(viewLifecycleOwner) { list ->
+            allAllergens = list
+            setAllergenViews()
+        }
     }
 
     fun setAllergenViews() {
@@ -201,54 +186,39 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         SubItemUtils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, requireContext())
     }
 
-    fun checkIfIngredientItemExists(ingredientId: String): Boolean {
-        return baseIngredientsList.map { it.id }.contains(ingredientId)
-                || otherIngredientsList.map { it.id }.contains(ingredientId)
-                || possibleIngredientsList.map { it.id }.contains(ingredientId)
+    fun changeIngredientProperties(ingredientItem: IngredientItem, originalList: IngredientStatus) {
+        DialogIngredientProperties(this, Pair(ingredientItem, originalList), false)
     }
 
-    fun changeIngredientItemState(
-        item: MenuItem,
-        ingredientItem: IngredientItem,
-        originalListId: Int
-    ) {
-        val targetState = when (item.itemId) {
-            R.id.setBase -> IngredientItemState.BASE
-            R.id.setOther -> IngredientItemState.OTHER
-            R.id.setPossible -> IngredientItemState.POSSIBLE
-            R.id.changeAmount -> IngredientItemState.CHANGE_AMOUNT
-            R.id.changeExtraPrice -> IngredientItemState.CHANGE_EXTRA_PRICE
-            else -> IngredientItemState.REMOVE
-        }
-
-        if (originalListId == targetState.ordinal) {
-            return
-        }
-
-        val lists = arrayListOf(baseIngredientsList, otherIngredientsList, possibleIngredientsList)
-        val recyclers = arrayListOf(
-            binding.recyclerViewBaseIngredients,
-            binding.recyclerViewOtherIngredients,
-            binding.recyclerViewPossibleIngredients
+    fun removeIngredient(item: Pair<IngredientItem, IngredientStatus>) {
+        SubItemUtils.removeIngredientItem(
+            lists[item.second.ordinal],
+            recyclers[item.second.ordinal],
+            item.first,
+            requireContext()
         )
+    }
 
-        if (IngredientItemState.isActionRemove(targetState)) {
-            SubItemUtils.removeIngredientItem(lists[originalListId], recyclers[originalListId], ingredientItem, requireContext())
-            ingredientItem.extraPrice = 0.0
+    fun saveIngredient(
+        oldItem: Pair<IngredientItem, IngredientStatus>,
+        newItem: Pair<IngredientItem, IngredientStatus>,
+        isNew: Boolean
+    ) {
+        if (isNew) {
+            lists[newItem.second.ordinal].add(newItem.first)
+        } else if (oldItem.second == newItem.second) {
+            lists[newItem.second.ordinal]
+                .find { it == oldItem.first }.also { it?.amount = newItem.first.amount }
+                .also { it?.extraPrice = newItem.first.extraPrice }
+        } else {
+            lists[oldItem.second.ordinal].remove(oldItem.first)
+            lists[newItem.second.ordinal].add(newItem.first)
+
+            recyclers[oldItem.second.ordinal].adapter?.notifyDataSetChanged() //TODO Zła praktyka
+            SubItemUtils.setRecyclerSize(recyclers[oldItem.second.ordinal], lists[oldItem.second.ordinal].size, requireContext())
         }
-        if (IngredientItemState.isActionAdd(targetState)) {
-            SubItemUtils.addIngredientItem(lists[targetState.ordinal], recyclers[targetState.ordinal], ingredientItem, requireContext())
-        }
-        if (targetState == IngredientItemState.CHANGE_AMOUNT) {
-            SubItemUtils.addChangeIngredientItemAmountDialog(recyclers[originalListId], ingredientItem, requireContext())
-        }
-        if (targetState == IngredientItemState.CHANGE_EXTRA_PRICE) {
-            if (originalListId != 2) {
-                Toast.makeText(context, getString(R.string.only_possible_have_extra_price), Toast.LENGTH_SHORT).show()
-            } else {
-                SubItemUtils.addChangeIngredientExtraPriceDialog(recyclers[originalListId], ingredientItem, requireContext())
-            }
-        }
+        recyclers[newItem.second.ordinal].adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        SubItemUtils.setRecyclerSize(recyclers[newItem.second.ordinal], lists[newItem.second.ordinal].size, requireContext())
     }
 
     // TODO problemy z mutable list

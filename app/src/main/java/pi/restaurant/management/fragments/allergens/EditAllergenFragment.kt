@@ -32,6 +32,7 @@ class EditAllergenFragment : AbstractModifyAllergenFragment() {
     override fun fillInData(snapshotsPair: SnapshotsPair) {
         val data = getItem(snapshotsPair)
         binding.editTextName.setText(data.basic.name)
+        binding.editTextDescription.setText(data.details.description)
         finishLoading()
     }
 }

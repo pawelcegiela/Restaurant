@@ -20,14 +20,17 @@ class AllergenModifyDishOnClickListener(
     override fun setOnItemClickListener(dialog: Dialog, listView: ListView) {
         listView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                if (allergensList.map { it.id }.contains(allAllergens[position].id)) {
+                val list = allAllergens.filter {
+                    it.name.lowercase().contains(dialog.findViewById<EditText>(R.id.editTextSearch).text.toString().lowercase())
+                }
+                if (allergensList.map { it.id }.contains(list[position].id)) {
                     Toast.makeText(
                         fragment.activity,
                         fragment.getString(R.string.allergen_already_added),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    val item = allAllergens[position]
+                    val item = list[position]
                     fragment.addAllergenItem(item)
                 }
                 dialog.dismiss()

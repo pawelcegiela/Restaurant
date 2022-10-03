@@ -117,13 +117,6 @@
                 android:layout_height="250dp"
                 app:layoutManager="LinearLayoutManager" />
 
-            <Button
-                android:id="@+id/buttonAddBaseIngredient"
-                android:layout_width="150dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:text="@string/add_ingredient" />
-
             <TextView
                 android:id="@+id/textViewOtherIngredients"
                 android:layout_width="wrap_content"
@@ -139,13 +132,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 app:layoutManager="LinearLayoutManager" />
-
-            <Button
-                android:id="@+id/buttonAddOtherIngredient"
-                android:layout_width="150dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:text="@string/add_ingredient" />
 
             <TextView
                 android:id="@+id/textViewPossibleIngredients"
@@ -164,7 +150,7 @@
                 app:layoutManager="LinearLayoutManager" />
 
             <Button
-                android:id="@+id/buttonAddPossibleIngredient"
+                android:id="@+id/buttonAddIngredient"
                 android:layout_width="150dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"

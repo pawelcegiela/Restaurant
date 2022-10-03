@@ -1,6 +1,6 @@
 package pi.restaurant.management.data
 
-class LocationBasic : AbstractDataObject {
+class AddressBasic : AbstractDataObject {
     override var id = "location"
     var city = ""
     var postalCode = ""
@@ -19,5 +19,16 @@ class LocationBasic : AbstractDataObject {
         this.street = street
         this.houseNumber = houseNumber
         this.flatNumber = flatNumber
+    }
+
+    constructor(
+        id: String,
+        city: String,
+        postalCode: String,
+        street: String,
+        houseNumber: String,
+        flatNumber: String
+    ) : this(city, postalCode, street, houseNumber, flatNumber) {
+        this.id = id
     }
 }

@@ -1,5 +1,6 @@
 package pi.restaurant.management.fragments.ingredients
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
@@ -41,5 +42,14 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
 
         getIngredientListAndSetIngredientButton()
         finishLoading()
+    }
+
+    override fun checkRemovePreconditions(): Boolean {
+        val details = viewModel.snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
+        if (details.containingSubDishes.isNotEmpty() || details.containingDishes.isNotEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.cant_delete_used_ingredient), Toast.LENGTH_LONG).show()
+            return false
+        }
+        return true
     }
 }

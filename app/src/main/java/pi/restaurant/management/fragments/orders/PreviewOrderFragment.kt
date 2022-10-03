@@ -23,6 +23,7 @@ import pi.restaurant.management.utils.SubItemUtils
 
 class PreviewOrderFragment : AbstractPreviewItemFragment() {
     override val linearLayout get() = binding.linearLayout
+    override val progressBar get() = binding.progress.progressBar
     override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewOrderToEditOrder
     override val backActionId = R.id.actionPreviewOrderToOrders
@@ -61,6 +62,6 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         binding.textViewDelivery.text = DeliveryType.getString(item.basic.deliveryType, requireContext())
         binding.textViewPlace.text = OrderPlace.getString(item.details.orderPlace, requireContext())
 
-        binding.progress.progressBar.visibility = View.GONE
+        viewModel.liveReadyToUnlock.value = true
     }
 }

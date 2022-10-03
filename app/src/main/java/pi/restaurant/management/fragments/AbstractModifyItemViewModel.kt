@@ -68,7 +68,7 @@ abstract class AbstractModifyItemViewModel : ViewModel() {
         })
     }
 
-    fun saveToDatabase(data: SplitDataObject) {
+    open fun saveToDatabase(data: SplitDataObject) {
         val databaseBasicRef = Firebase.database.getReference(databasePath).child("basic").child(data.id)
         databaseBasicRef.setValue(data.basic)
 
@@ -77,4 +77,6 @@ abstract class AbstractModifyItemViewModel : ViewModel() {
 
         liveSaveStatus.value = true
     }
+
+    open fun removeAdditionalElements() {}
 }
