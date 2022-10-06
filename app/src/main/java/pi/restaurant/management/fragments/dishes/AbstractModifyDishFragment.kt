@@ -2,22 +2,19 @@ package pi.restaurant.management.fragments.dishes
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyDishBinding
 import pi.restaurant.management.enums.DishType
-import pi.restaurant.management.enums.IngredientItemState
 import pi.restaurant.management.enums.IngredientStatus
 import pi.restaurant.management.enums.Unit
 import pi.restaurant.management.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.listeners.AllergenModifyDishOnClickListener
+import pi.restaurant.management.listeners.AddAllergenButtonListener
 import pi.restaurant.management.listeners.AddIngredientButtonListener
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.SubItemUtils
@@ -172,7 +169,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
     fun setAllergenViews() {
         binding.buttonAddAllergen.setOnClickListener(
-            AllergenModifyDishOnClickListener(
+            AddAllergenButtonListener(
                 requireContext(),
                 allAllergens.map { it.name }.toMutableList(),
                 allergensList,

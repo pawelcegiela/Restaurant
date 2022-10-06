@@ -15,6 +15,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
+import pi.restaurant.management.data.User
 import pi.restaurant.management.data.UserBasic
 import pi.restaurant.management.data.UserDetails
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
@@ -22,7 +23,7 @@ import pi.restaurant.management.enums.Role
 import java.util.*
 
 
-class AuthenticationActivity : AppCompatActivity() {
+class AuthenticationViewModel : AppCompatActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
     private lateinit var auth: FirebaseAuth
     private var keepSplashScreen = true
@@ -50,7 +51,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
     private fun logOut() {
         Firebase.auth.signOut()
-        startActivity(Intent(this, AuthenticationActivity::class.java).apply {
+        startActivity(Intent(this, AuthenticationViewModel::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         })
         finish()
@@ -76,7 +77,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 } else {
                     keepSplashScreen = false
                     Toast.makeText(
-                        this@AuthenticationActivity,
+                        this@AuthenticationViewModel,
                         getString(R.string.account_has_been_disabled),
                         Toast.LENGTH_LONG
                     ).show()
@@ -105,7 +106,7 @@ class AuthenticationActivity : AppCompatActivity() {
         Firebase.database.getReference("users").child("details").child(Firebase.auth.uid!!).setValue(details)
 
         Toast.makeText(
-            this@AuthenticationActivity,
+            this@AuthenticationViewModel,
             getString(R.string.no_user_data_found),
             Toast.LENGTH_LONG
         ).show()

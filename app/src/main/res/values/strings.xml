@@ -223,4 +223,22 @@
     <string name="base_ingredient">Base ingredient</string>
     <string name="possible_ingredient">Possible ingredient</string>
     <string name="other_ingredient">Other ingredient</string>
+    <string name="order">Order</string>
+    <string name="status_colon">Status:</string>
+    <string name="order_date_colon">Order date:</string>
+    <string name="estimated_collection_date_colon">Estimated collection date:</string>
+    <string name="order_form_colon">Order form (to go/eat in):</string>
+    <string name="delivery_address_colon">Delivery address:</string>
+    <string name="status_history">Status history</string>
+    <string name="ready">Ready</string>
+    <string name="next_status">Next status</string>
+    <string name="type_colon">Type:</string>
+    <string name="are_you_sure_next_status">Are you sure you want to change the order status to the next one?</string>
+    <string name="deliverer_colon">Deliverer:</string>
+    <string name="choose">Choose</string>
+    <string name="no_person_chosen">No person chosen</string>
+    <string name="full_price_colon">Full price:</string>
+    <string name="can_deliver_orders">Can deliver orders?</string>
+    <string name="deliverers_not_initialized_yet">List of possible deliverers has not been initialized yet. Try again in a few seconds or check your internet connection.</string>
+    <string name="loading_deliverer">Loading deliverer…</string>
 </resources>

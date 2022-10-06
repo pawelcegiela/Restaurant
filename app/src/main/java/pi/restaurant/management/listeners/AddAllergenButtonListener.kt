@@ -4,18 +4,17 @@ import android.app.Dialog
 import android.content.Context
 import android.widget.*
 import pi.restaurant.management.R
-import pi.restaurant.management.data.Allergen
 import pi.restaurant.management.data.AllergenBasic
 import pi.restaurant.management.fragments.dishes.AbstractModifyDishFragment
 
-class AllergenModifyDishOnClickListener(
+class AddAllergenButtonListener(
     context: Context,
     list: List<String>,
     private val allergensList: MutableList<AllergenBasic>,
     private val allAllergens: MutableList<AllergenBasic>,
     private val fragment: AbstractModifyDishFragment
 ) :
-    AbstractModifyDishOnClickListener(context, list) {
+    AbstractAddSubItemButtonListener(context, list) {
 
     override fun setOnItemClickListener(dialog: Dialog, listView: ListView) {
         listView.onItemClickListener =

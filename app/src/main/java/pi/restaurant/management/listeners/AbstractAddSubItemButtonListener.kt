@@ -11,9 +11,9 @@ import android.view.View
 import android.widget.*
 import pi.restaurant.management.R
 
-abstract class AbstractModifyDishOnClickListener(
+abstract class AbstractAddSubItemButtonListener(
     private val context: Context,
-    private val list: List<String>,
+    var itemList: List<String>,
 ) :
     View.OnClickListener {
 
@@ -30,7 +30,7 @@ abstract class AbstractModifyDishOnClickListener(
         val editText = dialog.findViewById<EditText>(R.id.editTextSearch)
         val listView = dialog.findViewById<ListView>(R.id.listViewItems)
 
-        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, list)
+        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, itemList)
         listView.adapter = adapter
 
         editText.addTextChangedListener(object : TextWatcher {

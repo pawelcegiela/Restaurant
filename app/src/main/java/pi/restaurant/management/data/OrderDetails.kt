@@ -12,6 +12,8 @@ class OrderDetails : AbstractDataObject {
     var orderPlace: Int = 0
     var dishes: HashMap<String, DishItem> = HashMap()
     var address : AddressBasic? = null
+    var statusChanges: HashMap<String, Int> = HashMap()
+    var delivererId: String = ""
 
     @Suppress("unused")
     constructor()
@@ -23,7 +25,7 @@ class OrderDetails : AbstractDataObject {
         orderDate: Date,
         orderPlace: Int,
         dishes: HashMap<String, DishItem>,
-        address: AddressBasic?
+        address: AddressBasic?,
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.userId = userId

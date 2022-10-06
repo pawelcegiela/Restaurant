@@ -7,7 +7,7 @@ enum class OrderStatus(val stringResourceId: Int) {
     NEW(R.string.new_s),
     ACCEPTED(R.string.accepted),
     PREPARING(R.string.preparing),
-    AWAITING(R.string.awaiting),
+    READY(R.string.ready),
     DELIVERY(R.string.delivery),
     FINISHED(R.string.finished);
 
@@ -18,6 +18,29 @@ enum class OrderStatus(val stringResourceId: Int) {
 
         fun getArrayOfStrings(context: Context): Array<String> {
             return values().map { context.getString(it.stringResourceId) }.toTypedArray()
+        }
+
+        fun getNextStatusId(currentStatusId: Int, deliveryType: DeliveryType) : Int {
+            val statuses = if (deliveryType == DeliveryType.DELIVERY) {
+                getStatusesForDelivery()
+            } else {
+                getStatusesForSelfPickup()
+            }
+
+            val index = statuses.indexOf(currentStatusId)
+            return if (index != statuses.size - 1) {
+                statuses[index + 1]
+            } else {
+                currentStatusId
+            }
+        }
+
+        private fun getStatusesForDelivery(): ArrayList<Int> {
+            return arrayListOf(NEW.ordinal, ACCEPTED.ordinal, PREPARING.ordinal, DELIVERY.ordinal, FINISHED.ordinal)
+        }
+
+        private fun getStatusesForSelfPickup(): ArrayList<Int> {
+            return arrayListOf(NEW.ordinal, ACCEPTED.ordinal, PREPARING.ordinal, READY.ordinal, FINISHED.ordinal)
         }
     }
 }

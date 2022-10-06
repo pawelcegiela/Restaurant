@@ -71,6 +71,13 @@
                 android:layout_height="60dp"
                 android:layout_margin="15dp" />
 
+            <CheckBox
+                android:id="@+id/checkBoxDelivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/can_deliver_orders" />
+
             <EditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"

@@ -5,6 +5,7 @@ import java.util.*
 class UserDetails : AbstractDataObject {
     var email: String = ""
     var creationDate: Date = Date()
+    var ordersToDeliver = HashMap<String, Boolean>()
 
     @Suppress("unused")
     constructor() {

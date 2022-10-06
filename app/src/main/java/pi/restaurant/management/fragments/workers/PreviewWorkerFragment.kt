@@ -48,6 +48,7 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         binding.textViewEmail.text = item.details.email
         binding.textViewRole.text = Role.getString(item.basic.role, requireContext())
         binding.textViewCreationDate.text = StringFormatUtils.formatDate(item.details.creationDate)
+        binding.textViewDelivery.text = if (item.basic.delivery) getString(R.string.yes) else getString(R.string.no)
 
         viewModel.liveReadyToUnlock.value = true
     }

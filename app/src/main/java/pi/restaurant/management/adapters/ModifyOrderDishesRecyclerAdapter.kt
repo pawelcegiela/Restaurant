@@ -12,11 +12,11 @@ import pi.restaurant.management.databinding.ItemSubItemBinding
 import pi.restaurant.management.fragments.orders.AbstractModifyOrderFragment
 
 
-class OrderDishesRecyclerAdapter(
+class ModifyOrderDishesRecyclerAdapter(
     private val dataSet: List<DishItem>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<OrderDishesRecyclerAdapter.ViewHolder>() {
+    RecyclerView.Adapter<ModifyOrderDishesRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
         val binding: ItemSubItemBinding,

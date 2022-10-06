@@ -56,7 +56,8 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
             firstName = binding.editTextFirstName.text.toString(),
             lastName = binding.editTextLastName.text.toString(),
             role = binding.spinnerRole.selectedItemId.toInt(),
-            disabled = disabled
+            disabled = disabled,
+            delivery = binding.checkBoxDelivery.isChecked
         )
         val details = UserDetails(
             id = itemId,

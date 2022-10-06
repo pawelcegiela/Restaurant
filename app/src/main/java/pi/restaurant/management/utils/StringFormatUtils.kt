@@ -4,6 +4,9 @@ import android.content.Context
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
+import pi.restaurant.management.data.AddressBasic
+import pi.restaurant.management.data.Dish
+import pi.restaurant.management.data.DishItem
 import pi.restaurant.management.enums.Unit
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,6 +41,24 @@ class StringFormatUtils {
 
         fun formatId(): String {
             return "${Date().time}_${Firebase.auth.uid}_${Random().nextInt(9999)}"
+        }
+
+        fun formatAddress(address: AddressBasic): String {
+            return "${address.street} ${address.houseNumber}${if (address.flatNumber.isNotEmpty()) " / " else ""}" +
+                    "${address.flatNumber}\n${address.postalCode} ${address.city}"
+        }
+
+        fun formatDishChanges(dishItem: DishItem): String {
+            val used = dishItem.usedPossibleIngredients
+            val unused = dishItem.unusedOtherIngredients
+            var text = ""
+            for (item in used) {
+                text += "+ ${item.name}\n"
+            }
+            for (item in unused) {
+                text += "- ${item.name}\n"
+            }
+            return text.trim()
         }
     }
 }

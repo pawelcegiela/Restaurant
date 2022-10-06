@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
-import pi.restaurant.management.adapters.OrderDishesRecyclerAdapter
+import pi.restaurant.management.adapters.ModifyOrderDishesRecyclerAdapter
 import pi.restaurant.management.data.*
 import pi.restaurant.management.databinding.FragmentModifyOrderBinding
 import pi.restaurant.management.enums.DeliveryType
@@ -88,7 +88,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     fun initializeRecycler() {
-        binding.recyclerViewDishes.adapter = OrderDishesRecyclerAdapter(dishesList, this)
+        binding.recyclerViewDishes.adapter = ModifyOrderDishesRecyclerAdapter(dishesList, this)
         SubItemUtils.setRecyclerSize(binding.recyclerViewDishes, dishesList.size, requireContext())
     }
 

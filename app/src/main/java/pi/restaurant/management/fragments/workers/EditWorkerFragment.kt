@@ -64,6 +64,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.editTextLastName.setText(data.basic.lastName)
         binding.editTextEmail.setText(data.details.email)
         binding.spinnerRole.setSelection(data.basic.role)
+        binding.checkBoxDelivery.isChecked = data.basic.delivery
 
         creationDate = data.details.creationDate
         disabled = data.basic.disabled

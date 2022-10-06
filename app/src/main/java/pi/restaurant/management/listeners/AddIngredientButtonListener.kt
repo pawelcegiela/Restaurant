@@ -14,7 +14,7 @@ class AddIngredientButtonListener(
     private val allIngredients: MutableList<IngredientBasic>,
     private val fragment: Fragment
 ) :
-    AbstractModifyDishOnClickListener(fragment.requireContext(), allIngredients.map { it.name }.toMutableList()) {
+    AbstractAddSubItemButtonListener(fragment.requireContext(), allIngredients.map { it.name }.toMutableList()) {
 
     override fun setOnItemClickListener(dialog: Dialog, listView: ListView) {
         listView.onItemClickListener =

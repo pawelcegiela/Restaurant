@@ -101,6 +101,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/no_creation_date_to_display" />
 
+                    <pi.restaurant.management.views.TextViewDetailTitle
+                        android:id="@+id/textViewDeliveryTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/can_deliver_orders" />
+
+                    <pi.restaurant.management.views.TextViewDetail
+                        android:id="@+id/textViewDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no" />
+
                 </LinearLayout>
 
             </pi.restaurant.management.views.CardViewPreviewElement>
