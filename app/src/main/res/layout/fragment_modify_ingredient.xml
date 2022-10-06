@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.ingredients.AbstractModifyIngredientFragment">
+    tools:context=".ui.fragments.ingredients.AbstractModifyIngredientFragment">
 
     <ScrollView
         android:layout_width="match_parent"

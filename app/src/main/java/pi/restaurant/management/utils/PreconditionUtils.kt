@@ -1,8 +1,7 @@
 package pi.restaurant.management.utils
 
-import pi.restaurant.management.data.OpeningHours
-import pi.restaurant.management.data.OpeningHoursBasic
-import pi.restaurant.management.enums.Precondition
+import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
+import pi.restaurant.management.objects.enums.Precondition
 
 class PreconditionUtils {
     companion object {

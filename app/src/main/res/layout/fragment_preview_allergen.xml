@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".fragments.allergens.PreviewAllergenFragment">
+    tools:context=".ui.fragments.allergens.PreviewAllergenFragment">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -21,7 +21,7 @@
             android:visibility="gone"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <pi.restaurant.management.views.CardViewPreviewElement
+            <pi.restaurant.management.ui.views.CardViewPreviewElement
                 android:id="@+id/cardAllergenDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,13 +59,13 @@
                             android:layout_marginHorizontal="15dp"
                             android:orientation="vertical">
 
-                            <pi.restaurant.management.views.TextViewItemName
+                            <pi.restaurant.management.ui.views.TextViewItemName
                                 android:id="@+id/textViewName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="7dp" />
 
-                            <pi.restaurant.management.views.TextViewItemType
+                            <pi.restaurant.management.ui.views.TextViewItemType
                                 android:id="@+id/textViewAllergen"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
 
                     </LinearLayout>
 
-                    <pi.restaurant.management.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
                         android:id="@+id/textViewDescriptionTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="@string/description_colon" />
 
-                    <pi.restaurant.management.views.TextViewDetail
+                    <pi.restaurant.management.ui.views.TextViewDetail
                         android:id="@+id/textViewDescription"
                         android:layout_width="wrap_content"
                         android:text="@string/no_allergen_description"
@@ -91,9 +91,9 @@
 
                 </LinearLayout>
 
-            </pi.restaurant.management.views.CardViewPreviewElement>
+            </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
-            <pi.restaurant.management.views.CardViewPreviewElement
+            <pi.restaurant.management.ui.views.CardViewPreviewElement
                 android:id="@+id/cardContainingDishes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
-                    <pi.restaurant.management.views.TextViewCardTitle
+                    <pi.restaurant.management.ui.views.TextViewCardTitle
                         android:id="@+id/textViewContaining"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                         app:layoutManager="LinearLayoutManager" />
 
                 </LinearLayout>
-            </pi.restaurant.management.views.CardViewPreviewElement>
+            </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
             <include
                 android:id="@+id/cardSetNavigation"

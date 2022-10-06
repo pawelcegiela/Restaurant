@@ -3,11 +3,9 @@ package pi.restaurant.management.utils
 import android.content.Context
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import pi.restaurant.management.R
-import pi.restaurant.management.data.AddressBasic
-import pi.restaurant.management.data.Dish
-import pi.restaurant.management.data.DishItem
-import pi.restaurant.management.enums.Unit
+import pi.restaurant.management.objects.data.address.AddressBasic
+import pi.restaurant.management.objects.data.dish.DishItem
+import pi.restaurant.management.objects.enums.Unit
 import java.text.SimpleDateFormat
 import java.util.*
 

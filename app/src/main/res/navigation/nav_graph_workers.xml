@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/WorkersMainFragment"
-        android:name="pi.restaurant.management.fragments.workers.WorkersMainFragment"
+        android:name="pi.restaurant.management.ui.fragments.workers.WorkersMainFragment"
         android:label="@string/workers"
         tools:layout="@layout/fragment_item_list">
 
@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/EditWorkerFragment"
-        android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
+        android:name="pi.restaurant.management.ui.fragments.workers.EditWorkerFragment"
         android:label="@string/edit_worker"
         tools:layout="@layout/fragment_modify_worker">
         <action
@@ -46,7 +46,7 @@
 
     <fragment
         android:id="@+id/AddWorkerFragment"
-        android:name="pi.restaurant.management.fragments.workers.AddWorkerFragment"
+        android:name="pi.restaurant.management.ui.fragments.workers.AddWorkerFragment"
         android:label="@string/add_worker"
         tools:layout="@layout/fragment_modify_worker">
         <action
@@ -58,7 +58,7 @@
 
     <fragment
         android:id="@+id/EditMyDataFragment"
-        android:name="pi.restaurant.management.fragments.workers.EditWorkerFragment"
+        android:name="pi.restaurant.management.ui.fragments.workers.EditWorkerFragment"
         android:label="@string/edit_my_data"
         tools:layout="@layout/fragment_modify_worker">
         <argument
@@ -75,7 +75,7 @@
 
     <fragment
         android:id="@+id/PreviewWorkerFragment"
-        android:name="pi.restaurant.management.fragments.workers.PreviewWorkerFragment"
+        android:name="pi.restaurant.management.ui.fragments.workers.PreviewWorkerFragment"
         android:label="@string/preview_worker"
         tools:layout="@layout/fragment_preview_worker">
         <action
@@ -90,55 +90,55 @@
 
     <activity
         android:id="@+id/MainActivity"
-        android:name="pi.restaurant.management.activities.MainActivity"
+        android:name="pi.restaurant.management.ui.activities.MainActivity"
         android:label="Home"
         tools:layout="@layout/activity_main" />
 
     <activity
         android:id="@+id/DiscountsActivity"
-        android:name="pi.restaurant.management.activities.DiscountsActivity"
+        android:name="pi.restaurant.management.ui.activities.DiscountsActivity"
         android:label="@string/discounts"
         tools:layout="@layout/activity_discounts" />
 
     <activity
         android:id="@+id/IngredientsActivity"
-        android:name="pi.restaurant.management.activities.IngredientsActivity"
+        android:name="pi.restaurant.management.ui.activities.IngredientsActivity"
         android:label="@string/ingredients"
         tools:layout="@layout/activity_ingredients" />
 
     <activity
         android:id="@+id/DishesActivity"
-        android:name="pi.restaurant.management.activities.DishesActivity"
+        android:name="pi.restaurant.management.ui.activities.DishesActivity"
         android:label="@string/dishes"
         tools:layout="@layout/activity_dishes" />
 
     <activity
         android:id="@+id/AllergensActivity"
-        android:name="pi.restaurant.management.activities.AllergensActivity"
+        android:name="pi.restaurant.management.ui.activities.AllergensActivity"
         android:label="@string/allergens"
         tools:layout="@layout/activity_allergens" />
 
     <activity
         android:id="@+id/OrdersActivity"
-        android:name="pi.restaurant.management.activities.OrdersActivity"
+        android:name="pi.restaurant.management.ui.activities.OrdersActivity"
         android:label="@string/orders"
         tools:layout="@layout/activity_orders" />
 
     <activity
         android:id="@+id/RestaurantDataActivity"
-        android:name="pi.restaurant.management.activities.RestaurantDataActivity"
+        android:name="pi.restaurant.management.ui.activities.RestaurantDataActivity"
         android:label="@string/restaurant_data"
         tools:layout="@layout/activity_restaurant_data" />
 
     <activity
         android:id="@+id/SettingsActivity"
-        android:name="pi.restaurant.management.activities.SettingsActivity"
+        android:name="pi.restaurant.management.ui.activities.SettingsActivity"
         android:label="@string/action_settings"
         tools:layout="@layout/activity_settings" />
 
     <activity
         android:id="@+id/LogOut"
-        android:name="pi.restaurant.management.activities.AuthenticationActivity"
+        android:name="pi.restaurant.management.ui.activities.AuthenticationActivity"
         android:label="@string/log_out"
         tools:layout="@layout/activity_authentication">
 

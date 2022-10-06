@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <pi.restaurant.management.views.CardViewPreviewElement
+    <pi.restaurant.management.ui.views.CardViewPreviewElement
         android:id="@+id/cardAllergens"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +19,6 @@
 
         </LinearLayout>
 
-    </pi.restaurant.management.views.CardViewPreviewElement>
+    </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
 </LinearLayout>
