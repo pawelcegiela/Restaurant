@@ -5,7 +5,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.WorkersRecyclerAdapter
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.ui.fragments.AbstractItemListFragment
-import pi.restaurant.management.logic.fragments.AbstractItemListViewModel
+import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 
 class WorkersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionWorkersToAddWorker
@@ -16,6 +16,6 @@ class WorkersMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            WorkersRecyclerAdapter(viewModel.liveDataList.value as MutableList<UserBasic>, this@WorkersMainFragment)
+            WorkersRecyclerAdapter(viewModel.dataList.value as MutableList<UserBasic>, this@WorkersMainFragment)
     }
 }

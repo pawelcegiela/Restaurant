@@ -18,7 +18,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
-import pi.restaurant.management.logic.activities.AuthenticationViewModel
+import pi.restaurant.management.model.activities.AuthenticationViewModel
 import pi.restaurant.management.objects.enums.Role
 import java.util.*
 import kotlin.collections.HashMap

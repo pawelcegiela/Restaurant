@@ -10,7 +10,8 @@ import pi.restaurant.management.objects.data.*
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
 import pi.restaurant.management.objects.data.allergen.AllergenDetails
 import pi.restaurant.management.databinding.FragmentModifyAllergenBinding
-import pi.restaurant.management.logic.fragments.allergens.AbstractModifyAllergenViewModel
+import pi.restaurant.management.model.fragments.allergens.AbstractModifyAllergenViewModel
+import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewModel
 import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
@@ -36,7 +37,7 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        val allergen = (viewModel as AbstractModifyAllergenViewModel).allergen ?: Allergen()
+        val allergen = (viewModel as AbstractModifyAllergenViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val basic = AllergenBasic(
             id = itemId,

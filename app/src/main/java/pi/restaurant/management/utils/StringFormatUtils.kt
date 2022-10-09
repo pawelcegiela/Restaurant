@@ -69,9 +69,9 @@ class StringFormatUtils {
             var text = "${item.name} [${formatAmountWithUnit(context, item.amount, item.unit)}"
 
             if (status == IngredientStatus.POSSIBLE || item.extraPrice != 0.0) {
-                text += ",  + ${item.extraPrice} zł]"
+                text += ",  + ${item.extraPrice} zł"
             }
-            return text
+            return "$text]"
         }
     }
 }

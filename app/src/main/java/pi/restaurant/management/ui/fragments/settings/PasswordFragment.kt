@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.databinding.FragmentPasswordBinding
-import pi.restaurant.management.logic.fragments.settings.PasswordViewModel
+import pi.restaurant.management.model.fragments.settings.PasswordViewModel
 
 class PasswordFragment : Fragment() {
     private var _binding: FragmentPasswordBinding? = null

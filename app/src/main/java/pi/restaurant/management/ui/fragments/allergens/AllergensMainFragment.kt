@@ -5,8 +5,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.AllergensRecyclerAdapter
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
 import pi.restaurant.management.ui.fragments.AbstractItemListFragment
-import pi.restaurant.management.logic.fragments.AbstractItemListViewModel
-import pi.restaurant.management.logic.fragments.allergens.AllergensMainViewModel
+import pi.restaurant.management.model.fragments.AbstractItemListViewModel
+import pi.restaurant.management.model.fragments.allergens.AllergensMainViewModel
 
 class AllergensMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionAllergensToAddAllergen
@@ -17,6 +17,6 @@ class AllergensMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            AllergensRecyclerAdapter(viewModel.liveDataList.value as MutableList<AllergenBasic>, this@AllergensMainFragment)
+            AllergensRecyclerAdapter(viewModel.dataList.value as MutableList<AllergenBasic>, this@AllergensMainFragment)
     }
 }

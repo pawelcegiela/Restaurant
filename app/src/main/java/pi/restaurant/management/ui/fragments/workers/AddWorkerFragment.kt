@@ -9,8 +9,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.objects.enums.Precondition
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.workers.AddWorkerViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.workers.AddWorkerViewModel
 import pi.restaurant.management.utils.PreconditionUtils
 
 class AddWorkerFragment : AbstractModifyWorkerFragment() {

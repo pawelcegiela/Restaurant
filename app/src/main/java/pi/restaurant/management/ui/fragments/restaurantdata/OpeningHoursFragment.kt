@@ -16,8 +16,8 @@ import pi.restaurant.management.objects.data.openinghours.OpeningHoursDetails
 import pi.restaurant.management.databinding.FragmentOpeningHoursBinding
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.restaurantdata.OpeningHoursViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.restaurantdata.OpeningHoursViewModel
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
@@ -99,14 +99,8 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
         )
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair): OpeningHours {
-        val basic = snapshotsPair.basic?.getValue<OpeningHoursBasic>() ?: OpeningHoursBasic()
-        val details = snapshotsPair.details?.getValue<OpeningHoursDetails>() ?: OpeningHoursDetails()
-        return OpeningHours(basic, details)
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val openingHours = getItem(snapshotsPair)
+    override fun fillInData() {
+        val openingHours = _viewModel.item.value ?: OpeningHours()
 
         defaultOpening = openingHours.basic.defaultStartHour as Date
         defaultClosing = openingHours.basic.defaultEndHour as Date

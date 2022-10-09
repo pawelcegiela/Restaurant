@@ -5,8 +5,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.DiscountsRecyclerAdapter
 import pi.restaurant.management.objects.data.discount.DiscountBasic
 import pi.restaurant.management.ui.fragments.AbstractItemListFragment
-import pi.restaurant.management.logic.fragments.AbstractItemListViewModel
-import pi.restaurant.management.logic.fragments.discounts.DiscountsMainViewModel
+import pi.restaurant.management.model.fragments.AbstractItemListViewModel
+import pi.restaurant.management.model.fragments.discounts.DiscountsMainViewModel
 
 class DiscountsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDiscountsToAddDiscount
@@ -17,6 +17,6 @@ class DiscountsMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            DiscountsRecyclerAdapter(viewModel.liveDataList.value as MutableList<DiscountBasic>, this@DiscountsMainFragment)
+            DiscountsRecyclerAdapter(viewModel.dataList.value as MutableList<DiscountBasic>, this@DiscountsMainFragment)
     }
 }

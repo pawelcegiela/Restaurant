@@ -2,8 +2,8 @@ package pi.restaurant.management.ui.fragments.discounts
 
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.discounts.EditDiscountViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.discounts.EditDiscountViewModel
 
 class EditDiscountFragment : AbstractModifyDiscountFragment() {
 

@@ -14,8 +14,8 @@ import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantBasi
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantDetails
 import pi.restaurant.management.databinding.FragmentAboutRestaurantBinding
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.restaurantdata.AboutRestaurantViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.restaurantdata.AboutRestaurantViewModel
 import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 
@@ -47,14 +47,8 @@ class AboutRestaurantFragment : AbstractModifyItemFragment() {
         setNavigationCardsSave()
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair) : AboutRestaurant {
-        val basic = snapshotsPair.basic?.getValue<AboutRestaurantBasic>() ?: AboutRestaurantBasic()
-        val details = snapshotsPair.details?.getValue<AboutRestaurantDetails>() ?: AboutRestaurantDetails()
-        return AboutRestaurant(basic, details)
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val data = getItem(snapshotsPair)
+    override fun fillInData() {
+        val data = _viewModel.item.value ?: AboutRestaurant()
         binding.editTextRestaurantName.setText(data.basic.name)
         binding.editTextRestaurantDescription.setText(data.basic.description)
     }

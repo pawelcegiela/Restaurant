@@ -7,7 +7,7 @@ import java.util.*
 class OrderBasic : AbstractDataObject {
     var orderStatus: Int = 0
     var collectionDate: Date = Date()
-    var deliveryType: Int = 0
+    var collectionType: Int = 0
     var value: Double = 0.0
     var name: String = ""
 
@@ -18,14 +18,14 @@ class OrderBasic : AbstractDataObject {
         id: String,
         orderStatus: Int,
         collectionDate: Date,
-        deliveryType: Int,
+        collectionType: Int,
         value: Double,
         name: String,
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.orderStatus = orderStatus
         this.collectionDate = collectionDate
-        this.deliveryType = deliveryType
+        this.collectionType = collectionType
         this.value = value
         this.name = name
     }

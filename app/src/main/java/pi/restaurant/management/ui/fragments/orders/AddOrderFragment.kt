@@ -2,8 +2,8 @@ package pi.restaurant.management.ui.fragments.orders
 
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.orders.AddOrderViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.orders.AddOrderViewModel
 
 class AddOrderFragment : AbstractModifyOrderFragment() {
 
@@ -16,9 +16,9 @@ class AddOrderFragment : AbstractModifyOrderFragment() {
 
     override fun initializeUI() {
         super.initializeUI()
+        activityViewModel.setActionSave(R.id.actionCustomizeDishToAddOrder)
         setNavigationCardsSave()
         initializeRecycler()
-        addLiveDataListener()
         finishLoading()
     }
 }

@@ -7,8 +7,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.ingredient.Ingredient
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientDetails
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.ingredients.EditIngredientViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.ingredients.EditIngredientViewModel
 import pi.restaurant.management.objects.SnapshotsPair
 
 
@@ -27,15 +27,8 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
         setNavigationCardsSaveRemove()
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair) : Ingredient {
-        val basic = snapshotsPair.basic?.getValue<IngredientBasic>() ?: IngredientBasic()
-        val details = snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
-        _viewModel.ingredient = Ingredient(itemId, basic, details)
-        return _viewModel.ingredient!!
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val data = getItem(snapshotsPair)
+    override fun fillInData() {
+        val data = _viewModel.item.value ?: Ingredient()
         binding.editTextName.setText(data.basic.name)
         binding.editTextAmount.setText(data.basic.amount.toString())
         binding.spinnerUnit.setSelection(data.basic.unit)
@@ -47,7 +40,7 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
     }
 
     override fun checkRemovePreconditions(): Boolean {
-        val details = viewModel.snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
+        val details = _viewModel.item.value?.details ?: IngredientDetails()
         if (details.containingSubDishes.isNotEmpty() || details.containingDishes.isNotEmpty()) {
             Toast.makeText(requireContext(), getString(R.string.cant_delete_used_ingredient), Toast.LENGTH_LONG).show()
             return false

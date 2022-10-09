@@ -96,6 +96,13 @@
         android:name="pi.restaurant.management.ui.fragments.orders.CustomizeDishFragment"
         android:label="@string/customize_dish"
         tools:layout="@layout/fragment_modify_dish">
+        <action
+            android:id="@+id/actionCustomizeDishToAddOrder"
+            app:destination="@id/AddOrderFragment" />
+
+        <action
+            android:id="@+id/actionCustomizeDishToEditOrder"
+            app:destination="@id/EditOrderFragment" />
     </fragment>
 
     <activity

@@ -1,14 +1,13 @@
 package pi.restaurant.management.ui.fragments.dishes
 
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.DishesRecyclerAdapter
 import pi.restaurant.management.objects.data.dish.DishBasic
-import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.ui.fragments.AbstractItemListFragment
-import pi.restaurant.management.logic.fragments.AbstractItemListViewModel
-import pi.restaurant.management.logic.fragments.dishes.DishesMainViewModel
+import pi.restaurant.management.model.fragments.AbstractItemListViewModel
+import pi.restaurant.management.model.fragments.dishes.DishesMainViewModel
+import pi.restaurant.management.ui.activities.OrdersActivity
 
 class DishesMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDishesToAddDish
@@ -19,14 +18,9 @@ class DishesMainFragment : AbstractItemListFragment() {
     override fun initializeUI() {
         super.initializeUI()
         binding.recyclerView.adapter =
-            DishesRecyclerAdapter(viewModel.liveDataList.value as MutableList<DishBasic>, this@DishesMainFragment)
-
-        //TODO: Czy da się pominąć ten krok?
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<DishItem>("newItem")
-            ?.observe(viewLifecycleOwner) {
-                val navController = findNavController()
-                navController.previousBackStackEntry?.savedStateHandle?.set("newItem", it)
-                navController.popBackStack()
-            }
+            DishesRecyclerAdapter(viewModel.dataList.value as MutableList<DishBasic>, this@DishesMainFragment)
+        if (activity is OrdersActivity) {
+            _viewModel.shouldDisplayFAB = false
+        }
     }
 }

@@ -12,8 +12,8 @@ import pi.restaurant.management.objects.data.user.User
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.objects.enums.Precondition
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.workers.EditWorkerViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.workers.EditWorkerViewModel
 import pi.restaurant.management.objects.SnapshotsPair
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
@@ -53,15 +53,8 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         }
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair) : User {
-        val basic = snapshotsPair.basic?.getValue<UserBasic>() ?: UserBasic()
-        val details = snapshotsPair.details?.getValue<UserDetails>() ?: UserDetails()
-        _viewModel.user = User(itemId, basic, details)
-        return _viewModel.user!!
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val data = getItem(snapshotsPair)
+    override fun fillInData() {
+        val data = _viewModel.item.value ?: User()
         binding.editTextFirstName.setText(data.basic.firstName)
         binding.editTextLastName.setText(data.basic.lastName)
         binding.editTextEmail.setText(data.details.email)

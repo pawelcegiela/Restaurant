@@ -12,8 +12,7 @@ import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.databinding.CardSetNavigationModifyBinding
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 abstract class AbstractModifyItemFragment : Fragment() {
@@ -33,13 +32,14 @@ abstract class AbstractModifyItemFragment : Fragment() {
         addLiveDataObservers()
     }
 
-    private fun addLiveDataObservers() {
-        viewModel.liveUserRole.observe(viewLifecycleOwner) { role ->
+    fun addLiveDataObservers() {
+        viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
                 if (role < Role.WORKER.ordinal) {
                     initializeUI()
-                    if (itemId.isNotEmpty()) {
-                        viewModel.getDataFromDatabase(itemId)
+                    viewModel.itemId = itemId
+                    if (itemId.isNotEmpty() && viewModel.shouldGetDataFromDatabase()) {
+                        viewModel.getDataFromDatabase()
                     }
                 } else {
                     initializeWorkerUI()
@@ -47,16 +47,18 @@ abstract class AbstractModifyItemFragment : Fragment() {
             }
         }
 
-        viewModel.liveDataSnapshot.observe(viewLifecycleOwner) { snapshotPair ->
-            if (snapshotPair.isReady()) {
-                fillInData(snapshotPair)
+        viewModel.readyToInitialize.observe(viewLifecycleOwner) { ready ->
+            if (ready) {
+                fillInData()
                 finishLoading()
             }
         }
 
-        viewModel.liveSaveStatus.observe(viewLifecycleOwner) {
-            Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
-            findNavController().navigate(nextActionId)
+        viewModel.saveStatus.observe(viewLifecycleOwner) { saved ->
+            if (saved) {
+                Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
+                findNavController().navigate(nextActionId)
+            }
         }
     }
 
@@ -67,7 +69,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
         findNavController().navigate(nextActionId)
     }
 
-    open fun fillInData(snapshotsPair: SnapshotsPair) {}
+    open fun fillInData() {}
 
     fun setNavigationCardsSave() {
         cardSetNavigation.cardSaveBack.cardSave.setOnClickListener {
@@ -95,7 +97,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
 
         cardSetNavigation.cardSaveRemoveBack.cardRemove.setOnClickListener {
-            viewModel.liveDataSnapshot.value?.let { snapshotsPair -> removeFromDatabase(snapshotsPair) }
+            removeFromDatabase()
         }
 
         cardSetNavigation.cardSaveRemoveBack.cardBack.setOnClickListener {
@@ -124,7 +126,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
         return Precondition.OK
     }
 
-    private fun removeFromDatabase(snapshotsPair: SnapshotsPair) {
+    private fun removeFromDatabase() {
         if (!checkRemovePreconditions()) {
             return
         }
@@ -132,13 +134,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
         dialogBuilder.setTitle(getString(R.string.warning))
         dialogBuilder.setMessage(getString(R.string.do_you_want_to_remove))
         dialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
-            viewModel.removeAdditionalElements()
-            for (snapshot in snapshotsPair.basic!!.children) {
-                snapshot.ref.removeValue()
-            }
-            for (snapshot in snapshotsPair.details!!.children) {
-                snapshot.ref.removeValue()
-            }
+            viewModel.removeFromDatabase()
 
             dialog.dismiss()
             Toast.makeText(activity, getString(removeMessageId), Toast.LENGTH_SHORT).show()

@@ -5,24 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.objects.data.ingredient.Ingredient
-import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 import pi.restaurant.management.databinding.FragmentPreviewIngredientBinding
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurant.management.logic.fragments.AbstractPreviewItemViewModel
-import pi.restaurant.management.logic.fragments.ingredients.PreviewIngredientViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.model.fragments.ingredients.PreviewIngredientViewModel
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 class PreviewIngredientFragment : AbstractPreviewItemFragment() {
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val cardSetNavigation get() = binding.cardSetNavigation
     override val editActionId = R.id.actionPreviewIngredientToEditIngredient
@@ -38,24 +34,15 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPreviewIngredientBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair): Ingredient {
-        val basic = snapshotsPair.basic?.getValue<IngredientBasic>() ?: IngredientBasic()
-        val details = snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
-        return Ingredient(itemId, basic, details)
-    }
+    override fun fillInData() {
+        val item = _viewModel.item.value ?: Ingredient()
 
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val item = getItem(snapshotsPair)
-
-        binding.textViewName.text = item.basic.name
-
-        if (item.basic.subDish) {
-            binding.textViewAmountTitle.visibility = View.GONE
-            binding.textViewAmount.visibility = View.GONE
-        } else {
+        if (!item.basic.subDish) {
             binding.textViewAmount.text =
                 StringFormatUtils.formatAmountWithUnit(requireContext(), item.basic.amount, item.basic.unit)
         }
@@ -71,8 +58,8 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         }
 
         if (item.details.containingDishes.isEmpty() && item.details.containingSubDishes.isEmpty()) {
-            binding.cardContaining.visibility = View.GONE
-            viewModel.liveReadyToUnlock.value = true
+//            binding.cardContaining.visibility = View.GONE
+            viewModel.setReadyToUnlock()
         } else {
             setContainingDishes(item.details)
             setContainingSubDishes(item.details)
@@ -94,7 +81,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
                     UserInterfaceUtils.setRecyclerSize(binding.recyclerViewDishesContaining, containingDishes.size, requireContext())
 
                     if (details.containingSubDishes.size == _viewModel.containingSubDishes.size) {
-                        viewModel.liveReadyToUnlock.value = true
+                        viewModel.setReadyToUnlock()
                     }
                 }
             }
@@ -120,7 +107,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
                     )
 
                     if (details.containingDishes.size == _viewModel.containingDishes.size) {
-                        viewModel.liveReadyToUnlock.value = true
+                        viewModel.setReadyToUnlock()
                     }
                 }
             }

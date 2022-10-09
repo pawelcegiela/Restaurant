@@ -6,8 +6,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
 import pi.restaurant.management.objects.data.allergen.AllergenDetails
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.allergens.EditAllergenViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.allergens.EditAllergenViewModel
 import pi.restaurant.management.objects.SnapshotsPair
 
 class EditAllergenFragment : AbstractModifyAllergenFragment() {
@@ -24,15 +24,8 @@ class EditAllergenFragment : AbstractModifyAllergenFragment() {
         setNavigationCardsSaveRemove()
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair) : Allergen {
-        val basic = snapshotsPair.basic?.getValue<AllergenBasic>() ?: AllergenBasic()
-        val details = snapshotsPair.details?.getValue<AllergenDetails>() ?: AllergenDetails()
-        _viewModel.allergen = Allergen(itemId, basic, details)
-        return _viewModel.allergen!!
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val data = getItem(snapshotsPair)
+    override fun fillInData() {
+        val data = _viewModel.item.value ?: Allergen()
         binding.editTextName.setText(data.basic.name)
         binding.editTextDescription.setText(data.details.description)
         finishLoading()

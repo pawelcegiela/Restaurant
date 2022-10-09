@@ -2,8 +2,8 @@ package pi.restaurant.management.ui.fragments.ingredients
 
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.ingredients.AddIngredientViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.ingredients.AddIngredientViewModel
 
 class AddIngredientFragment : AbstractModifyIngredientFragment() {
 

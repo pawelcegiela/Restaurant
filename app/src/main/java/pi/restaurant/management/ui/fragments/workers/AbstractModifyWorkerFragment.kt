@@ -11,7 +11,7 @@ import pi.restaurant.management.objects.data.*
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
-import pi.restaurant.management.logic.fragments.workers.AbstractModifyWorkerViewModel
+import pi.restaurant.management.model.fragments.workers.AbstractModifyWorkerViewModel
 import pi.restaurant.management.objects.data.user.User
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
@@ -51,7 +51,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        val user = (viewModel as AbstractModifyWorkerViewModel).user ?: User()
+        val user = (viewModel as AbstractModifyWorkerViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
         val basic = UserBasic(
@@ -84,7 +84,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.compareRoles(viewModel.liveUserRole.value!!, (data as UserBasic).role)
+        return PreconditionUtils.compareRoles(viewModel.userRole.value!!, (data as UserBasic).role)
     }
 
     override fun onDestroyView() {

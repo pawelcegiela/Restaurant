@@ -10,7 +10,7 @@ import pi.restaurant.management.objects.data.*
 import pi.restaurant.management.objects.data.discount.DiscountBasic
 import pi.restaurant.management.objects.data.discount.DiscountDetails
 import pi.restaurant.management.databinding.FragmentModifyDiscountBinding
-import pi.restaurant.management.logic.fragments.discounts.AbstractModifyDiscountViewModel
+import pi.restaurant.management.model.fragments.discounts.AbstractModifyDiscountViewModel
 import pi.restaurant.management.objects.data.discount.Discount
 import pi.restaurant.management.objects.enums.DiscountType
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
@@ -48,7 +48,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        val discount = (viewModel as AbstractModifyDiscountViewModel).discount ?: Discount()
+        val discount = (viewModel as AbstractModifyDiscountViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val availableNumber = binding.editTextAvailable.text.toString().toInt()
         val assignedNumber = binding.editTextAssigned.text.toString().toInt()

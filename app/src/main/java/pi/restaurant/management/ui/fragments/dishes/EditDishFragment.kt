@@ -6,8 +6,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.dish.DishBasic
 import pi.restaurant.management.objects.data.dish.DishDetails
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.dishes.EditDishViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.dishes.EditDishViewModel
 import pi.restaurant.management.objects.SnapshotsPair
 
 class EditDishFragment : AbstractModifyDishFragment() {
@@ -27,15 +27,8 @@ class EditDishFragment : AbstractModifyDishFragment() {
         getAllergenListAndSetAllergenButtons()
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair) : Dish {
-        val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
-        val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
-        _viewModel.dish = Dish(itemId, basic, details)
-        return _viewModel.dish!!
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val data = getItem(snapshotsPair)
+    override fun fillInData() {
+        val data = _viewModel.item.value ?: Dish()
         binding.editTextName.setText(data.basic.name)
         binding.editTextDescription.setText(data.details.description)
         binding.editTextRecipe.setText(data.details.recipe)

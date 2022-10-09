@@ -20,8 +20,8 @@ enum class OrderStatus(val stringResourceId: Int) {
             return values().map { context.getString(it.stringResourceId) }.toTypedArray()
         }
 
-        fun getNextStatusId(currentStatusId: Int, deliveryType: DeliveryType) : Int {
-            val statuses = if (deliveryType == DeliveryType.DELIVERY) {
+        fun getNextStatusId(currentStatusId: Int, collectionType: CollectionType) : Int {
+            val statuses = if (collectionType == CollectionType.DELIVERY) {
                 getStatusesForDelivery()
             } else {
                 getStatusesForSelfPickup()

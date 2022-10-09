@@ -5,33 +5,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.ktx.getValue
+import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.objects.data.dish.Dish
-import pi.restaurant.management.objects.data.dish.DishBasic
-import pi.restaurant.management.objects.data.dish.DishDetails
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.databinding.CardSetEditBackBinding
 import pi.restaurant.management.databinding.FragmentCustomizeDishBinding
+import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.objects.enums.DishType
-import pi.restaurant.management.objects.enums.IngredientItemState
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurant.management.logic.fragments.AbstractPreviewItemViewModel
-import pi.restaurant.management.logic.fragments.orders.CustomizeDishViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.model.fragments.orders.CustomizeDishViewModel
 import pi.restaurant.management.ui.views.CustomNumberPicker
+import pi.restaurant.management.ui.views.TimePickerFragment
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 
 class CustomizeDishFragment : AbstractPreviewItemFragment() {
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val cardSetNavigation: CardSetEditBackBinding? = null
     override val editActionId = 0
@@ -39,6 +38,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel : CustomizeDishViewModel by viewModels()
 
+    private val activityViewModel : OrdersViewModel by activityViewModels()
     private var _binding: FragmentCustomizeDishBinding? = null
     val binding get() = _binding!!
 
@@ -53,6 +53,8 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCustomizeDishBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -60,26 +62,24 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override fun initializeUI() {
         val cardSetNavigation = binding.cardSetNavigation
         cardSetNavigation.cardAdd.setOnClickListener {
-            val navController = findNavController()
-            navController.previousBackStackEntry?.savedStateHandle?.set("newItem", getDataObject())
-            navController.popBackStack()
+            val dataObject = getDataObject()
+            activityViewModel.savedOrder.value?.details?.dishes?.put(dataObject.id, dataObject)
+            findNavController().navigate(activityViewModel.actionSave.value!!)
         }
         cardSetNavigation.cardBack.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair) : Dish {
-        val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
-        val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
-        return Dish(itemId, basic, details)
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val item = getItem(snapshotsPair)
+    override fun fillInData() {
+        val item = _viewModel.item.value ?: Dish()
         dish = item
+        if (!dish.basic.isActive) {
+            Toast.makeText(requireContext(), "TODO This dish is inactive", Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack()
+        }
 
-        numberPickerPortions = CustomNumberPicker(binding.numberPickerPortions) { refreshTotalDishPrice() }
+        numberPickerPortions = CustomNumberPicker(binding.numberPickerPortions, 1, 10, 1) { refreshTotalDishPrice() }
 
         binding.textViewName.text = item.basic.name
         if (item.basic.isDiscounted) {
@@ -102,7 +102,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         initializeRecyclerViews(item)
         initializeMoreLessButtons()
 
-        viewModel.liveReadyToUnlock.value = true
+        viewModel.setReadyToUnlock()
     }
 
     private fun initializeRecyclerViews(item: Dish) {
@@ -152,7 +152,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
 
     private fun getDataObject(): DishItem {
         return DishItem(
-            id = itemId,
+            id = StringFormatUtils.formatId(),
             dish = dish,
             amount = numberPickerPortions.getValue(),
             unusedOtherIngredients = getUnusedOtherIngredients(),

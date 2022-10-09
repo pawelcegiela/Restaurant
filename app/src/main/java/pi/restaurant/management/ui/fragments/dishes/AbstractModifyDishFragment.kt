@@ -21,7 +21,7 @@ import pi.restaurant.management.objects.enums.Unit
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.listeners.AddAllergenButtonListener
 import pi.restaurant.management.ui.listeners.AddIngredientButtonListener
-import pi.restaurant.management.logic.fragments.dishes.AbstractModifyDishViewModel
+import pi.restaurant.management.model.fragments.dishes.AbstractModifyDishViewModel
 import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
@@ -73,7 +73,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        val dish = (viewModel as AbstractModifyDishViewModel).dish ?: Dish()
+        val dish = (viewModel as AbstractModifyDishViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val discountPrice = if (binding.checkBoxDiscount.isChecked) {
             binding.editTextDiscountPrice.text.toString().toDouble()

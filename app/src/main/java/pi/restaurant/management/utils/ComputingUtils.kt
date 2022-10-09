@@ -1,11 +1,12 @@
 package pi.restaurant.management.utils
 
 import pi.restaurant.management.objects.data.discount.DiscountBasic
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ComputingUtils {
     companion object {
+        private const val millisecondsInMinute = 1000 * 60
+
         fun getNumberOfDiscounts(discount: DiscountBasic): String {
             return discount.availableDiscounts.size.toString() + " / " +
                     discount.assignedDiscounts.size.toString() + " / " +
@@ -16,10 +17,12 @@ class ComputingUtils {
             return discount.amount.toString() + discount.type.toString()
         }
 
-        fun getTodayWithTime(time: String): Date {
-            val dateString = StringFormatUtils.formatDate(Date()) + " $time"
-            val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT)
-            return sdf.parse(dateString)!!
+        fun getDateTimeInXMinutes(minutes: Int): Date {
+            return Date(Date().time + minutes * millisecondsInMinute)
+        }
+
+        fun getMinutesFromNow(date: Date): Int {
+            return ((date.time - Date().time) / millisecondsInMinute).toInt()
         }
     }
 }

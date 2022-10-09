@@ -2,9 +2,13 @@ package pi.restaurant.management.ui.views
 
 import pi.restaurant.management.databinding.CustomNumberPickerBinding
 
-class CustomNumberPicker(private val numberPicker: CustomNumberPickerBinding, val notifyFragment: () -> (Unit)) {
-    private val minimumValue = 1
-    private val maximumValue = 10
+class CustomNumberPicker(
+    private val numberPicker: CustomNumberPickerBinding,
+    private val minimumValue: Int,
+    private val maximumValue: Int,
+    private val step: Int,
+    val notifyFragment: () -> (Unit)
+) {
 
     init {
         setButtonListeners()
@@ -12,15 +16,15 @@ class CustomNumberPicker(private val numberPicker: CustomNumberPickerBinding, va
 
     private fun setButtonListeners() {
         numberPicker.buttonLess.setOnClickListener {
-            if (getValue() > minimumValue) {
-                setValue(getValue() - 1)
+            if (getValue() - step >= minimumValue) {
+                setValue(getValue() - step)
                 notifyFragment()
             }
         }
 
         numberPicker.buttonMore.setOnClickListener {
-            if (getValue() < maximumValue) {
-                setValue(getValue() + 1)
+            if (getValue() + step <= maximumValue) {
+                setValue(getValue() + step)
                 notifyFragment()
             }
         }
@@ -30,7 +34,7 @@ class CustomNumberPicker(private val numberPicker: CustomNumberPickerBinding, va
         numberPicker.textViewNumber.text = value.toString()
     }
 
-    fun getValue() : Int {
+    fun getValue(): Int {
         return numberPicker.textViewNumber.text.toString().toInt()
     }
 }

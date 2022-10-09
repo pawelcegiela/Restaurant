@@ -8,24 +8,24 @@ import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.logic.fragments.AbstractItemListViewModel
+import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 
 class WorkersMainViewModel : AbstractItemListViewModel() {
     override val databasePath = "users"
 
-    override fun setDataList(dataSnapshot: DataSnapshot) {
+    override fun retrieveDataList(dataSnapshot: DataSnapshot) {
         val data = dataSnapshot.getValue<HashMap<String, UserBasic>>() ?: HashMap()
-        liveDataList.value = data.toList().map { it.second }.toMutableList()
+        setDataList(data.toList().map { it.second }.toMutableList())
     }
 
     override fun checkPreconditions(item: AbstractDataObject) {
         val user = item as UserBasic
-        if (user.role > (liveUserRole.value ?: Role.WORKER.ordinal)) {
-            liveEditPrecondition.value = Precondition.OK
+        if (user.role > (userRole.value ?: Role.WORKER.ordinal)) {
+            setEditPrecondition(Precondition.OK)
         } else if (user.id == Firebase.auth.uid) {
-            liveEditPrecondition.value = Precondition.SAME_USER
+            setEditPrecondition(Precondition.SAME_USER)
         } else {
-            liveEditPrecondition.value = Precondition.TOO_LOW_ROLE
+            setEditPrecondition(Precondition.TOO_LOW_ROLE)
         }
     }
 }

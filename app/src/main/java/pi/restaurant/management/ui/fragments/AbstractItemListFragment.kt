@@ -13,7 +13,7 @@ import pi.restaurant.management.ui.adapters.AbstractRecyclerAdapter
 import pi.restaurant.management.databinding.FragmentItemListBinding
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.logic.fragments.AbstractItemListViewModel
+import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 
 abstract class AbstractItemListFragment : Fragment() {
 
@@ -43,20 +43,20 @@ abstract class AbstractItemListFragment : Fragment() {
     }
 
     open fun addLiveDataObservers() {
-        viewModel.liveDataList.observe(viewLifecycleOwner) {
+        viewModel.dataList.observe(viewLifecycleOwner) {
             initializeUI()
             progressBar.visibility = View.GONE
         }
 
-        viewModel.liveUserRole.observe(viewLifecycleOwner) { role ->
+        viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (role < Role.WORKER.ordinal) {
+                if (role < Role.WORKER.ordinal && viewModel.displayFAB()) {
                     binding.fab.visibility = View.VISIBLE
                 }
             }
         }
 
-        viewModel.liveEditPrecondition.observe(viewLifecycleOwner) { precondition ->
+        viewModel.editPrecondition.observe(viewLifecycleOwner) { precondition ->
             when (precondition) {
                 Precondition.OK -> openEdit()
                 Precondition.SAME_USER -> findNavController().navigate(R.id.actionWorkersToEditMyData)
@@ -68,14 +68,13 @@ abstract class AbstractItemListFragment : Fragment() {
                 else -> {}
             }
             if (precondition != null) {
-                viewModel.liveEditPrecondition.value = null
+                viewModel.setEditPrecondition(null)
             }
         }
     }
 
     open fun initializeUI() {
         initializeSearchView()
-        addSwipeToEditCallback()
 
         binding.fab.setOnClickListener {
             findNavController().navigate(addActionId)
@@ -94,26 +93,6 @@ abstract class AbstractItemListFragment : Fragment() {
                 return false
             }
         })
-    }
-
-    private fun addSwipeToEditCallback() {
-        // TODO Przemyśleć i przywrócić
-//        if (arguments?.getBoolean("swipeEnabled", true) == false) {
-//            return
-//        }
-//        val swipeToEditCallback: SwipeCallback =
-//            object : SwipeCallback(
-//                requireActivity().applicationContext,
-//                Color.YELLOW,
-//                com.google.android.material.R.drawable.material_ic_edit_black_24dp
-//            ) {
-//                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
-//                    chosenItemId = viewModel.liveDataList.value!![viewHolder.adapterPosition].id
-//                    viewModel.checkPreconditions(viewModel.liveDataList.value!![viewHolder.adapterPosition])
-//                }
-//            }
-//        val itemTouchHelper = ItemTouchHelper(swipeToEditCallback)
-//        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
 
     private fun openEdit() {

@@ -14,8 +14,8 @@ import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.address.AddressDetails
 import pi.restaurant.management.databinding.FragmentLocationBinding
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.logic.fragments.restaurantdata.LocationViewModel
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.restaurantdata.LocationViewModel
 import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 
@@ -47,14 +47,8 @@ class LocationFragment : AbstractModifyItemFragment() {
         setNavigationCardsSave()
     }
 
-    private fun getItem(snapshotsPair: SnapshotsPair): Address {
-        val basic = snapshotsPair.basic?.getValue<AddressBasic>() ?: AddressBasic()
-        val details = snapshotsPair.details?.getValue<AddressDetails>() ?: AddressDetails()
-        return Address(basic, details)
-    }
-
-    override fun fillInData(snapshotsPair: SnapshotsPair) {
-        val data = getItem(snapshotsPair)
+    override fun fillInData() {
+        val data = _viewModel.item.value ?: Address()
         binding.address.editTextCity.setText(data.basic.city)
         binding.address.editTextPostalCode.setText(data.basic.postalCode)
         binding.address.editTextStreet.setText(data.basic.street)
