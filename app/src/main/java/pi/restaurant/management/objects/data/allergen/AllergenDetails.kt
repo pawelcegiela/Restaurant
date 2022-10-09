@@ -12,9 +12,11 @@ class AllergenDetails : AbstractDataObject {
 
     constructor(
         id: String,
-        description: String
+        description: String,
+        containingDishes: HashMap<String, Boolean>
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.description = description
+        this.containingDishes = containingDishes
     }
 }

@@ -2,6 +2,7 @@ package pi.restaurant.management.objects.data.user
 
 import pi.restaurant.management.objects.data.AbstractDataObject
 import java.util.*
+import kotlin.collections.HashMap
 
 class UserDetails : AbstractDataObject {
     var email: String = ""
@@ -13,9 +14,10 @@ class UserDetails : AbstractDataObject {
         this.id = ""
     }
 
-    constructor(id: String, email: String, creationDate: Date) {
+    constructor(id: String, email: String, creationDate: Date, ordersToDeliver: HashMap<String, Boolean>) {
         this.id = id
         this.email = email
         this.creationDate = creationDate
+        this.ordersToDeliver = ordersToDeliver
     }
 }

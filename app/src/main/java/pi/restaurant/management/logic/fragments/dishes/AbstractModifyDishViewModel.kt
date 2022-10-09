@@ -13,9 +13,11 @@ import pi.restaurant.management.objects.data.dish.DishDetails
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.logic.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.objects.data.dish.Dish
 
 abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
     override val databasePath = "dishes"
+    var dish: Dish? = null
 
     val liveAllIngredients = MutableLiveData<MutableList<IngredientBasic>>()
     val liveAllAllergens = MutableLiveData<MutableList<AllergenBasic>>()

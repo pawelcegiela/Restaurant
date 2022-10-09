@@ -67,7 +67,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         if (item.basic.isDiscounted) {
             binding.textViewPrice.text = StringFormatUtils.formatPrice(item.basic.discountPrice)
             binding.textViewOriginalPrice.paintFlags =
-                binding.textViewFinalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             binding.textViewOriginalPrice.visibility = View.VISIBLE
             binding.textViewOriginalPrice.text = StringFormatUtils.formatPrice(item.basic.basePrice)
         } else {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp">
+
+    <Button
+        android:id="@+id/buttonLess"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:textSize="18sp"
+        android:text="@string/minus"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:id="@+id/textViewNumber"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/buttonLess"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:importantForAutofill="no"
+        android:text="@string/one" />
+
+    <Button
+        android:id="@+id/buttonMore"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:textSize="18sp"
+        android:text="@string/plus"
+        android:layout_toEndOf="@+id/textViewNumber"/>
+</RelativeLayout>

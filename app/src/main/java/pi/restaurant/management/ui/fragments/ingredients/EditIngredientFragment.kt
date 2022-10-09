@@ -30,7 +30,8 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
     private fun getItem(snapshotsPair: SnapshotsPair) : Ingredient {
         val basic = snapshotsPair.basic?.getValue<IngredientBasic>() ?: IngredientBasic()
         val details = snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
-        return Ingredient(itemId, basic, details)
+        _viewModel.ingredient = Ingredient(itemId, basic, details)
+        return _viewModel.ingredient!!
     }
 
     override fun fillInData(snapshotsPair: SnapshotsPair) {

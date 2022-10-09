@@ -241,4 +241,11 @@
     <string name="can_deliver_orders">Can deliver orders?</string>
     <string name="deliverers_not_initialized_yet">List of possible deliverers has not been initialized yet. Try again in a few seconds or check your internet connection.</string>
     <string name="loading_deliverer">Loading deliverer…</string>
+    <string name="ingredients_you_can_remove_colon">Ingredients you can remove:</string>
+    <string name="unit_price_colon">Unit price:</string>
+    <string name="total_dish_price_colon">Total dish price:</string>
+    <string name="portions_colon">Portions:</string>
+    <string name="this_order">This order</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragments.dishes.PreviewDishFragment">
+    tools:context=".ui.fragments.orders.CustomizeDishFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -19,11 +21,6 @@
             android:paddingHorizontal="10dp"
             android:visibility="gone"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <include
-                android:id="@+id/cardViewDisabled"
-                layout="@layout/card_view_info"
-                android:visibility="gone" />
 
             <pi.restaurant.management.ui.views.CardViewPreviewElement
                 android:id="@+id/cardDishDetails"
@@ -171,6 +168,56 @@
             </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
             <pi.restaurant.management.ui.views.CardViewPreviewElement
+                android:id="@+id/cardThisOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingBottom="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <pi.restaurant.management.ui.views.TextViewCardTitle
+                        android:id="@+id/textViewThisOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="20dp"
+                        android:text="@string/this_order" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewTotalDishPriceTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/total_dish_price_colon" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetail
+                        android:id="@+id/textViewTotalDishPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewPortionsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/portions_colon" />
+
+                    <include
+                        android:id="@+id/numberPickerPortions"
+                        layout="@layout/custom_number_picker" />
+
+                </LinearLayout>
+
+            </pi.restaurant.management.ui.views.CardViewPreviewElement>
+
+            <pi.restaurant.management.ui.views.CardViewPreviewElement
                 android:id="@+id/cardIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,58 +237,41 @@
                         android:text="@string/ingredients" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerViewBaseOtherIngredients"
+                        android:id="@+id/recyclerViewBaseIngredients"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         app:layoutManager="LinearLayoutManager" />
 
-                    <LinearLayout
-                        android:id="@+id/linearLayoutIngredientsUnexpanded"
-                        android:layout_width="match_parent"
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewOtherIngredients"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginTop="35dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/ingredients_you_can_remove_colon" />
 
-                        <pi.restaurant.management.ui.views.TextViewLessMore
-                            android:id="@+id/textViewIngredientsMore"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="@string/show_more" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutIngredientsExpanded"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewOtherIngredients"
                         android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:layoutManager="LinearLayoutManager" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewPossibleIngredients"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:layout_marginTop="35dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/ingredients_you_can_add_colon" />
 
-                        <pi.restaurant.management.ui.views.TextViewDetailTitle
-                            android:id="@+id/textViewPossibleIngredients"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="35dp"
-                            android:layout_marginBottom="20dp"
-                            android:text="@string/ingredients_you_can_add_colon" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recycler_view_possible_ingredients"
-                            android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            app:layoutManager="LinearLayoutManager" />
-
-                        <pi.restaurant.management.ui.views.TextViewLessMore
-                            android:id="@+id/textViewIngredientsLess"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="@string/show_less" />
-                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_possible_ingredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:layoutManager="LinearLayoutManager" />
 
                 </LinearLayout>
+
             </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
             <pi.restaurant.management.ui.views.CardViewPreviewElement
@@ -254,8 +284,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <pi.restaurant.management.ui.views.TextViewCardTitle
                         android:id="@+id/textViewAllergens"
@@ -273,16 +303,27 @@
                 </LinearLayout>
             </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
-            <include
-                android:id="@+id/cardSetNavigation"
-                layout="@layout/card_set_edit_back" />
-
         </LinearLayout>
 
     </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/bottom_toolbar_height" />
+
+    <include
+        android:id="@+id/cardSetNavigation"
+        layout="@layout/card_view_add_back"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline" />
 
     <include
         android:id="@+id/progress"
         layout="@layout/progress_bar" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

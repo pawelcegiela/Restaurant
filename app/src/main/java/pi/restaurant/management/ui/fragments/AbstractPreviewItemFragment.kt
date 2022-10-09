@@ -57,6 +57,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     open fun initializeUI() {
         cardSetNavigation?.cardBack?.root?.visibility = View.GONE
         cardSetNavigation?.cardEditBack?.root?.visibility = View.VISIBLE
+
         cardSetNavigation?.cardEditBack?.cardEdit?.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("id", itemId)

@@ -31,7 +31,8 @@ class EditOrderFragment : AbstractModifyOrderFragment() {
     private fun getItem(snapshotsPair: SnapshotsPair) : Order {
         val basic = snapshotsPair.basic?.getValue<OrderBasic>() ?: OrderBasic()
         val details = snapshotsPair.details?.getValue<OrderDetails>() ?: OrderDetails()
-        return Order(itemId, basic, details)
+        _viewModel.order = Order(itemId, basic, details)
+        return _viewModel.order!!
     }
 
     override fun fillInData(snapshotsPair: SnapshotsPair) {

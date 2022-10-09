@@ -15,6 +15,7 @@ class DishDetails : AbstractDataObject {
     var allergens: HashMap<String, AllergenBasic> = HashMap()
     var amount: Double = 0.0
     var unit: Int = 0
+    var containingOrders: HashMap<String, Boolean> = HashMap()
 
     @Suppress("unused")
     constructor()
@@ -28,7 +29,8 @@ class DishDetails : AbstractDataObject {
         possibleIngredients: HashMap<String, IngredientItem>,
         allergens: HashMap<String, AllergenBasic>,
         amount: Double,
-        unit: Int
+        unit: Int,
+        containingOrders: HashMap<String, Boolean>
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.description = description
@@ -39,5 +41,6 @@ class DishDetails : AbstractDataObject {
         this.allergens = allergens
         this.amount = amount
         this.unit = unit
+        this.containingOrders = containingOrders
     }
 }

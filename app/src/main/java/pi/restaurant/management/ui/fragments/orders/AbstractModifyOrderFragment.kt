@@ -16,6 +16,8 @@ import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.order.OrderDetails
 import pi.restaurant.management.databinding.FragmentModifyOrderBinding
+import pi.restaurant.management.logic.fragments.orders.AbstractModifyOrderViewModel
+import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.enums.DeliveryType
 import pi.restaurant.management.objects.enums.OrderPlace
 import pi.restaurant.management.objects.enums.OrderStatus
@@ -103,6 +105,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
+        val order = (viewModel as AbstractModifyOrderViewModel).order ?: Order()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
         val basic = OrderBasic(
@@ -120,7 +123,9 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
             orderDate = orderDate ?: Date(),
             orderPlace = binding.spinnerPlace.selectedItemId.toInt(),
             dishes = HashMap(dishesList.associateBy { it.id }),
-            address = getAddress()
+            address = getAddress(),
+            statusChanges = order.details.statusChanges,
+            delivererId = order.details.delivererId
         )
 
         return SplitDataObject(itemId, basic, details)

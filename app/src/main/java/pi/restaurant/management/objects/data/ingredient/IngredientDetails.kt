@@ -14,9 +14,13 @@ class IngredientDetails : AbstractDataObject {
 
     constructor(
         id: String,
-        subIngredients: MutableList<IngredientItem>?
+        subIngredients: MutableList<IngredientItem>?,
+        containingDishes: HashMap<String, Boolean>,
+        containingSubDishes: HashMap<String, Boolean>
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.subIngredients = subIngredients
+        this.containingDishes = containingDishes
+        this.containingSubDishes = containingSubDishes
     }
 }

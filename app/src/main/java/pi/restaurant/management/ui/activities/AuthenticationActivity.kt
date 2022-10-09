@@ -3,10 +3,10 @@ package pi.restaurant.management.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,14 +18,16 @@ import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
+import pi.restaurant.management.logic.activities.AuthenticationViewModel
 import pi.restaurant.management.objects.enums.Role
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
-    private lateinit var auth: FirebaseAuth
     private var keepSplashScreen = true
+    val viewModel: AuthenticationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +59,7 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     private fun authenticate() {
-        auth = Firebase.auth
-        val user = auth.currentUser
+        val user = Firebase.auth.currentUser
         if (user == null) {
             keepSplashScreen = false
             return
@@ -99,7 +100,9 @@ class AuthenticationActivity : AppCompatActivity() {
         val details = UserDetails(
             id = Firebase.auth.uid!!,
             email = Firebase.auth.currentUser?.email!!,
-            creationDate = Date())
+            creationDate = Date(),
+            ordersToDeliver = HashMap()
+        )
 
         Firebase.database.getReference("users").child("basic").child(Firebase.auth.uid!!).setValue(basic)
         Firebase.database.getReference("users").child("details").child(Firebase.auth.uid!!).setValue(details)
@@ -122,7 +125,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            auth.signInWithEmailAndPassword(email, password)
+            Firebase.auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         authenticate()
@@ -145,7 +148,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            auth.sendPasswordResetEmail(email)
+            Firebase.auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         binding.editTextResetPassEmail.setText("")

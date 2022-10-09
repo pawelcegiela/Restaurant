@@ -5,6 +5,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.dish.DishItem
+import pi.restaurant.management.objects.data.ingredient.IngredientItem
+import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.objects.enums.Unit
 import java.text.SimpleDateFormat
 import java.util.*
@@ -57,6 +59,19 @@ class StringFormatUtils {
                 text += "- ${item.name}\n"
             }
             return text.trim()
+        }
+
+        fun formatDishItemHeader(dishItem: DishItem): String {
+            return "${dishItem.dish.basic.name}  [x${dishItem.amount}], ${formatPrice(dishItem.finalPrice)}"
+        }
+
+        fun formatIngredientItemHeader(item: IngredientItem, status: IngredientStatus, context: Context): String {
+            var text = "${item.name} [${formatAmountWithUnit(context, item.amount, item.unit)}"
+
+            if (status == IngredientStatus.POSSIBLE || item.extraPrice != 0.0) {
+                text += ",  + ${item.extraPrice} zł]"
+            }
+            return text
         }
     }
 }

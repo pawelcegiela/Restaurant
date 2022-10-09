@@ -56,7 +56,8 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
     private fun getItem(snapshotsPair: SnapshotsPair) : User {
         val basic = snapshotsPair.basic?.getValue<UserBasic>() ?: UserBasic()
         val details = snapshotsPair.details?.getValue<UserDetails>() ?: UserDetails()
-        return User(itemId, basic, details)
+        _viewModel.user = User(itemId, basic, details)
+        return _viewModel.user!!
     }
 
     override fun fillInData(snapshotsPair: SnapshotsPair) {
@@ -67,7 +68,6 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.spinnerRole.setSelection(data.basic.role)
         binding.checkBoxDelivery.isChecked = data.basic.delivery
 
-        creationDate = data.details.creationDate
         disabled = data.basic.disabled
 //        if (disabled) {
 //            cardSetNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getString(R.string.enable_user)

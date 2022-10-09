@@ -32,8 +32,9 @@ class PreviewOrderDishesRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewName.text = dataSet[position].dish.basic.name
-        viewHolder.binding.textViewChanges.text = StringFormatUtils.formatDishChanges(dataSet[position])
+        val item = dataSet[position]
+        viewHolder.binding.textViewName.text = StringFormatUtils.formatDishItemHeader(item)
+        viewHolder.binding.textViewChanges.text = StringFormatUtils.formatDishChanges(item)
         if (viewHolder.binding.textViewChanges.text.isEmpty()) {
             viewHolder.binding.textViewChanges.visibility = View.GONE
         }

@@ -30,7 +30,8 @@ class EditDishFragment : AbstractModifyDishFragment() {
     private fun getItem(snapshotsPair: SnapshotsPair) : Dish {
         val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
         val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
-        return Dish(itemId, basic, details)
+        _viewModel.dish = Dish(itemId, basic, details)
+        return _viewModel.dish!!
     }
 
     override fun fillInData(snapshotsPair: SnapshotsPair) {

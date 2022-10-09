@@ -28,6 +28,8 @@ class OrderDetails : AbstractDataObject {
         orderPlace: Int,
         dishes: HashMap<String, DishItem>,
         address: AddressBasic?,
+        statusChanges: HashMap<String, Int>,
+        delivererId: String
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.userId = userId
@@ -36,5 +38,7 @@ class OrderDetails : AbstractDataObject {
         this.orderPlace = orderPlace
         this.dishes = dishes
         this.address = address
+        this.statusChanges = statusChanges
+        this.delivererId = delivererId
     }
 }

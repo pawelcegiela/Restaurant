@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.databinding.ItemSubItemBinding
-import pi.restaurant.management.objects.enums.IngredientItemState
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
 import pi.restaurant.management.ui.fragments.ingredients.AbstractModifyIngredientFragment
@@ -56,10 +55,8 @@ class DishIngredientsRecyclerAdapter(
                     }
 
                     binding.buttonOptions.setOnClickListener {
-                        if (list == IngredientStatus.OTHER) {
-                            fragment.changeIngredientItemState(IngredientItemState.POSSIBLE, dataSet[layoutPosition])
-                        } else if (list == IngredientStatus.POSSIBLE) {
-                            fragment.changeIngredientItemState(IngredientItemState.REMOVE, dataSet[layoutPosition])
+                        if (list != IngredientStatus.BASE) {
+                            fragment.changeIngredientItemState(list, dataSet[layoutPosition])
                         }
                     }
                 }
@@ -78,13 +75,8 @@ class DishIngredientsRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewName.text = "${dataSet[position].name} [${
-            StringFormatUtils.formatAmountWithUnit(
-                viewHolder.context,
-                dataSet[position].amount,
-                dataSet[position].unit
-            )
-        }" + if (list == IngredientStatus.POSSIBLE || dataSet[position].extraPrice != 0.0) ",  + ${dataSet[position].extraPrice} zł]" else "]"
+        viewHolder.binding.textViewName.text =
+            StringFormatUtils.formatIngredientItemHeader(dataSet[position], list, viewHolder.context)
     }
 
     override fun getItemCount() = dataSet.size

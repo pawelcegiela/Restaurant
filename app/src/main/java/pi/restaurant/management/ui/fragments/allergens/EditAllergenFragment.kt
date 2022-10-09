@@ -27,7 +27,8 @@ class EditAllergenFragment : AbstractModifyAllergenFragment() {
     private fun getItem(snapshotsPair: SnapshotsPair) : Allergen {
         val basic = snapshotsPair.basic?.getValue<AllergenBasic>() ?: AllergenBasic()
         val details = snapshotsPair.details?.getValue<AllergenDetails>() ?: AllergenDetails()
-        return Allergen(itemId, basic, details)
+        _viewModel.allergen = Allergen(itemId, basic, details)
+        return _viewModel.allergen!!
     }
 
     override fun fillInData(snapshotsPair: SnapshotsPair) {

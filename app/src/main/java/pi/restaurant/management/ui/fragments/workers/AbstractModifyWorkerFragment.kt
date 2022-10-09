@@ -11,12 +11,13 @@ import pi.restaurant.management.objects.data.*
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
+import pi.restaurant.management.logic.fragments.workers.AbstractModifyWorkerViewModel
+import pi.restaurant.management.objects.data.user.User
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
-import java.util.*
 import kotlin.collections.HashMap
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
@@ -29,7 +30,6 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     override var itemId = ""
 
     var disabled = false
-    var creationDate = Date()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +51,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
+        val user = (viewModel as AbstractModifyWorkerViewModel).user ?: User()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
         val basic = UserBasic(
@@ -64,8 +65,9 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         val details = UserDetails(
             id = itemId,
             email = binding.editTextEmail.text.toString(),
-            creationDate = creationDate
-        ) // TODO Temp creation date
+            creationDate = user.details.creationDate,
+            ordersToDeliver = user.details.ordersToDeliver
+        )
 
         return SplitDataObject(itemId, basic, details)
     }

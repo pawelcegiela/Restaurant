@@ -17,6 +17,7 @@ import pi.restaurant.management.objects.enums.Unit
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.listeners.AddIngredientButtonListener
 import pi.restaurant.management.logic.fragments.ingredients.AbstractModifyIngredientViewModel
+import pi.restaurant.management.objects.data.ingredient.Ingredient
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 import pi.restaurant.management.ui.views.DialogIngredientProperties
@@ -114,6 +115,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
+        val ingredient = (viewModel as AbstractModifyIngredientViewModel).ingredient ?: Ingredient()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
         val basic = IngredientBasic(
@@ -125,7 +127,9 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         )
         val details = IngredientDetails(
             id = itemId,
-            subIngredients = if (binding.checkBoxSubDish.isChecked) subIngredientsList else null
+            subIngredients = if (binding.checkBoxSubDish.isChecked) subIngredientsList else null,
+            containingDishes = ingredient.details.containingDishes,
+            containingSubDishes = ingredient.details.containingSubDishes
         )
 
         return SplitDataObject(itemId, basic, details)
