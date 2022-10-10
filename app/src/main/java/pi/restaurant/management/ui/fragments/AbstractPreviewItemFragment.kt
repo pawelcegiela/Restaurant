@@ -25,7 +25,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         addLiveDataObservers()
     }
 
-    private fun addLiveDataObservers() {
+    fun addLiveDataObservers() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
                 if (Role.isAtLeastManager(role)) {

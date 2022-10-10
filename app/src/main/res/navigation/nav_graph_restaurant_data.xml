@@ -12,27 +12,44 @@
         tools:layout="@layout/fragment_rd_main">
 
         <action
-            android:id="@+id/actionRDtoAboutRestaurant"
-            app:destination="@id/AboutRestaurantFragment" />
+            android:id="@+id/actionRDToEditRestaurantData"
+            app:destination="@id/EditRestaurantDataFragment" />
 
         <action
-            android:id="@+id/actionRDtoOpeningHours"
-            app:destination="@id/OpeningHoursFragment" />
+            android:id="@+id/actionRDToMain"
+            app:destination="@id/MainActivity" />
 
-        <action
-            android:id="@+id/actionRDtoLocation"
-            app:destination="@id/LocationFragment" />
-
-        <action
-            android:id="@+id/actionRDtoDelivery"
-            app:destination="@id/DeliveryFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/AboutRestaurantFragment"
-        android:name="pi.restaurant.management.ui.fragments.restaurantdata.AboutRestaurantFragment"
-        android:label="@string/about_restaurant"
-        tools:layout="@layout/fragment_about_restaurant">
+        android:id="@+id/EditRestaurantDataFragment"
+        android:name="pi.restaurant.management.ui.fragments.restaurantdata.EditRestaurantData"
+        android:label="@string/edit_restaurant_data"
+        tools:layout="@layout/fragment_edit_restaurant_data">
+
+        <action
+            android:id="@+id/actionERDToEditAboutRestaurant"
+            app:destination="@id/EditAboutRestaurantFragment" />
+
+        <action
+            android:id="@+id/actionERDToEditOpeningHours"
+            app:destination="@id/EditOpeningHoursFragment" />
+
+        <action
+            android:id="@+id/actionERDToEditLocation"
+            app:destination="@id/EditLocationFragment" />
+
+        <action
+            android:id="@+id/actionERDToEditDelivery"
+            app:destination="@id/EditDeliveryFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/EditAboutRestaurantFragment"
+        android:name="pi.restaurant.management.ui.fragments.restaurantdata.EditAboutRestaurantFragment"
+        android:label="@string/edit_about_restaurant"
+        tools:layout="@layout/fragment_modify_about_restaurant">
         <action
             android:id="@+id/actionAboutRestaurantToRD"
             app:destination="@id/RDMainFragment"
@@ -41,10 +58,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/OpeningHoursFragment"
-        android:name="pi.restaurant.management.ui.fragments.restaurantdata.OpeningHoursFragment"
-        android:label="@string/opening_hours"
-        tools:layout="@layout/fragment_opening_hours">
+        android:id="@+id/EditOpeningHoursFragment"
+        android:name="pi.restaurant.management.ui.fragments.restaurantdata.EditOpeningHoursFragment"
+        android:label="@string/edit_opening_hours"
+        tools:layout="@layout/fragment_modify_opening_hours">
         <action
             android:id="@+id/actionOpeningHoursToRD"
             app:destination="@id/RDMainFragment"
@@ -53,10 +70,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/LocationFragment"
-        android:name="pi.restaurant.management.ui.fragments.restaurantdata.LocationFragment"
-        android:label="@string/location"
-        tools:layout="@layout/fragment_location">
+        android:id="@+id/EditLocationFragment"
+        android:name="pi.restaurant.management.ui.fragments.restaurantdata.EditLocationFragment"
+        android:label="@string/edit_location"
+        tools:layout="@layout/fragment_modify_location">
         <action
             android:id="@+id/actionLocationToRD"
             app:destination="@id/RDMainFragment"
@@ -65,10 +82,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/DeliveryFragment"
-        android:name="pi.restaurant.management.ui.fragments.restaurantdata.DeliveryFragment"
-        android:label="@string/delivery"
-        tools:layout="@layout/fragment_delivery">
+        android:id="@+id/EditDeliveryFragment"
+        android:name="pi.restaurant.management.ui.fragments.restaurantdata.EditDeliveryFragment"
+        android:label="@string/edit_delivery"
+        tools:layout="@layout/fragment_modify_delivery">
         <action
             android:id="@+id/actionDeliveryToRD"
             app:destination="@id/RDMainFragment"

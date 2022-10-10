@@ -7,26 +7,24 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.*
 import pi.restaurant.management.objects.data.openinghours.OpeningHours
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursDetails
-import pi.restaurant.management.databinding.FragmentOpeningHoursBinding
+import pi.restaurant.management.databinding.FragmentModifyOpeningHoursBinding
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.model.fragments.restaurantdata.OpeningHoursViewModel
+import pi.restaurant.management.model.fragments.restaurantdata.EditOpeningHoursViewModel
 import pi.restaurant.management.utils.PreconditionUtils
-import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.utils.StringFormatUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OpeningHoursFragment : AbstractModifyItemFragment() {
-    private var _binding: FragmentOpeningHoursBinding? = null
+class EditOpeningHoursFragment : AbstractModifyItemFragment() {
+    private var _binding: FragmentModifyOpeningHoursBinding? = null
     private val binding get() = _binding!!
 
     override val linearLayout get() = binding.linearLayout
@@ -38,7 +36,7 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
     override val removeMessageId = 0 // Unused
 
     override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : OpeningHoursViewModel by viewModels()
+    private val _viewModel : EditOpeningHoursViewModel by viewModels()
 
     private lateinit var checkBoxes: ArrayList<CheckBox>
     private lateinit var etOpenings: ArrayList<EditText>
@@ -56,7 +54,7 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentOpeningHoursBinding.inflate(inflater, container, false)
+        _binding = FragmentModifyOpeningHoursBinding.inflate(inflater, container, false)
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

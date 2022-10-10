@@ -18,24 +18,24 @@
             android:title="@string/restaurant_data" />
 
         <item
-            android:id="@+id/AboutRestaurantFragment"
+            android:id="@+id/EditAboutRestaurantFragment"
             android:icon="@drawable/about_restaurant"
-            android:title="@string/about_restaurant" />
+            android:title="@string/edit_about_restaurant" />
 
         <item
-            android:id="@+id/OpeningHoursFragment"
+            android:id="@+id/EditOpeningHoursFragment"
             android:icon="@drawable/hours"
-            android:title="@string/opening_hours" />
+            android:title="@string/edit_opening_hours" />
 
         <item
-            android:id="@+id/LocationFragment"
+            android:id="@+id/EditLocationFragment"
             android:icon="@drawable/location"
-            android:title="@string/location" />
+            android:title="@string/edit_location" />
 
         <item
-            android:id="@+id/DeliveryFragment"
+            android:id="@+id/EditDeliveryFragment"
             android:icon="@drawable/delivery"
-            android:title="@string/delivery" />
+            android:title="@string/edit_delivery" />
     </group>
 
     <group

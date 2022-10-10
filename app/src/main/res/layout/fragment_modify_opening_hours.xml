@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragments.restaurantdata.OpeningHoursFragment">
+    tools:context=".ui.fragments.restaurantdata.EditOpeningHoursFragment">
 
     <ScrollView
         android:layout_width="match_parent"

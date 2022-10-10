@@ -9,7 +9,7 @@ import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.address.AddressDetails
 
-class LocationViewModel : AbstractModifyItemViewModel() {
+class EditLocationViewModel : AbstractModifyItemViewModel() {
     override val databasePath = "restaurantData"
 
     private val _item: MutableLiveData<Address> = MutableLiveData()

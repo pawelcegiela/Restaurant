@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import pi.restaurant.management.databinding.FragmentDeliveryBinding
+import pi.restaurant.management.databinding.FragmentModifyDeliveryBinding
 
-class DeliveryFragment : Fragment() {
-    private var _binding: FragmentDeliveryBinding? = null
+class EditDeliveryFragment : Fragment() {
+    private var _binding: FragmentModifyDeliveryBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDeliveryBinding.inflate(inflater, container, false)
+        _binding = FragmentModifyDeliveryBinding.inflate(inflater, container, false)
         return binding.root
     }
 

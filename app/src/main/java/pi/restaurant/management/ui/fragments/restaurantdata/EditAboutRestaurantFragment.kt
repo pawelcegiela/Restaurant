@@ -6,21 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.*
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurant
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantBasic
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantDetails
-import pi.restaurant.management.databinding.FragmentAboutRestaurantBinding
+import pi.restaurant.management.databinding.FragmentModifyAboutRestaurantBinding
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.model.fragments.restaurantdata.AboutRestaurantViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.model.fragments.restaurantdata.EditAboutRestaurantViewModel
 import pi.restaurant.management.utils.StringFormatUtils
 
-class AboutRestaurantFragment : AbstractModifyItemFragment() {
-    private var _binding: FragmentAboutRestaurantBinding? = null
+class EditAboutRestaurantFragment : AbstractModifyItemFragment() {
+    private var _binding: FragmentModifyAboutRestaurantBinding? = null
     private val binding get() = _binding!!
 
     override val linearLayout get() = binding.linearLayout
@@ -32,13 +30,13 @@ class AboutRestaurantFragment : AbstractModifyItemFragment() {
     override val removeMessageId = 0 // Unused
 
     override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : AboutRestaurantViewModel by viewModels()
+    private val _viewModel : EditAboutRestaurantViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAboutRestaurantBinding.inflate(inflater, container, false)
+        _binding = FragmentModifyAboutRestaurantBinding.inflate(inflater, container, false)
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

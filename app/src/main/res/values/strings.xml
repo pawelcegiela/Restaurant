@@ -263,4 +263,11 @@
     <string name="close_order_without_realizing">Close order without realizing</string>
     <string name="are_you_sure_close_order">Are you sure you want to close the order without realizing? This decision can\'t be reverted. If the order was placed in the app, the customer will be notified; otherwise remember about informing the client that their order won\'t be prepared.</string>
     <string name="executive">Executive</string>
+    <string name="no_restaurant_description">No restaurant description</string>
+    <string name="address">Address</string>
+    <string name="edit_restaurant_data">Edit restaurant data</string>
+    <string name="edit_about_restaurant">Edit details</string>
+    <string name="edit_opening_hours">Edit opening hours</string>
+    <string name="edit_location">Edit location</string>
+    <string name="edit_delivery">Edit delivery</string>
 </resources>

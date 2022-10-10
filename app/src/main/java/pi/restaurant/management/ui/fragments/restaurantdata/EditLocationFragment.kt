@@ -6,21 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.*
 import pi.restaurant.management.objects.data.address.Address
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.address.AddressDetails
-import pi.restaurant.management.databinding.FragmentLocationBinding
+import pi.restaurant.management.databinding.FragmentModifyLocationBinding
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.model.fragments.restaurantdata.LocationViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.model.fragments.restaurantdata.EditLocationViewModel
 import pi.restaurant.management.utils.StringFormatUtils
 
-class LocationFragment : AbstractModifyItemFragment() {
-    private var _binding: FragmentLocationBinding? = null
+class EditLocationFragment : AbstractModifyItemFragment() {
+    private var _binding: FragmentModifyLocationBinding? = null
     private val binding get() = _binding!!
 
     override val linearLayout get() = binding.linearLayout
@@ -32,13 +30,13 @@ class LocationFragment : AbstractModifyItemFragment() {
     override val removeMessageId = 0 // Unused
 
     override val viewModel: AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel: LocationViewModel by viewModels()
+    private val _viewModel: EditLocationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLocationBinding.inflate(inflater, container, false)
+        _binding = FragmentModifyLocationBinding.inflate(inflater, container, false)
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

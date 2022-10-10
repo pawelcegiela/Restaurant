@@ -9,7 +9,7 @@ import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurant
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantBasic
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantDetails
 
-class AboutRestaurantViewModel : AbstractModifyItemViewModel() {
+class EditAboutRestaurantViewModel : AbstractModifyItemViewModel() {
     override val databasePath = "restaurantData"
 
     private val _item: MutableLiveData<AboutRestaurant> = MutableLiveData()

@@ -9,7 +9,7 @@ import pi.restaurant.management.objects.data.openinghours.OpeningHours
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursDetails
 
-class OpeningHoursViewModel : AbstractModifyItemViewModel() {
+class EditOpeningHoursViewModel : AbstractModifyItemViewModel() {
     override val databasePath = "restaurantData"
 
     private val _item: MutableLiveData<OpeningHours> = MutableLiveData()

@@ -78,5 +78,9 @@ class StringFormatUtils {
         fun formatStatusChange(data: Pair<String, Int>, context: Context): String {
             return "${data.first}  -  ${OrderStatus.getString(data.second, context)}"
         }
+
+        fun formatOpeningHours(startHour: Date, endHour: Date) : String {
+            return "${formatTime(startHour)}  -  ${formatTime(endHour)}"
+        }
     }
 }
