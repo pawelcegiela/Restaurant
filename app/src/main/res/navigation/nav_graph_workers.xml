@@ -20,10 +20,6 @@
             app:destination="@id/EditWorkerFragment" />
 
         <action
-            android:id="@+id/actionWorkersToEditMyData"
-            app:destination="@id/EditMyDataFragment" />
-
-        <action
             android:id="@+id/actionWorkersToPreviewWorker"
             app:destination="@id/PreviewWorkerFragment" />
 
@@ -81,6 +77,9 @@
         <action
             android:id="@+id/actionPreviewWorkerToEditWorker"
             app:destination="@id/EditWorkerFragment" />
+        <action
+            android:id="@+id/actionPreviewWorkerToEditMyData"
+            app:destination="@id/EditMyDataFragment" />
         <action
             android:id="@+id/actionPreviewWorkerToWorkers"
             app:destination="@id/WorkersMainFragment"

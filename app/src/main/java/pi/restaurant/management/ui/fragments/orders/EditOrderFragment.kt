@@ -28,6 +28,5 @@ class EditOrderFragment : AbstractModifyOrderFragment() {
         if (activityViewModel.savedOrder.value != null) {
             itemId = activityViewModel.savedOrder.value!!.id
         }
-        setNavigationCardsSaveRemove()
     }
 }

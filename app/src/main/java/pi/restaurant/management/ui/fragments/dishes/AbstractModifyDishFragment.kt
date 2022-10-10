@@ -37,7 +37,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
 
     var baseIngredientsList: MutableList<IngredientItem> = ArrayList()
@@ -197,8 +197,9 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     fun removeIngredient(item: Pair<IngredientItem, IngredientStatus>) {
+        val itemPosition = lists[item.second.ordinal].indexOf(item.first)
         lists[item.second.ordinal].remove(item.first)
-        recyclers[item.second.ordinal].adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        recyclers[item.second.ordinal].adapter?.notifyItemRemoved(itemPosition)
         UserInterfaceUtils.setRecyclerSize(recyclers[item.second.ordinal], lists[item.second.ordinal].size, requireContext())
     }
 
@@ -214,26 +215,28 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
                 .find { it == oldItem.first }.also { it?.amount = newItem.first.amount }
                 .also { it?.extraPrice = newItem.first.extraPrice }
         } else {
+            val oldListPosition = lists[oldItem.second.ordinal].indexOf(oldItem.first)
             lists[oldItem.second.ordinal].remove(oldItem.first)
             lists[newItem.second.ordinal].add(newItem.first)
 
-            recyclers[oldItem.second.ordinal].adapter?.notifyDataSetChanged() //TODO Zła praktyka
+            recyclers[oldItem.second.ordinal].adapter?.notifyItemRemoved(oldListPosition)
             UserInterfaceUtils.setRecyclerSize(recyclers[oldItem.second.ordinal], lists[oldItem.second.ordinal].size, requireContext())
         }
-        recyclers[newItem.second.ordinal].adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        recyclers[newItem.second.ordinal].adapter?.notifyItemInserted(lists[newItem.second.ordinal].indexOf(newItem.first))
         UserInterfaceUtils.setRecyclerSize(recyclers[newItem.second.ordinal], lists[newItem.second.ordinal].size, requireContext())
     }
 
     // TODO problemy z mutable list
     fun removeAllergenItem(allergenItem: AllergenBasic) {
+        val itemPosition = allergensList.indexOf(allergenItem)
         allergensList.remove(allergenItem)
-        binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        binding.recyclerViewAllergens.adapter?.notifyItemRemoved(itemPosition)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, requireContext())
     }
 
     fun addAllergenItem(allergenItem: AllergenBasic) {
         allergensList.add(allergenItem)
-        binding.recyclerViewAllergens.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        binding.recyclerViewAllergens.adapter?.notifyItemInserted(allergensList.indexOf(allergenItem))
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, requireContext())
     }
 }

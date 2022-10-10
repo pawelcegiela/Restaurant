@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.SplitDataObject
-import pi.restaurant.management.databinding.CardSetNavigationModifyBinding
+import pi.restaurant.management.databinding.ToolbarNavigationModifyBinding
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
@@ -20,7 +20,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     abstract val linearLayout: LinearLayout
     abstract val progressBar: ProgressBar
-    abstract val cardSetNavigation: CardSetNavigationModifyBinding
+    abstract val toolbarNavigation: ToolbarNavigationModifyBinding
     abstract var itemId: String
     abstract val nextActionId: Int
     abstract val saveMessageId: Int
@@ -35,7 +35,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     fun addLiveDataObservers() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (role < Role.WORKER.ordinal) {
+                if (Role.isAtLeastManager(role)) {
                     initializeUI()
                     viewModel.itemId = itemId
                     if (itemId.isNotEmpty() && viewModel.shouldGetDataFromDatabase()) {
@@ -72,23 +72,25 @@ abstract class AbstractModifyItemFragment : Fragment() {
     open fun fillInData() {}
 
     fun setNavigationCardsSave() {
-        cardSetNavigation.cardSaveBack.cardSave.setOnClickListener {
+        toolbarNavigation.root.visibility = View.VISIBLE
+        toolbarNavigation.cardSave.root.visibility = View.VISIBLE
+        toolbarNavigation.cardSave.root.setOnClickListener {
             if (!UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
                 return@setOnClickListener
             }
 
             saveToDatabase()
-        }
-
-        cardSetNavigation.cardSaveBack.cardBack.setOnClickListener {
-            findNavController().navigate(nextActionId)
         }
     }
 
     open fun setNavigationCardsSaveRemove() {
-        cardSetNavigation.cardSaveBack.root.visibility = View.GONE
-        cardSetNavigation.cardSaveRemoveBack.root.visibility = View.VISIBLE
-        cardSetNavigation.cardSaveRemoveBack.cardSave.setOnClickListener {
+        if (!Role.isAtLeastExecutive(viewModel.userRole.value)) {
+            setNavigationCardsSave()
+            return
+        }
+        toolbarNavigation.root.visibility = View.VISIBLE
+        toolbarNavigation.cardSaveRemove.root.visibility = View.VISIBLE
+        toolbarNavigation.cardSaveRemove.cardSave2.setOnClickListener {
             if (!UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
                 return@setOnClickListener
             }
@@ -96,12 +98,8 @@ abstract class AbstractModifyItemFragment : Fragment() {
             saveToDatabase()
         }
 
-        cardSetNavigation.cardSaveRemoveBack.cardRemove.setOnClickListener {
+        toolbarNavigation.cardSaveRemove.cardRemove.setOnClickListener {
             removeFromDatabase()
-        }
-
-        cardSetNavigation.cardSaveRemoveBack.cardBack.setOnClickListener {
-            findNavController().navigate(nextActionId)
         }
     }
 

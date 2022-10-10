@@ -2,24 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="40dp"
+    android:background="@color/blue_4"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
     android:paddingHorizontal="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="40dp">
+    android:visibility="gone">
 
     <include
         android:id="@+id/cardBack"
         layout="@layout/card_view_back" />
 
     <include
-        android:id="@+id/cardSaveBack"
-        layout="@layout/card_view_save_back"
-        android:visibility="gone"/>
+        android:id="@+id/cardAdd"
+        layout="@layout/card_view_add"
+        android:visibility="gone" />
 
     <include
-        android:id="@+id/cardEditBack"
-        layout="@layout/card_view_edit_back"
-        android:visibility="gone"/>
+        android:id="@+id/cardEdit"
+        layout="@layout/card_view_edit"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -23,9 +23,6 @@ abstract class AbstractItemListViewModel : ViewModel() {
     private val _dataList: MutableLiveData<MutableList<AbstractDataObject>> = MutableLiveData<MutableList<AbstractDataObject>>()
     val dataList: LiveData<MutableList<AbstractDataObject>> = _dataList
 
-    private val _editPrecondition: MutableLiveData<Precondition?> = MutableLiveData<Precondition?>()
-    val editPrecondition: LiveData<Precondition?> = _editPrecondition
-
     fun loadData() {
         val databaseRef = Firebase.database.getReference(databasePath).child("basic")
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -53,14 +50,6 @@ abstract class AbstractItemListViewModel : ViewModel() {
 
     fun setDataList(list: MutableList<AbstractDataObject>) {
         _dataList.value = list
-    }
-
-    fun setEditPrecondition(precondition: Precondition?) {
-        _editPrecondition.value = precondition
-    }
-
-    open fun checkPreconditions(item: AbstractDataObject) {
-        _editPrecondition.value = Precondition.OK
     }
 
     open fun displayFAB() = true

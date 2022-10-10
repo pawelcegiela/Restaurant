@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.app
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.user.User
 import pi.restaurant.management.databinding.FragmentPreviewWorkerBinding
+import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
@@ -16,8 +20,8 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
-    override val editActionId = R.id.actionPreviewWorkerToEditWorker
+    override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
+    override var editActionId = R.id.actionPreviewWorkerToEditWorker
     override val backActionId = R.id.actionPreviewWorkerToWorkers
     override val viewModel: AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel: PreviewWorkerViewModel by viewModels()
@@ -52,7 +56,12 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
         if (myRole < previewedUserRole) {
             super.initializeUI()
         } else {
-            initializeWorkerUI()
+            if (Firebase.auth.uid == (_viewModel.item.value?.id ?: "")) {
+                editActionId = R.id.actionPreviewWorkerToEditMyData
+                super.initializeUI()
+            } else {
+                initializeWorkerUI()
+            }
         }
     }
 }

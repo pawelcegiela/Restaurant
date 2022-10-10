@@ -12,6 +12,7 @@ import pi.restaurant.management.ui.adapters.PreviewDishIngredientRecyclerAdapter
 import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
+import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.objects.enums.DishType
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
@@ -22,7 +23,7 @@ import pi.restaurant.management.utils.UserInterfaceUtils
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewDishToEditDish
     override val backActionId = R.id.actionPreviewDishToDishes
     override val viewModel: AbstractPreviewItemViewModel get() = _viewModel

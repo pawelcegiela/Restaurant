@@ -62,7 +62,7 @@
         android:singleLine="true" />
 
     <include
-        android:id="@+id/cardSetNavigation"
-        layout="@layout/card_view_save_remove_back" />
+        android:id="@+id/toolbarNavigation"
+        layout="@layout/toolbar_navigation_dialog" />
 
 </LinearLayout>

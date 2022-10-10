@@ -32,7 +32,9 @@ class PasswordFragment : Fragment() {
     }
 
     private fun setButtonListener() {
-        binding.buttonSavePassword.setOnClickListener {
+        binding.toolbarNavigation.root.visibility = View.VISIBLE
+        binding.toolbarNavigation.cardSave.root.visibility = View.VISIBLE
+        binding.toolbarNavigation.cardSave.root.setOnClickListener {
             viewModel.changePassword(
                 binding.editTextCurrentPassword.text.toString(),
                 binding.editTextNewPassword.text.toString(),

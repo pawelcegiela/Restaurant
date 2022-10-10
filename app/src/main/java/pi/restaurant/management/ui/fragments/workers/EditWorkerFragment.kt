@@ -29,10 +29,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         itemId = arguments?.getString("id").toString()
         isMyData = arguments?.getBoolean("myData") != null && arguments?.getBoolean("myData")!!
         if (isMyData) {
-            setNavigationCardsSave()
             setMyDataSettings()
-        } else {
-            setNavigationCardsSaveRemove()
         }
 
         binding.editTextEmail.isEnabled = false
@@ -63,10 +60,15 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
         disabled = data.basic.disabled
 //        if (disabled) {
-//            cardSetNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getString(R.string.enable_user)
+//            toolbarNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getString(R.string.enable_user)
 //        } else {
-//            cardSetNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getText(R.string.disable_user)
+//            toolbarNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getText(R.string.disable_user)
 //        } TODO Przywrócić
+        if (isMyData) {
+            setNavigationCardsSave()
+        } else {
+            setNavigationCardsSaveRemove()
+        }
     }
 
     override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
@@ -79,7 +81,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
     override fun setNavigationCardsSaveRemove() {
         super.setNavigationCardsSaveRemove()
-        cardSetNavigation.cardSaveRemoveBack.cardRemove.setOnClickListener {
+        toolbarNavigation.cardSaveRemove.cardRemove.setOnClickListener {
             disabled = !disabled
             saveToDatabase()
         }

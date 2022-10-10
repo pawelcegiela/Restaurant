@@ -22,7 +22,6 @@ class EditDishFragment : AbstractModifyDishFragment() {
         itemId = arguments?.getString("id").toString()
 
         initializeSpinners()
-        setNavigationCardsSaveRemove()
         getIngredientListAndSetIngredientButtons()
         getAllergenListAndSetAllergenButtons()
     }
@@ -46,6 +45,8 @@ class EditDishFragment : AbstractModifyDishFragment() {
         allergensList = data.details.allergens.toList().map { it.second }.toMutableList()
         setIngredientViews()
         setAllergenViews()
+
+        setNavigationCardsSaveRemove()
         finishLoading()
     }
 }

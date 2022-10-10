@@ -24,7 +24,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
 
     override fun onCreateView(
@@ -48,7 +48,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        val discount = (viewModel as AbstractModifyDiscountViewModel).getPreviousItem()
+        // val discount = (viewModel as AbstractModifyDiscountViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val availableNumber = binding.editTextAvailable.text.toString().toInt()
         val assignedNumber = binding.editTextAssigned.text.toString().toInt()

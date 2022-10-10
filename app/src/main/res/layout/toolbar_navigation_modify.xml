@@ -2,19 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="40dp"
+    android:background="@color/blue_4"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
     android:paddingHorizontal="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="40dp">
+    android:visibility="gone">
 
     <include
-        android:id="@+id/cardSaveRemoveBack"
-        layout="@layout/card_view_save_remove_back"
+        android:id="@+id/cardSaveRemove"
+        layout="@layout/card_view_save_remove"
         android:visibility="gone" />
 
     <include
-        android:id="@+id/cardSaveBack"
-        layout="@layout/card_view_save_back" />
+        android:id="@+id/cardSave"
+        layout="@layout/card_view_save"
+        android:visibility="gone"/>
 
 </LinearLayout>

@@ -25,7 +25,7 @@ class LocationFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = "location"
     override val nextActionId = R.id.actionLocationToRD
     override val saveMessageId = R.string.location_modified

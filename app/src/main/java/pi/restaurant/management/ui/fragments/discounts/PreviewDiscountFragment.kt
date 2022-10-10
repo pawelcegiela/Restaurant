@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.discount.Discount
 import pi.restaurant.management.databinding.FragmentPreviewDiscountBinding
+import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.objects.enums.DiscountType
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
@@ -16,7 +17,7 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewDiscountToEditDiscount
     override val backActionId = R.id.actionPreviewDiscountToDiscounts
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel

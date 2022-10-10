@@ -9,6 +9,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
 import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.databinding.FragmentPreviewAllergenBinding
+import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.allergens.PreviewAllergenViewModel
@@ -16,7 +17,7 @@ import pi.restaurant.management.utils.UserInterfaceUtils
 
 class PreviewAllergenFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewAllergenToEditAllergen
     override val backActionId = R.id.actionPreviewAllergenToAllergens
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel

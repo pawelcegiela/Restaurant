@@ -2,11 +2,10 @@ package pi.restaurant.management.ui.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import pi.restaurant.management.databinding.CardSetEditBackBinding
+import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 
@@ -14,7 +13,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val viewModel: AbstractPreviewItemViewModel
 
     abstract val progressBar: ProgressBar
-    abstract val cardSetNavigation: CardSetEditBackBinding?
+    abstract val toolbarNavigation: ToolbarNavigationPreviewBinding
     abstract val editActionId: Int
     abstract val backActionId: Int
     var editable : Boolean = true
@@ -29,7 +28,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     private fun addLiveDataObservers() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (role < Role.WORKER.ordinal) {
+                if (Role.isAtLeastManager(role)) {
                     viewModel.getDataFromDatabase()
                 } else {
                     initializeWorkerUI()
@@ -56,25 +55,24 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     }
 
     open fun initializeUI() {
-        cardSetNavigation?.cardBack?.root?.visibility = View.GONE
-        cardSetNavigation?.cardEditBack?.root?.visibility = View.VISIBLE
+        toolbarNavigation.root.visibility = View.VISIBLE
+        toolbarNavigation.cardBack.root.visibility = View.GONE
+        toolbarNavigation.cardEdit.root.visibility = View.VISIBLE
 
-        cardSetNavigation?.cardEditBack?.cardEdit?.setOnClickListener {
+        toolbarNavigation.cardEdit.root.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("id", viewModel.itemId)
 
             findNavController().navigate(editActionId, bundle)
         }
-        cardSetNavigation?.cardEditBack?.cardBack?.setOnClickListener {
-            findNavController().navigate(backActionId)
-        }
     }
 
-    fun initializeWorkerUI() {
-        cardSetNavigation?.cardBack?.root?.visibility = View.VISIBLE
-        cardSetNavigation?.cardEditBack?.root?.visibility = View.GONE
+    open fun initializeWorkerUI() {
+        toolbarNavigation.root.visibility = View.VISIBLE
+        toolbarNavigation.cardBack.root.visibility = View.VISIBLE
+        toolbarNavigation.cardEdit.root.visibility = View.GONE
 
-        cardSetNavigation?.cardBack?.root?.setOnClickListener {
+        toolbarNavigation.cardBack.root.setOnClickListener {
             findNavController().navigate(backActionId)
         }
         viewModel.setReadyToUnlock()

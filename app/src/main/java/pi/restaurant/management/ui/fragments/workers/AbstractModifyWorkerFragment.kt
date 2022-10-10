@@ -26,7 +26,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
 
     var disabled = false

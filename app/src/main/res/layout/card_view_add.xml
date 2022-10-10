@@ -1,43 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
-    android:paddingHorizontal="10dp"
-    android:background="@color/blue_4">
+    android:paddingHorizontal="10dp" >
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardBack"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="10dp"
-        android:backgroundTint="@color/blue_2a"
-        app:cardCornerRadius="40dp"
-        app:contentPadding="15dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/imageBackIcon"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="10dp"
-                android:contentDescription="@string/icon"
-                android:padding="7dp"
-                android:src="@drawable/back" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardAdd"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginHorizontal="10dp"
@@ -49,7 +20,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            tools:ignore="UseCompoundDrawables">
 
             <TextView
                 android:id="@+id/textViewAdd"

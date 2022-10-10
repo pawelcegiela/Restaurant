@@ -31,7 +31,7 @@ class OpeningHoursFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = "openingHours"
     override val nextActionId = R.id.actionOpeningHoursToRD
     override val saveMessageId = R.string.opening_hours_modified

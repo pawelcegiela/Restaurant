@@ -30,7 +30,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
 
     var subIngredientsList: MutableList<IngredientItem> = ArrayList()
@@ -93,8 +93,9 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     }
 
     fun removeSubIngredient(item: Pair<IngredientItem, IngredientStatus>) {
+        val itemPosition = subIngredientsList.indexOf(item.first)
         subIngredientsList.remove(item.first)
-        binding.recyclerViewSubIngredients.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        binding.recyclerViewSubIngredients.adapter?.notifyItemRemoved(itemPosition)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewSubIngredients, subIngredientsList.size, requireContext())
     }
 
@@ -105,12 +106,15 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     ) {
         if (isNew) {
             subIngredientsList.add(newItem)
+            binding.recyclerViewSubIngredients.adapter?.notifyItemInserted(subIngredientsList.indexOf(newItem))
         } else {
+            val itemPosition = subIngredientsList.indexOf(oldItem)
             subIngredientsList
                 .find { it == oldItem }.also { it?.amount = newItem.amount }
                 .also { it?.extraPrice = newItem.extraPrice }
+            binding.recyclerViewSubIngredients.adapter?.notifyItemChanged(itemPosition)
         }
-        binding.recyclerViewSubIngredients.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewSubIngredients, subIngredientsList.size, requireContext())
     }
 

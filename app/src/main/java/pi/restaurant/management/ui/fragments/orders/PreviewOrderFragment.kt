@@ -1,6 +1,5 @@
 package pi.restaurant.management.ui.fragments.orders
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import pi.restaurant.management.ui.adapters.StatusChangesRecyclerAdapter
 import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.databinding.FragmentPreviewOrderBinding
+import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.objects.enums.CollectionType
 import pi.restaurant.management.objects.enums.OrderPlace
@@ -30,7 +30,7 @@ import kotlin.collections.ArrayList
 
 class PreviewOrderFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewOrderToEditOrder
     override val backActionId = R.id.actionPreviewOrderToOrders
     override val viewModel: AbstractPreviewItemViewModel get() = _viewModel

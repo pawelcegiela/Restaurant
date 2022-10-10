@@ -6,6 +6,7 @@ import pi.restaurant.management.R
 enum class Role(val stringResourceId: Int) {
     ADMIN(R.string.admin),
     OWNER(R.string.owner),
+    EXECUTIVE(R.string.executive),
     MANAGER(R.string.manager),
     WORKER(R.string.worker);
 
@@ -20,6 +21,18 @@ enum class Role(val stringResourceId: Int) {
 
         fun getPlaceholder() : Int {
             return 999
+        }
+
+        private fun isAtLeast(role1: Int, role2: Int) : Boolean {
+            return role1 <= role2
+        }
+
+        fun isAtLeastManager(role: Int?) : Boolean {
+            return isAtLeast(role ?: WORKER.ordinal, MANAGER.ordinal)
+        }
+
+        fun isAtLeastExecutive(role: Int?) : Boolean {
+            return isAtLeast(role ?: WORKER.ordinal, EXECUTIVE.ordinal)
         }
     }
 }

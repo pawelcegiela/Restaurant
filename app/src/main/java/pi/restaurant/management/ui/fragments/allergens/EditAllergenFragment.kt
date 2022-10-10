@@ -20,14 +20,13 @@ class EditAllergenFragment : AbstractModifyAllergenFragment() {
 
     override fun initializeUI() {
         itemId = arguments?.getString("id").toString()
-
-        setNavigationCardsSaveRemove()
     }
 
     override fun fillInData() {
         val data = _viewModel.item.value ?: Allergen()
         binding.editTextName.setText(data.basic.name)
         binding.editTextDescription.setText(data.details.description)
+        setNavigationCardsSaveRemove()
         finishLoading()
     }
 }

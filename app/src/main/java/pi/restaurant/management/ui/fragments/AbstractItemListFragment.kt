@@ -50,25 +50,9 @@ abstract class AbstractItemListFragment : Fragment() {
 
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (role < Role.WORKER.ordinal && viewModel.displayFAB()) {
+                if (Role.isAtLeastManager(role) && viewModel.displayFAB()) {
                     binding.fab.visibility = View.VISIBLE
                 }
-            }
-        }
-
-        viewModel.editPrecondition.observe(viewLifecycleOwner) { precondition ->
-            when (precondition) {
-                Precondition.OK -> openEdit()
-                Precondition.SAME_USER -> findNavController().navigate(R.id.actionWorkersToEditMyData)
-                Precondition.TOO_LOW_ROLE -> Toast.makeText(
-                    context,
-                    getString(R.string.no_permission_user_data),
-                    Toast.LENGTH_SHORT
-                ).show()
-                else -> {}
-            }
-            if (precondition != null) {
-                viewModel.setEditPrecondition(null)
             }
         }
     }

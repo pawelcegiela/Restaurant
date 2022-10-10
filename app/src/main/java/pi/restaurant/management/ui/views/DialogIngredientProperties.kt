@@ -49,14 +49,11 @@ class DialogIngredientProperties(
     }
 
     private fun setListener() {
-        binding.cardSetNavigation.cardBack.setOnClickListener {
-            dismiss()
-        }
-        binding.cardSetNavigation.cardRemove.setOnClickListener {
+        binding.toolbarNavigation.cardRemove.setOnClickListener {
             removeItem()
             dismiss()
         }
-        binding.cardSetNavigation.cardSave.setOnClickListener {
+        binding.toolbarNavigation.cardSave.setOnClickListener {
             saveItem(item, buildNewItem(item.first))
             dismiss()
         }

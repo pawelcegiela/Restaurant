@@ -10,14 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
-import pi.restaurant.management.databinding.CardSetEditBackBinding
 import pi.restaurant.management.databinding.FragmentCustomizeDishBinding
+import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.objects.enums.DishType
 import pi.restaurant.management.objects.enums.IngredientStatus
@@ -25,14 +24,13 @@ import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.orders.CustomizeDishViewModel
 import pi.restaurant.management.ui.views.CustomNumberPicker
-import pi.restaurant.management.ui.views.TimePickerFragment
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 
 class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation: CardSetEditBackBinding? = null
+    override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0
     override val backActionId = 0
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
@@ -60,13 +58,20 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
 
     // TODO Edycja dania
     override fun initializeUI() {
-        val cardSetNavigation = binding.cardSetNavigation
-        cardSetNavigation.cardAdd.setOnClickListener {
+        toolbarNavigation.root.visibility = View.VISIBLE
+        toolbarNavigation.cardBack.root.visibility = View.GONE
+        toolbarNavigation.cardAdd.root.visibility = View.VISIBLE
+
+        toolbarNavigation.cardAdd.root.setOnClickListener {
             val dataObject = getDataObject()
             activityViewModel.savedOrder.value?.details?.dishes?.put(dataObject.id, dataObject)
             findNavController().navigate(activityViewModel.actionSave.value!!)
         }
-        cardSetNavigation.cardBack.setOnClickListener {
+    }
+
+    override fun initializeWorkerUI() {
+        toolbarNavigation.root.visibility = View.VISIBLE
+        toolbarNavigation.cardBack.root.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -139,14 +144,15 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     }
 
     private fun removeIngredient(list: MutableList<IngredientItem>, recycler: RecyclerView, item: IngredientItem) {
+        val itemPosition = list.indexOf(item)
         list.remove(item)
-        recycler.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        recycler.adapter?.notifyItemRemoved(itemPosition)
         UserInterfaceUtils.setRecyclerSize(recycler, list.size, requireContext())
     }
 
     private fun addIngredient(list: MutableList<IngredientItem>, recycler: RecyclerView, item: IngredientItem) {
         list.add(item)
-        recycler.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        recycler.adapter?.notifyItemInserted(list.indexOf(item))
         UserInterfaceUtils.setRecyclerSize(recycler, list.size, requireContext())
     }
 

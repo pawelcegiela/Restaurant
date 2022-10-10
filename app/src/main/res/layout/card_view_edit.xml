@@ -14,7 +14,7 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        android:backgroundTint="@color/blue_2a"
+        android:backgroundTint="@color/orange"
         app:cardCornerRadius="40dp"
         app:contentPadding="15dp">
 
@@ -25,26 +25,26 @@
             tools:ignore="UseCompoundDrawables">
 
             <TextView
-                android:id="@+id/textViewBack"
+                android:id="@+id/textViewEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="65dp"
                 android:gravity="center"
-                android:text="@string/back"
+                android:text="@string/edit"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imageBackIcon"
+                android:id="@+id/imageEditIcon"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
                 android:layout_marginHorizontal="10dp"
                 android:contentDescription="@string/icon"
                 android:padding="6dp"
-                android:src="@drawable/back" />
+                android:src="@drawable/edit" />
 
         </LinearLayout>
 

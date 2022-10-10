@@ -8,55 +8,52 @@
     android:paddingHorizontal="10dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardBack"
-        android:layout_width="wrap_content"
+        android:id="@+id/cardRemove"
+        android:layout_width="110dp"
         android:layout_height="70dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
-        android:backgroundTint="@color/blue_2a"
+        android:backgroundTint="@color/red"
         app:cardCornerRadius="40dp"
         app:contentPadding="15dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/imageBackIcon"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="10dp"
-                android:contentDescription="@string/icon"
-                android:padding="7dp"
-                android:src="@drawable/back" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageRemoveIcon"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:contentDescription="@string/icon"
+            android:padding="6dp"
+            android:src="@drawable/remove" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardSave"
-        android:layout_width="wrap_content"
+        android:id="@+id/cardSave2"
+        android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
+        android:layout_weight="1"
         android:backgroundTint="@color/green"
         app:cardCornerRadius="40dp"
         app:contentPadding="15dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/textViewSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
                 android:layout_gravity="center"
-                android:layout_marginStart="35dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="30dp"
+                android:layout_toStartOf="@id/imageSaveIcon"
                 android:gravity="center"
                 android:text="@string/save"
                 android:textColor="@color/white"
@@ -67,12 +64,13 @@
                 android:id="@+id/imageSaveIcon"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:layout_marginHorizontal="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="5dp"
                 android:contentDescription="@string/icon"
                 android:padding="6dp"
                 android:src="@drawable/save" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

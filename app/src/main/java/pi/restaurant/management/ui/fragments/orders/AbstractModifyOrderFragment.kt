@@ -40,7 +40,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
 
     protected val activityViewModel: OrdersViewModel by activityViewModels()
@@ -109,6 +109,11 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         updateFullPrice()
         initializeRecycler()
 
+        if (this is AddOrderFragment) {
+            setNavigationCardsSave()
+        } else {
+            setNavigationCardsSaveRemove()
+        }
         finishLoading()
     }
 
@@ -230,8 +235,9 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     fun removeDish(dishItem: DishItem) {
+        val itemPosition = dishesList.indexOf(dishItem)
         dishesList.remove(dishItem)
-        binding.recyclerViewDishes.adapter?.notifyDataSetChanged() //TODO Zła praktyka
+        binding.recyclerViewDishes.adapter?.notifyItemRemoved(itemPosition)
         updateFullPrice()
     }
 

@@ -25,7 +25,7 @@ class AboutRestaurantFragment : AbstractModifyItemFragment() {
 
     override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
-    override val cardSetNavigation get() = binding.cardSetNavigation
+    override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = "aboutRestaurant"
     override val nextActionId = R.id.actionAboutRestaurantToRD
     override val saveMessageId = R.string.restaurant_data_modified
@@ -43,14 +43,15 @@ class AboutRestaurantFragment : AbstractModifyItemFragment() {
         return binding.root
     }
 
-    override fun initializeUI() {
-        setNavigationCardsSave()
-    }
+    override fun initializeUI() { }
 
     override fun fillInData() {
         val data = _viewModel.item.value ?: AboutRestaurant()
         binding.editTextRestaurantName.setText(data.basic.name)
         binding.editTextRestaurantDescription.setText(data.basic.description)
+
+        setNavigationCardsSave()
+        finishLoading()
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

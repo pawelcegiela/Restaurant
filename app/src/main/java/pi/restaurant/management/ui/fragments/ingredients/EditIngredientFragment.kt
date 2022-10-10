@@ -23,8 +23,6 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
     override fun initializeUI() {
         super.initializeUI()
         itemId = arguments?.getString("id").toString()
-
-        setNavigationCardsSaveRemove()
     }
 
     override fun fillInData() {
@@ -36,6 +34,7 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
         subIngredientsList = data.details.subIngredients ?: ArrayList()
 
         getIngredientListAndSetIngredientButton()
+        setNavigationCardsSaveRemove()
         finishLoading()
     }
 

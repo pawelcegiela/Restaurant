@@ -262,4 +262,5 @@
     <string name="contact_phone">Contact phone</string>
     <string name="close_order_without_realizing">Close order without realizing</string>
     <string name="are_you_sure_close_order">Are you sure you want to close the order without realizing? This decision can\'t be reverted. If the order was placed in the app, the customer will be notified; otherwise remember about informing the client that their order won\'t be prepared.</string>
+    <string name="executive">Executive</string>
 </resources>
