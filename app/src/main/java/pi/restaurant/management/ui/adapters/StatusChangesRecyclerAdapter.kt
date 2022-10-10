@@ -2,12 +2,11 @@ package pi.restaurant.management.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import pi.restaurant.management.databinding.ItemOrderDishBinding
-import pi.restaurant.management.objects.enums.OrderStatus
+import pi.restaurant.management.databinding.ItemStatusChangeBinding
+import pi.restaurant.management.utils.StringFormatUtils
 
 
 class StatusChangesRecyclerAdapter(
@@ -17,22 +16,20 @@ class StatusChangesRecyclerAdapter(
     RecyclerView.Adapter<StatusChangesRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
-        val binding: ItemOrderDishBinding,
+        val binding: ItemStatusChangeBinding,
         val context: Context,
         val fragment: Fragment,
     ) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemOrderDishBinding
+        val binding = ItemStatusChangeBinding
             .inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding, viewGroup.context, fragment)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewName.text =
-            "${dataSet[position].first}  -  ${OrderStatus.getString(dataSet[position].second, fragment.requireContext())}"
-        viewHolder.binding.textViewChanges.visibility = View.GONE
+        viewHolder.binding.textViewName.text = StringFormatUtils.formatStatusChange(dataSet[position], fragment.requireContext())
     }
 
     override fun getItemCount() = dataSet.size

@@ -10,6 +10,6 @@ class OrdersMainViewModel : AbstractItemListViewModel() {
 
     override fun retrieveDataList(dataSnapshot: DataSnapshot) {
         val data = dataSnapshot.getValue<HashMap<String, OrderBasic>>() ?: HashMap()
-        setDataList(data.toList().map { it.second }.toMutableList())
+        setDataList(data.toList().map { it.second }.toMutableList().sortedByDescending { it.id }.toMutableList())
     }
 }

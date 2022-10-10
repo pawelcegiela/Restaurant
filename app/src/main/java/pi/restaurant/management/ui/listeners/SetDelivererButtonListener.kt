@@ -3,13 +3,14 @@ package pi.restaurant.management.ui.listeners
 import android.app.Dialog
 import android.view.View
 import android.widget.*
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.ui.fragments.orders.PreviewOrderFragment
 
 class SetDelivererButtonListener(
-    private val liveList: MutableLiveData<MutableList<UserBasic>>,
+    private val liveList: LiveData<MutableList<UserBasic>>,
     private val fragment: PreviewOrderFragment
 ) :
     AbstractAddSubItemButtonListener(fragment.requireContext(), liveList.value?.map { it.getFullName() } ?: ArrayList()) {

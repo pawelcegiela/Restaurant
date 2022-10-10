@@ -9,7 +9,8 @@ enum class OrderStatus(val stringResourceId: Int) {
     PREPARING(R.string.preparing),
     READY(R.string.ready),
     DELIVERY(R.string.delivery),
-    FINISHED(R.string.finished);
+    FINISHED(R.string.finished),
+    CLOSED_WITHOUT_REALIZATION(R.string.closed_without_realization);
 
     companion object {
         fun getString(id: Int, context: Context): String {
@@ -20,7 +21,17 @@ enum class OrderStatus(val stringResourceId: Int) {
             return values().map { context.getString(it.stringResourceId) }.toTypedArray()
         }
 
-        fun getNextStatusId(currentStatusId: Int, collectionType: CollectionType) : Int {
+        fun getArrayOfStringsForDelivery(context: Context): Array<String> {
+            val statuses = getStatusesForDelivery()
+            return values().filter{ it.ordinal in statuses }.map { context.getString(it.stringResourceId) }.toTypedArray()
+        }
+
+        fun getArrayOfStringsForSelfPickup(context: Context): Array<String> {
+            val statuses = getStatusesForSelfPickup()
+            return values().filter{ it.ordinal in statuses }.map { context.getString(it.stringResourceId) }.toTypedArray()
+        }
+
+        fun getNextStatusId(currentStatusId: Int, collectionType: CollectionType): Int {
             val statuses = if (collectionType == CollectionType.DELIVERY) {
                 getStatusesForDelivery()
             } else {
@@ -35,12 +46,16 @@ enum class OrderStatus(val stringResourceId: Int) {
             }
         }
 
-        private fun getStatusesForDelivery(): ArrayList<Int> {
+        fun getStatusesForDelivery(): ArrayList<Int> {
             return arrayListOf(NEW.ordinal, ACCEPTED.ordinal, PREPARING.ordinal, DELIVERY.ordinal, FINISHED.ordinal)
         }
 
-        private fun getStatusesForSelfPickup(): ArrayList<Int> {
+        fun getStatusesForSelfPickup(): ArrayList<Int> {
             return arrayListOf(NEW.ordinal, ACCEPTED.ordinal, PREPARING.ordinal, READY.ordinal, FINISHED.ordinal)
+        }
+
+        fun isFinished(ordinal: Int) : Boolean {
+            return ordinal == FINISHED.ordinal || ordinal == CLOSED_WITHOUT_REALIZATION.ordinal
         }
     }
 }

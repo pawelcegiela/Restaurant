@@ -17,6 +17,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val cardSetNavigation: CardSetEditBackBinding?
     abstract val editActionId: Int
     abstract val backActionId: Int
+    var editable : Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +40,11 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         viewModel.readyToInitialize.observe(viewLifecycleOwner) { ready ->
             if (ready) {
                 fillInData()
-                initializeUI()
+                if (editable) {
+                    initializeUI()
+                } else {
+                    initializeWorkerUI()
+                }
             }
         }
 
@@ -66,6 +71,9 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     }
 
     fun initializeWorkerUI() {
+        cardSetNavigation?.cardBack?.root?.visibility = View.VISIBLE
+        cardSetNavigation?.cardEditBack?.root?.visibility = View.GONE
+
         cardSetNavigation?.cardBack?.root?.setOnClickListener {
             findNavController().navigate(backActionId)
         }

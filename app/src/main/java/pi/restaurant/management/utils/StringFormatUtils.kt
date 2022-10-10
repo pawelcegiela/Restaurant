@@ -7,6 +7,7 @@ import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
+import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.Unit
 import java.text.SimpleDateFormat
 import java.util.*
@@ -53,16 +54,16 @@ class StringFormatUtils {
             val unused = dishItem.unusedOtherIngredients
             var text = ""
             for (item in used) {
-                text += "+ ${item.name}\n"
+                text += "+   ${item.name}\n"
             }
             for (item in unused) {
-                text += "- ${item.name}\n"
+                text += "-   ${item.name}\n"
             }
             return text.trim()
         }
 
-        fun formatDishItemHeader(dishItem: DishItem): String {
-            return "${dishItem.dish.basic.name}  [x${dishItem.amount}], ${formatPrice(dishItem.finalPrice)}"
+        fun formatDishItemDetails(dishItem: DishItem): String {
+            return "x${dishItem.amount},   ${formatPrice(dishItem.finalPrice)}"
         }
 
         fun formatIngredientItemHeader(item: IngredientItem, status: IngredientStatus, context: Context): String {
@@ -72,6 +73,10 @@ class StringFormatUtils {
                 text += ",  + ${item.extraPrice} zł"
             }
             return "$text]"
+        }
+
+        fun formatStatusChange(data: Pair<String, Int>, context: Context): String {
+            return "${data.first}  -  ${OrderStatus.getString(data.second, context)}"
         }
     }
 }

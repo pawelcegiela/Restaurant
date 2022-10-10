@@ -8,21 +8,37 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.databinding.ItemOrderDishBinding
+import pi.restaurant.management.ui.fragments.orders.AbstractModifyOrderFragment
+import pi.restaurant.management.ui.fragments.orders.PreviewOrderFragment
 import pi.restaurant.management.utils.StringFormatUtils
 
 
-class PreviewOrderDishesRecyclerAdapter(
+class OrderDishesRecyclerAdapter(
     private val dataSet: List<DishItem>,
     private val fragment: Fragment,
 ) :
-    RecyclerView.Adapter<PreviewOrderDishesRecyclerAdapter.ViewHolder>() {
+    RecyclerView.Adapter<OrderDishesRecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(
         val binding: ItemOrderDishBinding,
         val context: Context,
         val fragment: Fragment,
         private val dataSet: List<DishItem>,
-    ) : RecyclerView.ViewHolder(binding.root)
+    ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            if (fragment is AbstractModifyOrderFragment) {
+                binding.buttonRemove.setOnClickListener {
+                    fragment.removeDish(dataSet[layoutPosition])
+                }
+                binding.root.setOnClickListener {
+
+                }
+            } else if (fragment is PreviewOrderFragment) {
+                binding.buttonRemove.visibility = View.GONE
+            }
+        }
+    }
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemOrderDishBinding
@@ -33,7 +49,8 @@ class PreviewOrderDishesRecyclerAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = dataSet[position]
-        viewHolder.binding.textViewName.text = StringFormatUtils.formatDishItemHeader(item)
+        viewHolder.binding.textViewName.text = item.dish.basic.name
+        viewHolder.binding.textViewDetails.text = StringFormatUtils.formatDishItemDetails(item)
         viewHolder.binding.textViewChanges.text = StringFormatUtils.formatDishChanges(item)
         if (viewHolder.binding.textViewChanges.text.isEmpty()) {
             viewHolder.binding.textViewChanges.visibility = View.GONE

@@ -250,4 +250,16 @@
     <string name="plus">+</string>
     <string name="collection_type_colon">Collection type:</string>
     <string name="requested_collection_time_in_minutes_colon">Requested collection time (in minutes):</string>
+    <string name="now">Now</string>
+    <string name="last_modification_date_colon">Last modification date:</string>
+    <string name="order_has_not_been_modified_yet">Order has not been modified yet</string>
+    <string name="requested_collection_time_colon">Requested collection time:</string>
+    <string name="order_added_by_colon">Order added by:</string>
+    <string name="not_loaded_yet">Not loaded yet</string>
+    <string name="closed_without_realization">Closed without realization</string>
+    <string name="no_contact_phone">No contact phone</string>
+    <string name="contact_phone_colon">Contact phone:</string>
+    <string name="contact_phone">Contact phone</string>
+    <string name="close_order_without_realizing">Close order without realizing</string>
+    <string name="are_you_sure_close_order">Are you sure you want to close the order without realizing? This decision can\'t be reverted. If the order was placed in the app, the customer will be notified; otherwise remember about informing the client that their order won\'t be prepared.</string>
 </resources>

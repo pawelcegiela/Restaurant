@@ -17,12 +17,12 @@ class ComputingUtils {
             return discount.amount.toString() + discount.type.toString()
         }
 
-        fun getDateTimeInXMinutes(minutes: Int): Date {
-            return Date(Date().time + minutes * millisecondsInMinute)
+        fun getDateTimeXMinutesAfterDate(date: Date, minutes: Int): Date {
+            return Date(date.time + minutes * millisecondsInMinute)
         }
 
-        fun getMinutesFromNow(date: Date): Int {
-            return ((date.time - Date().time) / millisecondsInMinute).toInt()
+        fun getMinutesFromDate(firstDate: Date, secondDate: Date): Int {
+            return ((secondDate.time - firstDate.time) / millisecondsInMinute).toInt()
         }
     }
 }

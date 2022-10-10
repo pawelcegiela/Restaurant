@@ -20,7 +20,7 @@ class OrdersMainFragment : AbstractItemListFragment() {
 
     override fun initializeUI() {
         super.initializeUI()
-        activityViewModel.setSavedOrder(null)
+        activityViewModel.reset()
         binding.recyclerView.adapter =
             OrdersRecyclerAdapter(viewModel.dataList.value as MutableList<OrderBasic>, this@OrdersMainFragment)
         binding.searchView.visibility = View.GONE

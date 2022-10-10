@@ -4,10 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <pi.restaurant.management.ui.views.TextViewDetail
+    <TextView
         android:id="@+id/itemTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp" />
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="17dp"
+        android:textSize="18sp" />
 
 </LinearLayout>

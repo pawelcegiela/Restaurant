@@ -38,6 +38,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="15dp"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -50,14 +51,15 @@
                             android:padding="6dp"
                             android:src="@drawable/order" />
 
-                        <EditText
+                        <pi.restaurant.management.ui.views.EditTextItemName
                             android:id="@+id/editTextName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
                             android:layout_marginHorizontal="15dp"
                             android:layout_marginBottom="7dp"
-                            android:hint="@string/order" />
+                            android:gravity="center"
+                            android:hint="@string/order"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -72,23 +74,20 @@
                     <Spinner
                         android:id="@+id/spinnerCollectionType"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="13dp" />
+                        android:layout_height="wrap_content" />
 
                     <pi.restaurant.management.ui.views.TextViewDetailTitle
                         android:id="@+id/textViewStatusTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
                         android:layout_marginBottom="10dp"
                         android:text="@string/status_colon" />
 
                     <Spinner
                         android:id="@+id/spinnerStatus"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="13dp" />
+                        android:layout_height="wrap_content" />
 
                     <pi.restaurant.management.ui.views.TextViewDetailTitle
                         android:id="@+id/textViewFullPriceTitle"
@@ -114,9 +113,7 @@
                     <Spinner
                         android:id="@+id/spinnerType"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="13dp" />
+                        android:layout_height="wrap_content" />
 
                     <pi.restaurant.management.ui.views.TextViewDetailTitle
                         android:id="@+id/textViewOrderDateTitle"
@@ -129,7 +126,8 @@
                     <pi.restaurant.management.ui.views.TextViewDetail
                         android:id="@+id/textViewOrderDate"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/now" />
 
                     <pi.restaurant.management.ui.views.TextViewDetailTitle
                         android:id="@+id/textViewCollectionDateTitle"
@@ -154,9 +152,7 @@
                     <Spinner
                         android:id="@+id/spinnerPlace"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="13dp" />
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:id="@+id/linearLayoutDeliveryDetails"
@@ -176,20 +172,23 @@
                             android:id="@+id/address"
                             layout="@layout/modify_address" />
 
-                        <pi.restaurant.management.ui.views.TextViewDetailTitle
-                            android:id="@+id/textViewDeliveryPersonTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="@string/deliverer_colon" />
-
-                        <pi.restaurant.management.ui.views.TextViewDetail
-                            android:id="@+id/textViewDeliveryPerson"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/no_person_chosen" />
-
                     </LinearLayout>
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewContactPhoneTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/contact_phone_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextContactPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/contact_phone"
+                        android:importantForAutofill="no"
+                        android:inputType="phone" />
 
                 </LinearLayout>
 

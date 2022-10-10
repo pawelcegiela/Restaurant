@@ -12,8 +12,8 @@ class OrdersViewModel : ViewModel() {
     private val _actionSave = MutableLiveData<Int>()
     val actionSave: LiveData<Int> = _actionSave
 
-    private val _previousStatus: MutableLiveData<Int> = MutableLiveData()
-    val previousStatus: LiveData<Int> = _previousStatus
+    private val _previousStatus: MutableLiveData<Int?> = MutableLiveData()
+    val previousStatus: LiveData<Int?> = _previousStatus
 
     fun setSavedOrder(order: Order?) {
         _savedOrder.value = order
@@ -23,8 +23,12 @@ class OrdersViewModel : ViewModel() {
         _actionSave.value = resource
     }
 
-    fun setPreviousStatus(status: Int) {
+    fun setPreviousStatus(status: Int?) {
         _previousStatus.value = status
     }
 
+    fun reset() {
+        setSavedOrder(null)
+        setPreviousStatus(null)
+    }
 }

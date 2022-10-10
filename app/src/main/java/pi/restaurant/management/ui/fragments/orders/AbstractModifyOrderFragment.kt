@@ -23,9 +23,10 @@ import pi.restaurant.management.objects.enums.CollectionType
 import pi.restaurant.management.objects.enums.OrderPlace
 import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.OrderType
-import pi.restaurant.management.ui.adapters.ModifyOrderDishesRecyclerAdapter
+import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.views.CustomNumberPicker
+import pi.restaurant.management.ui.views.SpinnerAdapter
 import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
@@ -42,12 +43,11 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     override val cardSetNavigation get() = binding.cardSetNavigation
     override var itemId = ""
 
-    protected val activityViewModel : OrdersViewModel by activityViewModels()
+    protected val activityViewModel: OrdersViewModel by activityViewModels()
 
     var dishesList: MutableList<DishItem> = ArrayList()
-    var orderDate: Date? = null
     abstract val addDishAction: Int
-    private lateinit var numberPickerCollectionTime : CustomNumberPicker
+    private lateinit var numberPickerCollectionTime: CustomNumberPicker
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activityViewModel.savedOrder.value == null) {
@@ -71,7 +71,8 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
-        numberPickerCollectionTime = CustomNumberPicker(binding.numberPickerCollectionTime, 30, 150, 5) { refreshCollectionDate() }
+        numberPickerCollectionTime =
+            CustomNumberPicker(binding.numberPickerCollectionTime, 30, 150, 5) { refreshCollectionDate() }
         numberPickerCollectionTime.setValue(45)
         initializeSpinners()
         initializeButton()
@@ -80,9 +81,17 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     override fun fillInData() {
         val data = (viewModel as AbstractModifyOrderViewModel).item.value ?: Order()
 
+        if (activityViewModel.previousStatus.value == null) {
+            activityViewModel.setPreviousStatus((viewModel as AbstractModifyOrderViewModel).item.value?.basic?.orderStatus)
+        }
+        if ((viewModel as AbstractModifyOrderViewModel).previousStatus.value == null) {
+            (viewModel as AbstractModifyOrderViewModel).setPreviousStatus(activityViewModel.previousStatus.value ?: -1)
+        }
+
+        binding.editTextName.setText(if (data.basic.name == getString(R.string.order)) "" else data.basic.name)
         binding.spinnerType.setSelection(data.details.orderType)
-        binding.spinnerStatus.setSelection(data.basic.orderStatus)
-        numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromNow(data.basic.collectionDate))
+        setSpinnerStatusSelection(data.basic.orderStatus)
+        numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromDate(data.details.orderDate, data.basic.collectionDate))
         binding.spinnerCollectionType.setSelection(data.basic.collectionType)
         binding.spinnerPlace.setSelection(data.details.orderPlace)
         if (data.basic.collectionType == CollectionType.SELF_PICKUP.ordinal) {
@@ -94,11 +103,18 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
             binding.address.editTextHouseNumber.setText(data.details.address?.houseNumber)
             binding.address.editTextFlatNumber.setText(data.details.address?.flatNumber)
         }
+        binding.textViewOrderDate.text = StringFormatUtils.formatDateTime(data.details.orderDate)
+        binding.editTextContactPhone.setText(data.details.contactPhone)
         dishesList = data.details.dishes.toList().map { it.second }.toMutableList()
-
+        updateFullPrice()
         initializeRecycler()
 
         finishLoading()
+    }
+
+    private fun setSpinnerStatusSelection(status: Int) {
+        val statuses = if (isDeliveryOrder()) OrderStatus.getStatusesForDelivery() else OrderStatus.getStatusesForSelfPickup()
+        binding.spinnerStatus.setSelection(statuses.indexOf(status))
     }
 
     private fun refreshCollectionDate() {
@@ -106,63 +122,45 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     private fun initializeSpinners() {
-        binding.spinnerType.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                OrderType.getArrayOfStrings(requireContext())
-            )
+        val context = requireContext()
+        binding.spinnerCollectionType.adapter = SpinnerAdapter(context, CollectionType.getArrayOfStrings(context))
+        binding.spinnerType.adapter = SpinnerAdapter(context, OrderType.getArrayOfStrings(context))
+        binding.spinnerStatus.adapter = SpinnerAdapter(context, getArrayOfStatuses())
+        binding.spinnerPlace.adapter = SpinnerAdapter(context, OrderPlace.getArrayOfStrings(context))
 
-        binding.spinnerStatus.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                OrderStatus.getArrayOfStrings(requireContext())
-            )
-
-        binding.spinnerCollectionType.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                CollectionType.getArrayOfStrings(requireContext())
-            )
         binding.spinnerCollectionType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
                 if (position == CollectionType.DELIVERY.ordinal) {
-                    binding.address.root.visibility = View.VISIBLE
+                    binding.linearLayoutDeliveryDetails.visibility = View.VISIBLE
+                    binding.spinnerPlace.setSelection(CollectionType.SELF_PICKUP.ordinal)
                 } else {
-                    binding.address.root.visibility = View.GONE
+                    binding.linearLayoutDeliveryDetails.visibility = View.GONE
                 }
+                binding.spinnerPlace.isEnabled = position == CollectionType.SELF_PICKUP.ordinal
+                binding.spinnerStatus.adapter = SpinnerAdapter(context, getArrayOfStatuses())
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) {
             }
         }
+    }
 
-        binding.spinnerPlace.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                OrderPlace.getArrayOfStrings(requireContext())
-            )
+    private fun getArrayOfStatuses(): Array<String> {
+        return if (isDeliveryOrder()) {
+            OrderStatus.getArrayOfStringsForDelivery(requireContext())
+        } else {
+            OrderStatus.getArrayOfStringsForSelfPickup(requireContext())
+        }
     }
 
     fun initializeRecycler() {
-        binding.recyclerViewDishes.adapter = ModifyOrderDishesRecyclerAdapter(dishesList, this)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewDishes, dishesList.size, requireContext())
+        binding.recyclerViewDishes.adapter = OrderDishesRecyclerAdapter(dishesList, this)
     }
 
     private fun initializeButton() {
         binding.buttonAddDish.setOnClickListener {
             val sdo = getDataObject()
             activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
-            if (activityViewModel.previousStatus.value == null) {
-                activityViewModel.setPreviousStatus((viewModel as AbstractModifyOrderViewModel).previousStatus.value ?: -1)
-            }
             findNavController().navigate(addDishAction)
         }
     }
@@ -173,29 +171,31 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
         val basic = OrderBasic(
             id = itemId,
-            orderStatus = binding.spinnerStatus.selectedItemId.toInt(),
-            collectionDate = ComputingUtils.getDateTimeInXMinutes(numberPickerCollectionTime.getValue()),
+            orderStatus = getStatusInt(),
+            collectionDate = ComputingUtils.getDateTimeXMinutesAfterDate(order.details.orderDate, numberPickerCollectionTime.getValue()),
             collectionType = binding.spinnerCollectionType.selectedItemId.toInt(),
-            value = dishesList.sumOf { it.finalPrice },
-            name = "Order"
+            value = countFullPrice(),
+            name = if (binding.editTextName.text?.isEmpty() == true) "Order" else binding.editTextName.text.toString()
         )
         val details = OrderDetails(
             id = itemId,
             userId = Firebase.auth.uid ?: "",
             orderType = binding.spinnerType.selectedItemId.toInt(),
-            orderDate = orderDate ?: Date(),
+            orderDate = order.details.orderDate,
+            modificationDate = Date(),
             orderPlace = binding.spinnerPlace.selectedItemId.toInt(),
             dishes = HashMap(dishesList.associateBy { it.id }),
             address = getAddress(),
             statusChanges = order.details.statusChanges,
-            delivererId = order.details.delivererId
+            delivererId = order.details.delivererId,
+            contactPhone = binding.editTextContactPhone.text.toString()
         )
 
         return SplitDataObject(itemId, basic, details)
     }
 
     private fun getAddress(): AddressBasic? {
-        return if (binding.spinnerCollectionType.selectedItemId.toInt() == CollectionType.DELIVERY.ordinal) {
+        return if (isDeliveryOrder()) {
             AddressBasic(
                 id = itemId,
                 city = binding.address.editTextCity.text.toString(),
@@ -209,14 +209,41 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         }
     }
 
+    private fun getStatusInt() : Int {
+        val statuses = if (isDeliveryOrder()) {
+            OrderStatus.getStatusesForDelivery()
+        } else {
+            OrderStatus.getStatusesForSelfPickup()
+        }
+        return statuses[binding.spinnerStatus.selectedItemId.toInt()]
+    }
+
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
+        if (isDeliveryOrder()) {
+            map[binding.address.editTextStreet] = R.string.street
+            map[binding.address.editTextHouseNumber] = R.string.house_number
+            map[binding.address.editTextPostalCode] = R.string.postal_code
+            map[binding.address.editTextCity] = R.string.city
+        }
         return map
     }
 
     fun removeDish(dishItem: DishItem) {
         dishesList.remove(dishItem)
         binding.recyclerViewDishes.adapter?.notifyDataSetChanged() //TODO Zła praktyka
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewDishes, dishesList.size, requireContext())
+        updateFullPrice()
+    }
+
+    private fun countFullPrice(): Double {
+        return dishesList.sumOf { it.finalPrice }
+    }
+
+    private fun updateFullPrice() {
+        binding.textViewFullPrice.text = StringFormatUtils.formatPrice(countFullPrice())
+    }
+
+    private fun isDeliveryOrder(): Boolean {
+        return binding.spinnerCollectionType.selectedItemId.toInt() == CollectionType.DELIVERY.ordinal
     }
 }
