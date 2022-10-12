@@ -124,7 +124,7 @@
     <string name="edit_my_data">Edit my data</string>
     <string name="location_modified">Restaurant location has been modified</string>
     <string name="opening_hours_modified">Opening hours have been modified</string>
-    <string name="temp_add_map">Dodać mapkę z wyborem lokalizacji</string>
+    <string name="temp_add_map">Add map</string>
     <string name="allergens">Allergens</string>
     <string name="add_allergen">Add allergen</string>
     <string name="edit_allergen">Edit allergen</string>
@@ -281,4 +281,22 @@
     <string name="open">Open</string>
     <string name="default_colon">Default:</string>
     <string name="opening_hour_cant_be_earlier_than_closing">Opening hour can\'t be earlier than closing hour</string>
+    <string name="house">House</string>
+    <string name="flat">Flat</string>
+    <string name="address_colon">Address:</string>
+    <string name="first_name_colon">First name:</string>
+    <string name="last_name_colon">Last name:</string>
+    <string name="role_colon">Role:</string>
+    <string name="your_password">Your password</string>
+    <string name="password_colon">Password:</string>
+    <string name="repeat_user_password_colon">Repeat user password:</string>
+    <string name="user_password_colon">User password:</string>
+    <string name="your_password_colon">Your password:</string>
+    <string name="is_dish_active">Is dish active?</string>
+    <string name="dish_type_colon">Dish type:</string>
+    <string name="base_price_colon">Base price (in zł):</string>
+    <string name="discount_colon">Discount:</string>
+    <string name="base_ingredients_colon">Base ingredients:</string>
+    <string name="other_ingredients_colon">Other ingredients:</string>
+    <string name="possible_ingredients_colon">Possible ingredients:</string>
 </resources>

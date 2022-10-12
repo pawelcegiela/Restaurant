@@ -33,9 +33,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         }
 
         binding.editTextEmail.isEnabled = false
-        binding.editTextUserPassword.visibility = View.GONE
-        binding.editTextRepeatUserPassword.visibility = View.GONE
-        binding.editTextPassword.visibility = View.GONE
+        binding.linearLayoutPasswords.visibility = View.GONE
 
         initializeSpinner()
     }

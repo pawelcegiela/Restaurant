@@ -22,6 +22,7 @@ class EditDishFragment : AbstractModifyDishFragment() {
         itemId = arguments?.getString("id").toString()
 
         initializeSpinners()
+        initializeCheckBoxListener()
         getIngredientListAndSetIngredientButtons()
         getAllergenListAndSetAllergenButtons()
     }
@@ -34,6 +35,7 @@ class EditDishFragment : AbstractModifyDishFragment() {
         binding.checkBoxActive.isChecked = data.basic.isActive
         binding.editTextBasePrice.setText(data.basic.basePrice.toString())
         binding.checkBoxDiscount.isChecked = data.basic.isDiscounted
+        binding.editTextDiscountPrice.isEnabled = data.basic.isDiscounted
         binding.editTextDiscountPrice.setText(data.basic.discountPrice.toString())
         binding.spinnerDishType.setSelection(data.basic.dishType)
         binding.editTextAmount.setText(data.details.amount.toString())

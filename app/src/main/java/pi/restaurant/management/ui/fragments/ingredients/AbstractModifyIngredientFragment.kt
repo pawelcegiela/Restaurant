@@ -21,6 +21,7 @@ import pi.restaurant.management.objects.data.ingredient.Ingredient
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 import pi.restaurant.management.ui.views.DialogIngredientProperties
+import pi.restaurant.management.ui.views.SpinnerAdapter
 
 
 abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
@@ -51,24 +52,13 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     }
 
     private fun initializeSpinner() {
-        binding.spinnerUnit.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                Unit.getArrayOfStrings(requireContext())
-            )
+        binding.spinnerUnit.adapter = SpinnerAdapter(requireContext(), Unit.getArrayOfStrings(requireContext()))
     }
 
     private fun setCheckBoxListener() {
         binding.checkBoxSubDish.setOnCheckedChangeListener { _, isChecked ->
-            setSubDish(isChecked)
+            binding.cardSubIngredients.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
-    }
-
-    private fun setSubDish(isSubDish: Boolean) {
-        binding.recyclerViewSubIngredients.visibility = if (isSubDish) View.VISIBLE else View.GONE
-        binding.buttonAddSubIngredient.visibility = if (isSubDish) View.VISIBLE else View.GONE
     }
 
     fun getIngredientListAndSetIngredientButton() {

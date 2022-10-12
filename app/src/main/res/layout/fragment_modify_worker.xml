@@ -20,75 +20,182 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <EditText
-                android:id="@+id/editTextFirstName"
+            <pi.restaurant.management.ui.views.CardViewPreviewElement
+                android:id="@+id/cardWorkerDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint="@string/first_name"
-                android:importantForAutofill="no"
-                android:inputType="text" />
+                android:layout_margin="10dp">
 
-            <EditText
-                android:id="@+id/editTextLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint="@string/last_name"
-                android:importantForAutofill="no"
-                android:inputType="text" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="25dp"
+                    android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint="@string/e_mail"
-                android:importantForAutofill="no"
-                android:inputType="textEmailAddress" />
+                    <LinearLayout
+                        android:id="@+id/workerHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editTextUserPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="25dp"
-                android:hint="@string/user_password"
-                android:importantForAutofill="no"
-                android:inputType="textPassword" />
+                        <ImageView
+                            android:id="@+id/imageIcon"
+                            android:layout_width="80dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="10dp"
+                            android:contentDescription="@string/icon"
+                            android:padding="6dp"
+                            android:src="@drawable/worker" />
 
-            <EditText
-                android:id="@+id/editTextRepeatUserPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="25dp"
-                android:hint="@string/repeat_user_password"
-                android:importantForAutofill="no"
-                android:inputType="textPassword" />
+                        <pi.restaurant.management.ui.views.TextViewItemName
+                            android:id="@+id/textViewName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:layout_marginBottom="7dp"
+                            android:gravity="center"
+                            android:text="@string/worker" />
 
-            <Spinner
-                android:id="@+id/spinnerRole"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="15dp" />
+                    </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxDelivery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/can_deliver_orders" />
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewFirstNameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/first_name_colon" />
 
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="25dp"
-                android:hint="@string/password"
-                android:importantForAutofill="no"
-                android:inputType="textPassword" />
+                    <EditText
+                        android:id="@+id/editTextFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/first_name"
+                        android:importantForAutofill="no"
+                        android:inputType="text" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewLastNameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/last_name_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/last_name"
+                        android:importantForAutofill="no"
+                        android:inputType="text" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewEmailTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/email_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/e_mail"
+                        android:importantForAutofill="no"
+                        android:inputType="textEmailAddress" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewRoleTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/role_colon" />
+
+                    <Spinner
+                        android:id="@+id/spinnerRole"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                        android:id="@+id/textViewDeliveryTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/can_deliver_orders" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/can_deliver_orders" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutPasswords"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewUserPasswordTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/user_password_colon" />
+
+                        <EditText
+                            android:id="@+id/editTextUserPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/user_password"
+                            android:importantForAutofill="no"
+                            android:inputType="textPassword" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewRepeatUserPasswordTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/repeat_user_password_colon" />
+
+                        <EditText
+                            android:id="@+id/editTextRepeatUserPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/repeat_user_password"
+                            android:importantForAutofill="no"
+                            android:inputType="textPassword" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewPasswordTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/your_password_colon" />
+
+                        <EditText
+                            android:id="@+id/editTextPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/your_password"
+                            android:importantForAutofill="no"
+                            android:inputType="textPassword" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
         </LinearLayout>
 

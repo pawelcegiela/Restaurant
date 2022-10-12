@@ -13,9 +13,11 @@ import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
 import pi.restaurant.management.model.fragments.workers.AbstractModifyWorkerViewModel
 import pi.restaurant.management.objects.data.user.User
+import pi.restaurant.management.objects.enums.OrderType
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
+import pi.restaurant.management.ui.views.SpinnerAdapter
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
 import kotlin.collections.HashMap
@@ -41,13 +43,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     }
 
     fun initializeSpinner() {
-        binding.spinnerRole.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                Role.getArrayOfStrings(requireContext())
-            )
+        binding.spinnerRole.adapter = SpinnerAdapter(requireContext(), Role.getArrayOfStrings(requireContext()))
     }
 
     override fun getDataObject(): SplitDataObject {

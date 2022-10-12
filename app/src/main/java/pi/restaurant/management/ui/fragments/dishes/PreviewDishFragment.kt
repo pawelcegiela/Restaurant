@@ -57,6 +57,13 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         binding.textViewAmount.text =
             StringFormatUtils.formatAmountWithUnit(requireContext(), item.details.amount, item.details.unit)
 
+        if (item.details.possibleIngredients.isEmpty()) {
+            binding.textViewPossibleIngredients.visibility = View.GONE
+        }
+        if (item.details.allergens.isEmpty()) {
+            binding.cardAllergens.visibility = View.GONE
+        }
+
         initializeRecyclerViews(item)
         initializeMoreLessButtons()
 

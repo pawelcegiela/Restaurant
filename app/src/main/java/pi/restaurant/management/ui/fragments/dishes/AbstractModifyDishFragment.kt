@@ -23,9 +23,11 @@ import pi.restaurant.management.ui.listeners.AddAllergenButtonListener
 import pi.restaurant.management.ui.listeners.AddIngredientButtonListener
 import pi.restaurant.management.model.fragments.dishes.AbstractModifyDishViewModel
 import pi.restaurant.management.objects.data.dish.Dish
+import pi.restaurant.management.objects.enums.OrderType
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 import pi.restaurant.management.ui.views.DialogIngredientProperties
+import pi.restaurant.management.ui.views.SpinnerAdapter
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
@@ -67,6 +69,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     override fun initializeUI() {
         finishLoading()
         initializeSpinners()
+        initializeCheckBoxListener()
         setNavigationCardsSave()
         getIngredientListAndSetIngredientButtons()
         getAllergenListAndSetAllergenButtons()
@@ -118,21 +121,17 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     fun initializeSpinners() {
-        binding.spinnerUnit.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                Unit.getArrayOfStrings(requireContext())
-            )
+        binding.spinnerUnit.adapter = SpinnerAdapter(requireContext(), Unit.getArrayOfStrings(requireContext()))
+        binding.spinnerDishType.adapter = SpinnerAdapter(requireContext(), DishType.getArrayOfStrings(requireContext()))
+    }
 
-        binding.spinnerDishType.adapter =
-            ArrayAdapter(
-                requireContext(),
-                R.layout.spinner_item_view,
-                R.id.itemTextView,
-                DishType.getArrayOfStrings(requireContext())
-            )
+    fun initializeCheckBoxListener() {
+        binding.checkBoxDiscount.setOnCheckedChangeListener { _, isChecked ->
+            binding.editTextDiscountPrice.isEnabled = isChecked
+            if (isChecked) {
+                binding.editTextDiscountPrice.setText("")
+            }
+        }
     }
 
     fun getIngredientListAndSetIngredientButtons() {
