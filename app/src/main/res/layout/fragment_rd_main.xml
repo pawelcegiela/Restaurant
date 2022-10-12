@@ -126,7 +126,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/monday" />
+                                android:text="@string/monday_colon" />
 
                             <pi.restaurant.management.ui.views.TextViewDetail
                                 android:id="@+id/textViewMonday"
@@ -147,7 +147,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/tuesday" />
+                                android:text="@string/tuesday_colon" />
 
                             <pi.restaurant.management.ui.views.TextViewDetail
                                 android:id="@+id/textViewTuesday"
@@ -168,7 +168,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/wednesday" />
+                                android:text="@string/wednesday_colon" />
 
                             <pi.restaurant.management.ui.views.TextViewDetail
                                 android:id="@+id/textViewWednesday"
@@ -189,7 +189,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/thursday" />
+                                android:text="@string/thursday_colon" />
 
                             <pi.restaurant.management.ui.views.TextViewDetail
                                 android:id="@+id/textViewThursday"
@@ -210,7 +210,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/friday" />
+                                android:text="@string/friday_colon" />
 
                             <pi.restaurant.management.ui.views.TextViewDetail
                                 android:id="@+id/textViewFriday"
@@ -231,7 +231,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/saturday" />
+                                android:text="@string/saturday_colon" />
 
                             <pi.restaurant.management.ui.views.TextViewDetail
                                 android:id="@+id/textViewSaturday"
@@ -252,7 +252,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/sunday" />
+                                android:text="@string/sunday_colon" />
 
                             <pi.restaurant.management.ui.views.TextViewDetail
                                 android:id="@+id/textViewSunday"

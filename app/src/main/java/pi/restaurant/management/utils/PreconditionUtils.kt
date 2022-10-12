@@ -32,7 +32,7 @@ class PreconditionUtils {
 
         fun checkOpeningHoursError(data: OpeningHoursBasic) : Precondition {
             if (data.isError) {
-                return Precondition.OPENING_HOURS_FORMAT
+                return Precondition.INVALID_OPENING_HOURS
             }
             return Precondition.OK
         }

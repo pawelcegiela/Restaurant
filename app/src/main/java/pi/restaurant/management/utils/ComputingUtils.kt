@@ -1,6 +1,7 @@
 package pi.restaurant.management.utils
 
 import pi.restaurant.management.objects.data.discount.DiscountBasic
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ComputingUtils {
@@ -23,6 +24,10 @@ class ComputingUtils {
 
         fun getMinutesFromDate(firstDate: Date, secondDate: Date): Int {
             return ((secondDate.time - firstDate.time) / millisecondsInMinute).toInt()
+        }
+
+        fun getTimeFromString(string: String): Date {
+            return SimpleDateFormat("HH:mm", Locale.ROOT).parse(string) ?: Date()
         }
     }
 }

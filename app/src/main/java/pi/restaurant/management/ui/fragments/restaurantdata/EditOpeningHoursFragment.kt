@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.*
@@ -17,11 +18,14 @@ import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.restaurantdata.EditOpeningHoursViewModel
+import pi.restaurant.management.ui.views.TimePickerFragment
+import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyOpeningHoursBinding? = null
@@ -35,12 +39,8 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     override val saveMessageId = R.string.opening_hours_modified
     override val removeMessageId = 0 // Unused
 
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : EditOpeningHoursViewModel by viewModels()
-
-    private lateinit var checkBoxes: ArrayList<CheckBox>
-    private lateinit var etOpenings: ArrayList<EditText>
-    private lateinit var etClosings: ArrayList<EditText>
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: EditOpeningHoursViewModel by viewModels()
 
     private lateinit var daysEnabled: ArrayList<Boolean>
     private lateinit var daysOpeningValues: ArrayList<Date>
@@ -49,6 +49,18 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     private val sdf = SimpleDateFormat("HH:mm", Locale.ROOT)
     private lateinit var defaultOpening: Date
     private lateinit var defaultClosing: Date
+
+    private val daySets
+        get() = arrayListOf(
+            binding.setMonday,
+            binding.setTuesday,
+            binding.setWednesday,
+            binding.setThursday,
+            binding.setFriday,
+            binding.setSaturday,
+            binding.setSunday,
+            binding.setDefault
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,41 +72,44 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
-        initializeArrays()
-        setCheckBoxListeners()
         setNavigationCardsSave()
+
+        binding.setDefault.checkBox.isChecked = true
+        binding.setDefault.checkBox.visibility = View.GONE
+
+        initializeDaySets()
     }
 
-    private fun initializeArrays() {
-        checkBoxes = arrayListOf(
-            binding.checkBoxMonday,
-            binding.checkBoxTuesday,
-            binding.checkBoxWednesday,
-            binding.checkBoxThursday,
-            binding.checkBoxFriday,
-            binding.checkBoxSaturday,
-            binding.checkBoxSunday
-        )
+    private fun initializeDaySets() {
+        for (set in daySets) {
+            set.checkBox.setOnClickListener {
+                if (set.checkBox.isChecked) {
+                    set.textViewStartHour.text = binding.setDefault.textViewStartHour.text
+                    set.textViewEndHour.text = binding.setDefault.textViewEndHour.text
+                    set.textViewDash.text = getString(R.string.dash)
+                } else {
+                    set.textViewStartHour.text = ""
+                    set.textViewEndHour.text = ""
+                    set.textViewDash.text = ""
+                }
+            }
 
-        etOpenings = arrayListOf(
-            binding.editTextMondayStartHour,
-            binding.editTextTuesdayStartHour,
-            binding.editTextWednesdayStartHour,
-            binding.editTextThursdayStartHour,
-            binding.editTextFridayStartHour,
-            binding.editTextSaturdayStartHour,
-            binding.editTextSundayStartHour
-        )
+            set.textViewStartHour.setOnClickListener {
+                if (set.checkBox.isChecked) {
+                    TimePickerFragment(ComputingUtils.getTimeFromString(set.textViewStartHour.text.toString())) { time ->
+                        set.textViewStartHour.text = time
+                    }.show(requireActivity().supportFragmentManager, "timePicker")
+                }
+            }
 
-        etClosings = arrayListOf(
-            binding.editTextMondayEndHour,
-            binding.editTextTuesdayEndHour,
-            binding.editTextWednesdayEndHour,
-            binding.editTextThursdayEndHour,
-            binding.editTextFridayEndHour,
-            binding.editTextSaturdayEndHour,
-            binding.editTextSundayEndHour
-        )
+            set.textViewEndHour.setOnClickListener {
+                if (set.checkBox.isChecked) {
+                    TimePickerFragment(ComputingUtils.getTimeFromString(set.textViewEndHour.text.toString())) { time ->
+                        set.textViewEndHour.text = time
+                    }.show(requireActivity().supportFragmentManager, "timePicker")
+                }
+            }
+        }
     }
 
     override fun fillInData() {
@@ -103,53 +118,31 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
         defaultOpening = openingHours.basic.defaultStartHour as Date
         defaultClosing = openingHours.basic.defaultEndHour as Date
 
-        binding.editTextDefaultStartHour.setText(sdf.format(defaultOpening))
-        binding.editTextDefaultEndHour.setText(sdf.format(defaultClosing))
+        binding.setDefault.textViewStartHour.text = StringFormatUtils.formatTime(defaultOpening)
+        binding.setDefault.textViewEndHour.text = StringFormatUtils.formatTime(defaultClosing)
 
         daysEnabled = openingHours.getWeekDaysEnabled()
         daysOpeningValues = openingHours.getWeekDaysStartHour()
         daysClosingValues = openingHours.getWeekDaysEndHour()
 
-        for (i in checkBoxes.indices) {
+        for (i in daysEnabled.indices) {
             val enabled = daysEnabled[i]
-            checkBoxes[i].isChecked = enabled
-            etOpenings[i].isEnabled = enabled
-            etClosings[i].isEnabled = enabled
+            daySets[i].checkBox.isChecked = enabled
 
             if (enabled) {
-                etOpenings[i].setText(sdf.format(daysOpeningValues[i]))
-                etClosings[i].setText(sdf.format(daysClosingValues[i]))
+                daySets[i].textViewStartHour.text = StringFormatUtils.formatTime(daysOpeningValues[i])
+                daySets[i].textViewEndHour.text = StringFormatUtils.formatTime(daysClosingValues[i])
+                daySets[i].textViewDash.text = getString(R.string.dash)
             } else {
-                etOpenings[i].setText("-")
-                etClosings[i].setText("-")
+                daySets[i].textViewStartHour.text = ""
+                daySets[i].textViewEndHour.text = ""
+                daySets[i].textViewDash.text = ""
             }
         }
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
         return HashMap()
-    }
-
-    private fun setCheckBoxListeners() {
-        for (i in checkBoxes.indices) {
-            checkBoxes[i].setOnCheckedChangeListener { _, isChecked ->
-                changeDay(i, isChecked)
-            }
-            changeDay(i, checkBoxes[i].isChecked)
-        }
-    }
-
-    private fun changeDay(i: Int, isChecked: Boolean) {
-        etOpenings[i].isEnabled = isChecked
-        etClosings[i].isEnabled = isChecked
-
-        if (isChecked) {
-            etOpenings[i].setText(binding.editTextDefaultStartHour.text.toString())
-            etClosings[i].setText(binding.editTextDefaultEndHour.text.toString())
-        } else {
-            etOpenings[i].setText("-")
-            etClosings[i].setText("-")
-        }
     }
 
     override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
@@ -163,30 +156,35 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val basic = OpeningHoursBasic()
 
-        try {
-            basic.defaultStartHour =
-                sdf.parse(binding.editTextDefaultStartHour.text.toString())
-            basic.defaultEndHour = sdf.parse(binding.editTextDefaultEndHour.text.toString())
+        basic.defaultStartHour = ComputingUtils.getTimeFromString(binding.setDefault.textViewStartHour.text.toString())
+        basic.defaultEndHour = ComputingUtils.getTimeFromString(binding.setDefault.textViewEndHour.text.toString())
 
-            for (i in daysEnabled.indices) {
-                daysEnabled[i] = checkBoxes[i].isChecked
-                if (etOpenings[i].text.toString() == "-") {
-                    daysOpeningValues[i] = defaultOpening
-                    daysClosingValues[i] = defaultClosing
-                } else {
-                    daysOpeningValues[i] =
-                        sdf.parse(etOpenings[i].text.toString()) as Date
-                    daysClosingValues[i] = sdf.parse(etClosings[i].text.toString()) as Date
-                }
+        for (i in daysEnabled.indices) {
+            daysEnabled[i] = daySets[i].checkBox.isChecked
+            if (daySets[i].checkBox.isChecked) {
+                daysOpeningValues[i] =
+                    sdf.parse(daySets[i].textViewStartHour.text.toString()) as Date
+                daysClosingValues[i] = sdf.parse(daySets[i].textViewEndHour.text.toString()) as Date
+            } else {
+                daysOpeningValues[i] = defaultOpening
+                daysClosingValues[i] = defaultClosing
             }
-            basic.setWeekDaysEnabled(daysEnabled)
-            basic.setWeekDaysStartHour(daysOpeningValues)
-            basic.setWeekDaysEndHour(daysClosingValues)
-        } catch (ex: ParseException) {
-            basic.isError = true
         }
+        basic.setWeekDaysEnabled(daysEnabled)
+        basic.setWeekDaysStartHour(daysOpeningValues)
+        basic.setWeekDaysEndHour(daysClosingValues)
+        basic.isError = checkValues()
 
         return SplitDataObject(itemId, basic, OpeningHoursDetails())
+    }
+
+    private fun checkValues() : Boolean {
+        for (i in daysEnabled.indices) {
+            if (daysOpeningValues[i] >= daysClosingValues[i]) {
+                return true
+            }
+        }
+        return (defaultOpening >= defaultClosing)
     }
 
     override fun onDestroyView() {

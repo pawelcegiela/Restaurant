@@ -7,15 +7,15 @@ import android.text.format.DateFormat
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
 
-class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
-    private val minimumPeriod: Long = 1000 * 60 * 30 // 30 minutes
-    private val defaultPeriod: Long = 1000 * 60 * 45 // 45 minutes
+class TimePickerFragment(val initialDate: Date, val function: (String) -> (Unit)) : DialogFragment(),
+    TimePickerDialog.OnTimeSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
-        c.timeInMillis += defaultPeriod
+        c.time = initialDate
         val hour = c.get(Calendar.HOUR_OF_DAY)
         val minute = c.get(Calendar.MINUTE)
 
@@ -24,12 +24,6 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        val c = Calendar.getInstance()
-        c.timeInMillis += minimumPeriod
-        val minimumHour = c.get(Calendar.HOUR_OF_DAY)
-        val minimumMinute = c.get(Calendar.MINUTE)
-        if (hourOfDay < minimumHour || (hourOfDay == minimumHour && minute < minimumMinute)) {
-            Toast.makeText(requireContext(), "zle", Toast.LENGTH_SHORT).show()
-        }
+        function(StringFormatUtils.formatTimeFromIntegers(hourOfDay, minute))
     }
 }

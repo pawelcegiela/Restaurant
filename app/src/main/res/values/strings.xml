@@ -270,4 +270,15 @@
     <string name="edit_opening_hours">Edit opening hours</string>
     <string name="edit_location">Edit location</string>
     <string name="edit_delivery">Edit delivery</string>
+    <string name="monday_colon">Monday:</string>
+    <string name="tuesday_colon">Tuesday:</string>
+    <string name="wednesday_colon">Wednesday:</string>
+    <string name="thursday_colon">Thursday:</string>
+    <string name="friday_colon">Friday:</string>
+    <string name="saturday_colon">Saturday:</string>
+    <string name="sunday_colon">Sunday:</string>
+    <string name="dash">-</string>
+    <string name="open">Open</string>
+    <string name="default_colon">Default:</string>
+    <string name="opening_hour_cant_be_earlier_than_closing">Opening hour can\'t be earlier than closing hour</string>
 </resources>

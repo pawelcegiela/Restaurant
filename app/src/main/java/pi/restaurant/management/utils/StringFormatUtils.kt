@@ -82,5 +82,9 @@ class StringFormatUtils {
         fun formatOpeningHours(startHour: Date, endHour: Date) : String {
             return "${formatTime(startHour)}  -  ${formatTime(endHour)}"
         }
+
+        fun formatTimeFromIntegers(hour: Int, minute: Int) : String {
+            return "${String.format("%02d", hour)}:${String.format("%02d", minute)}"
+        }
     }
 }

@@ -20,7 +20,6 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
             <pi.restaurant.management.ui.views.CardViewPreviewElement
                 android:id="@+id/cardOrderDetails"
                 android:layout_width="match_parent"
