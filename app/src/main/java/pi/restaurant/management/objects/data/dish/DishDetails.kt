@@ -1,10 +1,9 @@
 package pi.restaurant.management.objects.data.dish
 
 import pi.restaurant.management.objects.data.AbstractDataObject
-import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
+import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.utils.StringFormatUtils
-import kotlin.collections.HashMap
 
 class DishDetails : AbstractDataObject {
     var description: String = ""

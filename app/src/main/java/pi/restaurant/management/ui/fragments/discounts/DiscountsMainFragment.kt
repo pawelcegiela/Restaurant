@@ -4,14 +4,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.DiscountsRecyclerAdapter
-import pi.restaurant.management.objects.data.discount.DiscountBasic
-import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 import pi.restaurant.management.model.fragments.discounts.DiscountsMainViewModel
-import pi.restaurant.management.objects.enums.DiscountType
 import pi.restaurant.management.objects.enums.DiscountsTab
 import pi.restaurant.management.ui.adapters.PagerAdapter
+import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 
 class DiscountsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDiscountsToAddDiscount

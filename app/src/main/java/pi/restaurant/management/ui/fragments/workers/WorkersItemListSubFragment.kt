@@ -3,8 +3,6 @@ package pi.restaurant.management.ui.fragments.workers
 import android.os.Bundle
 import android.view.View
 import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.objects.enums.DishType
-import pi.restaurant.management.objects.enums.DishesTab
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.objects.enums.WorkersTab
 import pi.restaurant.management.ui.adapters.WorkersRecyclerAdapter

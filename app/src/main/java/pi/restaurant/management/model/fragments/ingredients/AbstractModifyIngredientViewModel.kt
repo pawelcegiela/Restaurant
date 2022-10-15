@@ -7,12 +7,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.objects.data.SplitDataObject
+import pi.restaurant.management.objects.data.ingredient.Ingredient
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientDetails
-import pi.restaurant.management.objects.data.SplitDataObject
-import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.objects.data.ingredient.Ingredient
-import pi.restaurant.management.objects.data.ingredient.IngredientItem
 
 abstract class AbstractModifyIngredientViewModel : AbstractModifyItemViewModel() {
     override val databasePath = "ingredients"

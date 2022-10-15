@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.databinding.ItemPreviewDishIngredientBinding
+import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.utils.StringFormatUtils
 
@@ -37,14 +37,8 @@ class PreviewDishIngredientRecyclerAdapter(
         } else if (dataSet[position].second == IngredientStatus.POSSIBLE) {
             viewHolder.binding.imageIcon.setImageResource(R.drawable.plus)
         }
-        val item = dataSet[position].first
-        viewHolder.binding.textViewName.text = "${item.name} [${
-            StringFormatUtils.formatAmountWithUnit(
-                viewHolder.context,
-                item.amount,
-                item.unit
-            )
-        }" + if (dataSet[position].second == IngredientStatus.POSSIBLE || item.extraPrice != 0.0) ",  + ${item.extraPrice} zł]" else "]"
+        viewHolder.binding.textViewName.text =
+            StringFormatUtils.formatIngredientItemHeader(dataSet[position].first, dataSet[position].second, viewHolder.context)
     }
 
     override fun getItemCount() = dataSet.size

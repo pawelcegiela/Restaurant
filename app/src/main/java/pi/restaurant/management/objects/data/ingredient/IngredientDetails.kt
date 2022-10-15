@@ -2,7 +2,6 @@ package pi.restaurant.management.objects.data.ingredient
 
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.utils.StringFormatUtils
-import kotlin.collections.HashMap
 
 class IngredientDetails : AbstractDataObject {
     var subIngredients: MutableList<IngredientItem>? = null

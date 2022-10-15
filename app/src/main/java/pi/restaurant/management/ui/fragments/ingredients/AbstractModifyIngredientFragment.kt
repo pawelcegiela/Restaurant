@@ -4,24 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurant.management.objects.data.*
+import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
+import pi.restaurant.management.model.fragments.ingredients.AbstractModifyIngredientViewModel
+import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
-import pi.restaurant.management.databinding.FragmentModifyIngredientBinding
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.objects.enums.Unit
+import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.listeners.AddIngredientButtonListener
-import pi.restaurant.management.model.fragments.ingredients.AbstractModifyIngredientViewModel
-import pi.restaurant.management.objects.data.ingredient.Ingredient
-import pi.restaurant.management.utils.StringFormatUtils
-import pi.restaurant.management.utils.UserInterfaceUtils
 import pi.restaurant.management.ui.views.DialogIngredientProperties
 import pi.restaurant.management.ui.views.SpinnerAdapter
+import pi.restaurant.management.utils.StringFormatUtils
+import pi.restaurant.management.utils.UserInterfaceUtils
 
 
 abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {

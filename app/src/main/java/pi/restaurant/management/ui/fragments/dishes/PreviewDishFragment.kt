@@ -7,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
-import pi.restaurant.management.ui.adapters.PreviewDishIngredientRecyclerAdapter
-import pi.restaurant.management.objects.data.dish.Dish
-import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.databinding.FragmentPreviewDishBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurant.management.objects.enums.DishType
-import pi.restaurant.management.objects.enums.IngredientStatus
-import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.dishes.PreviewDishViewModel
+import pi.restaurant.management.objects.data.dish.Dish
+import pi.restaurant.management.objects.data.ingredient.IngredientItem
+import pi.restaurant.management.objects.enums.DishType
+import pi.restaurant.management.objects.enums.IngredientStatus
+import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
+import pi.restaurant.management.ui.adapters.PreviewDishIngredientRecyclerAdapter
+import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 

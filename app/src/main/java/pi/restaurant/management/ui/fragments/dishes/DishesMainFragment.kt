@@ -4,13 +4,13 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 import pi.restaurant.management.model.fragments.dishes.DishesMainViewModel
-import pi.restaurant.management.objects.enums.DishesTab
 import pi.restaurant.management.objects.enums.DishType
+import pi.restaurant.management.objects.enums.DishesTab
 import pi.restaurant.management.ui.activities.OrdersActivity
 import pi.restaurant.management.ui.adapters.PagerAdapter
+import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 
 class DishesMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDishesToAddDish

@@ -1,8 +1,6 @@
 package pi.restaurant.management.model.fragments.workers
 
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.model.fragments.allergens.EditAllergenViewModel
-import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.objects.data.user.User
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.data.user.UserDetails

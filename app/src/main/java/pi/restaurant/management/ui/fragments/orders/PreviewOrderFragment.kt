@@ -7,25 +7,24 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
-import pi.restaurant.management.ui.adapters.StatusChangesRecyclerAdapter
-import pi.restaurant.management.objects.data.order.Order
-import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.databinding.FragmentPreviewOrderBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
+import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.model.fragments.orders.PreviewOrderViewModel
+import pi.restaurant.management.objects.data.order.Order
+import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.enums.CollectionType
 import pi.restaurant.management.objects.enums.OrderPlace
 import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.OrderType
+import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
+import pi.restaurant.management.ui.adapters.StatusChangesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.ui.listeners.SetDelivererButtonListener
-import pi.restaurant.management.model.fragments.orders.PreviewOrderViewModel
 import pi.restaurant.management.ui.views.YesNoDialog
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class PreviewOrderFragment : AbstractPreviewItemFragment() {

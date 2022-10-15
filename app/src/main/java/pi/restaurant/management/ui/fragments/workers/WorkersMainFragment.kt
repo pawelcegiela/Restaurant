@@ -4,12 +4,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.WorkersRecyclerAdapter
-import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 import pi.restaurant.management.objects.enums.WorkersTab
 import pi.restaurant.management.ui.adapters.PagerAdapter
+import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 
 class WorkersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionWorkersToAddWorker

@@ -6,8 +6,8 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.objects.enums.Role
 
 abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val viewModel: AbstractPreviewItemViewModel

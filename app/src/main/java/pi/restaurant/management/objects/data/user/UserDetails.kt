@@ -2,7 +2,6 @@ package pi.restaurant.management.objects.data.user
 
 import pi.restaurant.management.objects.data.AbstractDataObject
 import java.util.*
-import kotlin.collections.HashMap
 
 class UserDetails : AbstractDataObject {
     var email: String = ""

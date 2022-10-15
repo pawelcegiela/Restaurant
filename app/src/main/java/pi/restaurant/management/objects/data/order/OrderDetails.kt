@@ -5,7 +5,6 @@ import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
-import kotlin.collections.HashMap
 
 class OrderDetails : AbstractDataObject {
     var userId: String = ""

@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.*
+import pi.restaurant.management.databinding.FragmentModifyAboutRestaurantBinding
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.restaurantdata.EditAboutRestaurantViewModel
+import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurant
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantBasic
 import pi.restaurant.management.objects.data.aboutrestaurant.AboutRestaurantDetails
-import pi.restaurant.management.databinding.FragmentModifyAboutRestaurantBinding
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.model.fragments.restaurantdata.EditAboutRestaurantViewModel
 import pi.restaurant.management.utils.StringFormatUtils
 
 class EditAboutRestaurantFragment : AbstractModifyItemFragment() {

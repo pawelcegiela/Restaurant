@@ -1,15 +1,9 @@
 package pi.restaurant.management.ui.fragments.orders
 
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.order.Order
-import pi.restaurant.management.objects.data.order.OrderBasic
-import pi.restaurant.management.objects.data.order.OrderDetails
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.orders.EditOrderViewModel
-import pi.restaurant.management.objects.SnapshotsPair
-import pi.restaurant.management.utils.StringFormatUtils
 
 
 class EditOrderFragment : AbstractModifyOrderFragment() {

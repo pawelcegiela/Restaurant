@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
-import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurant.management.objects.data.ingredient.Ingredient
-import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 import pi.restaurant.management.databinding.FragmentPreviewIngredientBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurant.management.objects.enums.IngredientStatus
-import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.ingredients.PreviewIngredientViewModel
+import pi.restaurant.management.objects.data.ingredient.Ingredient
+import pi.restaurant.management.objects.data.ingredient.IngredientDetails
+import pi.restaurant.management.objects.enums.IngredientStatus
+import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
+import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
+import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 

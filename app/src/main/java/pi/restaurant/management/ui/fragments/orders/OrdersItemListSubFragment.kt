@@ -5,8 +5,6 @@ import android.view.View
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.OrdersTab
-import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.objects.enums.WorkersTab
 import pi.restaurant.management.ui.adapters.OrdersRecyclerAdapter
 import pi.restaurant.management.ui.fragments.ItemListSubFragment
 

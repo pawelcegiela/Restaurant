@@ -3,18 +3,14 @@ package pi.restaurant.management.ui.fragments.workers
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.activities.SettingsActivity
-import pi.restaurant.management.objects.data.AbstractDataObject
-import pi.restaurant.management.objects.data.user.User
-import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.objects.data.user.UserDetails
-import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.workers.EditWorkerViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.objects.data.AbstractDataObject
+import pi.restaurant.management.objects.data.user.User
+import pi.restaurant.management.objects.enums.Precondition
+import pi.restaurant.management.ui.activities.SettingsActivity
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
 

@@ -2,8 +2,8 @@ package pi.restaurant.management.ui.fragments.workers
 
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
-import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
+import pi.restaurant.management.objects.data.user.UserBasic
 
 class WorkersMainViewModel : AbstractItemListViewModel() {
     override val databasePath = "users"

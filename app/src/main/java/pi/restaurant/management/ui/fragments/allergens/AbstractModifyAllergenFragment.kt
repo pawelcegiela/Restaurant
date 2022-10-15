@@ -6,16 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.*
-import pi.restaurant.management.objects.data.allergen.AllergenBasic
-import pi.restaurant.management.objects.data.allergen.AllergenDetails
 import pi.restaurant.management.databinding.FragmentModifyAllergenBinding
 import pi.restaurant.management.model.fragments.allergens.AbstractModifyAllergenViewModel
-import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewModel
-import pi.restaurant.management.objects.data.allergen.Allergen
+import pi.restaurant.management.objects.data.SplitDataObject
+import pi.restaurant.management.objects.data.allergen.AllergenBasic
+import pi.restaurant.management.objects.data.allergen.AllergenDetails
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
-import java.util.HashMap
 
 abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
 

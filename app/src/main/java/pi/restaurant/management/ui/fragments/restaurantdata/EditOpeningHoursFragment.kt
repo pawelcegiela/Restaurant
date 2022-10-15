@@ -4,28 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.EditText
-import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.*
+import pi.restaurant.management.databinding.FragmentModifyOpeningHoursBinding
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.model.fragments.restaurantdata.EditOpeningHoursViewModel
+import pi.restaurant.management.objects.data.AbstractDataObject
+import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.openinghours.OpeningHours
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursDetails
-import pi.restaurant.management.databinding.FragmentModifyOpeningHoursBinding
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.model.fragments.restaurantdata.EditOpeningHoursViewModel
 import pi.restaurant.management.ui.views.TimePickerFragment
 import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyOpeningHoursBinding? = null

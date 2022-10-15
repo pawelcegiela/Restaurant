@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
-import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.databinding.FragmentPreviewAllergenBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.allergens.PreviewAllergenViewModel
+import pi.restaurant.management.objects.data.allergen.Allergen
+import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
+import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 class PreviewAllergenFragment : AbstractPreviewItemFragment() {

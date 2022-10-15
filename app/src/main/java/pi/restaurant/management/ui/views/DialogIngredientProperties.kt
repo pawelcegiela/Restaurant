@@ -6,12 +6,11 @@ import android.graphics.drawable.ColorDrawable
 import android.text.Editable
 import android.view.View
 import androidx.fragment.app.Fragment
-import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.databinding.DialogIngredientPropertiesBinding
+import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
 import pi.restaurant.management.ui.fragments.ingredients.AbstractModifyIngredientFragment
-import java.lang.NumberFormatException
 
 class DialogIngredientProperties(
     val fragment: Fragment,

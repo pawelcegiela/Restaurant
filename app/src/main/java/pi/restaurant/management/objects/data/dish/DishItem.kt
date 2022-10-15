@@ -4,7 +4,6 @@ import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.utils.StringFormatUtils
 import java.io.Serializable
-import kotlin.collections.ArrayList
 
 class DishItem : AbstractDataObject, Serializable {
     lateinit var dish: Dish

@@ -4,11 +4,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 import pi.restaurant.management.model.fragments.ingredients.IngredientsMainViewModel
 import pi.restaurant.management.objects.enums.IngredientsTab
 import pi.restaurant.management.ui.adapters.PagerAdapter
+import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 
 class IngredientsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionIngredientsToAddIngredient

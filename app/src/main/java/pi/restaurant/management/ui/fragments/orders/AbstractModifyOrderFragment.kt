@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
@@ -13,7 +14,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentModifyOrderBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewModel
-import pi.restaurant.management.objects.data.*
+import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.order.Order
@@ -29,7 +30,6 @@ import pi.restaurant.management.ui.views.CustomNumberPicker
 import pi.restaurant.management.ui.views.SpinnerAdapter
 import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.StringFormatUtils
-import pi.restaurant.management.utils.UserInterfaceUtils
 import java.util.*
 
 

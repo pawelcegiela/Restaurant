@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.databinding.ItemSubItemBinding
+import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
 import pi.restaurant.management.ui.fragments.ingredients.AbstractModifyIngredientFragment

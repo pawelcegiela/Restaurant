@@ -1,14 +1,10 @@
 package pi.restaurant.management.ui.fragments.allergens
 
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.allergen.Allergen
-import pi.restaurant.management.objects.data.allergen.AllergenBasic
-import pi.restaurant.management.objects.data.allergen.AllergenDetails
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.allergens.EditAllergenViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.objects.data.allergen.Allergen
 
 class EditAllergenFragment : AbstractModifyAllergenFragment() {
 

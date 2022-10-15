@@ -1,8 +1,6 @@
 package pi.restaurant.management.model.fragments.discounts
 
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.model.fragments.allergens.EditAllergenViewModel
-import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.objects.data.discount.Discount
 import pi.restaurant.management.objects.data.discount.DiscountBasic
 import pi.restaurant.management.objects.data.discount.DiscountDetails

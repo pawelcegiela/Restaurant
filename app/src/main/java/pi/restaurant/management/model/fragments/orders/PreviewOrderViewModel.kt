@@ -8,15 +8,14 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.order.OrderDetails
+import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
-import kotlin.collections.HashMap
 
 class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
     override val databasePath = "orders"

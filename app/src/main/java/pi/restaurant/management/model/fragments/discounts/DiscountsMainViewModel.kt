@@ -2,8 +2,8 @@ package pi.restaurant.management.model.fragments.discounts
 
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ktx.getValue
-import pi.restaurant.management.objects.data.discount.DiscountBasic
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
+import pi.restaurant.management.objects.data.discount.DiscountBasic
 
 class DiscountsMainViewModel : AbstractItemListViewModel() {
     override val databasePath = "discounts"

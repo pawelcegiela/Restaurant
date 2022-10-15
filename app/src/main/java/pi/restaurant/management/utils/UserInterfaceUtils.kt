@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.CardViewWideBinding
-import pi.restaurant.management.objects.data.ingredient.IngredientItem
 
 class UserInterfaceUtils {
     companion object {

@@ -2,14 +2,11 @@ package pi.restaurant.management.ui.fragments.ingredients
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.ingredient.Ingredient
-import pi.restaurant.management.objects.data.ingredient.IngredientBasic
-import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.ingredients.EditIngredientViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.objects.data.ingredient.Ingredient
+import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 
 
 class EditIngredientFragment : AbstractModifyIngredientFragment() {

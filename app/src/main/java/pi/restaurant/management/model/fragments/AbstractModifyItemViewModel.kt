@@ -10,9 +10,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.objects.SnapshotsPair
 
 abstract class AbstractModifyItemViewModel : ViewModel() {
     abstract val databasePath: String

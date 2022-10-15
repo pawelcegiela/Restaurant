@@ -3,12 +3,10 @@ package pi.restaurant.management.ui.fragments.allergens
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.AllergensRecyclerAdapter
-import pi.restaurant.management.objects.data.allergen.AllergenBasic
-import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 import pi.restaurant.management.model.fragments.allergens.AllergensMainViewModel
 import pi.restaurant.management.ui.adapters.PagerAdapter
+import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 
 class AllergensMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionAllergensToAddAllergen

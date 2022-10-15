@@ -1,11 +1,11 @@
 package pi.restaurant.management.model.fragments.restaurantdata
 
-import pi.restaurant.management.objects.data.address.Address
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.objects.data.address.Address
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.address.AddressDetails
 

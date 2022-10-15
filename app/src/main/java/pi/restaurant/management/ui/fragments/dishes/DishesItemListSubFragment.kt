@@ -3,8 +3,8 @@ package pi.restaurant.management.ui.fragments.dishes
 import android.os.Bundle
 import android.view.View
 import pi.restaurant.management.objects.data.dish.DishBasic
-import pi.restaurant.management.objects.enums.DishesTab
 import pi.restaurant.management.objects.enums.DishType
+import pi.restaurant.management.objects.enums.DishesTab
 import pi.restaurant.management.ui.adapters.DishesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.ItemListSubFragment
 

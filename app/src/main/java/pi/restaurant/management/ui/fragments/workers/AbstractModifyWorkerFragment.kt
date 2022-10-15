@@ -4,23 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.*
-import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
 import pi.restaurant.management.model.fragments.workers.AbstractModifyWorkerViewModel
-import pi.restaurant.management.objects.data.user.User
-import pi.restaurant.management.objects.enums.OrderType
+import pi.restaurant.management.objects.data.AbstractDataObject
+import pi.restaurant.management.objects.data.SplitDataObject
+import pi.restaurant.management.objects.data.user.UserBasic
+import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.views.SpinnerAdapter
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
-import kotlin.collections.HashMap
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null

@@ -3,7 +3,6 @@ package pi.restaurant.management.objects.data.openinghours
 import pi.restaurant.management.objects.data.AbstractDataObject
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class OpeningHoursBasic : AbstractDataObject() {
     override var id = "openingHours"

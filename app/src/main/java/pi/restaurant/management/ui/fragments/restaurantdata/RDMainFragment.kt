@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentRdMainBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
@@ -19,7 +17,6 @@ import pi.restaurant.management.objects.data.restaurantdata.RestaurantDataDetail
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.ui.views.TextViewDetail
 import pi.restaurant.management.utils.StringFormatUtils
-import pi.restaurant.management.utils.UserInterfaceUtils
 
 class RDMainFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar

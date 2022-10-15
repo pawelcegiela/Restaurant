@@ -3,16 +3,19 @@ package pi.restaurant.management.ui.fragments
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
+import pi.restaurant.management.databinding.ToolbarNavigationModifyBinding
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.SplitDataObject
-import pi.restaurant.management.databinding.ToolbarNavigationModifyBinding
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 abstract class AbstractModifyItemFragment : Fragment() {

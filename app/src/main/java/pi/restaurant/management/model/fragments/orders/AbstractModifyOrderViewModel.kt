@@ -2,11 +2,11 @@ package pi.restaurant.management.model.fragments.orders
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
+import pi.restaurant.management.objects.data.SplitDataObject
+import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.order.OrderDetails
-import pi.restaurant.management.objects.data.SplitDataObject
-import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.objects.data.order.Order
 import java.util.*
 
 abstract class AbstractModifyOrderViewModel : AbstractModifyItemViewModel() {

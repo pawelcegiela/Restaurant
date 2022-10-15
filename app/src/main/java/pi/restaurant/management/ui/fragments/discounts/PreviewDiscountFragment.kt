@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.discount.Discount
 import pi.restaurant.management.databinding.FragmentPreviewDiscountBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurant.management.objects.enums.DiscountType
-import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.discounts.PreviewDiscountViewModel
+import pi.restaurant.management.objects.data.discount.Discount
+import pi.restaurant.management.objects.enums.DiscountType
+import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {

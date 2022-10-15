@@ -10,10 +10,6 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.objects.SnapshotsPair
-import pi.restaurant.management.objects.data.AbstractDataObject
-import pi.restaurant.management.objects.data.dish.Dish
-import pi.restaurant.management.objects.data.dish.DishBasic
-import pi.restaurant.management.objects.data.dish.DishDetails
 import pi.restaurant.management.objects.data.ingredient.Ingredient
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientDetails

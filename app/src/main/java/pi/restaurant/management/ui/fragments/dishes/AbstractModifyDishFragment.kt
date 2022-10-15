@@ -4,30 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
-import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurant.management.objects.data.*
+import pi.restaurant.management.databinding.FragmentModifyDishBinding
+import pi.restaurant.management.model.fragments.dishes.AbstractModifyDishViewModel
+import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
 import pi.restaurant.management.objects.data.dish.DishBasic
 import pi.restaurant.management.objects.data.dish.DishDetails
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
-import pi.restaurant.management.databinding.FragmentModifyDishBinding
 import pi.restaurant.management.objects.enums.DishType
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.objects.enums.Unit
+import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
+import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.listeners.AddAllergenButtonListener
 import pi.restaurant.management.ui.listeners.AddIngredientButtonListener
-import pi.restaurant.management.model.fragments.dishes.AbstractModifyDishViewModel
-import pi.restaurant.management.objects.data.dish.Dish
-import pi.restaurant.management.objects.enums.OrderType
-import pi.restaurant.management.utils.StringFormatUtils
-import pi.restaurant.management.utils.UserInterfaceUtils
 import pi.restaurant.management.ui.views.DialogIngredientProperties
 import pi.restaurant.management.ui.views.SpinnerAdapter
+import pi.restaurant.management.utils.StringFormatUtils
+import pi.restaurant.management.utils.UserInterfaceUtils
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {

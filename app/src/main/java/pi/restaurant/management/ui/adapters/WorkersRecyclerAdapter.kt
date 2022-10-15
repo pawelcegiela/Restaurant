@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
+import pi.restaurant.management.databinding.ItemWorkersBinding
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.databinding.ItemWorkersBinding
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class WorkersRecyclerAdapter(

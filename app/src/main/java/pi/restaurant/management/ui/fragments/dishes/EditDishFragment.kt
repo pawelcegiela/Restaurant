@@ -1,14 +1,10 @@
 package pi.restaurant.management.ui.fragments.dishes
 
 import androidx.fragment.app.viewModels
-import com.google.firebase.database.ktx.getValue
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.dish.Dish
-import pi.restaurant.management.objects.data.dish.DishBasic
-import pi.restaurant.management.objects.data.dish.DishDetails
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.dishes.EditDishViewModel
-import pi.restaurant.management.objects.SnapshotsPair
+import pi.restaurant.management.objects.data.dish.Dish
 
 class EditDishFragment : AbstractModifyDishFragment() {
 

@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 import pi.restaurant.management.R
-import pi.restaurant.management.objects.data.user.User
 import pi.restaurant.management.databinding.FragmentPreviewWorkerBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.workers.PreviewWorkerViewModel
+import pi.restaurant.management.objects.data.user.User
+import pi.restaurant.management.objects.enums.Role
+import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {

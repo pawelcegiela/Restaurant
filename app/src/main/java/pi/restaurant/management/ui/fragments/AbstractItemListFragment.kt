@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.tabs.TabLayoutMediator
-import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentItemListBinding
-import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
-import pi.restaurant.management.ui.adapters.PagerAdapter
+import pi.restaurant.management.objects.enums.Role
 
 abstract class AbstractItemListFragment : Fragment() {
 

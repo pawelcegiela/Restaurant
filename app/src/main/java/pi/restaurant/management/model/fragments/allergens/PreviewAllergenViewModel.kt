@@ -13,7 +13,6 @@ import pi.restaurant.management.objects.SnapshotsPair
 import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
 import pi.restaurant.management.objects.data.allergen.AllergenDetails
-import kotlin.coroutines.coroutineContext
 
 class PreviewAllergenViewModel : AbstractPreviewItemViewModel() {
     override val databasePath = "allergens"

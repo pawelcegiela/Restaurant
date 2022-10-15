@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
+import pi.restaurant.management.databinding.ItemAllergensBinding
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
-import pi.restaurant.management.databinding.ItemAllergensBinding
 import java.util.*
 
 

@@ -2,7 +2,6 @@ package pi.restaurant.management.objects.data.discount
 
 import pi.restaurant.management.objects.data.AbstractDataObject
 import java.util.*
-import kotlin.collections.ArrayList
 
 class DiscountBasic : AbstractDataObject {
     var availableDiscounts: ArrayList<String> = ArrayList()
