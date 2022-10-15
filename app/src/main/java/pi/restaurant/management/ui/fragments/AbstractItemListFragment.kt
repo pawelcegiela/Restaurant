@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.AbstractRecyclerAdapter
 import pi.restaurant.management.databinding.FragmentItemListBinding
-import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
+import pi.restaurant.management.ui.adapters.PagerAdapter
 
 abstract class AbstractItemListFragment : Fragment() {
 
@@ -25,7 +24,6 @@ abstract class AbstractItemListFragment : Fragment() {
     abstract val addActionId: Int
     abstract val editActionId: Int
     val progressBar get() = binding.progress.progressBar
-    private lateinit var chosenItemId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,33 +55,14 @@ abstract class AbstractItemListFragment : Fragment() {
         }
     }
 
+    abstract fun addViewPagerAdapters()
+
     open fun initializeUI() {
-        initializeSearchView()
+        addViewPagerAdapters()
 
         binding.fab.setOnClickListener {
             findNavController().navigate(addActionId)
         }
-    }
-
-    private fun initializeSearchView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                (binding.recyclerView.adapter as AbstractRecyclerAdapter?)?.filter(query)
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                (binding.recyclerView.adapter as AbstractRecyclerAdapter?)?.filter(newText)
-                return false
-            }
-        })
-    }
-
-    private fun openEdit() {
-        val bundle = Bundle()
-        bundle.putString("id", chosenItemId)
-
-        findNavController().navigate(editActionId, bundle)
     }
 
     override fun onDestroyView() {

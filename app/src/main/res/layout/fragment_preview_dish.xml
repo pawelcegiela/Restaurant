@@ -145,7 +145,7 @@
                                 android:id="@+id/textViewDescription"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{vm.item.details.description.empty ? @string/no_dish_description : vm.item.basic.name}" />
+                                android:text="@{vm.item.details.description.empty ? @string/no_dish_description : vm.item.details.description}" />
 
                             <pi.restaurant.management.ui.views.TextViewDetailTitle
                                 android:id="@+id/textViewAmountTitle"
@@ -173,7 +173,7 @@
                                 android:id="@+id/textViewRecipe"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{vm.item.details.recipe.empty ? @string/no_dish_recipe : vm.item.basic.name}" />
+                                android:text="@{vm.item.details.recipe.empty ? @string/no_dish_recipe : vm.item.details.recipe}" />
 
                             <pi.restaurant.management.ui.views.TextViewLessMore
                                 android:id="@+id/textViewDetailsLess"

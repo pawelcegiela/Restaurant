@@ -1,13 +1,16 @@
 package pi.restaurant.management.ui.fragments.dishes
 
+import android.view.View
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.DishesRecyclerAdapter
-import pi.restaurant.management.objects.data.dish.DishBasic
 import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 import pi.restaurant.management.model.fragments.dishes.DishesMainViewModel
+import pi.restaurant.management.objects.enums.DishesTab
+import pi.restaurant.management.objects.enums.DishType
 import pi.restaurant.management.ui.activities.OrdersActivity
+import pi.restaurant.management.ui.adapters.PagerAdapter
 
 class DishesMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDishesToAddDish
@@ -17,10 +20,19 @@ class DishesMainFragment : AbstractItemListFragment() {
 
     override fun initializeUI() {
         super.initializeUI()
-        binding.recyclerView.adapter =
-            DishesRecyclerAdapter(viewModel.dataList.value as MutableList<DishBasic>, this@DishesMainFragment)
         if (activity is OrdersActivity) {
             _viewModel.shouldDisplayFAB = false
         }
+    }
+
+    override fun addViewPagerAdapters() {
+        binding.tabLayout.visibility = View.VISIBLE
+        val list = DishType.values()
+        val names = DishesTab.getArrayOfStrings(requireContext())
+        binding.pager.adapter = PagerAdapter(requireActivity().supportFragmentManager, lifecycle, list, requireActivity(),this, viewModel.dataList.value)
+
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            tab.text = names[position]
+        }.attach()
     }
 }

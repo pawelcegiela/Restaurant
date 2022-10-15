@@ -1,11 +1,15 @@
 package pi.restaurant.management.ui.fragments.workers
 
+import android.view.View
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
 import pi.restaurant.management.ui.adapters.WorkersRecyclerAdapter
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
+import pi.restaurant.management.objects.enums.WorkersTab
+import pi.restaurant.management.ui.adapters.PagerAdapter
 
 class WorkersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionWorkersToAddWorker
@@ -13,9 +17,14 @@ class WorkersMainFragment : AbstractItemListFragment() {
     override val viewModel : AbstractItemListViewModel get() = _viewModel
     private val _viewModel : WorkersMainViewModel by viewModels()
 
-    override fun initializeUI() {
-        super.initializeUI()
-        binding.recyclerView.adapter =
-            WorkersRecyclerAdapter(viewModel.dataList.value as MutableList<UserBasic>, this@WorkersMainFragment)
+    override fun addViewPagerAdapters() {
+        binding.tabLayout.visibility = View.VISIBLE
+        val list = WorkersTab.values()
+        val names = WorkersTab.getArrayOfStrings(requireContext())
+        binding.pager.adapter = PagerAdapter(requireActivity().supportFragmentManager, lifecycle, list, requireActivity(), this, viewModel.dataList.value)
+
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            tab.text = names[position]
+        }.attach()
     }
 }

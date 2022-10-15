@@ -32,7 +32,7 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         if (this is EditDishViewModel) {
             return item.value ?: Dish(itemId, DishBasic(), DishDetails())
         }
-        return Dish()
+        return Dish(itemId, DishBasic(), DishDetails())
     }
 
     private fun updateIngredients(details: DishDetails) {

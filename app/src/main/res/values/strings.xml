@@ -299,4 +299,14 @@
     <string name="base_ingredients_colon">Base ingredients:</string>
     <string name="other_ingredients_colon">Other ingredients:</string>
     <string name="possible_ingredients_colon">Possible ingredients:</string>
+    <string name="all_">All</string>
+    <string name="warm_dishes">Warm dishes</string>
+    <string name="cold_dishes">Cold dishes</string>
+    <string name="non_alcoholic_drinks">Non-alcoholic drinks</string>
+    <string name="alcoholic_drinks">Alcoholic drinks</string>
+    <string name="admins">Admins</string>
+    <string name="owners">Owners</string>
+    <string name="executives">Executives</string>
+    <string name="managers">Managers</string>
+    <string name="expired">Expired</string>
 </resources>

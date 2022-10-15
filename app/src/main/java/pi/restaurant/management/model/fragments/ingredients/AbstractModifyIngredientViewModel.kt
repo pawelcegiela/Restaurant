@@ -28,7 +28,7 @@ abstract class AbstractModifyIngredientViewModel : AbstractModifyItemViewModel()
         if (this is EditIngredientViewModel) {
             return item.value ?: Ingredient(itemId, IngredientBasic(), IngredientDetails())
         }
-        return Ingredient()
+        return Ingredient(itemId, IngredientBasic(), IngredientDetails())
     }
 
     private fun updateSubIngredients(details: IngredientDetails) {

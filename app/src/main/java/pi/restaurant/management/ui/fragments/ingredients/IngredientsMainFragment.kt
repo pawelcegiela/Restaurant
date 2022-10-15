@@ -1,22 +1,30 @@
 package pi.restaurant.management.ui.fragments.ingredients
 
+import android.view.View
 import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
-import pi.restaurant.management.ui.adapters.IngredientsRecyclerAdapter
-import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 import pi.restaurant.management.model.fragments.AbstractItemListViewModel
 import pi.restaurant.management.model.fragments.ingredients.IngredientsMainViewModel
+import pi.restaurant.management.objects.enums.IngredientsTab
+import pi.restaurant.management.ui.adapters.PagerAdapter
 
 class IngredientsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionIngredientsToAddIngredient
     override val editActionId = R.id.actionIngredientsToEditIngredient
-    override val viewModel : AbstractItemListViewModel get() = _viewModel
-    private val _viewModel : IngredientsMainViewModel by viewModels()
+    override val viewModel: AbstractItemListViewModel get() = _viewModel
+    private val _viewModel: IngredientsMainViewModel by viewModels()
 
-    override fun initializeUI() {
-        super.initializeUI()
-        binding.recyclerView.adapter =
-            IngredientsRecyclerAdapter(viewModel.dataList.value as MutableList<IngredientBasic>, this@IngredientsMainFragment)
+    override fun addViewPagerAdapters() {
+        binding.tabLayout.visibility = View.VISIBLE
+        val list = IngredientsTab.values()
+        val names = IngredientsTab.getArrayOfStrings(requireContext())
+        binding.pager.adapter =
+            PagerAdapter(requireActivity().supportFragmentManager, lifecycle, list, requireActivity(), this, viewModel.dataList.value)
+
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            tab.text = names[position]
+        }.attach()
     }
 }
