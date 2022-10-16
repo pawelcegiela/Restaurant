@@ -11,6 +11,7 @@ class AddOrderFragment : AbstractModifyOrderFragment() {
     override val saveMessageId = R.string.order_added
     override val removeMessageId = 0 // Unused
     override val addDishAction = R.id.actionAddOrderToDishes
+    override val editDishActionId = R.id.actionAddOrderToCustomizeDish
     override val viewModel : AbstractModifyItemViewModel get() = _viewModel
     private val _viewModel : AddOrderViewModel by viewModels()
 

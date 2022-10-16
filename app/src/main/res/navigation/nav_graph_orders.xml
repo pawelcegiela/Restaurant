@@ -37,12 +37,11 @@
 
         <action
             android:id="@+id/actionAddOrderToDishes"
-            app:destination="@id/ChooseDishFragment">
-            <argument
-                android:name="swipeEnabled"
-                android:defaultValue="false"
-                app:argType="boolean" />
-        </action>
+            app:destination="@id/ChooseDishFragment" />
+
+        <action
+            android:id="@+id/actionAddOrderToCustomizeDish"
+            app:destination="@id/CustomizeDishFragment" />
     </fragment>
 
     <fragment
@@ -58,12 +57,11 @@
 
         <action
             android:id="@+id/actionEditOrderToDishes"
-            app:destination="@id/ChooseDishFragment">
-            <argument
-                android:name="swipeEnabled"
-                android:defaultValue="false"
-                app:argType="boolean" />
-        </action>
+            app:destination="@id/ChooseDishFragment" />
+
+        <action
+            android:id="@+id/actionEditOrderToCustomizeDish"
+            app:destination="@id/CustomizeDishFragment" />
     </fragment>
 
     <fragment

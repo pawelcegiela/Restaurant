@@ -7,7 +7,7 @@ import java.io.Serializable
 
 class DishItem : AbstractDataObject, Serializable {
     lateinit var dish: Dish
-    var amount: Int = 0
+    var amount: Int = 1
     var unusedOtherIngredients: ArrayList<IngredientItem> = ArrayList()
     var usedPossibleIngredients: ArrayList<IngredientItem> = ArrayList()
     var finalPrice: String = "0.0"

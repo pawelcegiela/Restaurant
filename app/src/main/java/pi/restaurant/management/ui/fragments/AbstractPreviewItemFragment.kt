@@ -29,7 +29,9 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
                 if (Role.isAtLeastManager(role)) {
-                    viewModel.getDataFromDatabase()
+                    if (viewModel.shouldGetDataFromDatabase()) {
+                        viewModel.getDataFromDatabase()
+                    }
                 } else {
                     initializeWorkerUI()
                 }

@@ -79,4 +79,10 @@ abstract class AbstractPreviewItemViewModel : ViewModel() {
     fun setReadyToUnlock() {
         _readyToUnlock.value = true
     }
+
+    fun setReadyToInitialize() {
+        _readyToInitialize.value = true
+    }
+
+    open fun shouldGetDataFromDatabase() = true
 }

@@ -111,15 +111,15 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     override fun fillInData() {
         val openingHours = _viewModel.item.value ?: OpeningHours()
 
-        defaultOpening = openingHours.basic.defaultStartHour as Date
-        defaultClosing = openingHours.basic.defaultEndHour as Date
+        defaultOpening = openingHours.basic.defaultStartHour
+        defaultClosing = openingHours.basic.defaultEndHour
 
         binding.setDefault.textViewStartHour.text = StringFormatUtils.formatTime(defaultOpening)
         binding.setDefault.textViewEndHour.text = StringFormatUtils.formatTime(defaultClosing)
 
-        daysEnabled = openingHours.getWeekDaysEnabled()
-        daysOpeningValues = openingHours.getWeekDaysStartHour()
-        daysClosingValues = openingHours.getWeekDaysEndHour()
+        daysEnabled = openingHours.basic.getWeekDaysEnabled()
+        daysOpeningValues = openingHours.basic.getWeekDaysStartHour()
+        daysClosingValues = openingHours.basic.getWeekDaysEndHour()
 
         for (i in daysEnabled.indices) {
             val enabled = daysEnabled[i]

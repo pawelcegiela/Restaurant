@@ -17,6 +17,7 @@ import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewMo
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.delivery.DeliveryBasic
+import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
@@ -42,6 +43,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
+    abstract val editDishActionId: Int
 
     protected val activityViewModel: OrdersViewModel by activityViewModels()
 
@@ -135,6 +137,13 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         // TODO Checking whether it's not too late
     }
 
+    fun editDish(dishItem: DishItem) {
+        val sdo = getDataObject()
+        activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
+        activityViewModel.setEditedDish(dishItem)
+        findNavController().navigate(editDishActionId)
+    }
+
     private fun initializeSpinners() {
         val context = requireContext()
         binding.spinnerCollectionType.adapter = SpinnerAdapter(context, CollectionType.getArrayOfStrings(context))
@@ -151,7 +160,9 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
                     binding.linearLayoutDeliveryDetails.visibility = View.GONE
                 }
                 binding.spinnerPlace.isEnabled = position == CollectionType.SELF_PICKUP.ordinal
+                val selection = binding.spinnerStatus.selectedItemId.toInt()
                 binding.spinnerStatus.adapter = SpinnerAdapter(context, getArrayOfStatuses())
+                binding.spinnerStatus.setSelection(selection)
                 updateFullPrice()
             }
 

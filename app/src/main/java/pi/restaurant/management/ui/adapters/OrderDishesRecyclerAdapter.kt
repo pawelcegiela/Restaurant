@@ -31,7 +31,7 @@ class OrderDishesRecyclerAdapter(
                     fragment.removeDish(dataSet[layoutPosition])
                 }
                 binding.root.setOnClickListener {
-
+                    fragment.editDish(dataSet[layoutPosition])
                 }
             } else if (fragment is PreviewOrderFragment) {
                 binding.buttonRemove.visibility = View.GONE

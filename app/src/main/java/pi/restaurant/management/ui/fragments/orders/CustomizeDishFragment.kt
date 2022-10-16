@@ -14,6 +14,7 @@ import pi.restaurant.management.databinding.FragmentCustomizeDishBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
+import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewModel
 import pi.restaurant.management.model.fragments.orders.CustomizeDishViewModel
 import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.dish.DishItem
@@ -57,7 +58,18 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    // TODO Dish edition
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        if (activityViewModel.editedDish.value == null) {
+            super.onViewCreated(view, savedInstanceState)
+        } else {
+            _viewModel.setItem(activityViewModel.editedDish.value ?: DishItem())
+            activityViewModel.resetEditedDish()
+            viewModel.getUserRole()
+            addLiveDataObservers()
+            _viewModel.setReadyToInitialize()
+        }
+    }
+
     override fun initializeUI() {
         toolbarNavigation.root.visibility = View.VISIBLE
         toolbarNavigation.cardBack.root.visibility = View.GONE
@@ -78,34 +90,42 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     }
 
     override fun fillInData() {
-        val item = _viewModel.item.value ?: Dish()
-        dish = item
-        if (!dish.basic.isActive) {
-            Toast.makeText(requireContext(), "TODO This dish is inactive", Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack()
-        }
+        val item = _viewModel.item.value ?: DishItem()
+        dish = item.dish
 
         numberPickerPortions = CustomNumberPicker(binding.numberPickerPortions, 1, 10, 1) { refreshTotalDishPrice() }
+        numberPickerPortions.setValue(item.amount)
 
-        binding.textViewName.text = item.basic.name
-        if (item.basic.isDiscounted) {
-            binding.textViewPrice.text = StringFormatUtils.formatPrice(item.basic.discountPrice)
+        binding.textViewName.text = dish.basic.name
+        if (dish.basic.isDiscounted) {
+            binding.textViewPrice.text = StringFormatUtils.formatPrice(dish.basic.discountPrice)
             binding.textViewOriginalPrice.paintFlags =
                 binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             binding.textViewOriginalPrice.visibility = View.VISIBLE
-            binding.textViewOriginalPrice.text = StringFormatUtils.formatPrice(item.basic.basePrice)
+            binding.textViewOriginalPrice.text = StringFormatUtils.formatPrice(dish.basic.basePrice)
         } else {
-            binding.textViewPrice.text = StringFormatUtils.formatPrice(item.basic.basePrice)
+            binding.textViewPrice.text = StringFormatUtils.formatPrice(dish.basic.basePrice)
         }
-        binding.textViewDishType.text = DishType.getString(item.basic.dishType, requireContext())
+        binding.textViewDishType.text = DishType.getString(dish.basic.dishType, requireContext())
         binding.textViewAmount.text =
-            StringFormatUtils.formatAmountWithUnit(requireContext(), item.details.amount, item.details.unit)
+            StringFormatUtils.formatAmountWithUnit(requireContext(), dish.details.amount, dish.details.unit)
         refreshTotalDishPrice()
 
-        otherIngredientsList = item.details.otherIngredients.toList().map { it.second }.toMutableList()
-        possibleIngredientsList = item.details.possibleIngredients.toList().map { it.second }.toMutableList()
+        otherIngredientsList = dish.details.otherIngredients.toList().map { it.second }.toMutableList()
+        possibleIngredientsList = dish.details.possibleIngredients.toList().map { it.second }.toMutableList()
 
-        initializeRecyclerViews(item)
+        for (ingredient in item.unusedOtherIngredients) {
+            val ingredientItem = otherIngredientsList.find { it.id == ingredient.id }
+            otherIngredientsList.remove(ingredientItem)
+            ingredientItem?.let { possibleIngredientsList.add(it) }
+        }
+        for (ingredient in item.usedPossibleIngredients) {
+            val ingredientItem = possibleIngredientsList.find { it.id == ingredient.id }
+            possibleIngredientsList.remove(ingredientItem)
+            ingredientItem?.let { otherIngredientsList.add(it) }
+        }
+
+        initializeRecyclerViews(dish)
         initializeMoreLessButtons()
 
         viewModel.setReadyToUnlock()
@@ -118,11 +138,11 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
 
         binding.recyclerViewOtherIngredients.adapter =
             DishIngredientsRecyclerAdapter(otherIngredientsList, this, IngredientStatus.OTHER)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, item.details.otherIngredients.size, requireContext())
+        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, otherIngredientsList.size, requireContext())
 
         binding.recyclerViewPossibleIngredients.adapter =
             DishIngredientsRecyclerAdapter(possibleIngredientsList, this, IngredientStatus.POSSIBLE)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, item.details.possibleIngredients.size, requireContext())
+        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, possibleIngredientsList.size, requireContext())
 
         binding.recyclerViewAllergens.adapter =
             DishAllergensRecyclerAdapter(item.details.allergens.toList().map { it.second }.toMutableList(), this)
@@ -158,9 +178,12 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     }
 
     private fun getDataObject(): DishItem {
+        val dishItem = (viewModel as CustomizeDishViewModel).getPreviousItem()
+        val itemId = dishItem.id.ifEmpty { StringFormatUtils.formatId() }
+
         return DishItem(
-            id = StringFormatUtils.formatId(),
-            dish = dish,
+            id = itemId,
+            dish = dishItem.dish,
             amount = numberPickerPortions.getValue(),
             unusedOtherIngredients = getUnusedOtherIngredients(),
             usedPossibleIngredients = getUsedPossibleIngredients(),
