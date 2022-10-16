@@ -45,7 +45,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
 
         if (!item.basic.subDish) {
             binding.textViewAmount.text =
-                StringFormatUtils.formatAmountWithUnit(requireContext(), item.basic.amount, item.basic.unit)
+                StringFormatUtils.formatAmountWithUnit(requireContext(), item.basic.amount.toString(), item.basic.unit)
         }
 
         binding.textViewType.text = if (item.basic.subDish) getString(R.string.sub_dish) else getString(R.string.ingredient)

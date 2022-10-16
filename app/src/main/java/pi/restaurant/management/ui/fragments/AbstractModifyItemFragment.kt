@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ToolbarNavigationModifyBinding
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
-import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
@@ -112,7 +111,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     open fun saveToDatabase() {
         val data = getDataObject()
 
-        val precondition = checkSavePreconditions(data.basic)
+        val precondition = checkSavePreconditions(data)
         if (precondition != Precondition.OK) {
             Toast.makeText(activity, getString(precondition.nameRes), Toast.LENGTH_SHORT).show()
             return
@@ -123,7 +122,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     abstract fun getDataObject(): SplitDataObject
 
-    open fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+    open fun checkSavePreconditions(data: SplitDataObject): Precondition {
         return Precondition.OK
     }
 

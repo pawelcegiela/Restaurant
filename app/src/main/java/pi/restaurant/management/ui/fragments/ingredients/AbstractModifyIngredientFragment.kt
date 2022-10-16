@@ -114,7 +114,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         val basic = IngredientBasic(
             id = itemId,
             name = binding.editTextName.text.toString(),
-            amount = if (binding.checkBoxSubDish.isChecked) binding.editTextAmount.text.toString().toInt() else 0,
+            amount = if (!binding.checkBoxSubDish.isChecked) binding.editTextAmount.text.toString().toInt() else 0,
             unit = binding.spinnerUnit.selectedItemPosition,
             subDish = binding.checkBoxSubDish.isChecked,
         )

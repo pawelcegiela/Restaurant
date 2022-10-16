@@ -9,5 +9,6 @@ enum class Precondition(val nameRes: Int) {
     TOO_LOW_ROLE(R.string.you_can_set_lower_roles),
     INVALID_OPENING_HOURS(R.string.opening_hour_cant_be_earlier_than_closing),
     SAME_USER(0),
-    TOO_LOW_VALUE_DELIVERY(R.string.too_low_value_delivery)
+    TOO_LOW_VALUE_DELIVERY(R.string.too_low_value_delivery),
+    EMPTY_ORDER(R.string.order_should_contain_at_least_one_dish)
 }

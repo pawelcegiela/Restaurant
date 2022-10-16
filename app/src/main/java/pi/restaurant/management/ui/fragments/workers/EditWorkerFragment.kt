@@ -7,7 +7,7 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.workers.EditWorkerViewModel
-import pi.restaurant.management.objects.data.AbstractDataObject
+import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.user.User
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.ui.activities.SettingsActivity
@@ -65,7 +65,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         }
     }
 
-    override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
         return if (isMyData) {
             Precondition.OK
         } else {

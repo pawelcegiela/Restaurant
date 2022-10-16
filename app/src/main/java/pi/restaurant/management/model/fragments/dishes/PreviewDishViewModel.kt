@@ -22,7 +22,7 @@ class PreviewDishViewModel : AbstractPreviewItemViewModel() {
         _item.value = Dish(itemId, basic, details)
     }
 
-    fun formatPrice(price: Double) : String {
+    fun formatPrice(price: String) : String {
         return StringFormatUtils.formatPrice(price)
     }
 

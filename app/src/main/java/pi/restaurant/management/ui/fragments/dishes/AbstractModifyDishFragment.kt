@@ -77,16 +77,16 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         val dish = (viewModel as AbstractModifyDishViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val discountPrice = if (binding.checkBoxDiscount.isChecked) {
-            binding.editTextDiscountPrice.text.toString().toDouble()
+            binding.editTextDiscountPrice.text.toString()
         } else {
-            0.0
+            "0.0"
         }
 
         val basic = DishBasic(
             id = itemId,
             name = binding.editTextName.text.toString(),
             isActive = binding.checkBoxActive.isChecked,
-            basePrice = binding.editTextBasePrice.text.toString().toDouble(),
+            basePrice = binding.editTextBasePrice.text.toString(),
             isDiscounted = binding.checkBoxDiscount.isChecked,
             discountPrice = discountPrice,
             dishType = binding.spinnerDishType.selectedItemId.toInt()
@@ -99,7 +99,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             otherIngredients = HashMap(otherIngredientsList.associateBy { it.id }),
             possibleIngredients = HashMap(possibleIngredientsList.associateBy { it.id }),
             allergens = HashMap(allergensList.associateBy { it.id }),
-            amount = binding.editTextAmount.text.toString().toDouble(),
+            amount = binding.editTextAmount.text.toString(),
             unit = binding.spinnerUnit.selectedItemId.toInt(),
             containingOrders = dish.details.containingOrders
         )

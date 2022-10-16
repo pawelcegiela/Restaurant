@@ -49,11 +49,11 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
         val data = _viewModel.item.value ?: Delivery()
         binding.checkBoxAvailable.isChecked = data.basic.available
         if (data.basic.available) {
-            binding.editTextMinimumPrice.setText(data.basic.minimumPrice.toString())
-            binding.editTextExtraFee.setText(data.basic.extraDeliveryFee.toString())
+            binding.editTextMinimumPrice.setText(data.basic.minimumPrice)
+            binding.editTextExtraFee.setText(data.basic.extraDeliveryFee)
             binding.checkBoxFreeThreshold.isChecked = data.basic.freeDeliveryAvailable
             if (data.basic.freeDeliveryAvailable) {
-                binding.editTextFreeThreshold.setText(data.basic.minimumPriceFreeDelivery.toString())
+                binding.editTextFreeThreshold.setText(data.basic.minimumPriceFreeDelivery)
             } else {
                 binding.editTextFreeThreshold.isEnabled = false
             }
@@ -85,10 +85,10 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
         } else {
             DeliveryBasic(
                 available = true,
-                minimumPrice = binding.editTextMinimumPrice.text.toString().toDouble(),
-                extraDeliveryFee = binding.editTextExtraFee.text.toString().toDouble(),
+                minimumPrice = binding.editTextMinimumPrice.text.toString(),
+                extraDeliveryFee = binding.editTextExtraFee.text.toString(),
                 freeDeliveryAvailable = binding.checkBoxFreeThreshold.isChecked,
-                minimumPriceFreeDelivery = binding.editTextFreeThreshold.text.ifEmpty { "0.0" }.toString().toDouble()
+                minimumPriceFreeDelivery = binding.editTextFreeThreshold.text.ifEmpty { "0.0" }.toString()
             )
         }
 

@@ -10,7 +10,7 @@ class DishItem : AbstractDataObject, Serializable {
     var amount: Int = 0
     var unusedOtherIngredients: ArrayList<IngredientItem> = ArrayList()
     var usedPossibleIngredients: ArrayList<IngredientItem> = ArrayList()
-    var finalPrice: Double = 0.0
+    var finalPrice: String = "0.0"
 
     @Suppress("unused")
     constructor()
@@ -21,7 +21,7 @@ class DishItem : AbstractDataObject, Serializable {
         amount: Int,
         unusedOtherIngredients: ArrayList<IngredientItem>,
         usedPossibleIngredients: ArrayList<IngredientItem>,
-        finalPrice: Double
+        finalPrice: String
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.dish = dish

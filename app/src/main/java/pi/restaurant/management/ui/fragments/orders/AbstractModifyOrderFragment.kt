@@ -14,12 +14,10 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentModifyOrderBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewModel
-import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.delivery.DeliveryBasic
 import pi.restaurant.management.objects.data.dish.DishItem
-import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
 import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.order.OrderDetails
@@ -31,6 +29,7 @@ import pi.restaurant.management.ui.views.SpinnerAdapter
 import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
+import java.math.BigDecimal
 import java.util.*
 
 
@@ -252,22 +251,22 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         updateFullPrice()
     }
 
-    private fun countFullPrice(): Double {
-        var price = dishesList.sumOf { it.finalPrice }
+    private fun countFullPrice(): String {
+        var price = dishesList.sumOf { BigDecimal(it.finalPrice) }
         if (binding.spinnerCollectionType.selectedItemId.toInt() == CollectionType.DELIVERY.ordinal) {
-            val deliveryOptions = (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value ?: return price
-            if (price < deliveryOptions.minimumPriceFreeDelivery) {
-                price += deliveryOptions.extraDeliveryFee
+            val deliveryOptions = (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value ?: return price.toString()
+            if (price < BigDecimal(deliveryOptions.minimumPriceFreeDelivery)) {
+                price += BigDecimal(deliveryOptions.extraDeliveryFee)
             }
         }
-        return price
+        return price.toString()
     }
 
-    override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.checkOrder((data as OrderBasic), (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value)
+        return PreconditionUtils.checkOrder(data.basic as OrderBasic, data.details as OrderDetails, (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value)
     }
 
     private fun updateFullPrice() {

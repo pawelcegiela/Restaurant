@@ -6,9 +6,9 @@ import pi.restaurant.management.utils.StringFormatUtils
 class DishBasic : AbstractDataObject {
     var name: String = ""
     var isActive = true
-    var basePrice: Double = 0.0
+    var basePrice: String = "0.0"
     var isDiscounted: Boolean = false
-    var discountPrice: Double = 0.0
+    var discountPrice: String = "0.0"
     var dishType: Int = 0
 
     @Suppress("unused")
@@ -18,9 +18,9 @@ class DishBasic : AbstractDataObject {
         id: String,
         name: String,
         isActive: Boolean,
-        basePrice: Double,
+        basePrice: String,
         isDiscounted: Boolean,
-        discountPrice: Double,
+        discountPrice: String,
         dishType: Int
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }

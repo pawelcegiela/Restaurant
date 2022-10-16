@@ -8,7 +8,6 @@ import android.widget.EditText
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentModifyWorkerBinding
 import pi.restaurant.management.model.fragments.workers.AbstractModifyWorkerViewModel
-import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.user.UserBasic
 import pi.restaurant.management.objects.data.user.UserDetails
@@ -73,11 +72,11 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         return map
     }
 
-    override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.compareRoles(viewModel.userRole.value!!, (data as UserBasic).role)
+        return PreconditionUtils.compareRoles(viewModel.userRole.value!!, (data.basic as UserBasic).role)
     }
 
     override fun onDestroyView() {

@@ -107,7 +107,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|end"
                             android:layout_marginTop="10dp"
-                            android:text="@{vm.formatPrice(vm.item.basic.discounted ? vm.item.basic.discountPrice : vm.item.basic.basePrice)}"
                             android:textSize="22sp" />
 
                         <LinearLayout

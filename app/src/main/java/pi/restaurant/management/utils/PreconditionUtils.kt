@@ -3,8 +3,10 @@ package pi.restaurant.management.utils
 import pi.restaurant.management.objects.data.delivery.DeliveryBasic
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
 import pi.restaurant.management.objects.data.order.OrderBasic
+import pi.restaurant.management.objects.data.order.OrderDetails
 import pi.restaurant.management.objects.enums.CollectionType
 import pi.restaurant.management.objects.enums.Precondition
+import java.math.BigDecimal
 
 class PreconditionUtils {
     companion object {
@@ -40,8 +42,12 @@ class PreconditionUtils {
             return Precondition.OK
         }
 
-        fun checkOrder(order: OrderBasic, deliveryOptions: DeliveryBasic?): Precondition {
-            if (order.collectionType == CollectionType.DELIVERY.ordinal && order.value < (deliveryOptions?.minimumPrice ?: 0.0)) {
+        fun checkOrder(orderBasic: OrderBasic, orderDetails: OrderDetails, deliveryOptions: DeliveryBasic?): Precondition {
+            if (orderDetails.dishes.isEmpty()) {
+                return Precondition.EMPTY_ORDER
+            }
+            if (orderBasic.collectionType == CollectionType.DELIVERY.ordinal && BigDecimal(orderBasic.value)
+                < BigDecimal(deliveryOptions?.minimumPrice ?: "0.0")) {
                 return Precondition.TOO_LOW_VALUE_DELIVERY
             }
             return Precondition.OK

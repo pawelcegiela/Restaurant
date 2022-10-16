@@ -9,13 +9,15 @@ import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.Unit
+import java.math.BigDecimal
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 class StringFormatUtils {
     companion object {
-        fun formatAmountWithUnit(context: Context, amount: Number, unit: Int): String {
-            return "$amount ${Unit.getString(unit, context)}"
+        fun formatAmountWithUnit(context: Context, amount: String, unit: Int): String {
+            return "${DecimalFormat("##.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}"
         }
 
         fun formatDate(date: Date): String {
@@ -32,8 +34,8 @@ class StringFormatUtils {
             return "${formatDate(date)} ${formatTime(date)}"
         }
 
-        fun formatPrice(value: Double): String {
-            return "${String.format("%.2f", value)} zł"
+        fun formatPrice(value: String): String {
+            return "${DecimalFormat("#0.00").format(BigDecimal(value))} zł"
         }
 
         fun formatNames(firstName: String, lastName: String): String {
@@ -69,8 +71,8 @@ class StringFormatUtils {
         fun formatIngredientItemHeader(item: IngredientItem, status: IngredientStatus, context: Context): String {
             var text = "${item.name} [${formatAmountWithUnit(context, item.amount, item.unit)}"
 
-            if (status == IngredientStatus.POSSIBLE || item.extraPrice != 0.0) {
-                text += ",  + ${item.extraPrice} zł"
+            if (status == IngredientStatus.POSSIBLE || BigDecimal(item.extraPrice) != BigDecimal.ZERO) {
+                text += "    + ${formatPrice(item.extraPrice)}"
             }
             return "$text]"
         }

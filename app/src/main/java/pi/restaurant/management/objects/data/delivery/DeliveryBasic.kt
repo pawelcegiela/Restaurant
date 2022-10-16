@@ -5,10 +5,10 @@ import pi.restaurant.management.objects.data.AbstractDataObject
 class DeliveryBasic : AbstractDataObject {
     override var id = "delivery"
     var available: Boolean = false
-    var minimumPrice: Double = 0.0
-    var extraDeliveryFee: Double = 0.0
+    var minimumPrice: String = "0.0"
+    var extraDeliveryFee: String = "0.0"
     var freeDeliveryAvailable: Boolean = false
-    var minimumPriceFreeDelivery: Double = 0.0
+    var minimumPriceFreeDelivery: String = "0.0"
 
     @Suppress("unused")
     constructor()
@@ -19,10 +19,10 @@ class DeliveryBasic : AbstractDataObject {
 
     constructor(
         available: Boolean,
-        minimumPrice: Double,
-        extraDeliveryFee: Double,
+        minimumPrice: String,
+        extraDeliveryFee: String,
         freeDeliveryAvailable: Boolean,
-        minimumPriceFreeDelivery: Double
+        minimumPriceFreeDelivery: String
     ) {
         this.available = available
         this.minimumPrice = minimumPrice

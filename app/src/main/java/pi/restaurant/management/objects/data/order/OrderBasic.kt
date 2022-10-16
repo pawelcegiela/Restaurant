@@ -8,7 +8,7 @@ class OrderBasic : AbstractDataObject {
     var orderStatus: Int = 0
     var collectionDate: Date = Date()
     var collectionType: Int = 0
-    var value: Double = 0.0
+    var value: String = "0.0"
     var name: String = ""
 
     @Suppress("unused")
@@ -19,7 +19,7 @@ class OrderBasic : AbstractDataObject {
         orderStatus: Int,
         collectionDate: Date,
         collectionType: Int,
-        value: Double,
+        value: String,
         name: String,
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }

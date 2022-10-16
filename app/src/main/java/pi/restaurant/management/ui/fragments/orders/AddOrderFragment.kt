@@ -18,6 +18,7 @@ class AddOrderFragment : AbstractModifyOrderFragment() {
         super.initializeUI()
         activityViewModel.setActionSave(R.id.actionCustomizeDishToAddOrder)
         initializeRecycler()
+        setNavigationCardsSave()
         finishLoading()
     }
 }

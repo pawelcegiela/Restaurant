@@ -26,6 +26,7 @@ import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.ui.views.CustomNumberPicker
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
+import java.math.BigDecimal
 
 
 class CustomizeDishFragment : AbstractPreviewItemFragment() {
@@ -187,10 +188,10 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         return list
     }
 
-    private fun getFinalPrice() : Double {
-        var price = if (dish.basic.isDiscounted) dish.basic.discountPrice else dish.basic.basePrice
-        price += otherIngredientsList.sumOf { it.extraPrice }
-        return price * numberPickerPortions.getValue()
+    private fun getFinalPrice() : String {
+        var price = BigDecimal(if (dish.basic.isDiscounted) dish.basic.discountPrice else dish.basic.basePrice)
+        price += otherIngredientsList.sumOf { BigDecimal(it.extraPrice) }
+        return (price * BigDecimal(numberPickerPortions.getValue())).toString()
     }
 
     private fun initializeMoreLessButtons() {

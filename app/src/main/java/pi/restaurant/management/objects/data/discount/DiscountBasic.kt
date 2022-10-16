@@ -9,7 +9,7 @@ class DiscountBasic : AbstractDataObject {
     var usedDiscounts: ArrayList<String> = ArrayList()
 
     var type: Int = 0
-    var amount: Double = 0.0
+    var amount: String = "0.0"
     lateinit var expirationDate: Date
 
     @Suppress("unused")
@@ -21,7 +21,7 @@ class DiscountBasic : AbstractDataObject {
         assignedDiscounts: ArrayList<String>,
         usedDiscounts: ArrayList<String>,
         type: Int,
-        amount: Double,
+        amount: String,
         expirationDate: Date
     ) {
         this.availableDiscounts = availableDiscounts

@@ -11,6 +11,7 @@ import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
 import pi.restaurant.management.ui.fragments.ingredients.AbstractModifyIngredientFragment
+import java.math.BigDecimal
 
 class DialogIngredientProperties(
     val fragment: Fragment,
@@ -40,8 +41,8 @@ class DialogIngredientProperties(
             IngredientStatus.POSSIBLE -> binding.radioPossibleIngredient.isChecked = true
         }
 
-        if (item.first.amount != 0.0) {
-            binding.editTextAmount.setText(item.first.amount.toString())
+        if (BigDecimal(item.first.amount) != BigDecimal.ZERO) {
+            binding.editTextAmount.setText(item.first.amount)
         }
         setExtraPriceField(binding.radioPossibleIngredient.isChecked)
 
@@ -64,8 +65,8 @@ class DialogIngredientProperties(
     private fun setExtraPriceField(isChecked: Boolean) {
         if (isChecked) {
             binding.editTextExtraPrice.isEnabled = true
-            if (item.first.extraPrice != 0.0) {
-                binding.editTextExtraPrice.setText(item.first.extraPrice.toString())
+            if (BigDecimal(item.first.extraPrice) != BigDecimal.ZERO) {
+                binding.editTextExtraPrice.setText(item.first.extraPrice)
             }
         } else {
             binding.editTextExtraPrice.isEnabled = false
@@ -75,8 +76,8 @@ class DialogIngredientProperties(
 
     private fun buildNewItem(oldItem: IngredientItem): Pair<IngredientItem, IngredientStatus> {
         val ingredientItem = IngredientItem(oldItem.id, oldItem.name, oldItem.unit)
-        ingredientItem.amount = getDoubleValue(binding.editTextAmount.text)
-        ingredientItem.extraPrice = getDoubleValue(binding.editTextExtraPrice.text)
+        ingredientItem.amount = getProperValue(binding.editTextAmount.text)
+        ingredientItem.extraPrice = getProperValue(binding.editTextExtraPrice.text)
 
         val status = if (binding.radioBaseIngredient.isChecked) {
             IngredientStatus.BASE
@@ -89,11 +90,12 @@ class DialogIngredientProperties(
         return Pair(ingredientItem, status)
     }
 
-    private fun getDoubleValue(text: Editable?) : Double {
+    private fun getProperValue(text: Editable?) : String {
         return try {
-            text.toString().toDouble()
+            BigDecimal(text.toString())
+            text.toString()
         } catch (ex: NumberFormatException) {
-            0.0
+            "0.0"
         }
     }
 

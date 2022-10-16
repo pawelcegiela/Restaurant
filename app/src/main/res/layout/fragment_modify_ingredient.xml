@@ -84,7 +84,7 @@
                             android:layout_weight="1"
                             android:hint="@string/amount"
                             android:importantForAutofill="no"
-                            android:inputType="numberDecimal" />
+                            android:inputType="number" />
 
                         <Spinner
                             android:id="@+id/spinnerUnit"

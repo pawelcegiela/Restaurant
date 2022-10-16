@@ -10,7 +10,6 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentModifyOpeningHoursBinding
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.restaurantdata.EditOpeningHoursViewModel
-import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.openinghours.OpeningHours
 import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
@@ -142,11 +141,11 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
         return HashMap()
     }
 
-    override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.checkOpeningHoursError(data as OpeningHoursBasic)
+        return PreconditionUtils.checkOpeningHoursError(data.basic as OpeningHoursBasic)
     }
 
     override fun getDataObject(): SplitDataObject {

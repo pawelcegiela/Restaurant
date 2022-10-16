@@ -53,6 +53,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
             binding.textViewOriginalPrice.paintFlags =
                 binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
+        binding.textViewPrice.text = StringFormatUtils.formatPrice(if (item.basic.isDiscounted) item.basic.discountPrice else item.basic.basePrice)
         binding.textViewDishType.text = DishType.getString(item.basic.dishType, requireContext())
         binding.textViewAmount.text =
             StringFormatUtils.formatAmountWithUnit(requireContext(), item.details.amount, item.details.unit)

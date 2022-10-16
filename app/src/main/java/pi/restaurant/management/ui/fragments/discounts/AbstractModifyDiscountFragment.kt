@@ -63,7 +63,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
             assignedDiscounts = discountsViewModel.createDiscounts(code, assignedNumber, availableNumber),
             usedDiscounts = discountsViewModel.createDiscounts(code, usedNumber, availableNumber + assignedNumber),
             type = binding.spinnerType.selectedItemId.toInt(),
-            amount = binding.editTextAmount.text.toString().toDouble(),
+            amount = binding.editTextAmount.text.toString(),
             expirationDate = Date() //TODO Zrobić
         )
 

@@ -8,7 +8,7 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.R
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.workers.AddWorkerViewModel
-import pi.restaurant.management.objects.data.AbstractDataObject
+import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.utils.PreconditionUtils
@@ -31,7 +31,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
     override fun saveToDatabase() {
         val data = getDataObject()
 
-        val precondition = checkSavePreconditions(data.basic)
+        val precondition = checkSavePreconditions(data)
         if (precondition != Precondition.OK) {
             Toast.makeText(activity, getString(precondition.nameRes), Toast.LENGTH_SHORT).show()
             return
@@ -55,7 +55,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
             }
     }
 
-    override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
