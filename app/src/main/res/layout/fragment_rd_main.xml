@@ -320,7 +320,66 @@
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="20dp"
                             android:text="@string/delivery" />
-                        <!-- TODO -->
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewAvailableDeliveryTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/is_delivery_available" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewAvailableDelivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutAvailableDelivery"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <pi.restaurant.management.ui.views.TextViewDetailTitle
+                                android:id="@+id/textViewMinimumPriceTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="@string/minimum_order_price_colon" />
+
+                            <pi.restaurant.management.ui.views.TextViewDetail
+                                android:id="@+id/textViewMinimumPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <pi.restaurant.management.ui.views.TextViewDetailTitle
+                                android:id="@+id/textViewDeliveryFeeTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="@string/extra_delivery_fee_colon" />
+
+                            <pi.restaurant.management.ui.views.TextViewDetail
+                                android:id="@+id/textViewDeliveryFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <pi.restaurant.management.ui.views.TextViewDetailTitle
+                                android:id="@+id/textViewFreeDeliveryTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="10dp"
+                                android:text="@string/free_delivery_colon" />
+
+                            <pi.restaurant.management.ui.views.TextViewDetail
+                                android:id="@+id/textViewFreeDelivery"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
                 </pi.restaurant.management.ui.views.CardViewPreviewElement>

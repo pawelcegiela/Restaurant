@@ -14,21 +14,22 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentModifyOrderBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewModel
+import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.address.AddressBasic
+import pi.restaurant.management.objects.data.delivery.DeliveryBasic
 import pi.restaurant.management.objects.data.dish.DishItem
+import pi.restaurant.management.objects.data.openinghours.OpeningHoursBasic
 import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.order.OrderDetails
-import pi.restaurant.management.objects.enums.CollectionType
-import pi.restaurant.management.objects.enums.OrderPlace
-import pi.restaurant.management.objects.enums.OrderStatus
-import pi.restaurant.management.objects.enums.OrderType
+import pi.restaurant.management.objects.enums.*
 import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.views.CustomNumberPicker
 import pi.restaurant.management.ui.views.SpinnerAdapter
 import pi.restaurant.management.utils.ComputingUtils
+import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
 
@@ -45,7 +46,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     protected val activityViewModel: OrdersViewModel by activityViewModels()
 
-    var dishesList: MutableList<DishItem> = ArrayList()
+    private var dishesList: MutableList<DishItem> = ArrayList()
     abstract val addDishAction: Int
     private lateinit var numberPickerCollectionTime: CustomNumberPicker
 
@@ -55,6 +56,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         } else {
             (viewModel as AbstractModifyOrderViewModel).setItem(activityViewModel.savedOrder.value ?: Order())
             (viewModel as AbstractModifyOrderViewModel).setPreviousStatus(activityViewModel.previousStatus.value ?: -1)
+            (viewModel as AbstractModifyOrderViewModel).setDeliveryOptions(activityViewModel.deliveryOptions.value ?: DeliveryBasic())
             itemId = activityViewModel.savedOrder.value?.id ?: ""
             addLiveDataObservers()
             viewModel.getUserRole()
@@ -84,6 +86,9 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         if (activityViewModel.previousStatus.value == null) {
             activityViewModel.setPreviousStatus((viewModel as AbstractModifyOrderViewModel).item.value?.basic?.orderStatus)
         }
+        if (activityViewModel.deliveryOptions.value == null) {
+            activityViewModel.setDeliveryOptions((viewModel as AbstractModifyOrderViewModel).deliveryOptions.value ?: DeliveryBasic())
+        }
         if ((viewModel as AbstractModifyOrderViewModel).previousStatus.value == null) {
             (viewModel as AbstractModifyOrderViewModel).setPreviousStatus(activityViewModel.previousStatus.value ?: -1)
         }
@@ -92,7 +97,12 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         binding.spinnerType.setSelection(data.details.orderType)
         setSpinnerStatusSelection(data.basic.orderStatus)
         numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromDate(data.details.orderDate, data.basic.collectionDate))
-        binding.spinnerCollectionType.setSelection(data.basic.collectionType)
+        if (((viewModel as AbstractModifyOrderViewModel).deliveryOptions.value ?: DeliveryBasic()).available) {
+            binding.spinnerCollectionType.setSelection(data.basic.collectionType)
+        } else {
+            binding.spinnerCollectionType.isEnabled = false
+            binding.spinnerCollectionType.setSelection(CollectionType.SELF_PICKUP.ordinal)
+        }
         binding.spinnerPlace.setSelection(data.details.orderPlace)
         if (data.basic.collectionType == CollectionType.SELF_PICKUP.ordinal) {
             binding.linearLayoutDeliveryDetails.visibility = View.GONE
@@ -143,6 +153,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
                 }
                 binding.spinnerPlace.isEnabled = position == CollectionType.SELF_PICKUP.ordinal
                 binding.spinnerStatus.adapter = SpinnerAdapter(context, getArrayOfStatuses())
+                updateFullPrice()
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>?) {
@@ -242,7 +253,21 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     private fun countFullPrice(): Double {
-        return dishesList.sumOf { it.finalPrice }
+        var price = dishesList.sumOf { it.finalPrice }
+        if (binding.spinnerCollectionType.selectedItemId.toInt() == CollectionType.DELIVERY.ordinal) {
+            val deliveryOptions = (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value ?: return price
+            if (price < deliveryOptions.minimumPriceFreeDelivery) {
+                price += deliveryOptions.extraDeliveryFee
+            }
+        }
+        return price
+    }
+
+    override fun checkSavePreconditions(data: AbstractDataObject): Precondition {
+        if (super.checkSavePreconditions(data) != Precondition.OK) {
+            return super.checkSavePreconditions(data)
+        }
+        return PreconditionUtils.checkOrder((data as OrderBasic), (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value)
     }
 
     private fun updateFullPrice() {

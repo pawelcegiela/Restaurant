@@ -2,8 +2,16 @@ package pi.restaurant.management.model.fragments.orders
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.objects.data.SplitDataObject
+import pi.restaurant.management.objects.data.delivery.Delivery
+import pi.restaurant.management.objects.data.delivery.DeliveryBasic
 import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.order.OrderDetails
@@ -17,6 +25,9 @@ abstract class AbstractModifyOrderViewModel : AbstractModifyItemViewModel() {
 
     private val _previousStatus: MutableLiveData<Int> = MutableLiveData()
     val previousStatus: LiveData<Int> = _previousStatus
+
+    private val _deliveryOptions: MutableLiveData<DeliveryBasic> = MutableLiveData()
+    val deliveryOptions: LiveData<DeliveryBasic> = _deliveryOptions
 
     override fun saveToDatabase(data: SplitDataObject) {
         checkStatusChanges(data.basic as OrderBasic, data.details as OrderDetails)
@@ -33,6 +44,22 @@ abstract class AbstractModifyOrderViewModel : AbstractModifyItemViewModel() {
 
     fun setPreviousStatus(status: Int) {
         _previousStatus.value = status
+    }
+
+    fun setDeliveryOptions(deliveryOptions: DeliveryBasic) {
+        _deliveryOptions.value = deliveryOptions
+    }
+
+    override fun getAdditionalData() {
+        val databaseRef = Firebase.database.getReference("restaurantData").child("basic").child("delivery")
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                _deliveryOptions.value = dataSnapshot.getValue<DeliveryBasic>() ?: DeliveryBasic()
+                setReadyToInitialize()
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun checkStatusChanges(basic: OrderBasic, details: OrderDetails) {

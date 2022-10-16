@@ -309,4 +309,16 @@
     <string name="executives">Executives</string>
     <string name="managers">Managers</string>
     <string name="expired">Expired</string>
+    <string name="delivery_settings_changed">Delivery settings changed successfully</string>
+    <string name="is_delivery_available">Is delivery available?</string>
+    <string name="minimum_order_price_colon">Minimum order price:</string>
+    <string name="extra_delivery_fee_colon">Extra delivery fee:</string>
+    <string name="free_delivery_threshold_colon">Free delivery threshold:</string>
+    <string name="minimum_order_price">Minimum order price:</string>
+    <string name="extra_delivery_fee">Extra delivery fee</string>
+    <string name="free_delivery_threshold">Free delivery threshold</string>
+    <string name="free_delivery_colon">Free delivery:</string>
+    <string name="not_available">Not available</string>
+    <string name="from_threshold">From %1$s</string>
+    <string name="too_low_value_delivery">Order value is too low for delivery</string>
 </resources>

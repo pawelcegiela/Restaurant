@@ -3,6 +3,7 @@ package pi.restaurant.management.model.activities
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import pi.restaurant.management.objects.data.delivery.DeliveryBasic
 import pi.restaurant.management.objects.data.order.Order
 
 class OrdersViewModel : ViewModel() {
@@ -15,6 +16,9 @@ class OrdersViewModel : ViewModel() {
     private val _previousStatus: MutableLiveData<Int?> = MutableLiveData()
     val previousStatus: LiveData<Int?> = _previousStatus
 
+    private val _deliveryOptions: MutableLiveData<DeliveryBasic> = MutableLiveData()
+    val deliveryOptions: LiveData<DeliveryBasic> = _deliveryOptions
+
     fun setSavedOrder(order: Order?) {
         _savedOrder.value = order
     }
@@ -25,6 +29,10 @@ class OrdersViewModel : ViewModel() {
 
     fun setPreviousStatus(status: Int?) {
         _previousStatus.value = status
+    }
+
+    fun setDeliveryOptions(deliveryOptions: DeliveryBasic) {
+        _deliveryOptions.value = deliveryOptions
     }
 
     fun reset() {

@@ -92,7 +92,7 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         setButtonListeners(item)
         setLiveDataListeners(item)
 
-        binding.textViewFullPrice.text = StringFormatUtils.formatPrice(getFullPrice(item))
+        binding.textViewFullPrice.text = StringFormatUtils.formatPrice(item.basic.value)
         if (item.details.contactPhone.isNotEmpty()) {
             binding.textViewContactPhone.text = item.details.contactPhone
         }
@@ -165,11 +165,6 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
     private fun setDelivererName(delivererId: String) {
         val deliverers = _viewModel.possibleDeliverers.value ?: ArrayList()
         binding.textViewDeliveryPerson.text = deliverers.find { it.id == delivererId }?.getFullName()
-    }
-
-    private fun getFullPrice(item: Order): Double {
-        // TODO: Ew. koszty dostawy
-        return item.details.dishes.map { it.value }.sumOf { it.finalPrice }
     }
 
     fun setDeliverer(user: UserBasic) {

@@ -52,10 +52,7 @@ abstract class AbstractModifyItemViewModel : ViewModel() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 snapshotsPair.basic = dataSnapshot
-                if (snapshotsPair.isReady()) {
-                    getItem(snapshotsPair)
-                    _readyToInitialize.value = true
-                }
+                checkIfReady()
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -67,14 +64,22 @@ abstract class AbstractModifyItemViewModel : ViewModel() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 snapshotsPair.details = dataSnapshot
-                if (snapshotsPair.isReady()) {
-                    getItem(snapshotsPair)
-                    _readyToInitialize.value = true
-                }
+                checkIfReady()
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
+    }
+
+    private fun checkIfReady() {
+        if (snapshotsPair.isReady()) {
+            getItem(snapshotsPair)
+            getAdditionalData()
+        }
+    }
+
+    open fun getAdditionalData() {
+        setReadyToInitialize()
     }
 
     open fun saveToDatabase(data: SplitDataObject) {
