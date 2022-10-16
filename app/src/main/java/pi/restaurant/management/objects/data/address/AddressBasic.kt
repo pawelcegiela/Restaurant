@@ -9,8 +9,6 @@ class AddressBasic : AbstractDataObject {
     var street = ""
     var houseNumber = ""
     var flatNumber = ""
-    var latitude = ""
-    var longitude = ""
 
     @Suppress("unused")
     constructor()

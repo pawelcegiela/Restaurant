@@ -27,7 +27,6 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
         setNavigationCardsSave()
     }
 
-    //TODO Pomysł na większe połączenie kodu z superklasą
     override fun saveToDatabase() {
         val data = getDataObject()
 
@@ -41,7 +40,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
         Firebase.auth.createUserWithEmailAndPassword((data.details as UserDetails).email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    //TODO: Żeby nie przelogowywało
+                    //TODO: No logging out
                     itemId = Firebase.auth.currentUser!!.uid
                     super.saveToDatabase()
                 } else {

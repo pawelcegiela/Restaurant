@@ -55,7 +55,8 @@ class DiscountsRecyclerAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewCode.text = dataSet[position].id
         viewHolder.binding.textViewNumber.text = ComputingUtils.getNumberOfDiscounts(dataSet[position])
-        viewHolder.binding.textViewDiscountAmount.text = ComputingUtils.getDiscountAmount(dataSet[position])
+        viewHolder.binding.textViewDiscountAmount.text =
+            StringFormatUtils.formatDiscountValue(dataSet[position].amount, dataSet[position].type, viewHolder.context)
         viewHolder.binding.textViewExpirationDate.text =
             StringFormatUtils.formatDate(dataSet[position].expirationDate)
     }

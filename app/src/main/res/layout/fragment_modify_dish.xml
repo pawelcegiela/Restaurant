@@ -180,7 +180,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="@string/amount_colon" />
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -188,20 +188,20 @@
 
                         <EditText
                             android:id="@+id/editTextAmount"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_toStartOf="@+id/spinnerUnit"
                             android:hint="@string/amount"
                             android:importantForAutofill="no"
                             android:inputType="numberDecimal" />
 
                         <Spinner
                             android:id="@+id/spinnerUnit"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_weight="1" />
-                    </LinearLayout>
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="20dp" />
+                    </RelativeLayout>
 
                 </LinearLayout>
             </pi.restaurant.management.ui.views.CardViewPreviewElement>

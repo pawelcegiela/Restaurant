@@ -12,15 +12,14 @@ abstract class AbstractModifyDiscountViewModel : AbstractModifyItemViewModel() {
         if (this is EditDiscountViewModel) {
             return item.value ?: Discount(itemId, DiscountBasic(), DiscountDetails())
         }
-        return Discount()
+        return Discount(itemId, DiscountBasic(), DiscountDetails())
     }
 
-    fun createDiscounts(code: String, number: Int, startNumber: Int): ArrayList<String> {
+    fun createDiscounts(code: String, number: Int): ArrayList<String> {
         val discounts = ArrayList<String>()
-        for (i in (startNumber + 1)..(startNumber + number)) {
+        for (i in 1..number) {
             discounts.add("$code#$i")
         }
         return discounts
     }
-
 }

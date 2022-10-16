@@ -39,7 +39,7 @@ enum class OrderStatus(val stringResourceId: Int) {
             }
 
             val index = statuses.indexOf(currentStatusId)
-            return if (index != statuses.size - 1) {
+            return if (index < statuses.size - 1 && index >= 0) {
                 statuses[index + 1]
             } else {
                 currentStatusId

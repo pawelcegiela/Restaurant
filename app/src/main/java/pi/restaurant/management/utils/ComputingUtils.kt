@@ -11,11 +11,7 @@ class ComputingUtils {
         fun getNumberOfDiscounts(discount: DiscountBasic): String {
             return discount.availableDiscounts.size.toString() + " / " +
                     discount.assignedDiscounts.size.toString() + " / " +
-                    discount.usedDiscounts.size.toString()
-        }
-
-        fun getDiscountAmount(discount: DiscountBasic): String {
-            return discount.amount.toString() + discount.type.toString()
+                    discount.redeemedDiscounts.size.toString()
         }
 
         fun getDateTimeXMinutesAfterDate(date: Date, minutes: Int): Date {
@@ -28,6 +24,15 @@ class ComputingUtils {
 
         fun getTimeFromString(string: String): Date {
             return SimpleDateFormat("HH:mm", Locale.ROOT).parse(string) ?: Date()
+        }
+
+        fun getDateTimeFromString(string: String): Date {
+            return SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT).parse(string) ?: Date()
+        }
+
+        fun getInitialExpirationDateString(): String {
+            val weekInMilliseconds = 1000 * 60 * 60 * 24 * 7
+            return "${SimpleDateFormat("dd.MM.yyyy", Locale.ROOT).format(Date().time + weekInMilliseconds)} 00:00"
         }
     }
 }

@@ -132,7 +132,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     private fun refreshCollectionDate() {
-        // TODO Sprawdzanie czy nie jest za późno
+        // TODO Checking whether it's not too late
     }
 
     private fun initializeSpinners() {

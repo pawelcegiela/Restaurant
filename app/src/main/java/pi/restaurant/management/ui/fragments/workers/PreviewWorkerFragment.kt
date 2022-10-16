@@ -41,7 +41,7 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     override fun fillInData() {
         val item = _viewModel.item.value ?: User()
 
-        binding.textViewName.text = StringFormatUtils.formatNames(item.basic.firstName, item.basic.lastName)
+        binding.textViewName.text = StringFormatUtils.format(item.basic.firstName, item.basic.lastName)
         binding.textViewRole.text = Role.getString(item.basic.role, requireContext())
         binding.textViewCreationDate.text = StringFormatUtils.formatDate(item.details.creationDate)
         binding.textViewDelivery.text = if (item.basic.delivery) getString(R.string.yes) else getString(R.string.no)

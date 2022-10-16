@@ -78,8 +78,9 @@
 
                                 <pi.restaurant.management.ui.views.TextViewItemName
                                     android:id="@+id/textViewName"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:gravity="center"
                                     android:layout_marginBottom="7dp"
                                     android:text="@{vm.item.basic.name}" />
 

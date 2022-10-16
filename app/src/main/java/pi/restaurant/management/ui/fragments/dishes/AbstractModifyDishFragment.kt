@@ -44,8 +44,8 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     var otherIngredientsList: MutableList<IngredientItem> = ArrayList()
     var possibleIngredientsList: MutableList<IngredientItem> = ArrayList()
     var allergensList: MutableList<AllergenBasic> = ArrayList()
-    lateinit var allIngredients: MutableList<IngredientBasic>
-    lateinit var allAllergens: MutableList<AllergenBasic>
+    private lateinit var allIngredients: MutableList<IngredientBasic>
+    private lateinit var allAllergens: MutableList<AllergenBasic>
 
     private val lists get() = arrayListOf(baseIngredientsList, otherIngredientsList, possibleIngredientsList)
     private val recyclers
@@ -223,7 +223,6 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         UserInterfaceUtils.setRecyclerSize(recyclers[newItem.second.ordinal], lists[newItem.second.ordinal].size, requireContext())
     }
 
-    // TODO problemy z mutable list
     fun removeAllergenItem(allergenItem: AllergenBasic) {
         val itemPosition = allergensList.indexOf(allergenItem)
         allergensList.remove(allergenItem)

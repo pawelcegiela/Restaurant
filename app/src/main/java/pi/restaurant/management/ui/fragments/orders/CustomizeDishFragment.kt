@@ -41,11 +41,11 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     private var _binding: FragmentCustomizeDishBinding? = null
     val binding get() = _binding!!
 
-    var otherIngredientsList: MutableList<IngredientItem> = ArrayList()
-    var possibleIngredientsList: MutableList<IngredientItem> = ArrayList()
+    private var otherIngredientsList: MutableList<IngredientItem> = ArrayList()
+    private var possibleIngredientsList: MutableList<IngredientItem> = ArrayList()
 
     lateinit var dish: Dish
-    lateinit var numberPickerPortions: CustomNumberPicker
+    private lateinit var numberPickerPortions: CustomNumberPicker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +57,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    // TODO Edycja dania
+    // TODO Dish edition
     override fun initializeUI() {
         toolbarNavigation.root.visibility = View.VISIBLE
         toolbarNavigation.cardBack.root.visibility = View.GONE

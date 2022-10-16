@@ -4,19 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Spinner
+import androidx.fragment.app.activityViewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentModifyDiscountBinding
+import pi.restaurant.management.model.activities.DiscountsViewModel
 import pi.restaurant.management.model.fragments.discounts.AbstractModifyDiscountViewModel
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.discount.DiscountBasic
 import pi.restaurant.management.objects.data.discount.DiscountDetails
 import pi.restaurant.management.objects.enums.DiscountType
+import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
+import pi.restaurant.management.ui.views.DatePickerFragment
+import pi.restaurant.management.ui.views.SpinnerAdapter
+import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.StringFormatUtils
-import java.util.*
 
 abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
@@ -28,6 +31,8 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
 
+    private val activityViewModel: DiscountsViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,43 +43,63 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
+        initializeExpirationDate()
         finishLoading()
         initializeSpinner()
-        setNavigationCardsSave() // TODO Przy dodawaniu edycji uważać!
+        setNavigationCardsSave()
     }
 
-    private fun initializeSpinner() {
-        val spinner: Spinner = binding.spinnerType
-        spinner.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item_view, R.id.itemTextView, DiscountType.getArrayOfStrings(requireContext()))
+    fun initializeExpirationDate() {
+        binding.textViewExpirationDate.text = ComputingUtils.getInitialExpirationDateString()
+        binding.textViewExpirationDate.setOnClickListener {
+            val date = ComputingUtils.getDateTimeFromString(binding.textViewExpirationDate.text.toString())
+            DatePickerFragment(date) { newDate ->
+                binding.textViewExpirationDate.text = StringFormatUtils.format(newDate, "00:00")
+            }.show(requireActivity().supportFragmentManager, "datePicker")
+        }
+    }
+
+    fun initializeSpinner() {
+        binding.spinnerType.adapter = SpinnerAdapter(requireContext(), DiscountType.getArrayOfStrings(requireContext()))
     }
 
     override fun getDataObject(): SplitDataObject {
-        // val discount = (viewModel as AbstractModifyDiscountViewModel).getPreviousItem()
+        val discount = (viewModel as AbstractModifyDiscountViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
         val availableNumber = binding.editTextAvailable.text.toString().toInt()
-        val assignedNumber = binding.editTextAssigned.text.toString().toInt()
-        val usedNumber = binding.editTextUsed.text.toString().toInt()
         val code = binding.editTextCode.text.toString()
         val discountsViewModel = viewModel as AbstractModifyDiscountViewModel
 
         val basic = DiscountBasic(
             id = code,
-            availableDiscounts = discountsViewModel.createDiscounts(code, availableNumber, 0),
-            assignedDiscounts = discountsViewModel.createDiscounts(code, assignedNumber, availableNumber),
-            usedDiscounts = discountsViewModel.createDiscounts(code, usedNumber, availableNumber + assignedNumber),
-            type = binding.spinnerType.selectedItemId.toInt(),
             amount = binding.editTextAmount.text.toString(),
-            expirationDate = Date() //TODO Zrobić
+            type = binding.spinnerType.selectedItemId.toInt(),
+            hasThreshold = binding.checkBoxThreshold.isChecked,
+            thresholdValue = binding.editTextThreshold.text.toString().ifEmpty { "0.0" },
+            creationDate = discount.basic.creationDate,
+            expirationDate = ComputingUtils.getDateTimeFromString(binding.textViewExpirationDate.text.toString()),
+            availableDiscounts = discountsViewModel.createDiscounts(code, availableNumber),
+            assignedDiscounts = discount.basic.assignedDiscounts,
+            redeemedDiscounts = discount.basic.redeemedDiscounts
         )
 
         return SplitDataObject(code, basic, DiscountDetails())
     }
 
+    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
+        if (super.checkSavePreconditions(data) != Precondition.OK) {
+            return super.checkSavePreconditions(data)
+        }
+        val discount = data.basic as DiscountBasic
+        if (activityViewModel.list.value?.any { it.id == discount.id && it.creationDate != discount.creationDate } == true) {
+            return Precondition.DISCOUNT_CODE_EXISTS
+        }
+        return Precondition.OK
+    }
+
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
-        map[binding.editTextAvailable] = R.string.number_of_available_discounts
-        map[binding.editTextAssigned] = R.string.number_of_assigned_discounts
-        map[binding.editTextUsed] = R.string.number_of_used_discounts
+        map[binding.editTextAvailable] = R.string.number_of_discounts
         map[binding.editTextCode] = R.string.code
         map[binding.editTextAmount] = R.string.amount
         return map

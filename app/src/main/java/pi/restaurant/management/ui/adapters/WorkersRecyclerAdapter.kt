@@ -53,7 +53,7 @@ class WorkersRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewName.text = StringFormatUtils.formatNames(dataSet[position].firstName, dataSet[position].lastName)
+        viewHolder.binding.textViewName.text = StringFormatUtils.format(dataSet[position].firstName, dataSet[position].lastName)
 
         if (dataSet[position].disabled) {
             viewHolder.binding.textViewName.paintFlags =

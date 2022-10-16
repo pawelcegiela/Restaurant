@@ -32,8 +32,8 @@ class OpeningHoursBasic : AbstractDataObject() {
     var sundayEndHour = Date()
 
     private val sdf = SimpleDateFormat("HH:mm", Locale.ROOT)
-    var defaultStartHour = sdf.parse("9:00")
-    var defaultEndHour = sdf.parse("21:00")
+    var defaultStartHour: Date = sdf.parse("9:00")!!
+    var defaultEndHour: Date = sdf.parse("21:00")!!
 
     var isError = false
 

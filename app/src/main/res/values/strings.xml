@@ -89,7 +89,7 @@
     <string name="add_ingredient">Add ingredient</string>
     <string name="ingredient_added">Ingredient has been added</string>
     <string name="gram">g</string>
-    <string name="mililiter">ml</string>
+    <string name="milliliter">ml</string>
     <string name="piece">pcs</string>
     <string name="add_dish">Add dish</string>
     <string name="price">Price</string>
@@ -322,4 +322,18 @@
     <string name="from_threshold">From %1$s</string>
     <string name="too_low_value_delivery">Order value is too low for delivery</string>
     <string name="order_should_contain_at_least_one_dish">Order should contain at least one dish</string>
+    <string name="expiration_date_colon">Expiration date:</string>
+    <string name="creation_date_colon">Creation date:</string>
+    <string name="discount_value_colon">Discount value:</string>
+    <string name="todo">TODO</string>
+    <string name="number_of_available_discounts_colon">Number of available discounts:</string>
+    <string name="number_of_assigned_discounts_colon">Number of assigned discounts:</string>
+    <string name="number_of_redeemed_discounts_colon">Number of redeemed discounts:</string>
+    <string name="discount_code_exists">A discount with the same code already exists</string>
+    <string name="number_of_discounts_colon">Number of discounts:</string>
+    <string name="number_of_discounts">Number of discounts</string>
+    <string name="select_expiration_date">Select expiration date</string>
+    <string name="threshold_value">Threshold value</string>
+    <string name="valid_above_total_order_value_colon">Valid above total order value:</string>
+    <string name="any">Any</string>
 </resources>

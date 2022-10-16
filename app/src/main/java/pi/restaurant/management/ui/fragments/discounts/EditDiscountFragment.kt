@@ -4,6 +4,10 @@ import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.model.fragments.discounts.EditDiscountViewModel
+import pi.restaurant.management.objects.data.discount.Discount
+import pi.restaurant.management.objects.data.discount.DiscountBasic
+import pi.restaurant.management.objects.data.discount.DiscountDetails
+import pi.restaurant.management.utils.StringFormatUtils
 
 class EditDiscountFragment : AbstractModifyDiscountFragment() {
 
@@ -13,5 +17,22 @@ class EditDiscountFragment : AbstractModifyDiscountFragment() {
     override val viewModel : AbstractModifyItemViewModel get() = _viewModel
     private val _viewModel : EditDiscountViewModel by viewModels()
 
-    //TODO: Edycja rabatów - do przemyślenia
+    override fun initializeUI() {
+        itemId = arguments?.getString("id").toString()
+        initializeExpirationDate()
+        initializeSpinner()
+    }
+
+    override fun fillInData() {
+        val data = _viewModel.item.value ?: Discount(itemId, DiscountBasic(), DiscountDetails())
+        binding.editTextCode.setText(data.basic.id)
+        binding.editTextAmount.setText(data.basic.amount)
+        binding.spinnerType.setSelection(data.basic.type)
+        binding.checkBoxThreshold.isChecked = data.basic.hasThreshold
+        binding.editTextThreshold.setText(data.basic.thresholdValue)
+        binding.editTextAvailable.setText(data.basic.availableDiscounts.size.toString())
+        binding.textViewExpirationDate.text = StringFormatUtils.formatDateTime(data.basic.expirationDate)
+        setNavigationCardsSaveRemove()
+        finishLoading()
+    }
 }

@@ -29,12 +29,12 @@ class EditDishFragment : AbstractModifyDishFragment() {
         binding.editTextDescription.setText(data.details.description)
         binding.editTextRecipe.setText(data.details.recipe)
         binding.checkBoxActive.isChecked = data.basic.isActive
-        binding.editTextBasePrice.setText(data.basic.basePrice.toString())
+        binding.editTextBasePrice.setText(data.basic.basePrice)
         binding.checkBoxDiscount.isChecked = data.basic.isDiscounted
         binding.editTextDiscountPrice.isEnabled = data.basic.isDiscounted
-        binding.editTextDiscountPrice.setText(data.basic.discountPrice.toString())
+        binding.editTextDiscountPrice.setText(data.basic.discountPrice)
         binding.spinnerDishType.setSelection(data.basic.dishType)
-        binding.editTextAmount.setText(data.details.amount.toString())
+        binding.editTextAmount.setText(data.details.amount)
         binding.spinnerUnit.setSelection(data.details.unit)
 
         baseIngredientsList = data.details.baseIngredients.toList().map { it.second }.toMutableList()

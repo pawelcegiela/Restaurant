@@ -4,32 +4,40 @@ import pi.restaurant.management.objects.data.AbstractDataObject
 import java.util.*
 
 class DiscountBasic : AbstractDataObject {
+    var amount: String = "0.0"
+    var type: Int = 0
+    var hasThreshold: Boolean = false
+    var thresholdValue: String = "0.0"
+    var creationDate: Date = Date()
+    var expirationDate: Date = Date()
     var availableDiscounts: ArrayList<String> = ArrayList()
     var assignedDiscounts: ArrayList<String> = ArrayList()
-    var usedDiscounts: ArrayList<String> = ArrayList()
-
-    var type: Int = 0
-    var amount: String = "0.0"
-    lateinit var expirationDate: Date
+    var redeemedDiscounts: ArrayList<String> = ArrayList()
 
     @Suppress("unused")
     constructor()
 
     constructor(
         id: String,
+        amount: String,
+        type: Int,
+        hasThreshold: Boolean,
+        thresholdValue: String,
+        creationDate: Date,
+        expirationDate: Date,
         availableDiscounts: ArrayList<String>,
         assignedDiscounts: ArrayList<String>,
-        usedDiscounts: ArrayList<String>,
-        type: Int,
-        amount: String,
-        expirationDate: Date
+        redeemedDiscounts: ArrayList<String>
     ) {
+        this.id = id
+        this.amount = amount
+        this.type = type
+        this.hasThreshold = hasThreshold
+        this.thresholdValue = thresholdValue
+        this.creationDate = creationDate
+        this.expirationDate = expirationDate
         this.availableDiscounts = availableDiscounts
         this.assignedDiscounts = assignedDiscounts
-        this.usedDiscounts = usedDiscounts
-        this.id = id
-        this.type = type
-        this.amount = amount
-        this.expirationDate = expirationDate
+        this.redeemedDiscounts = redeemedDiscounts
     }
 }

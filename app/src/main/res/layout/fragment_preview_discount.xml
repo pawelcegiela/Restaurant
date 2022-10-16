@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -32,69 +33,155 @@
                 android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.GONE}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <TextView
-                    android:id="@+id/textViewAvailable"
-                    android:layout_width="wrap_content"
+                <pi.restaurant.management.ui.views.CardViewPreviewElement
+                    android:id="@+id/cardDiscountDetails"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_margin="10dp">
 
-                <TextView
-                    android:id="@+id/textViewAssigned"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="25dp"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textViewUsed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                        <LinearLayout
+                            android:id="@+id/discountHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="15dp"
+                            android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textViewCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:text="@{vm.item.basic.id}"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                            <ImageView
+                                android:id="@+id/imageIcon"
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:contentDescription="@string/icon"
+                                android:padding="6dp"
+                                android:src="@drawable/discount" />
 
-                <TextView
-                    android:id="@+id/textViewAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="15dp"
+                                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textViewType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                                <pi.restaurant.management.ui.views.TextViewItemName
+                                    android:id="@+id/textViewCode"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="7dp"
+                                    android:text="@{vm.item.basic.id}" />
 
-                <TextView
-                    android:id="@+id/textViewExpirationDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                                <pi.restaurant.management.ui.views.TextViewItemType
+                                    android:id="@+id/textViewDiscount"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/discount" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewDiscountValueTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/discount_value_colon" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewDiscountValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewThresholdTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/valid_above_total_order_value_colon" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewThreshold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewCreationDateTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/creation_date_colon" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewCreationDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewExpirationDateTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/expiration_date_colon" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewExpirationDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewAvailableTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/number_of_available_discounts_colon" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewAvailable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewAssignedTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/number_of_assigned_discounts_colon" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewAssigned"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetailTitle
+                            android:id="@+id/textViewRedeemedTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/number_of_redeemed_discounts_colon" />
+
+                        <pi.restaurant.management.ui.views.TextViewDetail
+                            android:id="@+id/textViewRedeemed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </pi.restaurant.management.ui.views.CardViewPreviewElement>
 
             </LinearLayout>
 

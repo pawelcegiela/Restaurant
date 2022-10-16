@@ -22,6 +22,7 @@ import pi.restaurant.management.ui.fragments.ingredients.IngredientsItemListSubF
 import pi.restaurant.management.ui.fragments.orders.OrdersItemListSubFragment
 import pi.restaurant.management.ui.fragments.workers.WorkersItemListSubFragment
 
+@Suppress("UNCHECKED_CAST")
 class PagerAdapter<Tab>(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
@@ -37,7 +38,7 @@ class PagerAdapter<Tab>(
 
     override fun createFragment(position: Int): Fragment {
         return when (activity) {
-            is AllergensActivity -> AllergensItemListSubFragment(list as MutableList<AllergenBasic>, position)
+            is AllergensActivity -> AllergensItemListSubFragment(list as MutableList<AllergenBasic>)
             is DiscountsActivity -> DiscountsItemListSubFragment(list as MutableList<DiscountBasic>, position)
             is DishesActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position)
             is IngredientsActivity -> IngredientsItemListSubFragment(list as MutableList<IngredientBasic>, position)

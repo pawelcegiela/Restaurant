@@ -19,7 +19,7 @@ class PreconditionUtils {
             val uppercase = password1.contains(Regex("[A-Z]"))
             val lowercase = password1.contains(Regex("[a-z]"))
             val numbers = password1.contains(Regex("[0-9]"))
-            //TODO Dodać znaki specjalne
+            //TODO Add special characters
 
             if (length && uppercase && lowercase && numbers) {
                 return Precondition.OK

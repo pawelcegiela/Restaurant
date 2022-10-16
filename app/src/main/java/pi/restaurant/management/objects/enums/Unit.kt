@@ -4,7 +4,7 @@ import android.content.Context
 import pi.restaurant.management.R
 
 enum class Unit(val stringResourceId: Int) {
-    GRAM(R.string.gram), MILLILITER(R.string.mililiter), PIECE(R.string.piece);
+    GRAM(R.string.gram), MILLILITER(R.string.milliliter), PIECE(R.string.piece);
 
     companion object {
         fun getString(id: Int, context: Context): String {

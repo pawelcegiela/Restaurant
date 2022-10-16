@@ -6,6 +6,7 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
+import pi.restaurant.management.objects.enums.DiscountType
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.Unit
@@ -16,6 +17,10 @@ import java.util.*
 
 class StringFormatUtils {
     companion object {
+        fun format(firstString: String, secondString: String): String {
+            return "$firstString $secondString"
+        }
+
         fun formatAmountWithUnit(context: Context, amount: String, unit: Int): String {
             return "${DecimalFormat("##.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}"
         }
@@ -36,10 +41,6 @@ class StringFormatUtils {
 
         fun formatPrice(value: String): String {
             return "${DecimalFormat("#0.00").format(BigDecimal(value))} zł"
-        }
-
-        fun formatNames(firstName: String, lastName: String): String {
-            return "$firstName $lastName"
         }
 
         fun formatId(): String {
@@ -85,8 +86,16 @@ class StringFormatUtils {
             return "${formatTime(startHour)}  -  ${formatTime(endHour)}"
         }
 
+        fun formatDateFromIntegers(day: Int, month: Int, year: Int): String {
+            return "${String.format("%02d", day)}.${String.format("%02d", month + 1)}.${String.format("%04d", year)}"
+        }
+
         fun formatTimeFromIntegers(hour: Int, minute: Int) : String {
             return "${String.format("%02d", hour)}:${String.format("%02d", minute)}"
+        }
+
+        fun formatDiscountValue(amount: String, type: Int, context: Context): String {
+            return "$amount ${DiscountType.getString(type, context)}"
         }
     }
 }

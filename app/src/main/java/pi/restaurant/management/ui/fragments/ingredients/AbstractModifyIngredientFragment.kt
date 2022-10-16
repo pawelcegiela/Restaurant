@@ -34,7 +34,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     override var itemId = ""
 
     var subIngredientsList: MutableList<IngredientItem> = ArrayList()
-    lateinit var allIngredients: MutableList<IngredientBasic>
+    private lateinit var allIngredients: MutableList<IngredientBasic>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
