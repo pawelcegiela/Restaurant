@@ -15,9 +15,9 @@ import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 class OrdersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionOrdersToAddOrder
     override val editActionId = R.id.actionOrdersToEditOrder
-    override val viewModel : AbstractItemListViewModel get() = _viewModel
-    private val _viewModel : OrdersMainViewModel by viewModels()
-    private val activityViewModel : OrdersViewModel by activityViewModels()
+    override val viewModel: AbstractItemListViewModel get() = _viewModel
+    private val _viewModel: OrdersMainViewModel by viewModels()
+    private val activityViewModel: OrdersViewModel by activityViewModels()
 
     override fun initializeUI() {
         super.initializeUI()
@@ -28,7 +28,15 @@ class OrdersMainFragment : AbstractItemListFragment() {
         binding.tabLayout.visibility = View.VISIBLE
         val list = OrdersTab.values()
         val names = OrdersTab.getArrayOfStrings(requireContext())
-        binding.pager.adapter = PagerAdapter(requireActivity().supportFragmentManager, lifecycle, list,requireActivity(), this, viewModel.dataList.value)
+        binding.pager.adapter = PagerAdapter(
+            requireActivity().supportFragmentManager,
+            lifecycle,
+            list,
+            requireActivity(),
+            this,
+            viewModel.dataList.value,
+            binding.fabFilter
+        )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = names[position]

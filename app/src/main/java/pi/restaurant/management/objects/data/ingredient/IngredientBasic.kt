@@ -8,6 +8,7 @@ class IngredientBasic : AbstractDataObject {
     var amount: Int = 0
     var unit: Int = 0
     var subDish: Boolean = false
+    var disabled: Boolean = false
 
     @Suppress("unused")
     constructor()

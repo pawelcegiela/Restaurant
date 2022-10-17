@@ -1,10 +1,9 @@
 package pi.restaurant.management.model.activities
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import pi.restaurant.management.objects.data.discount.DiscountBasic
 
-class DiscountsViewModel : AbstractActivityViewModel() {
+
+class AllergensViewModel : AbstractActivityViewModel() {
     private val _showActive = MutableLiveData(true)
     private val _showDisabled = MutableLiveData(false)
 
@@ -22,12 +21,5 @@ class DiscountsViewModel : AbstractActivityViewModel() {
 
     override fun setShowDisabled(disabled: Boolean) {
         _showDisabled.value = disabled
-    }
-
-    private val _list = MutableLiveData<MutableList<DiscountBasic>>()
-    val list: LiveData<MutableList<DiscountBasic>> = _list
-
-    fun setList(list: MutableList<DiscountBasic>) {
-        _list.value = list
     }
 }

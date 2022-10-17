@@ -10,6 +10,7 @@ class OrderBasic : AbstractDataObject {
     var collectionType: Int = 0
     var value: String = "0.0"
     var name: String = ""
+    var disabled: Boolean = false
 
     @Suppress("unused")
     constructor()

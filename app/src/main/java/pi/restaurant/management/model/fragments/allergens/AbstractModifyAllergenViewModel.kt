@@ -8,10 +8,10 @@ import pi.restaurant.management.objects.data.allergen.AllergenDetails
 abstract class AbstractModifyAllergenViewModel : AbstractModifyItemViewModel() {
     override val databasePath = "allergens"
 
-    fun getPreviousItem() : Allergen {
+    fun getPreviousItem(): Allergen {
         if (this is EditAllergenViewModel) {
             return item.value ?: Allergen(itemId, AllergenBasic(), AllergenDetails())
         }
-        return Allergen()
+        return Allergen(itemId, AllergenBasic(), AllergenDetails())
     }
 }

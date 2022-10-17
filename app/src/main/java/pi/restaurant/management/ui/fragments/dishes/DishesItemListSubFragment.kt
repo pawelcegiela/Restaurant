@@ -1,14 +1,32 @@
 package pi.restaurant.management.ui.fragments.dishes
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import pi.restaurant.management.model.activities.DishesViewModel
 import pi.restaurant.management.objects.data.dish.DishBasic
 import pi.restaurant.management.objects.enums.DishType
 import pi.restaurant.management.objects.enums.DishesTab
 import pi.restaurant.management.ui.adapters.DishesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.ItemListSubFragment
 
-class DishesItemListSubFragment(private var list: MutableList<DishBasic>, private val position: Int) : ItemListSubFragment() {
+class DishesItemListSubFragment(
+    private var list: MutableList<DishBasic>,
+    private val position: Int,
+    fabFilter: FloatingActionButton,
+    private val showInactive: Boolean
+) : ItemListSubFragment(fabFilter) {
+    private val _activityViewModel: DishesViewModel by activityViewModels()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        activityViewModel = _activityViewModel
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -16,9 +34,31 @@ class DishesItemListSubFragment(private var list: MutableList<DishBasic>, privat
             DishesTab.DISHES.ordinal -> list = list.filter { it.dishType == DishType.DISH.ordinal }.toMutableList()
             DishesTab.WARM_DISHES.ordinal -> list = list.filter { it.dishType == DishType.WARM_DISH.ordinal }.toMutableList()
             DishesTab.COLD_DISHES.ordinal -> list = list.filter { it.dishType == DishType.COLD_DISH.ordinal }.toMutableList()
-            DishesTab.NON_ALCOHOLIC_DRINKS.ordinal -> list = list.filter { it.dishType == DishType.NON_ALCOHOLIC_DRINK.ordinal }.toMutableList()
-            DishesTab.ALCOHOLIC_DRINKS.ordinal -> list = list.filter { it.dishType == DishType.ALCOHOLIC_DRINK.ordinal }.toMutableList()
+            DishesTab.NON_ALCOHOLIC_DRINKS.ordinal -> list =
+                list.filter { it.dishType == DishType.NON_ALCOHOLIC_DRINK.ordinal }.toMutableList()
+            DishesTab.ALCOHOLIC_DRINKS.ordinal -> list =
+                list.filter { it.dishType == DishType.ALCOHOLIC_DRINK.ordinal }.toMutableList()
         }
-        binding.recyclerView.adapter = DishesRecyclerAdapter(list, this)
+
+        setAdapter()
+    }
+
+    private fun getFilteredList(): MutableList<DishBasic> {
+        return if (showInactive) {
+            if (_activityViewModel.getShowActive() && _activityViewModel.getShowDisabled()) {
+                list
+            } else if (!_activityViewModel.getShowActive() && !_activityViewModel.getShowDisabled()) {
+                ArrayList()
+            } else {
+                list.filter { it.disabled == _activityViewModel.getShowDisabled() }.toMutableList()
+            }
+        } else {
+            list.filter { !it.disabled && it.isActive }.toMutableList()
+        }
+    }
+
+    override fun setAdapter() {
+        Log.e("Setting adapter", this.javaClass.name + " # " + position)
+        binding.recyclerView.adapter = DishesRecyclerAdapter(getFilteredList(), this)
     }
 }

@@ -12,14 +12,22 @@ import pi.restaurant.management.ui.fragments.AbstractItemListFragment
 class WorkersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionWorkersToAddWorker
     override val editActionId = R.id.actionWorkersToEditWorker
-    override val viewModel : AbstractItemListViewModel get() = _viewModel
-    private val _viewModel : WorkersMainViewModel by viewModels()
+    override val viewModel: AbstractItemListViewModel get() = _viewModel
+    private val _viewModel: WorkersMainViewModel by viewModels()
 
     override fun addViewPagerAdapters() {
         binding.tabLayout.visibility = View.VISIBLE
         val list = WorkersTab.values()
         val names = WorkersTab.getArrayOfStrings(requireContext())
-        binding.pager.adapter = PagerAdapter(requireActivity().supportFragmentManager, lifecycle, list, requireActivity(), this, viewModel.dataList.value)
+        binding.pager.adapter = PagerAdapter(
+            requireActivity().supportFragmentManager,
+            lifecycle,
+            list,
+            requireActivity(),
+            this,
+            viewModel.dataList.value,
+            binding.fabFilter
+        )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = names[position]

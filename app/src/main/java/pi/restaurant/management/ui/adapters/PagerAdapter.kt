@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
 import pi.restaurant.management.objects.data.discount.DiscountBasic
@@ -29,7 +30,8 @@ class PagerAdapter<Tab>(
     private val data: Array<Tab>,
     private val activity: FragmentActivity,
     private val parentFragment: Fragment,
-    private val list: MutableList<AbstractDataObject>?
+    private val list: MutableList<AbstractDataObject>?,
+    private val fabFilter: FloatingActionButton
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
@@ -38,16 +40,21 @@ class PagerAdapter<Tab>(
 
     override fun createFragment(position: Int): Fragment {
         return when (activity) {
-            is AllergensActivity -> AllergensItemListSubFragment(list as MutableList<AllergenBasic>)
-            is DiscountsActivity -> DiscountsItemListSubFragment(list as MutableList<DiscountBasic>, position)
-            is DishesActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position)
-            is IngredientsActivity -> IngredientsItemListSubFragment(list as MutableList<IngredientBasic>, position)
+            is AllergensActivity -> AllergensItemListSubFragment(list as MutableList<AllergenBasic>, fabFilter)
+            is DiscountsActivity -> DiscountsItemListSubFragment(list as MutableList<DiscountBasic>, position, fabFilter)
+            is DishesActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position, fabFilter, true)
+            is IngredientsActivity -> IngredientsItemListSubFragment(list as MutableList<IngredientBasic>, position, fabFilter)
             is OrdersActivity -> {
-                if (parentFragment is DishesMainFragment) DishesItemListSubFragment(list as MutableList<DishBasic>, position)
-                else OrdersItemListSubFragment(list as MutableList<OrderBasic>, position)
+                if (parentFragment is DishesMainFragment) DishesItemListSubFragment(
+                    list as MutableList<DishBasic>,
+                    position,
+                    fabFilter,
+                    false
+                )
+                else OrdersItemListSubFragment(list as MutableList<OrderBasic>, position, fabFilter)
             }
-            is WorkersActivity -> WorkersItemListSubFragment(list as MutableList<UserBasic>, position)
-            else -> ItemListSubFragment()
+            is WorkersActivity -> WorkersItemListSubFragment(list as MutableList<UserBasic>, position, fabFilter)
+            else -> ItemListSubFragment(fabFilter)
         }
     }
 }

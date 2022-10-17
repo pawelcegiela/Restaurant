@@ -13,6 +13,7 @@ class DiscountBasic : AbstractDataObject {
     var availableDiscounts: ArrayList<String> = ArrayList()
     var assignedDiscounts: ArrayList<String> = ArrayList()
     var redeemedDiscounts: ArrayList<String> = ArrayList()
+    var disabled: Boolean = false
 
     @Suppress("unused")
     constructor()

@@ -5,6 +5,7 @@ import pi.restaurant.management.utils.StringFormatUtils
 
 class AllergenBasic : AbstractDataObject {
     var name: String = ""
+    var disabled: Boolean = false
 
     @Suppress("unused")
     constructor()

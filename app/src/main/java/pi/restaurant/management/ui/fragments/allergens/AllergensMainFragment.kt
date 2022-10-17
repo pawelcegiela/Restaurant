@@ -18,7 +18,15 @@ class AllergensMainFragment : AbstractItemListFragment() {
         val list = arrayOf(0)
         val names = arrayListOf(getString(R.string.all_))
         binding.pager.adapter =
-            PagerAdapter(requireActivity().supportFragmentManager, lifecycle, list, requireActivity(), this, viewModel.dataList.value)
+            PagerAdapter(
+                requireActivity().supportFragmentManager,
+                lifecycle,
+                list,
+                requireActivity(),
+                this,
+                viewModel.dataList.value,
+                binding.fabFilter
+            )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = names[position]

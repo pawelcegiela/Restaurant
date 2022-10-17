@@ -10,6 +10,7 @@ class DishBasic : AbstractDataObject {
     var isDiscounted: Boolean = false
     var discountPrice: String = "0.0"
     var dishType: Int = 0
+    var disabled: Boolean = false
 
     @Suppress("unused")
     constructor()

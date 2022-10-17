@@ -336,4 +336,7 @@
     <string name="threshold_value">Threshold value</string>
     <string name="valid_above_total_order_value_colon">Valid above total order value:</string>
     <string name="any">Any</string>
+    <string name="filter">Filter</string>
+    <string name="show_active_items">Show active items</string>
+    <string name="show_disabled_items">Show disabled items</string>
 </resources>

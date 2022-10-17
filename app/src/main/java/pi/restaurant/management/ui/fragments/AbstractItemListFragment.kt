@@ -45,7 +45,10 @@ abstract class AbstractItemListFragment : Fragment() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
                 if (Role.isAtLeastManager(role) && viewModel.displayFAB()) {
-                    binding.fab.visibility = View.VISIBLE
+                    binding.fabAdd.visibility = View.VISIBLE
+                }
+                if (viewModel.displayFAB()) {
+                    binding.fabFilter.visibility = View.VISIBLE
                 }
             }
         }
@@ -56,7 +59,7 @@ abstract class AbstractItemListFragment : Fragment() {
     open fun initializeUI() {
         addViewPagerAdapters()
 
-        binding.fab.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
             findNavController().navigate(addActionId)
         }
     }

@@ -2,12 +2,14 @@ package pi.restaurant.management.model.activities
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import pi.restaurant.management.objects.data.delivery.DeliveryBasic
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.order.Order
 
-class OrdersViewModel : ViewModel() {
+class OrdersViewModel : AbstractActivityViewModel() {
+    private val _showActive = MutableLiveData(true)
+    private val _showDisabled = MutableLiveData(false)
+
     private val _savedOrder = MutableLiveData<Order?>()
     val savedOrder: LiveData<Order?> = _savedOrder
 
@@ -22,6 +24,22 @@ class OrdersViewModel : ViewModel() {
 
     private val _editedDish: MutableLiveData<DishItem?> = MutableLiveData()
     val editedDish: LiveData<DishItem?> = _editedDish
+
+    override fun getShowActive(): Boolean {
+        return _showActive.value ?: true
+    }
+
+    override fun getShowDisabled(): Boolean {
+        return _showDisabled.value ?: false
+    }
+
+    override fun setShowActive(active: Boolean) {
+        _showActive.value = active
+    }
+
+    override fun setShowDisabled(disabled: Boolean) {
+        _showDisabled.value = disabled
+    }
 
     fun setSavedOrder(order: Order?) {
         _savedOrder.value = order

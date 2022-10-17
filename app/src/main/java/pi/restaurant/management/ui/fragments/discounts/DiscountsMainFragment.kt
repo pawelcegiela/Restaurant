@@ -34,7 +34,8 @@ class DiscountsMainFragment : AbstractItemListFragment() {
             list,
             requireActivity(),
             this,
-            viewModel.dataList.value
+            viewModel.dataList.value,
+            binding.fabFilter
         )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->

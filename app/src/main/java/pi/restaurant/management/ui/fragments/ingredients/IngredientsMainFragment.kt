@@ -21,7 +21,15 @@ class IngredientsMainFragment : AbstractItemListFragment() {
         val list = IngredientsTab.values()
         val names = IngredientsTab.getArrayOfStrings(requireContext())
         binding.pager.adapter =
-            PagerAdapter(requireActivity().supportFragmentManager, lifecycle, list, requireActivity(), this, viewModel.dataList.value)
+            PagerAdapter(
+                requireActivity().supportFragmentManager,
+                lifecycle,
+                list,
+                requireActivity(),
+                this,
+                viewModel.dataList.value,
+                binding.fabFilter
+            )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = names[position]

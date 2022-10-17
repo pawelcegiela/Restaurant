@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurant.management.databinding.FragmentItemListSubBinding
+import pi.restaurant.management.model.activities.AbstractActivityViewModel
 import pi.restaurant.management.ui.adapters.AbstractRecyclerAdapter
+import pi.restaurant.management.ui.views.DialogFilter
 
-open class ItemListSubFragment : Fragment() {
+open class ItemListSubFragment(private val fabFilter: FloatingActionButton) : Fragment() {
     private var _binding: FragmentItemListSubBinding? = null
     protected val binding get() = _binding!!
+    protected lateinit var activityViewModel: AbstractActivityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,4 +43,24 @@ open class ItemListSubFragment : Fragment() {
             }
         })
     }
+
+    override fun onPause() {
+        super.onPause()
+        fabFilter.setOnClickListener(null)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setAdapter()
+
+        fabFilter.setOnClickListener {
+            DialogFilter(this, activityViewModel.getShowActive(), activityViewModel.getShowDisabled()) { active, disabled ->
+                activityViewModel.setShowActive(active)
+                activityViewModel.setShowDisabled(disabled)
+                setAdapter()
+            }
+        }
+    }
+
+    open fun setAdapter() {}
 }

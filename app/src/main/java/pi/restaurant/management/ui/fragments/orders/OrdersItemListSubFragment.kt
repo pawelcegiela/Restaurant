@@ -1,14 +1,31 @@
 package pi.restaurant.management.ui.fragments.orders
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.OrdersTab
 import pi.restaurant.management.ui.adapters.OrdersRecyclerAdapter
 import pi.restaurant.management.ui.fragments.ItemListSubFragment
 
-class OrdersItemListSubFragment(private var list: MutableList<OrderBasic>, private val position: Int) : ItemListSubFragment() {
+class OrdersItemListSubFragment(
+    private var list: MutableList<OrderBasic>,
+    private val position: Int,
+    fabFilter: FloatingActionButton
+) : ItemListSubFragment(fabFilter) {
+    private val _activityViewModel: OrdersViewModel by activityViewModels()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        activityViewModel = _activityViewModel
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -19,9 +36,26 @@ class OrdersItemListSubFragment(private var list: MutableList<OrderBasic>, priva
             OrdersTab.READY.ordinal -> list = list.filter { it.orderStatus == OrderStatus.READY.ordinal }.toMutableList()
             OrdersTab.DELIVERY.ordinal -> list = list.filter { it.orderStatus == OrderStatus.DELIVERY.ordinal }.toMutableList()
             OrdersTab.FINISHED.ordinal -> list = list.filter { it.orderStatus == OrderStatus.FINISHED.ordinal }.toMutableList()
-            OrdersTab.CLOSED_WITHOUT_REALIZATION.ordinal -> list = list.filter { it.orderStatus == OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal }.toMutableList()
+            OrdersTab.CLOSED_WITHOUT_REALIZATION.ordinal -> list =
+                list.filter { it.orderStatus == OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal }.toMutableList()
         }
-        binding.recyclerView.adapter = OrdersRecyclerAdapter(list, this)
+
+        setAdapter()
         binding.searchView.visibility = View.GONE
+    }
+
+    private fun getFilteredList(): MutableList<OrderBasic> {
+        return if (_activityViewModel.getShowActive() && _activityViewModel.getShowDisabled()) {
+            list
+        } else if (!_activityViewModel.getShowActive() && !_activityViewModel.getShowDisabled()) {
+            ArrayList()
+        } else {
+            list.filter { it.disabled == _activityViewModel.getShowDisabled() }.toMutableList()
+        }
+    }
+
+    override fun setAdapter() {
+        Log.e("Setting adapter", this.javaClass.name + " # " + position)
+        binding.recyclerView.adapter = OrdersRecyclerAdapter(getFilteredList(), this)
     }
 }
