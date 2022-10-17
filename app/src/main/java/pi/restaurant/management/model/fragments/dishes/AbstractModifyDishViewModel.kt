@@ -87,7 +87,7 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val data = dataSnapshot.getValue<HashMap<String, IngredientBasic>>() ?: HashMap()
-                liveAllIngredients.value = data.toList().map { it.second }.toMutableList()
+                liveAllIngredients.value = data.toList().map { it.second }.filter { !it.disabled }.toMutableList()
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -99,7 +99,7 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val data = dataSnapshot.getValue<HashMap<String, AllergenBasic>>() ?: HashMap()
-                liveAllAllergens.value = data.toList().map { it.second }.toMutableList()
+                liveAllAllergens.value = data.toList().map { it.second }.filter { !it.disabled }.toMutableList()
             }
 
             override fun onCancelled(error: DatabaseError) {}

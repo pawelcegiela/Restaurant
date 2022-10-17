@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp"
+    android:paddingBottom="30dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/information"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/removal_message" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupRemovalTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="35dp">
+
+        <RadioButton
+            android:id="@+id/radioDisable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/disable" />
+
+        <RadioButton
+            android:id="@+id/radioRemove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remove" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonContinue"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/continue_"/>
+
+</LinearLayout>

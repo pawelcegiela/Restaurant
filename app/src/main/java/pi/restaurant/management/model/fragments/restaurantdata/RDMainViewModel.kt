@@ -20,4 +20,8 @@ class RDMainViewModel : AbstractPreviewItemViewModel() {
         val details = snapshotsPair.details?.getValue<RestaurantDataDetails>() ?: RestaurantDataDetails()
         _item.value = RestaurantData(basic, details)
     }
+
+    override fun isDisabled(): Boolean {
+        return false
+    }
 }

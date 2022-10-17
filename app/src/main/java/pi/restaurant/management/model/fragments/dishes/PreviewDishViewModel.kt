@@ -26,4 +26,8 @@ class PreviewDishViewModel : AbstractPreviewItemViewModel() {
         return StringFormatUtils.formatPrice(price)
     }
 
+    override fun isDisabled(): Boolean {
+        return item.value?.basic?.disabled == true
+    }
+
 }

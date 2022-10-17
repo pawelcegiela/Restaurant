@@ -21,4 +21,7 @@ class PreviewWorkerViewModel : AbstractPreviewItemViewModel() {
         _item.value = User(itemId, basic, details)
     }
 
+    override fun isDisabled(): Boolean {
+        return item.value?.basic?.disabled == true
+    }
 }

@@ -1,6 +1,5 @@
 package pi.restaurant.management.ui.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -15,6 +14,8 @@ import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
+import pi.restaurant.management.ui.views.DialogRemoval
+import pi.restaurant.management.ui.views.YesNoDialog
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 abstract class AbstractModifyItemFragment : Fragment() {
@@ -101,10 +102,13 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
 
         toolbarNavigation.cardSaveRemove.cardRemove.setOnClickListener {
-            removeFromDatabase()
+            if (Role.isAtLeastAdmin(viewModel.userRole.value)) {
+                DialogRemoval(this, { disableItem() }, { removeFromDatabase() })
+            } else {
+                disableItem()
+            }
         }
     }
-
 
     abstract fun getEditTextMap(): Map<EditText, Int>
 
@@ -126,24 +130,30 @@ abstract class AbstractModifyItemFragment : Fragment() {
         return Precondition.OK
     }
 
+    private fun disableItem() {
+        if (!checkRemovePreconditions()) {
+            return
+        }
+        YesNoDialog(requireContext(), R.string.warning, R.string.do_you_want_to_disable) { dialog, _ ->
+            viewModel.disableItem()
+
+            dialog.dismiss()
+            Toast.makeText(activity, getString(R.string.this_item_has_been_disabled), Toast.LENGTH_SHORT).show()
+            findNavController().navigate(nextActionId)
+        }
+    }
+
     private fun removeFromDatabase() {
         if (!checkRemovePreconditions()) {
             return
         }
-        val dialogBuilder = AlertDialog.Builder(this.context)
-        dialogBuilder.setTitle(getString(R.string.warning))
-        dialogBuilder.setMessage(getString(R.string.do_you_want_to_remove))
-        dialogBuilder.setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+        YesNoDialog(requireContext(), R.string.warning, R.string.do_you_want_to_remove) { dialog, _ ->
             viewModel.removeFromDatabase()
 
             dialog.dismiss()
             Toast.makeText(activity, getString(removeMessageId), Toast.LENGTH_SHORT).show()
             findNavController().navigate(nextActionId)
         }
-        dialogBuilder.setNegativeButton(getString(R.string.no)) { dialog, _ ->
-            dialog.dismiss()
-        }
-        dialogBuilder.create().show()
     }
 
     open fun checkRemovePreconditions() = true

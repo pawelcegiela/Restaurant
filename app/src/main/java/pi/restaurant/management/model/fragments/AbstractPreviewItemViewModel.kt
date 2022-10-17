@@ -85,4 +85,6 @@ abstract class AbstractPreviewItemViewModel : ViewModel() {
     }
 
     open fun shouldGetDataFromDatabase() = true
+
+    abstract fun isDisabled() : Boolean
 }

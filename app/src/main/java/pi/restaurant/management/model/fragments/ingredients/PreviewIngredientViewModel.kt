@@ -64,4 +64,8 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
         }
     }
 
+    override fun isDisabled(): Boolean {
+        return item.value?.basic?.disabled == true
+    }
+
 }

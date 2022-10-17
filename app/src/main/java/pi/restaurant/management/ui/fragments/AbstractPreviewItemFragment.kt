@@ -41,7 +41,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         viewModel.readyToInitialize.observe(viewLifecycleOwner) { ready ->
             if (ready) {
                 fillInData()
-                if (editable) {
+                if (editable && !viewModel.isDisabled()) {
                     initializeUI()
                 } else {
                     initializeWorkerUI()

@@ -38,4 +38,8 @@ class CustomizeDishViewModel : AbstractPreviewItemViewModel() {
     override fun shouldGetDataFromDatabase(): Boolean {
         return _item.value == null
     }
+
+    override fun isDisabled(): Boolean {
+        return false
+    }
 }

@@ -34,5 +34,9 @@ enum class Role(val stringResourceId: Int) {
         fun isAtLeastExecutive(role: Int?) : Boolean {
             return isAtLeast(role ?: WORKER.ordinal, EXECUTIVE.ordinal)
         }
+
+        fun isAtLeastAdmin(role: Int?) : Boolean {
+            return isAtLeast(role ?: WORKER.ordinal, ADMIN.ordinal)
+        }
     }
 }

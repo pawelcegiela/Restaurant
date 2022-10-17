@@ -109,4 +109,9 @@ abstract class AbstractModifyItemViewModel : ViewModel() {
     }
 
     open fun shouldGetDataFromDatabase() = true
+
+    fun disableItem() {
+        val databaseRef = Firebase.database.getReference(databasePath).child("basic").child(itemId).child("disabled")
+        databaseRef.setValue(true)
+    }
 }

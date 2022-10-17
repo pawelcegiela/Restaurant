@@ -1,5 +1,6 @@
 package pi.restaurant.management.ui.fragments.allergens
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
@@ -7,6 +8,7 @@ import pi.restaurant.management.model.fragments.allergens.EditAllergenViewModel
 import pi.restaurant.management.objects.data.allergen.Allergen
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
 import pi.restaurant.management.objects.data.allergen.AllergenDetails
+import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 
 class EditAllergenFragment : AbstractModifyAllergenFragment() {
 
@@ -26,5 +28,14 @@ class EditAllergenFragment : AbstractModifyAllergenFragment() {
         binding.editTextDescription.setText(data.details.description)
         setNavigationCardsSaveRemove()
         finishLoading()
+    }
+
+    override fun checkRemovePreconditions(): Boolean {
+        val details = _viewModel.item.value?.details ?: AllergenDetails()
+        if (details.containingDishes.isNotEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.cant_delete_used_ingredient), Toast.LENGTH_LONG).show()
+            return false
+        }
+        return true
     }
 }
