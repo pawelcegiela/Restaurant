@@ -14,6 +14,7 @@ import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.objects.enums.Unit
+import pi.restaurant.management.ui.RecyclerManager
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.listeners.AddIngredientButtonListener
@@ -74,6 +75,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
             )
             binding.recyclerViewSubIngredients.adapter =
                 DishIngredientsRecyclerAdapter(subIngredientsList, this@AbstractModifyIngredientFragment, IngredientStatus.BASE)
+            binding.recyclerViewSubIngredients.layoutManager = RecyclerManager(context)
         }
     }
 

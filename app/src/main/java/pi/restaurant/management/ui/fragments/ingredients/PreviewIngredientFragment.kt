@@ -13,6 +13,7 @@ import pi.restaurant.management.model.fragments.ingredients.PreviewIngredientVie
 import pi.restaurant.management.objects.data.ingredient.Ingredient
 import pi.restaurant.management.objects.data.ingredient.IngredientDetails
 import pi.restaurant.management.objects.enums.IngredientStatus
+import pi.restaurant.management.ui.RecyclerManager
 import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
@@ -53,6 +54,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         if (item.basic.subDish && item.details.subIngredients != null) {
             binding.recyclerViewSubIngredients.adapter =
                 DishIngredientsRecyclerAdapter(item.details.subIngredients!!, this, IngredientStatus.BASE)
+            binding.recyclerViewSubIngredients.layoutManager = RecyclerManager(context)
             UserInterfaceUtils.setRecyclerSize(binding.recyclerViewSubIngredients, item.details.subIngredients!!.size, requireContext())
         } else {
             binding.cardSubIngredients.visibility = View.GONE
@@ -79,6 +81,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
                 if (containingDishes.size == containingDishesIds.size) {
                     binding.recyclerViewDishesContaining.adapter =
                         ContainingItemsRecyclerAdapter(containingDishes, this)
+                    binding.recyclerViewDishesContaining.layoutManager = RecyclerManager(context)
                     UserInterfaceUtils.setRecyclerSize(binding.recyclerViewDishesContaining, containingDishes.size, requireContext())
 
                     if (details.containingSubDishes.size == _viewModel.containingSubDishes.size) {
@@ -101,6 +104,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
                 if (containingSubDishes.size == containingSubDishesIds.size) {
                     binding.recyclerViewSubDishesContaining.adapter =
                         ContainingItemsRecyclerAdapter(containingSubDishes, this)
+                    binding.recyclerViewSubDishesContaining.layoutManager = RecyclerManager(context)
                     UserInterfaceUtils.setRecyclerSize(
                         binding.recyclerViewSubDishesContaining,
                         containingSubDishes.size,

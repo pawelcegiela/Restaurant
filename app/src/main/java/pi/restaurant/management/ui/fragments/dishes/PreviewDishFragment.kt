@@ -15,6 +15,7 @@ import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.DishType
 import pi.restaurant.management.objects.enums.IngredientStatus
+import pi.restaurant.management.ui.RecyclerManager
 import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.ui.adapters.PreviewDishIngredientRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
@@ -78,16 +79,19 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
 
         binding.recyclerViewBaseOtherIngredients.adapter =
             PreviewDishIngredientRecyclerAdapter(baseOtherIngredients, this)
+        binding.recyclerViewBaseOtherIngredients.layoutManager = RecyclerManager(context)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewBaseOtherIngredients, baseOtherIngredients.size, requireContext())
 
         val possibleIngredients = item.details.possibleIngredients.toList().map { it.second to IngredientStatus.POSSIBLE }
 
         binding.recyclerViewPossibleIngredients.adapter =
             PreviewDishIngredientRecyclerAdapter(possibleIngredients, this)
+        binding.recyclerViewPossibleIngredients.layoutManager = RecyclerManager(context)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, possibleIngredients.size, requireContext())
 
         binding.recyclerViewAllergens.adapter =
             DishAllergensRecyclerAdapter(item.details.allergens.toList().map { it.second }.toMutableList(), this)
+        binding.recyclerViewAllergens.layoutManager = RecyclerManager(context)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewAllergens, item.details.allergens.size, requireContext())
     }
 

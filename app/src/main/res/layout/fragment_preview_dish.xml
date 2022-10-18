@@ -209,8 +209,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewBaseOtherIngredients"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            app:layoutManager="LinearLayoutManager" />
+                            android:layout_height="250dp" />
 
                         <LinearLayout
                             android:id="@+id/linearLayoutIngredientsUnexpanded"
@@ -246,8 +245,7 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recycler_view_possible_ingredients"
                                 android:layout_width="match_parent"
-                                android:layout_height="250dp"
-                                app:layoutManager="LinearLayoutManager" />
+                                android:layout_height="250dp" />
 
                             <pi.restaurant.management.ui.textviews.TextViewLessMore
                                 android:id="@+id/textViewIngredientsLess"
@@ -284,8 +282,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_view_allergens"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            app:layoutManager="LinearLayoutManager" />
+                            android:layout_height="250dp" />
 
                     </LinearLayout>
                 </pi.restaurant.management.ui.CardViewPreviewElement>

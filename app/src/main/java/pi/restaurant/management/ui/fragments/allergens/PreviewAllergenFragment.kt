@@ -11,6 +11,7 @@ import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.allergens.PreviewAllergenViewModel
 import pi.restaurant.management.objects.data.allergen.Allergen
+import pi.restaurant.management.ui.RecyclerManager
 import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.UserInterfaceUtils
@@ -54,6 +55,7 @@ class PreviewAllergenFragment : AbstractPreviewItemFragment() {
             if (containingDishes.size == containingDishesIds.size) {
                 binding.recyclerViewDishesContaining.adapter =
                     ContainingItemsRecyclerAdapter(containingDishes, this)
+                binding.recyclerViewDishesContaining.layoutManager = RecyclerManager(context)
                 UserInterfaceUtils.setRecyclerSize(binding.recyclerViewDishesContaining, containingDishes.size, requireContext())
                 viewModel.setReadyToUnlock()
             }

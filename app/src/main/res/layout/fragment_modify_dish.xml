@@ -236,8 +236,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewBaseIngredients"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        app:layoutManager="LinearLayoutManager" />
+                        android:layout_height="250dp" />
 
                     <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewOtherIngredients"
@@ -250,8 +249,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewOtherIngredients"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        app:layoutManager="LinearLayoutManager" />
+                        android:layout_height="250dp" />
 
                     <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewPossibleIngredients"
@@ -264,8 +262,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view_possible_ingredients"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        app:layoutManager="LinearLayoutManager" />
+                        android:layout_height="250dp" />
 
                     <Button
                         android:id="@+id/buttonAddIngredient"
@@ -303,8 +300,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view_allergens"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        app:layoutManager="LinearLayoutManager" />
+                        android:layout_height="250dp" />
 
                     <Button
                         android:id="@+id/buttonAddAllergen"

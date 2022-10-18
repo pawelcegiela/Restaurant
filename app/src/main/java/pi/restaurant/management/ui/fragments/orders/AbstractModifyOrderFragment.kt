@@ -22,6 +22,7 @@ import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.order.OrderDetails
 import pi.restaurant.management.objects.enums.*
+import pi.restaurant.management.ui.RecyclerManager
 import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.pickers.CustomNumberPicker
@@ -180,6 +181,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     fun initializeRecycler() {
         binding.recyclerViewDishes.adapter = OrderDishesRecyclerAdapter(dishesList, this)
+        binding.recyclerViewDishes.layoutManager = RecyclerManager(context)
     }
 
     private fun initializeButton() {

@@ -17,6 +17,7 @@ import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.DishType
 import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.objects.enums.Unit
+import pi.restaurant.management.ui.RecyclerManager
 import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
@@ -155,14 +156,17 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         binding.recyclerViewBaseIngredients.adapter =
             DishIngredientsRecyclerAdapter(baseIngredientsList, this, IngredientStatus.BASE)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, baseIngredientsList.size, requireContext())
+        binding.recyclerViewBaseIngredients.layoutManager = RecyclerManager(context)
 
         binding.recyclerViewOtherIngredients.adapter =
             DishIngredientsRecyclerAdapter(otherIngredientsList, this, IngredientStatus.OTHER)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, otherIngredientsList.size, requireContext())
+        binding.recyclerViewOtherIngredients.layoutManager = RecyclerManager(context)
 
         binding.recyclerViewPossibleIngredients.adapter =
             DishIngredientsRecyclerAdapter(possibleIngredientsList, this, IngredientStatus.POSSIBLE)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, possibleIngredientsList.size, requireContext())
+        binding.recyclerViewPossibleIngredients.layoutManager = RecyclerManager(context)
     }
 
     fun getAllergenListAndSetAllergenButtons() {
@@ -187,6 +191,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         binding.recyclerViewAllergens.adapter =
             DishAllergensRecyclerAdapter(allergensList, this)
         UserInterfaceUtils.setRecyclerSize(binding.recyclerViewAllergens, allergensList.size, requireContext())
+        binding.recyclerViewAllergens.layoutManager = RecyclerManager(context)
     }
 
     fun changeIngredientProperties(ingredientItem: IngredientItem, originalList: IngredientStatus) {

@@ -18,6 +18,7 @@ import pi.restaurant.management.objects.enums.CollectionType
 import pi.restaurant.management.objects.enums.OrderPlace
 import pi.restaurant.management.objects.enums.OrderStatus
 import pi.restaurant.management.objects.enums.OrderType
+import pi.restaurant.management.ui.RecyclerManager
 import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurant.management.ui.adapters.StatusChangesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
@@ -67,6 +68,7 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
 
         val dishesList = item.details.dishes.toList().map { it.second }.toMutableList()
         binding.recyclerViewDishes.adapter = OrderDishesRecyclerAdapter(dishesList, this)
+        binding.recyclerViewDishes.layoutManager = RecyclerManager(context)
 
         binding.textViewDelivery.text = CollectionType.getString(item.basic.collectionType, requireContext())
         binding.textViewPlace.text = OrderPlace.getString(item.details.orderPlace, requireContext())
@@ -88,6 +90,7 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
             binding.cardStatusHistory.visibility = View.GONE
         }
         binding.recyclerViewStatusHistory.adapter = StatusChangesRecyclerAdapter(statusChanges, this)
+        binding.recyclerViewStatusHistory.layoutManager = RecyclerManager(context)
 
         setButtonListeners(item)
         setLiveDataListeners(item)

@@ -131,8 +131,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewDishesContaining"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            app:layoutManager="LinearLayoutManager" />
+                            android:layout_height="250dp" />
 
                     </LinearLayout>
                 </pi.restaurant.management.ui.CardViewPreviewElement>
