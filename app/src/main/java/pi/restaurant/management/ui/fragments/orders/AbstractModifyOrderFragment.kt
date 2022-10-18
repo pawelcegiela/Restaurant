@@ -17,7 +17,6 @@ import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewMo
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.data.address.AddressBasic
 import pi.restaurant.management.objects.data.delivery.DeliveryBasic
-import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.dish.DishItem
 import pi.restaurant.management.objects.data.order.Order
 import pi.restaurant.management.objects.data.order.OrderBasic
@@ -25,8 +24,8 @@ import pi.restaurant.management.objects.data.order.OrderDetails
 import pi.restaurant.management.objects.enums.*
 import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.ui.views.CustomNumberPicker
-import pi.restaurant.management.ui.views.SpinnerAdapter
+import pi.restaurant.management.ui.pickers.CustomNumberPicker
+import pi.restaurant.management.ui.adapters.SpinnerAdapter
 import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils

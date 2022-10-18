@@ -20,7 +20,7 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <pi.restaurant.management.ui.views.CardViewPreviewElement
+            <pi.restaurant.management.ui.CardViewPreviewElement
                 android:id="@+id/cardOpeningHoursDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                             android:padding="6dp"
                             android:src="@drawable/hours" />
 
-                        <pi.restaurant.management.ui.views.TextViewItemName
+                        <pi.restaurant.management.ui.textviews.TextViewItemName
                             android:id="@+id/textViewName"
                             android:layout_width="match_parent"
                             android:gravity="center"
@@ -60,7 +60,7 @@
                             android:text="@string/opening_hours" />
                     </LinearLayout>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewDefaultTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     <include android:id="@+id/setDefault"
                         layout="@layout/set_day_opening_hours"/>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewMondayTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                     <include android:id="@+id/setMonday"
                         layout="@layout/set_day_opening_hours"/>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewTuesdayTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                     <include android:id="@+id/setTuesday"
                         layout="@layout/set_day_opening_hours"/>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewWednesdayTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                     <include android:id="@+id/setWednesday"
                         layout="@layout/set_day_opening_hours"/>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewThursdayTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
                     <include android:id="@+id/setThursday"
                         layout="@layout/set_day_opening_hours"/>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewFridayTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                     <include android:id="@+id/setFriday"
                         layout="@layout/set_day_opening_hours"/>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewSaturdayTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                     <include android:id="@+id/setSaturday"
                         layout="@layout/set_day_opening_hours"/>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewSundayTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                         layout="@layout/set_day_opening_hours"/>
 
                 </LinearLayout>
-            </pi.restaurant.management.ui.views.CardViewPreviewElement>
+            </pi.restaurant.management.ui.CardViewPreviewElement>
         </LinearLayout>
 
     </ScrollView>

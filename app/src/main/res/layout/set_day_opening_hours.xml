@@ -10,21 +10,21 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <pi.restaurant.management.ui.views.TextViewDetail
+    <pi.restaurant.management.ui.textviews.TextViewDetail
         android:id="@+id/textViewStartHour"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:textAlignment="center"/>
 
-    <pi.restaurant.management.ui.views.TextViewDetail
+    <pi.restaurant.management.ui.textviews.TextViewDetail
         android:id="@+id/textViewDash"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"/>
 
-    <pi.restaurant.management.ui.views.TextViewDetail
+    <pi.restaurant.management.ui.textviews.TextViewDetail
         android:id="@+id/textViewEndHour"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

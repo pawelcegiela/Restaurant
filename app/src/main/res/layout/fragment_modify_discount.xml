@@ -20,7 +20,7 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <pi.restaurant.management.ui.views.CardViewPreviewElement
+            <pi.restaurant.management.ui.CardViewPreviewElement
                 android:id="@+id/cardDiscountDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                             android:padding="6dp"
                             android:src="@drawable/discount" />
 
-                        <pi.restaurant.management.ui.views.EditTextItemName
+                        <pi.restaurant.management.ui.textviews.EditTextItemName
                             android:id="@+id/editTextCode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
 
                     </LinearLayout>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewDiscountValueTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                             android:layout_marginStart="20dp" />
                     </RelativeLayout>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewThresholdTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
 
                     </RelativeLayout>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewExpirationDateTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,12 +135,12 @@
                         android:layout_marginBottom="10dp"
                         android:text="@string/expiration_date_colon" />
 
-                    <pi.restaurant.management.ui.views.TextViewDetail
+                    <pi.restaurant.management.ui.textviews.TextViewDetail
                         android:id="@+id/textViewExpirationDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewAvailableTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
 
                 </LinearLayout>
 
-            </pi.restaurant.management.ui.views.CardViewPreviewElement>
+            </pi.restaurant.management.ui.CardViewPreviewElement>
 
         </LinearLayout>
 

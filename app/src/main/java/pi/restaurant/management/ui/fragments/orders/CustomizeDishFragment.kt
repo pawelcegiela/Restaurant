@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,6 @@ import pi.restaurant.management.databinding.FragmentCustomizeDishBinding
 import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.model.activities.OrdersViewModel
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
-import pi.restaurant.management.model.fragments.orders.AbstractModifyOrderViewModel
 import pi.restaurant.management.model.fragments.orders.CustomizeDishViewModel
 import pi.restaurant.management.objects.data.dish.Dish
 import pi.restaurant.management.objects.data.dish.DishItem
@@ -24,7 +22,7 @@ import pi.restaurant.management.objects.enums.IngredientStatus
 import pi.restaurant.management.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurant.management.ui.views.CustomNumberPicker
+import pi.restaurant.management.ui.pickers.CustomNumberPicker
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 import java.math.BigDecimal

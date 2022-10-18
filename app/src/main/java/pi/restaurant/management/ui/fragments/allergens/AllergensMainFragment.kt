@@ -1,5 +1,8 @@
 package pi.restaurant.management.ui.fragments.allergens
 
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurant.management.R
@@ -15,6 +18,7 @@ class AllergensMainFragment : AbstractItemListFragment() {
     private val _viewModel: AllergensMainViewModel by viewModels()
 
     override fun addViewPagerAdapters() {
+        binding.tabLayout.visibility = View.GONE
         val list = arrayOf(0)
         val names = arrayListOf(getString(R.string.all_))
         binding.pager.adapter =
@@ -25,7 +29,8 @@ class AllergensMainFragment : AbstractItemListFragment() {
                 requireActivity(),
                 this,
                 viewModel.dataList.value,
-                binding.fabFilter
+                binding.fabFilter,
+                searchView
             )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->

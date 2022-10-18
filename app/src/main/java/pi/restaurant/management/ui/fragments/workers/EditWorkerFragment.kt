@@ -52,12 +52,6 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.spinnerRole.setSelection(data.basic.role)
         binding.checkBoxDelivery.isChecked = data.basic.delivery
 
-        disabled = data.basic.disabled
-//        if (disabled) {
-//            toolbarNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getString(R.string.enable_user)
-//        } else {
-//            toolbarNavigation.cardSaveRemoveBack.cardRemove.textViewRemove.text = getText(R.string.disable_user)
-//        } TODO Przywrócić
         if (isMyData) {
             setNavigationCardsSave()
         } else {
@@ -70,14 +64,6 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
             Precondition.OK
         } else {
             super.checkSavePreconditions(data)
-        }
-    }
-
-    override fun setNavigationCardsSaveRemove() {
-        super.setNavigationCardsSaveRemove()
-        toolbarNavigation.cardSaveRemove.cardRemove.setOnClickListener {
-            disabled = !disabled
-            saveToDatabase()
         }
     }
 }

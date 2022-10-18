@@ -2,20 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
     android:orientation="vertical"
     android:paddingHorizontal="30dp"
     android:paddingBottom="30dp">
 
-    <TextView
+    <pi.restaurant.management.ui.textviews.TextViewItemName
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/set_ingredient_properties"
-        android:textAlignment="center"
-        android:textSize="20sp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="30dp"
-        android:textStyle="bold" />
+        android:text="@string/set_ingredient_properties" />
 
     <RadioGroup
         android:id="@+id/radioGroupIngredientType"

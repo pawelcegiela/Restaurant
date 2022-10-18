@@ -1,6 +1,7 @@
 package pi.restaurant.management.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurant.management.databinding.FragmentItemListSubBinding
 import pi.restaurant.management.model.activities.AbstractActivityViewModel
 import pi.restaurant.management.ui.adapters.AbstractRecyclerAdapter
-import pi.restaurant.management.ui.views.DialogFilter
+import pi.restaurant.management.ui.dialogs.FilterDialog
 
-open class ItemListSubFragment(private val fabFilter: FloatingActionButton) : Fragment() {
+open class ItemListSubFragment(private val fabFilter: FloatingActionButton, private val searchView: SearchView) : Fragment() {
     private var _binding: FragmentItemListSubBinding? = null
     protected val binding get() = _binding!!
     protected lateinit var activityViewModel: AbstractActivityViewModel
@@ -25,13 +26,29 @@ open class ItemListSubFragment(private val fabFilter: FloatingActionButton) : Fr
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
+        setAdapter()
         initializeSearchView()
+
+        fabFilter.setOnClickListener {
+            FilterDialog(this, activityViewModel.getShowActive(), activityViewModel.getShowDisabled()) { active, disabled ->
+                activityViewModel.setShowActive(active)
+                activityViewModel.setShowDisabled(disabled)
+                setAdapter()
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fabFilter.setOnClickListener(null)
+        searchView.setOnQueryTextListener(null)
     }
 
     private fun initializeSearchView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        (binding.recyclerView.adapter as AbstractRecyclerAdapter?)?.filter(searchView.query.toString())
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 (binding.recyclerView.adapter as AbstractRecyclerAdapter?)?.filter(query)
                 return false
@@ -42,24 +59,6 @@ open class ItemListSubFragment(private val fabFilter: FloatingActionButton) : Fr
                 return false
             }
         })
-    }
-
-    override fun onPause() {
-        super.onPause()
-        fabFilter.setOnClickListener(null)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setAdapter()
-
-        fabFilter.setOnClickListener {
-            DialogFilter(this, activityViewModel.getShowActive(), activityViewModel.getShowDisabled()) { active, disabled ->
-                activityViewModel.setShowActive(active)
-                activityViewModel.setShowDisabled(disabled)
-                setAdapter()
-            }
-        }
     }
 
     open fun setAdapter() {}

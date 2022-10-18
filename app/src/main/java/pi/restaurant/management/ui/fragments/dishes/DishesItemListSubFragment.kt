@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurant.management.model.activities.DishesViewModel
@@ -18,8 +19,9 @@ class DishesItemListSubFragment(
     private var list: MutableList<DishBasic>,
     private val position: Int,
     fabFilter: FloatingActionButton,
+    searchView: SearchView,
     private val showInactive: Boolean
-) : ItemListSubFragment(fabFilter) {
+) : ItemListSubFragment(fabFilter, searchView) {
     private val _activityViewModel: DishesViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

@@ -1,4 +1,4 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.textviews
 
 import android.content.Context
 import android.graphics.Typeface
@@ -11,6 +11,6 @@ class TextViewCardTitle(context: Context?, attrs: AttributeSet?) : androidx.appc
         textSize = 22F
         gravity = Gravity.CENTER
         typeface = Typeface.DEFAULT_BOLD
-        setTextColor(resources.getColor(R.color.white, null))
+        setTextColor(resources.getColor(R.color.light_grey, null))
     }
 }

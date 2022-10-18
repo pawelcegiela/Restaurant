@@ -1,9 +1,37 @@
 <resources>
 
-    <style name="Theme.RestaurantManagement" parent="Base.Theme.RestaurantManagement">
+    <style name="Theme.RestaurantManagement" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Transparent system bars for edge-to-edge. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+
+        <item name="colorPrimary">@color/blue_5</item>
+        <item name="colorSecondary">@color/blue_2a</item>
+
+        <item name="colorOnPrimary">@color/light_grey</item>
+
+        <item name="android:textColor">@color/light_grey</item>
+
+        <item name="android:colorBackground">@color/light_grey</item>
+        <item name="android:colorBackgroundFloating">@color/medium_grey</item>
+
+        <item name="android:forceDarkAllowed">false</item>
+<!--        <item name="fontFamily">@font/app_font</item>-->
+    </style>
+
+    <style name="RestaurantAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:background">@color/medium_grey</item>
+    </style>
+
+    <style name="RestaurantTabLayout" parent="Widget.Material3.TabLayout">
+        <item name="tabIndicatorColor">@color/blue_1</item>
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">@color/blue_4</item>
+        <item name="android:background">@color/blue_4</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextColor">@color/light_grey</item>
     </style>
 </resources>

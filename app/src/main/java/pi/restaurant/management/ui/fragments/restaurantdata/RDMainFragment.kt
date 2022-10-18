@@ -15,7 +15,7 @@ import pi.restaurant.management.objects.data.restaurantdata.RestaurantData
 import pi.restaurant.management.objects.data.restaurantdata.RestaurantDataBasic
 import pi.restaurant.management.objects.data.restaurantdata.RestaurantDataDetails
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurant.management.ui.views.TextViewDetail
+import pi.restaurant.management.ui.textviews.TextViewDetail
 import pi.restaurant.management.utils.StringFormatUtils
 
 class RDMainFragment : AbstractPreviewItemFragment() {

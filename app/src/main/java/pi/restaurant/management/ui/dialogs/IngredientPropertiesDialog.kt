@@ -1,4 +1,4 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.dialogs
 
 import android.app.Dialog
 import android.graphics.Color
@@ -13,7 +13,7 @@ import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
 import pi.restaurant.management.ui.fragments.ingredients.AbstractModifyIngredientFragment
 import java.math.BigDecimal
 
-class DialogIngredientProperties(
+class IngredientPropertiesDialog(
     val fragment: Fragment,
     private val item: Pair<IngredientItem, IngredientStatus>,
     private val isNew: Boolean
@@ -23,8 +23,6 @@ class DialogIngredientProperties(
 
     init {
         setContentView(binding.root)
-
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContent()
         setListener()
         show()

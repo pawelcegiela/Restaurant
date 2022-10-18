@@ -1,4 +1,4 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.textviews
 
 import android.content.Context
 import android.graphics.Typeface

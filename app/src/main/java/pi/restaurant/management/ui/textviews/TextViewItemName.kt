@@ -1,4 +1,4 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.textviews
 
 import android.content.Context
 import android.graphics.Typeface
@@ -12,6 +12,6 @@ class TextViewItemName(context: Context?, attrs: AttributeSet?) : androidx.appco
         gravity = Gravity.CENTER
         typeface = Typeface.DEFAULT_BOLD
         textAlignment = TEXT_ALIGNMENT_CENTER
-        setTextColor(resources.getColor(R.color.white, null))
+        setTextColor(resources.getColor(R.color.light_grey, null))
     }
 }

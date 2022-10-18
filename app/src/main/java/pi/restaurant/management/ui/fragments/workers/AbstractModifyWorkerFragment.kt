@@ -14,7 +14,7 @@ import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.ui.views.SpinnerAdapter
+import pi.restaurant.management.ui.adapters.SpinnerAdapter
 import pi.restaurant.management.utils.PreconditionUtils
 import pi.restaurant.management.utils.StringFormatUtils
 
@@ -51,7 +51,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
             firstName = binding.editTextFirstName.text.toString(),
             lastName = binding.editTextLastName.text.toString(),
             role = binding.spinnerRole.selectedItemId.toInt(),
-            disabled = disabled,
+            disabled = user.basic.disabled,
             delivery = binding.checkBoxDelivery.isChecked
         )
         val details = UserDetails(

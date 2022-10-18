@@ -25,7 +25,6 @@ class DiscountsMainFragment : AbstractItemListFragment() {
     override fun addViewPagerAdapters() {
         activityViewModel.setList((viewModel.dataList.value ?: ArrayList()) as ArrayList<DiscountBasic>)
 
-        binding.tabLayout.visibility = View.VISIBLE
         val list = DiscountsTab.values()
         val names = DiscountsTab.getArrayOfStrings(requireContext())
         binding.pager.adapter = PagerAdapter(
@@ -35,7 +34,8 @@ class DiscountsMainFragment : AbstractItemListFragment() {
             requireActivity(),
             this,
             viewModel.dataList.value,
-            binding.fabFilter
+            binding.fabFilter,
+            searchView
         )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->

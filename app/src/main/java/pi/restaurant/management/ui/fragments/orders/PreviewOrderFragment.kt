@@ -22,7 +22,7 @@ import pi.restaurant.management.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurant.management.ui.adapters.StatusChangesRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.ui.listeners.SetDelivererButtonListener
-import pi.restaurant.management.ui.views.YesNoDialog
+import pi.restaurant.management.ui.dialogs.YesNoDialog
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
 

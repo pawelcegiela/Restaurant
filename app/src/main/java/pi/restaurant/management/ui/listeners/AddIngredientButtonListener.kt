@@ -10,7 +10,7 @@ import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
-import pi.restaurant.management.ui.views.DialogIngredientProperties
+import pi.restaurant.management.ui.dialogs.IngredientPropertiesDialog
 
 class AddIngredientButtonListener(
     private val recyclerList: MutableList<IngredientItem>,
@@ -33,7 +33,7 @@ class AddIngredientButtonListener(
                     ).show()
                 } else {
                     val ingredientItem = IngredientItem(list[position].id, list[position].name, list[position].unit)
-                    DialogIngredientProperties(fragment, Pair(ingredientItem, IngredientStatus.BASE), true)
+                    IngredientPropertiesDialog(fragment, Pair(ingredientItem, IngredientStatus.BASE), true)
                 }
                 dialog.dismiss()
             }

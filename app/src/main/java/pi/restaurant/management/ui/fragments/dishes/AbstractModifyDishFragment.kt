@@ -22,8 +22,8 @@ import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
 import pi.restaurant.management.ui.listeners.AddAllergenButtonListener
 import pi.restaurant.management.ui.listeners.AddIngredientButtonListener
-import pi.restaurant.management.ui.views.DialogIngredientProperties
-import pi.restaurant.management.ui.views.SpinnerAdapter
+import pi.restaurant.management.ui.dialogs.IngredientPropertiesDialog
+import pi.restaurant.management.ui.adapters.SpinnerAdapter
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
 
@@ -190,7 +190,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     fun changeIngredientProperties(ingredientItem: IngredientItem, originalList: IngredientStatus) {
-        DialogIngredientProperties(this, Pair(ingredientItem, originalList), false)
+        IngredientPropertiesDialog(this, Pair(ingredientItem, originalList), false)
     }
 
     fun removeIngredient(item: Pair<IngredientItem, IngredientStatus>) {

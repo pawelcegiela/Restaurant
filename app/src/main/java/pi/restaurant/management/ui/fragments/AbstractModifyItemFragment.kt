@@ -14,8 +14,9 @@ import pi.restaurant.management.model.fragments.AbstractModifyItemViewModel
 import pi.restaurant.management.objects.data.SplitDataObject
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.objects.enums.Role
-import pi.restaurant.management.ui.views.DialogRemoval
-import pi.restaurant.management.ui.views.YesNoDialog
+import pi.restaurant.management.ui.dialogs.RemovalDialog
+import pi.restaurant.management.ui.dialogs.YesNoDialog
+import pi.restaurant.management.ui.fragments.workers.EditWorkerFragment
 import pi.restaurant.management.utils.UserInterfaceUtils
 
 abstract class AbstractModifyItemFragment : Fragment() {
@@ -102,8 +103,8 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
 
         toolbarNavigation.cardSaveRemove.cardRemove.setOnClickListener {
-            if (Role.isAtLeastAdmin(viewModel.userRole.value)) {
-                DialogRemoval(this, { disableItem() }, { removeFromDatabase() })
+            if (Role.isAtLeastAdmin(viewModel.userRole.value) && this !is EditWorkerFragment) {
+                RemovalDialog(this, { disableItem() }, { removeFromDatabase() })
             } else {
                 disableItem()
             }

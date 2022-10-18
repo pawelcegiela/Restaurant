@@ -1,4 +1,4 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.pickers
 
 import android.app.Dialog
 import android.app.TimePickerDialog

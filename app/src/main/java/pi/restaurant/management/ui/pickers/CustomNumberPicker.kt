@@ -1,4 +1,4 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.pickers
 
 import pi.restaurant.management.databinding.CustomNumberPickerBinding
 

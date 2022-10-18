@@ -1,38 +1,31 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.dialogs
 
 import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import pi.restaurant.management.databinding.DialogFilterBinding
 
-class DialogFilter(
+class FilterDialog(
     val fragment: Fragment,
-    private val showActive: Boolean,
-    private val showDisabled: Boolean,
-    private val onSave: (Boolean, Boolean) -> (Unit)
+    showActive: Boolean,
+    showDisabled: Boolean,
+    onSave: (Boolean, Boolean) -> (Unit)
 ) :
     Dialog(fragment.requireContext()) {
     val binding: DialogFilterBinding = DialogFilterBinding.inflate(layoutInflater, null, false)
 
     init {
         setContentView(binding.root)
+        val width = (fragment.resources.displayMetrics.widthPixels * 0.9).toInt()
+        window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        setContent()
-        setListener()
-        show()
-    }
-
-    private fun setContent() {
         binding.checkBoxActive.isChecked = showActive
         binding.checkBoxDisabled.isChecked = showDisabled
-    }
 
-    private fun setListener() {
-        binding.cardSave.setOnClickListener {
+        binding.buttonSave.setOnClickListener {
             onSave(binding.checkBoxActive.isChecked, binding.checkBoxDisabled.isChecked)
             dismiss()
         }
+        show()
     }
 }

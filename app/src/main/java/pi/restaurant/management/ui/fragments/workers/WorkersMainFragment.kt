@@ -16,7 +16,6 @@ class WorkersMainFragment : AbstractItemListFragment() {
     private val _viewModel: WorkersMainViewModel by viewModels()
 
     override fun addViewPagerAdapters() {
-        binding.tabLayout.visibility = View.VISIBLE
         val list = WorkersTab.values()
         val names = WorkersTab.getArrayOfStrings(requireContext())
         binding.pager.adapter = PagerAdapter(
@@ -26,7 +25,8 @@ class WorkersMainFragment : AbstractItemListFragment() {
             requireActivity(),
             this,
             viewModel.dataList.value,
-            binding.fabFilter
+            binding.fabFilter,
+            searchView
         )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->

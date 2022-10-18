@@ -16,8 +16,8 @@ import pi.restaurant.management.objects.data.discount.DiscountDetails
 import pi.restaurant.management.objects.enums.DiscountType
 import pi.restaurant.management.objects.enums.Precondition
 import pi.restaurant.management.ui.fragments.AbstractModifyItemFragment
-import pi.restaurant.management.ui.views.DatePickerFragment
-import pi.restaurant.management.ui.views.SpinnerAdapter
+import pi.restaurant.management.ui.pickers.DatePickerFragment
+import pi.restaurant.management.ui.adapters.SpinnerAdapter
 import pi.restaurant.management.utils.ComputingUtils
 import pi.restaurant.management.utils.StringFormatUtils
 

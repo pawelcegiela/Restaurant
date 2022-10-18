@@ -345,4 +345,7 @@
     <string name="disable">Disable</string>
     <string name="removal_message">Do you want to disable this item or to fully remove it from the database? None of these actions can be undone. It is recommend to disable items in order to keep the full history of the restaurant and prevent problems on the client side.</string>
     <string name="this_item_has_been_disabled">This item has been disabled</string>
+    <string name="current_password_colon">Current password:</string>
+    <string name="new_password_colon">New password:</string>
+    <string name="repeat_new_password_colon">Repeat new password:</string>
 </resources>

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurant.management.model.activities.OrdersViewModel
@@ -17,8 +18,9 @@ import pi.restaurant.management.ui.fragments.ItemListSubFragment
 class OrdersItemListSubFragment(
     private var list: MutableList<OrderBasic>,
     private val position: Int,
-    fabFilter: FloatingActionButton
-) : ItemListSubFragment(fabFilter) {
+    fabFilter: FloatingActionButton,
+    private val searchView: SearchView
+) : ItemListSubFragment(fabFilter, searchView) {
     private val _activityViewModel: OrdersViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -41,7 +43,7 @@ class OrdersItemListSubFragment(
         }
 
         setAdapter()
-        binding.searchView.visibility = View.GONE
+        searchView.visibility = View.GONE
     }
 
     private fun getFilteredList(): MutableList<OrderBasic> {

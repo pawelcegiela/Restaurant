@@ -20,7 +20,7 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <pi.restaurant.management.ui.views.CardViewPreviewElement
+            <pi.restaurant.management.ui.CardViewPreviewElement
                 android:id="@+id/cardAllergenDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                             android:padding="6dp"
                             android:src="@drawable/allergen" />
 
-                        <pi.restaurant.management.ui.views.EditTextItemName
+                        <pi.restaurant.management.ui.textviews.EditTextItemName
                             android:id="@+id/editTextName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
 
                     </LinearLayout>
 
-                    <pi.restaurant.management.ui.views.TextViewDetailTitle
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewDescriptionTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
 
                 </LinearLayout>
 
-            </pi.restaurant.management.ui.views.CardViewPreviewElement>
+            </pi.restaurant.management.ui.CardViewPreviewElement>
 
         </LinearLayout>
 

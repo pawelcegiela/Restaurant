@@ -1,4 +1,4 @@
-package pi.restaurant.management.ui.views
+package pi.restaurant.management.ui.adapters
 
 import android.content.Context
 import android.widget.ArrayAdapter

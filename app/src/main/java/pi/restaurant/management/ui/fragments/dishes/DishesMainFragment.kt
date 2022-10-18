@@ -26,7 +26,6 @@ class DishesMainFragment : AbstractItemListFragment() {
     }
 
     override fun addViewPagerAdapters() {
-        binding.tabLayout.visibility = View.VISIBLE
         val list = DishType.values()
         val names = DishesTab.getArrayOfStrings(requireContext())
         binding.pager.adapter = PagerAdapter(
@@ -36,7 +35,8 @@ class DishesMainFragment : AbstractItemListFragment() {
             requireActivity(),
             this,
             viewModel.dataList.value,
-            binding.fabFilter
+            binding.fabFilter,
+            searchView
         )
 
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
