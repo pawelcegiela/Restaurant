@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.databinding.ItemOrderDishBinding
 import pi.restaurant.management.objects.data.dish.DishItem
-import pi.restaurant.management.ui.fragments.orders.AbstractModifyOrderFragment
-import pi.restaurant.management.ui.fragments.orders.PreviewOrderFragment
+import pi.restaurant.management.ui.fragments.management.orders.AbstractModifyOrderFragment
+import pi.restaurant.management.ui.fragments.management.orders.PreviewOrderFragment
 import pi.restaurant.management.utils.StringFormatUtils
 
 

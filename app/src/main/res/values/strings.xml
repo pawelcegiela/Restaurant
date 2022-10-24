@@ -354,4 +354,15 @@
     <string name="correction_description">Enter amount you want to remove from the database. The value will be subtracted from the current available amount, which equals %1$s</string>
     <string name="amount_changes_history">Amount changes history</string>
     <string name="accepted_order">Accepted order</string>
+    <string name="log_in_as_a_worker">Log in as a worker</string>
+    <string name="worker_authentication">Worker authentication</string>
+    <string name="sign_in">Sign in</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="repeat_password_colon">Repeat password:</string>
+    <string name="e_mail_colon">E-mail:</string>
+    <string name="worker_account_no_data">This account is not a worker account or it has no data. If you\'re sure you want to log in to this account as a worker, contact administrator</string>
+    <string name="customer_account_no_data">This account is not a customer account or it has no data. If you\'re sure you want to log in to this account as a customer, contact administrator</string>
+    <string name="customer">Customer</string>
+    <string name="customer_authentication">Customer authentication</string>
+    <string name="log_in_as_a_customer">Log in as a customer</string>
 </resources>

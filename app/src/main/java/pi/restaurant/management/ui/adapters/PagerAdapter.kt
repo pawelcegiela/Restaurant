@@ -15,15 +15,15 @@ import pi.restaurant.management.objects.data.dish.DishBasic
 import pi.restaurant.management.objects.data.ingredient.IngredientBasic
 import pi.restaurant.management.objects.data.order.OrderBasic
 import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.ui.activities.*
-import pi.restaurant.management.ui.fragments.ItemListSubFragment
-import pi.restaurant.management.ui.fragments.allergens.AllergensItemListSubFragment
-import pi.restaurant.management.ui.fragments.discounts.DiscountsItemListSubFragment
-import pi.restaurant.management.ui.fragments.dishes.DishesItemListSubFragment
-import pi.restaurant.management.ui.fragments.dishes.DishesMainFragment
-import pi.restaurant.management.ui.fragments.ingredients.IngredientsItemListSubFragment
-import pi.restaurant.management.ui.fragments.orders.OrdersItemListSubFragment
-import pi.restaurant.management.ui.fragments.workers.WorkersItemListSubFragment
+import pi.restaurant.management.ui.activities.management.*
+import pi.restaurant.management.ui.fragments.management.ItemListSubFragment
+import pi.restaurant.management.ui.fragments.management.allergens.AllergensItemListSubFragment
+import pi.restaurant.management.ui.fragments.management.discounts.DiscountsItemListSubFragment
+import pi.restaurant.management.ui.fragments.management.dishes.DishesItemListSubFragment
+import pi.restaurant.management.ui.fragments.management.dishes.DishesMainFragment
+import pi.restaurant.management.ui.fragments.management.ingredients.IngredientsItemListSubFragment
+import pi.restaurant.management.ui.fragments.management.orders.OrdersItemListSubFragment
+import pi.restaurant.management.ui.fragments.management.workers.WorkersItemListSubFragment
 
 @Suppress("UNCHECKED_CAST")
 class PagerAdapter<Tab>(

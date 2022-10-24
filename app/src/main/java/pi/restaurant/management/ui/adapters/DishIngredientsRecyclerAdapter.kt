@@ -10,9 +10,9 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ItemSubItemBinding
 import pi.restaurant.management.objects.data.ingredient.IngredientItem
 import pi.restaurant.management.objects.enums.IngredientStatus
-import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
-import pi.restaurant.management.ui.fragments.ingredients.AbstractModifyIngredientFragment
-import pi.restaurant.management.ui.fragments.orders.CustomizeDishFragment
+import pi.restaurant.management.ui.fragments.management.dishes.AbstractModifyDishFragment
+import pi.restaurant.management.ui.fragments.management.ingredients.AbstractModifyIngredientFragment
+import pi.restaurant.management.ui.fragments.management.orders.CustomizeDishFragment
 import pi.restaurant.management.utils.StringFormatUtils
 
 

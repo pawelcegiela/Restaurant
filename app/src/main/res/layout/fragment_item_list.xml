@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragments.AbstractItemListFragment">
+    tools:context=".ui.fragments.management.AbstractItemListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

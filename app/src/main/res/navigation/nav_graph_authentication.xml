@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_authentication"
+    app:startDestination="@id/CustomerAuthenticationFragment">
+
+    <fragment
+        android:id="@+id/CustomerAuthenticationFragment"
+        android:name="pi.restaurant.management.ui.fragments.authentication.CustomerAuthenticationFragment"
+        android:label="@string/customer_authentication"
+        tools:layout="@layout/fragment_authentication">
+
+        <action
+            android:id="@+id/actionCustomerAuthenticationToWorker"
+            app:destination="@id/WorkerAuthenticationFragment"
+            app:popUpTo="@id/CustomerAuthenticationFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/WorkerAuthenticationFragment"
+        android:name="pi.restaurant.management.ui.fragments.authentication.WorkerAuthenticationFragment"
+        android:label="@string/worker_authentication"
+        tools:layout="@layout/fragment_authentication">
+
+        <action
+            android:id="@+id/actionWorkerAuthenticationToCustomer"
+            app:destination="@id/CustomerAuthenticationFragment"
+            app:popUpTo="@id/CustomerAuthenticationFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="pi.restaurant.management.ui.activities.management.MainActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_main" />
+
+</navigation>

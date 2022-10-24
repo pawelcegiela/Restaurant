@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/AllergensMainFragment"
-        android:name="pi.restaurant.management.ui.fragments.allergens.AllergensMainFragment"
+        android:name="pi.restaurant.management.ui.fragments.management.allergens.AllergensMainFragment"
         android:label="@string/allergens"
         tools:layout="@layout/fragment_item_list">
 
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/AddAllergenFragment"
-        android:name="pi.restaurant.management.ui.fragments.allergens.AddAllergenFragment"
+        android:name="pi.restaurant.management.ui.fragments.management.allergens.AddAllergenFragment"
         android:label="@string/add_allergen"
         tools:layout="@layout/fragment_modify_allergen">
         <action
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/EditAllergenFragment"
-        android:name="pi.restaurant.management.ui.fragments.allergens.EditAllergenFragment"
+        android:name="pi.restaurant.management.ui.fragments.management.allergens.EditAllergenFragment"
         android:label="@string/edit_allergen"
         tools:layout="@layout/fragment_modify_allergen">
         <action
@@ -50,7 +50,7 @@
 
     <fragment
         android:id="@+id/PreviewAllergenFragment"
-        android:name="pi.restaurant.management.ui.fragments.allergens.PreviewAllergenFragment"
+        android:name="pi.restaurant.management.ui.fragments.management.allergens.PreviewAllergenFragment"
         android:label="@string/preview_allergen"
         tools:layout="@layout/fragment_preview_allergen">
         <action
@@ -65,49 +65,49 @@
 
     <activity
         android:id="@+id/MainActivity"
-        android:name="pi.restaurant.management.ui.activities.MainActivity"
+        android:name="pi.restaurant.management.ui.activities.management.MainActivity"
         android:label="Home"
         tools:layout="@layout/activity_main" />
 
     <activity
         android:id="@+id/DiscountsActivity"
-        android:name="pi.restaurant.management.ui.activities.DiscountsActivity"
+        android:name="pi.restaurant.management.ui.activities.management.DiscountsActivity"
         android:label="@string/discounts"
         tools:layout="@layout/activity_discounts" />
 
     <activity
         android:id="@+id/IngredientsActivity"
-        android:name="pi.restaurant.management.ui.activities.IngredientsActivity"
+        android:name="pi.restaurant.management.ui.activities.management.IngredientsActivity"
         android:label="@string/ingredients"
         tools:layout="@layout/activity_ingredients" />
 
     <activity
         android:id="@+id/DishesActivity"
-        android:name="pi.restaurant.management.ui.activities.DishesActivity"
+        android:name="pi.restaurant.management.ui.activities.management.DishesActivity"
         android:label="@string/dishes"
         tools:layout="@layout/activity_dishes" />
 
     <activity
         android:id="@+id/OrdersActivity"
-        android:name="pi.restaurant.management.ui.activities.OrdersActivity"
+        android:name="pi.restaurant.management.ui.activities.management.OrdersActivity"
         android:label="@string/orders"
         tools:layout="@layout/activity_orders" />
 
     <activity
         android:id="@+id/RestaurantDataActivity"
-        android:name="pi.restaurant.management.ui.activities.RestaurantDataActivity"
+        android:name="pi.restaurant.management.ui.activities.management.RestaurantDataActivity"
         android:label="@string/restaurant_data"
         tools:layout="@layout/activity_restaurant_data" />
 
     <activity
         android:id="@+id/WorkersActivity"
-        android:name="pi.restaurant.management.ui.activities.WorkersActivity"
+        android:name="pi.restaurant.management.ui.activities.management.WorkersActivity"
         android:label="@string/workers"
         tools:layout="@layout/activity_workers" />
 
     <activity
         android:id="@+id/SettingsActivity"
-        android:name="pi.restaurant.management.ui.activities.SettingsActivity"
+        android:name="pi.restaurant.management.ui.activities.management.SettingsActivity"
         android:label="@string/action_settings"
         tools:layout="@layout/activity_settings" />
 

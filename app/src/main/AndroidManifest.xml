@@ -24,31 +24,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="pi.restaurant.management.ui.activities.MainActivity"
+            android:name="pi.restaurant.management.ui.activities.management.MainActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.DiscountsActivity"
+            android:name="pi.restaurant.management.ui.activities.management.DiscountsActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.IngredientsActivity"
+            android:name="pi.restaurant.management.ui.activities.management.IngredientsActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.DishesActivity"
+            android:name="pi.restaurant.management.ui.activities.management.DishesActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.AllergensActivity"
+            android:name="pi.restaurant.management.ui.activities.management.AllergensActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.OrdersActivity"
+            android:name="pi.restaurant.management.ui.activities.management.OrdersActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.RestaurantDataActivity"
+            android:name="pi.restaurant.management.ui.activities.management.RestaurantDataActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.WorkersActivity"
+            android:name="pi.restaurant.management.ui.activities.management.WorkersActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name="pi.restaurant.management.ui.activities.SettingsActivity"
+            android:name="pi.restaurant.management.ui.activities.management.SettingsActivity"
             android:screenOrientation="nosensor" />
     </application>
 

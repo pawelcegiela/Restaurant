@@ -8,7 +8,7 @@ import android.widget.ListView
 import android.widget.Toast
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
-import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
+import pi.restaurant.management.ui.fragments.management.dishes.AbstractModifyDishFragment
 
 class AddAllergenButtonListener(
     context: Context,

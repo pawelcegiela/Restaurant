@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.authentication.WorkerAuthenticationFragment">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <pi.restaurant.management.ui.CardViewPreviewElement
+                android:id="@+id/cardLogIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        android:id="@+id/textViewLogIn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/log_in" />
+
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewLogInEmailTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/e_mail_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextLogInEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/e_mail"
+                        android:importantForAutofill="no"
+                        android:inputType="textWebEmailAddress" />
+
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewLogInPasswordTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/password_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextLogInPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:importantForAutofill="no"
+                        android:inputType="textPassword" />
+
+                    <Button
+                        android:id="@+id/buttonLogIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="@string/log_in" />
+
+                </LinearLayout>
+            </pi.restaurant.management.ui.CardViewPreviewElement>
+
+            <pi.restaurant.management.ui.CardViewPreviewElement
+                android:id="@+id/cardSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        android:id="@+id/textViewSignIn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/sign_in" />
+
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewSignInEmailTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/e_mail_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextSignInEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/e_mail"
+                        android:importantForAutofill="no"
+                        android:inputType="textWebEmailAddress" />
+
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewSignInPasswordTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/password_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextSignInPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:importantForAutofill="no"
+                        android:inputType="textPassword" />
+
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewSignInRepeatPasswordTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/repeat_password_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextSignInRepeatPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/repeat_password"
+                        android:importantForAutofill="no"
+                        android:inputType="textPassword" />
+
+                    <Button
+                        android:id="@+id/buttonSignIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="@string/sign_in" />
+
+                </LinearLayout>
+            </pi.restaurant.management.ui.CardViewPreviewElement>
+
+            <pi.restaurant.management.ui.CardViewPreviewElement
+                android:id="@+id/cardResetPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        android:id="@+id/textViewResetPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/reset_password" />
+
+                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewResetEmailTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/e_mail_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextResetPassEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/e_mail"
+                        android:importantForAutofill="no"
+                        android:inputType="textWebEmailAddress" />
+
+                    <Button
+                        android:id="@+id/buttonResetPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="@string/reset_password" />
+
+                </LinearLayout>
+            </pi.restaurant.management.ui.CardViewPreviewElement>
+
+            <Button
+                android:id="@+id/buttonLogInAsWorker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="30dp"
+                android:text="@string/log_in_as_a_worker" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

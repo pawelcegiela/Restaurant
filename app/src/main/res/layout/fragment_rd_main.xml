@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurant.management.model.fragments.restaurantdata.RDMainViewModel" />
+            type="pi.restaurant.management.model.fragments.management.restaurantdata.RDMainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.fragments.restaurantdata.RDMainFragment">
+        tools:context=".ui.fragments.management.restaurantdata.RDMainFragment">
 
         <ScrollView
             android:id="@+id/scrollView"

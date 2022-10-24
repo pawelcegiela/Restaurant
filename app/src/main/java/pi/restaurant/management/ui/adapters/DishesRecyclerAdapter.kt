@@ -11,8 +11,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ItemDishesBinding
 import pi.restaurant.management.objects.data.AbstractDataObject
 import pi.restaurant.management.objects.data.dish.DishBasic
-import pi.restaurant.management.ui.activities.DishesActivity
-import pi.restaurant.management.ui.activities.OrdersActivity
+import pi.restaurant.management.ui.activities.management.DishesActivity
+import pi.restaurant.management.ui.activities.management.OrdersActivity
 import pi.restaurant.management.utils.StringFormatUtils
 import java.util.*
 

@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import pi.restaurant.management.R
 import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.ui.fragments.orders.PreviewOrderFragment
+import pi.restaurant.management.ui.fragments.management.orders.PreviewOrderFragment
 
 class SetDelivererButtonListener(
     private val liveList: LiveData<MutableList<UserBasic>>,

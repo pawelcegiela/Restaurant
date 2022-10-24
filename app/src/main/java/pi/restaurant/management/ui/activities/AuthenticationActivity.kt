@@ -18,8 +18,8 @@ import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ActivityAuthenticationBinding
 import pi.restaurant.management.model.activities.AuthenticationViewModel
 import pi.restaurant.management.objects.data.user.UserBasic
-import pi.restaurant.management.objects.data.user.UserDetails
 import pi.restaurant.management.objects.enums.Role
+import pi.restaurant.management.ui.activities.management.MainActivity
 import java.util.*
 
 
@@ -38,15 +38,23 @@ class AuthenticationActivity : AppCompatActivity() {
         if (intent.getBooleanExtra("logOut", false)) {
             logOut()
         } else {
-            authenticate()
+            authenticate { data ->
+                if (data == null || !data.disabled) {
+                    keepSplashScreen = false
+                    Toast.makeText(
+                        this@AuthenticationActivity,
+                        getString(R.string.authentication_failed),
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    startMainActivity(data.role)
+                }
+            }
         }
 
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
-
-        setButtonLogInListener()
-        setResetPasswordListener()
+        setSupportActionBar(binding.toolbar.toolbar)
     }
 
     private fun logOut() {
@@ -57,7 +65,7 @@ class AuthenticationActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun authenticate() {
+    fun authenticate(callback: (UserBasic?) -> (Unit)) {
         val user = Firebase.auth.currentUser
         if (user == null) {
             keepSplashScreen = false
@@ -68,101 +76,61 @@ class AuthenticationActivity : AppCompatActivity() {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val data = dataSnapshot.getValue<UserBasic>()
-                if (data == null) {
-                    addUserToDatabase()
-                }
-                if (data == null || !data.disabled) {
-                    startMainActivity()
-                } else {
-                    keepSplashScreen = false
-                    Toast.makeText(
-                        this@AuthenticationActivity,
-                        getString(R.string.account_has_been_disabled),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                callback(data)
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
     }
 
-    private fun addUserToDatabase() {
-        val basic = UserBasic(
-            id = Firebase.auth.uid!!,
-            firstName = getString(R.string.temp_first_name),
-            lastName = getString(R.string.temp_last_name),
-            role = Role.WORKER.ordinal,
-            disabled = false,
-            delivery = false
-        )
-        val details = UserDetails(
-            id = Firebase.auth.uid!!,
-            email = Firebase.auth.currentUser?.email!!,
-            creationDate = Date(),
-            ordersToDeliver = HashMap()
-        )
-
-        Firebase.database.getReference("users").child("basic").child(Firebase.auth.uid!!).setValue(basic)
-        Firebase.database.getReference("users").child("details").child(Firebase.auth.uid!!).setValue(details)
-
-        Toast.makeText(
-            this@AuthenticationActivity,
-            getString(R.string.no_user_data_found),
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun setButtonLogInListener() {
-        binding.buttonLogIn.setOnClickListener {
-            val email = binding.editTextLogInEmail.text.toString()
-            val password = binding.editTextLogInPassword.text.toString()
-
-            if (email == "" || password == "") {
-                Toast.makeText(this, getString(R.string.enter_email_password), Toast.LENGTH_SHORT)
-                    .show()
-                return@setOnClickListener
-            }
-
-            Firebase.auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        authenticate()
-                    } else {
-                        binding.editTextLogInPassword.setText("")
-                        Toast.makeText(
-                            baseContext, getString(R.string.authentication_failed),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+    fun loginAsWorker(data: UserBasic?) {
+        if (data == null || !Role.isWorkerRole(data.role)) {
+            keepSplashScreen = false
+            Toast.makeText(
+                this@AuthenticationActivity,
+                getString(R.string.worker_account_no_data),
+                Toast.LENGTH_LONG
+            ).show()
+            Firebase.auth.signOut()
+        } else if (!data.disabled) {
+            keepSplashScreen = false
+            Toast.makeText(
+                this@AuthenticationActivity,
+                getString(R.string.account_has_been_disabled),
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            startMainActivity(data.role)
         }
     }
 
-    private fun setResetPasswordListener() {
-        binding.buttonResetPassword.setOnClickListener {
-            val email = binding.editTextResetPassEmail.text.toString()
-            if (email == "") {
-                Toast.makeText(this, getString(R.string.enter_email), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            Firebase.auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        binding.editTextResetPassEmail.setText("")
-                        Toast.makeText(
-                            this,
-                            getString(R.string.password_reset_email_sent),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+    fun loginAsCustomer(data: UserBasic?) {
+        if (data == null || Role.isWorkerRole(data.role)) {
+            keepSplashScreen = false
+            Toast.makeText(
+                this@AuthenticationActivity,
+                getString(R.string.customer_account_no_data),
+                Toast.LENGTH_LONG
+            ).show()
+            Firebase.auth.signOut()
+        } else if (!data.disabled) {
+            keepSplashScreen = false
+            Toast.makeText(
+                this@AuthenticationActivity,
+                getString(R.string.account_has_been_disabled),
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            startMainActivity(data.role)
         }
     }
 
-    private fun startMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+    fun startMainActivity(role: Int) {
+        if (Role.isWorkerRole(role)) {
+            startActivity(Intent(this, MainActivity::class.java))
+        } else {
+//            startActivity(Intent(this, CustomerMainActivity::class.java))
+        }
         finish()
     }
 }

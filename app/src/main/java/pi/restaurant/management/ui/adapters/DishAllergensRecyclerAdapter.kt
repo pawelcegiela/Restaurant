@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.ItemSubItemBinding
 import pi.restaurant.management.objects.data.allergen.AllergenBasic
-import pi.restaurant.management.ui.fragments.dishes.AbstractModifyDishFragment
+import pi.restaurant.management.ui.fragments.management.dishes.AbstractModifyDishFragment
 
 
 class DishAllergensRecyclerAdapter(
