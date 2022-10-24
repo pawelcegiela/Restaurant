@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurant.management.model.fragments.management.workers.PreviewWorkerViewModel" />
+            type="pi.restaurantapp.model.fragments.management.workers.PreviewWorkerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.fragments.management.workers.PreviewWorkerFragment">
+        tools:context="pi.restaurantapp.ui.fragments.management.workers.PreviewWorkerFragment">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -33,7 +33,7 @@
                 android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.GONE}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardWorkerDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,13 +71,13 @@
                                 android:layout_marginHorizontal="15dp"
                                 android:orientation="vertical">
 
-                                <pi.restaurant.management.ui.textviews.TextViewItemName
+                                <pi.restaurantapp.ui.textviews.TextViewItemName
                                     android:id="@+id/textViewName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="7dp" />
 
-                                <pi.restaurant.management.ui.textviews.TextViewItemType
+                                <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewRole"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content" />
@@ -86,7 +86,7 @@
 
                         </LinearLayout>
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewEmailTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -94,13 +94,13 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/email_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{vm.item.details.email}"/>
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCreationDateTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -108,13 +108,13 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/account_creation_date_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewCreationDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/no_creation_date_to_display" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDeliveryTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/can_deliver_orders" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewDelivery"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
 
                     </LinearLayout>
 
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
             </LinearLayout>
 

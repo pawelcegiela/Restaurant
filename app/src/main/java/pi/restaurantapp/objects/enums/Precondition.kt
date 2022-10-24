@@ -1,0 +1,14 @@
+package pi.restaurantapp.objects.enums
+
+import pi.restaurantapp.R
+
+enum class Precondition(val nameRes: Int) {
+    OK(0),
+    PASSWORDS_DIFFER(R.string.passwords_differ),
+    PASSWORD_TOO_WEAK(R.string.password_too_weak),
+    TOO_LOW_ROLE(R.string.you_can_set_lower_roles),
+    INVALID_OPENING_HOURS(R.string.opening_hour_cant_be_earlier_than_closing),
+    TOO_LOW_VALUE_DELIVERY(R.string.too_low_value_delivery),
+    EMPTY_ORDER(R.string.order_should_contain_at_least_one_dish),
+    DISCOUNT_CODE_EXISTS(R.string.discount_code_exists)
+}

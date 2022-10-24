@@ -6,14 +6,14 @@
     android:paddingHorizontal="30dp"
     android:paddingBottom="30dp">
 
-    <pi.restaurant.management.ui.textviews.TextViewItemName
+    <pi.restaurantapp.ui.textviews.TextViewItemName
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="30dp"
         android:text="@string/information" />
 
-    <pi.restaurant.management.ui.textviews.TextViewDetail
+    <pi.restaurantapp.ui.textviews.TextViewDetail
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/removal_message" />

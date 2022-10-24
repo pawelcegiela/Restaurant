@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragments.management.workers.AbstractModifyWorkerFragment">
+    tools:context="pi.restaurantapp.ui.fragments.management.workers.AbstractModifyWorkerFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <pi.restaurant.management.ui.CardViewPreviewElement
+            <pi.restaurantapp.ui.CardViewPreviewElement
                 android:id="@+id/cardWorkerDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                             android:padding="6dp"
                             android:src="@drawable/worker" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewItemName
+                        <pi.restaurantapp.ui.textviews.TextViewItemName
                             android:id="@+id/textViewName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
 
                     </LinearLayout>
 
-                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewFirstNameTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                         android:importantForAutofill="no"
                         android:inputType="text" />
 
-                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewLastNameTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                         android:importantForAutofill="no"
                         android:inputType="text" />
 
-                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewEmailTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textEmailAddress" />
 
-                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewRoleTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewDeliveryTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewUserPasswordTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
                             android:importantForAutofill="no"
                             android:inputType="textPassword" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewRepeatUserPasswordTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                             android:importantForAutofill="no"
                             android:inputType="textPassword" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewPasswordTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
 
                     </LinearLayout>
                 </LinearLayout>
-            </pi.restaurant.management.ui.CardViewPreviewElement>
+            </pi.restaurantapp.ui.CardViewPreviewElement>
 
         </LinearLayout>
 

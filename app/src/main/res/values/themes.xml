@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.RestaurantManagement" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Restaurant" parent="Theme.Material3.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/blue_5</item>
         <item name="colorSecondary">@color/blue_2a</item>
@@ -30,15 +30,15 @@
         <item name="tabTextColor">@color/light_grey</item>
     </style>
 
-    <style name="Theme.RestaurantManagement.AppBarOverlay"
+    <style name="Theme.Restaurant.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.RestaurantManagement.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Restaurant.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/blue_5</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/restaurant_small</item>
         <item name="windowSplashScreenAnimationDuration">200</item>
-        <item name="postSplashScreenTheme">@style/Theme.RestaurantManagement</item>
+        <item name="postSplashScreenTheme">@style/Theme.Restaurant</item>
     </style>
 
 </resources>

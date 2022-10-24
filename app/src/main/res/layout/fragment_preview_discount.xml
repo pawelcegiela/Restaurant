@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurant.management.model.fragments.management.discounts.PreviewDiscountViewModel" />
+            type="pi.restaurantapp.model.fragments.management.discounts.PreviewDiscountViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.fragments.management.discounts.PreviewDiscountFragment">
+        tools:context="pi.restaurantapp.ui.fragments.management.discounts.PreviewDiscountFragment">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -33,7 +33,7 @@
                 android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.GONE}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardDiscountDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,14 +71,14 @@
                                 android:layout_marginHorizontal="15dp"
                                 android:orientation="vertical">
 
-                                <pi.restaurant.management.ui.textviews.TextViewItemName
+                                <pi.restaurantapp.ui.textviews.TextViewItemName
                                     android:id="@+id/textViewCode"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="7dp"
                                     android:text="@{vm.item.basic.id}" />
 
-                                <pi.restaurant.management.ui.textviews.TextViewItemType
+                                <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewDiscount"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 
                         </LinearLayout>
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDiscountValueTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -96,12 +96,12 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/discount_value_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewDiscountValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewThresholdTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -109,12 +109,12 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/valid_above_total_order_value_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewThreshold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCreationDateTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -122,12 +122,12 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/creation_date_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewCreationDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewExpirationDateTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,12 +135,12 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/expiration_date_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewExpirationDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewAvailableTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -148,12 +148,12 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/number_of_available_discounts_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewAvailable"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewAssignedTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -161,12 +161,12 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/number_of_assigned_discounts_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewAssigned"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewRedeemedTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -174,14 +174,14 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/number_of_redeemed_discounts_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewRedeemed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
             </LinearLayout>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragments.management.restaurantdata.EditAboutRestaurantFragment">
+    tools:context="pi.restaurantapp.ui.fragments.management.restaurantdata.EditAboutRestaurantFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <pi.restaurant.management.ui.CardViewPreviewElement
+            <pi.restaurantapp.ui.CardViewPreviewElement
                 android:id="@+id/cardAboutRestaurantDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                             android:padding="6dp"
                             android:src="@drawable/about_restaurant" />
 
-                        <pi.restaurant.management.ui.textviews.EditTextItemName
+                        <pi.restaurantapp.ui.textviews.EditTextItemName
                             android:id="@+id/editTextRestaurantName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
 
                     </LinearLayout>
 
-                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewDescriptionTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine" />
                 </LinearLayout>
-            </pi.restaurant.management.ui.CardViewPreviewElement>
+            </pi.restaurantapp.ui.CardViewPreviewElement>
         </LinearLayout>
     </ScrollView>
 

@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurant.management.model.fragments.management.restaurantdata.RDMainViewModel" />
+            type="pi.restaurantapp.model.fragments.management.restaurantdata.RDMainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.fragments.management.restaurantdata.RDMainFragment">
+        tools:context="pi.restaurantapp.ui.fragments.management.restaurantdata.RDMainFragment">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -34,7 +34,7 @@
                 android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.GONE}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardRestaurantDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                                 android:padding="6dp"
                                 android:src="@drawable/restaurant" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewItemName
+                            <pi.restaurantapp.ui.textviews.TextViewItemName
                                 android:id="@+id/textViewName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
 
                         </LinearLayout>
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDescriptionTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -84,15 +84,15 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/description_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{vm.item.basic.aboutRestaurant.description.empty ? @string/no_restaurant_description : vm.item.basic.aboutRestaurant.description}" />
                     </LinearLayout>
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardOpeningHours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                         android:layout_marginBottom="25dp"
                         android:orientation="vertical">
 
-                        <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
                             android:id="@+id/textViewOpeningHours"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewMondayTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/monday_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewMonday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -141,7 +141,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewTuesdayTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/tuesday_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewTuesday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -162,7 +162,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewWednesdayTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/wednesday_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewWednesday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -183,7 +183,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewThursdayTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/thursday_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewThursday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -204,7 +204,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewFridayTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/friday_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewFriday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -225,7 +225,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewSaturdayTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/saturday_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewSaturday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -246,7 +246,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewSundayTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -254,16 +254,16 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/sunday_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewSunday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
 
                     </LinearLayout>
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -277,14 +277,14 @@
                         android:layout_marginBottom="25dp"
                         android:orientation="vertical">
 
-                        <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
                             android:id="@+id/textViewLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="20dp"
                             android:text="@string/location" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewAddressTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -292,15 +292,15 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/address" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardDelivery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -314,14 +314,14 @@
                         android:layout_marginBottom="25dp"
                         android:orientation="vertical">
 
-                        <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
                             android:id="@+id/textViewDelivery"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="20dp"
                             android:text="@string/delivery" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewAvailableDeliveryTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -329,7 +329,7 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/is_delivery_available" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewAvailableDelivery"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
@@ -340,7 +340,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewMinimumPriceTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -348,12 +348,12 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/minimum_order_price_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewMinimumPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewDeliveryFeeTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -361,12 +361,12 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/extra_delivery_fee_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewDeliveryFee"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewFreeDeliveryTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -374,7 +374,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/free_delivery_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewFreeDelivery"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -382,7 +382,7 @@
                         </LinearLayout>
 
                     </LinearLayout>
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
             </LinearLayout>
 

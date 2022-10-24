@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.fragments.management.ingredients.AbstractModifyIngredientFragment">
+    tools:context="pi.restaurantapp.ui.fragments.management.ingredients.AbstractModifyIngredientFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <pi.restaurant.management.ui.CardViewPreviewElement
+            <pi.restaurantapp.ui.CardViewPreviewElement
                 android:id="@+id/cardIngredientDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                             android:padding="6dp"
                             android:src="@drawable/ingredient" />
 
-                        <pi.restaurant.management.ui.textviews.EditTextItemName
+                        <pi.restaurantapp.ui.textviews.EditTextItemName
                             android:id="@+id/editTextName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
 
                     </LinearLayout>
 
-                    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewAmountTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,9 +86,9 @@
 
                 </LinearLayout>
 
-            </pi.restaurant.management.ui.CardViewPreviewElement>
+            </pi.restaurantapp.ui.CardViewPreviewElement>
 
-            <pi.restaurant.management.ui.CardViewPreviewElement
+            <pi.restaurantapp.ui.CardViewPreviewElement
                 android:id="@+id/cardSubIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
-                    <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                    <pi.restaurantapp.ui.textviews.TextViewCardTitle
                         android:id="@+id/textViewSubIngredients"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                         android:text="@string/add_sub_ingredient" />
 
                 </LinearLayout>
-            </pi.restaurant.management.ui.CardViewPreviewElement>
+            </pi.restaurantapp.ui.CardViewPreviewElement>
 
         </LinearLayout>
 

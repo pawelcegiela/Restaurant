@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.RestaurantManagement" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Restaurant" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/blue_5</item>
         <item name="colorSecondary">@color/blue_2a</item>
 

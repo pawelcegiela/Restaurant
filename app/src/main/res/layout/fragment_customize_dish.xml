@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurant.management.model.fragments.management.orders.CustomizeDishViewModel" />
+            type="pi.restaurantapp.model.fragments.management.orders.CustomizeDishViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.fragments.management.orders.CustomizeDishFragment">
+        tools:context="pi.restaurantapp.ui.fragments.management.orders.CustomizeDishFragment">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.GONE}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardDishDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,13 +70,13 @@
                                 android:layout_marginHorizontal="15dp"
                                 android:orientation="vertical">
 
-                                <pi.restaurant.management.ui.textviews.TextViewItemName
+                                <pi.restaurantapp.ui.textviews.TextViewItemName
                                     android:id="@+id/textViewName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="7dp" />
 
-                                <pi.restaurant.management.ui.textviews.TextViewItemType
+                                <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewDishType"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content" />
@@ -107,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <pi.restaurant.management.ui.textviews.TextViewLessMore
+                            <pi.restaurantapp.ui.textviews.TextViewLessMore
                                 android:id="@+id/textViewDetailsMore"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
@@ -124,7 +124,7 @@
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewDescriptionTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -132,13 +132,13 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/description_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewDescription"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/no_dish_description" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewAmountTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -146,13 +146,13 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/estimated_amount_weight_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewAmount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/no_amount_dish" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                            <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewRecipeTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -160,13 +160,13 @@
                                 android:layout_marginBottom="10dp"
                                 android:text="@string/recipe_and_info_colon" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewDetail
+                            <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewRecipe"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/no_dish_recipe" />
 
-                            <pi.restaurant.management.ui.textviews.TextViewLessMore
+                            <pi.restaurantapp.ui.textviews.TextViewLessMore
                                 android:id="@+id/textViewDetailsLess"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
@@ -176,9 +176,9 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardThisOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -191,14 +191,14 @@
                         android:layout_gravity="center"
                         android:orientation="vertical">
 
-                        <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
                             android:id="@+id/textViewThisOrder"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="20dp"
                             android:text="@string/this_order" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewTotalDishPriceTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -206,13 +206,13 @@
                             android:layout_marginBottom="10dp"
                             android:text="@string/total_dish_price_colon" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetail
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewTotalDishPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewPortionsTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -226,9 +226,9 @@
 
                     </LinearLayout>
 
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
                         android:layout_gravity="center"
                         android:orientation="vertical">
 
-                        <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
                             android:id="@+id/textViewIngredients"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -253,7 +253,7 @@
                             android:layout_height="250dp"
                             app:layoutManager="LinearLayoutManager" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewOtherIngredients"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -267,7 +267,7 @@
                             android:layout_height="250dp"
                             app:layoutManager="LinearLayoutManager" />
 
-                        <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewPossibleIngredients"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -283,9 +283,9 @@
 
                     </LinearLayout>
 
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                <pi.restaurant.management.ui.CardViewPreviewElement
+                <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardAllergens"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -298,7 +298,7 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="vertical">
 
-                        <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
                             android:id="@+id/textViewAllergens"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -312,7 +312,7 @@
                             app:layoutManager="LinearLayoutManager" />
 
                     </LinearLayout>
-                </pi.restaurant.management.ui.CardViewPreviewElement>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
             </LinearLayout>
 
