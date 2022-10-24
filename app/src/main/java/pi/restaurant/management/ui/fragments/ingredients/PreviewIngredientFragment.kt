@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.fragment.app.viewModels
 import pi.restaurant.management.R
 import pi.restaurant.management.databinding.FragmentPreviewIngredientBinding
@@ -11,14 +13,20 @@ import pi.restaurant.management.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurant.management.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurant.management.model.fragments.ingredients.PreviewIngredientViewModel
 import pi.restaurant.management.objects.data.ingredient.Ingredient
+import pi.restaurant.management.objects.data.ingredient.IngredientAmountChange
 import pi.restaurant.management.objects.data.ingredient.IngredientDetails
+import pi.restaurant.management.objects.enums.IngredientModificationType
 import pi.restaurant.management.objects.enums.IngredientStatus
+import pi.restaurant.management.objects.enums.Unit
 import pi.restaurant.management.ui.RecyclerManager
+import pi.restaurant.management.ui.adapters.AmountChangesRecyclerAdapter
 import pi.restaurant.management.ui.adapters.ContainingItemsRecyclerAdapter
 import pi.restaurant.management.ui.adapters.DishIngredientsRecyclerAdapter
+import pi.restaurant.management.ui.dialogs.IngredientChangesDialog
 import pi.restaurant.management.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurant.management.utils.StringFormatUtils
 import pi.restaurant.management.utils.UserInterfaceUtils
+import java.lang.Integer.max
 
 class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
@@ -47,6 +55,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         if (!item.basic.subDish) {
             binding.textViewAmount.text =
                 StringFormatUtils.formatAmountWithUnit(requireContext(), item.basic.amount.toString(), item.basic.unit)
+            setButtonListeners(item.id, item.basic.unit)
         }
 
         binding.textViewType.text = if (item.basic.subDish) getString(R.string.sub_dish) else getString(R.string.ingredient)
@@ -61,11 +70,39 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         }
 
         if (item.details.containingDishes.isEmpty() && item.details.containingSubDishes.isEmpty()) {
-//            binding.cardContaining.visibility = View.GONE
             viewModel.setReadyToUnlock()
         } else {
             setContainingDishes(item.details)
             setContainingSubDishes(item.details)
+        }
+        setAmountChangesRecycler(item.details.amountChanges, Unit.getString(item.basic.unit, requireContext()))
+    }
+
+    private fun setButtonListeners(id: String, unit: Int) {
+        binding.buttonDelivery.setOnClickListener {
+            IngredientChangesDialog(
+                requireContext(),
+                unit,
+                getString(R.string.delivery),
+                getString(R.string.delivery_description, binding.textViewAmount.text)
+            ) { amount ->
+                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.DELIVERY) { newAmount ->
+                    binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
+                }
+            }
+        }
+
+        binding.buttonCorrection.setOnClickListener {
+            IngredientChangesDialog(
+                requireContext(),
+                unit,
+                getString(R.string.correction),
+                getString(R.string.correction_description, binding.textViewAmount.text)
+            ) { amount ->
+                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.CORRECTION) { newAmount ->
+                    binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
+                }
+            }
         }
     }
 
@@ -117,5 +154,23 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
                 }
             }
         }
+    }
+
+    private fun setAmountChangesRecycler(amountChanges: HashMap<String, IngredientAmountChange>, unit: String) {
+        val firstIndex = max(amountChanges.size - 10, 0)
+        val lastIndex = amountChanges.size
+        binding.recyclerViewAmountChanges.adapter =
+            AmountChangesRecyclerAdapter(amountChanges.map { it.value }.sortedByDescending { it.date }.subList(firstIndex, lastIndex), this, unit)
+//        val layoutParams2 = LinearLayout.LayoutParams(
+//            0,
+//            0
+//        )
+//        binding.recyclerViewAmountChanges.layoutParams = layoutParams2
+        val layoutParams = LinearLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+        binding.recyclerViewAmountChanges.layoutParams = layoutParams
+        binding.recyclerViewAmountChanges.layoutManager = RecyclerManager(context)
     }
 }

@@ -103,6 +103,29 @@
                             android:layout_marginBottom="5dp"
                             android:visibility="@{vm.item.basic.subDish ? View.GONE : View.VISIBLE}" />
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="30dp"
+                            android:visibility="@{vm.item.basic.subDish ? View.GONE : View.VISIBLE}">
+
+                            <Button
+                                android:id="@+id/buttonDelivery"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/delivery"
+                                android:layout_marginHorizontal="10dp"/>
+
+                            <Button
+                                android:id="@+id/buttonCorrection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/correction"
+                                android:layout_marginHorizontal="10dp"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </pi.restaurant.management.ui.CardViewPreviewElement>
@@ -179,6 +202,34 @@
                             android:id="@+id/recyclerViewSubDishesContaining"
                             android:layout_width="match_parent"
                             android:layout_height="250dp" />
+
+                    </LinearLayout>
+                </pi.restaurant.management.ui.CardViewPreviewElement>
+
+                <pi.restaurant.management.ui.CardViewPreviewElement
+                    android:id="@+id/cardAmountChanges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <pi.restaurant.management.ui.textviews.TextViewCardTitle
+                            android:id="@+id/textViewAmountChanges"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="20dp"
+                            android:text="@string/amount_changes_history" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewAmountChanges"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"/>
 
                     </LinearLayout>
                 </pi.restaurant.management.ui.CardViewPreviewElement>

@@ -69,30 +69,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="35dp"
                         android:layout_marginBottom="10dp"
-                        android:text="@string/amount_colon" />
+                        android:text="@string/unit_colon" />
 
-                    <RelativeLayout
+                    <Spinner
+                        android:id="@+id/spinnerUnit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/editTextAmount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_toStartOf="@+id/spinnerUnit"
-                            android:hint="@string/amount"
-                            android:importantForAutofill="no"
-                            android:inputType="number" />
-
-                        <Spinner
-                            android:id="@+id/spinnerUnit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginStart="20dp" />
-                    </RelativeLayout>
+                        android:layout_marginBottom="15dp"/>
 
                     <CheckBox
                         android:id="@+id/checkBoxSubDish"

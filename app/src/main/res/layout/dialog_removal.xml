@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingHorizontal="35dp"
-        android:paddingVertical="8dp"
+        android:paddingVertical="12dp"
         android:text="@string/continue_" />
 
 </LinearLayout>

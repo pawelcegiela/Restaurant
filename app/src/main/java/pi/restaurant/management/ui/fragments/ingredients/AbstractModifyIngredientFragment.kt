@@ -58,6 +58,10 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     private fun setCheckBoxListener() {
         binding.checkBoxSubDish.setOnCheckedChangeListener { _, isChecked ->
             binding.cardSubIngredients.visibility = if (isChecked) View.VISIBLE else View.GONE
+            binding.spinnerUnit.isEnabled = !isChecked
+            if (isChecked) {
+                binding.spinnerUnit.setSelection(Unit.PIECE.ordinal)
+            }
         }
     }
 
@@ -116,7 +120,7 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         val basic = IngredientBasic(
             id = itemId,
             name = binding.editTextName.text.toString(),
-            amount = if (!binding.checkBoxSubDish.isChecked) binding.editTextAmount.text.toString().toInt() else 0,
+            amount = ingredient.basic.amount,
             unit = binding.spinnerUnit.selectedItemPosition,
             subDish = binding.checkBoxSubDish.isChecked,
         )
@@ -124,7 +128,8 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
             id = itemId,
             subIngredients = if (binding.checkBoxSubDish.isChecked) subIngredientsList else null,
             containingDishes = ingredient.details.containingDishes,
-            containingSubDishes = ingredient.details.containingSubDishes
+            containingSubDishes = ingredient.details.containingSubDishes,
+            amountChanges = ingredient.details.amountChanges
         )
 
         return SplitDataObject(itemId, basic, details)
@@ -133,7 +138,6 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
         map[binding.editTextName] = R.string.name
-        map[binding.editTextAmount] = R.string.amount
         return map
     }
 }

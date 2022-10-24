@@ -7,35 +7,17 @@
     android:paddingBottom="30dp">
 
     <pi.restaurant.management.ui.textviews.TextViewItemName
+        android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
-        android:text="@string/set_ingredient_properties" />
+        android:layout_marginBottom="15dp" />
 
-    <RadioGroup
-        android:id="@+id/radioGroupIngredientType"
+    <pi.restaurant.management.ui.textviews.TextViewDetailTitle
+        android:id="@+id/textViewDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/radioBaseIngredient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/base_ingredient" />
-
-        <RadioButton
-            android:id="@+id/radioOtherIngredient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/other_ingredient" />
-
-        <RadioButton
-            android:id="@+id/radioPossibleIngredient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/possible_ingredient" />
-    </RadioGroup>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,18 +43,14 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/editTextExtraPrice"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:hint="@string/extra_price"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:singleLine="true" />
-
-    <include
-        android:id="@+id/toolbarNavigation"
-        layout="@layout/toolbar_navigation_dialog" />
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:paddingHorizontal="35dp"
+        android:paddingVertical="12dp"
+        android:text="@string/save" />
 
 </LinearLayout>

@@ -20,12 +20,14 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
     override fun initializeUI() {
         super.initializeUI()
         itemId = arguments?.getString("id").toString()
+        binding.spinnerUnit.isEnabled = false
+        binding.checkBoxSubDish.isEnabled = false
     }
 
     override fun fillInData() {
         val data = _viewModel.item.value ?: Ingredient()
+
         binding.editTextName.setText(data.basic.name)
-        binding.editTextAmount.setText(data.basic.amount.toString())
         binding.spinnerUnit.setSelection(data.basic.unit)
         binding.checkBoxSubDish.isChecked = data.basic.subDish
         subIngredientsList = data.details.subIngredients ?: ArrayList()

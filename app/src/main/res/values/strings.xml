@@ -348,4 +348,10 @@
     <string name="current_password_colon">Current password:</string>
     <string name="new_password_colon">New password:</string>
     <string name="repeat_new_password_colon">Repeat new password:</string>
+    <string name="unit_colon">Unit:</string>
+    <string name="correction">Correction</string>
+    <string name="delivery_description">Enter amount you want to add to the database. The value will be added to the present available amount, which equals %1$s</string>
+    <string name="correction_description">Enter amount you want to remove from the database. The value will be subtracted from the current available amount, which equals %1$s</string>
+    <string name="amount_changes_history">Amount changes history</string>
+    <string name="accepted_order">Accepted order</string>
 </resources>
