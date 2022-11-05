@@ -15,7 +15,7 @@ import pi.restaurantapp.objects.data.openinghours.OpeningHours
 import pi.restaurantapp.objects.data.openinghours.OpeningHoursBasic
 import pi.restaurantapp.objects.data.openinghours.OpeningHoursDetails
 import pi.restaurantapp.objects.enums.Precondition
-import pi.restaurantapp.ui.fragments.management.AbstractModifyItemFragment
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.TimePickerFragment
 import pi.restaurantapp.utils.ComputingUtils
 import pi.restaurantapp.utils.PreconditionUtils

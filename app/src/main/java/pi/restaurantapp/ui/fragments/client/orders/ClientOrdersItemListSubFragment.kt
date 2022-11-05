@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.fragments.management.orders
+package pi.restaurantapp.ui.fragments.client.orders
 
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +15,7 @@ import pi.restaurantapp.objects.enums.OrdersTab
 import pi.restaurantapp.ui.adapters.OrdersRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 
-class OrdersItemListSubFragment(
+class ClientOrdersItemListSubFragment(
     private var list: MutableList<OrderBasic>,
     private val position: Int,
     fabFilter: FloatingActionButton,

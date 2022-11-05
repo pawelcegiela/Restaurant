@@ -10,12 +10,11 @@ import pi.restaurantapp.model.fragments.management.discounts.DiscountsMainViewMo
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.enums.DiscountsTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractItemListFragment
+import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 
 @Suppress("UNCHECKED_CAST")
 class DiscountsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDiscountsToAddDiscount
-    override val editActionId = R.id.actionDiscountsToEditDiscount
     override val viewModel: AbstractItemListViewModel get() = _viewModel
     private val _viewModel: DiscountsMainViewModel by viewModels()
 

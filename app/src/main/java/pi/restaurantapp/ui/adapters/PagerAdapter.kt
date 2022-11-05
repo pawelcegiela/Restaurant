@@ -15,8 +15,10 @@ import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.user.UserBasic
+import pi.restaurantapp.ui.activities.client.ClientOrdersActivity
 import pi.restaurantapp.ui.activities.management.*
-import pi.restaurantapp.ui.fragments.management.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.allergens.AllergensItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.discounts.DiscountsItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.dishes.DishesItemListSubFragment
@@ -56,6 +58,7 @@ class PagerAdapter<Tab>(
                 }
             }
             is WorkersActivity -> WorkersItemListSubFragment(list as MutableList<UserBasic>, position, fabFilter, searchView)
+            is ClientOrdersActivity -> ClientOrdersItemListSubFragment(list as MutableList<OrderBasic>, position, fabFilter, searchView)
             else -> ItemListSubFragment(fabFilter, searchView)
         }
     }

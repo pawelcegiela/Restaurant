@@ -9,11 +9,10 @@ import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
 import pi.restaurantapp.model.fragments.management.orders.OrdersMainViewModel
 import pi.restaurantapp.objects.enums.OrdersTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractItemListFragment
+import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 
 class OrdersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionOrdersToAddOrder
-    override val editActionId = R.id.actionOrdersToEditOrder
     override val viewModel: AbstractItemListViewModel get() = _viewModel
     private val _viewModel: OrdersMainViewModel by viewModels()
     private val activityViewModel: OrdersViewModel by activityViewModels()

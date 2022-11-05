@@ -21,7 +21,7 @@ import pi.restaurantapp.objects.enums.OrderType
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurantapp.ui.adapters.StatusChangesRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractPreviewItemFragment
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.ui.listeners.SetDelivererButtonListener
 import pi.restaurantapp.ui.dialogs.YesNoDialog
 import pi.restaurantapp.utils.StringFormatUtils

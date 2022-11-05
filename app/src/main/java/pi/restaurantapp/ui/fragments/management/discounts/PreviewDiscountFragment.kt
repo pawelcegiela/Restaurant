@@ -11,7 +11,7 @@ import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.discounts.PreviewDiscountViewModel
 import pi.restaurantapp.objects.data.discount.Discount
-import pi.restaurantapp.ui.fragments.management.AbstractPreviewItemFragment
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {

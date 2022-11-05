@@ -23,7 +23,7 @@ import pi.restaurantapp.ui.adapters.AmountChangesRecyclerAdapter
 import pi.restaurantapp.ui.adapters.ContainingItemsRecyclerAdapter
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurantapp.ui.dialogs.IngredientChangesDialog
-import pi.restaurantapp.ui.fragments.management.AbstractPreviewItemFragment
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 import pi.restaurantapp.utils.UserInterfaceUtils
 import java.lang.Integer.max

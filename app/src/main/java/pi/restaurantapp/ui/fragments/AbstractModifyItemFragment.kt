@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.fragments.management
+package pi.restaurantapp.ui.fragments
 
 import android.os.Bundle
 import android.view.View

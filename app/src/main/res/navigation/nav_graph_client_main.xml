@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_client_main"
+    app:startDestination="@id/ClientMainFragment">
+
+    <fragment
+        android:id="@+id/ClientMainFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.main.ClientMainFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/actionClientMainToRestaurantData"
+            app:destination="@id/ClientRestaurantDataActivity" />
+
+        <action
+            android:id="@+id/actionClientMainToOrders"
+            app:destination="@id/ClientOrdersActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/ClientRestaurantDataActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientRestaurantDataActivity"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/activity_client_restaurant_data" />
+
+    <activity
+        android:id="@+id/ClientOrdersActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientOrdersActivity"
+        android:label="@string/orders_history"
+        tools:layout="@layout/activity_client_orders" />
+
+</navigation>

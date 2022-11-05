@@ -12,7 +12,7 @@ import pi.restaurantapp.model.activities.management.DiscountsViewModel
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.enums.DiscountsTab
 import pi.restaurantapp.ui.adapters.DiscountsRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import java.util.*
 
 class DiscountsItemListSubFragment(

@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.fragments.management
+package pi.restaurantapp.ui.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -16,7 +16,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val toolbarNavigation: ToolbarNavigationPreviewBinding
     abstract val editActionId: Int
     abstract val backActionId: Int
-    var editable : Boolean = true
+    var editable: Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,12 +28,8 @@ abstract class AbstractPreviewItemFragment : Fragment() {
     fun addLiveDataObservers() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (Role.isAtLeastManager(role)) {
-                    if (viewModel.shouldGetDataFromDatabase()) {
-                        viewModel.getDataFromDatabase()
-                    }
-                } else {
-                    initializeWorkerUI()
+                if (viewModel.shouldGetDataFromDatabase()) {
+                    viewModel.getDataFromDatabase()
                 }
             }
         }
@@ -41,7 +37,7 @@ abstract class AbstractPreviewItemFragment : Fragment() {
         viewModel.readyToInitialize.observe(viewLifecycleOwner) { ready ->
             if (ready) {
                 fillInData()
-                if (editable && !viewModel.isDisabled()) {
+                if (editable && !viewModel.isDisabled() && Role.isAtLeastManager(viewModel.userRole.value)) {
                     initializeUI()
                 } else {
                     initializeWorkerUI()

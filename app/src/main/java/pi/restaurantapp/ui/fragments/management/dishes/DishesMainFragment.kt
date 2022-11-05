@@ -9,11 +9,10 @@ import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.DishesTab
 import pi.restaurantapp.ui.activities.management.OrdersActivity
 import pi.restaurantapp.ui.adapters.PagerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractItemListFragment
+import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 
 class DishesMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDishesToAddDish
-    override val editActionId = R.id.actionDishesToEditDish
     override val viewModel: AbstractItemListViewModel get() = _viewModel
     private val _viewModel: DishesMainViewModel by viewModels()
 

@@ -13,7 +13,7 @@ import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.DishesTab
 import pi.restaurantapp.ui.adapters.DishesRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.ItemListSubFragment
 
 class DishesItemListSubFragment(
     private var list: MutableList<DishBasic>,

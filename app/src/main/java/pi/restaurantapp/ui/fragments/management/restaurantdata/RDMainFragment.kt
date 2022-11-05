@@ -14,7 +14,8 @@ import pi.restaurantapp.model.fragments.management.restaurantdata.RDMainViewMode
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantData
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantDataBasic
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantDataDetails
-import pi.restaurantapp.ui.fragments.management.AbstractPreviewItemFragment
+import pi.restaurantapp.objects.enums.Role
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.ui.textviews.TextViewDetail
 import pi.restaurantapp.utils.StringFormatUtils
 
@@ -22,7 +23,12 @@ class RDMainFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override var editActionId = R.id.actionRDToEditRestaurantData
-    override val backActionId = R.id.actionRDToMain
+    override val backActionId
+        get() = if (Role.isWorkerRole(_viewModel.userRole.value ?: Role.getPlaceholder())) {
+            R.id.actionRDToMain
+        } else {
+            R.id.actionRDToClientMain
+        }
     override val viewModel: AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel: RDMainViewModel by viewModels()
 

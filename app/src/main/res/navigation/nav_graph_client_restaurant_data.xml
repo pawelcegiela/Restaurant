@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_client_restaurant_data"
+    app:startDestination="@id/RDMainFragment">
+
+    <fragment
+        android:id="@+id/RDMainFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.restaurantdata.RDMainFragment"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/fragment_rd_main">
+
+        <action
+            android:id="@+id/actionRDToClientMain"
+            app:destination="@id/ClientMainActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/ClientMainActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientMainActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_client_main" />
+
+</navigation>

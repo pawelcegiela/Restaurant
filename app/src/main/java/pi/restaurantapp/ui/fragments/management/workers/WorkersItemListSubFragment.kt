@@ -13,7 +13,7 @@ import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.WorkersTab
 import pi.restaurantapp.ui.adapters.WorkersRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.ItemListSubFragment
 
 class WorkersItemListSubFragment(
     private var list: MutableList<UserBasic>,

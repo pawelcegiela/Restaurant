@@ -7,11 +7,10 @@ import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
 import pi.restaurantapp.model.fragments.management.ingredients.IngredientsMainViewModel
 import pi.restaurantapp.objects.enums.IngredientsTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractItemListFragment
+import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 
 class IngredientsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionIngredientsToAddIngredient
-    override val editActionId = R.id.actionIngredientsToEditIngredient
     override val viewModel: AbstractItemListViewModel get() = _viewModel
     private val _viewModel: IngredientsMainViewModel by viewModels()
 

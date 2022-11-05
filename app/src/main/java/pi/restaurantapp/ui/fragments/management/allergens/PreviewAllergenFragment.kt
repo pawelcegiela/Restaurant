@@ -13,7 +13,7 @@ import pi.restaurantapp.model.fragments.management.allergens.PreviewAllergenView
 import pi.restaurantapp.objects.data.allergen.Allergen
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.ContainingItemsRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractPreviewItemFragment
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.utils.UserInterfaceUtils
 
 class PreviewAllergenFragment : AbstractPreviewItemFragment() {

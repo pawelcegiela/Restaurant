@@ -14,7 +14,7 @@ import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurant
 import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurantBasic
 import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurantDetails
-import pi.restaurantapp.ui.fragments.management.AbstractModifyItemFragment
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 
 class EditAboutRestaurantFragment : AbstractModifyItemFragment() {

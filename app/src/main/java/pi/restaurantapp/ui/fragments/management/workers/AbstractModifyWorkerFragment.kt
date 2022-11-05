@@ -13,7 +13,7 @@ import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
-import pi.restaurantapp.ui.fragments.management.AbstractModifyItemFragment
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.utils.PreconditionUtils
 import pi.restaurantapp.utils.StringFormatUtils

@@ -12,7 +12,7 @@ import pi.restaurantapp.model.activities.management.IngredientsViewModel
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.enums.IngredientsTab
 import pi.restaurantapp.ui.adapters.IngredientsRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.ItemListSubFragment
 
 class IngredientsItemListSubFragment(
     private var list: MutableList<IngredientBasic>,

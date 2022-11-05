@@ -7,11 +7,10 @@ import pi.restaurantapp.R
 import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
 import pi.restaurantapp.model.fragments.management.allergens.AllergensMainViewModel
 import pi.restaurantapp.ui.adapters.PagerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractItemListFragment
+import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 
 class AllergensMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionAllergensToAddAllergen
-    override val editActionId = R.id.actionAllergensToEditAllergen
     override val viewModel: AbstractItemListViewModel get() = _viewModel
     private val _viewModel: AllergensMainViewModel by viewModels()
 

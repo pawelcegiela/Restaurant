@@ -19,6 +19,7 @@ import pi.restaurantapp.databinding.ActivityAuthenticationBinding
 import pi.restaurantapp.model.activities.AuthenticationViewModel
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.Role
+import pi.restaurantapp.ui.activities.client.ClientMainActivity
 import pi.restaurantapp.ui.activities.management.MainActivity
 import java.util.*
 
@@ -129,7 +130,7 @@ class AuthenticationActivity : AppCompatActivity() {
         if (Role.isWorkerRole(role)) {
             startActivity(Intent(this, MainActivity::class.java))
         } else {
-//            startActivity(Intent(this, CustomerMainActivity::class.java))
+            startActivity(Intent(this, ClientMainActivity::class.java))
         }
         finish()
     }

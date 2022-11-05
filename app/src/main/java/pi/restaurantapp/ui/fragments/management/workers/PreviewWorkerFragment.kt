@@ -14,7 +14,7 @@ import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.workers.PreviewWorkerViewModel
 import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.enums.Role
-import pi.restaurantapp.ui.fragments.management.AbstractPreviewItemFragment
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {

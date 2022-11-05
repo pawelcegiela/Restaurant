@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.fragments.management
+package pi.restaurantapp.ui.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -19,7 +19,6 @@ abstract class AbstractItemListFragment : Fragment() {
     abstract val viewModel: AbstractItemListViewModel
 
     abstract val addActionId: Int
-    abstract val editActionId: Int
     val progressBar get() = binding.progress.progressBar
     lateinit var searchView: SearchView
 //    var menuProvider: MenuProvider? = null

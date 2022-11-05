@@ -24,7 +24,7 @@ import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.objects.enums.*
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractModifyItemFragment
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.CustomNumberPicker
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.utils.ComputingUtils

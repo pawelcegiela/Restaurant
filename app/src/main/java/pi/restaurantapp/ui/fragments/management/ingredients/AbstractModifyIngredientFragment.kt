@@ -16,7 +16,7 @@ import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.objects.enums.Unit
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractModifyItemFragment
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.listeners.AddIngredientButtonListener
 import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.adapters.SpinnerAdapter

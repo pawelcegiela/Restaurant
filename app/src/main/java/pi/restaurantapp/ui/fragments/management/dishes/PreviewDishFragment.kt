@@ -18,7 +18,7 @@ import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurantapp.ui.adapters.PreviewDishIngredientRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.AbstractPreviewItemFragment
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 import pi.restaurantapp.utils.UserInterfaceUtils
 

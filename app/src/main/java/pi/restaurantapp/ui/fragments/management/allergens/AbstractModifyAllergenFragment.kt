@@ -11,7 +11,7 @@ import pi.restaurantapp.model.fragments.management.allergens.AbstractModifyAller
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.allergen.AllergenDetails
-import pi.restaurantapp.ui.fragments.management.AbstractModifyItemFragment
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 
 abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {

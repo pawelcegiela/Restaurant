@@ -11,7 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurantapp.model.activities.management.IngredientsViewModel
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.ui.adapters.AllergensRecyclerAdapter
-import pi.restaurantapp.ui.fragments.management.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.ItemListSubFragment
 
 class AllergensItemListSubFragment(private val list: MutableList<AllergenBasic>, fabFilter: FloatingActionButton, searchView: SearchView) :
     ItemListSubFragment(fabFilter, searchView) {
