@@ -202,11 +202,11 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
             collectionDate = ComputingUtils.getDateTimeXMinutesAfterDate(order.details.orderDate, numberPickerCollectionTime.getValue()),
             collectionType = binding.spinnerCollectionType.selectedItemId.toInt(),
             value = countFullPrice(),
-            name = if (binding.editTextName.text?.isEmpty() == true) "Order" else binding.editTextName.text.toString()
+            name = if (binding.editTextName.text?.isEmpty() == true) "Order" else binding.editTextName.text.toString(),
+            userId = Firebase.auth.uid ?: ""
         )
         val details = OrderDetails(
             id = itemId,
-            userId = Firebase.auth.uid ?: "",
             orderType = binding.spinnerType.selectedItemId.toInt(),
             orderDate = order.details.orderDate,
             modificationDate = Date(),

@@ -99,7 +99,6 @@ class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
     }
 
     private fun getIngredientsToChange(details: OrderDetails, subDishes: LinkedHashMap<String, IngredientDetails>): HashMap<String, BigDecimal> {
-        // TODO Kwestia subdishów
         val ingredients = HashMap<String, BigDecimal>()
         for (dish in details.dishes.values) {
             val multiplier = BigDecimal(dish.amount)

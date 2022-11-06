@@ -7,7 +7,6 @@ import pi.restaurantapp.utils.StringFormatUtils
 import java.util.*
 
 class OrderDetails : AbstractDataObject {
-    var userId: String = ""
     var orderType: Int = 0
     var orderDate: Date = Date()
     var modificationDate: Date = Date()
@@ -23,7 +22,6 @@ class OrderDetails : AbstractDataObject {
 
     constructor(
         id: String,
-        userId: String,
         orderType: Int,
         orderDate: Date,
         modificationDate: Date,
@@ -35,7 +33,6 @@ class OrderDetails : AbstractDataObject {
         contactPhone: String
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
-        this.userId = userId
         this.orderType = orderType
         this.orderDate = orderDate
         this.modificationDate = modificationDate

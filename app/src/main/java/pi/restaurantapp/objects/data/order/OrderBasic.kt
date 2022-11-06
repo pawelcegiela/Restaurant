@@ -10,6 +10,7 @@ class OrderBasic : AbstractDataObject {
     var collectionType: Int = 0
     var value: String = "0.0"
     var name: String = ""
+    var userId: String = ""
     var disabled: Boolean = false
 
     @Suppress("unused")
@@ -22,6 +23,7 @@ class OrderBasic : AbstractDataObject {
         collectionType: Int,
         value: String,
         name: String,
+        userId: String
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.orderStatus = orderStatus
@@ -29,5 +31,6 @@ class OrderBasic : AbstractDataObject {
         this.collectionType = collectionType
         this.value = value
         this.name = name
+        this.userId = userId
     }
 }

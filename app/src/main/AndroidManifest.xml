@@ -58,6 +58,9 @@
         <activity
             android:name="pi.restaurantapp.ui.activities.client.ClientOrdersActivity"
             android:screenOrientation="nosensor" />
+        <activity
+            android:name="pi.restaurantapp.ui.activities.client.ClientSettingsActivity"
+            android:screenOrientation="nosensor" />
     </application>
 
 </manifest>

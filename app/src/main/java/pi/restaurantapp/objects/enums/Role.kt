@@ -24,7 +24,7 @@ enum class Role(val stringResourceId: Int) {
             return 999
         }
 
-        private fun isAtLeast(role1: Int, role2: Int): Boolean {
+        fun isAtLeast(role1: Int, role2: Int): Boolean {
             return role1 <= role2
         }
 

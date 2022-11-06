@@ -18,6 +18,10 @@
         <action
             android:id="@+id/actionClientMainToOrders"
             app:destination="@id/ClientOrdersActivity" />
+
+        <action
+            android:id="@+id/actionClientMainToSettings"
+            app:destination="@id/ClientSettingsActivity" />
     </fragment>
 
     <activity
@@ -31,5 +35,11 @@
         android:name="pi.restaurantapp.ui.activities.client.ClientOrdersActivity"
         android:label="@string/orders_history"
         tools:layout="@layout/activity_client_orders" />
+
+    <activity
+        android:id="@+id/ClientSettingsActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientSettingsActivity"
+        android:label="@string/my_account_and_preferences"
+        tools:layout="@layout/activity_client_settings" />
 
 </navigation>

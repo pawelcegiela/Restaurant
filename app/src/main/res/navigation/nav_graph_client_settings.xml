@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_client_settings"
+    app:startDestination="@id/ClientSettingsMainFragment">
+
+    <fragment
+        android:id="@+id/ClientSettingsMainFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.settings.ClientSettingsMainFragment"
+        android:label="@string/my_account_and_preferences"
+        tools:layout="@layout/fragment_item_list">
+
+        <action
+            android:id="@+id/actionClientSettingsToMyData"
+            app:destination="@id/ClientMyDataFragment" />
+
+        <action
+            android:id="@+id/actionClientSettingsToPassword"
+            app:destination="@id/PasswordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ClientMyDataFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.settings.ClientMyDataFragment"
+        android:label="@string/my_data"
+        tools:layout="@layout/fragment_client_my_data">
+
+        <action
+            android:id="@+id/actionClientMyDataToSettings"
+            app:destination="@id/ClientSettingsMainFragment"
+            app:popUpTo="@id/ClientSettingsMainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PasswordFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.settings.PasswordFragment"
+        android:label="@string/password"
+        tools:layout="@layout/fragment_password" />
+
+</navigation>

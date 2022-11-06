@@ -10,8 +10,8 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurantapp.model.activities.management.OrdersViewModel
 import pi.restaurantapp.objects.data.order.OrderBasic
+import pi.restaurantapp.objects.enums.ClientOrdersTab
 import pi.restaurantapp.objects.enums.OrderStatus
-import pi.restaurantapp.objects.enums.OrdersTab
 import pi.restaurantapp.ui.adapters.OrdersRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 
@@ -32,13 +32,9 @@ class ClientOrdersItemListSubFragment(
         super.onViewCreated(view, savedInstanceState)
 
         when (position) {
-            OrdersTab.NEW.ordinal -> list = list.filter { it.orderStatus == OrderStatus.NEW.ordinal }.toMutableList()
-            OrdersTab.ACCEPTED.ordinal -> list = list.filter { it.orderStatus == OrderStatus.ACCEPTED.ordinal }.toMutableList()
-            OrdersTab.PREPARING.ordinal -> list = list.filter { it.orderStatus == OrderStatus.PREPARING.ordinal }.toMutableList()
-            OrdersTab.READY.ordinal -> list = list.filter { it.orderStatus == OrderStatus.READY.ordinal }.toMutableList()
-            OrdersTab.DELIVERY.ordinal -> list = list.filter { it.orderStatus == OrderStatus.DELIVERY.ordinal }.toMutableList()
-            OrdersTab.FINISHED.ordinal -> list = list.filter { it.orderStatus == OrderStatus.FINISHED.ordinal }.toMutableList()
-            OrdersTab.CLOSED_WITHOUT_REALIZATION.ordinal -> list =
+            ClientOrdersTab.ACTIVE.ordinal -> list = list.filter { it.orderStatus < OrderStatus.FINISHED.ordinal }.toMutableList()
+            ClientOrdersTab.FINISHED.ordinal -> list = list.filter { it.orderStatus == OrderStatus.FINISHED.ordinal }.toMutableList()
+            ClientOrdersTab.CANCELED.ordinal -> list =
                 list.filter { it.orderStatus == OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal }.toMutableList()
         }
 

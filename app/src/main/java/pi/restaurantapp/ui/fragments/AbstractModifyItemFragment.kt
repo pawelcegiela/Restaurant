@@ -29,6 +29,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     abstract val nextActionId: Int
     abstract val saveMessageId: Int
     abstract val removeMessageId: Int
+    open val lowestRole = Role.MANAGER.ordinal
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +40,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     fun addLiveDataObservers() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (Role.isAtLeastManager(role)) {
+                if (Role.isAtLeast(role, lowestRole)) {
                     initializeUI()
                     viewModel.itemId = itemId
                     if (itemId.isNotEmpty() && viewModel.shouldGetDataFromDatabase()) {

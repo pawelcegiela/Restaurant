@@ -368,4 +368,7 @@
     <string name="new_order">New order</string>
     <string name="orders_history">Orders history</string>
     <string name="my_account_and_preferences"><![CDATA[My account & preferences]]></string>
+    <string name="default_delivery_address_colon">Default delivery address:</string>
+    <string name="cancel_order">Cancel order</string>
+    <string name="canceled">Canceled</string>
 </resources>

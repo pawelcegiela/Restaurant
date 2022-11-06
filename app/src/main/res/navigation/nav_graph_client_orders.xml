@@ -11,6 +11,20 @@
         android:label="@string/orders_history"
         tools:layout="@layout/fragment_item_list">
 
+        <action
+            android:id="@+id/actionClientOrdersMainToPreview"
+            app:destination="@id/ClientPreviewOrderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ClientPreviewOrderFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.orders.ClientPreviewOrderFragment"
+        android:label="@string/preview_order"
+        tools:layout="@layout/fragment_client_preview_order">
+
+        <action
+            android:id="@+id/actionClientPreviewOrderToOrders"
+            app:destination="@id/ClientOrdersMainFragment" />
     </fragment>
 
 </navigation>

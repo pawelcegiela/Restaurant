@@ -1,19 +1,16 @@
-package pi.restaurantapp.ui.fragments.management.orders
+package pi.restaurantapp.ui.fragments.client.orders
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
-import pi.restaurantapp.databinding.FragmentPreviewOrderBinding
+import pi.restaurantapp.databinding.FragmentClientPreviewOrderBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.activities.management.OrdersViewModel
+import pi.restaurantapp.model.fragments.client.orders.ClientPreviewOrderViewModel
 import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
-import pi.restaurantapp.model.fragments.management.orders.PreviewOrderViewModel
 import pi.restaurantapp.objects.data.order.Order
-import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.OrderPlace
 import pi.restaurantapp.objects.enums.OrderStatus
@@ -21,43 +18,36 @@ import pi.restaurantapp.objects.enums.OrderType
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurantapp.ui.adapters.StatusChangesRecyclerAdapter
-import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.ui.listeners.SetDelivererButtonListener
 import pi.restaurantapp.ui.dialogs.YesNoDialog
+import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 import java.util.*
 
-
-class PreviewOrderFragment : AbstractPreviewItemFragment() {
+class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
-    override val editActionId = R.id.actionPreviewOrderToEditOrder
-    override val backActionId = R.id.actionPreviewOrderToOrders
+    override val editActionId = 0 // Warning: unused
+    override val backActionId = R.id.actionClientPreviewOrderToOrders
     override val viewModel: AbstractPreviewItemViewModel get() = _viewModel
-    private val _viewModel: PreviewOrderViewModel by viewModels()
+    private val _viewModel: ClientPreviewOrderViewModel by viewModels()
     private var statusChanges: MutableList<Pair<String, Int>> = ArrayList()
 
-    private val activityViewModel : OrdersViewModel by activityViewModels()
-    private var _binding: FragmentPreviewOrderBinding? = null
+    private var _binding: FragmentClientPreviewOrderBinding? = null
     val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPreviewOrderBinding.inflate(inflater, container, false)
+        _binding = FragmentClientPreviewOrderBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.lifecycleOwner = this
-        activityViewModel.reset()
         return binding.root
     }
 
     override fun fillInData() {
         val item = _viewModel.item.value ?: Order()
-
-        _viewModel.getAllPossibleDeliverers()
-        _viewModel.getUserName(item.basic.userId)
-        editable = !OrderStatus.isFinished(item.basic.orderStatus)
+        editable = false
 
         binding.textViewName.text = item.basic.name
         binding.textViewType.text = OrderType.getString(item.details.orderType, requireContext())
@@ -92,7 +82,7 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         binding.recyclerViewStatusHistory.adapter = StatusChangesRecyclerAdapter(statusChanges, this)
         binding.recyclerViewStatusHistory.layoutManager = RecyclerManager(context)
 
-        setButtonListeners(item)
+        setButtonListener()
         setLiveDataListeners(item)
 
         binding.textViewFullPrice.text = StringFormatUtils.formatPrice(item.basic.value)
@@ -101,35 +91,19 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         }
 
         _viewModel.delivererId = item.details.delivererId
-        if (_viewModel.delivererId.isNotEmpty() && _viewModel.possibleDeliverers.value != null) {
-            setDelivererName(_viewModel.delivererId)
-        } else if (_viewModel.delivererId.isNotEmpty() && _viewModel.possibleDeliverers.value == null) {
-            binding.textViewDeliveryPerson.text = getString(R.string.loading_deliverer)
+        if (_viewModel.delivererId.isNotEmpty()) {
+            _viewModel.getDelivererUserName()
         }
 
-        if (OrderStatus.isFinished(item.basic.orderStatus)) {
-            binding.buttonCloseOrder.visibility = View.GONE
+        if (item.basic.orderStatus > OrderStatus.NEW.ordinal) {
+            binding.buttonCancelOrder.visibility = View.GONE
         }
 
         viewModel.setReadyToUnlock()
     }
 
-    private fun setButtonListeners(item: Order) {
-        binding.buttonNextStatus.setOnClickListener {
-            YesNoDialog(context, R.string.next_status, R.string.are_you_sure_next_status) { dialog, _ ->
-                val newStatus = OrderStatus.getNextStatusId(item.basic.orderStatus, CollectionType.values()[item.basic.collectionType])
-                if (newStatus != item.basic.orderStatus) {
-                    _viewModel.updateOrderStatus(newStatus)
-                }
-                dialog.dismiss()
-            }
-        }
-
-        binding.buttonDeliveryPerson.setOnClickListener(
-            SetDelivererButtonListener(_viewModel.possibleDeliverers, this)
-        )
-
-        binding.buttonCloseOrder.setOnClickListener {
+    private fun setButtonListener() {
+        binding.buttonCancelOrder.setOnClickListener {
             YesNoDialog(context, R.string.close_order_without_realizing, R.string.are_you_sure_close_order) { dialog, _ ->
                 _viewModel.updateOrderStatus(OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal)
                 dialog.dismiss()
@@ -142,9 +116,8 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
             if (status != null) {
                 item.basic.orderStatus = status
                 binding.textViewStatus.text = OrderStatus.getString(status, requireContext())
-                if (OrderStatus.isFinished(status)) {
-                    initializeWorkerUI()
-                    binding.buttonCloseOrder.visibility = View.GONE
+                if (status > OrderStatus.NEW.ordinal) {
+                    binding.buttonCancelOrder.visibility = View.GONE
                 }
             }
         }
@@ -155,23 +128,8 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
                 binding.recyclerViewStatusHistory.adapter?.notifyItemInserted(statusChanges.size - 1)
             }
         }
-        _viewModel.possibleDeliverers.observe(viewLifecycleOwner) { deliverers ->
-            if (deliverers != null && binding.textViewDeliveryPerson.text == getString(R.string.loading_deliverer)) {
-                setDelivererName(_viewModel.delivererId)
-            }
+        _viewModel.delivererName.observe(viewLifecycleOwner) { name ->
+            binding.textViewDeliveryPerson.text = name
         }
-        _viewModel.userName.observe(viewLifecycleOwner) { userName ->
-            binding.textViewUser.text = userName
-        }
-    }
-
-    private fun setDelivererName(delivererId: String) {
-        val deliverers = _viewModel.possibleDeliverers.value ?: ArrayList()
-        binding.textViewDeliveryPerson.text = deliverers.find { it.id == delivererId }?.getFullName()
-    }
-
-    fun setDeliverer(user: UserBasic) {
-        _viewModel.updateDeliverer(user.id)
-        binding.textViewDeliveryPerson.text = user.getFullName()
     }
 }

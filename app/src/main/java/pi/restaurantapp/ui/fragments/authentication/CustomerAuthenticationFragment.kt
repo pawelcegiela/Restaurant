@@ -8,6 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
+import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role
@@ -60,7 +61,9 @@ class CustomerAuthenticationFragment : AbstractAuthenticationFragment() {
             id = userId,
             email = email,
             creationDate = Date(),
-            ordersToDeliver = HashMap()
+            ordersToDeliver = HashMap(),
+            defaultDeliveryAddress = AddressBasic(),
+            contactPhone = ""
         )
 
         Firebase.database.getReference("users").child("basic").child(userId).setValue(basic)

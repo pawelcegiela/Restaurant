@@ -12,6 +12,8 @@ import pi.restaurantapp.databinding.ItemOrdersBinding
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.enums.OrderStatus
+import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragment
+import pi.restaurantapp.ui.fragments.management.orders.OrdersItemListSubFragment
 import pi.restaurantapp.utils.StringFormatUtils
 import java.util.*
 
@@ -40,8 +42,11 @@ class OrdersRecyclerAdapter(
             val bundle = Bundle()
             bundle.putString("id", dataSet[layoutPosition].id)
 
-            fragment.findNavController()
-                .navigate(R.id.actionOrdersToPreviewOrder, bundle)
+            if (fragment is OrdersItemListSubFragment) {
+                fragment.findNavController().navigate(R.id.actionOrdersToPreviewOrder, bundle)
+            } else if (fragment is ClientOrdersItemListSubFragment) {
+                fragment.findNavController().navigate(R.id.actionClientOrdersMainToPreview, bundle)
+            }
         }
     }
 

@@ -22,7 +22,7 @@ abstract class AbstractItemListViewModel : ViewModel() {
     private val _dataList: MutableLiveData<MutableList<AbstractDataObject>> = MutableLiveData<MutableList<AbstractDataObject>>()
     val dataList: LiveData<MutableList<AbstractDataObject>> = _dataList
 
-    fun loadData() {
+    open fun loadData() {
         val databaseRef = Firebase.database.getReference(databasePath).child("basic")
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
