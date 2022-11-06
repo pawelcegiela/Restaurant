@@ -281,6 +281,20 @@
                             android:layout_height="wrap_content"
                             android:text="@string/no_contact_phone" />
 
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewCommentsTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/comments_colon" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
+                            android:id="@+id/textViewComments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_comments" />
+
                         <Button
                             android:layout_marginTop="40dp"
                             android:id="@+id/buttonCloseOrder"

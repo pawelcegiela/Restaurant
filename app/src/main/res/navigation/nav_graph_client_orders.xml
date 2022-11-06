@@ -24,7 +24,9 @@
 
         <action
             android:id="@+id/actionClientPreviewOrderToOrders"
-            app:destination="@id/ClientOrdersMainFragment" />
+            app:destination="@id/ClientOrdersMainFragment"
+            app:popUpTo="@id/ClientOrdersMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

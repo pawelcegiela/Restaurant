@@ -1,12 +1,12 @@
 package pi.restaurantapp.ui.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentItemListBinding
 import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
 import pi.restaurantapp.objects.enums.Role
@@ -21,7 +21,6 @@ abstract class AbstractItemListFragment : Fragment() {
     abstract val addActionId: Int
     val progressBar get() = binding.progress.progressBar
     lateinit var searchView: SearchView
-//    var menuProvider: MenuProvider? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +28,6 @@ abstract class AbstractItemListFragment : Fragment() {
     ): View {
         _binding = FragmentItemListBinding.inflate(inflater, container, false)
         searchView = binding.searchView
-//        menuProvider = setMenuProvider()
-//        activity?.addMenuProvider(menuProvider!!)
         return binding.root
     }
 
@@ -69,34 +66,8 @@ abstract class AbstractItemListFragment : Fragment() {
         }
     }
 
-    private fun setMenuProvider(): MenuProvider {
-        return object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.toolbar_menu, menu)
-                searchView = menu.findItem(R.id.action_search).actionView as SearchView
-                searchView.isIconified = false
-                searchView.isIconifiedByDefault = false
-
-                menu.findItem(R.id.action_search).setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
-                    override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                        searchView.setQuery("", true)
-                        return true
-                    }
-
-                    override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                        searchView.setQuery("", true)
-                        return true
-                    }
-                })
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = true
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
-//        activity?.removeMenuProvider(menuProvider!!)
         _binding = null
     }
 }

@@ -33,10 +33,10 @@ class ClientMainFragment : Fragment() {
             binding.cardRestaurantData, R.drawable.restaurant_data, R.string.restaurant_data,
             findNavController(), R.id.actionClientMainToRestaurantData
         )
-        // TODO Link
+
         UserInterfaceUtils.setCardView(
             binding.cardNewOrder, R.drawable.plus, R.string.new_order,
-            findNavController(), R.id.actionClientMainToRestaurantData
+            findNavController(), R.id.actionClientMainToNewOrder
         )
 
         UserInterfaceUtils.setCardView(

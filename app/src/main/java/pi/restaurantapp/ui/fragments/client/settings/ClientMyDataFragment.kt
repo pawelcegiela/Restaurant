@@ -4,21 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientMyDataBinding
+import pi.restaurantapp.model.fragments.client.settings.ClientMyDataViewModel
 import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.workers.AbstractModifyWorkerViewModel
-import pi.restaurantapp.model.fragments.management.workers.EditWorkerViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
+import pi.restaurantapp.objects.enums.CollectionType
+import pi.restaurantapp.objects.enums.OrderPlace
 import pi.restaurantapp.objects.enums.Role
+import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 
@@ -34,7 +38,7 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     override val lowestRole = Role.CUSTOMER.ordinal
 
     override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : EditWorkerViewModel by viewModels()
+    private val _viewModel : ClientMyDataViewModel by viewModels()
     private var _binding: FragmentClientMyDataBinding? = null
     val binding get() = _binding!!
     var disabled = false
@@ -58,6 +62,8 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
 
     override fun initializeUI() {
         itemId = Firebase.auth.uid ?: return
+
+        initializeSpinners()
     }
 
     override fun getDataObject(): SplitDataObject {
@@ -76,9 +82,10 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
             id = itemId,
             email = binding.editTextEmail.text.toString(),
             creationDate = user.details.creationDate,
-            ordersToDeliver = user.details.ordersToDeliver,
             defaultDeliveryAddress = getAddress(),
-            contactPhone = binding.editTextContactPhone.text.toString()
+            contactPhone = binding.editTextContactPhone.text.toString(),
+            preferredCollectionType = binding.spinnerCollectionType.selectedItemId.toInt(),
+            preferredOrderPlace = binding.spinnerOrderPlace.selectedItemId.toInt()
         )
 
         return SplitDataObject(itemId, basic, details)
@@ -105,8 +112,28 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
         binding.defaultDeliveryAddress.editTextHouseNumber.setText(data.details.defaultDeliveryAddress.houseNumber)
         binding.defaultDeliveryAddress.editTextFlatNumber.setText(data.details.defaultDeliveryAddress.flatNumber)
         binding.editTextContactPhone.setText(data.details.contactPhone)
+        binding.spinnerCollectionType.setSelection(data.details.preferredCollectionType)
+        binding.spinnerOrderPlace.setSelection(data.details.preferredOrderPlace)
 
         setNavigationCardsSave()
+    }
+
+    private fun initializeSpinners() {
+        val context = requireContext()
+        binding.spinnerCollectionType.adapter = SpinnerAdapter(context, CollectionType.getArrayOfStrings(context))
+        binding.spinnerOrderPlace.adapter = SpinnerAdapter(context, OrderPlace.getArrayOfStrings(context))
+
+        binding.spinnerCollectionType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                if (position == CollectionType.DELIVERY.ordinal) {
+                    binding.spinnerOrderPlace.setSelection(CollectionType.SELF_PICKUP.ordinal)
+                }
+                binding.spinnerOrderPlace.isEnabled = position == CollectionType.SELF_PICKUP.ordinal
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+            }
+        }
     }
 
     override fun onDestroyView() {

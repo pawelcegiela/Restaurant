@@ -1,7 +1,6 @@
 package pi.restaurantapp.ui.fragments.client.orders
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,6 @@ class ClientOrdersItemListSubFragment(
     }
 
     override fun setAdapter() {
-        Log.e("Setting adapter", this.javaClass.name + " # " + position)
         binding.recyclerView.adapter = OrdersRecyclerAdapter(getFilteredList(), this)
     }
 }

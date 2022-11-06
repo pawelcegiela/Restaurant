@@ -28,7 +28,7 @@ import pi.restaurantapp.utils.UserInterfaceUtils
 import java.math.BigDecimal
 
 
-class CustomizeDishFragment : AbstractPreviewItemFragment() {
+open class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0
@@ -36,7 +36,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel : CustomizeDishViewModel by viewModels()
 
-    private val activityViewModel : OrdersViewModel by activityViewModels()
+    protected open val activityViewModel : OrdersViewModel by activityViewModels()
     private var _binding: FragmentCustomizeDishBinding? = null
     val binding get() = _binding!!
 
@@ -175,7 +175,7 @@ class CustomizeDishFragment : AbstractPreviewItemFragment() {
         UserInterfaceUtils.setRecyclerSize(recycler, list.size, requireContext())
     }
 
-    private fun getDataObject(): DishItem {
+    protected fun getDataObject(): DishItem {
         val dishItem = (viewModel as CustomizeDishViewModel).getPreviousItem()
         val itemId = dishItem.id.ifEmpty { StringFormatUtils.formatId() }
 

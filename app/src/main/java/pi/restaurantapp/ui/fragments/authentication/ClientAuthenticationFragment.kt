@@ -8,7 +8,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
-import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role
@@ -16,7 +15,7 @@ import pi.restaurantapp.ui.activities.AuthenticationActivity
 import java.util.*
 
 
-class CustomerAuthenticationFragment : AbstractAuthenticationFragment() {
+class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonLogInAsWorker.setOnClickListener {
@@ -60,10 +59,7 @@ class CustomerAuthenticationFragment : AbstractAuthenticationFragment() {
         val details = UserDetails(
             id = userId,
             email = email,
-            creationDate = Date(),
-            ordersToDeliver = HashMap(),
-            defaultDeliveryAddress = AddressBasic(),
-            contactPhone = ""
+            creationDate = Date()
         )
 
         Firebase.database.getReference("users").child("basic").child(userId).setValue(basic)

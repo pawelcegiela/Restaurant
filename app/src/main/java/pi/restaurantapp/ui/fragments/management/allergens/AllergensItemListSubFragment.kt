@@ -1,7 +1,6 @@
 package pi.restaurantapp.ui.fragments.management.allergens
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +38,6 @@ class AllergensItemListSubFragment(private val list: MutableList<AllergenBasic>,
     }
 
     override fun setAdapter() {
-        Log.e("Setting adapter", this.javaClass.name)
         binding.recyclerView.adapter = AllergensRecyclerAdapter(getFilteredList(), this)
     }
 }

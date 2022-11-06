@@ -9,13 +9,12 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyWorkerBinding
 import pi.restaurantapp.model.fragments.management.workers.AbstractModifyWorkerViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
-import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.utils.PreconditionUtils
 import pi.restaurantapp.utils.StringFormatUtils
 
@@ -59,9 +58,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
             id = itemId,
             email = binding.editTextEmail.text.toString(),
             creationDate = user.details.creationDate,
-            ordersToDeliver = user.details.ordersToDeliver,
-            defaultDeliveryAddress = AddressBasic(),
-            contactPhone = ""
+            ordersToDeliver = user.details.ordersToDeliver
         )
 
         return SplitDataObject(itemId, basic, details)

@@ -16,6 +16,10 @@
             app:destination="@id/ClientRestaurantDataActivity" />
 
         <action
+            android:id="@+id/actionClientMainToNewOrder"
+            app:destination="@id/ClientNewOrderActivity" />
+
+        <action
             android:id="@+id/actionClientMainToOrders"
             app:destination="@id/ClientOrdersActivity" />
 
@@ -29,6 +33,12 @@
         android:name="pi.restaurantapp.ui.activities.client.ClientRestaurantDataActivity"
         android:label="@string/restaurant_data"
         tools:layout="@layout/activity_client_restaurant_data" />
+
+    <activity
+        android:id="@+id/ClientNewOrderActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientNewOrderActivity"
+        android:label="@string/new_order"
+        tools:layout="@layout/activity_client_new_order" />
 
     <activity
         android:id="@+id/ClientOrdersActivity"

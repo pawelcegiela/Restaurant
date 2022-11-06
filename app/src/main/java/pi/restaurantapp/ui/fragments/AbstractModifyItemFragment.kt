@@ -61,8 +61,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
         viewModel.saveStatus.observe(viewLifecycleOwner) { saved ->
             if (saved) {
-                Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
-                findNavController().navigate(nextActionId)
+                afterSave()
             }
         }
     }
@@ -75,6 +74,11 @@ abstract class AbstractModifyItemFragment : Fragment() {
     }
 
     open fun fillInData() {}
+
+    open fun afterSave() {
+        Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
+        findNavController().navigate(nextActionId)
+    }
 
     fun setNavigationCardsSave() {
         toolbarNavigation.root.visibility = View.VISIBLE

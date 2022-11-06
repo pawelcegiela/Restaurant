@@ -191,6 +191,22 @@
                         android:importantForAutofill="no"
                         android:inputType="phone" />
 
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewCommentsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/comments_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/comments"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine" />
+
                 </LinearLayout>
 
             </pi.restaurantapp.ui.CardViewPreviewElement>

@@ -11,6 +11,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemDishesBinding
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.dish.DishBasic
+import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.activities.management.DishesActivity
 import pi.restaurantapp.ui.activities.management.OrdersActivity
 import pi.restaurantapp.utils.StringFormatUtils
@@ -45,6 +46,8 @@ class DishesRecyclerAdapter(
                 fragment.findNavController().navigate(R.id.actionDishesToPreviewDish, bundle)
             } else if (fragment.activity is OrdersActivity) {
                 fragment.findNavController().navigate(R.id.actionChooseDishToCustomizeDish, bundle)
+            } else if (fragment.activity is ClientNewOrderActivity) {
+                fragment.findNavController().navigate(R.id.actionClientNewOrderToCustomizeDish, bundle)
             }
         }
     }

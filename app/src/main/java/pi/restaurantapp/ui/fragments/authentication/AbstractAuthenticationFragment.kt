@@ -48,7 +48,7 @@ abstract class AbstractAuthenticationFragment : Fragment() {
                         (activity as AuthenticationActivity).authenticate {
                             if (this is WorkerAuthenticationFragment) {
                                 (activity as AuthenticationActivity).loginAsWorker(it)
-                            } else if (this is CustomerAuthenticationFragment) {
+                            } else if (this is ClientAuthenticationFragment) {
                                 (activity as AuthenticationActivity).loginAsCustomer(it)
                             }
                         }

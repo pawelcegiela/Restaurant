@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_client_new_order"
+    app:startDestination="@id/ClientNewOrderMainFragment">
+
+    <fragment
+        android:id="@+id/ClientNewOrderMainFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.neworder.ClientNewOrderMainFragment"
+        android:label="@string/choose_dishes"
+        tools:layout="@layout/fragment_item_list">
+
+        <action
+            android:id="@+id/actionClientNewOrderToCustomizeDish"
+            app:destination="@id/ClientCustomizeDishFragment" />
+
+        <action
+            android:id="@+id/actionClientNewOrderToFinalizeOrder"
+            app:destination="@id/ClientFinalizeOrderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ClientCustomizeDishFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.neworder.ClientCustomizeDishFragment"
+        android:label="@string/customize_dish"
+        tools:layout="@layout/fragment_customize_dish">
+
+        <action
+            android:id="@+id/actionClientCustomizeDishToNewOrder"
+            app:destination="@id/ClientNewOrderMainFragment"
+            app:popUpTo="@id/ClientNewOrderMainFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/actionClientCustomizeDishToFinalizeOrder"
+            app:destination="@id/ClientFinalizeOrderFragment"
+            app:popUpTo="@id/ClientFinalizeOrderFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ClientFinalizeOrderFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.neworder.ClientFinalizeOrderFragment"
+        android:label="@string/finalize_order"
+        tools:layout="@layout/fragment_modify_order">
+
+        <action
+            android:id="@+id/actionClientFinalizeOrderToCustomizeDish"
+            app:destination="@id/ClientCustomizeDishFragment" />
+
+        <action
+            android:id="@+id/actionClientFinalizeOrderToNewOrder"
+            app:destination="@id/ClientNewOrderMainFragment"
+            app:popUpTo="@id/ClientNewOrderMainFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/actionClientFinalizeOrderToOrders"
+            app:destination="@id/ClientOrdersActivity"
+            app:popUpTo="@id/ClientOrdersActivity"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <activity
+        android:id="@+id/ClientOrdersActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientOrdersActivity"
+        android:label="Orders"
+        tools:layout="@layout/activity_client_orders" />
+
+</navigation>

@@ -73,6 +73,10 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         binding.textViewDelivery.text = CollectionType.getString(item.basic.collectionType, requireContext())
         binding.textViewPlace.text = OrderPlace.getString(item.details.orderPlace, requireContext())
 
+        if (item.details.comments.isNotEmpty()) {
+            binding.textViewComments.text = item.details.comments
+        }
+
         if (item.basic.collectionType == CollectionType.DELIVERY.ordinal && item.details.address != null) {
             binding.textViewDeliveryAddress.text = StringFormatUtils.formatAddress(item.details.address!!)
         } else {

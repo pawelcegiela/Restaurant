@@ -45,7 +45,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     override var itemId = ""
     abstract val editDishActionId: Int
 
-    protected val activityViewModel: OrdersViewModel by activityViewModels()
+    protected open val activityViewModel: OrdersViewModel by activityViewModels()
 
     private var dishesList: MutableList<DishItem> = ArrayList()
     abstract val addDishAction: Int
@@ -215,7 +215,8 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
             address = getAddress(),
             statusChanges = order.details.statusChanges,
             delivererId = order.details.delivererId,
-            contactPhone = binding.editTextContactPhone.text.toString()
+            contactPhone = binding.editTextContactPhone.text.toString(),
+            comments = binding.editTextComments.text.toString()
         )
 
         return SplitDataObject(itemId, basic, details)

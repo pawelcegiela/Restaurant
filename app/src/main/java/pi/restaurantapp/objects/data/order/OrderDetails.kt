@@ -16,6 +16,7 @@ class OrderDetails : AbstractDataObject {
     var statusChanges: HashMap<String, Int> = HashMap()
     var delivererId: String = ""
     var contactPhone: String = ""
+    var comments: String = ""
 
     @Suppress("unused")
     constructor()
@@ -30,7 +31,8 @@ class OrderDetails : AbstractDataObject {
         address: AddressBasic?,
         statusChanges: HashMap<String, Int>,
         delivererId: String,
-        contactPhone: String
+        contactPhone: String,
+        comments: String
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.orderType = orderType
@@ -42,5 +44,6 @@ class OrderDetails : AbstractDataObject {
         this.statusChanges = statusChanges
         this.delivererId = delivererId
         this.contactPhone = contactPhone
+        this.comments = comments
     }
 }

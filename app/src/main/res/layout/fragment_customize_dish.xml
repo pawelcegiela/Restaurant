@@ -72,9 +72,10 @@
 
                                 <pi.restaurantapp.ui.textviews.TextViewItemName
                                     android:id="@+id/textViewName"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="7dp" />
+                                    android:layout_marginBottom="7dp"
+                                    android:gravity="center" />
 
                                 <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewDishType"

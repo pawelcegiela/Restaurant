@@ -371,4 +371,20 @@
     <string name="default_delivery_address_colon">Default delivery address:</string>
     <string name="cancel_order">Cancel order</string>
     <string name="canceled">Canceled</string>
+    <string name="choose_dishes">Choose dishes</string>
+    <string name="customize_and_add"><![CDATA[Customize & add]]></string>
+    <string name="next">Next</string>
+    <string name="finalize_order">Finalize order</string>
+    <string name="no_dishes_in_order">You haven\'t selected any dishes to your order</string>
+    <string name="order_cleared">Order has been cleared</string>
+    <string name="are_you_sure_cancel_order">Are you sure you want to cancel this order? The restaurant will be notified and food won\'t be prepared</string>
+    <string name="order_not_placed_abandon">Your order has not been placed. Do you want to discard it?</string>
+    <string name="preferred_collection_type_colon">Preferred collection type:</string>
+    <string name="preferred_order_type_colon">Preferred order type:</string>
+    <string name="preferred_delivery_type_colon">Preferred order form (to go/eat in):</string>
+    <string name="preferred_order_settings">Preferred order settings</string>
+    <string name="current_number_of_positions">Current number of positions in your order: %1$d</string>
+    <string name="comments">Comments</string>
+    <string name="comments_colon">Comments:</string>
+    <string name="no_comments">No comments</string>
 </resources>

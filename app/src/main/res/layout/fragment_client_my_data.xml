@@ -125,7 +125,7 @@
                         layout="@layout/modify_address" />
 
                     <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewContactPhoneTitleTitle"
+                        android:id="@+id/textViewContactPhoneTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
@@ -139,6 +139,56 @@
                         android:hint="@string/contact_phone"
                         android:importantForAutofill="no"
                         android:inputType="phone" />
+                </LinearLayout>
+            </pi.restaurantapp.ui.CardViewPreviewElement>
+
+            <pi.restaurantapp.ui.CardViewPreviewElement
+                android:id="@+id/cardPreferredOrderSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <pi.restaurantapp.ui.textviews.TextViewCardTitle
+                        android:id="@+id/textViewPreferredOrderSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="25dp"
+                        android:text="@string/preferred_order_settings" />
+
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewCollectionTypeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/preferred_collection_type_colon" />
+
+                    <Spinner
+                        android:id="@+id/spinnerCollectionType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewOrderPlaceTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/preferred_delivery_type_colon" />
+
+                    <Spinner
+                        android:id="@+id/spinnerOrderPlace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
             </pi.restaurantapp.ui.CardViewPreviewElement>
 

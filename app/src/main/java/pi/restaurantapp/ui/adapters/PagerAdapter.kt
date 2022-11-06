@@ -1,6 +1,5 @@
 package pi.restaurantapp.ui.adapters
 
-import android.util.Log
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -15,6 +14,7 @@ import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.user.UserBasic
+import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.activities.client.ClientOrdersActivity
 import pi.restaurantapp.ui.activities.management.*
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
@@ -44,7 +44,6 @@ class PagerAdapter<Tab>(
     }
 
     override fun createFragment(position: Int): Fragment {
-        Log.e("has Search View", searchView.id.toString())
         return when (activity) {
             is AllergensActivity -> AllergensItemListSubFragment(list as MutableList<AllergenBasic>, fabFilter, searchView)
             is DiscountsActivity -> DiscountsItemListSubFragment(list as MutableList<DiscountBasic>, position, fabFilter, searchView)
@@ -59,6 +58,7 @@ class PagerAdapter<Tab>(
             }
             is WorkersActivity -> WorkersItemListSubFragment(list as MutableList<UserBasic>, position, fabFilter, searchView)
             is ClientOrdersActivity -> ClientOrdersItemListSubFragment(list as MutableList<OrderBasic>, position, fabFilter, searchView)
+            is ClientNewOrderActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position, fabFilter, searchView, true)
             else -> ItemListSubFragment(fabFilter, searchView)
         }
     }

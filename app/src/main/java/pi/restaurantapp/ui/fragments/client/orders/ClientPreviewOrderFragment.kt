@@ -14,7 +14,6 @@ import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.OrderPlace
 import pi.restaurantapp.objects.enums.OrderStatus
-import pi.restaurantapp.objects.enums.OrderType
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter
 import pi.restaurantapp.ui.adapters.StatusChangesRecyclerAdapter
@@ -50,7 +49,6 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
         editable = false
 
         binding.textViewName.text = item.basic.name
-        binding.textViewType.text = OrderType.getString(item.details.orderType, requireContext())
         binding.textViewStatus.text = OrderStatus.getString(item.basic.orderStatus, requireContext())
         binding.textViewOrderDate.text = StringFormatUtils.formatDateTime(item.details.orderDate)
         binding.textViewCollectionDate.text = StringFormatUtils.formatDateTime(item.basic.collectionDate)
@@ -62,6 +60,10 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
 
         binding.textViewDelivery.text = CollectionType.getString(item.basic.collectionType, requireContext())
         binding.textViewPlace.text = OrderPlace.getString(item.details.orderPlace, requireContext())
+
+        if (item.details.comments.isNotEmpty()) {
+            binding.textViewComments.text = item.details.comments
+        }
 
         if (item.basic.collectionType == CollectionType.DELIVERY.ordinal && item.details.address != null) {
             binding.textViewDeliveryAddress.text = StringFormatUtils.formatAddress(item.details.address!!)
@@ -104,7 +106,7 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
 
     private fun setButtonListener() {
         binding.buttonCancelOrder.setOnClickListener {
-            YesNoDialog(context, R.string.close_order_without_realizing, R.string.are_you_sure_close_order) { dialog, _ ->
+            YesNoDialog(context, R.string.cancel_order, R.string.are_you_sure_cancel_order) { dialog, _ ->
                 _viewModel.updateOrderStatus(OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal)
                 dialog.dismiss()
             }
