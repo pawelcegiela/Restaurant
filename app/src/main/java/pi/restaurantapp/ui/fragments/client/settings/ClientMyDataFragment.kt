@@ -1,5 +1,6 @@
 package pi.restaurantapp.ui.fragments.client.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientMyDataBinding
 import pi.restaurantapp.model.fragments.client.settings.ClientMyDataViewModel
 import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
-import pi.restaurantapp.model.fragments.management.workers.AbstractModifyWorkerViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.user.User
@@ -37,8 +37,8 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     override var itemId = ""
     override val lowestRole = Role.CUSTOMER.ordinal
 
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : ClientMyDataViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: ClientMyDataViewModel by viewModels()
     private var _binding: FragmentClientMyDataBinding? = null
     val binding get() = _binding!!
     var disabled = false
@@ -67,7 +67,7 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        val user = (viewModel as AbstractModifyWorkerViewModel).getPreviousItem()
+        val user = _viewModel.getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
 
         val basic = UserBasic(
@@ -91,7 +91,7 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
         return SplitDataObject(itemId, basic, details)
     }
 
-    private fun getAddress() : AddressBasic {
+    private fun getAddress(): AddressBasic {
         return AddressBasic(
             city = binding.defaultDeliveryAddress.editTextCity.text.toString(),
             postalCode = binding.defaultDeliveryAddress.editTextPostalCode.text.toString(),
@@ -134,6 +134,23 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
             override fun onNothingSelected(parentView: AdapterView<*>?) {
             }
         }
+    }
+
+    override fun afterSave() {
+        val sharedPref = activity?.getSharedPreferences("prefs", Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putString("city", binding.defaultDeliveryAddress.editTextCity.text.toString())
+            putString("postalCode", binding.defaultDeliveryAddress.editTextPostalCode.text.toString())
+            putString("street", binding.defaultDeliveryAddress.editTextStreet.text.toString())
+            putString("houseNumber", binding.defaultDeliveryAddress.editTextHouseNumber.text.toString())
+            putString("flatNumber", binding.defaultDeliveryAddress.editTextFlatNumber.text.toString())
+            putString("contactPhone", binding.editTextContactPhone.text.toString())
+            putInt("collectionType", binding.spinnerCollectionType.selectedItemId.toInt())
+            putInt("orderPlace", binding.spinnerOrderPlace.selectedItemId.toInt())
+            apply()
+        }
+
+        super.afterSave()
     }
 
     override fun onDestroyView() {

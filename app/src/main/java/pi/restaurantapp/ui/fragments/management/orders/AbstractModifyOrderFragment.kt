@@ -47,7 +47,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     protected open val activityViewModel: OrdersViewModel by activityViewModels()
 
-    private var dishesList: MutableList<DishItem> = ArrayList()
+    protected var dishesList: MutableList<DishItem> = ArrayList()
     abstract val addDishAction: Int
     private lateinit var numberPickerCollectionTime: CustomNumberPicker
 
@@ -257,7 +257,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         return map
     }
 
-    fun removeDish(dishItem: DishItem) {
+    open fun removeDish(dishItem: DishItem) {
         val itemPosition = dishesList.indexOf(dishItem)
         dishesList.remove(dishItem)
         binding.recyclerViewDishes.adapter?.notifyItemRemoved(itemPosition)

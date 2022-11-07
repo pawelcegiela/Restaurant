@@ -14,7 +14,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityClientNewOrderBinding
 
 class ClientNewOrderActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityClientNewOrderBinding
+    lateinit var binding: ActivityClientNewOrderBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {

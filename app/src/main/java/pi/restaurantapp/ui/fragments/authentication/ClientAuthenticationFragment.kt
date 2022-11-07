@@ -1,5 +1,6 @@
 package pi.restaurantapp.ui.fragments.authentication
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -33,6 +34,7 @@ class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
             if (email.isNotEmpty() && password.isNotEmpty() && password == repeatPassword) {
                 Firebase.auth.createUserWithEmailAndPassword(email.toString(), password.toString()).addOnCompleteListener {
                     if (it.isSuccessful) {
+                        activity?.getSharedPreferences("prefs", Context.MODE_PRIVATE)?.edit()?.clear()?.apply()
                         saveNewCustomer()
                         (activity as AuthenticationActivity).startMainActivity(Role.CUSTOMER.ordinal)
                     } else {

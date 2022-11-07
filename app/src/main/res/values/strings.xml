@@ -387,4 +387,6 @@
     <string name="comments">Comments</string>
     <string name="comments_colon">Comments:</string>
     <string name="no_comments">No comments</string>
+    <string name="collection_type">Collection type</string>
+    <string name="order_place">Order place</string>
 </resources>

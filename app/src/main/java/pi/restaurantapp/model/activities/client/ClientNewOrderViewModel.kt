@@ -8,6 +8,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.model.activities.management.OrdersViewModel
+import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
@@ -19,10 +20,16 @@ class ClientNewOrderViewModel : OrdersViewModel() {
         setActionSave(R.id.actionClientCustomizeDishToNewOrder)
     }
 
+    fun createSavedOrder(address: AddressBasic, contactPhone: String, collectionType: Int, orderPlace: Int) {
+        val order = Order("", OrderBasic(), OrderDetails())
+        order.basic.collectionType = collectionType
+        order.details.address = address
+        order.details.contactPhone = contactPhone
+        order.details.orderPlace = orderPlace
+        setSavedOrder(order)
+    }
+
     fun addDishItem(dishItem: DishItem) {
-        if (savedOrder.value == null) {
-            setSavedOrder(Order("", OrderBasic(), OrderDetails()))
-        }
         savedOrder.value!!.details.dishes[dishItem.id] = dishItem
     }
 

@@ -11,11 +11,13 @@ import pi.restaurantapp.R
 import pi.restaurantapp.model.activities.client.ClientNewOrderViewModel
 import pi.restaurantapp.model.fragments.client.neworder.ClientFinalizeOrderViewModel
 import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.objects.enums.OrderType
 import pi.restaurantapp.objects.enums.Role
+import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
 
 //TODO Ustawienia z cache'a
@@ -61,6 +63,11 @@ class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
         binding.spinnerType.visibility = View.GONE
         binding.textViewOrderDate.visibility = View.GONE
         binding.textViewOrderDateTitle.visibility = View.GONE
+    }
+
+    override fun removeDish(dishItem: DishItem) {
+        super.removeDish(dishItem)
+        (activity as ClientNewOrderActivity).binding.toolbar.textViewAdditionalInfo.text = dishesList.size.toString()
     }
 
     override fun afterSave() {

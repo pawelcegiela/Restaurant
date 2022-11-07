@@ -20,4 +20,8 @@ class ClientMyDataViewModel : AbstractModifyItemViewModel() {
         val details = snapshotsPair.details?.getValue<UserDetails>() ?: UserDetails()
         _item.value = User(itemId, basic, details)
     }
+
+    fun getPreviousItem(): User {
+        return item.value ?: User(itemId, UserBasic(), UserDetails())
+    }
 }

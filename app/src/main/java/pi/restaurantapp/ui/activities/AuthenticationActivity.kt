@@ -1,5 +1,6 @@
 package pi.restaurantapp.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -18,10 +19,10 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityAuthenticationBinding
 import pi.restaurantapp.model.activities.AuthenticationViewModel
 import pi.restaurantapp.objects.data.user.UserBasic
+import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.client.ClientMainActivity
 import pi.restaurantapp.ui.activities.management.MainActivity
-import java.util.*
 
 
 class AuthenticationActivity : AppCompatActivity() {
@@ -129,9 +130,34 @@ class AuthenticationActivity : AppCompatActivity() {
     fun startMainActivity(role: Int) {
         if (Role.isWorkerRole(role)) {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         } else {
-            startActivity(Intent(this, ClientMainActivity::class.java))
+            val databaseRef = Firebase.database.getReference("users").child("details").child(Firebase.auth.uid!!)
+            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val data = dataSnapshot.getValue<UserDetails>() ?: return
+                    changeSharedPreferences(data)
+                    startActivity(Intent(this@AuthenticationActivity, ClientMainActivity::class.java))
+                    finish()
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
         }
-        finish()
+    }
+
+    private fun changeSharedPreferences(data: UserDetails) {
+        val sharedPref = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString("city", data.defaultDeliveryAddress.city)
+            putString("postalCode", data.defaultDeliveryAddress.postalCode)
+            putString("street", data.defaultDeliveryAddress.street)
+            putString("houseNumber", data.defaultDeliveryAddress.houseNumber)
+            putString("flatNumber", data.defaultDeliveryAddress.flatNumber)
+            putString("contactPhone", data.contactPhone)
+            putInt("collectionType", data.preferredCollectionType)
+            putInt("orderPlace", data.preferredOrderPlace)
+            apply()
+        }
     }
 }

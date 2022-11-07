@@ -14,6 +14,7 @@ import pi.restaurantapp.model.fragments.client.neworder.ClientNewOrderMainViewMo
 import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
 import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.DishesTab
+import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.dialogs.YesNoDialog
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
@@ -23,7 +24,7 @@ class ClientNewOrderMainFragment : AbstractItemListFragment() {
     override val viewModel: AbstractItemListViewModel get() = _viewModel
     private val _viewModel: ClientNewOrderMainViewModel by viewModels()
 
-    private val activityViewModel : ClientNewOrderViewModel by activityViewModels()
+    private val activityViewModel: ClientNewOrderViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,12 @@ class ClientNewOrderMainFragment : AbstractItemListFragment() {
                 }
             }
         })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as ClientNewOrderActivity).binding.toolbar.textViewAdditionalInfo.text =
+            (activityViewModel.savedOrder.value?.details?.dishes?.size ?: 0).toString()
     }
 
     override fun initializeUI() {
@@ -83,8 +90,4 @@ class ClientNewOrderMainFragment : AbstractItemListFragment() {
         }.attach()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-    }
 }
