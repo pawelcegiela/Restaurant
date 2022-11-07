@@ -35,8 +35,8 @@ class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
                 Firebase.auth.createUserWithEmailAndPassword(email.toString(), password.toString()).addOnCompleteListener {
                     if (it.isSuccessful) {
                         activity?.getSharedPreferences("prefs", Context.MODE_PRIVATE)?.edit()?.clear()?.apply()
-                        saveNewCustomer()
-                        (activity as AuthenticationActivity).startMainActivity(Role.CUSTOMER.ordinal)
+                        val name = saveNewCustomer()
+                        (activity as AuthenticationActivity).startMainActivity(Role.CUSTOMER.ordinal, name)
                     } else {
                         Log.e("Error", "Didn't create account")
                     }
@@ -45,7 +45,7 @@ class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
         }
     }
 
-    private fun saveNewCustomer() {
+    private fun saveNewCustomer() : String {
         val userId = Firebase.auth.uid!!
         val email = Firebase.auth.currentUser?.email!!
         val temporaryName = email.substringBefore('@')
@@ -66,5 +66,8 @@ class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
 
         Firebase.database.getReference("users").child("basic").child(userId).setValue(basic)
         Firebase.database.getReference("users").child("details").child(userId).setValue(details)
+        activity?.getSharedPreferences("prefs", Context.MODE_PRIVATE)?.edit()?.putString("name", basic.getFullName())?.apply()
+
+        return basic.getFullName()
     }
 }

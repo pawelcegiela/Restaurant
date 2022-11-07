@@ -40,6 +40,10 @@
             app:destination="@id/OrdersActivity" />
 
         <action
+            android:id="@+id/actionMainToChats"
+            app:destination="@id/ChatsActivity" />
+
+        <action
             android:id="@+id/actionMainToSettings"
             app:destination="@id/SettingsActivity" />
     </fragment>
@@ -85,6 +89,12 @@
         android:name="pi.restaurantapp.ui.activities.management.WorkersActivity"
         android:label="@string/workers"
         tools:layout="@layout/activity_workers" />
+
+    <activity
+        android:id="@+id/ChatsActivity"
+        android:name="pi.restaurantapp.ui.activities.management.ChatsActivity"
+        android:label="@string/chats"
+        tools:layout="@layout/activity_chats" />
 
     <activity
         android:id="@+id/SettingsActivity"

@@ -45,6 +45,11 @@ class ClientMainFragment : Fragment() {
         )
 
         UserInterfaceUtils.setCardView(
+            binding.cardChats, R.drawable.chat, R.string.chat,
+            findNavController(), R.id.actionClientMainToChats
+        )
+
+        UserInterfaceUtils.setCardView(
             binding.cardPreferences, R.drawable.settings, R.string.my_account_and_preferences,
             findNavController(), R.id.actionClientMainToSettings
         )

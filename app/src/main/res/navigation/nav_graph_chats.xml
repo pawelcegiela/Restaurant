@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_client_settings"
+    app:startDestination="@id/ChatsMainFragment">
+
+    <fragment
+        android:id="@+id/ChatsMainFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.chats.ChatsMainFragment"
+        android:label="@string/chats"
+        tools:layout="@layout/fragment_chats_main">
+
+        <action
+            android:id="@+id/actionChatsToChooseCustomer"
+            app:destination="@id/ChatsChooseCustomerFragment" />
+
+        <action
+            android:id="@+id/actionChatsToForum"
+            app:destination="@id/ChatWorkersForumFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ChatsChooseCustomerFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.chats.ChatsChooseCustomerFragment"
+        android:label="@string/choose_chat"
+        tools:layout="@layout/fragment_chats_choose_customer">
+
+        <action
+            android:id="@+id/actionChooseCustomerToChatWithCustomer"
+            app:destination="@id/ChatWithCustomerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ChatWithCustomerFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.chats.ChatWithCustomerFragment"
+        android:label="@string/chat"
+        tools:layout="@layout/fragment_chat_client_management">
+    </fragment>
+
+    <fragment
+        android:id="@+id/ChatWorkersForumFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.chats.ChatWorkersForumFragment"
+        android:label="@string/worker_forum"
+        tools:layout="@layout/fragment_chat_client_management">
+    </fragment>
+
+</navigation>

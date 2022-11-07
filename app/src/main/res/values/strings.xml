@@ -389,4 +389,12 @@
     <string name="no_comments">No comments</string>
     <string name="collection_type">Collection type</string>
     <string name="order_place">Order place</string>
+    <string name="chats">Chats</string>
+    <string name="general_chat">General chat</string>
+    <string name="type_here">Type here…</string>
+    <string name="send_message">Send message</string>
+    <string name="chat">Chat</string>
+    <string name="choose_chat">Choose chat</string>
+    <string name="chats_with_customers">Chats with customers</string>
+    <string name="worker_forum">Worker forum</string>
 </resources>

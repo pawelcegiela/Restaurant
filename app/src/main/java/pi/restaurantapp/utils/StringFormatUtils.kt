@@ -39,6 +39,10 @@ class StringFormatUtils {
             return "${formatDate(date)} ${formatTime(date)}"
         }
 
+        fun formatDateTime(date: Long): String {
+            return "${formatDate(Date(date))} ${formatTime(Date(date))}"
+        }
+
         fun formatPrice(value: String): String {
             return "${DecimalFormat("#0.00").format(BigDecimal(value))} zł"
         }

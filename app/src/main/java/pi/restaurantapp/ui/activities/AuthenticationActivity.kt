@@ -49,7 +49,7 @@ class AuthenticationActivity : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
-                    startMainActivity(data.role)
+                    startMainActivity(data.role, data.getFullName())
                 }
             }
         }
@@ -102,7 +102,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         } else {
-            startMainActivity(data.role)
+            startMainActivity(data.role, data.getFullName())
         }
     }
 
@@ -123,11 +123,12 @@ class AuthenticationActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         } else {
-            startMainActivity(data.role)
+            startMainActivity(data.role, data.getFullName())
         }
     }
 
-    fun startMainActivity(role: Int) {
+    fun startMainActivity(role: Int, name: String) {
+        getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().putString("name", name).apply()
         if (Role.isWorkerRole(role)) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()

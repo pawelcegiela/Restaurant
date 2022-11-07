@@ -9,6 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
+import pi.restaurantapp.objects.data.chat.ChatInfo
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
@@ -20,6 +21,7 @@ import pi.restaurantapp.ui.activities.management.*
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.allergens.AllergensItemListSubFragment
+import pi.restaurantapp.ui.fragments.management.chats.ChatsItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.discounts.DiscountsItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.dishes.DishesItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.dishes.DishesMainFragment
@@ -58,7 +60,8 @@ class PagerAdapter<Tab>(
             }
             is WorkersActivity -> WorkersItemListSubFragment(list as MutableList<UserBasic>, position, fabFilter, searchView)
             is ClientOrdersActivity -> ClientOrdersItemListSubFragment(list as MutableList<OrderBasic>, position, fabFilter, searchView)
-            is ClientNewOrderActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position, fabFilter, searchView, true)
+            is ClientNewOrderActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position, fabFilter, searchView, false)
+            is ChatsActivity -> ChatsItemListSubFragment(list as MutableList<ChatInfo>, fabFilter, searchView)
             else -> ItemListSubFragment(fabFilter, searchView)
         }
     }

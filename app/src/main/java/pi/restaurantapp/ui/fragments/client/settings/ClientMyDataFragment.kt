@@ -139,6 +139,7 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     override fun afterSave() {
         val sharedPref = activity?.getSharedPreferences("prefs", Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
+            putString("name", StringFormatUtils.format(binding.editTextFirstName.text.toString(), binding.editTextLastName.text.toString()))
             putString("city", binding.defaultDeliveryAddress.editTextCity.text.toString())
             putString("postalCode", binding.defaultDeliveryAddress.editTextPostalCode.text.toString())
             putString("street", binding.defaultDeliveryAddress.editTextStreet.text.toString())

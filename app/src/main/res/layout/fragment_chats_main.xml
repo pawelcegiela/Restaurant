@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="pi.restaurantapp.ui.fragments.management.main.MainFragment">
+    tools:context="pi.restaurantapp.ui.fragments.management.chats.ChatsMainFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,35 +22,7 @@
                 layout="@layout/card_view_wide" />
 
             <include
-                android:id="@+id/cardWorkers"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardDishes"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardAllergens"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardOrders"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardIngredients"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardDiscounts"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardChats"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardSettings"
+                android:id="@+id/cardNewOrder"
                 layout="@layout/card_view_wide" />
 
         </LinearLayout>

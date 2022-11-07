@@ -50,6 +50,9 @@
             android:name="pi.restaurantapp.ui.activities.management.SettingsActivity"
             android:screenOrientation="nosensor" />
         <activity
+            android:name="pi.restaurantapp.ui.activities.management.ChatsActivity"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name="pi.restaurantapp.ui.activities.client.ClientMainActivity"
             android:screenOrientation="nosensor" />
         <activity
@@ -63,6 +66,9 @@
             android:screenOrientation="nosensor" />
         <activity
             android:name="pi.restaurantapp.ui.activities.client.ClientNewOrderActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="pi.restaurantapp.ui.activities.client.ClientChatsActivity"
             android:screenOrientation="nosensor" />
     </application>
 

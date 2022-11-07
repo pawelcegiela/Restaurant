@@ -61,6 +61,7 @@ class ClientNewOrderMainFragment : AbstractItemListFragment() {
         binding.toolbarNavigation.cardReset.setOnClickListener {
             activityViewModel.reset()
             Toast.makeText(requireContext(), getString(R.string.order_cleared), Toast.LENGTH_SHORT).show()
+            (activity as ClientNewOrderActivity).binding.toolbar.textViewAdditionalInfo.text = "0"
         }
         binding.toolbarNavigation.cardNext.setOnClickListener {
             if (activityViewModel.savedOrder.value != null && activityViewModel.savedOrder.value!!.details.dishes.isNotEmpty()) {

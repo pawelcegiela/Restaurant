@@ -24,7 +24,7 @@
             android:layout_marginHorizontal="5dp"
             android:contentDescription="@string/icon"
             android:padding="6dp"
-            android:src="@drawable/remove" />
+            android:src="@drawable/reset" />
 
     </androidx.cardview.widget.CardView>
 
@@ -67,7 +67,7 @@
                 android:layout_marginHorizontal="5dp"
                 android:contentDescription="@string/icon"
                 android:padding="6dp"
-                android:src="@drawable/save" />
+                android:src="@drawable/next" />
 
         </RelativeLayout>
 
