@@ -44,6 +44,10 @@
             app:destination="@id/ChatsActivity" />
 
         <action
+            android:id="@+id/actionMainToCustomers"
+            app:destination="@id/CustomersActivity" />
+
+        <action
             android:id="@+id/actionMainToSettings"
             app:destination="@id/SettingsActivity" />
     </fragment>
@@ -89,6 +93,12 @@
         android:name="pi.restaurantapp.ui.activities.management.WorkersActivity"
         android:label="@string/workers"
         tools:layout="@layout/activity_workers" />
+
+    <activity
+        android:id="@+id/CustomersActivity"
+        android:name="pi.restaurantapp.ui.activities.management.CustomersActivity"
+        android:label="@string/customers"
+        tools:layout="@layout/activity_customers" />
 
     <activity
         android:id="@+id/ChatsActivity"

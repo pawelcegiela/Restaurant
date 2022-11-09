@@ -22,6 +22,7 @@ import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.allergens.AllergensItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.chats.ChatsItemListSubFragment
+import pi.restaurantapp.ui.fragments.management.customers.CustomersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.discounts.DiscountsItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.dishes.DishesItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.dishes.DishesMainFragment
@@ -62,6 +63,7 @@ class PagerAdapter<Tab>(
             is ClientOrdersActivity -> ClientOrdersItemListSubFragment(list as MutableList<OrderBasic>, position, fabFilter, searchView)
             is ClientNewOrderActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position, fabFilter, searchView, false)
             is ChatsActivity -> ChatsItemListSubFragment(list as MutableList<ChatInfo>, fabFilter, searchView)
+            is CustomersActivity -> CustomersItemListSubFragment(list as MutableList<UserBasic>, fabFilter, searchView)
             else -> ItemListSubFragment(fabFilter, searchView)
         }
     }

@@ -397,4 +397,7 @@
     <string name="choose_chat">Choose chat</string>
     <string name="chats_with_customers">Chats with customers</string>
     <string name="worker_forum">Worker forum</string>
+    <string name="customers">Customers</string>
+    <string name="preview_customer">Preview customer</string>
+    <string name="delivery_address">Delivery address</string>
 </resources>

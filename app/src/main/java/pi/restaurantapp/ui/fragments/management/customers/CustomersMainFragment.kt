@@ -1,22 +1,24 @@
-package pi.restaurantapp.ui.fragments.management.workers
+package pi.restaurantapp.ui.fragments.management.customers
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.management.workers.WorkersMainViewModel
 import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
-import pi.restaurantapp.objects.enums.WorkersTab
+import pi.restaurantapp.model.fragments.management.customers.CustomersMainViewModel
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 
-class WorkersMainFragment : AbstractItemListFragment() {
-    override val addActionId = R.id.actionWorkersToAddWorker
+
+class CustomersMainFragment : AbstractItemListFragment() {
+    override val addActionId = 0 // Warning: unused
     override val viewModel: AbstractItemListViewModel get() = _viewModel
-    private val _viewModel: WorkersMainViewModel by viewModels()
+    private val _viewModel: CustomersMainViewModel by viewModels()
 
     override fun addViewPagerAdapters() {
-        val list = WorkersTab.values()
-        val names = WorkersTab.getArrayOfStrings(requireContext())
+        binding.tabLayout.visibility = View.GONE
+        val list = arrayOf(0)
+        val names = arrayListOf(getString(R.string.all_))
         binding.pager.adapter = PagerAdapter(
             requireActivity().supportFragmentManager,
             lifecycle,

@@ -46,6 +46,10 @@
                 layout="@layout/card_view_wide" />
 
             <include
+                android:id="@+id/cardCustomers"
+                layout="@layout/card_view_wide" />
+
+            <include
                 android:id="@+id/cardChats"
                 layout="@layout/card_view_wide" />
 

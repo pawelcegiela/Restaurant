@@ -53,6 +53,9 @@
             android:name="pi.restaurantapp.ui.activities.management.ChatsActivity"
             android:screenOrientation="nosensor" />
         <activity
+            android:name="pi.restaurantapp.ui.activities.management.CustomersActivity"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name="pi.restaurantapp.ui.activities.client.ClientMainActivity"
             android:screenOrientation="nosensor" />
         <activity

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_client_orders"
+    app:startDestination="@id/CustomersMainFragment">
+
+    <fragment
+        android:id="@+id/CustomersMainFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.customers.CustomersMainFragment"
+        android:label="@string/customers"
+        tools:layout="@layout/fragment_item_list">
+
+        <action
+            android:id="@+id/actionCustomersToPreviewCustomer"
+            app:destination="@id/PreviewCustomerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PreviewCustomerFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.customers.PreviewCustomerFragment"
+        android:label="@string/preview_customer"
+        tools:layout="@layout/fragment_preview_customer">
+
+        <action
+            android:id="@+id/actionPreviewCustomerToCustomers"
+            app:destination="@id/CustomersMainFragment" />
+    </fragment>
+
+</navigation>
