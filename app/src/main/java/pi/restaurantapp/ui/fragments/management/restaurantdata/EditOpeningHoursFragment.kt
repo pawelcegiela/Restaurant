@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyOpeningHoursBinding
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.restaurantdata.EditOpeningHoursViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.openinghours.OpeningHours

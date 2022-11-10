@@ -1,13 +1,10 @@
 package pi.restaurantapp.model.fragments.management.dishes
 
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.dish.Dish
@@ -28,7 +25,7 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         super.saveToDatabase(data)
     }
 
-    fun getPreviousItem() : Dish {
+    fun getPreviousItem(): Dish {
         if (this is EditDishViewModel) {
             return item.value ?: Dish(itemId, DishBasic(), DishDetails())
         }
@@ -52,16 +49,17 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         ingredients.addAll(otherIngredients)
         ingredients.addAll(possibleIngredients)
 
-        val databaseRef = Firebase.database.getReference("ingredients").child("details")
-
-        for (ingredient in previousIngredients) {
-            if (ingredient.id !in ingredients.map { it.id }) {
-                databaseRef.child(ingredient.id).child("containingDishes").child(details.id).setValue(null)
+        Firebase.firestore.runTransaction { transaction ->
+            val dbRef = Firebase.firestore.collection("ingredients-details")
+            for (ingredient in previousIngredients) {
+                if (ingredient.id !in ingredients.map { it.id }) {
+                    transaction.update(dbRef.document(ingredient.id), "containingDishes.${details.id}", null)
+                }
             }
-        }
 
-        for (ingredient in ingredients) {
-            databaseRef.child(ingredient.id).child("containingDishes").child(details.id).setValue(true)
+            for (ingredient in ingredients) {
+                transaction.update(dbRef.document(ingredient.id), "containingDishes.${details.id}", true)
+            }
         }
     }
 
@@ -69,40 +67,35 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         val previousAllergens = getPreviousItem().details.allergens.map { it.value }
         val allergens = details.allergens.map { it.value }
 
-        val databaseRef = Firebase.database.getReference("allergens").child("details")
-
-        for (allergen in previousAllergens) {
-            if (allergen.id !in allergens.map { it.id }) {
-                databaseRef.child(allergen.id).child("containingDishes").child(details.id).setValue(null)
+        Firebase.firestore.runTransaction { transaction ->
+            val dbRef = Firebase.firestore.collection("allergens-details")
+            for (allergen in previousAllergens) {
+                if (allergen.id !in allergens.map { it.id }) {
+                    transaction.update(dbRef.document(allergen.id), "containingDishes.${details.id}", null)
+                }
             }
-        }
 
-        for (allergen in allergens) {
-            databaseRef.child(allergen.id).child("containingDishes").child(details.id).setValue(true)
+            for (allergen in allergens) {
+                transaction.update(dbRef.document(allergen.id), "containingDishes.${details.id}", true)
+            }
         }
     }
 
     fun getAllIngredients() {
-        val databaseRef = Firebase.database.getReference("ingredients").child("basic")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = dataSnapshot.getValue<HashMap<String, IngredientBasic>>() ?: HashMap()
-                liveAllIngredients.value = data.toList().map { it.second }.filter { !it.disabled }.toMutableList()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        Firebase.firestore.collection("ingredients-basic").get().addOnSuccessListener { snapshot ->
+            liveAllIngredients.value = snapshot
+                .mapNotNull { documentSnapshot -> documentSnapshot.toObject<IngredientBasic>() }
+                .filter { ingredient -> !ingredient.disabled }
+                .toMutableList()
+        }
     }
 
     fun getAllAllergens() {
-        val databaseRef = Firebase.database.getReference("allergens").child("basic")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val data = dataSnapshot.getValue<HashMap<String, AllergenBasic>>() ?: HashMap()
-                liveAllAllergens.value = data.toList().map { it.second }.filter { !it.disabled }.toMutableList()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        Firebase.firestore.collection("allergens-basic").get().addOnSuccessListener { snapshot ->
+            liveAllAllergens.value = snapshot
+                .mapNotNull { documentSnapshot -> documentSnapshot.toObject<AllergenBasic>() }
+                .filter { allergen -> !allergen.disabled }
+                .toMutableList()
+        }
     }
 }

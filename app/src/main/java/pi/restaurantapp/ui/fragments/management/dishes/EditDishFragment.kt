@@ -2,7 +2,7 @@ package pi.restaurantapp.ui.fragments.management.dishes
 
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.dishes.EditDishViewModel
 import pi.restaurantapp.objects.data.dish.Dish
 

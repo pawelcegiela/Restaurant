@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewDiscountBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.discounts.PreviewDiscountViewModel
 import pi.restaurantapp.objects.data.discount.Discount
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment

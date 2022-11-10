@@ -9,7 +9,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientPreviewOrderBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.client.orders.ClientPreviewOrderViewModel
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.OrderPlace

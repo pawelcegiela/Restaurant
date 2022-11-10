@@ -13,7 +13,7 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientMyDataBinding
 import pi.restaurantapp.model.fragments.client.settings.ClientMyDataViewModel
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.user.User

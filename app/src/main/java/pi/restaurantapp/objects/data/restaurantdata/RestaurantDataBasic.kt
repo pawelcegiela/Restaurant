@@ -7,9 +7,9 @@ import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.openinghours.OpeningHoursBasic
 
 class RestaurantDataBasic : AbstractDataObject() {
-    lateinit var aboutRestaurant: AboutRestaurantBasic
-    lateinit var openingHours: OpeningHoursBasic
-    lateinit var location: AddressBasic
-    lateinit var delivery: DeliveryBasic
+    var aboutRestaurant: AboutRestaurantBasic = AboutRestaurantBasic()
+    var openingHours: OpeningHoursBasic = OpeningHoursBasic()
+    var location: AddressBasic = AddressBasic()
+    var delivery: DeliveryBasic = DeliveryBasic()
 
 }

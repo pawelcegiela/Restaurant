@@ -1,10 +1,10 @@
 package pi.restaurantapp.objects
 
-import com.google.firebase.database.DataSnapshot
+import com.google.firebase.firestore.DocumentSnapshot
 
 class SnapshotsPair {
-    var basic: DataSnapshot? = null
-    var details: DataSnapshot? = null
+    var basic: DocumentSnapshot? = null
+    var details: DocumentSnapshot? = null
 
     fun isReady(): Boolean {
         return basic != null && details != null

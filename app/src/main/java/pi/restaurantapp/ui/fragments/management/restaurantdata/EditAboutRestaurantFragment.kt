@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyAboutRestaurantBinding
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.restaurantdata.EditAboutRestaurantViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurant

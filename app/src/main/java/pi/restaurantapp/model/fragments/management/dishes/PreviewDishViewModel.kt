@@ -2,8 +2,8 @@ package pi.restaurantapp.model.fragments.management.dishes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.ktx.getValue
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import com.google.firebase.firestore.ktx.toObject
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishBasic
@@ -17,12 +17,12 @@ class PreviewDishViewModel : AbstractPreviewItemViewModel() {
     val item: LiveData<Dish> = _item
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
-        val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
-        val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
+        val basic = snapshotsPair.basic?.toObject<DishBasic>() ?: DishBasic()
+        val details = snapshotsPair.details?.toObject<DishDetails>() ?: DishDetails()
         _item.value = Dish(itemId, basic, details)
     }
 
-    fun formatPrice(price: String) : String {
+    fun formatPrice(price: String): String {
         return StringFormatUtils.formatPrice(price)
     }
 

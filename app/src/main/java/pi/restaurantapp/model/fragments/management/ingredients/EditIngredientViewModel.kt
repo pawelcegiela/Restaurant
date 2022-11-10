@@ -2,8 +2,8 @@ package pi.restaurantapp.model.fragments.management.ingredients
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.ingredient.Ingredient
@@ -15,8 +15,8 @@ class EditIngredientViewModel : AbstractModifyIngredientViewModel() {
     val item: LiveData<Ingredient> = _item
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
-        val basic = snapshotsPair.basic?.getValue<IngredientBasic>() ?: IngredientBasic()
-        val details = snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
+        val basic = snapshotsPair.basic?.toObject<IngredientBasic>() ?: IngredientBasic()
+        val details = snapshotsPair.details?.toObject<IngredientDetails>() ?: IngredientDetails()
         _item.value = Ingredient(itemId, basic, details)
     }
 
@@ -27,10 +27,10 @@ class EditIngredientViewModel : AbstractModifyIngredientViewModel() {
         }
     }
 
-    private fun removeFromIngredients(ingredients: List<String>, dishId : String) {
-        val databaseRef = Firebase.database.getReference("ingredients").child("details")
+    private fun removeFromIngredients(ingredients: List<String>, dishId: String) {
+        val dbRef = Firebase.firestore.collection("ingredients-details")
         for (ingredientId in ingredients) {
-            databaseRef.child(ingredientId).child("containingSubDishes").child(dishId).setValue(null)
+            dbRef.document(ingredientId).update("containingSubDishes.$dishId", null)
         }
     }
 }

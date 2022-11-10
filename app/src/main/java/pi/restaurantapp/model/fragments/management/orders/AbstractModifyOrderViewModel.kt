@@ -2,13 +2,10 @@ package pi.restaurantapp.model.fragments.management.orders
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.order.Order
@@ -50,15 +47,10 @@ abstract class AbstractModifyOrderViewModel : AbstractModifyItemViewModel() {
     }
 
     override fun getAdditionalData() {
-        val databaseRef = Firebase.database.getReference("restaurantData").child("basic").child("delivery")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                _deliveryOptions.value = dataSnapshot.getValue<DeliveryBasic>() ?: DeliveryBasic()
-                setReadyToInitialize()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        Firebase.firestore.collection("restaurantData-basic").document("delivery").get().addOnSuccessListener { snapshot ->
+            _deliveryOptions.value = snapshot.toObject()
+            setReadyToInitialize()
+        }
     }
 
     private fun checkStatusChanges(basic: OrderBasic, details: OrderDetails) {

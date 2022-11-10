@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewCustomerBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.customers.PreviewCustomerViewModel
 import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.enums.Role

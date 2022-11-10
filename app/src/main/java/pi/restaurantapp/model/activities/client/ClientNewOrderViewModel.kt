@@ -1,10 +1,7 @@
 package pi.restaurantapp.model.activities.client
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.model.activities.management.OrdersViewModel
@@ -34,13 +31,8 @@ class ClientNewOrderViewModel : OrdersViewModel() {
     }
 
     fun setDeliveryOptions() {
-        val databaseRef = Firebase.database.getReference("restaurantData").child("basic").child("delivery")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                setDeliveryOptions(dataSnapshot.getValue<DeliveryBasic>() ?: DeliveryBasic())
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        Firebase.firestore.collection("restaurantData-basic").document("delivery").get().addOnSuccessListener { snapshot ->
+            setDeliveryOptions(snapshot.toObject() ?: DeliveryBasic())
+        }
     }
 }

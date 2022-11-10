@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.FragmentCustomizeDishBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.activities.management.OrdersViewModel
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.orders.CustomizeDishViewModel
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishItem

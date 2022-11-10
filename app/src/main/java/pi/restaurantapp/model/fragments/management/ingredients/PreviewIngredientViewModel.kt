@@ -3,13 +3,10 @@ package pi.restaurantapp.model.fragments.management.ingredients
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.ingredient.Ingredient
 import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
@@ -31,40 +28,30 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
     val item: LiveData<Ingredient> = _item
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
-        val basic = snapshotsPair.basic?.getValue<IngredientBasic>() ?: IngredientBasic()
-        val details = snapshotsPair.details?.getValue<IngredientDetails>() ?: IngredientDetails()
+        val basic = snapshotsPair.basic?.toObject<IngredientBasic>() ?: IngredientBasic()
+        val details = snapshotsPair.details?.toObject<IngredientDetails>() ?: IngredientDetails()
         _item.value = Ingredient(itemId, basic, details)
     }
 
     fun getContainingDishes(containingDishesIds: List<String>) {
         for (id in containingDishesIds) {
-            val databaseRef = Firebase.database.getReference("dishes").child("basic").child(id).child("name")
-            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    containingDishes.add(dataSnapshot.getValue<String>() ?: "")
-                    if (containingDishes.size == containingDishesIds.size) {
-                        liveContainingDishes.value = containingDishes
-                    }
+            Firebase.firestore.collection("dishes-basic").document(id).get().addOnSuccessListener { snapshot ->
+                containingDishes.add(snapshot.getString("name") ?: "")
+                if (containingDishes.size == containingDishesIds.size) {
+                    liveContainingDishes.value = containingDishes
                 }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
+            }
         }
     }
 
     fun getContainingSubDishes(containingSubDishesIds: List<String>) {
         for (id in containingSubDishesIds) {
-            val databaseRef = Firebase.database.getReference("ingredients").child("basic").child(id).child("name")
-            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    containingSubDishes.add(dataSnapshot.getValue<String>() ?: "")
-                    if (containingSubDishes.size == containingSubDishesIds.size) {
-                        liveContainingSubDishes.value = containingSubDishes
-                    }
+            Firebase.firestore.collection("ingredients-basic").document(id).get().addOnSuccessListener { snapshot ->
+                containingDishes.add(snapshot.getString("name") ?: "")
+                if (containingSubDishes.size == containingSubDishesIds.size) {
+                    liveContainingSubDishes.value = containingSubDishes
                 }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
+            }
         }
     }
 
@@ -73,22 +60,18 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
     }
 
     fun updateIngredientAmount(id: String, _amount: Int, modificationType: IngredientModificationType, callbackFunction: (Int) -> (Unit)) {
-        var databaseRef = Firebase.database.getReference("ingredients").child("basic").child(id).child("amount")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val amount = _amount * (if (modificationType == IngredientModificationType.CORRECTION) -1 else 1)
-                val newAmount = max((dataSnapshot.getValue<Int>() ?: 0) + amount, 0)
-                databaseRef.setValue(newAmount)
+        var newAmount = 0
+        Firebase.firestore.runTransaction { transaction ->
+            val difference = _amount * (if (modificationType == IngredientModificationType.CORRECTION) -1 else 1)
+            val oldAmount = transaction.get(dbRefBasic.document(id)).getLong("amount")?.toInt() ?: 0
+            newAmount = max(oldAmount + difference, 0)
+            transaction.update(dbRefBasic.document(id), "amount", newAmount)
 
-                val newAmountChange = IngredientAmountChange(Firebase.auth.uid ?: return, amount, newAmount, modificationType.ordinal)
-                databaseRef = Firebase.database.getReference("ingredients").child("details").child(id).child("amountChanges")
-                databaseRef.child(newAmountChange.date.time.toString()).setValue(newAmountChange)
-
-                callbackFunction(newAmount)
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+            val newAmountChange = IngredientAmountChange(Firebase.auth.uid!!, difference, newAmount, modificationType.ordinal)
+            transaction.update(dbRefDetails.document(id), "amountChanges.${newAmountChange.date.time}", newAmountChange)
+        }.addOnSuccessListener {
+            callbackFunction(newAmount)
+        }
     }
 
 }

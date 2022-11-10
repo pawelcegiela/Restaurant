@@ -3,13 +3,10 @@ package pi.restaurantapp.model.fragments.management.orders
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
@@ -43,58 +40,62 @@ class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
     val item: LiveData<Order> = _item
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
-        val basic = snapshotsPair.basic?.getValue<OrderBasic>() ?: OrderBasic()
-        val details = snapshotsPair.details?.getValue<OrderDetails>() ?: OrderDetails()
+        val basic = snapshotsPair.basic?.toObject<OrderBasic>() ?: OrderBasic()
+        val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
         _item.value = Order(itemId, basic, details)
     }
 
     fun updateOrderStatus(newStatus: Int) {
-        var databaseRef = Firebase.database.getReference(databasePath).child("basic").child(itemId).child("orderStatus")
-        databaseRef.setValue(newStatus)
-        _orderStatus.value = newStatus
+        val time = Date().time
+        Firebase.firestore.runTransaction { transaction ->
+            transaction.update(dbRefBasic.document(itemId), "orderStatus", newStatus)
+            transaction.update(dbRefDetails.document(itemId), "statusChanges.$time", newStatus)
+        }.addOnSuccessListener {
+            _orderStatus.value = newStatus
+            _statusChange.value = StringFormatUtils.formatDateTime(Date(time)) to newStatus
 
-        val time = Date().time.toString()
-        databaseRef = Firebase.database.getReference(databasePath).child("details").child(itemId).child("statusChanges").child(time)
-        databaseRef.setValue(newStatus)
-
-        _statusChange.value = StringFormatUtils.formatDateTime(Date(time.toLong())) to newStatus
-
-        if (newStatus == OrderStatus.ACCEPTED.ordinal) {
-            getSubDishes { subDishes ->
-                checkIngredientAmountChanges(item.value?.details ?: return@getSubDishes, subDishes)
+            if (newStatus == OrderStatus.ACCEPTED.ordinal) {
+                getSubDishes { subDishes ->
+                    checkIngredientAmountChanges(item.value?.details ?: return@getSubDishes, subDishes)
+                }
             }
         }
     }
 
     private fun getSubDishes(callback: (LinkedHashMap<String, IngredientDetails>) -> (Unit)) {
-        val databaseRef = Firebase.database.getReference("ingredients").child("details")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val map = dataSnapshot.getValue<HashMap<String, IngredientDetails>>() ?: HashMap()
-                callback(map.filter { it.value.subIngredients != null } as LinkedHashMap<String, IngredientDetails>)
+        val dbRef = Firebase.firestore.collection("ingredients-details").whereNotEqualTo("subIngredients", null)
+        dbRef.get().addOnSuccessListener { snapshot ->
+            val ingredients: LinkedHashMap<String, IngredientDetails> = LinkedHashMap()
+            if (snapshot != null) {
+                for (document in snapshot) {
+                    val ingredient = document.toObject<IngredientDetails>()
+                    ingredients[ingredient.id] = ingredient
+                }
             }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+            callback(ingredients)
+        }
     }
 
     private fun checkIngredientAmountChanges(details: OrderDetails, subDishes: LinkedHashMap<String, IngredientDetails>) {
         val ingredientsToChange = getIngredientsToChange(details, subDishes)
         for (ingredientId in ingredientsToChange.keys) {
-            var databaseRef = Firebase.database.getReference("ingredients").child("basic").child(ingredientId)
-            databaseRef.child("amount").addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val oldAmount = dataSnapshot.getValue<Int>() ?: return
-                    val change = ingredientsToChange[ingredientId]?.toInt()?.times(-1) ?: 0
-                    databaseRef.child("amount").setValue(oldAmount + change)
-                    val newAmountChange =
-                        IngredientAmountChange(Firebase.auth.uid ?: return, change, oldAmount + change, IngredientModificationType.ORDER.ordinal)
-                    databaseRef = Firebase.database.getReference("ingredients").child("details").child(ingredientId).child("amountChanges")
-                    databaseRef.child(newAmountChange.date.time.toString()).setValue(newAmountChange)
-                }
+            Firebase.firestore.runTransaction { transaction ->
+                var dbRef = Firebase.firestore.collection("ingredients-basic").document(ingredientId)
+                val oldAmount = transaction.get(dbRef).getLong("amount")?.toInt() ?: 0
+                val difference = ingredientsToChange[ingredientId]?.toInt()?.times(-1) ?: 0
+                val newAmount = oldAmount + difference
+                transaction.update(dbRef, "amount", newAmount)
 
-                override fun onCancelled(error: DatabaseError) {}
-            })
+                val newAmountChange =
+                    IngredientAmountChange(
+                        Firebase.auth.uid ?: return@runTransaction,
+                        difference,
+                        newAmount,
+                        IngredientModificationType.ORDER.ordinal
+                    )
+                dbRef = Firebase.firestore.collection("ingredients-details").document(ingredientId)
+                transaction.update(dbRef, "amountChanges.${newAmountChange.date.time}", newAmountChange)
+            }
         }
     }
 
@@ -125,45 +126,29 @@ class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
     }
 
     fun updateDeliverer(newDelivererId: String) {
-        var databaseRef = Firebase.database.getReference(databasePath).child("details").child(itemId).child("delivererId")
-        databaseRef.setValue(newDelivererId)
+        Firebase.firestore.runTransaction { transaction ->
+            transaction.update(dbRefDetails.document(itemId), "delivererId", newDelivererId)
+            transaction.update(Firebase.firestore.collection("users-details").document(newDelivererId), "ordersToDeliver.$itemId", true)
 
-        databaseRef =
-            Firebase.database.getReference("users").child("details").child(newDelivererId).child("ordersToDeliver").child(itemId)
-        databaseRef.setValue(true)
-
-        if (this.delivererId.isNotEmpty() && this.delivererId != newDelivererId) {
-            databaseRef =
-                Firebase.database.getReference("users").child("details").child(this.delivererId).child("ordersToDeliver")
-                    .child(itemId)
-            databaseRef.setValue(null)
+            if (this.delivererId.isNotEmpty() && this.delivererId != newDelivererId) {
+                transaction.update(Firebase.firestore.collection("users-details").document(this.delivererId), "ordersToDeliver.$itemId", null)
+            }
+        }.addOnSuccessListener {
+            this.delivererId = newDelivererId
         }
-        this.delivererId = newDelivererId
     }
 
     fun getAllPossibleDeliverers() {
-        val databaseRef = Firebase.database.getReference("users").child("basic")
-        val query = databaseRef.orderByChild("delivery").equalTo(true)
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val possibleDeliverersMap = dataSnapshot.getValue<HashMap<String, UserBasic>>() ?: HashMap()
-                _possibleDeliverers.value = possibleDeliverersMap.map { it.value }.toMutableList()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        Firebase.firestore.collection("users-basic").whereEqualTo("delivery", true).get().addOnSuccessListener { snapshot ->
+            _possibleDeliverers.value = snapshot.mapNotNull { documentSnapshot -> documentSnapshot.toObject<UserBasic>() }.toMutableList()
+        }
     }
 
     fun getUserName(userId: String) {
-        val databaseRef = Firebase.database.getReference("users").child("basic").child(userId)
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val user = dataSnapshot.getValue<UserBasic>() ?: UserBasic()
-                _userName.value = user.getFullName()
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        Firebase.firestore.collection("users-basic").document(userId).get().addOnSuccessListener { snapshot ->
+            val user = snapshot.toObject<UserBasic>() ?: UserBasic()
+            _userName.value = user.getFullName()
+        }
     }
 
     override fun isDisabled(): Boolean {

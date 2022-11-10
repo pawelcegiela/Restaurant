@@ -1,31 +1,21 @@
 package pi.restaurantapp.model.fragments.management.chats
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
+import pi.restaurantapp.model.fragments.AbstractItemListViewModel
+import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.chat.ChatInfo
 
 class ChatsChooseCustomerViewModel : AbstractItemListViewModel() {
     override val databasePath = "chats"
+    override val dbRef get() = Firebase.firestore.collection("$databasePath-basic").orderBy("lastMessageDate", Query.Direction.DESCENDING)
 
-    override fun loadData() {
-        val databaseRef = Firebase.database.getReference(databasePath).child("basic")
-        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                retrieveDataList(dataSnapshot)
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
-    }
-
-    override fun retrieveDataList(dataSnapshot: DataSnapshot) {
-        val data = dataSnapshot.getValue<HashMap<String, ChatInfo>>() ?: HashMap()
-        setDataList(data.toList().map { it.second }.sortedByDescending { it.lastMessageDate }.toMutableList())
+    override fun retrieveDataList(snapshot: QuerySnapshot) {
+        val dataList = snapshot.map { document -> document.toObject<ChatInfo>() }.toMutableList<AbstractDataObject>()
+        setDataList(dataList)
     }
 
     override fun displayFAB() = false

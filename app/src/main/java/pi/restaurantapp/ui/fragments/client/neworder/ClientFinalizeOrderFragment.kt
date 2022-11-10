@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
 import pi.restaurantapp.model.activities.client.ClientNewOrderViewModel
 import pi.restaurantapp.model.fragments.client.neworder.ClientFinalizeOrderViewModel
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic

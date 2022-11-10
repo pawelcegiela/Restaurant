@@ -10,7 +10,7 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewWorkerBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.workers.PreviewWorkerViewModel
 import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.enums.Role

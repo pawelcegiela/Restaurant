@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewAllergenBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.fragments.management.AbstractPreviewItemViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.allergens.PreviewAllergenViewModel
 import pi.restaurantapp.objects.data.allergen.Allergen
 import pi.restaurantapp.ui.RecyclerManager

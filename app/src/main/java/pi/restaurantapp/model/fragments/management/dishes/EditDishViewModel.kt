@@ -2,8 +2,8 @@ package pi.restaurantapp.model.fragments.management.dishes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.dish.Dish
@@ -15,8 +15,8 @@ class EditDishViewModel : AbstractModifyDishViewModel() {
     val item: LiveData<Dish> = _item
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
-        val basic = snapshotsPair.basic?.getValue<DishBasic>() ?: DishBasic()
-        val details = snapshotsPair.details?.getValue<DishDetails>() ?: DishDetails()
+        val basic = snapshotsPair.basic?.toObject<DishBasic>() ?: DishBasic()
+        val details = snapshotsPair.details?.toObject<DishDetails>() ?: DishDetails()
         _item.value = Dish(itemId, basic, details)
     }
 
@@ -36,17 +36,17 @@ class EditDishViewModel : AbstractModifyDishViewModel() {
         }
     }
 
-    private fun removeFromAllergens(allergens: List<String>, dishId : String) {
-        val databaseRef = Firebase.database.getReference("allergens").child("details")
+    private fun removeFromAllergens(allergens: List<String>, dishId: String) {
+        val dbRef = Firebase.firestore.collection("allergens-details")
         for (allergenId in allergens) {
-            databaseRef.child(allergenId).child("containingDishes").child(dishId).setValue(null)
+            dbRef.document(allergenId).update("containingDishes.$dishId", null)
         }
     }
 
-    private fun removeFromIngredients(ingredients: List<String>, dishId : String) {
-        val databaseRef = Firebase.database.getReference("ingredients").child("details")
+    private fun removeFromIngredients(ingredients: List<String>, dishId: String) {
+        val dbRef = Firebase.firestore.collection("ingredients-details")
         for (ingredientId in ingredients) {
-            databaseRef.child(ingredientId).child("containingDishes").child(dishId).setValue(null)
+            dbRef.document(ingredientId).update("containingDishes.$dishId", null)
         }
     }
 }

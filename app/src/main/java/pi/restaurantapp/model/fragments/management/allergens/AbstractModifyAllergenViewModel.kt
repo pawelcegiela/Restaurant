@@ -1,6 +1,6 @@
 package pi.restaurantapp.model.fragments.management.allergens
 
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.allergen.Allergen
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.allergen.AllergenDetails

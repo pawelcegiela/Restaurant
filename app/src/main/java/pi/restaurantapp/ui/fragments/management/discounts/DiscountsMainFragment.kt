@@ -5,7 +5,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
 import pi.restaurantapp.model.activities.management.DiscountsViewModel
-import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
+import pi.restaurantapp.model.fragments.AbstractItemListViewModel
 import pi.restaurantapp.model.fragments.management.discounts.DiscountsMainViewModel
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.enums.DiscountsTab

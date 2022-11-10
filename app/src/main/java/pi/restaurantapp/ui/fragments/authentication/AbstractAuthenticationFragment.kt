@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import androidx.fragment.app.activityViewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentAuthenticationBinding
+import pi.restaurantapp.model.activities.AuthenticationViewModel
 import pi.restaurantapp.ui.activities.AuthenticationActivity
 
 
 abstract class AbstractAuthenticationFragment : Fragment() {
     private var _binding: FragmentAuthenticationBinding? = null
     val binding get() = _binding!!
+    protected val activityViewModel: AuthenticationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,24 +43,21 @@ abstract class AbstractAuthenticationFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            Firebase.auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        (activity as AuthenticationActivity).authenticate {
-                            if (this is WorkerAuthenticationFragment) {
-                                (activity as AuthenticationActivity).loginAsWorker(it)
-                            } else if (this is ClientAuthenticationFragment) {
-                                (activity as AuthenticationActivity).loginAsCustomer(it)
-                            }
-                        }
-                    } else {
-                        binding.editTextLogInPassword.setText("")
-                        Toast.makeText(
-                            requireContext(), getString(R.string.authentication_failed),
-                            Toast.LENGTH_SHORT
-                        ).show()
+            activityViewModel.signIn(email, password, onSuccess = {
+                (activity as AuthenticationActivity).authenticate {
+                    if (this is WorkerAuthenticationFragment) {
+                        (activity as AuthenticationActivity).loginAsWorker(it)
+                    } else if (this is ClientAuthenticationFragment) {
+                        (activity as AuthenticationActivity).loginAsCustomer(it)
                     }
                 }
+            }, onFailure = {
+                binding.editTextLogInPassword.setText("")
+                Toast.makeText(
+                    requireContext(), getString(R.string.authentication_failed),
+                    Toast.LENGTH_SHORT
+                ).show()
+            })
         }
     }
 
@@ -71,17 +69,14 @@ abstract class AbstractAuthenticationFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            Firebase.auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        binding.editTextResetPassEmail.setText("")
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.password_reset_email_sent),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            activityViewModel.sendPasswordResetEmail(email) {
+                binding.editTextResetPassEmail.setText("")
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.password_reset_email_sent),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

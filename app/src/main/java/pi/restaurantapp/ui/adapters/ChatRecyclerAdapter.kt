@@ -15,7 +15,7 @@ import pi.restaurantapp.objects.data.chat.Message
 import pi.restaurantapp.utils.StringFormatUtils
 
 class ChatRecyclerAdapter(
-    private val dataSet: ArrayList<Message>,
+    private val dataSet: MutableList<Message>,
     private val fragment: Fragment,
     private val mainUserId: String,
     private val mainUserDisplay: Boolean

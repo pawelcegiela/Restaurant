@@ -2,8 +2,8 @@ package pi.restaurantapp.model.fragments.management.restaurantdata
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.ktx.getValue
-import pi.restaurantapp.model.fragments.management.AbstractModifyItemViewModel
+import com.google.firebase.firestore.ktx.toObject
+import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurant
 import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurantBasic
@@ -16,8 +16,8 @@ class EditAboutRestaurantViewModel : AbstractModifyItemViewModel() {
     val item: LiveData<AboutRestaurant> = _item
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
-        val basic = snapshotsPair.basic?.getValue<AboutRestaurantBasic>() ?: AboutRestaurantBasic()
-        val details = snapshotsPair.details?.getValue<AboutRestaurantDetails>() ?: AboutRestaurantDetails()
+        val basic = snapshotsPair.basic?.toObject<AboutRestaurantBasic>() ?: AboutRestaurantBasic()
+        val details = snapshotsPair.details?.toObject<AboutRestaurantDetails>() ?: AboutRestaurantDetails()
         _item.value = AboutRestaurant(basic, details)
     }
 }

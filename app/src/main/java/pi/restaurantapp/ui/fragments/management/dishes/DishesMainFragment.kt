@@ -3,7 +3,7 @@ package pi.restaurantapp.ui.fragments.management.dishes
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
+import pi.restaurantapp.model.fragments.AbstractItemListViewModel
 import pi.restaurantapp.model.fragments.management.dishes.DishesMainViewModel
 import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.DishesTab

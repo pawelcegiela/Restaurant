@@ -5,7 +5,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
 import pi.restaurantapp.model.activities.management.OrdersViewModel
-import pi.restaurantapp.model.fragments.management.AbstractItemListViewModel
+import pi.restaurantapp.model.fragments.AbstractItemListViewModel
 import pi.restaurantapp.model.fragments.management.orders.OrdersMainViewModel
 import pi.restaurantapp.objects.enums.OrdersTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
