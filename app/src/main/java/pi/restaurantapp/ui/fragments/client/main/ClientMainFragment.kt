@@ -40,7 +40,7 @@ class ClientMainFragment : Fragment() {
         )
 
         UserInterfaceUtils.setCardView(
-            binding.cardOrdersHistory, R.drawable.order, R.string.orders_history,
+            binding.cardMyOrders, R.drawable.order, R.string.my_orders,
             findNavController(), R.id.actionClientMainToOrders
         )
 

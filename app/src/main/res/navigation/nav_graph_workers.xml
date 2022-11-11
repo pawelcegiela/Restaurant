@@ -130,6 +130,18 @@
         tools:layout="@layout/activity_restaurant_data" />
 
     <activity
+        android:id="@+id/ChatsActivity"
+        android:name="pi.restaurantapp.ui.activities.management.ChatsActivity"
+        android:label="@string/chats"
+        tools:layout="@layout/activity_chats" />
+
+    <activity
+        android:id="@+id/CustomersActivity"
+        android:name="pi.restaurantapp.ui.activities.management.CustomersActivity"
+        android:label="@string/customers"
+        tools:layout="@layout/activity_customers" />
+
+    <activity
         android:id="@+id/SettingsActivity"
         android:name="pi.restaurantapp.ui.activities.management.SettingsActivity"
         android:label="@string/action_settings"

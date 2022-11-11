@@ -45,4 +45,77 @@
         tools:layout="@layout/fragment_chat_client_management">
     </fragment>
 
+
+    <activity
+        android:id="@+id/MainActivity"
+        android:name="pi.restaurantapp.ui.activities.management.MainActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_main" />
+
+    <activity
+        android:id="@+id/AllergensActivity"
+        android:name="pi.restaurantapp.ui.activities.management.AllergensActivity"
+        android:label="@string/allergens"
+        tools:layout="@layout/activity_allergens" />
+
+    <activity
+        android:id="@+id/DiscountsActivity"
+        android:name="pi.restaurantapp.ui.activities.management.DiscountsActivity"
+        android:label="@string/discounts"
+        tools:layout="@layout/activity_discounts" />
+
+    <activity
+        android:id="@+id/IngredientsActivity"
+        android:name="pi.restaurantapp.ui.activities.management.IngredientsActivity"
+        android:label="@string/ingredients"
+        tools:layout="@layout/activity_ingredients" />
+
+    <activity
+        android:id="@+id/DishesActivity"
+        android:name="pi.restaurantapp.ui.activities.management.DishesActivity"
+        android:label="@string/dishes"
+        tools:layout="@layout/activity_dishes" />
+
+    <activity
+        android:id="@+id/OrdersActivity"
+        android:name="pi.restaurantapp.ui.activities.management.OrdersActivity"
+        android:label="@string/orders"
+        tools:layout="@layout/activity_orders" />
+
+    <activity
+        android:id="@+id/RestaurantDataActivity"
+        android:name="pi.restaurantapp.ui.activities.management.RestaurantDataActivity"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/activity_restaurant_data" />
+
+    <activity
+        android:id="@+id/WorkersActivity"
+        android:name="pi.restaurantapp.ui.activities.management.WorkersActivity"
+        android:label="@string/workers"
+        tools:layout="@layout/activity_workers" />
+
+    <activity
+        android:id="@+id/CustomersActivity"
+        android:name="pi.restaurantapp.ui.activities.management.CustomersActivity"
+        android:label="@string/customers"
+        tools:layout="@layout/activity_customers" />
+
+    <activity
+        android:id="@+id/SettingsActivity"
+        android:name="pi.restaurantapp.ui.activities.management.SettingsActivity"
+        android:label="@string/action_settings"
+        tools:layout="@layout/activity_settings" />
+
+    <activity
+        android:id="@+id/LogOut"
+        android:name="pi.restaurantapp.ui.activities.AuthenticationActivity"
+        android:label="@string/log_out"
+        tools:layout="@layout/activity_authentication">
+
+        <argument
+            android:name="logOut"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </activity>
+
 </navigation>

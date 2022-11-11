@@ -27,14 +27,9 @@
         android:id="@+id/groupMain"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/DiscountsActivity"
-            android:icon="@drawable/discount"
-            android:title="@string/discounts" />
-
-        <item
-            android:id="@+id/IngredientsActivity"
-            android:icon="@drawable/ingredient"
-            android:title="@string/ingredients" />
+            android:id="@+id/OrdersActivity"
+            android:icon="@drawable/order"
+            android:title="@string/orders" />
 
         <item
             android:id="@+id/DishesActivity"
@@ -42,14 +37,29 @@
             android:title="@string/dishes" />
 
         <item
+            android:id="@+id/IngredientsActivity"
+            android:icon="@drawable/ingredient"
+            android:title="@string/ingredients" />
+
+        <item
             android:id="@+id/AllergensActivity"
             android:icon="@drawable/allergen"
             android:title="@string/allergens" />
 
         <item
-            android:id="@+id/OrdersActivity"
-            android:icon="@drawable/order"
-            android:title="@string/orders" />
+            android:id="@+id/ChatsActivity"
+            android:icon="@drawable/chat"
+            android:title="@string/chats" />
+        
+        <item
+            android:id="@+id/CustomersActivity"
+            android:icon="@drawable/customer"
+            android:title="@string/customers" />
+
+        <item
+            android:id="@+id/DiscountsActivity"
+            android:icon="@drawable/discount"
+            android:title="@string/discounts" />
 
         <item
             android:id="@+id/RestaurantDataActivity"

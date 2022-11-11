@@ -27,9 +27,9 @@
         android:id="@+id/groupMain"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/DiscountsActivity"
-            android:icon="@drawable/discount"
-            android:title="@string/discounts" />
+            android:id="@+id/DishesActivity"
+            android:icon="@drawable/dish"
+            android:title="@string/dishes" />
 
         <item
             android:id="@+id/IngredientsActivity"
@@ -37,24 +37,34 @@
             android:title="@string/ingredients" />
 
         <item
-            android:id="@+id/DishesActivity"
-            android:icon="@drawable/dish"
-            android:title="@string/dishes" />
-
-        <item
             android:id="@+id/AllergensActivity"
             android:icon="@drawable/allergen"
             android:title="@string/allergens" />
 
         <item
-            android:id="@+id/RestaurantDataActivity"
-            android:icon="@drawable/restaurant_data"
-            android:title="@string/restaurant_data" />
+            android:id="@+id/ChatsActivity"
+            android:icon="@drawable/chat"
+            android:title="@string/chats" />
 
         <item
             android:id="@+id/WorkersActivity"
             android:icon="@drawable/worker"
             android:title="@string/workers" />
+
+        <item
+            android:id="@+id/CustomersActivity"
+            android:icon="@drawable/customer"
+            android:title="@string/customers" />
+
+        <item
+            android:id="@+id/DiscountsActivity"
+            android:icon="@drawable/discount"
+            android:title="@string/discounts" />
+
+        <item
+            android:id="@+id/RestaurantDataActivity"
+            android:icon="@drawable/restaurant_data"
+            android:title="@string/restaurant_data" />
     </group>
 
     <group android:checkableBehavior="single"

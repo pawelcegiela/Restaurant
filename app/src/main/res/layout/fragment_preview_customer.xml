@@ -34,7 +34,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
-                    android:id="@+id/cardWorkerDetails"
+                    android:id="@+id/cardCustomerDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp">
@@ -47,7 +47,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:id="@+id/workerHeader"
+                            android:id="@+id/customerHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
@@ -62,7 +62,7 @@
                                 android:layout_marginHorizontal="10dp"
                                 android:contentDescription="@string/icon"
                                 android:padding="6dp"
-                                android:src="@drawable/worker" />
+                                android:src="@drawable/customer" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"

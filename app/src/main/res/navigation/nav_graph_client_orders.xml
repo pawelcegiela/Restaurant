@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/ClientOrdersMainFragment"
         android:name="pi.restaurantapp.ui.fragments.client.orders.ClientOrdersMainFragment"
-        android:label="@string/orders_history"
+        android:label="@string/my_orders"
         tools:layout="@layout/fragment_item_list">
 
         <action
@@ -28,5 +28,53 @@
             app:popUpTo="@id/ClientOrdersMainFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <activity
+        android:id="@+id/ClientMainActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientMainActivity"
+        android:label="@string/menu_home"
+        tools:layout="@layout/activity_client_main" />
+
+    <activity
+        android:id="@+id/ClientNewOrderActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientNewOrderActivity"
+        android:label="@string/new_order"
+        tools:layout="@layout/activity_client_new_order" />
+
+    <activity
+        android:id="@+id/ClientDiscountsActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientDiscountsActivity"
+        android:label="@string/discounts"
+        tools:layout="@layout/activity_client_discounts" />
+
+    <activity
+        android:id="@+id/ClientChatsActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientChatsActivity"
+        android:label="@string/chat"
+        tools:layout="@layout/activity_client_chats" />
+
+    <activity
+        android:id="@+id/ClientRestaurantDataActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientRestaurantDataActivity"
+        android:label="@string/restaurant_data"
+        tools:layout="@layout/activity_client_restaurant_data" />
+
+    <activity
+        android:id="@+id/ClientSettingsActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientSettingsActivity"
+        android:label="@string/my_account_and_preferences"
+        tools:layout="@layout/activity_client_settings" />
+
+    <activity
+        android:id="@+id/LogOut"
+        android:name="pi.restaurantapp.ui.activities.AuthenticationActivity"
+        android:label="@string/log_out"
+        tools:layout="@layout/activity_authentication">
+
+        <argument
+            android:name="logOut"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </activity>
 
 </navigation>

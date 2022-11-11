@@ -50,7 +50,7 @@
                             android:layout_marginHorizontal="10dp"
                             android:contentDescription="@string/icon"
                             android:padding="6dp"
-                            android:src="@drawable/worker" />
+                            android:src="@drawable/customer" />
 
                         <pi.restaurantapp.ui.textviews.TextViewItemName
                             android:id="@+id/textViewName"

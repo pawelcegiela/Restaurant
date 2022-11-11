@@ -30,12 +30,12 @@ class ChatsMainFragment : Fragment() {
 
     private fun setCardViews() {
         UserInterfaceUtils.setCardView(
-            binding.cardRestaurantData, R.drawable.restaurant_data, R.string.chats_with_customers,
+            binding.cardRestaurantData, R.drawable.customer, R.string.chats_with_customers,
             findNavController(), R.id.actionChatsToChooseCustomer
         )
 
         UserInterfaceUtils.setCardView(
-            binding.cardNewOrder, R.drawable.plus, R.string.worker_forum,
+            binding.cardNewOrder, R.drawable.forum, R.string.worker_forum,
             findNavController(), R.id.actionChatsToForum
         )
     }

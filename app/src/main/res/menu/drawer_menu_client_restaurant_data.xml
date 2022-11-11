@@ -2,4 +2,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupHome">
+        <item
+            android:id="@+id/ClientMainActivity"
+            android:icon="@drawable/home"
+            android:title="@string/menu_home" />
+    </group>
+
+    <group
+        android:id="@+id/groupMain"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/ClientOrdersActivity"
+            android:icon="@drawable/order"
+            android:title="@string/my_orders" />
+
+        <item
+            android:id="@+id/ClientNewOrderActivity"
+            android:icon="@drawable/add"
+            android:title="@string/new_order" />
+
+        <item
+            android:id="@+id/ClientDiscountsActivity"
+            android:icon="@drawable/discount"
+            android:title="@string/discounts" />
+
+        <item
+            android:id="@+id/ClientChatsActivity"
+            android:icon="@drawable/chat"
+            android:title="@string/chat" />
+
+        <item
+            android:id="@+id/ClientRDMainFragment"
+            android:icon="@drawable/restaurant_data"
+            android:title="@string/restaurant_data" />
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupSettings">
+        <item
+            android:id="@+id/ClientSettingsActivity"
+            android:icon="@drawable/settings"
+            android:title="@string/my_account_and_preferences" />
+
+        <item
+            android:id="@+id/LogOut"
+            android:icon="@drawable/logout"
+            android:title="@string/log_out" />
+    </group>
+
 </menu>

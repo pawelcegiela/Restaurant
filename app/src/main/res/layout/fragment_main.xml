@@ -18,11 +18,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include
-                android:id="@+id/cardRestaurantData"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardWorkers"
+                android:id="@+id/cardOrders"
                 layout="@layout/card_view_wide" />
 
             <include
@@ -30,19 +26,19 @@
                 layout="@layout/card_view_wide" />
 
             <include
-                android:id="@+id/cardAllergens"
-                layout="@layout/card_view_wide" />
-
-            <include
-                android:id="@+id/cardOrders"
-                layout="@layout/card_view_wide" />
-
-            <include
                 android:id="@+id/cardIngredients"
                 layout="@layout/card_view_wide" />
 
             <include
-                android:id="@+id/cardDiscounts"
+                android:id="@+id/cardAllergens"
+                layout="@layout/card_view_wide" />
+
+            <include
+                android:id="@+id/cardChats"
+                layout="@layout/card_view_wide" />
+
+            <include
+                android:id="@+id/cardWorkers"
                 layout="@layout/card_view_wide" />
 
             <include
@@ -50,7 +46,11 @@
                 layout="@layout/card_view_wide" />
 
             <include
-                android:id="@+id/cardChats"
+                android:id="@+id/cardDiscounts"
+                layout="@layout/card_view_wide" />
+
+            <include
+                android:id="@+id/cardRestaurantData"
                 layout="@layout/card_view_wide" />
 
             <include

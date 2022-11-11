@@ -30,13 +30,8 @@ class MainFragment : Fragment() {
 
     private fun setCardViews() {
         UserInterfaceUtils.setCardView(
-            binding.cardRestaurantData, R.drawable.restaurant_data, R.string.restaurant_data,
-            findNavController(), R.id.actionMainToRestaurantData
-        )
-
-        UserInterfaceUtils.setCardView(
-            binding.cardWorkers, R.drawable.worker, R.string.workers,
-            findNavController(), R.id.actionMainToWorkers
+            binding.cardOrders, R.drawable.order, R.string.orders,
+            findNavController(), R.id.actionMainToOrders
         )
 
         UserInterfaceUtils.setCardView(
@@ -45,18 +40,28 @@ class MainFragment : Fragment() {
         )
 
         UserInterfaceUtils.setCardView(
+            binding.cardIngredients, R.drawable.ingredient, R.string.ingredients,
+            findNavController(), R.id.actionMainToIngredients
+        )
+
+        UserInterfaceUtils.setCardView(
             binding.cardAllergens, R.drawable.allergen, R.string.allergens,
             findNavController(), R.id.actionMainToAllergens
         )
 
         UserInterfaceUtils.setCardView(
-            binding.cardOrders, R.drawable.order, R.string.orders,
-            findNavController(), R.id.actionMainToOrders
+            binding.cardChats, R.drawable.chat, R.string.chats,
+            findNavController(), R.id.actionMainToChats
         )
 
         UserInterfaceUtils.setCardView(
-            binding.cardIngredients, R.drawable.ingredient, R.string.ingredients,
-            findNavController(), R.id.actionMainToIngredients
+            binding.cardWorkers, R.drawable.worker, R.string.workers,
+            findNavController(), R.id.actionMainToWorkers
+        )
+
+        UserInterfaceUtils.setCardView(
+            binding.cardCustomers, R.drawable.customer, R.string.customers,
+            findNavController(), R.id.actionMainToCustomers
         )
 
         UserInterfaceUtils.setCardView(
@@ -65,13 +70,8 @@ class MainFragment : Fragment() {
         )
 
         UserInterfaceUtils.setCardView(
-            binding.cardCustomers, R.drawable.worker, R.string.customers,
-            findNavController(), R.id.actionMainToCustomers
-        )
-
-        UserInterfaceUtils.setCardView(
-            binding.cardChats, R.drawable.chat, R.string.chats,
-            findNavController(), R.id.actionMainToChats
+            binding.cardRestaurantData, R.drawable.restaurant_data, R.string.restaurant_data,
+            findNavController(), R.id.actionMainToRestaurantData
         )
 
         UserInterfaceUtils.setCardView(
