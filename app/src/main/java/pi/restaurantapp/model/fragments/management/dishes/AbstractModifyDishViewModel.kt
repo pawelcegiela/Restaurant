@@ -20,9 +20,32 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
     val liveAllAllergens = MutableLiveData<MutableList<AllergenBasic>>()
 
     override fun saveToDatabase(data: SplitDataObject) {
-        updateIngredients(data.details as DishDetails)
-        updateAllergens(data.details as DishDetails)
-        super.saveToDatabase(data)
+        val previousIngredients = getPreviousIngredients()
+        val ingredients = getCurrentIngredients(data.details as DishDetails)
+        val previousAllergens = getPreviousItem().details.allergens.map { it.value }
+        val allergens = (data.details as DishDetails).allergens.map { it.value }
+
+        Firebase.firestore.runTransaction { transaction ->
+            val dbRefIngredients = Firebase.firestore.collection("ingredients-details")
+            for (ingredient in previousIngredients.filter { previousIngredient -> previousIngredient.id !in ingredients.map { it.id } }) {
+                transaction.update(dbRefIngredients.document(ingredient.id), "containingDishes.${data.details.id}", null)
+            }
+            for (ingredient in ingredients) {
+                transaction.update(dbRefIngredients.document(ingredient.id), "containingDishes.${data.details.id}", true)
+            }
+
+            val dbRefAllergens = Firebase.firestore.collection("allergens-details")
+            for (allergen in previousAllergens.filter { previousAllergen -> previousAllergen.id !in allergens.map { it.id } }) {
+                transaction.update(dbRefAllergens.document(allergen.id), "containingDishes.${data.details.id}", null)
+            }
+            for (allergen in allergens) {
+                transaction.update(dbRefAllergens.document(allergen.id), "containingDishes.${data.details.id}", true)
+            }
+
+            saveDocumentToDatabase(data, transaction)
+        }.addOnSuccessListener {
+            setSaveStatus(true)
+        }
     }
 
     fun getPreviousItem(): Dish {
@@ -32,53 +55,30 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         return Dish(itemId, DishBasic(), DishDetails())
     }
 
-    private fun updateIngredients(details: DishDetails) {
+    private fun getPreviousIngredients(): ArrayList<IngredientItem> {
         val previousBaseIngredients = getPreviousItem().details.baseIngredients.map { it.value }
         val previousOtherIngredients = getPreviousItem().details.otherIngredients.map { it.value }
         val previousPossibleIngredients = getPreviousItem().details.possibleIngredients.map { it.value }
+
         val previousIngredients = ArrayList<IngredientItem>()
         previousIngredients.addAll(previousBaseIngredients)
         previousIngredients.addAll(previousOtherIngredients)
         previousIngredients.addAll(previousPossibleIngredients)
 
+        return previousIngredients
+    }
+
+    private fun getCurrentIngredients(details: DishDetails): ArrayList<IngredientItem> {
         val baseIngredients = details.baseIngredients.map { it.value }
         val otherIngredients = details.otherIngredients.map { it.value }
         val possibleIngredients = details.possibleIngredients.map { it.value }
+
         val ingredients = ArrayList<IngredientItem>()
         ingredients.addAll(baseIngredients)
         ingredients.addAll(otherIngredients)
         ingredients.addAll(possibleIngredients)
 
-        Firebase.firestore.runTransaction { transaction ->
-            val dbRef = Firebase.firestore.collection("ingredients-details")
-            for (ingredient in previousIngredients) {
-                if (ingredient.id !in ingredients.map { it.id }) {
-                    transaction.update(dbRef.document(ingredient.id), "containingDishes.${details.id}", null)
-                }
-            }
-
-            for (ingredient in ingredients) {
-                transaction.update(dbRef.document(ingredient.id), "containingDishes.${details.id}", true)
-            }
-        }
-    }
-
-    private fun updateAllergens(details: DishDetails) {
-        val previousAllergens = getPreviousItem().details.allergens.map { it.value }
-        val allergens = details.allergens.map { it.value }
-
-        Firebase.firestore.runTransaction { transaction ->
-            val dbRef = Firebase.firestore.collection("allergens-details")
-            for (allergen in previousAllergens) {
-                if (allergen.id !in allergens.map { it.id }) {
-                    transaction.update(dbRef.document(allergen.id), "containingDishes.${details.id}", null)
-                }
-            }
-
-            for (allergen in allergens) {
-                transaction.update(dbRef.document(allergen.id), "containingDishes.${details.id}", true)
-            }
-        }
+        return ingredients
     }
 
     fun getAllIngredients() {

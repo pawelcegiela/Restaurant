@@ -45,8 +45,8 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     var otherIngredientsList: MutableList<IngredientItem> = ArrayList()
     var possibleIngredientsList: MutableList<IngredientItem> = ArrayList()
     var allergensList: MutableList<AllergenBasic> = ArrayList()
-    private lateinit var allIngredients: MutableList<IngredientBasic>
-    private lateinit var allAllergens: MutableList<AllergenBasic>
+    private var allIngredients: MutableList<IngredientBasic> = ArrayList()
+    private var allAllergens: MutableList<AllergenBasic> = ArrayList()
 
     private val lists get() = arrayListOf(baseIngredientsList, otherIngredientsList, possibleIngredientsList)
     private val recyclers

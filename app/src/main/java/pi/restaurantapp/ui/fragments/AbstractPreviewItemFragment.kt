@@ -30,6 +30,8 @@ abstract class AbstractPreviewItemFragment : Fragment() {
             if (role != Role.getPlaceholder()) {
                 if (viewModel.shouldGetDataFromDatabase()) {
                     viewModel.getDataFromDatabase()
+                } else {
+                    viewModel.setReadyToInitialize()
                 }
             }
         }

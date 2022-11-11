@@ -22,7 +22,7 @@ class StringFormatUtils {
         }
 
         fun formatAmountWithUnit(context: Context, amount: String, unit: Int): String {
-            return "${DecimalFormat("##.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}"
+            return "${DecimalFormat("#0.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}"
         }
 
         fun formatDate(date: Date): String {

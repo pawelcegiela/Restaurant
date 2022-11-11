@@ -57,8 +57,6 @@ class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
 
     private fun hideElements() {
         binding.buttonAddDish.visibility = View.GONE
-        binding.textViewStatusTitle.visibility = View.GONE
-        binding.spinnerStatus.visibility = View.GONE
         binding.textViewTypeTitle.visibility = View.GONE
         binding.spinnerType.visibility = View.GONE
         binding.textViewOrderDate.visibility = View.GONE

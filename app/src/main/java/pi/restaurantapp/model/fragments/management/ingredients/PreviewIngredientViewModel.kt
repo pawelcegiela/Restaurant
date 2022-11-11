@@ -59,18 +59,26 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
         return item.value?.basic?.disabled == true
     }
 
-    fun updateIngredientAmount(id: String, _amount: Int, modificationType: IngredientModificationType, callbackFunction: (Int) -> (Unit)) {
+    fun updateIngredientAmount(
+        id: String,
+        _amount: Int,
+        modificationType: IngredientModificationType,
+        setNewAmount: (Int) -> (Unit),
+        addNewAmountChange: (IngredientAmountChange) -> (Unit)
+    ) {
         var newAmount = 0
+        var newAmountChange = IngredientAmountChange()
         Firebase.firestore.runTransaction { transaction ->
             val difference = _amount * (if (modificationType == IngredientModificationType.CORRECTION) -1 else 1)
             val oldAmount = transaction.get(dbRefBasic.document(id)).getLong("amount")?.toInt() ?: 0
             newAmount = max(oldAmount + difference, 0)
             transaction.update(dbRefBasic.document(id), "amount", newAmount)
 
-            val newAmountChange = IngredientAmountChange(Firebase.auth.uid!!, difference, newAmount, modificationType.ordinal)
+            newAmountChange = IngredientAmountChange(Firebase.auth.uid!!, difference, newAmount, modificationType.ordinal)
             transaction.update(dbRefDetails.document(id), "amountChanges.${newAmountChange.date.time}", newAmountChange)
         }.addOnSuccessListener {
-            callbackFunction(newAmount)
+            setNewAmount(newAmount)
+            addNewAmountChange(newAmountChange)
         }
     }
 

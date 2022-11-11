@@ -125,6 +125,22 @@
                         android:layout_height="wrap_content" />
 
                     <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                        android:id="@+id/textViewContactPhoneTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/contact_phone_colon" />
+
+                    <EditText
+                        android:id="@+id/editTextContactPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/contact_phone"
+                        android:importantForAutofill="no"
+                        android:inputType="phone" />
+
+                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewDeliveryTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

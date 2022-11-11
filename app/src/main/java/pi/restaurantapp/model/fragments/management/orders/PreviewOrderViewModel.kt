@@ -3,6 +3,7 @@ package pi.restaurantapp.model.fragments.management.orders
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -47,17 +48,24 @@ class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
 
     fun updateOrderStatus(newStatus: Int) {
         val time = Date().time
-        Firebase.firestore.runTransaction { transaction ->
-            transaction.update(dbRefBasic.document(itemId), "orderStatus", newStatus)
-            transaction.update(dbRefDetails.document(itemId), "statusChanges.$time", newStatus)
-        }.addOnSuccessListener {
-            _orderStatus.value = newStatus
-            _statusChange.value = StringFormatUtils.formatDateTime(Date(time)) to newStatus
-
-            if (newStatus == OrderStatus.ACCEPTED.ordinal) {
-                getSubDishes { subDishes ->
-                    checkIngredientAmountChanges(item.value?.details ?: return@getSubDishes, subDishes)
+        if (newStatus == OrderStatus.ACCEPTED.ordinal) {
+            getSubDishes { subDishes ->
+                Firebase.firestore.runTransaction { transaction ->
+                    checkIngredientAmountChanges(item.value?.details ?: return@runTransaction, subDishes, transaction)
+                    transaction.update(dbRefBasic.document(itemId), "orderStatus", newStatus)
+                    transaction.update(dbRefDetails.document(itemId), "statusChanges.$time", newStatus)
+                }.addOnSuccessListener {
+                    _orderStatus.value = newStatus
+                    _statusChange.value = StringFormatUtils.formatDateTime(Date(time)) to newStatus
                 }
+            }
+        } else {
+            Firebase.firestore.runTransaction { transaction ->
+                transaction.update(dbRefBasic.document(itemId), "orderStatus", newStatus)
+                transaction.update(dbRefDetails.document(itemId), "statusChanges.$time", newStatus)
+            }.addOnSuccessListener {
+                _orderStatus.value = newStatus
+                _statusChange.value = StringFormatUtils.formatDateTime(Date(time)) to newStatus
             }
         }
     }
@@ -76,26 +84,37 @@ class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
         }
     }
 
-    private fun checkIngredientAmountChanges(details: OrderDetails, subDishes: LinkedHashMap<String, IngredientDetails>) {
+    private fun checkIngredientAmountChanges(details: OrderDetails, subDishes: LinkedHashMap<String, IngredientDetails>, transaction: Transaction) {
         val ingredientsToChange = getIngredientsToChange(details, subDishes)
-        for (ingredientId in ingredientsToChange.keys) {
-            Firebase.firestore.runTransaction { transaction ->
-                var dbRef = Firebase.firestore.collection("ingredients-basic").document(ingredientId)
-                val oldAmount = transaction.get(dbRef).getLong("amount")?.toInt() ?: 0
-                val difference = ingredientsToChange[ingredientId]?.toInt()?.times(-1) ?: 0
-                val newAmount = oldAmount + difference
-                transaction.update(dbRef, "amount", newAmount)
+        val newAmounts = HashMap<String, Int>()
+        val newAmountChanges = HashMap<String, IngredientAmountChange>()
 
-                val newAmountChange =
-                    IngredientAmountChange(
-                        Firebase.auth.uid ?: return@runTransaction,
-                        difference,
-                        newAmount,
-                        IngredientModificationType.ORDER.ordinal
-                    )
-                dbRef = Firebase.firestore.collection("ingredients-details").document(ingredientId)
-                transaction.update(dbRef, "amountChanges.${newAmountChange.date.time}", newAmountChange)
-            }
+        val dbRefIngredientsBasic = Firebase.firestore.collection("ingredients-basic")
+        val dbRefIngredientsDetails = Firebase.firestore.collection("ingredients-details")
+
+        for (ingredientId in ingredientsToChange.keys) {
+            val oldAmount = transaction.get(dbRefIngredientsBasic.document(ingredientId)).getLong("amount")?.toInt() ?: 0
+            val difference = ingredientsToChange[ingredientId]?.toInt()?.times(-1) ?: 0
+            val newAmount = oldAmount + difference
+            val newAmountChange =
+                IngredientAmountChange(
+                    Firebase.auth.uid ?: return,
+                    difference,
+                    newAmount,
+                    IngredientModificationType.ORDER.ordinal
+                )
+
+            newAmounts[ingredientId] = newAmount
+            newAmountChanges[ingredientId] = newAmountChange
+        }
+
+        for (ingredientId in newAmounts.keys) {
+            transaction.update(dbRefIngredientsBasic.document(ingredientId), "amount", newAmounts[ingredientId])
+            transaction.update(
+                dbRefIngredientsDetails.document(ingredientId),
+                "amountChanges.${newAmountChanges[ingredientId]!!.date.time}",
+                newAmountChanges[ingredientId]
+            )
         }
     }
 
@@ -105,10 +124,10 @@ class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
             val multiplier = BigDecimal(dish.amount)
             val usedIngredients = dish.dish.details.baseIngredients.values.toMutableList()
             usedIngredients.addAll(dish.dish.details.otherIngredients.values.filter {
-                !dish.unusedOtherIngredients.map { it.id }.toMutableList().contains(it.id)
+                !dish.unusedOtherIngredients.map { ingredient -> ingredient.id }.toMutableList().contains(it.id)
             })
             usedIngredients.addAll(dish.dish.details.possibleIngredients.values.filter {
-                dish.usedPossibleIngredients.map { it.id }.toMutableList().contains(it.id)
+                dish.usedPossibleIngredients.map { ingredient -> ingredient.id }.toMutableList().contains(it.id)
             })
             for (ingredient in usedIngredients) {
                 if (subDishes[ingredient.id] == null) {

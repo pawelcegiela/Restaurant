@@ -2,10 +2,12 @@ package pi.restaurantapp.model.fragments.management.ingredients
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.SnapshotsPair
+import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.ingredient.Ingredient
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
@@ -18,6 +20,11 @@ class EditIngredientViewModel : AbstractModifyIngredientViewModel() {
         val basic = snapshotsPair.basic?.toObject<IngredientBasic>() ?: IngredientBasic()
         val details = snapshotsPair.details?.toObject<IngredientDetails>() ?: IngredientDetails()
         _item.value = Ingredient(itemId, basic, details)
+    }
+
+    override fun saveDocumentToDatabase(data: SplitDataObject, transaction: Transaction) {
+        transaction.update(dbRefBasic.document(data.id), "name", (data.basic as IngredientBasic).name)
+        transaction.update(dbRefDetails.document(data.id), "subIngredients", (data.details as IngredientDetails).subIngredients)
     }
 
     override fun removeAdditionalElements() {

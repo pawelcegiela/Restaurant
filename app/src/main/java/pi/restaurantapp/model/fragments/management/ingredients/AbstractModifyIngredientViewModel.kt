@@ -16,8 +16,21 @@ abstract class AbstractModifyIngredientViewModel : AbstractModifyItemViewModel()
     val liveAllIngredients = MutableLiveData<MutableList<IngredientBasic>>()
 
     override fun saveToDatabase(data: SplitDataObject) {
-        updateSubIngredients(data.details as IngredientDetails)
-        super.saveToDatabase(data)
+        val previousSubIngredients = getPreviousItem().details.subIngredients ?: ArrayList()
+        val subIngredients = (data.details as IngredientDetails).subIngredients ?: ArrayList()
+
+        Firebase.firestore.runTransaction { transaction ->
+            for (subIngredient in previousSubIngredients.filter { previousSubIngredient -> previousSubIngredient.id !in subIngredients.map { it.id } }) {
+                transaction.update(dbRefDetails.document(subIngredient.id), "containingSubDishes.${data.details.id}", null)
+            }
+            for (subIngredient in subIngredients) {
+                transaction.update(dbRefDetails.document(subIngredient.id), "containingSubDishes.${data.details.id}", true)
+            }
+
+            saveDocumentToDatabase(data, transaction)
+        }.addOnSuccessListener {
+            setSaveStatus(true)
+        }
     }
 
     fun getPreviousItem(): Ingredient {
@@ -25,23 +38,6 @@ abstract class AbstractModifyIngredientViewModel : AbstractModifyItemViewModel()
             return item.value ?: Ingredient(itemId, IngredientBasic(), IngredientDetails())
         }
         return Ingredient(itemId, IngredientBasic(), IngredientDetails())
-    }
-
-    private fun updateSubIngredients(details: IngredientDetails) {
-        val previousSubIngredients = getPreviousItem().details.subIngredients ?: ArrayList()
-        val subIngredients = details.subIngredients ?: ArrayList()
-
-        Firebase.firestore.runTransaction { transaction ->
-            for (subIngredient in previousSubIngredients) {
-                if (subIngredient.id !in subIngredients.map { it.id }) {
-                    transaction.update(dbRefDetails.document(subIngredient.id), "containingSubDishes.${details.id}", null)
-                }
-            }
-
-            for (subIngredient in subIngredients) {
-                transaction.update(dbRefDetails.document(subIngredient.id), "containingSubDishes.${details.id}", true)
-            }
-        }
     }
 
     fun getAllIngredients() {

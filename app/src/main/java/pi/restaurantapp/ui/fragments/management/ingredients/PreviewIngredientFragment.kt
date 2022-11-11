@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewIngredientBinding
@@ -35,6 +33,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     override val backActionId = R.id.actionPreviewIngredientToIngredients
     override val viewModel: AbstractPreviewItemViewModel get() = _viewModel
     private val _viewModel: PreviewIngredientViewModel by viewModels()
+    private var amountChanges: MutableList<IngredientAmountChange> = ArrayList()
 
     private var _binding: FragmentPreviewIngredientBinding? = null
     val binding get() = _binding!!
@@ -75,7 +74,11 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
             setContainingDishes(item.details)
             setContainingSubDishes(item.details)
         }
-        setAmountChangesRecycler(item.details.amountChanges, Unit.getString(item.basic.unit, requireContext()))
+
+        val firstIndex = max(amountChanges.size - 10, 0)
+        val lastIndex = item.details.amountChanges.size
+        this.amountChanges = item.details.amountChanges.map { it.value }.sortedByDescending { it.date }.subList(firstIndex, lastIndex).toMutableList()
+        setAmountChangesRecycler(Unit.getString(item.basic.unit, requireContext()))
     }
 
     private fun setButtonListeners(id: String, unit: Int) {
@@ -86,9 +89,12 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
                 getString(R.string.delivery),
                 getString(R.string.delivery_description, binding.textViewAmount.text)
             ) { amount ->
-                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.DELIVERY) { newAmount ->
+                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.DELIVERY, setNewAmount = { newAmount ->
                     binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
-                }
+                }, addNewAmountChange = { newAmountChange ->
+                    this.amountChanges.add(newAmountChange)
+                    binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(amountChanges.size - 1)
+                })
             }
         }
 
@@ -99,9 +105,12 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
                 getString(R.string.correction),
                 getString(R.string.correction_description, binding.textViewAmount.text)
             ) { amount ->
-                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.CORRECTION) { newAmount ->
+                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.CORRECTION, setNewAmount = { newAmount ->
                     binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
-                }
+                }, addNewAmountChange = { newAmountChange ->
+                    this.amountChanges.add(0, newAmountChange)
+                    binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(0)
+                })
             }
         }
     }
@@ -156,21 +165,8 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         }
     }
 
-    private fun setAmountChangesRecycler(amountChanges: HashMap<String, IngredientAmountChange>, unit: String) {
-        val firstIndex = max(amountChanges.size - 10, 0)
-        val lastIndex = amountChanges.size
-        binding.recyclerViewAmountChanges.adapter =
-            AmountChangesRecyclerAdapter(amountChanges.map { it.value }.sortedByDescending { it.date }.subList(firstIndex, lastIndex), this, unit)
-//        val layoutParams2 = LinearLayout.LayoutParams(
-//            0,
-//            0
-//        )
-//        binding.recyclerViewAmountChanges.layoutParams = layoutParams2
-        val layoutParams = LinearLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
-        )
-        binding.recyclerViewAmountChanges.layoutParams = layoutParams
+    private fun setAmountChangesRecycler(unit: String) {
+        binding.recyclerViewAmountChanges.adapter = AmountChangesRecyclerAdapter(this.amountChanges, this, unit)
         binding.recyclerViewAmountChanges.layoutManager = RecyclerManager(context)
     }
 }

@@ -64,7 +64,6 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
             activityViewModel.resetEditedDish()
             viewModel.getUserRole()
             addLiveDataObservers()
-            _viewModel.setReadyToInitialize()
         }
     }
 

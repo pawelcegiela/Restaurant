@@ -50,6 +50,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
         binding.editTextLastName.setText(data.basic.lastName)
         binding.editTextEmail.setText(data.details.email)
         binding.spinnerRole.setSelection(data.basic.role)
+        binding.editTextContactPhone.setText(data.details.contactPhone)
         binding.checkBoxDelivery.isChecked = data.basic.delivery
 
         if (isMyData) {

@@ -115,6 +115,20 @@
                             android:text="@string/no_creation_date_to_display" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewContactPhoneTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/contact_phone_colon" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
+                            android:id="@+id/textViewContactPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_contact_phone" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDeliveryTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

@@ -2,10 +2,12 @@ package pi.restaurantapp.model.fragments.management.dishes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.SnapshotsPair
+import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.dish.DishDetails
@@ -18,6 +20,22 @@ class EditDishViewModel : AbstractModifyDishViewModel() {
         val basic = snapshotsPair.basic?.toObject<DishBasic>() ?: DishBasic()
         val details = snapshotsPair.details?.toObject<DishDetails>() ?: DishDetails()
         _item.value = Dish(itemId, basic, details)
+    }
+
+    override fun saveDocumentToDatabase(data: SplitDataObject, transaction: Transaction) {
+        transaction.set(dbRefBasic.document(data.id), data.basic)
+        val details = data.details as DishDetails
+        val detailsToChange = hashMapOf<String, Any>(
+            "description" to details.description,
+            "recipe" to details.recipe,
+            "baseIngredients" to details.baseIngredients,
+            "otherIngredients" to details.otherIngredients,
+            "possibleIngredients" to details.possibleIngredients,
+            "allergens" to details.allergens,
+            "amount" to details.amount,
+            "unit" to details.unit
+        )
+        transaction.update(dbRefDetails.document(data.id), detailsToChange)
     }
 
     override fun removeAdditionalElements() {

@@ -28,11 +28,12 @@ class UserDetails : AbstractDataObject {
         this.creationDate = creationDate
     }
 
-    constructor(id: String, email: String, creationDate: Date, ordersToDeliver: HashMap<String, Boolean>) {
+    constructor(id: String, email: String, creationDate: Date, ordersToDeliver: HashMap<String, Boolean>, contactPhone: String) {
         this.id = id
         this.email = email
         this.creationDate = creationDate
         this.ordersToDeliver = ordersToDeliver
+        this.contactPhone = contactPhone
     }
 
     constructor(

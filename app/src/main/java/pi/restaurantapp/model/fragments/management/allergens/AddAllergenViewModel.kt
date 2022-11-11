@@ -1,3 +1,9 @@
 package pi.restaurantapp.model.fragments.management.allergens
 
-class AddAllergenViewModel : AbstractModifyAllergenViewModel()
+import pi.restaurantapp.objects.data.SplitDataObject
+
+class AddAllergenViewModel : AbstractModifyAllergenViewModel() {
+    override fun saveToDatabase(data: SplitDataObject) {
+        super.saveToDatabase(data)
+    }
+}

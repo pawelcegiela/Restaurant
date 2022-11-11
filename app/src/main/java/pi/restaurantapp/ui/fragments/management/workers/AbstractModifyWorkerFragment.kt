@@ -58,7 +58,8 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
             id = itemId,
             email = binding.editTextEmail.text.toString(),
             creationDate = user.details.creationDate,
-            ordersToDeliver = user.details.ordersToDeliver
+            ordersToDeliver = user.details.ordersToDeliver,
+            contactPhone = binding.editTextContactPhone.text.toString()
         )
 
         return SplitDataObject(itemId, basic, details)
@@ -69,6 +70,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         map[binding.editTextFirstName] = R.string.first_name
         map[binding.editTextLastName] = R.string.last_name
         map[binding.editTextEmail] = R.string.e_mail
+        map[binding.editTextContactPhone] = R.string.contact_phone
         return map
     }
 

@@ -2,6 +2,7 @@ package pi.restaurantapp.model.fragments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.SnapshotsPair
@@ -45,10 +46,16 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
     }
 
     open fun saveToDatabase(data: SplitDataObject) {
-        dbRefBasic.document(data.id).set(data.basic)
-        dbRefDetails.document(data.id).set(data.details)
+        Firebase.firestore.runTransaction { transaction ->
+            saveDocumentToDatabase(data, transaction)
+        }.addOnSuccessListener {
+            setSaveStatus(true)
+        }
+    }
 
-        _saveStatus.value = true
+    open fun saveDocumentToDatabase(data: SplitDataObject, transaction: Transaction) {
+        transaction.set(dbRefBasic.document(data.id), data.basic)
+        transaction.set(dbRefDetails.document(data.id), data.details)
     }
 
     fun removeFromDatabase() {
@@ -67,5 +74,9 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
 
     fun disableItem() {
         Firebase.firestore.collection("$databasePath-basic").document(itemId).update("disabled", true)
+    }
+
+    fun setSaveStatus(status: Boolean) {
+        _saveStatus.value = status
     }
 }

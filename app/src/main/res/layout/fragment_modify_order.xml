@@ -78,19 +78,6 @@
                         android:layout_height="wrap_content" />
 
                     <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewStatusTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/status_colon" />
-
-                    <Spinner
-                        android:id="@+id/spinnerStatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                         android:id="@+id/textViewFullPriceTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
