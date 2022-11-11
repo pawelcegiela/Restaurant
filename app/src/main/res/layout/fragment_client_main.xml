@@ -34,6 +34,10 @@
                 layout="@layout/card_view_wide" />
 
             <include
+                android:id="@+id/cardDiscounts"
+                layout="@layout/card_view_wide" />
+
+            <include
                 android:id="@+id/cardPreferences"
                 layout="@layout/card_view_wide" />
 

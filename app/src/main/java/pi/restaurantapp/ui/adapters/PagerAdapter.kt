@@ -15,10 +15,12 @@ import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.user.UserBasic
+import pi.restaurantapp.ui.activities.client.ClientDiscountsActivity
 import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.activities.client.ClientOrdersActivity
 import pi.restaurantapp.ui.activities.management.*
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
+import pi.restaurantapp.ui.fragments.client.discounts.ClientDiscountsItemListSubFragment
 import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.allergens.AllergensItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.chats.ChatsItemListSubFragment
@@ -60,10 +62,11 @@ class PagerAdapter<Tab>(
                 }
             }
             is WorkersActivity -> WorkersItemListSubFragment(list as MutableList<UserBasic>, position, fabFilter, searchView)
-            is ClientOrdersActivity -> ClientOrdersItemListSubFragment(list as MutableList<OrderBasic>, position, fabFilter, searchView)
-            is ClientNewOrderActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position, fabFilter, searchView, false)
             is ChatsActivity -> ChatsItemListSubFragment(list as MutableList<ChatInfo>, fabFilter, searchView)
             is CustomersActivity -> CustomersItemListSubFragment(list as MutableList<UserBasic>, fabFilter, searchView)
+            is ClientOrdersActivity -> ClientOrdersItemListSubFragment(list as MutableList<OrderBasic>, position, fabFilter, searchView)
+            is ClientNewOrderActivity -> DishesItemListSubFragment(list as MutableList<DishBasic>, position, fabFilter, searchView, false)
+            is ClientDiscountsActivity -> ClientDiscountsItemListSubFragment(list as MutableList<DiscountBasic>, fabFilter, searchView)
             else -> ItemListSubFragment(fabFilter, searchView)
         }
     }

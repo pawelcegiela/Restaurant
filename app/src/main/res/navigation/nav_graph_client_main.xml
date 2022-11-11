@@ -28,6 +28,10 @@
             app:destination="@id/ClientChatsActivity" />
 
         <action
+            android:id="@+id/actionClientMainToDiscounts"
+            app:destination="@id/ClientDiscountsActivity" />
+
+        <action
             android:id="@+id/actionClientMainToSettings"
             app:destination="@id/ClientSettingsActivity" />
     </fragment>
@@ -55,6 +59,12 @@
         android:name="pi.restaurantapp.ui.activities.client.ClientChatsActivity"
         android:label="@string/chats"
         tools:layout="@layout/activity_client_chats" />
+
+    <activity
+        android:id="@+id/ClientDiscountsActivity"
+        android:name="pi.restaurantapp.ui.activities.client.ClientDiscountsActivity"
+        android:label="@string/discounts"
+        tools:layout="@layout/activity_client_discounts" />
 
     <activity
         android:id="@+id/ClientSettingsActivity"

@@ -50,6 +50,11 @@ class ClientMainFragment : Fragment() {
         )
 
         UserInterfaceUtils.setCardView(
+            binding.cardDiscounts, R.drawable.discount, R.string.discounts,
+            findNavController(), R.id.actionClientMainToDiscounts
+        )
+
+        UserInterfaceUtils.setCardView(
             binding.cardPreferences, R.drawable.settings, R.string.my_account_and_preferences,
             findNavController(), R.id.actionClientMainToSettings
         )
