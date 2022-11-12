@@ -13,7 +13,6 @@ import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.dishes.PreviewDishViewModel
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
-import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
@@ -51,11 +50,9 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
             binding.cardViewDisabled.textViewInfo.text = getText(R.string.dish_unavailable)
         }
         if (item.basic.isDiscounted) {
-            binding.textViewOriginalPrice.paintFlags =
-                binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            binding.textViewOriginalPrice.paintFlags = binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
         binding.textViewPrice.text = StringFormatUtils.formatPrice(if (item.basic.isDiscounted) item.basic.discountPrice else item.basic.basePrice)
-        binding.textViewDishType.text = DishType.getString(item.basic.dishType, requireContext())
         binding.textViewAmount.text =
             StringFormatUtils.formatAmountWithUnit(requireContext(), item.details.amount, item.details.unit)
 

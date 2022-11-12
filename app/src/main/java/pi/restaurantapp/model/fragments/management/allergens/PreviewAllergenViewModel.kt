@@ -24,14 +24,21 @@ class PreviewAllergenViewModel : AbstractPreviewItemViewModel() {
         val basic = snapshotsPair.basic?.toObject<AllergenBasic>() ?: AllergenBasic()
         val details = snapshotsPair.details?.toObject<AllergenDetails>() ?: AllergenDetails()
         _item.value = Allergen(itemId, basic, details)
+
+        getContainingDishes(details.containingDishes.map { it.key })
     }
 
-    fun getContainingDishes(containingDishesIds: List<String>) {
+    private fun getContainingDishes(containingDishesIds: List<String>) {
+        if (containingDishesIds.isEmpty()) {
+            setReadyToUnlock()
+            return
+        }
         for (id in containingDishesIds) {
             Firebase.firestore.collection("dishes-basic").document(id).get().addOnSuccessListener { snapshot ->
                 containingDishes.add(snapshot.getString("name") ?: "")
                 if (containingDishes.size == containingDishesIds.size) {
                     liveContainingDishes.value = containingDishes
+                    setReadyToUnlock()
                 }
             }
         }

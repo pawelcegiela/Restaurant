@@ -21,6 +21,7 @@ class StringFormatUtils {
             return "$firstString $secondString"
         }
 
+        @JvmStatic
         fun formatAmountWithUnit(context: Context, amount: String, unit: Int): String {
             return "${DecimalFormat("#0.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}"
         }
@@ -43,6 +44,7 @@ class StringFormatUtils {
             return "${formatDate(Date(date))} ${formatTime(Date(date))}"
         }
 
+        @JvmStatic
         fun formatPrice(value: String): String {
             return "${DecimalFormat("#0.00").format(BigDecimal(value))} zł"
         }

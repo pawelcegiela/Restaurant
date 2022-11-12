@@ -33,5 +33,11 @@ class ContainingItemsRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    companion object {
+        @JvmStatic
+        fun createNew(dataSet: List<String>, fragment: Fragment) : ContainingItemsRecyclerAdapter {
+            return ContainingItemsRecyclerAdapter(dataSet, fragment)
+        }
+    }
 }
 

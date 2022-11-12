@@ -4,6 +4,8 @@
     <data>
 
         <import type="android.view.View" />
+        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.objects.enums.DishType" />
 
         <variable
             name="vm"
@@ -87,7 +89,8 @@
                                 <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewDishType"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:text="@{DishType.getString(vm.item.basic.dishType, context)}"/>
                             </LinearLayout>
 
                         </LinearLayout>

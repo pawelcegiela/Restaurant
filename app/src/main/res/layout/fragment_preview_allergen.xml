@@ -4,10 +4,16 @@
     <data>
 
         <import type="android.view.View" />
+        <import type="pi.restaurantapp.ui.adapters.ContainingItemsRecyclerAdapter" />
+        <import type="pi.restaurantapp.ui.RecyclerManager" />
 
         <variable
             name="vm"
             type="pi.restaurantapp.model.fragments.management.allergens.PreviewAllergenViewModel" />
+
+        <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.management.allergens.PreviewAllergenFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -111,7 +117,8 @@
                     android:id="@+id/cardContainingDishes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:visibility="@{vm.item.details.containingDishes.isEmpty() ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -131,7 +138,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewDishesContaining"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{ContainingItemsRecyclerAdapter.createNew(vm.containingDishes, fragment)}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}"/>
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>

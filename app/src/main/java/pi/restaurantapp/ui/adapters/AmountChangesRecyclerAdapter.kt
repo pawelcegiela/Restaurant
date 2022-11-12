@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.ItemAmountChangeBinding
 import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
 import pi.restaurantapp.objects.enums.IngredientModificationType
+import pi.restaurantapp.objects.enums.Unit
 import pi.restaurantapp.utils.StringFormatUtils
 
 
 class AmountChangesRecyclerAdapter(
     private val dataSet: List<IngredientAmountChange>,
     private val fragment: Fragment,
-    private val unit: String
+    private val unit: Int
 ) :
     RecyclerView.Adapter<AmountChangesRecyclerAdapter.ViewHolder>() {
 
@@ -32,8 +33,11 @@ class AmountChangesRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val valueAfter = dataSet[position].valueAfter.toString() + " " + unit
-        val changedValue = (if (dataSet[position].changedValue > 0) "+" else "") + dataSet[position].changedValue + " " + unit
+        val valueAfter = dataSet[position].valueAfter.toString() + " " + Unit.getString(unit, fragment.requireContext())
+        val changedValue = (if (dataSet[position].changedValue > 0) "+" else "") + dataSet[position].changedValue + " " + Unit.getString(
+            unit,
+            fragment.requireContext()
+        )
 
         viewHolder.binding.textViewDateType.text = "${StringFormatUtils.formatDateTime(dataSet[position].date)} - " +
                 IngredientModificationType.getString(dataSet[position].modificationType, viewHolder.context)
@@ -42,5 +46,11 @@ class AmountChangesRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    companion object {
+        @JvmStatic
+        fun createNew(dataSet: List<IngredientAmountChange>, fragment: Fragment, unit: Int): AmountChangesRecyclerAdapter {
+            return AmountChangesRecyclerAdapter(dataSet, fragment, unit)
+        }
+    }
 }
 

@@ -81,5 +81,11 @@ class DishIngredientsRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    companion object {
+        @JvmStatic
+        fun createNew(dataSet: List<IngredientItem>, fragment: Fragment, list: IngredientStatus): DishIngredientsRecyclerAdapter {
+            return DishIngredientsRecyclerAdapter(dataSet, fragment, list)
+        }
+    }
 }
 

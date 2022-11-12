@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
 
+        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+
+        <import type="pi.restaurantapp.ui.adapters.AmountChangesRecyclerAdapter" />
+
+        <import type="pi.restaurantapp.ui.adapters.ContainingItemsRecyclerAdapter" />
+
+        <import type="pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter" />
+
+        <import type="pi.restaurantapp.objects.enums.IngredientStatus" />
+
+        <import type="pi.restaurantapp.ui.RecyclerManager" />
+
         <variable
             name="vm"
             type="pi.restaurantapp.model.fragments.management.ingredients.PreviewIngredientViewModel" />
+
+        <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.management.ingredients.PreviewIngredientFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,7 +97,8 @@
                                 <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewType"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:text="@{vm.item.basic.subDish ? @string/sub_dish : @string/ingredient}" />
 
                             </LinearLayout>
 
@@ -101,29 +118,32 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
+                            android:text="@{StringFormatUtils.formatAmountWithUnit(context, String.valueOf(vm.item.basic.amount), vm.item.basic.unit)}"
                             android:visibility="@{vm.item.basic.subDish ? View.GONE : View.VISIBLE}" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_gravity="center"
                             android:layout_marginTop="30dp"
+                            android:orientation="horizontal"
                             android:visibility="@{vm.item.basic.subDish ? View.GONE : View.VISIBLE}">
 
                             <Button
                                 android:id="@+id/buttonDelivery"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/delivery"
-                                android:layout_marginHorizontal="10dp"/>
+                                android:layout_marginHorizontal="10dp"
+                                android:onClick="@{() -> fragment.onClickButtonDelivery(vm.item.basic.id, vm.item.basic.unit)}"
+                                android:text="@string/delivery" />
 
                             <Button
                                 android:id="@+id/buttonCorrection"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/correction"
-                                android:layout_marginHorizontal="10dp"/>
+                                android:layout_marginHorizontal="10dp"
+                                android:onClick="@{() -> fragment.onClickButtonCorrection(vm.item.basic.id, vm.item.basic.unit)}"
+                                android:text="@string/correction" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -134,7 +154,8 @@
                     android:id="@+id/cardSubIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:visibility="@{vm.item.basic.subDish &amp;&amp; vm.item.details.subIngredients != null ? View.VISIBLE : View.GONE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -153,7 +174,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewSubIngredients"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp"/>
+                            android:layout_height="wrap_content"
+                            android:adapter="@{vm.item.details.subIngredients != null ? DishIngredientsRecyclerAdapter.createNew(vm.item.details.subIngredients, fragment, IngredientStatus.BASE) : null}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
@@ -184,24 +207,32 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
-                            android:text="@string/dishes" />
+                            android:text="@string/dishes"
+                            android:visibility="@{vm.item.details.containingDishes.isEmpty() ? View.GONE : View.VISIBLE}" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewDishesContaining"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{ContainingItemsRecyclerAdapter.createNew(vm.containingDishes, fragment)}"
+                            android:visibility="@{vm.item.details.containingDishes.isEmpty() ? View.GONE : View.VISIBLE}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewContainingSubDishes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
-                            android:text="@string/sub_dishes" />
+                            android:text="@string/sub_dishes"
+                            android:visibility="@{vm.item.details.containingSubDishes.isEmpty() ? View.GONE : View.VISIBLE}" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewSubDishesContaining"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{ContainingItemsRecyclerAdapter.createNew(vm.containingSubDishes, fragment)}"
+                            android:visibility="@{vm.item.details.containingSubDishes.isEmpty() ? View.GONE : View.VISIBLE}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
@@ -229,7 +260,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewAmountChanges"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}"
+                            android:adapter="@{AmountChangesRecyclerAdapter.createNew(vm.amountChanges, fragment, vm.item.basic.unit)}"/>
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>

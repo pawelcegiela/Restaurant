@@ -27,29 +27,49 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
     private val _item: MutableLiveData<Ingredient> = MutableLiveData()
     val item: LiveData<Ingredient> = _item
 
+    var amountChanges: MutableList<IngredientAmountChange> = ArrayList()
+
     override fun getItem(snapshotsPair: SnapshotsPair) {
         val basic = snapshotsPair.basic?.toObject<IngredientBasic>() ?: IngredientBasic()
         val details = snapshotsPair.details?.toObject<IngredientDetails>() ?: IngredientDetails()
         _item.value = Ingredient(itemId, basic, details)
+
+        getAmountChanges(details.amountChanges)
+        getContainingDishes(details.containingDishes.map { it.key }, details.containingSubDishes.map { it.key })
     }
 
-    fun getContainingDishes(containingDishesIds: List<String>) {
+    private fun getAmountChanges(amountChangesHashMap: HashMap<String, IngredientAmountChange>) {
+        val firstIndex = max(amountChangesHashMap.size - 10, 0)
+        val lastIndex = amountChangesHashMap.size
+        amountChanges = amountChangesHashMap.map { it.value }.sortedByDescending { it.date }.subList(firstIndex, lastIndex).toMutableList()
+    }
+
+    private fun getContainingDishes(containingDishesIds: List<String>, containingSubDishesIds: List<String>) {
+        if (containingDishesIds.isEmpty() && containingSubDishesIds.isEmpty()) {
+            setReadyToUnlock()
+            return
+        }
+
         for (id in containingDishesIds) {
             Firebase.firestore.collection("dishes-basic").document(id).get().addOnSuccessListener { snapshot ->
                 containingDishes.add(snapshot.getString("name") ?: "")
                 if (containingDishes.size == containingDishesIds.size) {
                     liveContainingDishes.value = containingDishes
+                    if (containingSubDishes.size == containingSubDishesIds.size) {
+                        setReadyToUnlock()
+                    }
                 }
             }
         }
-    }
 
-    fun getContainingSubDishes(containingSubDishesIds: List<String>) {
         for (id in containingSubDishesIds) {
             Firebase.firestore.collection("ingredients-basic").document(id).get().addOnSuccessListener { snapshot ->
                 containingDishes.add(snapshot.getString("name") ?: "")
                 if (containingSubDishes.size == containingSubDishesIds.size) {
                     liveContainingSubDishes.value = containingSubDishes
+                    if (containingDishes.size == containingDishesIds.size) {
+                        setReadyToUnlock()
+                    }
                 }
             }
         }

@@ -11,6 +11,7 @@ enum class DishType(val stringResourceId: Int) {
     ALCOHOLIC_DRINK(R.string.alcoholic_drink);
 
     companion object {
+        @JvmStatic
         fun getString(id: Int, context: Context): String {
             return context.getString(values()[id].stringResourceId)
         }
