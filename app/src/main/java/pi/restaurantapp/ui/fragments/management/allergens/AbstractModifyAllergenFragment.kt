@@ -9,10 +9,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyAllergenBinding
 import pi.restaurantapp.model.fragments.management.allergens.AbstractModifyAllergenViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.allergen.AllergenBasic
-import pi.restaurantapp.objects.data.allergen.AllergenDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
 
 abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
 
@@ -23,30 +20,21 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
+    private val _viewModel get() = viewModel as AbstractModifyAllergenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyAllergenBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.lifecycleOwner = this
         linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
 
     override fun getDataObject(): SplitDataObject {
-        val allergen = (viewModel as AbstractModifyAllergenViewModel).getPreviousItem()
-        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
-        val basic = AllergenBasic(
-            id = itemId,
-            name = binding.editTextName.text.toString()
-        )
-        val details = AllergenDetails(
-            id = itemId,
-            description = binding.editTextDescription.text.toString(),
-            containingDishes = allergen.details.containingDishes
-        )
-
-        return SplitDataObject(itemId, basic, details)
+        return SplitDataObject(viewModel.itemId, _viewModel.item.value!!.basic, _viewModel.item.value!!.details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

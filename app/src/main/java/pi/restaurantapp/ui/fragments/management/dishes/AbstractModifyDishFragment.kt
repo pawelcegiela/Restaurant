@@ -20,18 +20,16 @@ import pi.restaurantapp.objects.enums.Unit
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.ui.dialogs.AddAllergenDialog
 import pi.restaurantapp.ui.dialogs.AddIngredientDialog
+import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 import pi.restaurantapp.utils.UserInterfaceUtils
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
-
-    // TODO Change Recycler to ListView!
 
     private var _binding: FragmentModifyDishBinding? = null
     val binding get() = _binding!!
@@ -48,6 +46,8 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     private var allIngredients: MutableList<IngredientBasic> = ArrayList()
     private var allAllergens: MutableList<AllergenBasic> = ArrayList()
 
+    private val _viewModel get() = viewModel as AbstractModifyDishViewModel
+
     private val lists get() = arrayListOf(baseIngredientsList, otherIngredientsList, possibleIngredientsList)
     private val recyclers
         get() = arrayListOf(
@@ -61,6 +61,9 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyDishBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = this
         linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
@@ -141,7 +144,7 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         }
     }
 
-    private fun getAllIngredients() : MutableList<IngredientItem> {
+    private fun getAllIngredients(): MutableList<IngredientItem> {
         return ArrayList(baseIngredientsList).also { it.addAll(otherIngredientsList) }.also { it.addAll(possibleIngredientsList) }
     }
 

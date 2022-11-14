@@ -1,6 +1,7 @@
 package pi.restaurantapp.objects.data.discount
 
 import pi.restaurantapp.objects.data.AbstractDataObject
+import pi.restaurantapp.utils.ComputingUtils
 import java.util.*
 
 class DiscountBasic : AbstractDataObject {
@@ -9,7 +10,7 @@ class DiscountBasic : AbstractDataObject {
     var hasThreshold: Boolean = false
     var thresholdValue: String = "0.0"
     var creationDate: Date = Date()
-    var expirationDate: Date = Date()
+    var expirationDate: Date = ComputingUtils.getInitialExpirationDate()
     var numberOfDiscounts: Int = 0
     var assignedDiscounts: ArrayList<String> = ArrayList()
     var redeemedDiscounts: ArrayList<String> = ArrayList()
@@ -46,5 +47,23 @@ class DiscountBasic : AbstractDataObject {
         this.redeemedDiscounts = redeemedDiscounts
         this.receiverType = receiverType
         this.usageType = usageType
+    }
+
+    fun onNumberOfDiscountsChanged(s: CharSequence) {
+        try {
+            this.numberOfDiscounts = s.toString().toInt()
+        } catch (_: NumberFormatException) {
+        }
+    }
+
+    fun onAmountChanged(s: CharSequence) {
+        try {
+            this.amount = s.toString().toDouble().toString()
+        } catch (_: NumberFormatException) {
+        }
+    }
+
+    fun onExpirationDateChanged(s: CharSequence) {
+        this.expirationDate = ComputingUtils.getDateTimeFromString(s.toString())
     }
 }

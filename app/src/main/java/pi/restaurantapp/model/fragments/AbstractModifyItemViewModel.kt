@@ -23,6 +23,8 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
 
     open fun getItem(snapshotsPair: SnapshotsPair) {}
 
+    open fun createItem() {}
+
     fun getDataFromDatabase() {
         dbRefBasic.document(itemId).get().addOnSuccessListener { snapshot ->
             snapshotsPair.basic = snapshot

@@ -45,6 +45,8 @@ abstract class AbstractModifyItemFragment : Fragment() {
                     viewModel.itemId = itemId
                     if (itemId.isNotEmpty() && viewModel.shouldGetDataFromDatabase()) {
                         viewModel.getDataFromDatabase()
+                    } else if (itemId.isEmpty()) {
+                        viewModel.createItem()
                     }
                 } else {
                     initializeWorkerUI()
@@ -73,7 +75,9 @@ abstract class AbstractModifyItemFragment : Fragment() {
         findNavController().navigate(nextActionId)
     }
 
-    open fun fillInData() {}
+    open fun fillInData() {
+        finishLoading()
+    }
 
     open fun afterSave() {
         Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()

@@ -14,4 +14,8 @@ class AllergenBasic : AbstractDataObject {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.name = name
     }
+
+    constructor(id: String) {
+        this.id = id
+    }
 }

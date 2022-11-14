@@ -8,4 +8,11 @@ class SpinnerAdapter(context: Context, array: Array<String>) : ArrayAdapter<Stri
     init {
         setDropDownViewResource(R.layout.spinner_item_view_dropdown)
     }
+
+    companion object {
+        @JvmStatic
+        fun createNew(context: Context, array: Array<String>): SpinnerAdapter {
+            return SpinnerAdapter(context, array)
+        }
+    }
 }

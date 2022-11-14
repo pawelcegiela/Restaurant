@@ -21,12 +21,15 @@ import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
-import pi.restaurantapp.objects.enums.*
+import pi.restaurantapp.objects.enums.CollectionType
+import pi.restaurantapp.objects.enums.OrderPlace
+import pi.restaurantapp.objects.enums.OrderType
+import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter
+import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.CustomNumberPicker
-import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.utils.ComputingUtils
 import pi.restaurantapp.utils.PreconditionUtils
 import pi.restaurantapp.utils.StringFormatUtils
@@ -50,6 +53,8 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     abstract val addDishAction: Int
     private lateinit var numberPickerCollectionTime: CustomNumberPicker
 
+    private val _viewModel get() = viewModel as AbstractModifyOrderViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (activityViewModel.savedOrder.value == null) {
             super.onViewCreated(view, savedInstanceState)
@@ -68,6 +73,9 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyOrderBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = this
         linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
@@ -237,14 +245,22 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     private fun countFullPrice(): String {
-        return ComputingUtils.countFullOrderPrice(dishesList, binding.spinnerCollectionType.selectedItemId.toInt(), (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value)
+        return ComputingUtils.countFullOrderPrice(
+            dishesList,
+            binding.spinnerCollectionType.selectedItemId.toInt(),
+            (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value
+        )
     }
 
     override fun checkSavePreconditions(data: SplitDataObject): Precondition {
         if (super.checkSavePreconditions(data) != Precondition.OK) {
             return super.checkSavePreconditions(data)
         }
-        return PreconditionUtils.checkOrder(data.basic as OrderBasic, data.details as OrderDetails, (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value)
+        return PreconditionUtils.checkOrder(
+            data.basic as OrderBasic,
+            data.details as OrderDetails,
+            (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value
+        )
     }
 
     private fun updateFullPrice() {

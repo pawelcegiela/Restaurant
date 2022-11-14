@@ -16,10 +16,10 @@ import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.objects.enums.Unit
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
-import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.ui.dialogs.AddIngredientDialog
+import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
+import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.utils.StringFormatUtils
 import pi.restaurantapp.utils.UserInterfaceUtils
 
@@ -37,11 +37,16 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
     var subIngredientsList: MutableList<IngredientItem> = ArrayList()
     private lateinit var allIngredients: MutableList<IngredientBasic>
 
+    private val _viewModel get() = viewModel as AbstractModifyIngredientViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyIngredientBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = this
         linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

@@ -29,11 +29,16 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
 
     var disabled = false
 
+    private val _viewModel get() = viewModel as AbstractModifyWorkerViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyWorkerBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = this
         linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

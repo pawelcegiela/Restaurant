@@ -1,212 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="pi.restaurantapp.ui.fragments.management.discounts.AbstractModifyDiscountFragment">
+<layout>
 
-    <ScrollView
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+
+        <import type="pi.restaurantapp.utils.ComputingUtils" />
+
+        <import type="pi.restaurantapp.ui.adapters.SpinnerAdapter" />
+
+        <import type="pi.restaurantapp.objects.enums.DiscountValueType" />
+
+        <import type="pi.restaurantapp.objects.enums.DiscountReceiverType" />
+
+        <import type="pi.restaurantapp.objects.enums.DiscountUsageType" />
+
+        <import type="pi.restaurantapp.ui.fragments.management.discounts.AddDiscountFragment" />
+
+        <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.management.discounts.AbstractModifyDiscountFragment" />
+
+        <variable
+            name="vm"
+            type="pi.restaurantapp.model.fragments.management.discounts.AbstractModifyDiscountViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="pi.restaurantapp.ui.fragments.management.discounts.AbstractModifyDiscountFragment">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <pi.restaurantapp.ui.CardViewPreviewElement
-                android:id="@+id/cardDiscountDetails"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <LinearLayout
+                <pi.restaurantapp.ui.CardViewPreviewElement
+                    android:id="@+id/cardDiscountDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="25dp"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp">
 
                     <LinearLayout
-                        android:id="@+id/discountHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="15dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="25dp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/imageIcon"
-                            android:layout_width="80dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="10dp"
-                            android:contentDescription="@string/icon"
-                            android:padding="6dp"
-                            android:src="@drawable/discount" />
-
-                        <pi.restaurantapp.ui.textviews.EditTextItemName
-                            android:id="@+id/editTextCode"
+                        <LinearLayout
+                            android:id="@+id/discountHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="15dp"
-                            android:layout_marginBottom="7dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="15dp"
                             android:gravity="center"
-                            android:hint="@string/code"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageIcon"
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:contentDescription="@string/icon"
+                                android:padding="6dp"
+                                android:src="@drawable/discount" />
+
+                            <pi.restaurantapp.ui.textviews.EditTextItemName
+                                android:id="@+id/editTextCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_marginBottom="7dp"
+                                android:enabled="@{fragment instanceof AddDiscountFragment}"
+                                android:gravity="center"
+                                android:hint="@string/code"
+                                android:onTextChanged="@{(s, start, before, count) -> vm.item.onIdChanged(s)}"
+                                android:text="@{vm.item.basic.id}"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewDiscountValueTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/discount_value_colon" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editTextAmount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_toStartOf="@+id/spinner_value_type"
+                                android:enabled="@{fragment instanceof AddDiscountFragment}"
+                                android:hint="@string/amount"
+                                android:importantForAutofill="no"
+                                android:inputType="number"
+                                android:onTextChanged="@{(s, start, before, count) -> vm.item.basic.onAmountChanged(s)}"
+                                android:text="@{vm.item.basic.amount != &quot;0.0&quot; ? String.valueOf(vm.item.basic.amount) : @string/empty}" />
+
+                            <Spinner
+                                android:id="@+id/spinner_value_type"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="20dp"
+                                android:adapter="@{SpinnerAdapter.createNew(context, DiscountValueType.getArrayOfStrings(context))}"
+                                android:enabled="@{fragment instanceof AddDiscountFragment}"
+                                android:selectedItemPosition="@={vm.item.basic.valueType}" />
+                        </RelativeLayout>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewThresholdTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/valid_above_total_order_value_colon" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/checkBoxThreshold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_gravity="center_vertical"
+                                android:checked="@={vm.item.basic.hasThreshold}"
+                                android:enabled="@{fragment instanceof AddDiscountFragment}" />
+
+                            <EditText
+                                android:id="@+id/editTextThreshold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_toEndOf="@+id/checkBoxThreshold"
+                                android:enabled="@{fragment instanceof AddDiscountFragment}"
+                                android:hint="@string/threshold_value"
+                                android:importantForAutofill="no"
+                                android:inputType="numberDecimal"
+                                android:text="@={vm.item.basic.thresholdValue}" />
+
+                        </RelativeLayout>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewReceiverTypeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/access_colon" />
+
+                        <Spinner
+                            android:id="@+id/spinnerReceiverType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adapter="@{SpinnerAdapter.createNew(context, DiscountReceiverType.getArrayOfStrings(context))}"
+                            android:enabled="@{fragment instanceof AddDiscountFragment}"
+                            android:selectedItemPosition="@={vm.item.basic.receiverType}" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewUsageTypeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/usage_colon" />
+
+                        <Spinner
+                            android:id="@+id/spinnerUsageType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adapter="@{SpinnerAdapter.createNew(context, DiscountUsageType.getArrayOfStrings(context))}"
+                            android:enabled="@{fragment instanceof AddDiscountFragment}"
+                            android:selectedItemPosition="@={vm.item.basic.usageType}" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewExpirationDateTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/expiration_date_colon" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
+                            android:id="@+id/textViewExpirationDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.expirationDate)}"
+                            android:onClick="@{() -> fragment.onClickExpirationDate()}"
+                            android:onTextChanged="@{(s, start, before, count) -> vm.item.basic.onExpirationDateChanged(s)}" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewAvailableTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/number_of_discounts_colon" />
+
+                        <EditText
+                            android:id="@+id/edit_text_total_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="@{fragment instanceof AddDiscountFragment}"
+                            android:hint="@string/number_of_discounts"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:onTextChanged="@{(s, start, before, count) -> vm.item.basic.onNumberOfDiscountsChanged(s)}"
+                            android:text="@{vm.item.basic.numberOfDiscounts != 0 ? String.valueOf(vm.item.basic.numberOfDiscounts) : @string/empty}" />
 
                     </LinearLayout>
 
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewDiscountValueTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/discount_value_colon" />
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+            </LinearLayout>
 
-                        <EditText
-                            android:id="@+id/editTextAmount"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/amount"
-                            android:importantForAutofill="no"
-                            android:inputType="number"
-                            android:layout_toStartOf="@+id/spinner_value_type"/>
+        </ScrollView>
 
-                        <Spinner
-                            android:id="@+id/spinner_value_type"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginStart="20dp" />
-                    </RelativeLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/bottom_toolbar_height" />
 
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewThresholdTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/valid_above_total_order_value_colon" />
+        <include
+            android:id="@+id/toolbarNavigation"
+            layout="@layout/toolbar_navigation_modify"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+        <include
+            android:id="@+id/progress"
+            layout="@layout/progress_bar" />
 
-                        <CheckBox
-                            android:id="@+id/checkBoxThreshold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_gravity="center_vertical" />
-
-                        <EditText
-                            android:id="@+id/editTextThreshold"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_toEndOf="@+id/checkBoxThreshold"
-                            android:hint="@string/threshold_value"
-                            android:importantForAutofill="no"
-                            android:inputType="numberDecimal" />
-
-                    </RelativeLayout>
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewReceiverTypeTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/access_colon" />
-
-                    <Spinner
-                        android:id="@+id/spinnerReceiverType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewUsageTypeTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/usage_colon" />
-
-                    <Spinner
-                        android:id="@+id/spinnerUsageType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewExpirationDateTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/expiration_date_colon" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetail
-                        android:id="@+id/textViewExpirationDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewAvailableTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/number_of_discounts_colon" />
-
-                    <EditText
-                        android:id="@+id/edit_text_total_number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/number_of_discounts"
-                        android:importantForAutofill="no"
-                        android:inputType="number" />
-
-                </LinearLayout>
-
-            </pi.restaurantapp.ui.CardViewPreviewElement>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/bottom_toolbar_height" />
-
-    <include
-        android:id="@+id/toolbarNavigation"
-        layout="@layout/toolbar_navigation_modify"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline" />
-
-    <include
-        android:id="@+id/progress"
-        layout="@layout/progress_bar" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

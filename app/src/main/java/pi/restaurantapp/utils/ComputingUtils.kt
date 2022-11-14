@@ -35,9 +35,9 @@ class ComputingUtils {
             return SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT).parse(string) ?: Date()
         }
 
-        fun getInitialExpirationDateString(): String {
+        fun getInitialExpirationDate(): Date {
             val weekInMilliseconds = 1000 * 60 * 60 * 24 * 7
-            return "${SimpleDateFormat("dd.MM.yyyy", Locale.ROOT).format(Date().time + weekInMilliseconds)} 00:00"
+            return Date(Date().time + weekInMilliseconds)
         }
 
         fun countFullOrderPrice(dishesList: MutableList<DishItem>, collectionTypeId: Int, deliveryOptions: DeliveryBasic?): String {

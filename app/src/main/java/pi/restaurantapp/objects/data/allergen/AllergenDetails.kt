@@ -19,4 +19,8 @@ class AllergenDetails : AbstractDataObject {
         this.description = description
         this.containingDishes = containingDishes
     }
+
+    constructor(id: String) {
+        this.id = id
+    }
 }

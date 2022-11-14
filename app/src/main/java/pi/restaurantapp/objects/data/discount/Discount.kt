@@ -19,4 +19,10 @@ class Discount : AbstractDataObject {
         this.basic = basic
         this.details = details
     }
+
+    fun onIdChanged(s: CharSequence) {
+        this.id = s.toString()
+        this.basic.id = s.toString()
+        this.details.id = s.toString()
+    }
 }
