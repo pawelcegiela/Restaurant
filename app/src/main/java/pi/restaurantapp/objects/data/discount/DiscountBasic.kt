@@ -5,14 +5,16 @@ import java.util.*
 
 class DiscountBasic : AbstractDataObject {
     var amount: String = "0.0"
-    var type: Int = 0
+    var valueType: Int = 0
     var hasThreshold: Boolean = false
     var thresholdValue: String = "0.0"
     var creationDate: Date = Date()
     var expirationDate: Date = Date()
-    var availableDiscounts: ArrayList<String> = ArrayList()
+    var numberOfDiscounts: Int = 0
     var assignedDiscounts: ArrayList<String> = ArrayList()
     var redeemedDiscounts: ArrayList<String> = ArrayList()
+    var receiverType: Int = 0
+    var usageType: Int = 0
     var disabled: Boolean = false
 
     @Suppress("unused")
@@ -21,24 +23,28 @@ class DiscountBasic : AbstractDataObject {
     constructor(
         id: String,
         amount: String,
-        type: Int,
+        valueType: Int,
         hasThreshold: Boolean,
         thresholdValue: String,
         creationDate: Date,
         expirationDate: Date,
-        availableDiscounts: ArrayList<String>,
+        numberOfDiscounts: Int,
         assignedDiscounts: ArrayList<String>,
-        redeemedDiscounts: ArrayList<String>
+        redeemedDiscounts: ArrayList<String>,
+        receiverType: Int,
+        usageType: Int
     ) {
         this.id = id
         this.amount = amount
-        this.type = type
+        this.valueType = valueType
         this.hasThreshold = hasThreshold
         this.thresholdValue = thresholdValue
         this.creationDate = creationDate
         this.expirationDate = expirationDate
-        this.availableDiscounts = availableDiscounts
+        this.numberOfDiscounts = numberOfDiscounts
         this.assignedDiscounts = assignedDiscounts
         this.redeemedDiscounts = redeemedDiscounts
+        this.receiverType = receiverType
+        this.usageType = usageType
     }
 }

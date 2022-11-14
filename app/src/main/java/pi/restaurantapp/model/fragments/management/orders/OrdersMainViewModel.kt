@@ -1,5 +1,6 @@
 package pi.restaurantapp.model.fragments.management.orders
 
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -11,7 +12,8 @@ import java.util.*
 
 class OrdersMainViewModel : AbstractItemListViewModel() {
     override val databasePath = "orders"
-    override val dbRef get() = Firebase.firestore.collection("$databasePath-basic").whereGreaterThan("collectionDate", getMonthAgoDate())
+    override val dbRef get() = Firebase.firestore.collection("$databasePath-basic")
+        .whereGreaterThan("collectionDate", getMonthAgoDate()).orderBy("collectionDate", Query.Direction.DESCENDING)
 
     override fun retrieveDataList(snapshot: QuerySnapshot) {
         val dataList = snapshot.map { document -> document.toObject<OrderBasic>() }.toMutableList<AbstractDataObject>()

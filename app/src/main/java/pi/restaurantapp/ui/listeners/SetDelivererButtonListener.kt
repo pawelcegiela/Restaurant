@@ -41,4 +41,11 @@ class SetDelivererButtonListener(
                 dialog.dismiss()
             }
     }
+
+    companion object {
+        @JvmStatic
+        fun createNew(liveList: LiveData<MutableList<UserBasic>>, fragment: PreviewOrderFragment): SetDelivererButtonListener {
+            return SetDelivererButtonListener(liveList, fragment)
+        }
+    }
 }

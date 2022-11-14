@@ -3,12 +3,11 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
-enum class CollectionType(val stringResourceId: Int) {
-    DELIVERY(R.string.delivery),
-    SELF_PICKUP(R.string.self_pickup);
+enum class DiscountValueType(val stringResourceId: Int) {
+    RELATIVE(R.string.relative_discount_ending),
+    ABSOLUTE(R.string.absolute_discount_ending);
 
     companion object {
-        @JvmStatic
         fun getString(id: Int, context: Context): String {
             return context.getString(values()[id].stringResourceId)
         }

@@ -27,11 +27,21 @@ class EditDiscountFragment : AbstractModifyDiscountFragment() {
         val data = _viewModel.item.value ?: Discount(itemId, DiscountBasic(), DiscountDetails())
         binding.editTextCode.setText(data.basic.id)
         binding.editTextAmount.setText(data.basic.amount)
-        binding.spinnerType.setSelection(data.basic.type)
+        binding.spinnerValueType.setSelection(data.basic.valueType)
         binding.checkBoxThreshold.isChecked = data.basic.hasThreshold
         binding.editTextThreshold.setText(data.basic.thresholdValue)
-        binding.editTextAvailable.setText(data.basic.availableDiscounts.size.toString())
+        binding.spinnerReceiverType.setSelection(data.basic.receiverType)
+        binding.spinnerUsageType.setSelection(data.basic.usageType)
         binding.textViewExpirationDate.text = StringFormatUtils.formatDateTime(data.basic.expirationDate)
+        binding.editTextTotalNumber.setText(data.basic.numberOfDiscounts.toString())
+
+        binding.editTextAmount.isEnabled = false
+        binding.spinnerValueType.isEnabled = false
+        binding.checkBoxThreshold.isEnabled = false
+        binding.editTextThreshold.isEnabled = false
+        binding.spinnerReceiverType.isEnabled = false
+        binding.spinnerUsageType.isEnabled = false
+        binding.editTextTotalNumber.isEnabled = false
         setNavigationCardsSaveRemove()
         finishLoading()
     }

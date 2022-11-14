@@ -12,14 +12,7 @@ import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.dishes.PreviewDishViewModel
 import pi.restaurantapp.objects.data.dish.Dish
-import pi.restaurantapp.objects.data.ingredient.IngredientItem
-import pi.restaurantapp.objects.enums.IngredientStatus
-import pi.restaurantapp.ui.RecyclerManager
-import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
-import pi.restaurantapp.ui.adapters.PreviewDishIngredientRecyclerAdapter
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
-import pi.restaurantapp.utils.UserInterfaceUtils
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
@@ -38,6 +31,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
     ): View {
         _binding = FragmentPreviewDishBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
+        binding.fragment = this
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -52,65 +46,17 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         if (item.basic.isDiscounted) {
             binding.textViewOriginalPrice.paintFlags = binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
-        binding.textViewPrice.text = StringFormatUtils.formatPrice(if (item.basic.isDiscounted) item.basic.discountPrice else item.basic.basePrice)
-        binding.textViewAmount.text =
-            StringFormatUtils.formatAmountWithUnit(requireContext(), item.details.amount, item.details.unit)
-
-        if (item.details.possibleIngredients.isEmpty()) {
-            binding.textViewPossibleIngredients.visibility = View.GONE
-        }
-        if (item.details.allergens.isEmpty()) {
-            binding.cardAllergens.visibility = View.GONE
-        }
-
-        initializeRecyclerViews(item)
-        initializeMoreLessButtons()
 
         viewModel.setReadyToUnlock()
     }
 
-    private fun initializeRecyclerViews(item: Dish) {
-        val baseOtherIngredients = ArrayList<Pair<IngredientItem, IngredientStatus>>()
-        baseOtherIngredients.addAll(item.details.baseIngredients.toList().map { it.second to IngredientStatus.BASE })
-        baseOtherIngredients.addAll(item.details.otherIngredients.toList().map { it.second to IngredientStatus.OTHER })
-
-        binding.recyclerViewBaseOtherIngredients.adapter =
-            PreviewDishIngredientRecyclerAdapter(baseOtherIngredients, this)
-        binding.recyclerViewBaseOtherIngredients.layoutManager = RecyclerManager(context)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewBaseOtherIngredients, baseOtherIngredients.size, requireContext())
-
-        val possibleIngredients = item.details.possibleIngredients.toList().map { it.second to IngredientStatus.POSSIBLE }
-
-        binding.recyclerViewPossibleIngredients.adapter =
-            PreviewDishIngredientRecyclerAdapter(possibleIngredients, this)
-        binding.recyclerViewPossibleIngredients.layoutManager = RecyclerManager(context)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, possibleIngredients.size, requireContext())
-
-        binding.recyclerViewAllergens.adapter =
-            DishAllergensRecyclerAdapter(item.details.allergens.toList().map { it.second }.toMutableList(), this)
-        binding.recyclerViewAllergens.layoutManager = RecyclerManager(context)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewAllergens, item.details.allergens.size, requireContext())
+    fun onClickDetails(showMore: Boolean) {
+        binding.linearLayoutDetailsUnexpanded.visibility = if (showMore) View.GONE else View.VISIBLE
+        binding.linearLayoutDetailsExpanded.visibility = if (showMore) View.VISIBLE else View.GONE
     }
 
-    private fun initializeMoreLessButtons() {
-        binding.textViewDetailsMore.setOnClickListener {
-            binding.linearLayoutDetailsUnexpanded.visibility = View.GONE
-            binding.linearLayoutDetailsExpanded.visibility = View.VISIBLE
-        }
-
-        binding.textViewDetailsLess.setOnClickListener {
-            binding.linearLayoutDetailsUnexpanded.visibility = View.VISIBLE
-            binding.linearLayoutDetailsExpanded.visibility = View.GONE
-        }
-
-        binding.textViewIngredientsMore.setOnClickListener {
-            binding.linearLayoutIngredientsUnexpanded.visibility = View.GONE
-            binding.linearLayoutIngredientsExpanded.visibility = View.VISIBLE
-        }
-
-        binding.textViewIngredientsLess.setOnClickListener {
-            binding.linearLayoutIngredientsUnexpanded.visibility = View.VISIBLE
-            binding.linearLayoutIngredientsExpanded.visibility = View.GONE
-        }
+    fun onClickIngredients(showMore: Boolean) {
+        binding.linearLayoutIngredientsUnexpanded.visibility = if (showMore) View.GONE else View.VISIBLE
+        binding.linearLayoutIngredientsExpanded.visibility = if (showMore) View.VISIBLE else View.GONE
     }
 }

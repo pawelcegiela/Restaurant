@@ -31,6 +31,7 @@ class OrdersItemListSubFragment(
         super.onViewCreated(view, savedInstanceState)
 
         when (position) {
+            OrdersTab.ALL_ACTIVE.ordinal -> list = list.filter { it.orderStatus < OrderStatus.FINISHED.ordinal }.toMutableList()
             OrdersTab.NEW.ordinal -> list = list.filter { it.orderStatus == OrderStatus.NEW.ordinal }.toMutableList()
             OrdersTab.ACCEPTED.ordinal -> list = list.filter { it.orderStatus == OrderStatus.ACCEPTED.ordinal }.toMutableList()
             OrdersTab.PREPARING.ordinal -> list = list.filter { it.orderStatus == OrderStatus.PREPARING.ordinal }.toMutableList()

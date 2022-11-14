@@ -43,5 +43,11 @@ class PreviewDishIngredientRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    companion object {
+        @JvmStatic
+        fun createNew(dataSet: List<Pair<IngredientItem, IngredientStatus>>, fragment: Fragment): PreviewDishIngredientRecyclerAdapter {
+            return PreviewDishIngredientRecyclerAdapter(dataSet, fragment)
+        }
+    }
 }
 

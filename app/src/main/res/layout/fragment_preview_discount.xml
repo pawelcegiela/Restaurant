@@ -5,6 +5,12 @@
 
         <import type="android.view.View" />
 
+        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+
+        <import type="pi.restaurantapp.objects.enums.DiscountReceiverType" />
+
+        <import type="pi.restaurantapp.objects.enums.DiscountUsageType" />
+
         <variable
             name="vm"
             type="pi.restaurantapp.model.fragments.management.discounts.PreviewDiscountViewModel" />
@@ -99,7 +105,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewDiscountValue"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatDiscountValue(vm.item.basic.amount, vm.item.basic.valueType, context)}"/>
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewThresholdTitle"
@@ -112,7 +119,36 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewThreshold"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{vm.item.basic.hasThreshold ? StringFormatUtils.formatPrice(vm.item.basic.thresholdValue) : @string/any}"/>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewReceiverTypeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/access_colon" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
+                            android:id="@+id/textViewReceiverType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{DiscountReceiverType.getString(vm.item.basic.receiverType, context)}"/>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewUsageTypeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/usage_colon" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
+                            android:id="@+id/textViewUsageType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{DiscountUsageType.getString(vm.item.basic.usageType, context)}"/>
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCreationDateTitle"
@@ -125,7 +161,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewCreationDate"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.creationDate)}"/>
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewExpirationDateTitle"
@@ -138,20 +175,22 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewExpirationDate"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.expirationDate)}"/>
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                            android:id="@+id/textViewAvailableTitle"
+                            android:id="@+id/textViewTotalNumberTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="25dp"
                             android:layout_marginBottom="10dp"
-                            android:text="@string/number_of_available_discounts_colon" />
+                            android:text="@string/total_number_of_discounts_colon" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetail
-                            android:id="@+id/textViewAvailable"
+                            android:id="@+id/textViewTotalNumber"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{String.valueOf(vm.item.basic.numberOfDiscounts)}"/>
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewAssignedTitle"
@@ -164,7 +203,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewAssigned"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{String.valueOf(vm.item.basic.assignedDiscounts.size)}"/>
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewRedeemedTitle"
@@ -177,10 +217,48 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewRedeemed"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
+                            android:layout_height="wrap_content"
+                            android:text="@{String.valueOf(vm.item.basic.redeemedDiscounts.size)}"/>
                     </LinearLayout>
 
+                </pi.restaurantapp.ui.CardViewPreviewElement>
+
+                <pi.restaurantapp.ui.CardViewPreviewElement
+                    android:id="@+id/cardAllergens"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
+                            android:id="@+id/textViewCurrentlyAssignedTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="30dp"
+                            android:text="@string/currently_assigned_to_colon" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_assigned"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <Button
+                            android:id="@+id/buttonAddCustomer"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_width="250dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center"
+                            android:text="@string/assign_to_customer" />
+
+                    </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
 
             </LinearLayout>

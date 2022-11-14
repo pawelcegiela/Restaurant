@@ -6,7 +6,7 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
-import pi.restaurantapp.objects.enums.DiscountType
+import pi.restaurantapp.objects.enums.DiscountValueType
 import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.objects.enums.OrderStatus
 import pi.restaurantapp.objects.enums.Unit
@@ -22,8 +22,8 @@ class StringFormatUtils {
         }
 
         @JvmStatic
-        fun formatAmountWithUnit(context: Context, amount: String, unit: Int): String {
-            return "${DecimalFormat("#0.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}"
+        fun formatAmountWithUnit(context: Context, amount: String?, unit: Int): String {
+            return if (amount != null) "${DecimalFormat("#0.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}" else ""
         }
 
         fun formatDate(date: Date): String {
@@ -36,8 +36,9 @@ class StringFormatUtils {
             return sdf.format(date)
         }
 
-        fun formatDateTime(date: Date): String {
-            return "${formatDate(date)} ${formatTime(date)}"
+        @JvmStatic
+        fun formatDateTime(date: Date?): String {
+            return if (date != null) "${formatDate(date)} ${formatTime(date)}" else ""
         }
 
         fun formatDateTime(date: Long): String {
@@ -45,14 +46,15 @@ class StringFormatUtils {
         }
 
         @JvmStatic
-        fun formatPrice(value: String): String {
-            return "${DecimalFormat("#0.00").format(BigDecimal(value))} zł"
+        fun formatPrice(value: String?): String {
+            return if (value != null) "${DecimalFormat("#0.00").format(BigDecimal(value))} zł" else "- zł"
         }
 
         fun formatId(): String {
             return "${Date().time}_${Firebase.auth.uid}_${Random().nextInt(9999)}"
         }
 
+        @JvmStatic
         fun formatAddress(address: AddressBasic): String {
             return "${address.street} ${address.houseNumber}${if (address.flatNumber.isNotEmpty()) " / " else ""}" +
                     "${address.flatNumber}\n${address.postalCode} ${address.city}"
@@ -100,8 +102,9 @@ class StringFormatUtils {
             return "${String.format("%02d", hour)}:${String.format("%02d", minute)}"
         }
 
-        fun formatDiscountValue(amount: String, type: Int, context: Context): String {
-            return "$amount ${DiscountType.getString(type, context)}"
+        @JvmStatic
+        fun formatDiscountValue(amount: String?, type: Int, context: Context): String {
+            return "$amount ${DiscountValueType.getString(type, context)}"
         }
     }
 }

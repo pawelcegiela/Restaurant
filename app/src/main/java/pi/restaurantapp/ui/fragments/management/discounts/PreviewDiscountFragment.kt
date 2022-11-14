@@ -10,9 +10,7 @@ import pi.restaurantapp.databinding.FragmentPreviewDiscountBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.discounts.PreviewDiscountViewModel
-import pi.restaurantapp.objects.data.discount.Discount
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
@@ -36,18 +34,6 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     }
 
     override fun fillInData() {
-        val item = _viewModel.item.value ?: Discount()
-
-        binding.textViewDiscountValue.text =
-            StringFormatUtils.formatDiscountValue(item.basic.amount, item.basic.type, requireContext())
-        binding.textViewThreshold.text =
-            if (item.basic.hasThreshold) StringFormatUtils.formatPrice(item.basic.thresholdValue) else getString(R.string.any)
-        binding.textViewCreationDate.text = StringFormatUtils.formatDateTime(item.basic.creationDate)
-        binding.textViewExpirationDate.text = StringFormatUtils.formatDateTime(item.basic.expirationDate)
-        binding.textViewAvailable.text = item.basic.availableDiscounts.size.toString()
-        binding.textViewAssigned.text = item.basic.assignedDiscounts.size.toString()
-        binding.textViewRedeemed.text = item.basic.redeemedDiscounts.size.toString()
-
         viewModel.setReadyToUnlock()
     }
 }

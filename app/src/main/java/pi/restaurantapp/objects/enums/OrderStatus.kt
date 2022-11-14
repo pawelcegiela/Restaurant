@@ -13,22 +13,13 @@ enum class OrderStatus(val stringResourceId: Int) {
     CLOSED_WITHOUT_REALIZATION(R.string.closed_without_realization);
 
     companion object {
+        @JvmStatic
         fun getString(id: Int, context: Context): String {
             return context.getString(values()[id].stringResourceId)
         }
 
         fun getArrayOfStrings(context: Context): Array<String> {
             return values().map { context.getString(it.stringResourceId) }.toTypedArray()
-        }
-
-        fun getArrayOfStringsForDelivery(context: Context): Array<String> {
-            val statuses = getStatusesForDelivery()
-            return values().filter{ it.ordinal in statuses }.map { context.getString(it.stringResourceId) }.toTypedArray()
-        }
-
-        fun getArrayOfStringsForSelfPickup(context: Context): Array<String> {
-            val statuses = getStatusesForSelfPickup()
-            return values().filter{ it.ordinal in statuses }.map { context.getString(it.stringResourceId) }.toTypedArray()
         }
 
         fun getNextStatusId(currentStatusId: Int, collectionType: CollectionType): Int {
@@ -46,14 +37,15 @@ enum class OrderStatus(val stringResourceId: Int) {
             }
         }
 
-        fun getStatusesForDelivery(): ArrayList<Int> {
+        private fun getStatusesForDelivery(): ArrayList<Int> {
             return arrayListOf(NEW.ordinal, ACCEPTED.ordinal, PREPARING.ordinal, DELIVERY.ordinal, FINISHED.ordinal)
         }
 
-        fun getStatusesForSelfPickup(): ArrayList<Int> {
+        private fun getStatusesForSelfPickup(): ArrayList<Int> {
             return arrayListOf(NEW.ordinal, ACCEPTED.ordinal, PREPARING.ordinal, READY.ordinal, FINISHED.ordinal)
         }
 
+        @JvmStatic
         fun isFinished(ordinal: Int) : Boolean {
             return ordinal == FINISHED.ordinal || ordinal == CLOSED_WITHOUT_REALIZATION.ordinal
         }

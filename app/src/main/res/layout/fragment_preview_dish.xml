@@ -4,8 +4,20 @@
     <data>
 
         <import type="android.view.View" />
+
         <import type="pi.restaurantapp.utils.StringFormatUtils" />
+
         <import type="pi.restaurantapp.objects.enums.DishType" />
+
+        <import type="pi.restaurantapp.ui.RecyclerManager" />
+
+        <import type="pi.restaurantapp.ui.adapters.PreviewDishIngredientRecyclerAdapter" />
+
+        <import type="pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter" />
+
+        <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.management.dishes.PreviewDishFragment" />
 
         <variable
             name="vm"
@@ -82,15 +94,15 @@
                                     android:id="@+id/textViewName"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
                                     android:layout_marginBottom="7dp"
+                                    android:gravity="center"
                                     android:text="@{vm.item.basic.name}" />
 
                                 <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewDishType"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="@{DishType.getString(vm.item.basic.dishType, context)}"/>
+                                    android:text="@{DishType.getString(vm.item.basic.dishType, context)}" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -111,6 +123,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|end"
                             android:layout_marginTop="10dp"
+                            android:text="@{StringFormatUtils.formatPrice(vm.item.basic.isDiscounted ? vm.item.basic.discountPrice : vm.item.basic.basePrice)}"
                             android:textSize="22sp" />
 
                         <LinearLayout
@@ -125,6 +138,7 @@
                                 android:layout_height="40dp"
                                 android:layout_marginTop="25dp"
                                 android:layout_marginBottom="10dp"
+                                android:onClick="@{() -> fragment.onClickDetails(true)}"
                                 android:text="@string/show_more" />
 
                         </LinearLayout>
@@ -162,7 +176,7 @@
                                 android:id="@+id/textViewAmount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/no_amount_dish" />
+                                android:text="@{StringFormatUtils.formatAmountWithUnit(context, vm.item.details.amount, vm.item.details.unit)}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewRecipeTitle"
@@ -184,6 +198,7 @@
                                 android:layout_height="40dp"
                                 android:layout_marginTop="25dp"
                                 android:layout_marginBottom="10dp"
+                                android:onClick="@{() -> fragment.onClickDetails(false)}"
                                 android:text="@string/show_less" />
                         </LinearLayout>
                     </LinearLayout>
@@ -212,7 +227,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewBaseOtherIngredients"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{PreviewDishIngredientRecyclerAdapter.createNew(vm.baseOtherIngredients, fragment)}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                         <LinearLayout
                             android:id="@+id/linearLayoutIngredientsUnexpanded"
@@ -226,6 +243,7 @@
                                 android:layout_height="40dp"
                                 android:layout_marginTop="25dp"
                                 android:layout_marginBottom="10dp"
+                                android:onClick="@{() -> fragment.onClickIngredients(true)}"
                                 android:text="@string/show_more" />
 
                         </LinearLayout>
@@ -243,12 +261,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="35dp"
                                 android:layout_marginBottom="20dp"
-                                android:text="@string/ingredients_you_can_add_colon" />
+                                android:text="@string/ingredients_you_can_add_colon"
+                                android:visibility="@{vm.item.details.possibleIngredients.isEmpty() ? View.GONE : View.VISIBLE}" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recycler_view_possible_ingredients"
                                 android:layout_width="match_parent"
-                                android:layout_height="250dp" />
+                                android:layout_height="wrap_content"
+                                android:adapter="@{PreviewDishIngredientRecyclerAdapter.createNew(vm.possibleIngredients, fragment)}"
+                                app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewLessMore
                                 android:id="@+id/textViewIngredientsLess"
@@ -256,6 +277,7 @@
                                 android:layout_height="40dp"
                                 android:layout_marginTop="25dp"
                                 android:layout_marginBottom="10dp"
+                                android:onClick="@{() -> fragment.onClickIngredients(false)}"
                                 android:text="@string/show_less" />
                         </LinearLayout>
 
@@ -266,7 +288,8 @@
                     android:id="@+id/cardAllergens"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:visibility="@{vm.item.details.allergens.isEmpty() ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -285,7 +308,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_view_allergens"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{DishAllergensRecyclerAdapter.createNew(vm.allergens, fragment)}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>

@@ -72,6 +72,10 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
             binding.textViewDeliveryAddress.visibility = View.GONE
         }
 
+        if (item.details.discount.isNotEmpty()) {
+            binding.textViewDiscount.text = item.details.discount
+        }
+
         if (item.details.statusChanges.isNotEmpty()) {
             val comparator = Comparator { obj1: Pair<Long, Int>, obj2: Pair<Long, Int> -> (obj1.first - obj2.first).toInt() }
             val statusChangesUnsorted = item.details.statusChanges.map { it.key.toLong() to it.value }.toMutableList()

@@ -56,9 +56,28 @@
             app:popUpToInclusive="true" />
 
         <action
-            android:id="@+id/actionClientFinalizeOrderToOrders"
+            android:id="@+id/actionClientFinalizeOrderToOrderSummary"
+            app:destination="@id/ClientOrderSummaryFragment"
+            app:popUpTo="@id/ClientFinalizeOrderFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ClientOrderSummaryFragment"
+        android:name="pi.restaurantapp.ui.fragments.client.neworder.ClientOrderSummaryFragment"
+        android:label="@string/order_summary"
+        tools:layout="@layout/fragment_client_preview_order">
+
+        <action
+            android:id="@+id/actionClientOrderSummaryToOrders"
             app:destination="@id/ClientOrdersActivity"
             app:popUpTo="@id/ClientOrdersActivity"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/actionClientOrderSummaryToMainActivity"
+            app:destination="@id/ClientMainActivity"
+            app:popUpTo="@id/ClientOrderSummaryFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

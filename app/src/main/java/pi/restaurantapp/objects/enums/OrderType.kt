@@ -9,6 +9,7 @@ enum class OrderType(val stringResourceId: Int) {
     CLIENT_APP(R.string.client_app);
 
     companion object {
+        @JvmStatic
         fun getString(id: Int, context: Context): String {
             return context.getString(values()[id].stringResourceId)
         }

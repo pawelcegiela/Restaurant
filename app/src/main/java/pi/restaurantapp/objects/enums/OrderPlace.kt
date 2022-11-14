@@ -8,6 +8,7 @@ enum class OrderPlace(val stringResourceId: Int) {
     TO_GO(R.string.to_go);
 
     companion object {
+        @JvmStatic
         fun getString(id: Int, context: Context): String {
             return context.getString(values()[id].stringResourceId)
         }

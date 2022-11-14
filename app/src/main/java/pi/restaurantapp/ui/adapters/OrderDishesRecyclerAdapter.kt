@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.ItemOrderDishBinding
 import pi.restaurantapp.objects.data.dish.DishItem
+import pi.restaurantapp.ui.fragments.client.neworder.ClientOrderSummaryFragment
 import pi.restaurantapp.ui.fragments.client.orders.ClientPreviewOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.PreviewOrderFragment
@@ -34,7 +35,7 @@ class OrderDishesRecyclerAdapter(
                 binding.root.setOnClickListener {
                     fragment.editDish(dataSet[layoutPosition])
                 }
-            } else if (fragment is PreviewOrderFragment || fragment is ClientPreviewOrderFragment) {
+            } else if (fragment is PreviewOrderFragment || fragment is ClientPreviewOrderFragment || fragment is ClientOrderSummaryFragment) {
                 binding.buttonRemove.visibility = View.GONE
             }
         }

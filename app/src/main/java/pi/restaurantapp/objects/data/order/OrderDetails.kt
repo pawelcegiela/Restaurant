@@ -17,6 +17,7 @@ class OrderDetails : AbstractDataObject {
     var delivererId: String = ""
     var contactPhone: String = ""
     var comments: String = ""
+    var discount: String = ""
 
     @Suppress("unused")
     constructor()

@@ -13,7 +13,9 @@ import pi.restaurantapp.model.fragments.management.discounts.AbstractModifyDisco
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.data.discount.DiscountDetails
-import pi.restaurantapp.objects.enums.DiscountType
+import pi.restaurantapp.objects.enums.DiscountReceiverType
+import pi.restaurantapp.objects.enums.DiscountUsageType
+import pi.restaurantapp.objects.enums.DiscountValueType
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.DatePickerFragment
@@ -60,27 +62,30 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     }
 
     fun initializeSpinner() {
-        binding.spinnerType.adapter = SpinnerAdapter(requireContext(), DiscountType.getArrayOfStrings(requireContext()))
+        binding.spinnerValueType.adapter = SpinnerAdapter(requireContext(), DiscountValueType.getArrayOfStrings(requireContext()))
+        binding.spinnerReceiverType.adapter = SpinnerAdapter(requireContext(), DiscountReceiverType.getArrayOfStrings(requireContext()))
+        binding.spinnerUsageType.adapter = SpinnerAdapter(requireContext(), DiscountUsageType.getArrayOfStrings(requireContext()))
     }
 
     override fun getDataObject(): SplitDataObject {
         val discount = (viewModel as AbstractModifyDiscountViewModel).getPreviousItem()
         itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
-        val availableNumber = binding.editTextAvailable.text.toString().toInt()
+        val availableNumber = binding.editTextTotalNumber.text.toString().toInt()
         val code = binding.editTextCode.text.toString()
-        val discountsViewModel = viewModel as AbstractModifyDiscountViewModel
 
         val basic = DiscountBasic(
             id = code,
             amount = binding.editTextAmount.text.toString(),
-            type = binding.spinnerType.selectedItemId.toInt(),
+            valueType = binding.spinnerValueType.selectedItemId.toInt(),
             hasThreshold = binding.checkBoxThreshold.isChecked,
             thresholdValue = binding.editTextThreshold.text.toString().ifEmpty { "0.0" },
             creationDate = discount.basic.creationDate,
             expirationDate = ComputingUtils.getDateTimeFromString(binding.textViewExpirationDate.text.toString()),
-            availableDiscounts = discountsViewModel.createDiscounts(code, availableNumber),
+            numberOfDiscounts = availableNumber,
             assignedDiscounts = discount.basic.assignedDiscounts,
-            redeemedDiscounts = discount.basic.redeemedDiscounts
+            redeemedDiscounts = discount.basic.redeemedDiscounts,
+            receiverType = binding.spinnerReceiverType.selectedItemId.toInt(),
+            usageType = binding.spinnerUsageType.selectedItemId.toInt()
         )
 
         return SplitDataObject(code, basic, DiscountDetails())
@@ -99,7 +104,7 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
-        map[binding.editTextAvailable] = R.string.number_of_discounts
+        map[binding.editTextTotalNumber] = R.string.number_of_discounts
         map[binding.editTextCode] = R.string.code
         map[binding.editTextAmount] = R.string.amount
         return map

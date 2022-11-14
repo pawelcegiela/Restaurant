@@ -14,7 +14,7 @@ import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.utils.StringFormatUtils
 import java.util.*
 
-class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
+open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
     override val databasePath = "orders"
     var delivererId = ""
 
@@ -56,5 +56,9 @@ class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
 
     override fun isDisabled(): Boolean {
         return item.value?.basic?.disabled == true
+    }
+
+    fun setItem(order: Order) {
+        _item.value = order
     }
 }

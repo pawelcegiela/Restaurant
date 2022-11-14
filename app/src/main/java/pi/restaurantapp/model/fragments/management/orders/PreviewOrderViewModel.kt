@@ -15,6 +15,7 @@ import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.objects.data.user.UserBasic
+import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.IngredientModificationType
 import pi.restaurantapp.objects.enums.OrderStatus
 import pi.restaurantapp.utils.StringFormatUtils
@@ -44,9 +45,22 @@ class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
         val basic = snapshotsPair.basic?.toObject<OrderBasic>() ?: OrderBasic()
         val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
         _item.value = Order(itemId, basic, details)
+
+        delivererId = details.delivererId
+        getAllPossibleDeliverers()
+        getUserName(basic.userId)
     }
 
-    fun updateOrderStatus(newStatus: Int) {
+    fun updateOrderStatus(closeWithoutRealization: Boolean) {
+        val newStatus = if (closeWithoutRealization) {
+            OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal
+        } else {
+            OrderStatus.getNextStatusId(item.value!!.basic.orderStatus, CollectionType.values()[item.value!!.basic.collectionType])
+        }
+        if (newStatus == item.value!!.basic.orderStatus) {
+            return
+        }
+
         val time = Date().time
         if (newStatus == OrderStatus.ACCEPTED.ordinal) {
             getSubDishes { subDishes ->

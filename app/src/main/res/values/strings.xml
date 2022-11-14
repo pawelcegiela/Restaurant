@@ -401,4 +401,26 @@
     <string name="preview_customer">Preview customer</string>
     <string name="delivery_address">Delivery address</string>
     <string name="my_orders">My orders</string>
+    <string name="for_specific_people">For specific people</string>
+    <string name="for_anyone_knowing_the_code">For anyone knowing the code</string>
+    <string name="one_time_per_person">One time per person</string>
+    <string name="multiple_times_per_person">Multiple times per person</string>
+    <string name="access_colon">Access:</string>
+    <string name="usage_colon">Usage:</string>
+    <string name="order_summary">Order summary</string>
+    <string name="redeem_discount">Redeem discount</string>
+    <string name="no_discount_redeemed">No discount redeemed</string>
+    <string name="discount_code_colon">Discount code:</string>
+    <string name="enter_discount_code">Enter discount code</string>
+    <string name="discount_does_not_exist">Discount with given code does not exist</string>
+    <string name="discount_can_be_assigned_by_restaurant">Discount with given code can be assigned by restaurant</string>
+    <string name="there_are_no_available_discounts_with_this_code_anymore">There are no available discounts with given code anymore</string>
+    <string name="you_already_assigned_discount">You have already assigned this discount to your account or redeemed it</string>
+    <string name="discount_has_been_assigned_to_your_account">Discount with given code has been successfully assigned to your account</string>
+    <string name="all_active">All active</string>
+    <string name="couldnt_redeem_discount">Couldn\'t redeem this discount. It was probably redeemed a moment ago.</string>
+    <string name="total_number_of_discounts_colon">Total number of discounts:</string>
+    <string name="assign_to_customers">Assign to customers</string>
+    <string name="assign_to_customer">Assign to customer</string>
+    <string name="currently_assigned_to_colon">Currently assigned to:</string>
 </resources>

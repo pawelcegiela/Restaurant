@@ -30,7 +30,6 @@ import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.utils.ComputingUtils
 import pi.restaurantapp.utils.PreconditionUtils
 import pi.restaurantapp.utils.StringFormatUtils
-import java.math.BigDecimal
 import java.util.*
 
 
@@ -238,14 +237,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     private fun countFullPrice(): String {
-        var price = dishesList.sumOf { BigDecimal(it.finalPrice) }
-        if (binding.spinnerCollectionType.selectedItemId.toInt() == CollectionType.DELIVERY.ordinal) {
-            val deliveryOptions = (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value ?: return price.toString()
-            if (price < BigDecimal(deliveryOptions.minimumPriceFreeDelivery)) {
-                price += BigDecimal(deliveryOptions.extraDeliveryFee)
-            }
-        }
-        return price.toString()
+        return ComputingUtils.countFullOrderPrice(dishesList, binding.spinnerCollectionType.selectedItemId.toInt(), (viewModel as AbstractModifyOrderViewModel).deliveryOptions.value)
     }
 
     override fun checkSavePreconditions(data: SplitDataObject): Precondition {

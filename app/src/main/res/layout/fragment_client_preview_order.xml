@@ -114,6 +114,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
+                        <Button
+                            android:id="@+id/buttonRedeemDiscount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40dp"
+                            android:text="@string/redeem_discount"
+                            android:visibility="gone" />
+
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewOrderDateTitle"
                             android:layout_width="wrap_content"
@@ -220,6 +229,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/no_comments" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewDiscountTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/discount_code_colon" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
+                            android:id="@+id/textViewDiscount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_discount_redeemed" />
 
                         <Button
                             android:id="@+id/buttonCancelOrder"

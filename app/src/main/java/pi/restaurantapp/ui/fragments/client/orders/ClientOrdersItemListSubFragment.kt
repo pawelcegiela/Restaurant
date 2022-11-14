@@ -18,7 +18,7 @@ class ClientOrdersItemListSubFragment(
     private var list: MutableList<OrderBasic>,
     private val position: Int,
     fabFilter: FloatingActionButton,
-    private val searchView: SearchView
+    searchView: SearchView
 ) : ItemListSubFragment(fabFilter, searchView) {
     private val _activityViewModel: OrdersViewModel by activityViewModels()
 
@@ -38,7 +38,6 @@ class ClientOrdersItemListSubFragment(
         }
 
         setAdapter()
-        searchView.visibility = View.GONE
     }
 
     private fun getFilteredList(): MutableList<OrderBasic> {

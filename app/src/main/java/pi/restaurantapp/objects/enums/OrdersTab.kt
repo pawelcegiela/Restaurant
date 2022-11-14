@@ -4,7 +4,7 @@ import android.content.Context
 import pi.restaurantapp.R
 
 enum class OrdersTab(val stringResourceId: Int) {
-    ALL(R.string.all_),
+    ALL_ACTIVE(R.string.all_active),
     NEW(R.string.new_s),
     ACCEPTED(R.string.accepted),
     PREPARING(R.string.preparing),

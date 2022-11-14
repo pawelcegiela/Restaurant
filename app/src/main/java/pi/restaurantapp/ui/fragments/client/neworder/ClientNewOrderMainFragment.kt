@@ -54,10 +54,15 @@ class ClientNewOrderMainFragment : AbstractItemListFragment() {
         initializeToolbar()
         activityViewModel.setDeliveryOptions()
         _viewModel.shouldDisplayFAB = false
+        binding.fabFilter.visibility = View.GONE
     }
 
     private fun initializeToolbar() {
-        binding.toolbarNavigation.root.visibility = View.VISIBLE
+        if (activityViewModel.savedOrder.value == null) {
+            binding.toolbarNavigation.root.visibility = View.GONE
+        } else {
+            binding.toolbarNavigation.root.visibility = View.VISIBLE
+        }
         binding.toolbarNavigation.cardReset.setOnClickListener {
             activityViewModel.reset()
             Toast.makeText(requireContext(), getString(R.string.order_cleared), Toast.LENGTH_SHORT).show()

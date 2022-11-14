@@ -4,7 +4,9 @@
     <data>
 
         <import type="android.view.View" />
+
         <import type="pi.restaurantapp.ui.adapters.ContainingItemsRecyclerAdapter" />
+
         <import type="pi.restaurantapp.ui.RecyclerManager" />
 
         <variable
@@ -140,7 +142,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adapter="@{ContainingItemsRecyclerAdapter.createNew(vm.containingDishes, fragment)}"
-                            app:layoutManager="@{RecyclerManager.createNew(context)}"/>
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>

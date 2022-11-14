@@ -2,15 +2,14 @@ package pi.restaurantapp.ui.fragments.client.neworder
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
 import pi.restaurantapp.model.activities.client.ClientNewOrderViewModel
-import pi.restaurantapp.model.fragments.client.neworder.ClientFinalizeOrderViewModel
 import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.model.fragments.client.neworder.ClientFinalizeOrderViewModel
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
@@ -23,7 +22,7 @@ import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragme
 //TODO Ustawienia z cache'a
 class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
 
-    override val nextActionId = R.id.actionClientFinalizeOrderToOrders
+    override val nextActionId = R.id.actionClientFinalizeOrderToOrderSummary
     override val saveMessageId = R.string.order_added
     override val removeMessageId = 0 // Warning: unused
     override val addDishAction = 0 // Warning: unused
@@ -69,8 +68,8 @@ class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
     }
 
     override fun afterSave() {
-        Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
-        findNavController().navigate(nextActionId)
-        activity?.finish()
+        val sdo = getDataObject()
+        activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
+        super.afterSave()
     }
 }

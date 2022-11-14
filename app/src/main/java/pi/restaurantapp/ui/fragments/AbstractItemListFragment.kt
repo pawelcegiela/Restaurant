@@ -21,6 +21,7 @@ abstract class AbstractItemListFragment : Fragment() {
     abstract val addActionId: Int
     val progressBar get() = binding.progress.progressBar
     lateinit var searchView: SearchView
+    open val lowestRole = Role.MANAGER.ordinal
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +47,7 @@ abstract class AbstractItemListFragment : Fragment() {
 
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (Role.isAtLeastManager(role) && viewModel.displayFAB()) {
+                if (Role.isAtLeast(role, lowestRole) && viewModel.displayFAB()) {
                     binding.fabAdd.visibility = View.VISIBLE
                 }
                 if (viewModel.displayFAB()) {

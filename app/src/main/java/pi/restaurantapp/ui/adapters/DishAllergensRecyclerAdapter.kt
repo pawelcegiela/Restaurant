@@ -54,5 +54,11 @@ class DishAllergensRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    companion object {
+        @JvmStatic
+        fun createNew(dataSet: List<AllergenBasic>, fragment: Fragment): DishAllergensRecyclerAdapter {
+            return DishAllergensRecyclerAdapter(dataSet, fragment)
+        }
+    }
 }
 

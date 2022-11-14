@@ -1,5 +1,6 @@
 package pi.restaurantapp.ui.fragments.client.orders
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.model.fragments.client.orders.ClientOrdersMainViewModel
@@ -14,6 +15,8 @@ class ClientOrdersMainFragment : AbstractItemListFragment() {
     private val _viewModel: ClientOrdersMainViewModel by viewModels()
 
     override fun addViewPagerAdapters() {
+        binding.fabFilter.visibility = View.GONE
+
         val list = ClientOrdersTab.values()
         val names = ClientOrdersTab.getArrayOfStrings(requireContext())
         binding.pager.adapter = PagerAdapter(
