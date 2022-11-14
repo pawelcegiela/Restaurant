@@ -423,4 +423,10 @@
     <string name="assign_to_customers">Assign to customers</string>
     <string name="assign_to_customer">Assign to customer</string>
     <string name="currently_assigned_to_colon">Currently assigned to:</string>
+    <string name="select_discount">Select discount</string>
+    <string name="select_deliverer">Select deliverer</string>
+    <string name="select_customer">Select customer</string>
+    <string name="select_allergen">Select allergen</string>
+    <string name="user_has_this_account">This customer has already got this discount assigned</string>
+    <string name="discount_has_been_assigned_to_this_customer">Discount has been successfully assigned to this customer</string>
 </resources>

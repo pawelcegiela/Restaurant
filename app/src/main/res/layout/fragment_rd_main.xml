@@ -5,6 +5,8 @@
 
         <import type="android.view.View" />
 
+        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+
         <variable
             name="vm"
             type="pi.restaurantapp.model.fragments.management.restaurantdata.RDMainViewModel" />
@@ -295,7 +297,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewAddress"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatAddress(vm.item.basic.location)}"/>
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
@@ -332,13 +335,15 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewAvailableDelivery"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{vm.item.basic.delivery.available ? @string/yes : @string/no}"/>
 
                         <LinearLayout
                             android:id="@+id/linearLayoutAvailableDelivery"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="@{vm.item.basic.delivery.available ? View.VISIBLE : View.GONE}">
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewMinimumPriceTitle"
@@ -351,7 +356,8 @@
                             <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewMinimumPrice"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:text="@{StringFormatUtils.formatPrice(vm.item.basic.delivery.minimumPrice)}"/>
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewDeliveryFeeTitle"
@@ -364,7 +370,8 @@
                             <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewDeliveryFee"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:text="@{StringFormatUtils.formatPrice(vm.item.basic.delivery.extraDeliveryFee)}"/>
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewFreeDeliveryTitle"
@@ -377,7 +384,7 @@
                             <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewFreeDelivery"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"/>
 
                         </LinearLayout>
 

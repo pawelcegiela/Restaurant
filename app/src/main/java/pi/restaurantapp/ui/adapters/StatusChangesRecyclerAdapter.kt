@@ -34,5 +34,11 @@ class StatusChangesRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    companion object {
+        @JvmStatic
+        fun createNew(dataSet: List<Pair<String, Int>>, fragment: Fragment) : StatusChangesRecyclerAdapter {
+            return StatusChangesRecyclerAdapter(dataSet, fragment)
+        }
+    }
 }
 

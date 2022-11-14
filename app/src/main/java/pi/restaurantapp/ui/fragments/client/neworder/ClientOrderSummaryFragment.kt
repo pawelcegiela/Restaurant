@@ -9,19 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
-import pi.restaurantapp.databinding.FragmentClientPreviewOrderBinding
+import pi.restaurantapp.databinding.FragmentClientOrderSummaryBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.activities.client.ClientNewOrderViewModel
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.client.neworder.ClientOrderSummaryViewModel
 import pi.restaurantapp.objects.data.discount.DiscountBasic
-import pi.restaurantapp.objects.data.order.Order
-import pi.restaurantapp.objects.enums.CollectionType
-import pi.restaurantapp.objects.enums.OrderPlace
-import pi.restaurantapp.ui.RecyclerManager
-import pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter
+import pi.restaurantapp.ui.dialogs.RedeemDiscountDialog
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.ui.listeners.RedeemDiscountButtonListener
 import pi.restaurantapp.utils.ComputingUtils
 import pi.restaurantapp.utils.StringFormatUtils
 
@@ -34,7 +29,7 @@ class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
     private val _viewModel: ClientOrderSummaryViewModel by viewModels()
     val activityViewModel: ClientNewOrderViewModel by activityViewModels()
 
-    private var _binding: FragmentClientPreviewOrderBinding? = null
+    private var _binding: FragmentClientOrderSummaryBinding? = null
     val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,62 +48,27 @@ class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentClientPreviewOrderBinding.inflate(inflater, container, false)
+        _binding = FragmentClientOrderSummaryBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
+        binding.fragment = this
         binding.lifecycleOwner = this
         return binding.root
     }
 
     override fun fillInData() {
-        val item = _viewModel.item.value ?: Order()
+        _viewModel.initializeData()
+    }
 
-        binding.textViewStatusTitle.visibility = View.GONE
-        binding.textViewStatus.visibility = View.GONE
-        binding.textViewModificationDateTitle.visibility = View.GONE
-        binding.textViewModificationDate.visibility = View.GONE
-        binding.textViewDeliveryPersonTitle.visibility = View.GONE
-        binding.textViewDeliveryPerson.visibility = View.GONE
-        binding.buttonCancelOrder.visibility = View.GONE
-        binding.cardStatusHistory.visibility = View.GONE
+    override fun addLiveDataObservers() {
+        super.addLiveDataObservers()
 
-        binding.textViewName.text = item.basic.name
-        binding.textViewOrderDate.text = StringFormatUtils.formatDateTime(item.details.orderDate)
-        binding.textViewCollectionDate.text = StringFormatUtils.formatDateTime(item.basic.collectionDate)
-
-        val dishesList = item.details.dishes.toList().map { it.second }.toMutableList()
-        binding.recyclerViewDishes.adapter = OrderDishesRecyclerAdapter(dishesList, this)
-        binding.recyclerViewDishes.layoutManager = RecyclerManager(context)
-
-        binding.textViewDelivery.text = CollectionType.getString(item.basic.collectionType, requireContext())
-        binding.textViewPlace.text = OrderPlace.getString(item.details.orderPlace, requireContext())
-
-        if (item.details.comments.isNotEmpty()) {
-            binding.textViewComments.text = item.details.comments
-        }
-
-        if (item.basic.collectionType == CollectionType.DELIVERY.ordinal && item.details.address != null) {
-            binding.textViewDeliveryAddress.text = StringFormatUtils.formatAddress(item.details.address!!)
-        } else {
-            binding.textViewDeliveryAddressTitle.visibility = View.GONE
-            binding.textViewDeliveryAddress.visibility = View.GONE
-        }
-
-        binding.textViewFullPrice.text = StringFormatUtils.formatPrice(item.basic.value)
-        if (item.details.contactPhone.isNotEmpty()) {
-            binding.textViewContactPhone.text = item.details.contactPhone
-        }
-
-        binding.buttonRedeemDiscount.visibility = View.VISIBLE
-
-        _viewModel.getPossibleDiscounts()
         _viewModel.possibleDiscounts.observe(viewLifecycleOwner) { list ->
-            binding.buttonRedeemDiscount.setOnClickListener(
-                RedeemDiscountButtonListener(list,
-                    this)
-            )
+            binding.buttonRedeemDiscount.setOnClickListener {
+                RedeemDiscountDialog(requireContext(), list, getString(R.string.select_discount)) { discount ->
+                    redeemDiscount(discount)
+                }
+            }
         }
-
-        viewModel.setReadyToUnlock()
     }
 
     override fun initializeWorkerUI() {

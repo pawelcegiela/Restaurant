@@ -5,6 +5,24 @@
 
         <import type="android.view.View" />
 
+        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+
+        <import type="pi.restaurantapp.ui.RecyclerManager" />
+
+        <import type="pi.restaurantapp.objects.enums.OrderStatus" />
+
+        <import type="pi.restaurantapp.objects.enums.CollectionType" />
+
+        <import type="pi.restaurantapp.objects.enums.OrderPlace" />
+
+        <import type="pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter" />
+
+        <import type="pi.restaurantapp.ui.adapters.StatusChangesRecyclerAdapter" />
+
+        <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.client.orders.ClientPreviewOrderFragment" />
+
         <variable
             name="vm"
             type="pi.restaurantapp.model.fragments.client.orders.ClientPreviewOrderViewModel" />
@@ -77,12 +95,13 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="7dp"
-                                    android:text="@string/order" />
+                                    android:text="@{vm.item.basic.name.isEmpty() ? @string/order : vm.item.basic.name}" />
 
                                 <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewDelivery"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:text="@{CollectionType.getString(vm.item.basic.collectionType, context)}" />
 
                             </LinearLayout>
 
@@ -99,7 +118,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewStatus"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{OrderStatus.getString(vm.item.basic.orderStatus, context)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewFullPriceTitle"
@@ -112,16 +132,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewFullPrice"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <Button
-                            android:id="@+id/buttonRedeemDiscount"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="40dp"
-                            android:text="@string/redeem_discount"
-                            android:visibility="gone" />
+                            android:text="@{StringFormatUtils.formatPrice(vm.item.basic.value)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewOrderDateTitle"
@@ -134,7 +146,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewOrderDate"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.details.orderDate)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewModificationDateTitle"
@@ -147,7 +160,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewModificationDate"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.details.modificationDate)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCollectionDateTitle"
@@ -160,7 +174,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewCollectionDate"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.collectionDate)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewPlaceTitle"
@@ -173,7 +188,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewPlace"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{OrderPlace.getString(vm.item.details.orderPlace, context)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDeliveryAddressTitle"
@@ -181,12 +197,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="25dp"
                             android:layout_marginBottom="10dp"
-                            android:text="@string/delivery_address_colon" />
+                            android:text="@string/delivery_address_colon"
+                            android:visibility="@{vm.item.basic.collectionType == CollectionType.DELIVERY.ordinal &amp;&amp; vm.item.details.address != null ? View.VISIBLE : View.GONE}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewDeliveryAddress"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{vm.item.basic.collectionType == CollectionType.DELIVERY.ordinal &amp;&amp; vm.item.details.address != null ? StringFormatUtils.formatAddress(vm.item.details.address) : @string/empty_string}"
+                            android:visibility="@{vm.item.basic.collectionType == CollectionType.DELIVERY.ordinal &amp;&amp; vm.item.details.address != null ? View.VISIBLE : View.GONE}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDeliveryPersonTitle"
@@ -214,7 +233,7 @@
                             android:id="@+id/textViewContactPhone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/no_contact_phone" />
+                            android:text="@{vm.item.details.contactPhone.isEmpty() ? @string/no_contact_phone : vm.item.details.contactPhone}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCommentsTitle"
@@ -228,7 +247,7 @@
                             android:id="@+id/textViewComments"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/no_comments" />
+                            android:text="@{vm.item.details.comments.isEmpty() ? @string/no_comments : vm.item.details.comments}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDiscountTitle"
@@ -242,7 +261,7 @@
                             android:id="@+id/textViewDiscount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/no_discount_redeemed" />
+                            android:text="@{vm.item.details.discount.isEmpty() ? @string/no_discount_redeemed : vm.item.details.discount}" />
 
                         <Button
                             android:id="@+id/buttonCancelOrder"
@@ -250,11 +269,12 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="40dp"
-                            android:text="@string/cancel_order" />
+                            android:onClick="@{() -> fragment.onClickButtonCancelOrder()}"
+                            android:text="@string/cancel_order"
+                            android:visibility="@{vm.item.basic.orderStatus > OrderStatus.NEW.ordinal ? View.GONE : View.VISIBLE}" />
                     </LinearLayout>
 
                 </pi.restaurantapp.ui.CardViewPreviewElement>
-
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardDishes"
@@ -280,7 +300,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewDishes"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{OrderDishesRecyclerAdapter.createNew(vm.dishesList, fragment)}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
@@ -289,7 +311,8 @@
                     android:id="@+id/cardStatusHistory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:visibility="@{vm.item.details.statusChanges.isEmpty() ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -309,7 +332,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewStatusHistory"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{StatusChangesRecyclerAdapter.createNew(vm.statusChanges, fragment)}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>

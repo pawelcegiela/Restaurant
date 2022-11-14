@@ -2,7 +2,10 @@
 <layout>
 
     <data>
+
         <import type="android.view.View" />
+
+        <import type="pi.restaurantapp.utils.StringFormatUtils" />
 
         <variable
             name="vm"
@@ -75,12 +78,14 @@
                                     android:id="@+id/textViewName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="7dp" />
+                                    android:layout_marginBottom="7dp"
+                                    android:text="@{StringFormatUtils.format(vm.item.basic.firstName, vm.item.basic.lastName)}" />
 
                                 <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewRole"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/customer" />
 
                             </LinearLayout>
 
@@ -98,7 +103,7 @@
                             android:id="@+id/textViewEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.item.details.email}"/>
+                            android:text="@{vm.item.details.email}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCreationDateTitle"
@@ -112,7 +117,7 @@
                             android:id="@+id/textViewCreationDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/no_creation_date_to_display" />
+                            android:text="@{StringFormatUtils.formatDate(vm.item.details.creationDate)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDeliveryAddressTitle"
@@ -125,7 +130,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewDeliveryAddress"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{StringFormatUtils.formatAddress(vm.item.details.defaultDeliveryAddress)}"/>
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewContactPhoneTitle"
@@ -138,7 +144,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewContactPhone"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{vm.item.details.contactPhone.isEmpty() ? @string/no_contact_phone : vm.item.details.contactPhone}"/>
 
                     </LinearLayout>
 

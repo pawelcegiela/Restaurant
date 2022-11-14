@@ -7,10 +7,12 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.objects.SnapshotsPair
+import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.objects.data.user.UserBasic
+import pi.restaurantapp.objects.enums.OrderStatus
 import pi.restaurantapp.utils.StringFormatUtils
 import java.util.*
 
@@ -30,20 +32,30 @@ open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
     private val _item: MutableLiveData<Order> = MutableLiveData()
     val item: LiveData<Order> = _item
 
+    val dishesList = ArrayList<DishItem>()
+    val statusChanges = ArrayList<Pair<String, Int>>()
+
     override fun getItem(snapshotsPair: SnapshotsPair) {
         val basic = snapshotsPair.basic?.toObject<OrderBasic>() ?: OrderBasic()
         val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
         _item.value = Order(itemId, basic, details)
+
+        dishesList.addAll(details.dishes.toList().map { it.second })
+        if (details.statusChanges.isNotEmpty()) {
+            val comparator = Comparator { obj1: Pair<Long, Int>, obj2: Pair<Long, Int> -> (obj1.first - obj2.first).toInt() }
+            val statusChangesUnsorted = details.statusChanges.map { it.key.toLong() to it.value }
+            statusChanges.addAll(statusChangesUnsorted.sortedWith(comparator).map { StringFormatUtils.formatDateTime(Date(it.first)) to it.second })
+        }
     }
 
-    fun updateOrderStatus(newStatus: Int) {
+    fun cancelOrder() {
         val time = Date().time
         Firebase.firestore.runTransaction { transaction ->
-            transaction.update(dbRefBasic.document(itemId), "orderStatus", newStatus)
-            transaction.update(dbRefDetails.document(itemId), "statusChanges.$time", newStatus)
+            transaction.update(dbRefBasic.document(itemId), "orderStatus", OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal)
+            transaction.update(dbRefDetails.document(itemId), "statusChanges.$time", OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal)
         }.addOnSuccessListener {
-            _orderStatus.value = newStatus
-            _statusChange.value = StringFormatUtils.formatDateTime(Date(time)) to newStatus
+            _orderStatus.value = OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal
+            _statusChange.value = StringFormatUtils.formatDateTime(Date(time)) to OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal
         }
     }
 
@@ -58,7 +70,4 @@ open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
         return item.value?.basic?.disabled == true
     }
 
-    fun setItem(order: Order) {
-        _item.value = order
-    }
 }

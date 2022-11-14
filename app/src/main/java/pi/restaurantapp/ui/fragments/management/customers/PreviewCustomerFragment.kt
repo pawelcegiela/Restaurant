@@ -10,10 +10,7 @@ import pi.restaurantapp.databinding.FragmentPreviewCustomerBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.customers.PreviewCustomerViewModel
-import pi.restaurantapp.objects.data.user.User
-import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
 
 
 class PreviewCustomerFragment : AbstractPreviewItemFragment() {
@@ -38,14 +35,6 @@ class PreviewCustomerFragment : AbstractPreviewItemFragment() {
     }
 
     override fun fillInData() {
-        val item = _viewModel.item.value ?: User()
-
-        binding.textViewName.text = StringFormatUtils.format(item.basic.firstName, item.basic.lastName)
-        binding.textViewRole.text = Role.getString(item.basic.role, requireContext())
-        binding.textViewCreationDate.text = StringFormatUtils.formatDate(item.details.creationDate)
-        binding.textViewDeliveryAddress.text = StringFormatUtils.formatAddress(item.details.defaultDeliveryAddress)
-        binding.textViewContactPhone.text = item.details.contactPhone
-
         viewModel.setReadyToUnlock()
     }
 

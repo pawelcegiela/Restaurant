@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewDiscountBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.discounts.PreviewDiscountViewModel
+import pi.restaurantapp.ui.dialogs.DiscountAssignCustomerDialog
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
@@ -29,11 +31,23 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     ): View {
         _binding = FragmentPreviewDiscountBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
+        binding.fragment = this
         binding.lifecycleOwner = this
         return binding.root
     }
 
     override fun fillInData() {
         viewModel.setReadyToUnlock()
+    }
+
+    fun onClickAddCustomer() {
+        DiscountAssignCustomerDialog(this, { _viewModel.getCustomers() }, _viewModel.customers, getString(R.string.select_customer)) { customer ->
+            _viewModel.addCustomer(customer) { messageId, success ->
+                Toast.makeText(requireContext(), getString(messageId), Toast.LENGTH_SHORT).show()
+                if (success) {
+                    binding.textViewAssigned.text = _viewModel.item.value!!.basic.assignedDiscounts.size.toString()
+                }
+            }
+        }
     }
 }

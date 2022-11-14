@@ -17,9 +17,9 @@ import pi.restaurantapp.objects.enums.Unit
 import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.ui.listeners.AddIngredientButtonListener
 import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
+import pi.restaurantapp.ui.dialogs.AddIngredientDialog
 import pi.restaurantapp.utils.StringFormatUtils
 import pi.restaurantapp.utils.UserInterfaceUtils
 
@@ -70,13 +70,9 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
         (viewModel as AbstractModifyIngredientViewModel).liveAllIngredients.observe(viewLifecycleOwner) { list ->
             allIngredients = list
             UserInterfaceUtils.setRecyclerSize(binding.recyclerViewSubIngredients, subIngredientsList.size, requireContext())
-            binding.buttonAddSubIngredient.setOnClickListener(
-                AddIngredientButtonListener(
-                    subIngredientsList,
-                    allIngredients,
-                    this@AbstractModifyIngredientFragment
-                )
-            )
+            binding.buttonAddSubIngredient.setOnClickListener {
+                AddIngredientDialog(this, subIngredientsList, allIngredients, getString(R.string.select_ingredient))
+            }
             binding.recyclerViewSubIngredients.adapter =
                 DishIngredientsRecyclerAdapter(subIngredientsList, this@AbstractModifyIngredientFragment, IngredientStatus.BASE)
             binding.recyclerViewSubIngredients.layoutManager = RecyclerManager(context)

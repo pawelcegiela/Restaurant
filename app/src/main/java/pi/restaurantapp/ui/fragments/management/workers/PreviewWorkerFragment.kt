@@ -12,10 +12,8 @@ import pi.restaurantapp.databinding.FragmentPreviewWorkerBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.workers.PreviewWorkerViewModel
-import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar
@@ -39,14 +37,6 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     }
 
     override fun fillInData() {
-        val item = _viewModel.item.value ?: User()
-
-        binding.textViewName.text = StringFormatUtils.format(item.basic.firstName, item.basic.lastName)
-        binding.textViewRole.text = Role.getString(item.basic.role, requireContext())
-        binding.textViewCreationDate.text = StringFormatUtils.formatDate(item.details.creationDate)
-        binding.textViewContactPhone.text = item.details.contactPhone
-        binding.textViewDelivery.text = if (item.basic.delivery) getString(R.string.yes) else getString(R.string.no)
-
         viewModel.setReadyToUnlock()
     }
 

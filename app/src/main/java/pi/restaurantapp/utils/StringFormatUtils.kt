@@ -17,7 +17,8 @@ import java.util.*
 
 class StringFormatUtils {
     companion object {
-        fun format(firstString: String, secondString: String): String {
+        @JvmStatic
+        fun format(firstString: String?, secondString: String?): String {
             return "$firstString $secondString"
         }
 
@@ -26,9 +27,10 @@ class StringFormatUtils {
             return if (amount != null) "${DecimalFormat("#0.00").format(BigDecimal(amount))} ${Unit.getString(unit, context)}" else ""
         }
 
-        fun formatDate(date: Date): String {
+        @JvmStatic
+        fun formatDate(date: Date?): String {
             val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
-            return sdf.format(date)
+            return if (date != null) sdf.format(date) else ""
         }
 
         fun formatTime(date: Date): String {
@@ -55,9 +57,11 @@ class StringFormatUtils {
         }
 
         @JvmStatic
-        fun formatAddress(address: AddressBasic): String {
-            return "${address.street} ${address.houseNumber}${if (address.flatNumber.isNotEmpty()) " / " else ""}" +
+        fun formatAddress(address: AddressBasic?): String {
+            return if (address != null)
+                "${address.street} ${address.houseNumber}${if (address.flatNumber.isNotEmpty()) " / " else ""}" +
                     "${address.flatNumber}\n${address.postalCode} ${address.city}"
+            else ""
         }
 
         fun formatDishChanges(dishItem: DishItem): String {
@@ -90,7 +94,7 @@ class StringFormatUtils {
             return "${data.first}  -  ${OrderStatus.getString(data.second, context)}"
         }
 
-        fun formatOpeningHours(startHour: Date, endHour: Date) : String {
+        fun formatOpeningHours(startHour: Date, endHour: Date): String {
             return "${formatTime(startHour)}  -  ${formatTime(endHour)}"
         }
 
@@ -98,7 +102,7 @@ class StringFormatUtils {
             return "${String.format("%02d", day)}.${String.format("%02d", month + 1)}.${String.format("%04d", year)}"
         }
 
-        fun formatTimeFromIntegers(hour: Int, minute: Int) : String {
+        fun formatTimeFromIntegers(hour: Int, minute: Int): String {
             return "${String.format("%02d", hour)}:${String.format("%02d", minute)}"
         }
 

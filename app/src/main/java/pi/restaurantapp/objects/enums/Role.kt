@@ -12,6 +12,7 @@ enum class Role(val stringResourceId: Int) {
     CUSTOMER(R.string.customer);
 
     companion object {
+        @JvmStatic
         fun getString(id: Int, context: Context): String {
             return context.getString(values()[id].stringResourceId)
         }

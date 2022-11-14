@@ -79,20 +79,12 @@ class RDMainFragment : AbstractPreviewItemFragment() {
             }
         }
 
-        binding.textViewAddress.text = StringFormatUtils.formatAddress(item.basic.location)
-
-        val delivery = item.basic.delivery
-        binding.textViewAvailableDelivery.text = if (delivery.available) getString(R.string.yes) else getString(R.string.no)
-        if (delivery.available) {
-            binding.textViewMinimumPrice.text = StringFormatUtils.formatPrice(delivery.minimumPrice)
-            binding.textViewDeliveryFee.text = StringFormatUtils.formatPrice(delivery.extraDeliveryFee)
+        if (item.basic.delivery.available) {
             binding.textViewFreeDelivery.text =
-                if (delivery.freeDeliveryAvailable) getString(
+                if (item.basic.delivery.freeDeliveryAvailable) getString(
                     R.string.from_threshold,
-                    StringFormatUtils.formatPrice(delivery.minimumPriceFreeDelivery)
+                    StringFormatUtils.formatPrice(item.basic.delivery.minimumPriceFreeDelivery)
                 ) else getString(R.string.not_available)
-        } else {
-            binding.linearLayoutAvailableDelivery.visibility = View.GONE
         }
 
         viewModel.setReadyToUnlock()

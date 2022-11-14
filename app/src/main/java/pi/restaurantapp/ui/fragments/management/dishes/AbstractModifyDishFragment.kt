@@ -21,10 +21,10 @@ import pi.restaurantapp.ui.RecyclerManager
 import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.ui.listeners.AddAllergenButtonListener
-import pi.restaurantapp.ui.listeners.AddIngredientButtonListener
 import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
+import pi.restaurantapp.ui.dialogs.AddAllergenDialog
+import pi.restaurantapp.ui.dialogs.AddIngredientDialog
 import pi.restaurantapp.utils.StringFormatUtils
 import pi.restaurantapp.utils.UserInterfaceUtils
 
@@ -141,17 +141,14 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         }
     }
 
-    fun setIngredientViews() {
-        val list =
-            ArrayList(baseIngredientsList).also { it.addAll(otherIngredientsList) }.also { it.addAll(possibleIngredientsList) }
+    private fun getAllIngredients() : MutableList<IngredientItem> {
+        return ArrayList(baseIngredientsList).also { it.addAll(otherIngredientsList) }.also { it.addAll(possibleIngredientsList) }
+    }
 
-        binding.buttonAddIngredient.setOnClickListener(
-            AddIngredientButtonListener(
-                list,
-                allIngredients,
-                this
-            )
-        )
+    fun setIngredientViews() {
+        binding.buttonAddIngredient.setOnClickListener {
+            AddIngredientDialog(this, getAllIngredients(), allIngredients, getString(R.string.select_ingredient))
+        }
 
         binding.recyclerViewBaseIngredients.adapter =
             DishIngredientsRecyclerAdapter(baseIngredientsList, this, IngredientStatus.BASE)
@@ -178,15 +175,11 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     }
 
     fun setAllergenViews() {
-        binding.buttonAddAllergen.setOnClickListener(
-            AddAllergenButtonListener(
-                requireContext(),
-                allAllergens.map { it.name }.toMutableList(),
-                allergensList,
-                allAllergens,
-                this
-            )
-        )
+        binding.buttonAddAllergen.setOnClickListener {
+            AddAllergenDialog(requireContext(), allergensList, allAllergens, getString(R.string.select_allergen)) { newAllergen ->
+                addAllergenItem(newAllergen)
+            }
+        }
 
         binding.recyclerViewAllergens.adapter =
             DishAllergensRecyclerAdapter(allergensList, this)

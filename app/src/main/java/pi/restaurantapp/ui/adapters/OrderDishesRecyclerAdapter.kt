@@ -61,5 +61,12 @@ class OrderDishesRecyclerAdapter(
 
     override fun getItemCount() = dataSet.size
 
+    companion object {
+        @JvmStatic
+        fun createNew(dataSet: List<DishItem>, fragment: Fragment) : OrderDishesRecyclerAdapter {
+            return OrderDishesRecyclerAdapter(dataSet, fragment)
+        }
+    }
+
 }
 

@@ -11,6 +11,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemDiscountsBinding
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.discount.DiscountBasic
+import pi.restaurantapp.ui.activities.management.DiscountsActivity
 import pi.restaurantapp.utils.ComputingUtils
 import pi.restaurantapp.utils.StringFormatUtils
 import java.util.*
@@ -31,8 +32,10 @@ class DiscountsRecyclerAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.root.setOnClickListener {
-                openItemPreview()
+            if (fragment.activity is DiscountsActivity) {
+                binding.root.setOnClickListener {
+                    openItemPreview()
+                }
             }
         }
 
@@ -40,8 +43,7 @@ class DiscountsRecyclerAdapter(
             val bundle = Bundle()
             bundle.putString("id", dataSet[layoutPosition].id)
 
-            fragment.findNavController()
-                .navigate(R.id.actionDiscountsToPreviewDiscount, bundle)
+            fragment.findNavController().navigate(R.id.actionDiscountsToPreviewDiscount, bundle)
         }
     }
 
@@ -57,8 +59,7 @@ class DiscountsRecyclerAdapter(
         viewHolder.binding.textViewNumber.text = ComputingUtils.getNumberOfDiscounts(dataSet[position])
         viewHolder.binding.textViewDiscountAmount.text =
             StringFormatUtils.formatDiscountValue(dataSet[position].amount, dataSet[position].valueType, viewHolder.context)
-        viewHolder.binding.textViewExpirationDate.text =
-            StringFormatUtils.formatDate(dataSet[position].expirationDate)
+        viewHolder.binding.textViewExpirationDate.text = StringFormatUtils.formatDate(dataSet[position].expirationDate)
     }
 
     override fun getItemCount() = dataSet.size

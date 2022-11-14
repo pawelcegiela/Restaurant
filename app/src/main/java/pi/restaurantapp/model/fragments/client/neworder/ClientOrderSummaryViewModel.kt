@@ -7,18 +7,40 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.model.fragments.client.orders.ClientPreviewOrderViewModel
+import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.discount.DiscountBasic
+import pi.restaurantapp.objects.data.dish.DishItem
+import pi.restaurantapp.objects.data.order.Order
+import pi.restaurantapp.objects.data.order.OrderBasic
+import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.utils.ComputingUtils
 import java.util.*
 
-class ClientOrderSummaryViewModel : ClientPreviewOrderViewModel() {
+class ClientOrderSummaryViewModel : AbstractPreviewItemViewModel() {
+    override val databasePath = "orders"
+
     private val _possibleDiscounts = MutableLiveData<MutableList<DiscountBasic>>()
     val possibleDiscounts: LiveData<MutableList<DiscountBasic>> get() = _possibleDiscounts
 
-    override fun shouldGetDataFromDatabase() = false
+    private val _item: MutableLiveData<Order> = MutableLiveData()
+    val item: LiveData<Order> = _item
 
-    fun getPossibleDiscounts() {
+    val dishesList = ArrayList<DishItem>()
+
+    override fun getItem(snapshotsPair: SnapshotsPair) {
+        val basic = snapshotsPair.basic?.toObject<OrderBasic>() ?: OrderBasic()
+        val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
+        _item.value = Order(itemId, basic, details)
+    }
+
+    fun initializeData() {
+        dishesList.addAll(_item.value!!.details.dishes.toList().map { it.second })
+        getPossibleDiscounts()
+        setReadyToUnlock()
+    }
+
+    private fun getPossibleDiscounts() {
         Firebase.firestore.collection("discounts-basic")
             .whereArrayContains("assignedDiscounts", Firebase.auth.uid!!)
             .whereGreaterThan("expirationDate", Date()).get().addOnSuccessListener { snapshot ->
@@ -55,5 +77,15 @@ class ClientOrderSummaryViewModel : ClientPreviewOrderViewModel() {
         }.addOnSuccessListener {
             callback(success)
         }
+    }
+
+    fun setItem(order: Order) {
+        _item.value = order
+    }
+
+    override fun shouldGetDataFromDatabase() = false
+
+    override fun isDisabled(): Boolean {
+        return item.value?.basic?.disabled == true
     }
 }
