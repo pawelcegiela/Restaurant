@@ -1,7 +1,6 @@
 package pi.restaurantapp.ui.fragments.client.neworder
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,7 +13,6 @@ import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
-import pi.restaurantapp.objects.enums.OrderType
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
@@ -47,24 +45,13 @@ class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
 
     override fun initializeUI() {
         super.initializeUI()
-        initializeRecycler()
         setNavigationCardsSave()
-        hideElements()
-        binding.spinnerType.setSelection(OrderType.CLIENT_APP.ordinal)
         finishLoading()
-    }
-
-    private fun hideElements() {
-        binding.buttonAddDish.visibility = View.GONE
-        binding.textViewTypeTitle.visibility = View.GONE
-        binding.spinnerType.visibility = View.GONE
-        binding.textViewOrderDate.visibility = View.GONE
-        binding.textViewOrderDateTitle.visibility = View.GONE
     }
 
     override fun removeDish(dishItem: DishItem) {
         super.removeDish(dishItem)
-        (activity as ClientNewOrderActivity).binding.toolbar.textViewAdditionalInfo.text = dishesList.size.toString()
+        (activity as ClientNewOrderActivity).binding.toolbar.textViewAdditionalInfo.text = _viewModel.observer.dishesList.size.toString()
     }
 
     override fun afterSave() {

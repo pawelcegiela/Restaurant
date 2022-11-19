@@ -40,6 +40,7 @@ class ComputingUtils {
             return Date(Date().time + weekInMilliseconds)
         }
 
+        @JvmStatic
         fun countFullOrderPrice(dishesList: MutableList<DishItem>, collectionTypeId: Int, deliveryOptions: DeliveryBasic?): String {
             var price = dishesList.sumOf { BigDecimal(it.finalPrice) }
             if (collectionTypeId == CollectionType.DELIVERY.ordinal) {

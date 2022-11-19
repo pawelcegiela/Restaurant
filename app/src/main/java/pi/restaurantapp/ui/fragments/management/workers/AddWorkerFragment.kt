@@ -23,7 +23,6 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
     override fun initializeUI() {
         finishLoading()
-        initializeSpinner()
         setNavigationCardsSave()
     }
 
@@ -41,7 +40,7 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     //TODO: No logging out
-                    itemId = Firebase.auth.currentUser!!.uid
+                    _viewModel.setNewUserId()
                     super.saveToDatabase()
                 } else {
                     Toast.makeText(

@@ -32,4 +32,16 @@ class DishBasic : AbstractDataObject {
         this.discountPrice = discountPrice
         this.dishType = dishType
     }
+
+    constructor(id: String) {
+        this.id = id
+    }
+
+    fun setIsActive(isActive: Boolean) {
+        this.isActive = isActive
+    }
+
+    fun setIsDiscounted(isDiscounted: Boolean) {
+        this.isDiscounted = isDiscounted
+    }
 }

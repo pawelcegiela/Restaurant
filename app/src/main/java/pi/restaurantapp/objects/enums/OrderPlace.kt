@@ -13,6 +13,7 @@ enum class OrderPlace(val stringResourceId: Int) {
             return context.getString(values()[id].stringResourceId)
         }
 
+        @JvmStatic
         fun getArrayOfStrings(context: Context): Array<String> {
             return values().map { context.getString(it.stringResourceId) }.toTypedArray()
         }

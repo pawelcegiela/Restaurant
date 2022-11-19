@@ -11,7 +11,6 @@ import pi.restaurantapp.databinding.FragmentPreviewDishBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.model.fragments.management.dishes.PreviewDishViewModel
-import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
@@ -37,13 +36,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
     }
 
     override fun fillInData() {
-        val item = _viewModel.item.value ?: Dish()
-
-        if (!item.basic.isActive) {
-            binding.cardViewDisabled.root.visibility = View.VISIBLE
-            binding.cardViewDisabled.textViewInfo.text = getText(R.string.dish_unavailable)
-        }
-        if (item.basic.isDiscounted) {
+        if (_viewModel.item.value?.basic?.isDiscounted == true) {
             binding.textViewOriginalPrice.paintFlags = binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
 

@@ -4,7 +4,7 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.utils.StringFormatUtils
 
 class IngredientBasic : AbstractDataObject {
-    lateinit var name: String
+    var name: String = ""
     var amount: Int = 0
     var unit: Int = 0
     var subDish: Boolean = false
@@ -25,5 +25,9 @@ class IngredientBasic : AbstractDataObject {
         this.amount = amount
         this.unit = unit
         this.subDish = subDish
+    }
+
+    constructor(id: String) {
+        this.id = id
     }
 }

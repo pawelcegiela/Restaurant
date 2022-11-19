@@ -6,7 +6,7 @@ import pi.restaurantapp.objects.enums.Role
 class UserBasic : AbstractDataObject {
     var firstName = ""
     var lastName = ""
-    var role = Role.CUSTOMER.ordinal
+    var role = Role.WORKER.ordinal
     var disabled: Boolean = false
     var delivery: Boolean = false
 

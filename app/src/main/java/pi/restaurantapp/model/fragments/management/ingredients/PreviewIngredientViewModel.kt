@@ -18,9 +18,6 @@ import java.lang.Integer.max
 class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
     override val databasePath = "ingredients"
 
-    val liveContainingDishes = MutableLiveData<ArrayList<String>>()
-    val liveContainingSubDishes = MutableLiveData<ArrayList<String>>()
-
     val containingDishes = ArrayList<String>()
     val containingSubDishes = ArrayList<String>()
 
@@ -53,23 +50,17 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
         for (id in containingDishesIds) {
             Firebase.firestore.collection("dishes-basic").document(id).get().addOnSuccessListener { snapshot ->
                 containingDishes.add(snapshot.getString("name") ?: "")
-                if (containingDishes.size == containingDishesIds.size) {
-                    liveContainingDishes.value = containingDishes
-                    if (containingSubDishes.size == containingSubDishesIds.size) {
-                        setReadyToUnlock()
-                    }
+                if (containingDishes.size == containingDishesIds.size && containingSubDishes.size == containingSubDishesIds.size) {
+                    setReadyToUnlock()
                 }
             }
         }
 
         for (id in containingSubDishesIds) {
             Firebase.firestore.collection("ingredients-basic").document(id).get().addOnSuccessListener { snapshot ->
-                containingDishes.add(snapshot.getString("name") ?: "")
-                if (containingSubDishes.size == containingSubDishesIds.size) {
-                    liveContainingSubDishes.value = containingSubDishes
-                    if (containingDishes.size == containingDishesIds.size) {
-                        setReadyToUnlock()
-                    }
+                containingSubDishes.add(snapshot.getString("name") ?: "")
+                if (containingSubDishes.size == containingSubDishesIds.size && containingDishes.size == containingDishesIds.size) {
+                    setReadyToUnlock()
                 }
             }
         }

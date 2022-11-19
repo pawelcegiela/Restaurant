@@ -39,12 +39,8 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
     private fun checkIfReady() {
         if (snapshotsPair.isReady()) {
             getItem(snapshotsPair)
-            getAdditionalData()
+            setReadyToInitialize()
         }
-    }
-
-    open fun getAdditionalData() {
-        setReadyToInitialize()
     }
 
     open fun saveToDatabase(data: SplitDataObject) {

@@ -7,6 +7,24 @@
 
         <import type="pi.restaurantapp.utils.StringFormatUtils" />
 
+        <import type="pi.restaurantapp.utils.ComputingUtils" />
+
+        <import type="pi.restaurantapp.objects.enums.CollectionType" />
+
+        <import type="pi.restaurantapp.objects.enums.OrderPlace" />
+
+        <import type="pi.restaurantapp.objects.enums.OrderType" />
+
+        <import type="pi.restaurantapp.ui.RecyclerManager" />
+
+        <import type="pi.restaurantapp.ui.adapters.SpinnerAdapter" />
+
+        <import type="pi.restaurantapp.ui.adapters.OrderDishesRecyclerAdapter" />
+
+        <import type="pi.restaurantapp.ui.fragments.management.orders.EditOrderFragment" />
+
+        <import type="pi.restaurantapp.ui.fragments.client.neworder.ClientFinalizeOrderFragment" />
+
         <variable
             name="fragment"
             type="pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment" />
@@ -78,6 +96,7 @@
                                 android:layout_marginBottom="7dp"
                                 android:gravity="center"
                                 android:hint="@string/order"
+                                android:text="@={vm.item.basic.name}"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -93,7 +112,11 @@
                         <Spinner
                             android:id="@+id/spinnerCollectionType"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{SpinnerAdapter.createNew(context, CollectionType.getArrayOfStrings(context))}"
+                            android:enabled="@{vm.observer.deliveryOptions.available}"
+                            android:onItemSelected="@{(x, y, position, z) -> fragment.onItemSelectedCollectionType(position)}"
+                            android:selectedItemPosition="@{vm.observer.deliveryOptions.available ? vm.item.basic.collectionType : CollectionType.SELF_PICKUP.ordinal}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewFullPriceTitle"
@@ -106,7 +129,8 @@
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewFullPrice"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{vm.observer.value}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewTypeTitle"
@@ -114,12 +138,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="25dp"
                             android:layout_marginBottom="10dp"
-                            android:text="@string/type_colon" />
+                            android:text="@string/type_colon"
+                            android:visibility="@{fragment instanceof ClientFinalizeOrderFragment ? View.GONE : View.VISIBLE}" />
 
                         <Spinner
                             android:id="@+id/spinnerType"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{SpinnerAdapter.createNew(context, OrderType.getArrayOfStrings(context))}"
+                            android:selectedItemPosition="@={vm.item.details.orderType}"
+                            android:visibility="@{fragment instanceof ClientFinalizeOrderFragment ? View.GONE : View.VISIBLE}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewOrderDateTitle"
@@ -127,13 +155,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="25dp"
                             android:layout_marginBottom="10dp"
-                            android:text="@string/order_date_colon" />
+                            android:text="@string/order_date_colon"
+                            android:visibility="@{fragment instanceof ClientFinalizeOrderFragment ? View.GONE : View.VISIBLE}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetail
                             android:id="@+id/textViewOrderDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/now" />
+                            android:text="@{fragment instanceof EditOrderFragment ? StringFormatUtils.formatDateTime(vm.item.details.orderDate) : @string/now}"
+                            android:visibility="@{fragment instanceof ClientFinalizeOrderFragment ? View.GONE : View.VISIBLE}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCollectionDateTitle"
@@ -158,13 +188,16 @@
                         <Spinner
                             android:id="@+id/spinnerPlace"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{SpinnerAdapter.createNew(context, OrderPlace.getArrayOfStrings(context))}"
+                            android:selectedItemPosition="@={vm.item.details.orderPlace}" />
 
                         <LinearLayout
                             android:id="@+id/linearLayoutDeliveryDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="@{vm.item.basic.collectionType == CollectionType.SELF_PICKUP.ordinal ? View.GONE : View.VISIBLE}">
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewDeliveryAddressTitle"
@@ -176,7 +209,12 @@
 
                             <include
                                 android:id="@+id/address"
-                                layout="@layout/modify_address" />
+                                layout="@layout/modify_address"
+                                app:city="@={vm.item.details.address.city}"
+                                app:flatNumber="@={vm.item.details.address.flatNumber}"
+                                app:houseNumber="@={vm.item.details.address.houseNumber}"
+                                app:postalCode="@={vm.item.details.address.postalCode}"
+                                app:street="@={vm.item.details.address.street}" />
 
                         </LinearLayout>
 
@@ -194,7 +232,8 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/contact_phone"
                             android:importantForAutofill="no"
-                            android:inputType="phone" />
+                            android:inputType="phone"
+                            android:text="@={vm.item.details.contactPhone}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCommentsTitle"
@@ -210,7 +249,8 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/comments"
                             android:importantForAutofill="no"
-                            android:inputType="textMultiLine" />
+                            android:inputType="textMultiLine"
+                            android:text="@={vm.item.details.comments}" />
 
                     </LinearLayout>
 
@@ -240,14 +280,18 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewDishes"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{OrderDishesRecyclerAdapter.createNew(vm.observer.dishesList, fragment)}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                         <Button
                             android:id="@+id/buttonAddDish"
                             android:layout_width="150dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center"
-                            android:text="@string/add_dish" />
+                            android:onClick="@{() -> fragment.onClickButtonAddDish()}"
+                            android:text="@string/add_dish"
+                            android:visibility="@{fragment instanceof ClientFinalizeOrderFragment ? View.GONE : View.VISIBLE}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>

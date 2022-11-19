@@ -5,7 +5,6 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.ingredients.EditIngredientViewModel
-import pi.restaurantapp.objects.data.ingredient.Ingredient
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
 
 
@@ -14,25 +13,14 @@ class EditIngredientFragment : AbstractModifyIngredientFragment() {
     override val nextActionId = R.id.actionEditIngredientToIngredients
     override val saveMessageId = R.string.ingredient_modified
     override val removeMessageId = R.string.ingredient_removed
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : EditIngredientViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: EditIngredientViewModel by viewModels()
 
     override fun initializeUI() {
-        super.initializeUI()
         itemId = arguments?.getString("id").toString()
-        binding.spinnerUnit.isEnabled = false
-        binding.checkBoxSubDish.isEnabled = false
     }
 
     override fun fillInData() {
-        val data = _viewModel.item.value ?: Ingredient()
-
-        binding.editTextName.setText(data.basic.name)
-        binding.spinnerUnit.setSelection(data.basic.unit)
-        binding.checkBoxSubDish.isChecked = data.basic.subDish
-        subIngredientsList = data.details.subIngredients ?: ArrayList()
-
-        getIngredientListAndSetIngredientButton()
         setNavigationCardsSaveRemove()
         finishLoading()
     }

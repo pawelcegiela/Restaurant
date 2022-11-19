@@ -8,6 +8,24 @@
 
         <import type="pi.restaurantapp.utils.StringFormatUtils" />
 
+        <import type="pi.restaurantapp.ui.fragments.management.ingredients.AddIngredientFragment" />
+
+        <import type="pi.restaurantapp.ui.adapters.SpinnerAdapter" />
+
+        <import type="pi.restaurantapp.ui.dialogs.AddIngredientDialog" />
+
+        <import type="pi.restaurantapp.objects.enums.Unit" />
+
+        <import type="pi.restaurantapp.objects.enums.IngredientStatus" />
+
+        <import type="pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter" />
+
+        <import type="pi.restaurantapp.ui.RecyclerManager" />
+
+        <variable
+            name="observer"
+            type="pi.restaurantapp.model.fragments.management.ingredients.AbstractModifyIngredientViewModel.Observer" />
+
         <variable
             name="fragment"
             type="pi.restaurantapp.ui.fragments.management.ingredients.AbstractModifyIngredientFragment" />
@@ -78,6 +96,7 @@
                                 android:layout_marginBottom="7dp"
                                 android:gravity="center"
                                 android:hint="@string/name"
+                                android:text="@={vm.item.basic.name}"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -94,13 +113,19 @@
                             android:id="@+id/spinnerUnit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="15dp" />
+                            android:layout_marginBottom="15dp"
+                            android:adapter="@{SpinnerAdapter.createNew(context, Unit.getArrayOfStrings(context))}"
+                            android:enabled="@{fragment instanceof AddIngredientFragment}"
+                            android:selectedItemPosition="@={vm.item.basic.unit}" />
 
                         <CheckBox
                             android:id="@+id/checkBoxSubDish"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:checked="@={vm.item.basic.subDish}"
+                            android:enabled="@{fragment instanceof AddIngredientFragment}"
+                            android:onCheckedChanged="@{(_, checked) -> fragment.onCheckedChangedSubDish(checked)}"
                             android:text="@string/treat_sub_dish_temp" />
 
                     </LinearLayout>
@@ -131,13 +156,16 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewSubIngredients"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp" />
+                            android:layout_height="wrap_content"
+                            android:adapter="@{DishIngredientsRecyclerAdapter.createNew(vm.observer.subIngredients, fragment, IngredientStatus.BASE)}"
+                            app:layoutManager="@{RecyclerManager.createNew(context)}" />
 
                         <Button
                             android:id="@+id/buttonAddSubIngredient"
                             android:layout_width="220dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center"
+                            android:onClick="@{() -> AddIngredientDialog.createNew(fragment, vm.observer.subIngredients, vm.allIngredients, @string/select_ingredient)}"
                             android:text="@string/add_sub_ingredient" />
 
                     </LinearLayout>

@@ -37,6 +37,9 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyDeliveryBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = this
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

@@ -11,11 +11,8 @@ import pi.restaurantapp.databinding.FragmentModifyLocationBinding
 import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.restaurantdata.EditLocationViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.address.Address
-import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.address.AddressDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
 
 class EditLocationFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyLocationBinding? = null
@@ -37,6 +34,9 @@ class EditLocationFragment : AbstractModifyItemFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyLocationBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = this
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
@@ -45,14 +45,7 @@ class EditLocationFragment : AbstractModifyItemFragment() {
         setNavigationCardsSave()
     }
 
-    override fun fillInData() {
-        val data = _viewModel.item.value ?: Address()
-        binding.address.editTextCity.setText(data.basic.city)
-        binding.address.editTextPostalCode.setText(data.basic.postalCode)
-        binding.address.editTextStreet.setText(data.basic.street)
-        binding.address.editTextHouseNumber.setText(data.basic.houseNumber)
-        binding.address.editTextFlatNumber.setText(data.basic.flatNumber)
-    }
+    override fun fillInData() {}
 
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
@@ -64,17 +57,7 @@ class EditLocationFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
-
-        val basic = AddressBasic(
-            city = binding.address.editTextCity.text.toString(),
-            postalCode = binding.address.editTextPostalCode.text.toString(),
-            street = binding.address.editTextStreet.text.toString(),
-            houseNumber = binding.address.editTextHouseNumber.text.toString(),
-            flatNumber = binding.address.editTextFlatNumber.text.toString()
-        )
-
-        return SplitDataObject(itemId, basic, AddressDetails())
+        return SplitDataObject(itemId, _viewModel.item.value!!.basic, AddressDetails())
     }
 
     override fun onDestroyView() {

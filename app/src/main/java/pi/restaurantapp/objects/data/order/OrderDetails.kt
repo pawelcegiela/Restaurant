@@ -12,7 +12,7 @@ class OrderDetails : AbstractDataObject {
     var modificationDate: Date = Date()
     var orderPlace: Int = 0
     var dishes: HashMap<String, DishItem> = HashMap()
-    var address : AddressBasic? = null
+    var address : AddressBasic = AddressBasic()
     var statusChanges: HashMap<String, Int> = HashMap()
     var delivererId: String = ""
     var contactPhone: String = ""
@@ -29,7 +29,7 @@ class OrderDetails : AbstractDataObject {
         modificationDate: Date,
         orderPlace: Int,
         dishes: HashMap<String, DishItem>,
-        address: AddressBasic?,
+        address: AddressBasic,
         statusChanges: HashMap<String, Int>,
         delivererId: String,
         contactPhone: String,
@@ -46,5 +46,9 @@ class OrderDetails : AbstractDataObject {
         this.delivererId = delivererId
         this.contactPhone = contactPhone
         this.comments = comments
+    }
+
+    constructor(id: String) {
+        this.id = id
     }
 }

@@ -33,4 +33,16 @@ class AddIngredientDialog(
                 dismiss()
             }
     }
+
+    companion object {
+        @JvmStatic
+        fun createNew(
+            fragment: Fragment,
+            recyclerList: MutableList<IngredientItem>,
+            allIngredients: MutableList<IngredientBasic>,
+            title: String
+        ): AddIngredientDialog {
+            return AddIngredientDialog(fragment, recyclerList, allIngredients, title)
+        }
+    }
 }

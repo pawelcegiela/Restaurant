@@ -1,5 +1,9 @@
 package pi.restaurantapp.model.fragments.management.dishes
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -8,7 +12,6 @@ import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.dish.Dish
-import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.dish.DishDetails
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
@@ -16,13 +19,57 @@ import pi.restaurantapp.objects.data.ingredient.IngredientItem
 abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
     override val databasePath = "dishes"
 
-    val liveAllIngredients = MutableLiveData<MutableList<IngredientBasic>>()
-    val liveAllAllergens = MutableLiveData<MutableList<AllergenBasic>>()
+    private val _item: MutableLiveData<Dish> = MutableLiveData()
+    val item: LiveData<Dish> = _item
+
+    private val _allIngredients = MutableLiveData<MutableList<IngredientBasic>>()
+    val allIngredients: LiveData<MutableList<IngredientBasic>> = _allIngredients
+
+    private val _allAllergens = MutableLiveData<MutableList<AllergenBasic>>()
+    val allAllergens: LiveData<MutableList<AllergenBasic>> = _allAllergens
+
+    private var previousIngredients: MutableList<IngredientItem> = ArrayList()
+    private var previousAllergens: MutableList<AllergenBasic> = ArrayList()
+
+    var observer = Observer()
+
+    class Observer : BaseObservable() {
+        @get:Bindable
+        var baseIngredients: MutableList<IngredientItem> = ArrayList()
+            set(value) {
+                field = value
+                notifyPropertyChanged(BR.baseIngredients)
+            }
+
+        @get:Bindable
+        var otherIngredients: MutableList<IngredientItem> = ArrayList()
+            set(value) {
+                field = value
+                notifyPropertyChanged(BR.otherIngredients)
+            }
+
+        @get:Bindable
+        var possibleIngredients: MutableList<IngredientItem> = ArrayList()
+            set(value) {
+                field = value
+                notifyPropertyChanged(BR.possibleIngredients)
+            }
+
+        @get:Bindable
+        var allergens: MutableList<AllergenBasic> = ArrayList()
+            set(value) {
+                field = value
+                notifyPropertyChanged(BR.allergens)
+            }
+    }
 
     override fun saveToDatabase(data: SplitDataObject) {
-        val previousIngredients = getPreviousIngredients()
-        val ingredients = getCurrentIngredients(data.details as DishDetails)
-        val previousAllergens = getPreviousItem().details.allergens.map { it.value }
+        item.value?.details?.baseIngredients = HashMap(observer.baseIngredients.associateBy { it.id })
+        item.value?.details?.otherIngredients = HashMap(observer.otherIngredients.associateBy { it.id })
+        item.value?.details?.possibleIngredients = HashMap(observer.possibleIngredients.associateBy { it.id })
+        item.value?.details?.allergens = HashMap(observer.allergens.associateBy { it.id })
+
+        val ingredients = getIngredients()
         val allergens = (data.details as DishDetails).allergens.map { it.value }
 
         Firebase.firestore.runTransaction { transaction ->
@@ -48,27 +95,17 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         }
     }
 
-    fun getPreviousItem(): Dish {
-        if (this is EditDishViewModel) {
-            return item.value ?: Dish(itemId, DishBasic(), DishDetails())
-        }
-        return Dish(itemId, DishBasic(), DishDetails())
+    fun setItem(newItem: Dish) {
+        _item.value = newItem
+
+        this.previousIngredients.addAll(getIngredients())
+        this.previousAllergens.addAll(newItem.details.allergens.map { it.value })
+        getAllIngredients()
+        getAllAllergens()
     }
 
-    private fun getPreviousIngredients(): ArrayList<IngredientItem> {
-        val previousBaseIngredients = getPreviousItem().details.baseIngredients.map { it.value }
-        val previousOtherIngredients = getPreviousItem().details.otherIngredients.map { it.value }
-        val previousPossibleIngredients = getPreviousItem().details.possibleIngredients.map { it.value }
-
-        val previousIngredients = ArrayList<IngredientItem>()
-        previousIngredients.addAll(previousBaseIngredients)
-        previousIngredients.addAll(previousOtherIngredients)
-        previousIngredients.addAll(previousPossibleIngredients)
-
-        return previousIngredients
-    }
-
-    private fun getCurrentIngredients(details: DishDetails): ArrayList<IngredientItem> {
+    fun getIngredients(): ArrayList<IngredientItem> {
+        val details = item.value?.details ?: DishDetails()
         val baseIngredients = details.baseIngredients.map { it.value }
         val otherIngredients = details.otherIngredients.map { it.value }
         val possibleIngredients = details.possibleIngredients.map { it.value }
@@ -81,18 +118,18 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
         return ingredients
     }
 
-    fun getAllIngredients() {
+    private fun getAllIngredients() {
         Firebase.firestore.collection("ingredients-basic").get().addOnSuccessListener { snapshot ->
-            liveAllIngredients.value = snapshot
+            _allIngredients.value = snapshot
                 .mapNotNull { documentSnapshot -> documentSnapshot.toObject<IngredientBasic>() }
                 .filter { ingredient -> !ingredient.disabled }
                 .toMutableList()
         }
     }
 
-    fun getAllAllergens() {
+    private fun getAllAllergens() {
         Firebase.firestore.collection("allergens-basic").get().addOnSuccessListener { snapshot ->
-            liveAllAllergens.value = snapshot
+            _allAllergens.value = snapshot
                 .mapNotNull { documentSnapshot -> documentSnapshot.toObject<AllergenBasic>() }
                 .filter { allergen -> !allergen.disabled }
                 .toMutableList()

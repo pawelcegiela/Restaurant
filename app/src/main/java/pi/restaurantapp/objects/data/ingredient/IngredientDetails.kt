@@ -1,7 +1,6 @@
 package pi.restaurantapp.objects.data.ingredient
 
 import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.utils.StringFormatUtils
 
 class IngredientDetails : AbstractDataObject {
     var subIngredients: MutableList<IngredientItem>? = null
@@ -12,17 +11,7 @@ class IngredientDetails : AbstractDataObject {
     @Suppress("unused")
     constructor()
 
-    constructor(
-        id: String,
-        subIngredients: MutableList<IngredientItem>?,
-        containingDishes: HashMap<String, Boolean>,
-        containingSubDishes: HashMap<String, Boolean>,
-        amountChanges: HashMap<String, IngredientAmountChange>
-    ) {
-        this.id = id.ifEmpty { StringFormatUtils.formatId() }
-        this.subIngredients = subIngredients
-        this.containingDishes = containingDishes
-        this.containingSubDishes = containingSubDishes
-        this.amountChanges = amountChanges
+    constructor(id: String) {
+        this.id = id
     }
 }

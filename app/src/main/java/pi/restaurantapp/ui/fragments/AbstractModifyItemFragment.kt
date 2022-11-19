@@ -43,9 +43,9 @@ abstract class AbstractModifyItemFragment : Fragment() {
                 if (Role.isAtLeast(role, lowestRole)) {
                     initializeUI()
                     viewModel.itemId = itemId
-                    if (itemId.isNotEmpty() && viewModel.shouldGetDataFromDatabase()) {
+                    if (viewModel.itemId.isNotEmpty() && viewModel.shouldGetDataFromDatabase()) {
                         viewModel.getDataFromDatabase()
-                    } else if (itemId.isEmpty()) {
+                    } else if (viewModel.itemId.isEmpty() && viewModel.shouldGetDataFromDatabase()) {
                         viewModel.createItem()
                     }
                 } else {

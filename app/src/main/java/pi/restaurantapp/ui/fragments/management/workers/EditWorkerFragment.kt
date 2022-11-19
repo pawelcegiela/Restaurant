@@ -1,6 +1,5 @@
 package pi.restaurantapp.ui.fragments.management.workers
 
-import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -8,7 +7,6 @@ import pi.restaurantapp.R
 import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.workers.EditWorkerViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.activities.management.SettingsActivity
 
@@ -17,43 +15,24 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
     override var nextActionId = R.id.actionEditWorkerToWorkers
     override val saveMessageId = R.string.worker_modified
     override val removeMessageId = 0 // Warning: unused
-    private var isMyData = false
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : EditWorkerViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: EditWorkerViewModel by viewModels()
 
     override fun initializeUI() {
-        itemId = arguments?.getString("id").toString()
-        isMyData = arguments?.getBoolean("myData") != null && arguments?.getBoolean("myData")!!
-        if (isMyData) {
-            setMyDataSettings()
-        }
+        _viewModel.isMyData = arguments?.getBoolean("myData") != null && arguments?.getBoolean("myData")!!
+        itemId = if (_viewModel.isMyData) Firebase.auth.uid!! else arguments?.getString("id").toString()
 
-        binding.editTextEmail.isEnabled = false
-        binding.linearLayoutPasswords.visibility = View.GONE
-
-        initializeSpinner()
-    }
-
-    private fun setMyDataSettings() {
-        itemId = Firebase.auth.uid ?: return
-        binding.spinnerRole.isEnabled = false
-        nextActionId = if (activity is SettingsActivity) {
-            R.id.actionMyDataToSettings
-        } else {
-            R.id.actionEditMyDataToWorkers
+        if (_viewModel.isMyData) {
+            nextActionId = if (activity is SettingsActivity) {
+                R.id.actionMyDataToSettings
+            } else {
+                R.id.actionEditMyDataToWorkers
+            }
         }
     }
 
     override fun fillInData() {
-        val data = _viewModel.item.value ?: User()
-        binding.editTextFirstName.setText(data.basic.firstName)
-        binding.editTextLastName.setText(data.basic.lastName)
-        binding.editTextEmail.setText(data.details.email)
-        binding.spinnerRole.setSelection(data.basic.role)
-        binding.editTextContactPhone.setText(data.details.contactPhone)
-        binding.checkBoxDelivery.isChecked = data.basic.delivery
-
-        if (isMyData) {
+        if (_viewModel.isMyData) {
             setNavigationCardsSave()
         } else {
             setNavigationCardsSaveRemove()
@@ -61,7 +40,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
     }
 
     override fun checkSavePreconditions(data: SplitDataObject): Precondition {
-        return if (isMyData) {
+        return if (_viewModel.isMyData) {
             Precondition.OK
         } else {
             super.checkSavePreconditions(data)

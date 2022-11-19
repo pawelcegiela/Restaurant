@@ -1,108 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="pi.restaurantapp.ui.fragments.management.restaurantdata.EditLocationFragment">
+<layout>
 
-    <ScrollView
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.management.restaurantdata.EditLocationFragment" />
+
+        <variable
+            name="vm"
+            type="pi.restaurantapp.model.fragments.management.restaurantdata.EditLocationViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="pi.restaurantapp.ui.fragments.management.restaurantdata.EditLocationFragment">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <pi.restaurantapp.ui.CardViewPreviewElement
-                android:id="@+id/cardLocationDetails"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <LinearLayout
+                <pi.restaurantapp.ui.CardViewPreviewElement
+                    android:id="@+id/cardLocationDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="25dp"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp">
 
                     <LinearLayout
-                        android:id="@+id/locationHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="15dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="25dp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/imageIcon"
-                            android:layout_width="80dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="10dp"
-                            android:contentDescription="@string/icon"
-                            android:padding="6dp"
-                            android:src="@drawable/location" />
-
-                        <pi.restaurantapp.ui.textviews.TextViewItemName
-                            android:id="@+id/textViewName"
+                        <LinearLayout
+                            android:id="@+id/locationHeader"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="15dp"
                             android:gravity="center"
-                            android:text="@string/location" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageIcon"
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:contentDescription="@string/icon"
+                                android:padding="6dp"
+                                android:src="@drawable/location" />
+
+                            <pi.restaurantapp.ui.textviews.TextViewItemName
+                                android:id="@+id/textViewName"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/location" />
+                        </LinearLayout>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewAddressTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/address_colon" />
+
+                        <include
+                            android:id="@+id/address"
+                            layout="@layout/modify_address"
+                            app:city="@={vm.item.basic.city}"
+                            app:flatNumber="@={vm.item.basic.flatNumber}"
+                            app:houseNumber="@={vm.item.basic.houseNumber}"
+                            app:postalCode="@={vm.item.basic.postalCode}"
+                            app:street="@={vm.item.basic.street}" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/temp_add_map" />
+
                     </LinearLayout>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewAddressTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/address_colon" />
+            </LinearLayout>
 
-                    <include
-                        android:id="@+id/address"
-                        layout="@layout/modify_address" />
+        </ScrollView>
 
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/temp_add_map" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/bottom_toolbar_height" />
 
-                </LinearLayout>
-            </pi.restaurantapp.ui.CardViewPreviewElement>
+        <include
+            android:id="@+id/toolbarNavigation"
+            layout="@layout/toolbar_navigation_modify"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline" />
 
-        </LinearLayout>
+        <include
+            android:id="@+id/progress"
+            layout="@layout/progress_bar" />
 
-    </ScrollView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/bottom_toolbar_height" />
-
-    <include
-        android:id="@+id/toolbarNavigation"
-        layout="@layout/toolbar_navigation_modify"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline" />
-
-    <include
-        android:id="@+id/progress"
-        layout="@layout/progress_bar" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

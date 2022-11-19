@@ -33,4 +33,10 @@ class OrderBasic : AbstractDataObject {
         this.name = name
         this.userId = userId
     }
+
+    constructor(id: String, userId: String) {
+        this.id = id
+        this.userId = userId
+    }
+
 }

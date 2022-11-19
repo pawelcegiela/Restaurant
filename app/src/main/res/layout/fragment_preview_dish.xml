@@ -51,7 +51,8 @@
                 <include
                     android:id="@+id/cardViewDisabled"
                     layout="@layout/card_view_info"
-                    android:visibility="gone" />
+                    app:visibility="@{vm.item.basic.isActive ? View.GONE : View.VISIBLE}"
+                    app:textInfo="@{@string/dish_unavailable}" />
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardDishDetails"

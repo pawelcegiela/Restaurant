@@ -10,13 +10,9 @@ import pi.restaurantapp.databinding.FragmentModifyWorkerBinding
 import pi.restaurantapp.model.fragments.management.workers.AbstractModifyWorkerViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.user.UserBasic
-import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Precondition
-import pi.restaurantapp.objects.enums.Role
-import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.utils.PreconditionUtils
-import pi.restaurantapp.utils.StringFormatUtils
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null
@@ -26,8 +22,6 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
-
-    var disabled = false
 
     private val _viewModel get() = viewModel as AbstractModifyWorkerViewModel
 
@@ -43,31 +37,8 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         return binding.root
     }
 
-    fun initializeSpinner() {
-        binding.spinnerRole.adapter = SpinnerAdapter(requireContext(), Role.getArrayOfStrings(requireContext()))
-    }
-
     override fun getDataObject(): SplitDataObject {
-        val user = (viewModel as AbstractModifyWorkerViewModel).getPreviousItem()
-        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
-
-        val basic = UserBasic(
-            id = itemId,
-            firstName = binding.editTextFirstName.text.toString(),
-            lastName = binding.editTextLastName.text.toString(),
-            role = binding.spinnerRole.selectedItemId.toInt(),
-            disabled = user.basic.disabled,
-            delivery = binding.checkBoxDelivery.isChecked
-        )
-        val details = UserDetails(
-            id = itemId,
-            email = binding.editTextEmail.text.toString(),
-            creationDate = user.details.creationDate,
-            ordersToDeliver = user.details.ordersToDeliver,
-            contactPhone = binding.editTextContactPhone.text.toString()
-        )
-
-        return SplitDataObject(itemId, basic, details)
+        return SplitDataObject(_viewModel.itemId, _viewModel.item.value!!.basic, _viewModel.item.value!!.details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

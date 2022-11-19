@@ -1,7 +1,5 @@
 package pi.restaurantapp.model.fragments.management.dishes
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.Transaction
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -13,13 +11,15 @@ import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.dish.DishDetails
 
 class EditDishViewModel : AbstractModifyDishViewModel() {
-    private val _item: MutableLiveData<Dish> = MutableLiveData()
-    val item: LiveData<Dish> = _item
-
     override fun getItem(snapshotsPair: SnapshotsPair) {
         val basic = snapshotsPair.basic?.toObject<DishBasic>() ?: DishBasic()
         val details = snapshotsPair.details?.toObject<DishDetails>() ?: DishDetails()
-        _item.value = Dish(itemId, basic, details)
+        setItem(Dish(itemId, basic, details))
+
+        observer.baseIngredients = details.baseIngredients.map { it.value }.toMutableList()
+        observer.otherIngredients = details.otherIngredients.map { it.value }.toMutableList()
+        observer.possibleIngredients = details.possibleIngredients.map { it.value }.toMutableList()
+        observer.allergens = details.allergens.map { it.value }.toMutableList()
     }
 
     override fun saveDocumentToDatabase(data: SplitDataObject, transaction: Transaction) {

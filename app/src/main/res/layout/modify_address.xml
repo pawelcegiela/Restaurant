@@ -1,84 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="street"
+            type="String" />
+
+        <variable
+            name="houseNumber"
+            type="String" />
+
+        <variable
+            name="flatNumber"
+            type="String" />
+
+        <variable
+            name="postalCode"
+            type="String" />
+
+        <variable
+            name="city"
+            type="String" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <EditText
-                android:id="@+id/editTextStreet"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:layout_toStartOf="@+id/editTextHouseNumber"
-                android:hint="@string/street"
-                android:importantForAutofill="no"
-                android:inputType="text" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editTextHouseNumber"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginVertical="10dp"
-                android:layout_toStartOf="@+id/editTextFlatNumber"
-                android:hint="@string/house"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                tools:ignore="TextFields" />
+                <EditText
+                    android:id="@+id/editTextStreet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_toStartOf="@+id/editTextHouseNumber"
+                    android:hint="@string/street"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@={street}" />
 
-            <EditText
-                android:id="@+id/editTextFlatNumber"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginVertical="10dp"
-                android:hint="@string/flat"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                tools:ignore="TextFields" />
+                <EditText
+                    android:id="@+id/editTextHouseNumber"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_toStartOf="@+id/editTextFlatNumber"
+                    android:hint="@string/house"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@={houseNumber}"
+                    tools:ignore="TextFields" />
 
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/editTextFlatNumber"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginVertical="10dp"
+                    android:hint="@string/flat"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@={flatNumber}"
+                    tools:ignore="TextFields" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            </RelativeLayout>
 
-            <EditText
-                android:id="@+id/editTextPostalCode"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginVertical="10dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/postal_code"
-                android:importantForAutofill="no"
-                android:inputType="text" />
-
-            <EditText
-                android:id="@+id/editTextCity"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/editTextPostalCode"
-                android:layout_marginVertical="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_alignParentEnd="true"
-                android:hint="@string/city"
-                android:importantForAutofill="no"
-                android:inputType="text" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:orientation="horizontal">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                <EditText
+                    android:id="@+id/editTextPostalCode"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:hint="@string/postal_code"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@={postalCode}" />
+
+                <EditText
+                    android:id="@+id/editTextCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/editTextPostalCode"
+                    android:hint="@string/city"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@={city}" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

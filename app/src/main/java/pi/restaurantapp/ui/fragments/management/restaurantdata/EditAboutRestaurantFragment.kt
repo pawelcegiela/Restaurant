@@ -11,11 +11,8 @@ import pi.restaurantapp.databinding.FragmentModifyAboutRestaurantBinding
 import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.model.fragments.management.restaurantdata.EditAboutRestaurantViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurant
-import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurantBasic
 import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurantDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
 
 class EditAboutRestaurantFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyAboutRestaurantBinding? = null
@@ -29,25 +26,24 @@ class EditAboutRestaurantFragment : AbstractModifyItemFragment() {
     override val saveMessageId = R.string.restaurant_data_modified
     override val removeMessageId = 0 // Unused
 
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : EditAboutRestaurantViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: EditAboutRestaurantViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentModifyAboutRestaurantBinding.inflate(inflater, container, false)
+        binding.vm = _viewModel
+        binding.fragment = this
+        binding.lifecycleOwner = this
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
 
-    override fun initializeUI() { }
+    override fun initializeUI() {}
 
     override fun fillInData() {
-        val data = _viewModel.item.value ?: AboutRestaurant()
-        binding.editTextRestaurantName.setText(data.basic.name)
-        binding.editTextRestaurantDescription.setText(data.basic.description)
-
         setNavigationCardsSave()
         finishLoading()
     }
@@ -60,14 +56,7 @@ class EditAboutRestaurantFragment : AbstractModifyItemFragment() {
     }
 
     override fun getDataObject(): SplitDataObject {
-        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
-
-        val basic = AboutRestaurantBasic(
-            name = binding.editTextRestaurantName.text.toString(),
-            description = binding.editTextRestaurantDescription.text.toString()
-        )
-
-        return SplitDataObject(itemId, basic, AboutRestaurantDetails())
+        return SplitDataObject(itemId, _viewModel.item.value!!.basic, AboutRestaurantDetails())
     }
 
     override fun onDestroyView() {
