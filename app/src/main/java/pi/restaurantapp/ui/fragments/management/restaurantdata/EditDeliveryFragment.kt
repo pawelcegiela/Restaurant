@@ -8,14 +8,14 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDeliveryBinding
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.model.fragments.management.restaurantdata.EditDeliveryViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditDeliveryViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.delivery.Delivery
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.delivery.DeliveryDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 class EditDeliveryFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDeliveryBinding? = null

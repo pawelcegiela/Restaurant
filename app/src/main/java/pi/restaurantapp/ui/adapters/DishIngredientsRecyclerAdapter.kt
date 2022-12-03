@@ -13,7 +13,7 @@ import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.ui.fragments.management.dishes.AbstractModifyDishFragment
 import pi.restaurantapp.ui.fragments.management.ingredients.AbstractModifyIngredientFragment
 import pi.restaurantapp.ui.fragments.management.orders.CustomizeDishFragment
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 
 class DishIngredientsRecyclerAdapter(

@@ -12,8 +12,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientMyDataBinding
-import pi.restaurantapp.model.fragments.client.settings.ClientMyDataViewModel
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.client.settings.ClientMyDataViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.user.User
@@ -24,7 +24,7 @@ import pi.restaurantapp.objects.enums.OrderPlace
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.adapters.SpinnerAdapter
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 class ClientMyDataFragment : AbstractModifyItemFragment() {
 
@@ -35,7 +35,7 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
-    override val lowestRole = Role.CUSTOMER.ordinal
+    override var lowestRole = Role.CUSTOMER.ordinal
 
     override val viewModel: AbstractModifyItemViewModel get() = _viewModel
     private val _viewModel: ClientMyDataViewModel by viewModels()

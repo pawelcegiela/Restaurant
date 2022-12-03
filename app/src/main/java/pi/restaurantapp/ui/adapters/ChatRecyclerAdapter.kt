@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemChatBinding
 import pi.restaurantapp.objects.data.chat.Message
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 class ChatRecyclerAdapter(
     private val dataSet: MutableList<Message>,

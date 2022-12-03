@@ -18,7 +18,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include
-                android:id="@+id/cardRestaurantData"
+                android:id="@+id/card_my_orders"
                 layout="@layout/card_view_wide" />
 
             <include
@@ -26,7 +26,7 @@
                 layout="@layout/card_view_wide" />
 
             <include
-                android:id="@+id/card_my_orders"
+                android:id="@+id/cardDiscounts"
                 layout="@layout/card_view_wide" />
 
             <include
@@ -34,7 +34,7 @@
                 layout="@layout/card_view_wide" />
 
             <include
-                android:id="@+id/cardDiscounts"
+                android:id="@+id/cardRestaurantData"
                 layout="@layout/card_view_wide" />
 
             <include

@@ -2,8 +2,8 @@ package pi.restaurantapp.ui.fragments.management.orders
 
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.model.fragments.management.orders.AddOrderViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.orders.AddOrderViewModel
 
 class AddOrderFragment : AbstractModifyOrderFragment() {
 

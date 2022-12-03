@@ -9,7 +9,7 @@ import pi.restaurantapp.databinding.ItemAmountChangeBinding
 import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
 import pi.restaurantapp.objects.enums.IngredientModificationType
 import pi.restaurantapp.objects.enums.Unit
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 
 class AmountChangesRecyclerAdapter(

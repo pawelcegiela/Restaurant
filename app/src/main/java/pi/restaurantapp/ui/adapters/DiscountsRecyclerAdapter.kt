@@ -12,8 +12,8 @@ import pi.restaurantapp.databinding.ItemDiscountsBinding
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.ui.activities.management.DiscountsActivity
-import pi.restaurantapp.utils.ComputingUtils
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.ComputingUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 

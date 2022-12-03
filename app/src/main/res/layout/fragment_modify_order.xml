@@ -5,9 +5,9 @@
 
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
-        <import type="pi.restaurantapp.utils.ComputingUtils" />
+        <import type="pi.restaurantapp.logic.utils.ComputingUtils" />
 
         <import type="pi.restaurantapp.objects.enums.CollectionType" />
 
@@ -31,7 +31,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.orders.AbstractModifyOrderViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.orders.AbstractModifyOrderViewModel" />
 
     </data>
 

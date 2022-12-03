@@ -12,7 +12,7 @@ import pi.restaurantapp.ui.fragments.client.neworder.ClientOrderSummaryFragment
 import pi.restaurantapp.ui.fragments.client.orders.ClientPreviewOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.PreviewOrderFragment
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 
 class OrderDishesRecyclerAdapter(

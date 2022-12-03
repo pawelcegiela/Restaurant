@@ -1,7 +1,7 @@
 package pi.restaurantapp.objects.data.allergen
 
 import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 class AllergenDetails : AbstractDataObject {
     var description: String = ""

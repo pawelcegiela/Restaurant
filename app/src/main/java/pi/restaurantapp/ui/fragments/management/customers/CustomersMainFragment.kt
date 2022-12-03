@@ -4,8 +4,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.AbstractItemListViewModel
-import pi.restaurantapp.model.fragments.management.customers.CustomersMainViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.management.customers.CustomersMainViewModel
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 
@@ -17,6 +17,7 @@ class CustomersMainFragment : AbstractItemListFragment() {
 
     override fun addViewPagerAdapters() {
         binding.tabLayout.visibility = View.GONE
+        binding.fabFilter.visibility = View.VISIBLE
         val list = arrayOf(0)
         val names = arrayListOf(getString(R.string.all_))
         binding.pager.adapter = PagerAdapter(

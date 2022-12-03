@@ -1,7 +1,7 @@
 package pi.restaurantapp.objects.data.order
 
 import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 class OrderBasic : AbstractDataObject {
@@ -37,6 +37,12 @@ class OrderBasic : AbstractDataObject {
     constructor(id: String, userId: String) {
         this.id = id
         this.userId = userId
+    }
+
+    constructor(id: String, userId: String, value: String) {
+        this.id = id
+        this.userId = userId
+        this.value = value
     }
 
 }

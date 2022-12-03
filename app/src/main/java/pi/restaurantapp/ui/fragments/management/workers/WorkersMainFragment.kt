@@ -3,8 +3,8 @@ package pi.restaurantapp.ui.fragments.management.workers
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.management.workers.WorkersMainViewModel
-import pi.restaurantapp.model.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.management.workers.WorkersMainViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.objects.enums.WorkersTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment

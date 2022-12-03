@@ -11,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.FragmentCustomizeDishBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.activities.management.OrdersViewModel
-import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
-import pi.restaurantapp.model.fragments.management.orders.CustomizeDishViewModel
+import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
@@ -23,8 +23,8 @@ import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.ui.pickers.CustomNumberPicker
-import pi.restaurantapp.utils.StringFormatUtils
-import pi.restaurantapp.utils.UserInterfaceUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.UserInterfaceUtils
 import java.math.BigDecimal
 
 

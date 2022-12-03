@@ -1,7 +1,7 @@
 package pi.restaurantapp.objects.data.dish
 
 import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 class DishBasic : AbstractDataObject {
     var name: String = ""

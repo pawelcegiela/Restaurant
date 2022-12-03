@@ -9,7 +9,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemPreviewDishIngredientBinding
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 
 class PreviewDishIngredientRecyclerAdapter(

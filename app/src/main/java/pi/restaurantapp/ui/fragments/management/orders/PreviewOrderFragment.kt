@@ -9,9 +9,9 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewOrderBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.activities.management.OrdersViewModel
-import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
-import pi.restaurantapp.model.fragments.management.orders.PreviewOrderViewModel
+import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.orders.PreviewOrderViewModel
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.enums.OrderStatus
 import pi.restaurantapp.ui.dialogs.SetDelivererDialog

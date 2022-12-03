@@ -10,14 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ToolbarNavigationModifyBinding
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.dialogs.RemovalDialog
 import pi.restaurantapp.ui.dialogs.YesNoDialog
 import pi.restaurantapp.ui.fragments.management.workers.EditWorkerFragment
-import pi.restaurantapp.utils.UserInterfaceUtils
+import pi.restaurantapp.logic.utils.UserInterfaceUtils
 
 abstract class AbstractModifyItemFragment : Fragment() {
     abstract val viewModel: AbstractModifyItemViewModel
@@ -29,7 +29,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     abstract val nextActionId: Int
     abstract val saveMessageId: Int
     abstract val removeMessageId: Int
-    open val lowestRole = Role.MANAGER.ordinal
+    open var lowestRole = Role.MANAGER.ordinal
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

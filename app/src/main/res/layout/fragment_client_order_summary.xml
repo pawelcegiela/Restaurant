@@ -5,7 +5,7 @@
 
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
         <import type="pi.restaurantapp.ui.RecyclerManager" />
 
@@ -21,7 +21,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.client.neworder.ClientOrderSummaryViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.client.neworder.ClientOrderSummaryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

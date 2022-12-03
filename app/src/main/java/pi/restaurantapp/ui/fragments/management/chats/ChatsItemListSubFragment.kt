@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.model.activities.management.ChatsViewModel
+import pi.restaurantapp.viewmodels.activities.management.ChatsViewModel
 import pi.restaurantapp.objects.data.chat.ChatInfo
 import pi.restaurantapp.ui.adapters.ChatInfoRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment

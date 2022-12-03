@@ -5,9 +5,9 @@
 
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
-        <import type="pi.restaurantapp.utils.ComputingUtils" />
+        <import type="pi.restaurantapp.logic.utils.ComputingUtils" />
 
         <import type="pi.restaurantapp.ui.adapters.SpinnerAdapter" />
 
@@ -25,7 +25,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.discounts.AbstractModifyDiscountViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.discounts.AbstractModifyDiscountViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

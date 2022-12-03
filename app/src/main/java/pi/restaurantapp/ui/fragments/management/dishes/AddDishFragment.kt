@@ -2,8 +2,8 @@ package pi.restaurantapp.ui.fragments.management.dishes
 
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.model.fragments.management.dishes.AddDishViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.dishes.AddDishViewModel
 
 class AddDishFragment : AbstractModifyDishFragment() {
 

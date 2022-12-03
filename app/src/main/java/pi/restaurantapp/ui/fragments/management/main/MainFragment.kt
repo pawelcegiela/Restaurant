@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentMainBinding
-import pi.restaurantapp.utils.UserInterfaceUtils
+import pi.restaurantapp.logic.utils.UserInterfaceUtils
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null

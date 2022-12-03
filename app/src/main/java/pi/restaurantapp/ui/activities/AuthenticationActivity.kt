@@ -12,7 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityAuthenticationBinding
-import pi.restaurantapp.model.activities.AuthenticationViewModel
+import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role

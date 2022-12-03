@@ -6,7 +6,7 @@
 
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
         <import type="pi.restaurantapp.ui.fragments.management.ingredients.AddIngredientFragment" />
 
@@ -24,7 +24,7 @@
 
         <variable
             name="observer"
-            type="pi.restaurantapp.model.fragments.management.ingredients.AbstractModifyIngredientViewModel.Observer" />
+            type="pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel.Observer" />
 
         <variable
             name="fragment"
@@ -32,7 +32,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.ingredients.AbstractModifyIngredientViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel" />
 
     </data>
 

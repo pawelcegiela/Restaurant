@@ -5,11 +5,11 @@
 
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.restaurantdata.RDMainViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

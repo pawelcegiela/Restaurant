@@ -2,8 +2,8 @@ package pi.restaurantapp.ui.fragments.management.allergens
 
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.model.fragments.management.allergens.AddAllergenViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.allergens.AddAllergenViewModel
 
 class AddAllergenFragment : AbstractModifyAllergenFragment() {
 

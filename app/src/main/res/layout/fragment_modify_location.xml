@@ -11,7 +11,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.restaurantdata.EditLocationViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditLocationViewModel" />
 
     </data>
 

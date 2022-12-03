@@ -1,7 +1,7 @@
 package pi.restaurantapp.objects.data.discount
 
 import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.utils.ComputingUtils
+import pi.restaurantapp.logic.utils.ComputingUtils
 import java.util.*
 
 class DiscountBasic : AbstractDataObject {

@@ -7,7 +7,7 @@
 
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
         <import type="pi.restaurantapp.ui.adapters.AmountChangesRecyclerAdapter" />
 
@@ -21,7 +21,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.ingredients.PreviewIngredientViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.ingredients.PreviewIngredientViewModel" />
 
         <variable
             name="fragment"

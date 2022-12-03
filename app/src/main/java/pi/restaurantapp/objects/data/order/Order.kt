@@ -1,7 +1,7 @@
 package pi.restaurantapp.objects.data.order
 
 import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 class Order : AbstractDataObject {
     lateinit var basic: OrderBasic

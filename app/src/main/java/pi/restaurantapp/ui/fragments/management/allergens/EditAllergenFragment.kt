@@ -3,8 +3,8 @@ package pi.restaurantapp.ui.fragments.management.allergens
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.model.fragments.management.allergens.EditAllergenViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.allergens.EditAllergenViewModel
 import pi.restaurantapp.objects.data.allergen.AllergenDetails
 
 class EditAllergenFragment : AbstractModifyAllergenFragment() {

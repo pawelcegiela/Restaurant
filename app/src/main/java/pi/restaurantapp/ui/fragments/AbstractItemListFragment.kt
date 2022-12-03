@@ -8,7 +8,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.databinding.FragmentItemListBinding
-import pi.restaurantapp.model.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.objects.enums.Role
 
 abstract class AbstractItemListFragment : Fragment() {

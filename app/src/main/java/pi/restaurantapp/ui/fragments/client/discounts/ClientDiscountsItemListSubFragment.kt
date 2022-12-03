@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.model.activities.client.ClientDiscountsViewModel
+import pi.restaurantapp.viewmodels.activities.client.ClientDiscountsViewModel
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.ui.adapters.DiscountsRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment

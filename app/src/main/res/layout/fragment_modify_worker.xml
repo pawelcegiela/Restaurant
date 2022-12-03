@@ -5,7 +5,7 @@
 
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
         <import type="pi.restaurantapp.ui.adapters.SpinnerAdapter" />
 
@@ -19,7 +19,7 @@
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.workers.AbstractModifyWorkerViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.workers.AbstractModifyWorkerViewModel" />
 
     </data>
 

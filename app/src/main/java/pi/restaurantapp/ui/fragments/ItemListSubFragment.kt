@@ -8,7 +8,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurantapp.databinding.FragmentItemListSubBinding
-import pi.restaurantapp.model.activities.management.AbstractActivityViewModel
+import pi.restaurantapp.viewmodels.activities.management.AbstractActivityViewModel
 import pi.restaurantapp.ui.adapters.AbstractRecyclerAdapter
 import pi.restaurantapp.ui.dialogs.FilterDialog
 

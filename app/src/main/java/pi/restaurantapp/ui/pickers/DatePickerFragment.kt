@@ -5,7 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 class DatePickerFragment(private val initialDate: Date, val function: (String) -> (Unit)) : DialogFragment(),

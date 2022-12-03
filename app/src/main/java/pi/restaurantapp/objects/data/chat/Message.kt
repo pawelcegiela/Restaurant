@@ -1,7 +1,7 @@
 package pi.restaurantapp.objects.data.chat
 
 import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.Date
 
 class Message : AbstractDataObject {

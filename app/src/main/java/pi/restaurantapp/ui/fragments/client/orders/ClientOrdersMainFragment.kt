@@ -3,8 +3,8 @@ package pi.restaurantapp.ui.fragments.client.orders
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
-import pi.restaurantapp.model.fragments.client.orders.ClientOrdersMainViewModel
-import pi.restaurantapp.model.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.client.orders.ClientOrdersMainViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.objects.enums.ClientOrdersTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment

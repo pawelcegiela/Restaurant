@@ -14,7 +14,7 @@ import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.enums.OrderStatus
 import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.orders.OrdersItemListSubFragment
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 

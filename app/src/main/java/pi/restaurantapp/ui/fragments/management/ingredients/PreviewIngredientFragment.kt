@@ -8,12 +8,12 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewIngredientBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.model.fragments.AbstractPreviewItemViewModel
-import pi.restaurantapp.model.fragments.management.ingredients.PreviewIngredientViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.ingredients.PreviewIngredientViewModel
 import pi.restaurantapp.objects.enums.IngredientModificationType
 import pi.restaurantapp.ui.dialogs.IngredientChangesDialog
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 
 class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar

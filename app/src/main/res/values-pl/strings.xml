@@ -232,7 +232,7 @@
     <string name="can_deliver_orders">Czy może dostarczać zamówienia?</string>
     <string name="deliverers_not_initialized_yet">Lista możliwych dostawców nie została jeszcze załadowana. Spróbuj ponownie za chwilę lub sprawdź swoje połączenie internetowe.</string>
     <string name="loading_deliverer">Ładowanie dostawcy…</string>
-    <string name="ingredients_you_can_remove_colon">Zamówienia, które możez usunąć:</string>
+    <string name="ingredients_you_can_remove_colon">Składniki, które możez usunąć:</string>
     <string name="unit_price_colon">Cena jednostkowa:</string>
     <string name="total_dish_price_colon">Całkowita cena dania:</string>
     <string name="portions_colon">Porcje:</string>

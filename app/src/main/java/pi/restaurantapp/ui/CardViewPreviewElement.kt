@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.cardview.widget.CardView
 import pi.restaurantapp.R
-import pi.restaurantapp.utils.UserInterfaceUtils
+import pi.restaurantapp.logic.utils.UserInterfaceUtils
 
 class CardViewPreviewElement(context: Context, attrs: AttributeSet?) : CardView(context, attrs) {
     init {

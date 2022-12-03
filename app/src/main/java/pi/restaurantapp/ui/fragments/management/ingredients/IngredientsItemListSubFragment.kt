@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.model.activities.management.IngredientsViewModel
+import pi.restaurantapp.viewmodels.activities.management.IngredientsViewModel
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.enums.IngredientsTab
 import pi.restaurantapp.ui.adapters.IngredientsRecyclerAdapter

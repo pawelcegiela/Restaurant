@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyIngredientBinding
-import pi.restaurantapp.model.fragments.management.ingredients.AbstractModifyIngredientViewModel
+import pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus

@@ -6,9 +6,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
-import pi.restaurantapp.model.activities.client.ClientNewOrderViewModel
-import pi.restaurantapp.model.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.model.fragments.client.neworder.ClientFinalizeOrderViewModel
+import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientFinalizeOrderViewModel
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
@@ -29,7 +29,7 @@ class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
     private val _viewModel: ClientFinalizeOrderViewModel by viewModels()
 
     override val activityViewModel: ClientNewOrderViewModel by activityViewModels()
-    override val lowestRole = Role.CUSTOMER.ordinal
+    override var lowestRole = Role.CUSTOMER.ordinal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

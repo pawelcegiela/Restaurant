@@ -14,7 +14,7 @@ import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.activities.management.DishesActivity
 import pi.restaurantapp.ui.activities.management.OrdersActivity
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 

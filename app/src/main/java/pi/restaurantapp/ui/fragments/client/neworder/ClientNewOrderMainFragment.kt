@@ -9,9 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.model.activities.client.ClientNewOrderViewModel
-import pi.restaurantapp.model.fragments.client.neworder.ClientNewOrderMainViewModel
-import pi.restaurantapp.model.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
+import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientNewOrderMainViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.DishesTab
 import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity

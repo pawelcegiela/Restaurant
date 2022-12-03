@@ -4,13 +4,13 @@
     <data>
         <import type="android.view.View" />
 
-        <import type="pi.restaurantapp.utils.StringFormatUtils" />
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
         <import type="pi.restaurantapp.objects.enums.Role" />
 
         <variable
             name="vm"
-            type="pi.restaurantapp.model.fragments.management.workers.PreviewWorkerViewModel" />
+            type="pi.restaurantapp.viewmodels.fragments.management.workers.PreviewWorkerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

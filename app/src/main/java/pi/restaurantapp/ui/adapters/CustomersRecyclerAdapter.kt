@@ -13,7 +13,7 @@ import pi.restaurantapp.databinding.ItemCustomersBinding
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.Role
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 

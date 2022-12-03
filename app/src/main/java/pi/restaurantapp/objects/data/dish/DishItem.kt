@@ -2,7 +2,7 @@ package pi.restaurantapp.objects.data.dish
 
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
-import pi.restaurantapp.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.io.Serializable
 
 class DishItem : AbstractDataObject, Serializable {
@@ -28,6 +28,10 @@ class DishItem : AbstractDataObject, Serializable {
         this.amount = amount
         this.unusedOtherIngredients = unusedOtherIngredients
         this.usedPossibleIngredients = usedPossibleIngredients
+        this.finalPrice = finalPrice
+    }
+
+    constructor(finalPrice: String) {
         this.finalPrice = finalPrice
     }
 }
