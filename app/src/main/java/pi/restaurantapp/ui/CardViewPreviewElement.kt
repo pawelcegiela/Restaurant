@@ -13,7 +13,7 @@ class CardViewPreviewElement(context: Context, attrs: AttributeSet?) : CardView(
         setContentPadding(dpToPx(28).toInt(), dpToPx(15).toInt(), dpToPx(28).toInt(), dpToPx(15).toInt())
     }
 
-    private fun dpToPx(dp: Int) : Float {
+    private fun dpToPx(dp: Int): Float {
         return UserInterfaceUtils.dpToPx(dp, resources)
     }
 }

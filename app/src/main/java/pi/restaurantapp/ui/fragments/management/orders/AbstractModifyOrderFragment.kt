@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.BR
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyOrderBinding
-import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
-import pi.restaurantapp.viewmodels.fragments.management.orders.AbstractModifyOrderViewModel
+import pi.restaurantapp.logic.utils.ComputingUtils
+import pi.restaurantapp.logic.utils.PreconditionUtils
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
@@ -21,8 +21,8 @@ import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.CustomNumberPicker
-import pi.restaurantapp.logic.utils.ComputingUtils
-import pi.restaurantapp.logic.utils.PreconditionUtils
+import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
+import pi.restaurantapp.viewmodels.fragments.management.orders.AbstractModifyOrderViewModel
 import java.util.*
 
 

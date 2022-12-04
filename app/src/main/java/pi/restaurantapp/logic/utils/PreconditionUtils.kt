@@ -47,7 +47,8 @@ class PreconditionUtils {
                 return Precondition.EMPTY_ORDER
             }
             if (orderBasic.collectionType == CollectionType.DELIVERY.ordinal && BigDecimal(orderBasic.value)
-                < BigDecimal(deliveryOptions?.minimumPrice ?: "0.0")) {
+                < BigDecimal(deliveryOptions?.minimumPrice ?: "0.0")
+            ) {
                 return Precondition.TOO_LOW_VALUE_DELIVERY
             }
             return Precondition.OK

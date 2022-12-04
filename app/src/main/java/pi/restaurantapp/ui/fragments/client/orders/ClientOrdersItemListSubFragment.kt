@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.enums.ClientOrdersTab
 import pi.restaurantapp.objects.enums.OrderStatus
 import pi.restaurantapp.ui.adapters.OrdersRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
+import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 
 class ClientOrdersItemListSubFragment(
     private var list: MutableList<OrderBasic>,

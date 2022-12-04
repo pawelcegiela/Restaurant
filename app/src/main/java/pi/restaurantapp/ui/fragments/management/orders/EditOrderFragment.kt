@@ -13,8 +13,8 @@ class EditOrderFragment : AbstractModifyOrderFragment() {
     override val removeMessageId = R.string.order_removed
     override val addDishAction = R.id.actionEditOrderToDishes
     override val editDishActionId = R.id.actionEditOrderToCustomizeDish
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : EditOrderViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: EditOrderViewModel by viewModels()
 
     override fun initializeUI() {
         super.initializeUI()

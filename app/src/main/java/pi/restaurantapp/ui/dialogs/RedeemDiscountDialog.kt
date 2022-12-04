@@ -2,8 +2,8 @@ package pi.restaurantapp.ui.dialogs
 
 import android.content.Context
 import android.widget.AdapterView
-import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.objects.data.discount.DiscountBasic
 
 class RedeemDiscountDialog(
     private val fragmentContext: Context,

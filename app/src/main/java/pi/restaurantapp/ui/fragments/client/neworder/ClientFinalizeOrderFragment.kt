@@ -6,9 +6,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientFinalizeOrderViewModel
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
@@ -16,6 +13,9 @@ import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
+import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientFinalizeOrderViewModel
 
 //TODO Ustawienia z cache'a
 class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {

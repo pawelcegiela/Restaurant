@@ -8,15 +8,15 @@ import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDiscountBinding
-import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
-import pi.restaurantapp.viewmodels.fragments.management.discounts.AbstractModifyDiscountViewModel
+import pi.restaurantapp.logic.utils.ComputingUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.DatePickerFragment
-import pi.restaurantapp.logic.utils.ComputingUtils
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
+import pi.restaurantapp.viewmodels.fragments.management.discounts.AbstractModifyDiscountViewModel
 
 abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 

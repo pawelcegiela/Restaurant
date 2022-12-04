@@ -10,10 +10,10 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewWorkerBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.workers.PreviewWorkerViewModel
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.workers.PreviewWorkerViewModel
 
 class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar

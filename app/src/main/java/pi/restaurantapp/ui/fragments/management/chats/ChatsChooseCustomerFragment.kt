@@ -4,11 +4,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
-import pi.restaurantapp.viewmodels.fragments.management.chats.ChatsChooseCustomerViewModel
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.management.chats.ChatsChooseCustomerViewModel
 
 class ChatsChooseCustomerFragment : AbstractItemListFragment() {
     override val addActionId = 0

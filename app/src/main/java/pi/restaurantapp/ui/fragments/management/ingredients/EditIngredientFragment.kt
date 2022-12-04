@@ -3,9 +3,9 @@ package pi.restaurantapp.ui.fragments.management.ingredients
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
+import pi.restaurantapp.objects.data.ingredient.IngredientDetails
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.ingredients.EditIngredientViewModel
-import pi.restaurantapp.objects.data.ingredient.IngredientDetails
 
 
 class EditIngredientFragment : AbstractModifyIngredientFragment() {

@@ -2,22 +2,21 @@ package pi.restaurantapp.viewmodels.fragments.client.orders
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.logic.fragments.client.orders.ClientPreviewOrderLogic
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
-import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.OrderStatus
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import java.util.*
 
 open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
-    override val databasePath = "orders"
+    override val logic = ClientPreviewOrderLogic()
+
     var delivererId = ""
 
     private val _orderStatus: MutableLiveData<Int> = MutableLiveData<Int>()
@@ -49,20 +48,15 @@ open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
     }
 
     fun cancelOrder() {
-        val time = Date().time
-        Firebase.firestore.runTransaction { transaction ->
-            transaction.update(dbRefBasic.document(itemId), "orderStatus", OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal)
-            transaction.update(dbRefDetails.document(itemId), "statusChanges.$time", OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal)
-        }.addOnSuccessListener {
+        logic.cancelOrder(itemId) { time ->
             _orderStatus.value = OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal
             _statusChange.value = StringFormatUtils.formatDateTime(Date(time)) to OrderStatus.CLOSED_WITHOUT_REALIZATION.ordinal
         }
     }
 
     fun getDelivererUserName() {
-        Firebase.firestore.collection("users-basic").document(delivererId).get().addOnSuccessListener { snapshot ->
-            val user = snapshot.toObject<UserBasic>() ?: UserBasic()
-            _delivererName.value = user.getFullName()
+        logic.getDelivererUserName(delivererId) { name ->
+            _delivererName.value = name
         }
     }
 

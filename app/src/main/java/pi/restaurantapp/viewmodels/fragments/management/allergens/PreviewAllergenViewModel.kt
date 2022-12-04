@@ -2,20 +2,19 @@ package pi.restaurantapp.viewmodels.fragments.management.allergens
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.logic.fragments.management.allergens.PreviewAllergenLogic
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.allergen.Allergen
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.allergen.AllergenDetails
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
 class PreviewAllergenViewModel : AbstractPreviewItemViewModel() {
-    override val databasePath = "allergens"
+    override val logic = PreviewAllergenLogic()
 
-    val liveContainingDishes = MutableLiveData<ArrayList<String>>()
-    val containingDishes = ArrayList<String>()
+    private val _containingDishes = MutableLiveData<ArrayList<String>>()
+    val containingDishes: LiveData<ArrayList<String>> = _containingDishes
 
     private val _item: MutableLiveData<Allergen> = MutableLiveData()
     val item: LiveData<Allergen> = _item
@@ -25,22 +24,9 @@ class PreviewAllergenViewModel : AbstractPreviewItemViewModel() {
         val details = snapshotsPair.details?.toObject<AllergenDetails>() ?: AllergenDetails()
         _item.value = Allergen(itemId, basic, details)
 
-        getContainingDishes(details.containingDishes.map { it.key })
-    }
-
-    private fun getContainingDishes(containingDishesIds: List<String>) {
-        if (containingDishesIds.isEmpty()) {
+        logic.getContainingDishes(details.containingDishes.map { it.key }) { containingDishes ->
+            _containingDishes.value = containingDishes
             setReadyToUnlock()
-            return
-        }
-        for (id in containingDishesIds) {
-            Firebase.firestore.collection("dishes-basic").document(id).get().addOnSuccessListener { snapshot ->
-                containingDishes.add(snapshot.getString("name") ?: "")
-                if (containingDishes.size == containingDishesIds.size) {
-                    liveContainingDishes.value = containingDishes
-                    setReadyToUnlock()
-                }
-            }
         }
     }
 

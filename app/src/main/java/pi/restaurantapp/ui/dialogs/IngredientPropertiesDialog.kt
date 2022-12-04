@@ -87,7 +87,7 @@ class IngredientPropertiesDialog(
         return Pair(ingredientItem, status)
     }
 
-    private fun getProperValue(text: Editable?) : String {
+    private fun getProperValue(text: Editable?): String {
         return try {
             BigDecimal(text.toString())
             text.toString()

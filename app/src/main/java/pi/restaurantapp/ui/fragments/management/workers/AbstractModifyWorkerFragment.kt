@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyWorkerBinding
-import pi.restaurantapp.viewmodels.fragments.management.workers.AbstractModifyWorkerViewModel
+import pi.restaurantapp.logic.utils.PreconditionUtils
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.logic.utils.PreconditionUtils
+import pi.restaurantapp.viewmodels.fragments.management.workers.AbstractModifyWorkerViewModel
 
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null

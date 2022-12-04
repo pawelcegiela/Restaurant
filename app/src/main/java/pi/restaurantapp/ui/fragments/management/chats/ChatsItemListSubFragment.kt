@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.viewmodels.activities.management.ChatsViewModel
 import pi.restaurantapp.objects.data.chat.ChatInfo
 import pi.restaurantapp.ui.adapters.ChatInfoRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
+import pi.restaurantapp.viewmodels.activities.management.ChatsViewModel
 
 class ChatsItemListSubFragment(private val list: MutableList<ChatInfo>, fabFilter: FloatingActionButton, searchView: SearchView) :
     ItemListSubFragment(fabFilter, searchView) {

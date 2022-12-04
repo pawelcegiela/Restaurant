@@ -5,19 +5,17 @@ import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.logic.fragments.management.orders.AbstractModifyOrderLogic
+import pi.restaurantapp.logic.utils.ComputingUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.enums.CollectionType
-import pi.restaurantapp.logic.utils.ComputingUtils
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
 abstract class AbstractModifyOrderViewModel : AbstractModifyItemViewModel() {
-    override val databasePath = "orders"
+    private val _logic: AbstractModifyOrderLogic get() = logic as AbstractModifyOrderLogic
 
     private val _item: MutableLiveData<Order> = MutableLiveData()
     val item: LiveData<Order> = _item
@@ -69,13 +67,9 @@ abstract class AbstractModifyOrderViewModel : AbstractModifyItemViewModel() {
         if (deliveryOptions != null) {
             observer.deliveryOptions = deliveryOptions
         } else {
-            getAdditionalData()
-        }
-    }
-
-    private fun getAdditionalData() {
-        Firebase.firestore.collection("restaurantData-basic").document("delivery").get().addOnSuccessListener { snapshot ->
-            observer.deliveryOptions = snapshot.toObject() ?: DeliveryBasic()
+            _logic.getAdditionalData { newDeliveryOptions ->
+                observer.deliveryOptions = newDeliveryOptions
+            }
         }
     }
 

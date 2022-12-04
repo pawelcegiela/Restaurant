@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyIngredientBinding
-import pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.objects.enums.Unit
 import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
+import pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel
 
 
 abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {

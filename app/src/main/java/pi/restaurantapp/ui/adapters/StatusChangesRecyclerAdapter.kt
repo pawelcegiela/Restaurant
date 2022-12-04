@@ -36,7 +36,7 @@ class StatusChangesRecyclerAdapter(
 
     companion object {
         @JvmStatic
-        fun createNew(dataSet: List<Pair<String, Int>>, fragment: Fragment) : StatusChangesRecyclerAdapter {
+        fun createNew(dataSet: List<Pair<String, Int>>, fragment: Fragment): StatusChangesRecyclerAdapter {
             return StatusChangesRecyclerAdapter(dataSet, fragment)
         }
     }

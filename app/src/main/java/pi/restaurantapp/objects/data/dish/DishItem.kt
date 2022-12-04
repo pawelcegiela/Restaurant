@@ -1,8 +1,8 @@
 package pi.restaurantapp.objects.data.dish
 
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
-import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.io.Serializable
 
 class DishItem : AbstractDataObject, Serializable {

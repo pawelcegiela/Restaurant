@@ -46,7 +46,7 @@ enum class OrderStatus(val stringResourceId: Int) {
         }
 
         @JvmStatic
-        fun isFinished(ordinal: Int) : Boolean {
+        fun isFinished(ordinal: Int): Boolean {
             return ordinal == FINISHED.ordinal || ordinal == CLOSED_WITHOUT_REALIZATION.ordinal
         }
     }

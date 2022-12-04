@@ -11,14 +11,14 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientOrderSummaryBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
-import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
-import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientOrderSummaryViewModel
+import pi.restaurantapp.logic.utils.ComputingUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.ui.dialogs.RedeemDiscountDialog
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
-import pi.restaurantapp.logic.utils.ComputingUtils
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientOrderSummaryViewModel
 
 class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar

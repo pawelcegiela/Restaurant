@@ -2,11 +2,14 @@ package pi.restaurantapp.viewmodels.fragments.management.workers
 
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import pi.restaurantapp.logic.fragments.management.workers.AddWorkerLogic
 import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 
 class AddWorkerViewModel : AbstractModifyWorkerViewModel() {
+    override val logic = AddWorkerLogic()
+
     override fun createItem() {
         setItem(User("", UserBasic(), UserDetails()))
         setReadyToInitialize()

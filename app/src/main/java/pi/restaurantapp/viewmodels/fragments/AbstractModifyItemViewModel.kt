@@ -2,17 +2,12 @@ package pi.restaurantapp.viewmodels.fragments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.Transaction
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import pi.restaurantapp.logic.fragments.AbstractModifyItemLogic
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.SplitDataObject
 
 abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
-    protected val dbRefBasic get() = Firebase.firestore.collection("$databasePath-basic")
-    protected val dbRefDetails get() = Firebase.firestore.collection("$databasePath-details")
-
-    private val snapshotsPair = SnapshotsPair()
+    private val _logic: AbstractModifyItemLogic get() = logic as AbstractModifyItemLogic
     var itemId: String = ""
 
     private val _saveStatus: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
@@ -26,43 +21,21 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
     open fun createItem() {}
 
     fun getDataFromDatabase() {
-        dbRefBasic.document(itemId).get().addOnSuccessListener { snapshot ->
-            snapshotsPair.basic = snapshot
-            checkIfReady()
-        }
-        dbRefDetails.document(itemId).get().addOnSuccessListener { snapshot ->
-            snapshotsPair.details = snapshot
-            checkIfReady()
-        }
-    }
-
-    private fun checkIfReady() {
-        if (snapshotsPair.isReady()) {
+        _logic.getDataFromDatabase(itemId) { snapshotsPair ->
             getItem(snapshotsPair)
             setReadyToInitialize()
         }
     }
 
     open fun saveToDatabase(data: SplitDataObject) {
-        Firebase.firestore.runTransaction { transaction ->
-            saveDocumentToDatabase(data, transaction)
-        }.addOnSuccessListener {
-            setSaveStatus(true)
+        _logic.saveToDatabase(data) { saveStatus ->
+            setSaveStatus(saveStatus)
         }
     }
 
-    open fun saveDocumentToDatabase(data: SplitDataObject, transaction: Transaction) {
-        transaction.set(dbRefBasic.document(data.id), data.basic)
-        transaction.set(dbRefDetails.document(data.id), data.details)
-    }
-
     fun removeFromDatabase() {
-        removeAdditionalElements()
-        dbRefBasic.document(itemId).delete()
-        dbRefDetails.document(itemId).delete()
+        _logic.removeFromDatabase(itemId)
     }
-
-    open fun removeAdditionalElements() {}
 
     fun setReadyToInitialize() {
         _readyToInitialize.value = true
@@ -71,7 +44,7 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
     open fun shouldGetDataFromDatabase() = true
 
     fun disableItem() {
-        Firebase.firestore.collection("$databasePath-basic").document(itemId).update("disabled", true)
+        _logic.disableItem(itemId)
     }
 
     fun setSaveStatus(status: Boolean) {

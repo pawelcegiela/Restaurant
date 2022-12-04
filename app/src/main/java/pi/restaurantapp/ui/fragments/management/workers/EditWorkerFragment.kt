@@ -6,12 +6,12 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.workers.EditWorkerViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.management.SettingsActivity
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.workers.EditWorkerViewModel
 
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
 

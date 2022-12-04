@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.viewmodels.activities.management.WorkersViewModel
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.WorkersTab
 import pi.restaurantapp.ui.adapters.WorkersRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
+import pi.restaurantapp.viewmodels.activities.management.WorkersViewModel
 
 class WorkersItemListSubFragment(
     private var list: MutableList<UserBasic>,

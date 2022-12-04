@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.viewmodels.activities.management.DishesViewModel
 import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.DishesTab
 import pi.restaurantapp.ui.adapters.DishesRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
+import pi.restaurantapp.viewmodels.activities.management.DishesViewModel
 
 class DishesItemListSubFragment(
     private var list: MutableList<DishBasic>,

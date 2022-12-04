@@ -1,7 +1,7 @@
 package pi.restaurantapp.objects.data.order
 
-import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.objects.data.AbstractDataObject
 import java.util.*
 
 class OrderBasic : AbstractDataObject {

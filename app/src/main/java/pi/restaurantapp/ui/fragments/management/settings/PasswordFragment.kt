@@ -45,15 +45,15 @@ class PasswordFragment : Fragment() {
 
     private fun setViewModelObservers() {
         // TODO Wyjście z fragmentu po sukcesie, nakaz wypełnienia wszystkich pól
-        viewModel.liveCurrentPassword.observe(viewLifecycleOwner) { value ->
+        viewModel.currentPassword.observe(viewLifecycleOwner) { value ->
             binding.editTextCurrentPassword.setText(value)
         }
 
-        viewModel.liveNewPassword.observe(viewLifecycleOwner) { value ->
+        viewModel.newPassword.observe(viewLifecycleOwner) { value ->
             binding.editTextNewPassword.setText(value)
         }
 
-        viewModel.liveRepeatNewPassword.observe(viewLifecycleOwner) { value ->
+        viewModel.repeatNewPassword.observe(viewLifecycleOwner) { value ->
             binding.editTextRepeatNewPassword.setText(value)
         }
 

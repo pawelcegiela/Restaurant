@@ -10,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemIngredientsBinding
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
-import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 

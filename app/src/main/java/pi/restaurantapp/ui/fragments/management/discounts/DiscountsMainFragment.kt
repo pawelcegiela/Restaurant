@@ -4,13 +4,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
-import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
-import pi.restaurantapp.viewmodels.fragments.management.discounts.DiscountsMainViewModel
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.enums.DiscountsTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
+import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.management.discounts.DiscountsMainViewModel
 
 @Suppress("UNCHECKED_CAST")
 class DiscountsMainFragment : AbstractItemListFragment() {

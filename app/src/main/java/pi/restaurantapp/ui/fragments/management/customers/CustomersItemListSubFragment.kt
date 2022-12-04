@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pi.restaurantapp.viewmodels.activities.management.CustomersViewModel
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.ui.adapters.CustomersRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
+import pi.restaurantapp.viewmodels.activities.management.CustomersViewModel
 
 
 class CustomersItemListSubFragment(

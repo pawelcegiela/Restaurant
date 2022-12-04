@@ -12,12 +12,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityAuthenticationBinding
-import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.client.ClientMainActivity
 import pi.restaurantapp.ui.activities.management.MainActivity
+import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
 
 
 class AuthenticationActivity : AppCompatActivity() {

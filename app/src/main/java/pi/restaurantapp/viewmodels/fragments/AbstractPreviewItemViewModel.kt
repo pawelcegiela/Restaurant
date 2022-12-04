@@ -2,15 +2,12 @@ package pi.restaurantapp.viewmodels.fragments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import pi.restaurantapp.logic.fragments.AbstractPreviewItemLogic
 import pi.restaurantapp.objects.SnapshotsPair
 
 abstract class AbstractPreviewItemViewModel : AbstractFragmentViewModel() {
-    protected val dbRefBasic get() = Firebase.firestore.collection("$databasePath-basic")
-    protected val dbRefDetails get() = Firebase.firestore.collection("$databasePath-details")
+    private val _logic: AbstractPreviewItemLogic get() = logic as AbstractPreviewItemLogic
 
-    private val snapshotsPair = SnapshotsPair()
     var itemId: String = ""
 
     private val _readyToUnlock: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
@@ -22,20 +19,9 @@ abstract class AbstractPreviewItemViewModel : AbstractFragmentViewModel() {
     abstract fun getItem(snapshotsPair: SnapshotsPair)
 
     open fun getDataFromDatabase() {
-        dbRefBasic.document(itemId).get().addOnSuccessListener { snapshot ->
-            snapshotsPair.basic = snapshot
-            checkIfReady()
-        }
-        dbRefDetails.document(itemId).get().addOnSuccessListener { snapshot ->
-            snapshotsPair.details = snapshot
-            checkIfReady()
-        }
-    }
-
-    private fun checkIfReady() {
-        if (snapshotsPair.isReady()) {
+        _logic.getDataFromDatabase(itemId) { snapshotsPair ->
             getItem(snapshotsPair)
-            _readyToInitialize.value = true
+            setReadyToInitialize()
         }
     }
 

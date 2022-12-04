@@ -60,7 +60,7 @@ class StringFormatUtils {
         fun formatAddress(address: AddressBasic?): String {
             return if (address != null)
                 "${address.street} ${address.houseNumber}${if (address.flatNumber.isNotEmpty()) " / " else ""}" +
-                    "${address.flatNumber}\n${address.postalCode} ${address.city}"
+                        "${address.flatNumber}\n${address.postalCode} ${address.city}"
             else ""
         }
 

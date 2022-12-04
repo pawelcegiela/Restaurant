@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemSubItemBinding
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.ui.fragments.management.dishes.AbstractModifyDishFragment
 import pi.restaurantapp.ui.fragments.management.ingredients.AbstractModifyIngredientFragment
 import pi.restaurantapp.ui.fragments.management.orders.CustomizeDishFragment
-import pi.restaurantapp.logic.utils.StringFormatUtils
 
 
 class DishIngredientsRecyclerAdapter(

@@ -1,8 +1,8 @@
 package pi.restaurantapp.objects.data.chat
 
-import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.logic.utils.StringFormatUtils
-import java.util.Date
+import pi.restaurantapp.objects.data.AbstractDataObject
+import java.util.*
 
 class Message : AbstractDataObject {
     var message: String = ""

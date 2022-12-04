@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyAllergenBinding
-import pi.restaurantapp.viewmodels.fragments.management.allergens.AbstractModifyAllergenViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
+import pi.restaurantapp.viewmodels.fragments.management.allergens.AbstractModifyAllergenViewModel
 
 abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
 

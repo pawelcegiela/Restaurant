@@ -11,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.FragmentCustomizeDishBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
-import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel
+import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.logic.utils.UserInterfaceUtils
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
@@ -23,8 +22,9 @@ import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
 import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.ui.pickers.CustomNumberPicker
-import pi.restaurantapp.logic.utils.StringFormatUtils
-import pi.restaurantapp.logic.utils.UserInterfaceUtils
+import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel
 import java.math.BigDecimal
 
 
@@ -33,10 +33,10 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0
     override val backActionId = 0
-    override val viewModel : AbstractPreviewItemViewModel get() = _viewModel
-    private val _viewModel : CustomizeDishViewModel by viewModels()
+    override val viewModel: AbstractPreviewItemViewModel get() = _viewModel
+    private val _viewModel: CustomizeDishViewModel by viewModels()
 
-    protected open val activityViewModel : OrdersViewModel by activityViewModels()
+    protected open val activityViewModel: OrdersViewModel by activityViewModels()
     private var _binding: FragmentCustomizeDishBinding? = null
     val binding get() = _binding!!
 
@@ -188,7 +188,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
         )
     }
 
-    private fun getUnusedOtherIngredients() : ArrayList<IngredientItem> {
+    private fun getUnusedOtherIngredients(): ArrayList<IngredientItem> {
         val list = ArrayList<IngredientItem>()
         for (ingredientItem in possibleIngredientsList) {
             if (dish.details.otherIngredients.containsKey(ingredientItem.id)) {
@@ -198,7 +198,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
         return list
     }
 
-    private fun getUsedPossibleIngredients() : ArrayList<IngredientItem> {
+    private fun getUsedPossibleIngredients(): ArrayList<IngredientItem> {
         val list = ArrayList<IngredientItem>()
         for (ingredientItem in otherIngredientsList) {
             if (dish.details.possibleIngredients.containsKey(ingredientItem.id)) {
@@ -208,7 +208,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
         return list
     }
 
-    private fun getFinalPrice() : String {
+    private fun getFinalPrice(): String {
         var price = BigDecimal(if (dish.basic.isDiscounted) dish.basic.discountPrice else dish.basic.basePrice)
         price += otherIngredientsList.sumOf { BigDecimal(it.extraPrice) }
         return (price * BigDecimal(numberPickerPortions.getValue())).toString()

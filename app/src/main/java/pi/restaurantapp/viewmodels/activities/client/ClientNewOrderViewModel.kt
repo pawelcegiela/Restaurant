@@ -5,14 +5,14 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 
 class ClientNewOrderViewModel : OrdersViewModel() {
     init {

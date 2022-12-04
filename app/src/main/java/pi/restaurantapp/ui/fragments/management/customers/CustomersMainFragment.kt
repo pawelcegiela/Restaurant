@@ -4,10 +4,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
-import pi.restaurantapp.viewmodels.fragments.management.customers.CustomersMainViewModel
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.management.customers.CustomersMainViewModel
 
 
 class CustomersMainFragment : AbstractItemListFragment() {

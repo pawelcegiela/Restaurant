@@ -8,11 +8,11 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyLocationBinding
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditLocationViewModel
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.address.AddressDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditLocationViewModel
 
 class EditLocationFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyLocationBinding? = null

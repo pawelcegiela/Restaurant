@@ -10,6 +10,6 @@ class AddDishFragment : AbstractModifyDishFragment() {
     override val nextActionId = R.id.actionAddDishToDishes
     override val saveMessageId = R.string.dish_added
     override val removeMessageId = 0 // Unused
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : AddDishViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: AddDishViewModel by viewModels()
 }

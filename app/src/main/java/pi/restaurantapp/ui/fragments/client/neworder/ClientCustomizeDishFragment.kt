@@ -6,11 +6,11 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.OrderPlace
 import pi.restaurantapp.ui.fragments.management.orders.CustomizeDishFragment
+import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
 
 
 class ClientCustomizeDishFragment : CustomizeDishFragment() {

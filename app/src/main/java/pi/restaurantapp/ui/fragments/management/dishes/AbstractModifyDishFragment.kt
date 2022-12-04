@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDishBinding
-import pi.restaurantapp.viewmodels.fragments.management.dishes.AbstractModifyDishViewModel
+import pi.restaurantapp.logic.utils.UserInterfaceUtils
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
@@ -15,7 +15,7 @@ import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.ui.dialogs.AddAllergenDialog
 import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.logic.utils.UserInterfaceUtils
+import pi.restaurantapp.viewmodels.fragments.management.dishes.AbstractModifyDishViewModel
 
 
 abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {

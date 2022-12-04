@@ -8,8 +8,9 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyOpeningHoursBinding
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditOpeningHoursViewModel
+import pi.restaurantapp.logic.utils.ComputingUtils
+import pi.restaurantapp.logic.utils.PreconditionUtils
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.openinghours.OpeningHours
 import pi.restaurantapp.objects.data.openinghours.OpeningHoursBasic
@@ -17,9 +18,8 @@ import pi.restaurantapp.objects.data.openinghours.OpeningHoursDetails
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.TimePickerFragment
-import pi.restaurantapp.logic.utils.ComputingUtils
-import pi.restaurantapp.logic.utils.PreconditionUtils
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditOpeningHoursViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -177,7 +177,7 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
         return SplitDataObject(itemId, basic, OpeningHoursDetails())
     }
 
-    private fun checkValues() : Boolean {
+    private fun checkValues(): Boolean {
         for (i in daysEnabled.indices) {
             if (daysOpeningValues[i] >= daysClosingValues[i]) {
                 return true

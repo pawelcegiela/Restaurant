@@ -10,9 +10,9 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.databinding.FragmentChatClientManagementBinding
-import pi.restaurantapp.viewmodels.fragments.client.chats.ClientChatsMainViewModel
 import pi.restaurantapp.objects.data.chat.Message
 import pi.restaurantapp.ui.adapters.ChatRecyclerAdapter
+import pi.restaurantapp.viewmodels.fragments.client.chats.ClientChatsMainViewModel
 
 
 class ClientChatsMainFragment : Fragment() {

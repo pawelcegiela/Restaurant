@@ -114,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|end"
                             android:layout_marginTop="20dp"
-                            android:text="@{vm.item.basic.discounted ? vm.formatPrice(vm.item.basic.basePrice) : @string/empty_string}"
+                            android:text="@{vm.item.basic.discounted ? StringFormatUtils.formatPrice(vm.item.basic.basePrice) : @string/empty_string}"
                             android:textSize="16sp"
                             android:visibility="@{vm.item.basic.discounted ? View.VISIBLE : View.GONE}" />
 

@@ -9,12 +9,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemOrdersBinding
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.enums.OrderStatus
 import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.orders.OrdersItemListSubFragment
-import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 

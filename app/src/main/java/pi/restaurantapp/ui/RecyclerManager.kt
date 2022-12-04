@@ -8,7 +8,7 @@ class RecyclerManager(context: Context?) : LinearLayoutManager(context) {
 
     companion object {
         @JvmStatic
-        fun createNew(context: Context?) : RecyclerManager {
+        fun createNew(context: Context?): RecyclerManager {
             return RecyclerManager(context)
         }
     }

@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentAuthenticationBinding
-import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
 import pi.restaurantapp.ui.activities.AuthenticationActivity
+import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
 
 
 abstract class AbstractAuthenticationFragment : Fragment() {

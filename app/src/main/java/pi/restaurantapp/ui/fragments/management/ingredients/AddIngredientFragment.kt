@@ -10,8 +10,8 @@ class AddIngredientFragment : AbstractModifyIngredientFragment() {
     override val nextActionId = R.id.actionAddIngredientToIngredients
     override val saveMessageId = R.string.ingredient_added
     override val removeMessageId = 0 // Unused
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : AddIngredientViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: AddIngredientViewModel by viewModels()
 
     override fun initializeUI() {
         setNavigationCardsSave()

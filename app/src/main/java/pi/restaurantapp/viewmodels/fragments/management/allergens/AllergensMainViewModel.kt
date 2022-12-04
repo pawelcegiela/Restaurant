@@ -1,17 +1,8 @@
 package pi.restaurantapp.viewmodels.fragments.management.allergens
 
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.toObject
+import pi.restaurantapp.logic.fragments.management.allergens.AllergensMainLogic
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
-import pi.restaurantapp.objects.data.AbstractDataObject
-import pi.restaurantapp.objects.data.allergen.AllergenBasic
 
 class AllergensMainViewModel : AbstractItemListViewModel() {
-    override val databasePath = "allergens"
-
-    override fun retrieveDataList(snapshot: QuerySnapshot) {
-        val dataList = snapshot.map { document -> document.toObject<AllergenBasic>() }.toMutableList<AbstractDataObject>()
-        setDataList(dataList)
-    }
-
+    override val logic = AllergensMainLogic()
 }

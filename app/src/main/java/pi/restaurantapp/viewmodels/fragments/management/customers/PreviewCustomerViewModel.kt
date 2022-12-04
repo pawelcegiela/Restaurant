@@ -3,14 +3,15 @@ package pi.restaurantapp.viewmodels.fragments.management.customers
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.toObject
-import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.logic.fragments.management.customers.PreviewCustomerLogic
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
 class PreviewCustomerViewModel : AbstractPreviewItemViewModel() {
-    override val databasePath = "users"
+    override val logic = PreviewCustomerLogic()
 
     private val _item: MutableLiveData<User> = MutableLiveData()
     val item: LiveData<User> = _item

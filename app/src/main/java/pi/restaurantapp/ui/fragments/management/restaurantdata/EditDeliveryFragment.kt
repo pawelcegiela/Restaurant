@@ -8,14 +8,14 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDeliveryBinding
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditDeliveryViewModel
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.delivery.Delivery
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.delivery.DeliveryDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditDeliveryViewModel
 
 class EditDeliveryFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDeliveryBinding? = null
@@ -29,8 +29,8 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
     override val saveMessageId = R.string.delivery_settings_changed
     override val removeMessageId = 0 // Unused
 
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : EditDeliveryViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: EditDeliveryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

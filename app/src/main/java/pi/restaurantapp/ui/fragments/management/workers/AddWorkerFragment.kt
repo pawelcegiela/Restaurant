@@ -6,20 +6,20 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.workers.AddWorkerViewModel
+import pi.restaurantapp.logic.utils.PreconditionUtils
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Precondition
-import pi.restaurantapp.logic.utils.PreconditionUtils
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.workers.AddWorkerViewModel
 
 class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
     override val nextActionId = R.id.actionAddWorkerToWorkers
     override val saveMessageId = R.string.created_new_user
     override val removeMessageId = 0 // Unused
-    override val viewModel : AbstractModifyItemViewModel get() = _viewModel
-    private val _viewModel : AddWorkerViewModel by viewModels()
+    override val viewModel: AbstractModifyItemViewModel get() = _viewModel
+    private val _viewModel: AddWorkerViewModel by viewModels()
 
     override fun initializeUI() {
         finishLoading()

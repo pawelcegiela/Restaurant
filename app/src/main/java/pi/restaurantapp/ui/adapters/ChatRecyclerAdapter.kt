@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ItemChatBinding
-import pi.restaurantapp.objects.data.chat.Message
 import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.objects.data.chat.Message
 
 class ChatRecyclerAdapter(
     private val dataSet: MutableList<Message>,

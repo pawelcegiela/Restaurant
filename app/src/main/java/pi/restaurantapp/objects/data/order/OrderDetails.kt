@@ -1,9 +1,9 @@
 package pi.restaurantapp.objects.data.order
 
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.dish.DishItem
-import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
 class OrderDetails : AbstractDataObject {
@@ -12,7 +12,7 @@ class OrderDetails : AbstractDataObject {
     var modificationDate: Date = Date()
     var orderPlace: Int = 0
     var dishes: HashMap<String, DishItem> = HashMap()
-    var address : AddressBasic = AddressBasic()
+    var address: AddressBasic = AddressBasic()
     var statusChanges: HashMap<String, Int> = HashMap()
     var delivererId: String = ""
     var contactPhone: String = ""

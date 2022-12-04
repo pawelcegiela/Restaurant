@@ -1,218 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="pi.restaurantapp.ui.fragments.client.settings.ClientMyDataFragment">
+<layout>
 
-    <ScrollView
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="pi.restaurantapp.ui.adapters.SpinnerAdapter" />
+
+        <import type="pi.restaurantapp.objects.enums.CollectionType" />
+
+        <import type="pi.restaurantapp.objects.enums.OrderPlace" />
+
+        <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.client.settings.ClientMyDataFragment" />
+
+        <variable
+            name="vm"
+            type="pi.restaurantapp.viewmodels.fragments.client.settings.ClientMyDataViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="pi.restaurantapp.ui.fragments.client.settings.ClientMyDataFragment">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <pi.restaurantapp.ui.CardViewPreviewElement
-                android:id="@+id/cardCustomerDetails"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <LinearLayout
+                <pi.restaurantapp.ui.CardViewPreviewElement
+                    android:id="@+id/cardCustomerDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="25dp"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp">
 
                     <LinearLayout
-                        android:id="@+id/customerHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="15dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="25dp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/imageIcon"
-                            android:layout_width="80dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="10dp"
-                            android:contentDescription="@string/icon"
-                            android:padding="6dp"
-                            android:src="@drawable/customer" />
-
-                        <pi.restaurantapp.ui.textviews.TextViewItemName
-                            android:id="@+id/textViewName"
+                        <LinearLayout
+                            android:id="@+id/customerHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="15dp"
-                            android:layout_marginBottom="7dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="15dp"
                             android:gravity="center"
-                            android:text="@string/my_data" />
+                            android:orientation="horizontal">
 
+                            <ImageView
+                                android:id="@+id/imageIcon"
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:contentDescription="@string/icon"
+                                android:padding="6dp"
+                                android:src="@drawable/customer" />
+
+                            <pi.restaurantapp.ui.textviews.TextViewItemName
+                                android:id="@+id/textViewName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_marginBottom="7dp"
+                                android:gravity="center"
+                                android:text="@string/my_data" />
+
+                        </LinearLayout>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewFirstNameTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/first_name_colon" />
+
+                        <EditText
+                            android:id="@+id/editTextFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/first_name"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="@={vm.item.basic.firstName}" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewLastNameTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/last_name_colon" />
+
+                        <EditText
+                            android:id="@+id/editTextLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/last_name"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:text="@={vm.item.basic.lastName}"/>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewEmailTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/email_colon" />
+
+                        <EditText
+                            android:id="@+id/editTextEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:hint="@string/e_mail"
+                            android:importantForAutofill="no"
+                            android:inputType="textEmailAddress"
+                            android:text="@={vm.item.details.email}"/>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewDefaultDeliveryAddressTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/default_delivery_address_colon" />
+
+                        <include
+                            android:id="@+id/defaultDeliveryAddress"
+                            layout="@layout/modify_address"
+                            app:city="@={vm.item.details.defaultDeliveryAddress.city}"
+                            app:flatNumber="@={vm.item.details.defaultDeliveryAddress.flatNumber}"
+                            app:houseNumber="@={vm.item.details.defaultDeliveryAddress.houseNumber}"
+                            app:postalCode="@={vm.item.details.defaultDeliveryAddress.postalCode}"
+                            app:street="@={vm.item.details.defaultDeliveryAddress.street}"/>
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewContactPhoneTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/contact_phone_colon" />
+
+                        <EditText
+                            android:id="@+id/editTextContactPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/contact_phone"
+                            android:importantForAutofill="no"
+                            android:inputType="phone"
+                            android:text="@={vm.item.details.contactPhone}"/>
                     </LinearLayout>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewFirstNameTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/first_name_colon" />
-
-                    <EditText
-                        android:id="@+id/editTextFirstName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/first_name"
-                        android:importantForAutofill="no"
-                        android:inputType="text" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewLastNameTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/last_name_colon" />
-
-                    <EditText
-                        android:id="@+id/editTextLastName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/last_name"
-                        android:importantForAutofill="no"
-                        android:inputType="text" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewEmailTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/email_colon" />
-
-                    <EditText
-                        android:id="@+id/editTextEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:hint="@string/e_mail"
-                        android:importantForAutofill="no"
-                        android:inputType="textEmailAddress" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewDefaultDeliveryAddressTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/default_delivery_address_colon" />
-
-                    <include
-                        android:id="@+id/defaultDeliveryAddress"
-                        layout="@layout/modify_address" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewContactPhoneTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/contact_phone_colon" />
-
-                    <EditText
-                        android:id="@+id/editTextContactPhone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/contact_phone"
-                        android:importantForAutofill="no"
-                        android:inputType="phone" />
-                </LinearLayout>
-            </pi.restaurantapp.ui.CardViewPreviewElement>
-
-            <pi.restaurantapp.ui.CardViewPreviewElement
-                android:id="@+id/cardPreferredOrderSettings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <LinearLayout
+                <pi.restaurantapp.ui.CardViewPreviewElement
+                    android:id="@+id/cardPreferredOrderSettings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp">
 
-                    <pi.restaurantapp.ui.textviews.TextViewCardTitle
-                        android:id="@+id/textViewPreferredOrderSettings"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="25dp"
-                        android:text="@string/preferred_order_settings" />
-
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewCollectionTypeTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="10dp"
-                        android:text="@string/preferred_collection_type_colon" />
+                        android:orientation="vertical">
 
-                    <Spinner
-                        android:id="@+id/spinnerCollectionType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
+                            android:id="@+id/textViewPreferredOrderSettings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="25dp"
+                            android:text="@string/preferred_order_settings" />
 
-                    <pi.restaurantapp.ui.textviews.TextViewDetailTitle
-                        android:id="@+id/textViewOrderPlaceTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/preferred_delivery_type_colon" />
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewCollectionTypeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/preferred_collection_type_colon" />
 
-                    <Spinner
-                        android:id="@+id/spinnerOrderPlace"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <Spinner
+                            android:id="@+id/spinnerCollectionType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adapter="@{SpinnerAdapter.createNew(context, CollectionType.getArrayOfStrings(context))}"
+                            android:selectedItemPosition="@={vm.item.details.preferredCollectionType}"
+                            android:onItemSelected="@{(x, y, position, z) -> fragment.onItemSelectedCollectionType(position)}"/>
 
-                </LinearLayout>
-            </pi.restaurantapp.ui.CardViewPreviewElement>
+                        <pi.restaurantapp.ui.textviews.TextViewDetailTitle
+                            android:id="@+id/textViewOrderPlaceTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/preferred_delivery_type_colon" />
 
-        </LinearLayout>
+                        <Spinner
+                            android:id="@+id/spinnerOrderPlace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:selectedItemPosition="@={vm.item.details.preferredOrderPlace}"
+                            android:adapter="@{SpinnerAdapter.createNew(context, OrderPlace.getArrayOfStrings(context))}" />
 
-    </ScrollView>
+                    </LinearLayout>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/bottom_toolbar_height" />
+            </LinearLayout>
 
-    <include
-        android:id="@+id/toolbarNavigation"
-        layout="@layout/toolbar_navigation_modify"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline" />
+        </ScrollView>
 
-    <include
-        android:id="@+id/progress"
-        layout="@layout/progress_bar" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/bottom_toolbar_height" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/toolbarNavigation"
+            layout="@layout/toolbar_navigation_modify"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline" />
+
+        <include
+            android:id="@+id/progress"
+            layout="@layout/progress_bar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

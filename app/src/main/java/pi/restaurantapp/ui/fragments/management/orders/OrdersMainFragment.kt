@@ -4,12 +4,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
-import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
-import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
-import pi.restaurantapp.viewmodels.fragments.management.orders.OrdersMainViewModel
 import pi.restaurantapp.objects.enums.OrdersTab
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
+import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
+import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
+import pi.restaurantapp.viewmodels.fragments.management.orders.OrdersMainViewModel
 
 class OrdersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionOrdersToAddOrder

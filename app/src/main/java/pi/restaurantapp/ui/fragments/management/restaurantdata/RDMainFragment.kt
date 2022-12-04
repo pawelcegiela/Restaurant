@@ -9,15 +9,15 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentRdMainBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
-import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
-import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantData
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantDataBasic
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantDataDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.ui.textviews.TextViewDetail
-import pi.restaurantapp.logic.utils.StringFormatUtils
+import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
+import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel
 
 class RDMainFragment : AbstractPreviewItemFragment() {
     override val progressBar get() = binding.progress.progressBar

@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.ItemOrderDishBinding
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.ui.fragments.client.neworder.ClientOrderSummaryFragment
 import pi.restaurantapp.ui.fragments.client.orders.ClientPreviewOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.PreviewOrderFragment
-import pi.restaurantapp.logic.utils.StringFormatUtils
 
 
 class OrderDishesRecyclerAdapter(
@@ -63,7 +63,7 @@ class OrderDishesRecyclerAdapter(
 
     companion object {
         @JvmStatic
-        fun createNew(dataSet: List<DishItem>, fragment: Fragment) : OrderDishesRecyclerAdapter {
+        fun createNew(dataSet: List<DishItem>, fragment: Fragment): OrderDishesRecyclerAdapter {
             return OrderDishesRecyclerAdapter(dataSet, fragment)
         }
     }

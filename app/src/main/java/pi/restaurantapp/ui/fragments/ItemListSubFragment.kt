@@ -8,9 +8,9 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurantapp.databinding.FragmentItemListSubBinding
-import pi.restaurantapp.viewmodels.activities.management.AbstractActivityViewModel
 import pi.restaurantapp.ui.adapters.AbstractRecyclerAdapter
 import pi.restaurantapp.ui.dialogs.FilterDialog
+import pi.restaurantapp.viewmodels.activities.management.AbstractActivityViewModel
 
 open class ItemListSubFragment(private val fabFilter: FloatingActionButton, private val searchView: SearchView) : Fragment() {
     private var _binding: FragmentItemListSubBinding? = null

@@ -3,14 +3,15 @@ package pi.restaurantapp.viewmodels.fragments.management.restaurantdata
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.toObject
-import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
+import pi.restaurantapp.logic.fragments.management.restaurantdata.EditDeliveryLogic
 import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.delivery.Delivery
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.delivery.DeliveryDetails
+import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
 class EditDeliveryViewModel : AbstractModifyItemViewModel() {
-    override val databasePath = "restaurantData"
+    override val logic = EditDeliveryLogic()
 
     private val _item: MutableLiveData<Delivery> = MutableLiveData()
     val item: LiveData<Delivery> = _item
