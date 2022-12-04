@@ -13,7 +13,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.allergens.PreviewAllergenViewModel
 
 class PreviewAllergenFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewAllergenToEditAllergen
     override val backActionId = R.id.actionPreviewAllergenToAllergens
@@ -33,6 +32,4 @@ class PreviewAllergenFragment : AbstractPreviewItemFragment() {
         binding.lifecycleOwner = this
         return binding.root
     }
-
-    override fun fillInData() {}
 }

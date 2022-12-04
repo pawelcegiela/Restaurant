@@ -27,9 +27,7 @@ class ClientOrderSummaryViewModel : AbstractPreviewItemViewModel() {
         val basic = snapshotsPair.basic?.toObject<OrderBasic>() ?: OrderBasic()
         val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
         _item.value = Order(itemId, basic, details)
-    }
 
-    fun initializeData() {
         dishesList.addAll(_item.value!!.details.dishes.toList().map { it.second })
         getPossibleDiscounts()
         setReadyToUnlock()

@@ -15,7 +15,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.discounts.PreviewDiscountViewModel
 
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewDiscountToEditDiscount
     override val backActionId = R.id.actionPreviewDiscountToDiscounts
@@ -34,10 +33,6 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
         binding.fragment = this
         binding.lifecycleOwner = this
         return binding.root
-    }
-
-    override fun fillInData() {
-        viewModel.setReadyToUnlock()
     }
 
     fun onClickAddCustomer() {

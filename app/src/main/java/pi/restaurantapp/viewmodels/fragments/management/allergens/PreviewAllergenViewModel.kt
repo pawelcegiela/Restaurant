@@ -13,7 +13,7 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 class PreviewAllergenViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewAllergenLogic()
 
-    private val _containingDishes = MutableLiveData<ArrayList<String>>()
+    private val _containingDishes = MutableLiveData<ArrayList<String>>(ArrayList())
     val containingDishes: LiveData<ArrayList<String>> = _containingDishes
 
     private val _item: MutableLiveData<Allergen> = MutableLiveData()

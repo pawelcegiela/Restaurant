@@ -21,7 +21,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientOrderSummaryViewModel
 
 class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0 // Warning: unused
     override val backActionId = 0 // Warning: unused
@@ -55,10 +54,6 @@ class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData() {
-        _viewModel.initializeData()
-    }
-
     override fun addLiveDataObservers() {
         super.addLiveDataObservers()
 
@@ -71,15 +66,13 @@ class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
         }
     }
 
-    override fun initializeWorkerUI() {
-        toolbarNavigation.root.visibility = View.VISIBLE
-
+    override fun initializeNavigationToolbar() {
         toolbarNavigation.cardBack.root.setOnClickListener {
             findNavController().navigate(R.id.actionClientOrderSummaryToMainActivity)
         }
     }
 
-    fun redeemDiscount(discount: DiscountBasic) {
+    private fun redeemDiscount(discount: DiscountBasic) {
         _viewModel.redeemDiscount(_viewModel.item.value!!.basic.value, discount) { success ->
             if (success) {
                 binding.buttonRedeemDiscount.visibility = View.GONE

@@ -29,7 +29,6 @@ import java.math.BigDecimal
 
 
 open class CustomizeDishFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0
     override val backActionId = 0
@@ -52,6 +51,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
     ): View {
         _binding = FragmentCustomizeDishBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
+        binding.fragment = this
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -67,11 +67,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
         }
     }
 
-    override fun initializeUI() {
-        toolbarNavigation.root.visibility = View.VISIBLE
-        toolbarNavigation.cardBack.root.visibility = View.GONE
-        toolbarNavigation.cardAdd.root.visibility = View.VISIBLE
-
+    override fun initializeNavigationToolbar() {
         toolbarNavigation.cardAdd.root.setOnClickListener {
             val dataObject = getDataObject()
             activityViewModel.savedOrder.value?.details?.dishes?.put(dataObject.id, dataObject)
@@ -79,14 +75,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
         }
     }
 
-    override fun initializeWorkerUI() {
-        toolbarNavigation.root.visibility = View.VISIBLE
-        toolbarNavigation.cardBack.root.setOnClickListener {
-            findNavController().popBackStack()
-        }
-    }
-
-    override fun fillInData() {
+    override fun initializeExtraData() {
         val item = _viewModel.item.value ?: DishItem()
         dish = item.dish
 

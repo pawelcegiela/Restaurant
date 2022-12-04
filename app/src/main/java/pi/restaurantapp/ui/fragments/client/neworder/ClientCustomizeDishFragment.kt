@@ -16,11 +16,7 @@ import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
 class ClientCustomizeDishFragment : CustomizeDishFragment() {
     override val activityViewModel: ClientNewOrderViewModel by activityViewModels()
 
-    override fun initializeWorkerUI() {
-        toolbarNavigation.root.visibility = View.VISIBLE
-        toolbarNavigation.cardBack.root.visibility = View.GONE
-        toolbarNavigation.cardAdd.root.visibility = View.VISIBLE
-
+    override fun initializeNavigationToolbar() {
         toolbarNavigation.cardAdd.root.setOnClickListener {
             val dataObject = getDataObject()
             ensureSavedOrderExists()
@@ -49,12 +45,5 @@ class ClientCustomizeDishFragment : CustomizeDishFragment() {
             val orderPlace = preferences.getInt("orderPlace", OrderPlace.TO_GO.ordinal)
             activityViewModel.createSavedOrder(address, contactPhone, collectionType, orderPlace)
         }
-    }
-
-    override fun fillInData() {
-        binding.textViewRecipeTitle.visibility = View.GONE
-        binding.textViewRecipe.visibility = View.GONE
-
-        super.fillInData()
     }
 }

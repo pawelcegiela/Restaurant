@@ -16,7 +16,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.client.orders.ClientPreviewOrderViewModel
 
 class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0 // Warning: unused
     override val backActionId = R.id.actionClientPreviewOrderToOrders
@@ -34,21 +33,10 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
         binding.vm = _viewModel
         binding.fragment = this
         binding.lifecycleOwner = this
+
+        setLiveDataListeners()
+
         return binding.root
-    }
-
-    override fun fillInData() {
-        val item = _viewModel.item.value ?: Order()
-
-        editable = false
-        setLiveDataListeners(item)
-
-        _viewModel.delivererId = item.details.delivererId
-        if (_viewModel.delivererId.isNotEmpty()) {
-            _viewModel.getDelivererUserName()
-        }
-
-        viewModel.setReadyToUnlock()
     }
 
     fun onClickButtonCancelOrder() {
@@ -58,9 +46,10 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
         }
     }
 
-    private fun setLiveDataListeners(item: Order) {
+    private fun setLiveDataListeners() {
         _viewModel.orderStatus.observe(viewLifecycleOwner) { status ->
             if (status != null) {
+                val item = _viewModel.item.value ?: Order()
                 item.basic.orderStatus = status
                 binding.textViewStatus.text = OrderStatus.getString(status, requireContext())
                 if (status > OrderStatus.NEW.ordinal) {

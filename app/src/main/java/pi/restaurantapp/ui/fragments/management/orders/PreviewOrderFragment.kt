@@ -11,6 +11,7 @@ import pi.restaurantapp.databinding.FragmentPreviewOrderBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.enums.OrderStatus
+import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.ui.dialogs.SetDelivererDialog
 import pi.restaurantapp.ui.dialogs.YesNoDialog
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
@@ -20,7 +21,6 @@ import pi.restaurantapp.viewmodels.fragments.management.orders.PreviewOrderViewM
 
 
 class PreviewOrderFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewOrderToEditOrder
     override val backActionId = R.id.actionPreviewOrderToOrders
@@ -43,10 +43,10 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData() {
+    override fun initializeExtraData() {
         val item = _viewModel.item.value ?: Order()
 
-        editable = !OrderStatus.isFinished(item.basic.orderStatus)
+        viewModel.editable = !OrderStatus.isFinished(item.basic.orderStatus)
         setLiveDataListeners(item)
 
         if (_viewModel.delivererId.isNotEmpty() && _viewModel.possibleDeliverers.value != null) {
@@ -85,7 +85,8 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
                 item.basic.orderStatus = status
                 binding.textViewStatus.text = OrderStatus.getString(status, requireContext())
                 if (OrderStatus.isFinished(status)) {
-                    initializeWorkerUI()
+                    viewModel.toolbarType.value = ToolbarType.BACK
+                    viewModel.setReadyToUnlock()
                     binding.buttonNextStatus.visibility = View.GONE
                     binding.buttonCloseOrder.visibility = View.GONE
                 }

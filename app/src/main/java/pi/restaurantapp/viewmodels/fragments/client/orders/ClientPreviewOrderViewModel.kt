@@ -35,6 +35,8 @@ open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
     val statusChanges = ArrayList<Pair<String, Int>>()
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
+        editable = false
+
         val basic = snapshotsPair.basic?.toObject<OrderBasic>() ?: OrderBasic()
         val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
         _item.value = Order(itemId, basic, details)
@@ -45,6 +47,11 @@ open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
             val statusChangesUnsorted = details.statusChanges.map { it.key.toLong() to it.value }
             statusChanges.addAll(statusChangesUnsorted.sortedWith(comparator).map { StringFormatUtils.formatDateTime(Date(it.first)) to it.second })
         }
+        delivererId = details.delivererId
+        if (delivererId.isNotEmpty()) {
+            getDelivererUserName()
+        }
+        setReadyToUnlock()
     }
 
     fun cancelOrder() {
@@ -54,7 +61,7 @@ open class ClientPreviewOrderViewModel : AbstractPreviewItemViewModel() {
         }
     }
 
-    fun getDelivererUserName() {
+    private fun getDelivererUserName() {
         logic.getDelivererUserName(delivererId) { name ->
             _delivererName.value = name
         }

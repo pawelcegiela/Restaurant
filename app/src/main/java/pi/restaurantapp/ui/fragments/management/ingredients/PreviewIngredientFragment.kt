@@ -16,7 +16,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.ingredients.PreviewIngredientViewModel
 
 class PreviewIngredientFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewIngredientToEditIngredient
     override val backActionId = R.id.actionPreviewIngredientToIngredients
@@ -36,8 +35,6 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
         binding.lifecycleOwner = this
         return binding.root
     }
-
-    override fun fillInData() {}
 
     fun onClickButtonDelivery(id: String, unit: Int) {
         IngredientChangesDialog(

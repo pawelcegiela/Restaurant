@@ -17,9 +17,13 @@ class PreviewCustomerViewModel : AbstractPreviewItemViewModel() {
     val item: LiveData<User> = _item
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
+        editable = false
+
         val basic = snapshotsPair.basic?.toObject<UserBasic>() ?: UserBasic()
         val details = snapshotsPair.details?.toObject<UserDetails>() ?: UserDetails()
         _item.value = User(itemId, basic, details)
+
+        setReadyToUnlock()
     }
 
     override fun isDisabled(): Boolean {

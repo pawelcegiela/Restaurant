@@ -9,6 +9,8 @@ import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.dish.DishDetails
 import pi.restaurantapp.objects.data.dish.DishItem
+import pi.restaurantapp.objects.enums.Role
+import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
 class CustomizeDishViewModel : AbstractPreviewItemViewModel() {
@@ -23,6 +25,10 @@ class CustomizeDishViewModel : AbstractPreviewItemViewModel() {
         val dishItem = DishItem()
         dishItem.dish = Dish(itemId, basic, details)
         _item.value = dishItem
+    }
+
+    override fun setToolbarType() {
+        toolbarType.value = ToolbarType.ADD
     }
 
     fun getPreviousItem(): DishItem {

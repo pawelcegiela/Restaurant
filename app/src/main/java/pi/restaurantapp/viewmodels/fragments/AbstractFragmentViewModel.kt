@@ -12,9 +12,13 @@ abstract class AbstractFragmentViewModel : ViewModel() {
     private val _userRole: MutableLiveData<Int> = MutableLiveData(Role.getPlaceholder())
     val userRole: LiveData<Int> = _userRole
 
-    fun getUserRole() {
+    open fun getUserRole() {
         logic.getUserRole { role ->
             _userRole.value = role
         }
+    }
+
+    fun setUserRole(role: Int) {
+        _userRole.value = role
     }
 }

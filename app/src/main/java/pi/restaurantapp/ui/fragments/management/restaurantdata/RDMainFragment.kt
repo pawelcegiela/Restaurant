@@ -20,7 +20,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel
 
 class RDMainFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override var editActionId = R.id.actionRDToEditRestaurantData
     override val backActionId
@@ -62,7 +61,7 @@ class RDMainFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData() {
+    override fun initializeExtraData() {
         val item = _viewModel.item.value ?: RestaurantData(RestaurantDataBasic(), RestaurantDataDetails())
         val openingHours = item.basic.openingHours
         val weekDaysEnabled = openingHours.getWeekDaysEnabled()

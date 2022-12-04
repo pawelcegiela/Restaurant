@@ -14,7 +14,6 @@ import pi.restaurantapp.viewmodels.fragments.management.customers.PreviewCustome
 
 
 class PreviewCustomerFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override var editActionId = 0 // Warning: unused
     override val backActionId = R.id.actionPreviewCustomerToCustomers
@@ -32,13 +31,5 @@ class PreviewCustomerFragment : AbstractPreviewItemFragment() {
         binding.vm = _viewModel
         binding.lifecycleOwner = this
         return binding.root
-    }
-
-    override fun fillInData() {
-        viewModel.setReadyToUnlock()
-    }
-
-    override fun initializeUI() {
-        initializeWorkerUI()
     }
 }

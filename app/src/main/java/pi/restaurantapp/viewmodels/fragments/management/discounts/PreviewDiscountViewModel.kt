@@ -24,6 +24,7 @@ class PreviewDiscountViewModel : AbstractPreviewItemViewModel() {
         val basic = snapshotsPair.basic?.toObject<DiscountBasic>() ?: DiscountBasic()
         val details = DiscountDetails()
         _item.value = Discount(itemId, basic, details)
+        setReadyToUnlock()
     }
 
     override fun isDisabled(): Boolean {

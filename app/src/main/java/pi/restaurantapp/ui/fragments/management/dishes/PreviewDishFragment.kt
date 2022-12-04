@@ -14,7 +14,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.dishes.PreviewDishViewModel
 
 class PreviewDishFragment : AbstractPreviewItemFragment() {
-    override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewDishToEditDish
     override val backActionId = R.id.actionPreviewDishToDishes
@@ -35,7 +34,7 @@ class PreviewDishFragment : AbstractPreviewItemFragment() {
         return binding.root
     }
 
-    override fun fillInData() {
+    override fun initializeExtraData() {
         if (_viewModel.item.value?.basic?.isDiscounted == true) {
             binding.textViewOriginalPrice.paintFlags = binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
