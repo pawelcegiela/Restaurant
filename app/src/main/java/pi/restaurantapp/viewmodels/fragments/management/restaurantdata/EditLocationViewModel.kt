@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.toObject
 import pi.restaurantapp.logic.fragments.management.restaurantdata.EditLocationLogic
 import pi.restaurantapp.objects.SnapshotsPair
+import pi.restaurantapp.objects.data.NullableSplitDataObject
 import pi.restaurantapp.objects.data.address.Address
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.address.AddressDetails
+import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
 class EditLocationViewModel : AbstractModifyItemViewModel() {
@@ -16,9 +18,13 @@ class EditLocationViewModel : AbstractModifyItemViewModel() {
     private val _item: MutableLiveData<Address> = MutableLiveData()
     val item: LiveData<Address> = _item
 
+    override val splitDataObject get() = NullableSplitDataObject(itemId, item.value?.basic, item.value?.details)
+
     override fun getItem(snapshotsPair: SnapshotsPair) {
         val basic = snapshotsPair.basic?.toObject<AddressBasic>() ?: AddressBasic()
         val details = snapshotsPair.details?.toObject<AddressDetails>() ?: AddressDetails()
         _item.value = Address(basic, details)
+
+        toolbarType.value = ToolbarType.SAVE
     }
 }

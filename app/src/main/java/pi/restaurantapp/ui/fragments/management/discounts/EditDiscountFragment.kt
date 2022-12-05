@@ -16,9 +16,4 @@ class EditDiscountFragment : AbstractModifyDiscountFragment() {
     override fun initializeUI() {
         itemId = arguments?.getString("id").toString()
     }
-
-    override fun fillInData() {
-        setNavigationCardsSaveRemove()
-        finishLoading()
-    }
 }

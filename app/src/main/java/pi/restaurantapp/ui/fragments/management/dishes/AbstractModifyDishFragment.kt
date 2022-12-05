@@ -8,7 +8,6 @@ import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDishBinding
 import pi.restaurantapp.logic.utils.UserInterfaceUtils
-import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
@@ -57,11 +56,6 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
 
     override fun initializeUI() {
         finishLoading()
-        setNavigationCardsSave()
-    }
-
-    override fun getDataObject(): SplitDataObject {
-        return SplitDataObject(viewModel.itemId, _viewModel.item.value!!.basic, _viewModel.item.value!!.details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

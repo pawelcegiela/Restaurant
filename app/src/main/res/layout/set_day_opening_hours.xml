@@ -3,17 +3,27 @@
 
     <data>
 
+        <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
+
         <variable
             name="enabled"
             type="Boolean" />
 
         <variable
             name="startHour"
-            type="String" />
+            type="java.util.Date" />
 
         <variable
             name="endHour"
-            type="String" />
+            type="java.util.Date" />
+
+        <variable
+            name="vm"
+            type="pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditOpeningHoursViewModel" />
+
+        <variable
+            name="number"
+            type="int" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,13 +35,17 @@
             android:id="@+id/checkBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:checked="@{enabled}"
+            android:onCheckedChanged="@{(_, isChecked) -> vm.onEnabledChanged(isChecked, number)}"/>
 
         <pi.restaurantapp.ui.textviews.TextViewDetail
             android:id="@+id/textViewStartHour"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:text="@{enabled ? StringFormatUtils.formatTime(startHour) : @string/empty}"
+            android:onTextChanged="@{(s, start, before, count) -> vm.onTextChangedStartHour(s, number)}"
             android:textAlignment="center" />
 
         <pi.restaurantapp.ui.textviews.TextViewDetail
@@ -39,6 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@{enabled ? @string/dash : @string/empty}"
             android:textAlignment="center" />
 
         <pi.restaurantapp.ui.textviews.TextViewDetail
@@ -46,6 +61,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:text="@{enabled ? StringFormatUtils.formatTime(endHour) : @string/empty}"
+            android:onTextChanged="@{(s, start, before, count) -> vm.onTextChangedEndHour(s, number)}"
             android:textAlignment="center" />
 
     </LinearLayout>

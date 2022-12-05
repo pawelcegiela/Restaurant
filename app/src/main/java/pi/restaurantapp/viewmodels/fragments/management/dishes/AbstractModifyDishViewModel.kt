@@ -6,6 +6,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.logic.fragments.management.dishes.AbstractModifyDishLogic
+import pi.restaurantapp.objects.data.NullableSplitDataObject
 import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.dish.Dish
@@ -19,6 +20,8 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
 
     private val _item: MutableLiveData<Dish> = MutableLiveData()
     val item: LiveData<Dish> = _item
+
+    override val splitDataObject get() = NullableSplitDataObject(itemId, item.value?.basic, item.value?.details)
 
     private val _allIngredients = MutableLiveData<MutableList<IngredientBasic>>()
     val allIngredients: LiveData<MutableList<IngredientBasic>> = _allIngredients
@@ -61,7 +64,7 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
             }
     }
 
-    override fun saveToDatabase(data: SplitDataObject) {
+    override fun saveToDatabase2(data: SplitDataObject) {
         item.value?.details?.baseIngredients = HashMap(observer.baseIngredients.associateBy { it.id })
         item.value?.details?.otherIngredients = HashMap(observer.otherIngredients.associateBy { it.id })
         item.value?.details?.possibleIngredients = HashMap(observer.possibleIngredients.associateBy { it.id })

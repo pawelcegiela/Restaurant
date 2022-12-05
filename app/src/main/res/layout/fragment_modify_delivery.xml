@@ -90,14 +90,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:checked="true"
+                            android:checked="@={vm.item.basic.available}"
                             android:text="@string/is_delivery_available" />
 
                         <LinearLayout
                             android:id="@+id/linearLayoutAvailableDelivery"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="@{vm.item.basic.available ? View.VISIBLE : View.GONE}">
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewMinimumPriceTitle"
@@ -113,7 +114,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/minimum_order_price"
                                 android:importantForAutofill="no"
-                                android:inputType="numberDecimal" />
+                                android:inputType="numberDecimal"
+                                android:text="@={vm.item.basic.minimumPrice}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewExtraFeeTitle"
@@ -129,7 +131,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/extra_delivery_fee"
                                 android:importantForAutofill="no"
-                                android:inputType="numberDecimal" />
+                                android:inputType="numberDecimal"
+                                android:text="@={vm.item.basic.extraDeliveryFee}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewFreeThresholdTitle"
@@ -149,7 +152,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentStart="true"
-                                    android:layout_gravity="center_vertical" />
+                                    android:layout_gravity="center_vertical"
+                                    android:checked="@={vm.item.basic.freeDeliveryAvailable}" />
 
                                 <EditText
                                     android:id="@+id/editTextFreeThreshold"
@@ -159,7 +163,9 @@
                                     android:layout_toEndOf="@+id/checkBoxFreeThreshold"
                                     android:hint="@string/free_delivery_threshold"
                                     android:importantForAutofill="no"
-                                    android:inputType="numberDecimal" />
+                                    android:inputType="numberDecimal"
+                                    android:text="@={vm.item.basic.minimumPriceFreeDelivery}"
+                                    android:enabled="@{vm.item.basic.freeDeliveryAvailable}"/>
 
                             </RelativeLayout>
 
@@ -182,7 +188,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline" />
+            app:layout_constraintTop_toTopOf="@id/guideline"
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"

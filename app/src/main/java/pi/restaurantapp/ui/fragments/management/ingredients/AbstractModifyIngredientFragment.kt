@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyIngredientBinding
-import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.objects.enums.Unit
@@ -74,10 +73,6 @@ abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
                 .also { it?.extraPrice = newItem.extraPrice }
             binding.recyclerViewSubIngredients.adapter?.notifyItemChanged(itemPosition)
         }
-    }
-
-    override fun getDataObject(): SplitDataObject {
-        return SplitDataObject(viewModel.itemId, _viewModel.item.value!!.basic, _viewModel.item.value!!.details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

@@ -15,6 +15,5 @@ class AddAllergenFragment : AbstractModifyAllergenFragment() {
 
     override fun initializeUI() {
         finishLoading()
-        setNavigationCardsSave()
     }
 }

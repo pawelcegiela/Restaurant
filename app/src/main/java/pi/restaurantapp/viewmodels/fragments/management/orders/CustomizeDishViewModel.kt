@@ -9,7 +9,6 @@ import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.dish.DishDetails
 import pi.restaurantapp.objects.data.dish.DishItem
-import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 

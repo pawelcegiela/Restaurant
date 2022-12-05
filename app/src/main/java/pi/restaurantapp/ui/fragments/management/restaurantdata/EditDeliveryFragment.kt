@@ -8,11 +8,6 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDeliveryBinding
-import pi.restaurantapp.logic.utils.StringFormatUtils
-import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.delivery.Delivery
-import pi.restaurantapp.objects.data.delivery.DeliveryBasic
-import pi.restaurantapp.objects.data.delivery.DeliveryDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditDeliveryViewModel
@@ -48,26 +43,6 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
         initializeCheckBoxListeners()
     }
 
-    override fun fillInData() {
-        val data = _viewModel.item.value ?: Delivery()
-        binding.checkBoxAvailable.isChecked = data.basic.available
-        if (data.basic.available) {
-            binding.editTextMinimumPrice.setText(data.basic.minimumPrice)
-            binding.editTextExtraFee.setText(data.basic.extraDeliveryFee)
-            binding.checkBoxFreeThreshold.isChecked = data.basic.freeDeliveryAvailable
-            if (data.basic.freeDeliveryAvailable) {
-                binding.editTextFreeThreshold.setText(data.basic.minimumPriceFreeDelivery)
-            } else {
-                binding.editTextFreeThreshold.isEnabled = false
-            }
-        } else {
-            binding.linearLayoutAvailableDelivery.visibility = View.GONE
-        }
-
-        setNavigationCardsSave()
-        finishLoading()
-    }
-
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
         if (binding.checkBoxAvailable.isChecked) {
@@ -78,24 +53,6 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
             }
         }
         return map
-    }
-
-    override fun getDataObject(): SplitDataObject {
-        itemId = itemId.ifEmpty { StringFormatUtils.formatId() }
-
-        val basic = if (!binding.checkBoxAvailable.isChecked) {
-            DeliveryBasic(available = false)
-        } else {
-            DeliveryBasic(
-                available = true,
-                minimumPrice = binding.editTextMinimumPrice.text.toString(),
-                extraDeliveryFee = binding.editTextExtraFee.text.toString(),
-                freeDeliveryAvailable = binding.checkBoxFreeThreshold.isChecked,
-                minimumPriceFreeDelivery = binding.editTextFreeThreshold.text.ifEmpty { "0.0" }.toString()
-            )
-        }
-
-        return SplitDataObject(itemId, basic, DeliveryDetails())
     }
 
     private fun initializeCheckBoxListeners() {

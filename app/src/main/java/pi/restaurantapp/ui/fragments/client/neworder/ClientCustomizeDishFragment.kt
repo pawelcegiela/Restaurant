@@ -1,7 +1,6 @@
 package pi.restaurantapp.ui.fragments.client.neworder
 
 import android.content.Context
-import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController

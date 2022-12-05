@@ -6,8 +6,6 @@ import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
-import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.management.SettingsActivity
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
@@ -26,7 +24,7 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
         _viewModel.isMyData = arguments?.getBoolean("myData") != null && arguments?.getBoolean("myData")!!
         itemId = if (_viewModel.isMyData) Firebase.auth.uid!! else arguments?.getString("id").toString()
-        lowestRole = if (_viewModel.isMyData) Role.WORKER.ordinal else Role.MANAGER.ordinal
+        viewModel.lowestRole = if (_viewModel.isMyData) Role.WORKER.ordinal else Role.MANAGER.ordinal
 
         if (_viewModel.isMyData) {
             nextActionId = if (activity is SettingsActivity) {
@@ -38,20 +36,4 @@ class EditWorkerFragment : AbstractModifyWorkerFragment() {
     }
 
     override fun initializeUI() {}
-
-    override fun fillInData() {
-        if (_viewModel.isMyData) {
-            setNavigationCardsSave()
-        } else {
-            setNavigationCardsSaveRemove()
-        }
-    }
-
-    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
-        return if (_viewModel.isMyData) {
-            Precondition.OK
-        } else {
-            super.checkSavePreconditions(data)
-        }
-    }
 }

@@ -415,4 +415,5 @@
     <string name="general_chat">Czat ogólny</string>
     <string name="type_here">Napisz tutaj…</string>
     <string name="send_message">Wyślij wiadomość</string>
+    <string name="null_data">Błąd: nie można zapisać danych do bazy, ponieważ są one nullem. Spróbuj ponownie lub skontaktuj się z administratorem</string>
 </resources>

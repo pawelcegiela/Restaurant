@@ -11,14 +11,11 @@ import pi.restaurantapp.BR
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyOrderBinding
 import pi.restaurantapp.logic.utils.ComputingUtils
-import pi.restaurantapp.logic.utils.PreconditionUtils
-import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.objects.enums.CollectionType
-import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.CustomNumberPicker
 import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
@@ -43,8 +40,8 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     private lateinit var numberPickerCollectionTime: CustomNumberPicker
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _viewModel.activityViewModel = activityViewModel
         _viewModel.setDeliveryOptions(activityViewModel.deliveryOptions.value)
         if (activityViewModel.savedOrder.value == null) {
             super.onViewCreated(view, savedInstanceState)
@@ -54,6 +51,8 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
             _viewModel.setPreviousStatus(activityViewModel.previousStatus.value ?: -1)
             addLiveDataObservers()
             viewModel.getUserRole()
+            _viewModel.setToolbarType()
+            initializeNavigationToolbar()
         }
     }
 
@@ -72,25 +71,12 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     override fun initializeUI() {
         numberPickerCollectionTime =
             CustomNumberPicker(binding.numberPickerCollectionTime, 30, 150, 5) { refreshCollectionDate() }
-    }
 
-    override fun fillInData() {
-        val data = _viewModel.item.value ?: Order()
-
-        if (_viewModel.previousStatus.value == null) {
-            _viewModel.setPreviousStatus(activityViewModel.previousStatus.value ?: -1)
+        // TODO Przenieść
+        val data = _viewModel.item.value
+        if (data != null) {
+            numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromDate(data.details.orderDate, data.basic.collectionDate))
         }
-
-        numberPickerCollectionTime =
-            CustomNumberPicker(binding.numberPickerCollectionTime, 30, 150, 5) { refreshCollectionDate() }
-        numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromDate(data.details.orderDate, data.basic.collectionDate))
-
-        if (this is AddOrderFragment) {
-            setNavigationCardsSave()
-        } else {
-            setNavigationCardsSaveRemove()
-        }
-        finishLoading()
     }
 
     private fun refreshCollectionDate() {
@@ -100,7 +86,7 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     fun editDish(dishItem: DishItem) {
-        val sdo = getDataObject()
+        val sdo = viewModel.splitDataObject
         activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
         activityViewModel.setEditedDish(dishItem)
         findNavController().navigate(editDishActionId)
@@ -119,20 +105,9 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
     }
 
     fun onClickButtonAddDish() {
-        val sdo = getDataObject()
+        val sdo = viewModel.splitDataObject
         activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
         findNavController().navigate(addDishAction)
-    }
-
-    override fun getDataObject(): SplitDataObject {
-        if (activityViewModel.previousStatus.value == null) {
-            activityViewModel.setPreviousStatus(_viewModel.item.value?.basic?.orderStatus)
-        }
-        if (activityViewModel.deliveryOptions.value == null) {
-            activityViewModel.setDeliveryOptions(_viewModel.observer.deliveryOptions)
-        }
-
-        return SplitDataObject(_viewModel.item.value!!.id, _viewModel.item.value!!.basic, _viewModel.item.value!!.details)
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
@@ -151,12 +126,5 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         _viewModel.observer.dishesList.remove(dishItem)
         binding.recyclerViewDishes.adapter?.notifyItemRemoved(itemPosition)
         _viewModel.updateFullPrice()
-    }
-
-    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
-        if (super.checkSavePreconditions(data) != Precondition.OK) {
-            return super.checkSavePreconditions(data)
-        }
-        return PreconditionUtils.checkOrder(data.basic as OrderBasic, data.details as OrderDetails, _viewModel.observer.deliveryOptions)
     }
 }

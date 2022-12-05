@@ -6,6 +6,8 @@ import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.dish.DishDetails
+import pi.restaurantapp.objects.enums.Role
+import pi.restaurantapp.objects.enums.ToolbarType
 
 class EditDishViewModel : AbstractModifyDishViewModel() {
     override val logic = EditDishLogic()
@@ -20,6 +22,8 @@ class EditDishViewModel : AbstractModifyDishViewModel() {
         observer.otherIngredients = details.otherIngredients.map { it.value }.toMutableList()
         observer.possibleIngredients = details.possibleIngredients.map { it.value }.toMutableList()
         observer.allergens = details.allergens.map { it.value }.toMutableList()
+
+        toolbarType.value = if (Role.isAtLeastExecutive(userRole.value)) ToolbarType.SAVE_REMOVE else ToolbarType.SAVE
     }
 
 

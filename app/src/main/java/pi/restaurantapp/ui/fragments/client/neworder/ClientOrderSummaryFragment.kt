@@ -35,11 +35,10 @@ class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
         if (activityViewModel.savedOrder.value == null) {
             super.onViewCreated(view, savedInstanceState)
         } else {
-            viewModel.itemId = activityViewModel.savedOrder.value?.id ?: ""
             _viewModel.setItem(activityViewModel.savedOrder.value ?: return)
             activityViewModel.reset()
             addLiveDataObservers()
-            viewModel.getUserRole()
+            viewModel.initializeData(activityViewModel.savedOrder.value?.id ?: "")
         }
     }
 

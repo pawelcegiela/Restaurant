@@ -46,8 +46,7 @@ class RDMainFragment : AbstractPreviewItemFragment() {
         )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.itemId = ""
-        viewModel.getUserRole()
+        viewModel.initializeData("")
         addLiveDataObservers()
     }
 
@@ -64,9 +63,9 @@ class RDMainFragment : AbstractPreviewItemFragment() {
     override fun initializeExtraData() {
         val item = _viewModel.item.value ?: RestaurantData(RestaurantDataBasic(), RestaurantDataDetails())
         val openingHours = item.basic.openingHours
-        val weekDaysEnabled = openingHours.getWeekDaysEnabled()
-        val weekDaysStartHours = openingHours.getWeekDaysStartHour()
-        val weekDaysEndHours = openingHours.getWeekDaysEndHour()
+        val weekDaysEnabled = openingHours.enabledList
+        val weekDaysStartHours = openingHours.startHoursList
+        val weekDaysEndHours = openingHours.endHoursList
         for (i in weekDaysEnabled.indices) {
             if (weekDaysEnabled[i]) {
                 dayLayouts[i].visibility = View.VISIBLE

@@ -430,4 +430,5 @@
     <string name="user_has_this_account">This customer has already got this discount assigned</string>
     <string name="discount_has_been_assigned_to_this_customer">Discount has been successfully assigned to this customer</string>
     <string name="empty" translatable="false" />
+    <string name="null_data">Error: cannot save item to database because data is null. Try again or contact administrator</string>
 </resources>

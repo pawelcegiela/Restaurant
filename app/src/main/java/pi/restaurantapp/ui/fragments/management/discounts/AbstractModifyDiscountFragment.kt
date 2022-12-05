@@ -10,9 +10,6 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDiscountBinding
 import pi.restaurantapp.logic.utils.ComputingUtils
 import pi.restaurantapp.logic.utils.StringFormatUtils
-import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.discount.DiscountBasic
-import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.ui.pickers.DatePickerFragment
 import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
@@ -40,16 +37,12 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
         binding.fragment = this
         binding.lifecycleOwner = this
         linearLayout.visibility = View.INVISIBLE
+        _viewModel.setList(activityViewModel.list.value ?: ArrayList())
         return binding.root
     }
 
     override fun initializeUI() {
         finishLoading()
-        setNavigationCardsSave()
-    }
-
-    override fun getDataObject(): SplitDataObject {
-        return SplitDataObject(_viewModel.item.value!!.basic.id, _viewModel.item.value!!.basic, _viewModel.item.value!!.details)
     }
 
     fun onClickExpirationDate() {
@@ -57,17 +50,6 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
         DatePickerFragment(date) { newDate ->
             binding.textViewExpirationDate.text = StringFormatUtils.format(newDate, "00:00")
         }.show(requireActivity().supportFragmentManager, "datePicker")
-    }
-
-    override fun checkSavePreconditions(data: SplitDataObject): Precondition {
-        if (super.checkSavePreconditions(data) != Precondition.OK) {
-            return super.checkSavePreconditions(data)
-        }
-        val discount = data.basic as DiscountBasic
-        if (activityViewModel.list.value?.any { it.id == discount.id && it.creationDate != discount.creationDate } == true) {
-            return Precondition.DISCOUNT_CODE_EXISTS
-        }
-        return Precondition.OK
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {

@@ -19,11 +19,6 @@ class EditAllergenFragment : AbstractModifyAllergenFragment() {
         itemId = arguments?.getString("id").toString()
     }
 
-    override fun fillInData() {
-        setNavigationCardsSaveRemove()
-        finishLoading()
-    }
-
     override fun checkRemovePreconditions(): Boolean {
         val details = _viewModel.item.value?.details ?: AllergenDetails()
         if (details.containingDishes.isNotEmpty()) {

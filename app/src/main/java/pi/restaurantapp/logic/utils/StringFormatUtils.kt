@@ -33,9 +33,10 @@ class StringFormatUtils {
             return if (date != null) sdf.format(date) else ""
         }
 
-        fun formatTime(date: Date): String {
+        @JvmStatic
+        fun formatTime(date: Date?): String {
             val sdf = SimpleDateFormat("HH:mm", Locale.ROOT)
-            return sdf.format(date)
+            return if (date != null) sdf.format(date) else ""
         }
 
         @JvmStatic

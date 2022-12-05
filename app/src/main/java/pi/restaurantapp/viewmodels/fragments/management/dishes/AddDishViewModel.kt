@@ -5,6 +5,7 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishBasic
 import pi.restaurantapp.objects.data.dish.DishDetails
+import pi.restaurantapp.objects.enums.ToolbarType
 
 class AddDishViewModel : AbstractModifyDishViewModel() {
     override val logic = AddDishLogic()
@@ -13,5 +14,7 @@ class AddDishViewModel : AbstractModifyDishViewModel() {
         itemId = StringFormatUtils.formatId()
         setItem(Dish(itemId, DishBasic(itemId), DishDetails(itemId)))
         setReadyToInitialize()
+
+        toolbarType.value = ToolbarType.SAVE
     }
 }

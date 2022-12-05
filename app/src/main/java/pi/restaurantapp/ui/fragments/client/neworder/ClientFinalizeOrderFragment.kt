@@ -10,7 +10,6 @@ import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
-import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.client.ClientNewOrderActivity
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
 import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
@@ -29,24 +28,17 @@ class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
     private val _viewModel: ClientFinalizeOrderViewModel by viewModels()
 
     override val activityViewModel: ClientNewOrderViewModel by activityViewModels()
-    override var lowestRole = Role.CUSTOMER.ordinal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val sdo = getDataObject()
+                val sdo = viewModel.splitDataObject
                 activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
                 findNavController().navigate(R.id.actionClientFinalizeOrderToNewOrder)
             }
         })
-    }
-
-    override fun initializeUI() {
-        super.initializeUI()
-        setNavigationCardsSave()
-        finishLoading()
     }
 
     override fun removeDish(dishItem: DishItem) {
@@ -55,7 +47,7 @@ class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
     }
 
     override fun afterSave() {
-        val sdo = getDataObject()
+        val sdo = viewModel.splitDataObject
         activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
         super.afterSave()
     }

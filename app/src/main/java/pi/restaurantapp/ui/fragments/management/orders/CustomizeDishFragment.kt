@@ -62,7 +62,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
         } else {
             _viewModel.setItem(activityViewModel.editedDish.value ?: DishItem())
             activityViewModel.resetEditedDish()
-            viewModel.getUserRole()
+            viewModel.initializeData(activityViewModel.editedDish.value!!.id)
             addLiveDataObservers()
         }
     }

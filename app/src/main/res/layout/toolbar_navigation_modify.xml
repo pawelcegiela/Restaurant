@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="40dp"
-    android:background="@color/blue_4"
-    android:gravity="center_horizontal"
-    android:orientation="horizontal"
-    android:paddingHorizontal="10dp"
-    android:visibility="gone">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include
-        android:id="@+id/cardSaveRemove"
-        layout="@layout/card_view_save_remove"
-        android:visibility="gone" />
+    <data>
 
-    <include
-        android:id="@+id/cardSave"
-        layout="@layout/card_view_save"
-        android:visibility="gone"/>
+        <import type="android.view.View" />
 
-</LinearLayout>
+        <import type="pi.restaurantapp.objects.enums.ToolbarType" />
+
+        <variable
+            name="type"
+            type="ToolbarType" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/blue_4"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:visibility="@{type == ToolbarType.HIDDEN ? View.GONE : View.VISIBLE}">
+
+        <include
+            android:id="@+id/cardSaveRemove"
+            layout="@layout/card_view_save_remove"
+            app:visibility="@{type == ToolbarType.SAVE_REMOVE ? View.VISIBLE : View.GONE}" />
+
+        <include
+            android:id="@+id/cardSave"
+            layout="@layout/card_view_save"
+            app:visibility="@{type == ToolbarType.SAVE ? View.VISIBLE : View.GONE}" />
+
+    </LinearLayout>
+</layout>

@@ -10,9 +10,7 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientMyDataBinding
 import pi.restaurantapp.logic.utils.StringFormatUtils
-import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.enums.CollectionType
-import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.client.settings.ClientMyDataViewModel
@@ -26,7 +24,6 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
-    override var lowestRole = Role.CUSTOMER.ordinal
 
     override val viewModel: AbstractModifyItemViewModel get() = _viewModel
     private val _viewModel: ClientMyDataViewModel by viewModels()
@@ -55,14 +52,6 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {}
-
-    override fun getDataObject(): SplitDataObject {
-        return SplitDataObject(_viewModel.itemId, _viewModel.item.value!!.basic, _viewModel.item.value!!.details)
-    }
-
-    override fun fillInData() {
-        setNavigationCardsSave()
-    }
 
     fun onItemSelectedCollectionType(position: Int) {
         if (position == CollectionType.DELIVERY.ordinal) {

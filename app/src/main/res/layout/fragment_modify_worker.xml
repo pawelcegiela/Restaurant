@@ -209,7 +209,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/user_password"
                                 android:importantForAutofill="no"
-                                android:inputType="textPassword" />
+                                android:inputType="textPassword"
+                                android:text="@={vm.userPassword}"/>
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewRepeatUserPasswordTitle"
@@ -225,7 +226,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repeat_user_password"
                                 android:importantForAutofill="no"
-                                android:inputType="textPassword" />
+                                android:inputType="textPassword"
+                                android:text="@={vm.repeatUserPassword}"/>
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewPasswordTitle"
@@ -241,7 +243,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/your_password"
                                 android:importantForAutofill="no"
-                                android:inputType="textPassword" />
+                                android:inputType="textPassword"
+                                android:text="@={vm.password}"/>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -264,7 +267,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline" />
+            app:layout_constraintTop_toTopOf="@id/guideline"
+            app:type="@{vm.toolbarType}"/>
 
         <include
             android:id="@+id/progress"

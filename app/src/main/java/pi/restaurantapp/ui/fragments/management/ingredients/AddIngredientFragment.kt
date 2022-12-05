@@ -14,7 +14,6 @@ class AddIngredientFragment : AbstractModifyIngredientFragment() {
     private val _viewModel: AddIngredientViewModel by viewModels()
 
     override fun initializeUI() {
-        setNavigationCardsSave()
         finishLoading()
     }
 }

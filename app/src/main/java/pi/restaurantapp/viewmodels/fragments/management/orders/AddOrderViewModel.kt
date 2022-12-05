@@ -7,6 +7,7 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
+import pi.restaurantapp.objects.enums.ToolbarType
 
 class AddOrderViewModel : AbstractModifyOrderViewModel() {
     override val logic = AddOrderLogic()
@@ -15,5 +16,11 @@ class AddOrderViewModel : AbstractModifyOrderViewModel() {
         itemId = StringFormatUtils.formatId()
         setItem(Order(itemId, OrderBasic(itemId, Firebase.auth.uid!!), OrderDetails(itemId)))
         setReadyToInitialize()
+
+        setToolbarType()
+    }
+
+    override fun setToolbarType() {
+        toolbarType.value = ToolbarType.SAVE
     }
 }

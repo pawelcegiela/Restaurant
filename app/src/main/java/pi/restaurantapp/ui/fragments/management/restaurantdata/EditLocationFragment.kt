@@ -8,8 +8,6 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyLocationBinding
-import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.address.AddressDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditLocationViewModel
@@ -42,10 +40,7 @@ class EditLocationFragment : AbstractModifyItemFragment() {
     }
 
     override fun initializeUI() {
-        setNavigationCardsSave()
     }
-
-    override fun fillInData() {}
 
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
@@ -54,10 +49,6 @@ class EditLocationFragment : AbstractModifyItemFragment() {
         map[binding.address.editTextPostalCode] = R.string.postal_code
         map[binding.address.editTextCity] = R.string.city
         return map
-    }
-
-    override fun getDataObject(): SplitDataObject {
-        return SplitDataObject(itemId, _viewModel.item.value!!.basic, AddressDetails())
     }
 
     override fun onDestroyView() {

@@ -8,8 +8,6 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyAboutRestaurantBinding
-import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurantDetails
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditAboutRestaurantViewModel
@@ -43,20 +41,11 @@ class EditAboutRestaurantFragment : AbstractModifyItemFragment() {
 
     override fun initializeUI() {}
 
-    override fun fillInData() {
-        setNavigationCardsSave()
-        finishLoading()
-    }
-
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = HashMap<EditText, Int>()
         map[binding.editTextRestaurantName] = R.string.restaurant_name
         map[binding.editTextRestaurantDescription] = R.string.restaurant_description
         return map
-    }
-
-    override fun getDataObject(): SplitDataObject {
-        return SplitDataObject(itemId, _viewModel.item.value!!.basic, AboutRestaurantDetails())
     }
 
     override fun onDestroyView() {

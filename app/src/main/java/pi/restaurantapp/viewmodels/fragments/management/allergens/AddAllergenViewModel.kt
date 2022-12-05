@@ -5,6 +5,7 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.allergen.Allergen
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.allergen.AllergenDetails
+import pi.restaurantapp.objects.enums.ToolbarType
 
 class AddAllergenViewModel : AbstractModifyAllergenViewModel() {
     override val logic = AddAllergenLogic()
@@ -13,5 +14,7 @@ class AddAllergenViewModel : AbstractModifyAllergenViewModel() {
         itemId = StringFormatUtils.formatId()
         setItem(Allergen(itemId, AllergenBasic(itemId), AllergenDetails(itemId)))
         setReadyToInitialize()
+
+        toolbarType.value = ToolbarType.SAVE
     }
 }

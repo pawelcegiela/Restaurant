@@ -11,8 +11,6 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ToolbarNavigationModifyBinding
 import pi.restaurantapp.logic.utils.UserInterfaceUtils
-import pi.restaurantapp.objects.data.SplitDataObject
-import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.dialogs.RemovalDialog
 import pi.restaurantapp.ui.dialogs.YesNoDialog
@@ -29,7 +27,6 @@ abstract class AbstractModifyItemFragment : Fragment() {
     abstract val nextActionId: Int
     abstract val saveMessageId: Int
     abstract val removeMessageId: Int
-    open var lowestRole = Role.MANAGER.ordinal
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,7 +37,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
     fun addLiveDataObservers() {
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
-                if (Role.isAtLeast(role, lowestRole)) {
+                if (Role.isAtLeast(role, viewModel.lowestRole)) {
                     initializeUI()
                     viewModel.itemId = itemId
                     if (viewModel.itemId.isNotEmpty() && viewModel.shouldGetDataFromDatabase()) {
@@ -49,14 +46,15 @@ abstract class AbstractModifyItemFragment : Fragment() {
                         viewModel.createItem()
                     }
                 } else {
-                    initializeWorkerUI()
+                    Toast.makeText(requireContext(), R.string.no_permission, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(nextActionId)
                 }
+                initializeNavigationToolbar()
             }
         }
 
         viewModel.readyToInitialize.observe(viewLifecycleOwner) { ready ->
             if (ready) {
-                fillInData()
                 finishLoading()
             }
         }
@@ -66,49 +64,34 @@ abstract class AbstractModifyItemFragment : Fragment() {
                 afterSave()
             }
         }
+
+        viewModel.toastMessage.observe(viewLifecycleOwner) { messageId ->
+            Toast.makeText(activity, getString(messageId), Toast.LENGTH_SHORT).show()
+        }
     }
 
     abstract fun initializeUI()
-
-    private fun initializeWorkerUI() {
-        Toast.makeText(requireContext(), R.string.no_permission, Toast.LENGTH_SHORT).show()
-        findNavController().navigate(nextActionId)
-    }
-
-    open fun fillInData() {
-        finishLoading()
-    }
 
     open fun afterSave() {
         Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
         findNavController().navigate(nextActionId)
     }
 
-    fun setNavigationCardsSave() {
-        toolbarNavigation.root.visibility = View.VISIBLE
-        toolbarNavigation.cardSave.root.visibility = View.VISIBLE
+    fun initializeNavigationToolbar() {
         toolbarNavigation.cardSave.root.setOnClickListener {
             if (!UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
                 return@setOnClickListener
             }
 
-            saveToDatabase()
+            viewModel.saveToDatabase()
         }
-    }
 
-    open fun setNavigationCardsSaveRemove() {
-        if (!Role.isAtLeastExecutive(viewModel.userRole.value)) {
-            setNavigationCardsSave()
-            return
-        }
-        toolbarNavigation.root.visibility = View.VISIBLE
-        toolbarNavigation.cardSaveRemove.root.visibility = View.VISIBLE
         toolbarNavigation.cardSaveRemove.cardSave2.setOnClickListener {
             if (!UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
                 return@setOnClickListener
             }
 
-            saveToDatabase()
+            viewModel.saveToDatabase()
         }
 
         toolbarNavigation.cardSaveRemove.cardRemove.setOnClickListener {
@@ -121,24 +104,6 @@ abstract class AbstractModifyItemFragment : Fragment() {
     }
 
     abstract fun getEditTextMap(): Map<EditText, Int>
-
-    open fun saveToDatabase() {
-        val data = getDataObject()
-
-        val precondition = checkSavePreconditions(data)
-        if (precondition != Precondition.OK) {
-            Toast.makeText(activity, getString(precondition.nameRes), Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        viewModel.saveToDatabase(data)
-    }
-
-    abstract fun getDataObject(): SplitDataObject
-
-    open fun checkSavePreconditions(data: SplitDataObject): Precondition {
-        return Precondition.OK
-    }
 
     private fun disableItem() {
         if (!checkRemovePreconditions()) {

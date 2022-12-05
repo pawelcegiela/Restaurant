@@ -6,6 +6,8 @@ import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.ingredient.Ingredient
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
+import pi.restaurantapp.objects.enums.Role
+import pi.restaurantapp.objects.enums.ToolbarType
 
 class EditIngredientViewModel : AbstractModifyIngredientViewModel() {
     override val logic = EditIngredientLogic()
@@ -17,5 +19,7 @@ class EditIngredientViewModel : AbstractModifyIngredientViewModel() {
         logic.item = Ingredient(itemId, basic, details)
 
         observer.subIngredients = item.value?.details?.subIngredients ?: ArrayList()
+
+        toolbarType.value = if (Role.isAtLeastExecutive(userRole.value)) ToolbarType.SAVE_REMOVE else ToolbarType.SAVE
     }
 }
