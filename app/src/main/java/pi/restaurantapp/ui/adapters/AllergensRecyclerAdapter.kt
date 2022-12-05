@@ -3,6 +3,7 @@ package pi.restaurantapp.ui.adapters
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -52,6 +53,10 @@ class AllergensRecyclerAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewName.text = dataSet[position].name
+
+        if (dataSet[position].disabled) {
+            viewHolder.binding.textViewDisabled.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount() = dataSet.size

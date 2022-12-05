@@ -60,7 +60,12 @@ class IngredientsRecyclerAdapter(
             viewHolder.binding.textViewAmount.text =
                 StringFormatUtils.formatAmountWithUnit(fragment.requireContext(), dataSet[position].amount.toString(), dataSet[position].unit)
         }
-        viewHolder.binding.textViewIngredientType.text = if (dataSet[position].subDish) "Sub-Dish" else "Ingredient"
+        viewHolder.binding.textViewIngredientType.text =
+            viewHolder.context.getString(if (dataSet[position].subDish) R.string.sub_dish else R.string.ingredient)
+
+        if (dataSet[position].disabled) {
+            viewHolder.binding.textViewDisabled.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount() = dataSet.size

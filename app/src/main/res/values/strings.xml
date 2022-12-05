@@ -444,4 +444,5 @@
     <string name="reward_values_should_be">Reward values should be at least: 5 (total value), 1 (minimum value) and 7 (days)</string>
     <string name="days">Days</string>
     <string name="days_colon">Orders counting for rewards from last days:</string>
+    <string name="disabled">Item disabled</string>
 </resources>

@@ -3,6 +3,7 @@ package pi.restaurantapp.ui.adapters
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -60,6 +61,10 @@ class DiscountsRecyclerAdapter(
         viewHolder.binding.textViewDiscountAmount.text =
             StringFormatUtils.formatDiscountValue(dataSet[position].amount, dataSet[position].valueType, viewHolder.context)
         viewHolder.binding.textViewExpirationDate.text = StringFormatUtils.formatDate(dataSet[position].expirationDate)
+
+        if (dataSet[position].disabled) {
+            viewHolder.binding.textViewDisabled.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount() = dataSet.size

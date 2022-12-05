@@ -3,6 +3,7 @@ package pi.restaurantapp.ui.adapters
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -42,12 +43,10 @@ class DishesRecyclerAdapter(
             val bundle = Bundle()
             bundle.putString("id", dataSet[layoutPosition].id)
 
-            if (fragment.activity is DishesActivity) {
-                fragment.findNavController().navigate(R.id.actionDishesToPreviewDish, bundle)
-            } else if (fragment.activity is OrdersActivity) {
-                fragment.findNavController().navigate(R.id.actionChooseDishToCustomizeDish, bundle)
-            } else if (fragment.activity is ClientNewOrderActivity) {
-                fragment.findNavController().navigate(R.id.actionClientNewOrderToCustomizeDish, bundle)
+            when (fragment.activity) {
+                is DishesActivity -> fragment.findNavController().navigate(R.id.actionDishesToPreviewDish, bundle)
+                is OrdersActivity -> fragment.findNavController().navigate(R.id.actionChooseDishToCustomizeDish, bundle)
+                is ClientNewOrderActivity -> fragment.findNavController().navigate(R.id.actionClientNewOrderToCustomizeDish, bundle)
             }
         }
     }
@@ -60,8 +59,14 @@ class DishesRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val price = if (dataSet[position].isDiscounted) dataSet[position].discountPrice else dataSet[position].basePrice
+
         viewHolder.binding.textViewName.text = dataSet[position].name
-        viewHolder.binding.textViewPrice.text = StringFormatUtils.formatPrice(dataSet[position].basePrice)
+        viewHolder.binding.textViewPrice.text = StringFormatUtils.formatPrice(price)
+
+        if (dataSet[position].disabled) {
+            viewHolder.binding.textViewDisabled.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount() = dataSet.size

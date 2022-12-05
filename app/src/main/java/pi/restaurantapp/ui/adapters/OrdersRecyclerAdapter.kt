@@ -3,6 +3,7 @@ package pi.restaurantapp.ui.adapters
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -58,9 +59,14 @@ class OrdersRecyclerAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.binding.textViewCollectionDate.text = StringFormatUtils.formatDate(dataSet[position].collectionDate)
+        viewHolder.binding.textViewName.text = dataSet[position].name.ifEmpty { viewHolder.context.getString(R.string.order) }
+        viewHolder.binding.textViewCollectionDate.text = StringFormatUtils.formatDateTime(dataSet[position].collectionDate)
         viewHolder.binding.textViewStatus.text = OrderStatus.getString(dataSet[position].orderStatus, viewHolder.context)
         viewHolder.binding.textViewValue.text = StringFormatUtils.formatPrice(dataSet[position].value)
+
+        if (dataSet[position].disabled) {
+            viewHolder.binding.textViewDisabled.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount() = dataSet.size

@@ -1,9 +1,9 @@
 package pi.restaurantapp.ui.adapters
 
 import android.content.Context
-import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -54,13 +54,11 @@ class WorkersRecyclerAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.binding.textViewName.text = StringFormatUtils.format(dataSet[position].firstName, dataSet[position].lastName)
+        viewHolder.binding.textViewRole.text = Role.getString(dataSet[position].role, viewHolder.context)
 
         if (dataSet[position].disabled) {
-            viewHolder.binding.textViewName.paintFlags =
-                viewHolder.binding.textViewName.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            viewHolder.binding.textViewDisabled.visibility = View.VISIBLE
         }
-
-        viewHolder.binding.textViewRole.text = Role.getString(dataSet[position].role, viewHolder.context)
     }
 
     override fun getItemCount() = dataSet.size
