@@ -416,4 +416,17 @@
     <string name="type_here">Napisz tutaj…</string>
     <string name="send_message">Wyślij wiadomość</string>
     <string name="null_data">Błąd: nie można zapisać danych do bazy, ponieważ są one nullem. Spróbuj ponownie lub skontaktuj się z administratorem</string>
+    <string name="reward">Nagroda</string>
+    <string name="total_value_of_rewards_colon">Całkowita wartość nagród:</string>
+    <string name="total_value_of_rewards">Całkowita wartość nagród</string>
+    <string name="minimum_value">Minimalna wartość</string>
+    <string name="minimum_value_of_one_discount_colon">Minimalna wartość pojedynczego rabatu:</string>
+    <string name="generate">Generuj</string>
+    <string name="rewards_added">Nagrody zostały pomyślnie dodane</string>
+    <string name="add_reward">Dodaj nagrodę</string>
+    <string name="generate_reward">Generuj nagrodę</string>
+    <string name="enter_reward_values">Wypełnij wszystkie wartości</string>
+    <string name="reward_values_should_be">Wartości powinny być co najmniej: 5 (całkowita wartość), 1 (minimalna wartość) i 7 (dni)</string>
+    <string name="days">Dni</string>
+    <string name="days_colon">Zamówienia liczące się do nagród z ostatnich dni:</string>
 </resources>

@@ -22,6 +22,10 @@
         <action
             android:id="@+id/actionDiscountsToPreviewDiscount"
             app:destination="@id/PreviewDiscountFragment" />
+
+        <action
+            android:id="@+id/actionDiscountsToAddReward"
+            app:destination="@id/AddRewardFragment" />
     </fragment>
 
     <fragment
@@ -58,6 +62,18 @@
             app:destination="@id/EditDiscountFragment" />
         <action
             android:id="@+id/actionPreviewDiscountToDiscounts"
+            app:destination="@id/DiscountsMainFragment"
+            app:popUpTo="@id/DiscountsMainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddRewardFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.discounts.AddRewardFragment"
+        android:label="@string/add_reward"
+        tools:layout="@layout/fragment_add_reward">
+        <action
+            android:id="@+id/actionAddRewardToDiscounts"
             app:destination="@id/DiscountsMainFragment"
             app:popUpTo="@id/DiscountsMainFragment"
             app:popUpToInclusive="true" />

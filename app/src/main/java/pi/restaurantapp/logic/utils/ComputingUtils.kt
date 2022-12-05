@@ -68,6 +68,11 @@ class ComputingUtils {
             return Date(Date().time - monthInMillis)
         }
 
+        fun getDateXDaysAgo(days: Long): Date {
+            val monthInMillis = 1000L * 60 * 60 * 24 * days
+            return Date(Date().time - monthInMillis)
+        }
+
         fun countDiscountRewards(orders: List<OrderBasic>, totalValue: Long, minimumDiscountValue: Long): HashMap<String, Int> {
             var usersBySum: MutableMap<String, BigDecimal> = HashMap<String, BigDecimal>()
 

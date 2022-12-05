@@ -431,4 +431,17 @@
     <string name="discount_has_been_assigned_to_this_customer">Discount has been successfully assigned to this customer</string>
     <string name="empty" translatable="false" />
     <string name="null_data">Error: cannot save item to database because data is null. Try again or contact administrator</string>
+    <string name="reward">Reward</string>
+    <string name="total_value_of_rewards_colon">Total value of rewards:</string>
+    <string name="total_value_of_rewards">Total value of rewards</string>
+    <string name="minimum_value">Minimum value</string>
+    <string name="minimum_value_of_one_discount_colon">Minimum value of one discount:</string>
+    <string name="generate">Generate</string>
+    <string name="rewards_added">Rewards have been successfully added</string>
+    <string name="add_reward">Add reward</string>
+    <string name="generate_reward">Generate reward</string>
+    <string name="enter_reward_values">Fill in all values</string>
+    <string name="reward_values_should_be">Reward values should be at least: 5 (total value), 1 (minimum value) and 7 (days)</string>
+    <string name="days">Days</string>
+    <string name="days_colon">Orders counting for rewards from last days:</string>
 </resources>
