@@ -14,7 +14,6 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null
     val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
@@ -28,8 +27,7 @@ abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyWorkerBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
-        linearLayout.visibility = View.INVISIBLE
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

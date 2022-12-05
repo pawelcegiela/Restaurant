@@ -20,7 +20,6 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
     override var nextActionId = R.id.actionClientMyDataToSettings
     override val saveMessageId = R.string.your_data_has_been_changed
     override val removeMessageId = 0 // Warning: unused
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
@@ -38,8 +37,7 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
         _binding = FragmentClientMyDataBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
-        linearLayout.visibility = View.INVISIBLE
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

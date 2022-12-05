@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.INVISIBLE}">
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardWorkerDetails"
@@ -210,7 +211,7 @@
                                 android:hint="@string/user_password"
                                 android:importantForAutofill="no"
                                 android:inputType="textPassword"
-                                android:text="@={vm.userPassword}"/>
+                                android:text="@={vm.userPassword}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewRepeatUserPasswordTitle"
@@ -227,7 +228,7 @@
                                 android:hint="@string/repeat_user_password"
                                 android:importantForAutofill="no"
                                 android:inputType="textPassword"
-                                android:text="@={vm.repeatUserPassword}"/>
+                                android:text="@={vm.repeatUserPassword}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewPasswordTitle"
@@ -244,7 +245,7 @@
                                 android:hint="@string/your_password"
                                 android:importantForAutofill="no"
                                 android:inputType="textPassword"
-                                android:text="@={vm.password}"/>
+                                android:text="@={vm.password}" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -268,11 +269,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
-            layout="@layout/progress_bar" />
+            layout="@layout/progress_bar"
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

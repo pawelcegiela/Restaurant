@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:textSize="18sp"
         android:text="@string/minus"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textViewNumber"
@@ -27,5 +27,5 @@
         android:layout_height="match_parent"
         android:textSize="18sp"
         android:text="@string/plus"
-        android:layout_toEndOf="@+id/textViewNumber"/>
+        android:layout_toEndOf="@+id/textViewNumber" />
 </RelativeLayout>

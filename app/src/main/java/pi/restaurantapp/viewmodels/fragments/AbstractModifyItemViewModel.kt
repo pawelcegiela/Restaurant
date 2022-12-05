@@ -23,8 +23,8 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
     private val _saveStatus: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
     val saveStatus: LiveData<Boolean> = _saveStatus
 
-    private val _readyToInitialize: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
-    val readyToInitialize: LiveData<Boolean> = _readyToInitialize
+    private val _readyToUnlock: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
+    val readyToUnlock: LiveData<Boolean> = _readyToUnlock
 
     private val _toastMessage: MutableLiveData<Int> = MutableLiveData<Int>()
     val toastMessage: LiveData<Int> = _toastMessage
@@ -36,7 +36,7 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
     fun getDataFromDatabase() {
         _logic.getDataFromDatabase(itemId) { snapshotsPair ->
             getItem(snapshotsPair)
-            setReadyToInitialize()
+            setReadyToUnlock()
         }
     }
 
@@ -52,7 +52,6 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
         } else {
             _toastMessage.value = R.string.null_data
         }
-
     }
 
     open fun saveToDatabase2(data: SplitDataObject) {
@@ -69,8 +68,8 @@ abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
         _logic.removeFromDatabase(itemId)
     }
 
-    fun setReadyToInitialize() {
-        _readyToInitialize.value = true
+    fun setReadyToUnlock() {
+        _readyToUnlock.value = true
     }
 
     open fun shouldGetDataFromDatabase() = true

@@ -39,7 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.INVISIBLE}">
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardCustomerDetails"
@@ -116,7 +117,7 @@
                             android:hint="@string/last_name"
                             android:importantForAutofill="no"
                             android:inputType="text"
-                            android:text="@={vm.item.basic.lastName}"/>
+                            android:text="@={vm.item.basic.lastName}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewEmailTitle"
@@ -134,7 +135,7 @@
                             android:hint="@string/e_mail"
                             android:importantForAutofill="no"
                             android:inputType="textEmailAddress"
-                            android:text="@={vm.item.details.email}"/>
+                            android:text="@={vm.item.details.email}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDefaultDeliveryAddressTitle"
@@ -151,7 +152,7 @@
                             app:flatNumber="@={vm.item.details.defaultDeliveryAddress.flatNumber}"
                             app:houseNumber="@={vm.item.details.defaultDeliveryAddress.houseNumber}"
                             app:postalCode="@={vm.item.details.defaultDeliveryAddress.postalCode}"
-                            app:street="@={vm.item.details.defaultDeliveryAddress.street}"/>
+                            app:street="@={vm.item.details.defaultDeliveryAddress.street}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewContactPhoneTitle"
@@ -168,7 +169,7 @@
                             android:hint="@string/contact_phone"
                             android:importantForAutofill="no"
                             android:inputType="phone"
-                            android:text="@={vm.item.details.contactPhone}"/>
+                            android:text="@={vm.item.details.contactPhone}" />
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
 
@@ -207,7 +208,7 @@
                             android:layout_height="wrap_content"
                             android:adapter="@{SpinnerAdapter.createNew(context, CollectionType.getArrayOfStrings(context))}"
                             android:selectedItemPosition="@={vm.item.details.preferredCollectionType}"
-                            android:onItemSelected="@{(x, y, position, z) -> fragment.onItemSelectedCollectionType(position)}"/>
+                            android:onItemSelected="@{(x, y, position, z) -> fragment.onItemSelectedCollectionType(position)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewOrderPlaceTitle"
@@ -245,11 +246,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
-            layout="@layout/progress_bar" />
+            layout="@layout/progress_bar"
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -12,8 +12,4 @@ class AddIngredientFragment : AbstractModifyIngredientFragment() {
     override val removeMessageId = 0 // Unused
     override val viewModel: AbstractModifyItemViewModel get() = _viewModel
     private val _viewModel: AddIngredientViewModel by viewModels()
-
-    override fun initializeUI() {
-        finishLoading()
-    }
 }

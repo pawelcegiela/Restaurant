@@ -1,8 +1,5 @@
 package pi.restaurantapp.viewmodels.fragments.management.ingredients
 
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.logic.fragments.management.ingredients.AbstractModifyIngredientLogic
@@ -27,17 +24,7 @@ abstract class AbstractModifyIngredientViewModel : AbstractModifyItemViewModel()
 
     private var previousSubIngredients: MutableList<IngredientItem> = ArrayList()
 
-    var observer = Observer(_item)
-
-    class Observer(private val item: MutableLiveData<Ingredient>) : BaseObservable() {
-        @get:Bindable
-        var subIngredients: MutableList<IngredientItem> = ArrayList()
-            set(value) {
-                field = value
-                notifyPropertyChanged(BR.subIngredients)
-                item.value?.details?.subIngredients = value
-            }
-    }
+    var observer = ModifyIngredientObserver(_item)
 
     override fun saveToDatabase2(data: SplitDataObject) {
         _logic.saveToDatabase(data, previousSubIngredients) { saveStatus ->

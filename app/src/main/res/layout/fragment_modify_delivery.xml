@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.INVISIBLE}">
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardDeliveryDetails"
@@ -165,7 +166,7 @@
                                     android:importantForAutofill="no"
                                     android:inputType="numberDecimal"
                                     android:text="@={vm.item.basic.minimumPriceFreeDelivery}"
-                                    android:enabled="@{vm.item.basic.freeDeliveryAvailable}"/>
+                                    android:enabled="@{vm.item.basic.freeDeliveryAvailable}" />
 
                             </RelativeLayout>
 
@@ -194,7 +195,8 @@
         <include
             android:id="@+id/progress"
             layout="@layout/progress_bar"
-            tools:layout_editor_absoluteX="1dp" />
+            tools:layout_editor_absoluteX="1dp"
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -14,10 +14,6 @@ class AddWorkerFragment : AbstractModifyWorkerFragment() {
     override val viewModel: AbstractModifyItemViewModel get() = _viewModel
     private val _viewModel: AddWorkerViewModel by viewModels()
 
-    override fun initializeUI() {
-        finishLoading()
-    }
-
     override fun getEditTextMap(): Map<EditText, Int> {
         val map = super.getEditTextMap().toMutableMap()
         map[binding.editTextUserPassword] = R.string.user_password

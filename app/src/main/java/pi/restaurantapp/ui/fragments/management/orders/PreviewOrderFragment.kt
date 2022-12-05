@@ -38,7 +38,7 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         _binding = FragmentPreviewOrderBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         activityViewModel.reset()
         return binding.root
     }

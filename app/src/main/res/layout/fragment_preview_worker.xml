@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <import type="android.view.View" />
 
         <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
@@ -80,13 +81,13 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="7dp"
-                                    android:text="@{StringFormatUtils.format(vm.item.basic.firstName, vm.item.basic.lastName)}"/>
+                                    android:text="@{StringFormatUtils.format(vm.item.basic.firstName, vm.item.basic.lastName)}" />
 
                                 <pi.restaurantapp.ui.textviews.TextViewItemType
                                     android:id="@+id/textViewRole"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="@{Role.getString(vm.item.basic.role, context)}"/>
+                                    android:text="@{Role.getString(vm.item.basic.role, context)}" />
 
                             </LinearLayout>
 
@@ -104,7 +105,7 @@
                             android:id="@+id/textViewEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.item.details.email}"/>
+                            android:text="@{vm.item.details.email}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCreationDateTitle"
@@ -170,12 +171,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
             layout="@layout/progress_bar"
-            app:shouldHide="@{vm.readyToUnlock}"/>
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

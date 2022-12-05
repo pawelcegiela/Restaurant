@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.viewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyOpeningHoursBinding
@@ -18,7 +17,6 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyOpeningHoursBinding? = null
     private val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = "openingHours"
@@ -48,7 +46,7 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyOpeningHoursBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }
@@ -90,10 +88,6 @@ class EditOpeningHoursFragment : AbstractModifyItemFragment() {
                 }
             }
         }
-    }
-
-    override fun getEditTextMap(): Map<EditText, Int> {
-        return HashMap()
     }
 
     override fun onDestroyView() {

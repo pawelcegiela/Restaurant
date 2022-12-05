@@ -15,7 +15,7 @@ class AddOrderViewModel : AbstractModifyOrderViewModel() {
     override fun createItem() {
         itemId = StringFormatUtils.formatId()
         setItem(Order(itemId, OrderBasic(itemId, Firebase.auth.uid!!), OrderDetails(itemId)))
-        setReadyToInitialize()
+        setReadyToUnlock()
 
         setToolbarType()
     }

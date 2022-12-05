@@ -13,7 +13,7 @@ class AddDishViewModel : AbstractModifyDishViewModel() {
     override fun createItem() {
         itemId = StringFormatUtils.formatId()
         setItem(Dish(itemId, DishBasic(itemId), DishDetails(itemId)))
-        setReadyToInitialize()
+        setReadyToUnlock()
 
         toolbarType.value = ToolbarType.SAVE
     }

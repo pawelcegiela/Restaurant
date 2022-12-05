@@ -15,7 +15,6 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyAllergenBinding? = null
     val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
@@ -27,8 +26,7 @@ abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
     ): View {
         _binding = FragmentModifyAllergenBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
-        binding.lifecycleOwner = this
-        linearLayout.visibility = View.INVISIBLE
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

@@ -165,12 +165,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
             layout="@layout/progress_bar"
-            app:shouldHide="@{vm.readyToUnlock}"/>
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

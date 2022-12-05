@@ -32,7 +32,7 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
         _binding = FragmentClientPreviewOrderBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setLiveDataListeners()
 

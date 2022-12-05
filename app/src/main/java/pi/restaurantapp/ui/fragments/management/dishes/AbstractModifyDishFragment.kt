@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentModifyDishBinding
-import pi.restaurantapp.logic.utils.UserInterfaceUtils
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
@@ -22,7 +21,6 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDishBinding? = null
     val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
@@ -49,13 +47,8 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyDishBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
-        linearLayout.visibility = View.INVISIBLE
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
-    }
-
-    override fun initializeUI() {
-        finishLoading()
     }
 
     override fun getEditTextMap(): Map<EditText, Int> {
@@ -115,7 +108,6 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
             lists[newItem.second.ordinal].add(newItem.first)
 
             recyclers[oldItem.second.ordinal].adapter?.notifyItemRemoved(oldListPosition)
-            UserInterfaceUtils.setRecyclerSize(recyclers[oldItem.second.ordinal], lists[oldItem.second.ordinal].size, requireContext())
         }
         recyclers[newItem.second.ordinal].adapter?.notifyItemInserted(lists[newItem.second.ordinal].indexOf(newItem.first))
     }

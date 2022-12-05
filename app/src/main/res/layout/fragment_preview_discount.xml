@@ -110,7 +110,7 @@
                             android:id="@+id/textViewDiscountValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{StringFormatUtils.formatDiscountValue(vm.item.basic.amount, vm.item.basic.valueType, context)}"/>
+                            android:text="@{StringFormatUtils.formatDiscountValue(vm.item.basic.amount, vm.item.basic.valueType, context)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewThresholdTitle"
@@ -124,7 +124,7 @@
                             android:id="@+id/textViewThreshold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.item.basic.hasThreshold ? StringFormatUtils.formatPrice(vm.item.basic.thresholdValue) : @string/any}"/>
+                            android:text="@{vm.item.basic.hasThreshold ? StringFormatUtils.formatPrice(vm.item.basic.thresholdValue) : @string/any}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewReceiverTypeTitle"
@@ -138,7 +138,7 @@
                             android:id="@+id/textViewReceiverType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{DiscountReceiverType.getString(vm.item.basic.receiverType, context)}"/>
+                            android:text="@{DiscountReceiverType.getString(vm.item.basic.receiverType, context)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewUsageTypeTitle"
@@ -152,7 +152,7 @@
                             android:id="@+id/textViewUsageType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{DiscountUsageType.getString(vm.item.basic.usageType, context)}"/>
+                            android:text="@{DiscountUsageType.getString(vm.item.basic.usageType, context)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewCreationDateTitle"
@@ -166,7 +166,7 @@
                             android:id="@+id/textViewCreationDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.creationDate)}"/>
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.creationDate)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewExpirationDateTitle"
@@ -180,7 +180,7 @@
                             android:id="@+id/textViewExpirationDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.expirationDate)}"/>
+                            android:text="@{StringFormatUtils.formatDateTime(vm.item.basic.expirationDate)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewTotalNumberTitle"
@@ -194,7 +194,7 @@
                             android:id="@+id/textViewTotalNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{String.valueOf(vm.item.basic.numberOfDiscounts)}"/>
+                            android:text="@{String.valueOf(vm.item.basic.numberOfDiscounts)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewAssignedTitle"
@@ -208,7 +208,7 @@
                             android:id="@+id/textViewAssigned"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{String.valueOf(vm.item.basic.assignedDiscounts.size)}"/>
+                            android:text="@{String.valueOf(vm.item.basic.assignedDiscounts.size)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewRedeemedTitle"
@@ -222,7 +222,7 @@
                             android:id="@+id/textViewRedeemed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{String.valueOf(vm.item.basic.redeemedDiscounts.size)}"/>
+                            android:text="@{String.valueOf(vm.item.basic.redeemedDiscounts.size)}" />
 
                         <Button
                             android:id="@+id/buttonAddCustomer"
@@ -232,7 +232,7 @@
                             android:layout_height="70dp"
                             android:layout_gravity="center"
                             android:text="@string/assign_to_customer"
-                            android:onClick="@{() -> fragment.onClickAddCustomer()}"/>
+                            android:onClick="@{() -> fragment.onClickAddCustomer()}" />
                     </LinearLayout>
 
                 </pi.restaurantapp.ui.CardViewPreviewElement>
@@ -255,12 +255,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
             layout="@layout/progress_bar"
-            app:shouldHide="@{vm.readyToUnlock}"/>
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

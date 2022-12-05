@@ -16,7 +16,7 @@ class AddWorkerViewModel : AbstractModifyWorkerViewModel() {
 
     override fun createItem() {
         setItem(User("", UserBasic(), UserDetails()))
-        setReadyToInitialize()
+        setReadyToUnlock()
 
         toolbarType.value = ToolbarType.SAVE
     }

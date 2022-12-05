@@ -29,7 +29,7 @@ class PreviewAllergenFragment : AbstractPreviewItemFragment() {
         _binding = FragmentPreviewAllergenBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }

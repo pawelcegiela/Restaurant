@@ -16,7 +16,6 @@ class EditAboutRestaurantFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyAboutRestaurantBinding? = null
     private val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = "aboutRestaurant"
@@ -34,7 +33,7 @@ class EditAboutRestaurantFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyAboutRestaurantBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

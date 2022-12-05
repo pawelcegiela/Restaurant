@@ -29,7 +29,7 @@ class PreviewCustomerFragment : AbstractPreviewItemFragment() {
     ): View {
         _binding = FragmentPreviewCustomerBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }

@@ -11,7 +11,7 @@ class AddDiscountViewModel : AbstractModifyDiscountViewModel() {
 
     override fun createItem() {
         setItem(Discount("", DiscountBasic(), DiscountDetails()))
-        setReadyToInitialize()
+        setReadyToUnlock()
 
         toolbarType.value = ToolbarType.SAVE
     }

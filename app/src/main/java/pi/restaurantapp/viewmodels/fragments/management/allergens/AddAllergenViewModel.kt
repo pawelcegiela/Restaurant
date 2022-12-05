@@ -13,7 +13,7 @@ class AddAllergenViewModel : AbstractModifyAllergenViewModel() {
     override fun createItem() {
         itemId = StringFormatUtils.formatId()
         setItem(Allergen(itemId, AllergenBasic(itemId), AllergenDetails(itemId)))
-        setReadyToInitialize()
+        setReadyToUnlock()
 
         toolbarType.value = ToolbarType.SAVE
     }

@@ -18,6 +18,5 @@ class AddOrderFragment : AbstractModifyOrderFragment() {
     override fun initializeUI() {
         super.initializeUI()
         activityViewModel.setActionSave(R.id.actionCustomizeDishToAddOrder)
-        finishLoading()
     }
 }

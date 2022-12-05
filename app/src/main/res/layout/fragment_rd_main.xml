@@ -298,7 +298,7 @@
                             android:id="@+id/textViewAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{StringFormatUtils.formatAddress(vm.item.basic.location)}"/>
+                            android:text="@{StringFormatUtils.formatAddress(vm.item.basic.location)}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
@@ -336,7 +336,7 @@
                             android:id="@+id/textViewAvailableDelivery"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.item.basic.delivery.available ? @string/yes : @string/no}"/>
+                            android:text="@{vm.item.basic.delivery.available ? @string/yes : @string/no}" />
 
                         <LinearLayout
                             android:id="@+id/linearLayoutAvailableDelivery"
@@ -357,7 +357,7 @@
                                 android:id="@+id/textViewMinimumPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{StringFormatUtils.formatPrice(vm.item.basic.delivery.minimumPrice)}"/>
+                                android:text="@{StringFormatUtils.formatPrice(vm.item.basic.delivery.minimumPrice)}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewDeliveryFeeTitle"
@@ -371,7 +371,7 @@
                                 android:id="@+id/textViewDeliveryFee"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{StringFormatUtils.formatPrice(vm.item.basic.delivery.extraDeliveryFee)}"/>
+                                android:text="@{StringFormatUtils.formatPrice(vm.item.basic.delivery.extraDeliveryFee)}" />
 
                             <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                                 android:id="@+id/textViewFreeDeliveryTitle"
@@ -384,7 +384,7 @@
                             <pi.restaurantapp.ui.textviews.TextViewDetail
                                 android:id="@+id/textViewFreeDelivery"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
                         </LinearLayout>
 
@@ -409,12 +409,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
             layout="@layout/progress_bar"
-            app:shouldHide="@{vm.readyToUnlock}"/>
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

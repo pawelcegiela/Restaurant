@@ -16,7 +16,6 @@ class EditLocationFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyLocationBinding? = null
     private val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = "location"
@@ -34,7 +33,7 @@ class EditLocationFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyLocationBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

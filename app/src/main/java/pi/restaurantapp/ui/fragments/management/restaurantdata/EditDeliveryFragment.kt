@@ -16,7 +16,6 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDeliveryBinding? = null
     private val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = "delivery"
@@ -34,7 +33,7 @@ class EditDeliveryFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyDeliveryBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.linearLayout.visibility = View.INVISIBLE
         return binding.root
     }

@@ -3,7 +3,6 @@ package pi.restaurantapp.ui.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -20,7 +19,6 @@ import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 abstract class AbstractModifyItemFragment : Fragment() {
     abstract val viewModel: AbstractModifyItemViewModel
 
-    abstract val linearLayout: LinearLayout
     abstract val progressBar: ProgressBar
     abstract val toolbarNavigation: ToolbarNavigationModifyBinding
     abstract var itemId: String
@@ -53,12 +51,6 @@ abstract class AbstractModifyItemFragment : Fragment() {
             }
         }
 
-        viewModel.readyToInitialize.observe(viewLifecycleOwner) { ready ->
-            if (ready) {
-                finishLoading()
-            }
-        }
-
         viewModel.saveStatus.observe(viewLifecycleOwner) { saved ->
             if (saved) {
                 afterSave()
@@ -70,7 +62,7 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
     }
 
-    abstract fun initializeUI()
+    open fun initializeUI() {}
 
     open fun afterSave() {
         Toast.makeText(activity, getString(saveMessageId), Toast.LENGTH_SHORT).show()
@@ -79,19 +71,15 @@ abstract class AbstractModifyItemFragment : Fragment() {
 
     fun initializeNavigationToolbar() {
         toolbarNavigation.cardSave.root.setOnClickListener {
-            if (!UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
-                return@setOnClickListener
+            if (UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
+                viewModel.saveToDatabase()
             }
-
-            viewModel.saveToDatabase()
         }
 
         toolbarNavigation.cardSaveRemove.cardSave2.setOnClickListener {
-            if (!UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
-                return@setOnClickListener
+            if (UserInterfaceUtils.checkRequiredFields(getEditTextMap(), this)) {
+                viewModel.saveToDatabase()
             }
-
-            viewModel.saveToDatabase()
         }
 
         toolbarNavigation.cardSaveRemove.cardRemove.setOnClickListener {
@@ -103,7 +91,9 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
     }
 
-    abstract fun getEditTextMap(): Map<EditText, Int>
+    open fun getEditTextMap(): Map<EditText, Int> {
+        return HashMap()
+    }
 
     private fun disableItem() {
         if (!checkRemovePreconditions()) {
@@ -111,7 +101,6 @@ abstract class AbstractModifyItemFragment : Fragment() {
         }
         YesNoDialog(requireContext(), R.string.warning, R.string.do_you_want_to_disable) { dialog, _ ->
             viewModel.disableItem()
-
             dialog.dismiss()
             Toast.makeText(activity, getString(R.string.this_item_has_been_disabled), Toast.LENGTH_SHORT).show()
             findNavController().navigate(nextActionId)
@@ -132,9 +121,4 @@ abstract class AbstractModifyItemFragment : Fragment() {
     }
 
     open fun checkRemovePreconditions() = true
-
-    fun finishLoading() {
-        progressBar.visibility = View.GONE
-        linearLayout.visibility = View.VISIBLE
-    }
 }

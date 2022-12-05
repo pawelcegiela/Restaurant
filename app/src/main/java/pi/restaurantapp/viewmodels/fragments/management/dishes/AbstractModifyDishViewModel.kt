@@ -1,8 +1,5 @@
 package pi.restaurantapp.viewmodels.fragments.management.dishes
 
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.logic.fragments.management.dishes.AbstractModifyDishLogic
@@ -32,37 +29,7 @@ abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
     private var previousIngredients: MutableList<IngredientItem> = ArrayList()
     private var previousAllergens: MutableList<AllergenBasic> = ArrayList()
 
-    var observer = Observer()
-
-    class Observer : BaseObservable() {
-        @get:Bindable
-        var baseIngredients: MutableList<IngredientItem> = ArrayList()
-            set(value) {
-                field = value
-                notifyPropertyChanged(BR.baseIngredients)
-            }
-
-        @get:Bindable
-        var otherIngredients: MutableList<IngredientItem> = ArrayList()
-            set(value) {
-                field = value
-                notifyPropertyChanged(BR.otherIngredients)
-            }
-
-        @get:Bindable
-        var possibleIngredients: MutableList<IngredientItem> = ArrayList()
-            set(value) {
-                field = value
-                notifyPropertyChanged(BR.possibleIngredients)
-            }
-
-        @get:Bindable
-        var allergens: MutableList<AllergenBasic> = ArrayList()
-            set(value) {
-                field = value
-                notifyPropertyChanged(BR.allergens)
-            }
-    }
+    var observer = ModifyDishObserver()
 
     override fun saveToDatabase2(data: SplitDataObject) {
         item.value?.details?.baseIngredients = HashMap(observer.baseIngredients.associateBy { it.id })

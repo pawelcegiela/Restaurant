@@ -33,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.INVISIBLE}">
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
                     android:id="@+id/cardOpeningHoursDetails"
@@ -90,7 +91,7 @@
                             app:startHour="@{vm.item.basic.defaultStartHour}"
                             app:endHour="@{vm.item.basic.defaultEndHour}"
                             app:vm="@{vm}"
-                            app:number="@{-1}"/>
+                            app:number="@{-1}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewMondayTitle"
@@ -107,7 +108,7 @@
                             app:startHour="@{vm.item.basic.startHoursList[0]}"
                             app:endHour="@{vm.item.basic.endHoursList[0]}"
                             app:vm="@{vm}"
-                            app:number="@{0}"/>
+                            app:number="@{0}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewTuesdayTitle"
@@ -124,7 +125,7 @@
                             app:startHour="@{vm.item.basic.startHoursList[1]}"
                             app:endHour="@{vm.item.basic.endHoursList[1]}"
                             app:vm="@{vm}"
-                            app:number="@{1}"/>
+                            app:number="@{1}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewWednesdayTitle"
@@ -141,7 +142,7 @@
                             app:startHour="@{vm.item.basic.startHoursList[2]}"
                             app:endHour="@{vm.item.basic.endHoursList[2]}"
                             app:vm="@{vm}"
-                            app:number="@{2}"/>
+                            app:number="@{2}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewThursdayTitle"
@@ -158,7 +159,7 @@
                             app:startHour="@{vm.item.basic.startHoursList[3]}"
                             app:endHour="@{vm.item.basic.endHoursList[3]}"
                             app:vm="@{vm}"
-                            app:number="@{3}"/>
+                            app:number="@{3}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewFridayTitle"
@@ -175,7 +176,7 @@
                             app:startHour="@{vm.item.basic.startHoursList[4]}"
                             app:endHour="@{vm.item.basic.endHoursList[4]}"
                             app:vm="@{vm}"
-                            app:number="@{4}"/>
+                            app:number="@{4}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewSaturdayTitle"
@@ -192,7 +193,7 @@
                             app:startHour="@{vm.item.basic.startHoursList[5]}"
                             app:endHour="@{vm.item.basic.endHoursList[5]}"
                             app:vm="@{vm}"
-                            app:number="@{5}"/>
+                            app:number="@{5}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewSundayTitle"
@@ -209,7 +210,7 @@
                             app:startHour="@{vm.item.basic.startHoursList[6]}"
                             app:endHour="@{vm.item.basic.endHoursList[6]}"
                             app:vm="@{vm}"
-                            app:number="@{6}"/>
+                            app:number="@{6}" />
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
@@ -231,11 +232,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
-            layout="@layout/progress_bar" />
+            layout="@layout/progress_bar"
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

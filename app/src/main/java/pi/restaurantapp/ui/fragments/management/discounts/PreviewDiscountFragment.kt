@@ -31,7 +31,7 @@ class PreviewDiscountFragment : AbstractPreviewItemFragment() {
         _binding = FragmentPreviewDiscountBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 

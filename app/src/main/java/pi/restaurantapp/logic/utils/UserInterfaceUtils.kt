@@ -1,28 +1,15 @@
 package pi.restaurantapp.logic.utils
 
-import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
 import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.CardViewWideBinding
 
 class UserInterfaceUtils {
     companion object {
-        fun setRecyclerSize(recyclerView: RecyclerView, size: Int, context: Context) {
-            val itemSize = 50
-            val layoutParams = LinearLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                (itemSize * context.resources.displayMetrics.density * size).toInt()
-            )
-            recyclerView.layoutParams = layoutParams
-        }
-
         fun checkRequiredFields(map: Map<EditText, Int>, fragment: Fragment): Boolean {
             var allFilled = true
             map.forEach {

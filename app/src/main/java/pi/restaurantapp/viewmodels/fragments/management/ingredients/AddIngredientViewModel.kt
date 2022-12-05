@@ -13,7 +13,7 @@ class AddIngredientViewModel : AbstractModifyIngredientViewModel() {
     override fun createItem() {
         itemId = StringFormatUtils.formatId()
         setItem(Ingredient(itemId, IngredientBasic(itemId), IngredientDetails(itemId)))
-        setReadyToInitialize()
+        setReadyToUnlock()
 
         toolbarType.value = ToolbarType.SAVE
     }

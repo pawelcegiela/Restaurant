@@ -41,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp">
+
         <EditText
             android:id="@+id/editTextAmount"
             android:layout_width="match_parent"
@@ -49,7 +50,7 @@
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
             android:singleLine="true"
-            android:layout_toStartOf="@+id/textViewUnit"/>
+            android:layout_toStartOf="@+id/textViewUnit" />
 
         <pi.restaurantapp.ui.textviews.TextViewDetail
             android:id="@+id/textViewUnit"

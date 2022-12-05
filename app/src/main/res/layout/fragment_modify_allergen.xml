@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="pi.restaurantapp.viewmodels.fragments.management.allergens.AbstractModifyAllergenViewModel" />
@@ -27,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:visibility="@{vm.readyToUnlock ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <pi.restaurantapp.ui.CardViewPreviewElement
@@ -87,9 +90,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/description"
-                            android:text="@={vm.item.details.description}"
                             android:importantForAutofill="no"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:text="@={vm.item.details.description}" />
 
                     </LinearLayout>
 
@@ -113,11 +116,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
-            layout="@layout/progress_bar" />
+            layout="@layout/progress_bar"
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

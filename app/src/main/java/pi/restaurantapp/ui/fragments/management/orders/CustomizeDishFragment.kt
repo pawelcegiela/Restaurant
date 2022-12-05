@@ -12,20 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.FragmentCustomizeDishBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.logic.utils.StringFormatUtils
-import pi.restaurantapp.logic.utils.UserInterfaceUtils
-import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
-import pi.restaurantapp.objects.enums.DishType
 import pi.restaurantapp.objects.enums.IngredientStatus
-import pi.restaurantapp.ui.adapters.DishAllergensRecyclerAdapter
-import pi.restaurantapp.ui.adapters.DishIngredientsRecyclerAdapter
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.ui.pickers.CustomNumberPicker
 import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel
-import java.math.BigDecimal
 
 
 open class CustomizeDishFragment : AbstractPreviewItemFragment() {
@@ -39,10 +33,6 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
     private var _binding: FragmentCustomizeDishBinding? = null
     val binding get() = _binding!!
 
-    private var otherIngredientsList: MutableList<IngredientItem> = ArrayList()
-    private var possibleIngredientsList: MutableList<IngredientItem> = ArrayList()
-
-    lateinit var dish: Dish
     private lateinit var numberPickerPortions: CustomNumberPicker
 
     override fun onCreateView(
@@ -52,7 +42,7 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
         _binding = FragmentCustomizeDishBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -61,8 +51,8 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
             super.onViewCreated(view, savedInstanceState)
         } else {
             _viewModel.setItem(activityViewModel.editedDish.value ?: DishItem())
-            activityViewModel.resetEditedDish()
             viewModel.initializeData(activityViewModel.editedDish.value!!.id)
+            activityViewModel.resetEditedDish()
             addLiveDataObservers()
         }
     }
@@ -77,110 +67,67 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
 
     override fun initializeExtraData() {
         val item = _viewModel.item.value ?: DishItem()
-        dish = item.dish
+        val dish = item.dish
 
-        numberPickerPortions = CustomNumberPicker(binding.numberPickerPortions, 1, 10, 1) { refreshTotalDishPrice() }
+        numberPickerPortions = CustomNumberPicker(binding.numberPickerPortions, 1, 10, 1) { value ->
+            _viewModel.item.value?.amount = value
+            refreshTotalDishPrice()
+        }
         numberPickerPortions.setValue(item.amount)
 
-        binding.textViewName.text = dish.basic.name
         if (dish.basic.isDiscounted) {
-            binding.textViewPrice.text = StringFormatUtils.formatPrice(dish.basic.discountPrice)
-            binding.textViewOriginalPrice.paintFlags =
-                binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            binding.textViewOriginalPrice.visibility = View.VISIBLE
-            binding.textViewOriginalPrice.text = StringFormatUtils.formatPrice(dish.basic.basePrice)
-        } else {
-            binding.textViewPrice.text = StringFormatUtils.formatPrice(dish.basic.basePrice)
+            binding.textViewOriginalPrice.paintFlags = binding.textViewOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         }
-        binding.textViewDishType.text = DishType.getString(dish.basic.dishType, requireContext())
-        binding.textViewAmount.text =
-            StringFormatUtils.formatAmountWithUnit(requireContext(), dish.details.amount, dish.details.unit)
+
         refreshTotalDishPrice()
-
-        otherIngredientsList = dish.details.otherIngredients.toList().map { it.second }.toMutableList()
-        possibleIngredientsList = dish.details.possibleIngredients.toList().map { it.second }.toMutableList()
-
-        for (ingredient in item.unusedOtherIngredients) {
-            val ingredientItem = otherIngredientsList.find { it.id == ingredient.id }
-            otherIngredientsList.remove(ingredientItem)
-            ingredientItem?.let { possibleIngredientsList.add(it) }
-        }
-        for (ingredient in item.usedPossibleIngredients) {
-            val ingredientItem = possibleIngredientsList.find { it.id == ingredient.id }
-            possibleIngredientsList.remove(ingredientItem)
-            ingredientItem?.let { otherIngredientsList.add(it) }
-        }
-
-        initializeRecyclerViews(dish)
         initializeMoreLessButtons()
 
         viewModel.setReadyToUnlock()
     }
 
-    private fun initializeRecyclerViews(item: Dish) {
-        binding.recyclerViewBaseIngredients.adapter =
-            DishIngredientsRecyclerAdapter(item.details.baseIngredients.toList().map { it.second }.toMutableList(), this, IngredientStatus.BASE)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewBaseIngredients, item.details.baseIngredients.size, requireContext())
-
-        binding.recyclerViewOtherIngredients.adapter =
-            DishIngredientsRecyclerAdapter(otherIngredientsList, this, IngredientStatus.OTHER)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewOtherIngredients, otherIngredientsList.size, requireContext())
-
-        binding.recyclerViewPossibleIngredients.adapter =
-            DishIngredientsRecyclerAdapter(possibleIngredientsList, this, IngredientStatus.POSSIBLE)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewPossibleIngredients, possibleIngredientsList.size, requireContext())
-
-        binding.recyclerViewAllergens.adapter =
-            DishAllergensRecyclerAdapter(item.details.allergens.toList().map { it.second }.toMutableList(), this)
-        UserInterfaceUtils.setRecyclerSize(binding.recyclerViewAllergens, item.details.allergens.size, requireContext())
-    }
-
     fun changeIngredientItemState(state: IngredientStatus, ingredientItem: IngredientItem) {
         if (state == IngredientStatus.OTHER) {
-            removeIngredient(otherIngredientsList, binding.recyclerViewOtherIngredients, ingredientItem)
-            addIngredient(possibleIngredientsList, binding.recyclerViewPossibleIngredients, ingredientItem)
+            removeIngredient(_viewModel.observer.otherIngredients, binding.recyclerViewOtherIngredients, ingredientItem)
+            addIngredient(_viewModel.observer.possibleIngredients, binding.recyclerViewPossibleIngredients, ingredientItem)
         } else {
-            removeIngredient(possibleIngredientsList, binding.recyclerViewPossibleIngredients, ingredientItem)
-            addIngredient(otherIngredientsList, binding.recyclerViewOtherIngredients, ingredientItem)
+            removeIngredient(_viewModel.observer.possibleIngredients, binding.recyclerViewPossibleIngredients, ingredientItem)
+            addIngredient(_viewModel.observer.otherIngredients, binding.recyclerViewOtherIngredients, ingredientItem)
         }
         refreshTotalDishPrice()
     }
 
     private fun refreshTotalDishPrice() {
-        binding.textViewTotalDishPrice.text = StringFormatUtils.formatPrice(getFinalPrice())
+        binding.textViewTotalDishPrice.text = StringFormatUtils.formatPrice(_viewModel.getFinalPrice())
     }
 
     private fun removeIngredient(list: MutableList<IngredientItem>, recycler: RecyclerView, item: IngredientItem) {
         val itemPosition = list.indexOf(item)
         list.remove(item)
         recycler.adapter?.notifyItemRemoved(itemPosition)
-        UserInterfaceUtils.setRecyclerSize(recycler, list.size, requireContext())
     }
 
     private fun addIngredient(list: MutableList<IngredientItem>, recycler: RecyclerView, item: IngredientItem) {
         list.add(item)
         recycler.adapter?.notifyItemInserted(list.indexOf(item))
-        UserInterfaceUtils.setRecyclerSize(recycler, list.size, requireContext())
     }
 
     protected fun getDataObject(): DishItem {
-        val dishItem = (viewModel as CustomizeDishViewModel).getPreviousItem()
-        val itemId = dishItem.id.ifEmpty { StringFormatUtils.formatId() }
+        val dishItem = _viewModel.item.value!!
 
         return DishItem(
-            id = itemId,
+            id = viewModel.itemId,
             dish = dishItem.dish,
             amount = numberPickerPortions.getValue(),
             unusedOtherIngredients = getUnusedOtherIngredients(),
             usedPossibleIngredients = getUsedPossibleIngredients(),
-            finalPrice = getFinalPrice()
+            finalPrice = _viewModel.getFinalPrice()
         )
     }
 
     private fun getUnusedOtherIngredients(): ArrayList<IngredientItem> {
         val list = ArrayList<IngredientItem>()
-        for (ingredientItem in possibleIngredientsList) {
-            if (dish.details.otherIngredients.containsKey(ingredientItem.id)) {
+        for (ingredientItem in _viewModel.observer.possibleIngredients) {
+            if (_viewModel.item.value!!.dish.details.otherIngredients.containsKey(ingredientItem.id)) {
                 list.add(ingredientItem)
             }
         }
@@ -189,18 +136,12 @@ open class CustomizeDishFragment : AbstractPreviewItemFragment() {
 
     private fun getUsedPossibleIngredients(): ArrayList<IngredientItem> {
         val list = ArrayList<IngredientItem>()
-        for (ingredientItem in otherIngredientsList) {
-            if (dish.details.possibleIngredients.containsKey(ingredientItem.id)) {
+        for (ingredientItem in _viewModel.observer.otherIngredients) {
+            if (_viewModel.item.value!!.dish.details.possibleIngredients.containsKey(ingredientItem.id)) {
                 list.add(ingredientItem)
             }
         }
         return list
-    }
-
-    private fun getFinalPrice(): String {
-        var price = BigDecimal(if (dish.basic.isDiscounted) dish.basic.discountPrice else dish.basic.basePrice)
-        price += otherIngredientsList.sumOf { BigDecimal(it.extraPrice) }
-        return (price * BigDecimal(numberPickerPortions.getValue())).toString()
     }
 
     private fun initializeMoreLessButtons() {

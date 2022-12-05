@@ -131,7 +131,7 @@
                             android:id="@+id/textViewDeliveryAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{StringFormatUtils.formatAddress(vm.item.details.defaultDeliveryAddress)}"/>
+                            android:text="@{StringFormatUtils.formatAddress(vm.item.details.defaultDeliveryAddress)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewContactPhoneTitle"
@@ -145,7 +145,7 @@
                             android:id="@+id/textViewContactPhone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{vm.item.details.contactPhone.isEmpty() ? @string/no_contact_phone : vm.item.details.contactPhone}"/>
+                            android:text="@{vm.item.details.contactPhone.isEmpty() ? @string/no_contact_phone : vm.item.details.contactPhone}" />
 
                     </LinearLayout>
 
@@ -169,12 +169,12 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline"
-            app:type="@{vm.toolbarType}"/>
+            app:type="@{vm.toolbarType}" />
 
         <include
             android:id="@+id/progress"
             layout="@layout/progress_bar"
-            app:shouldHide="@{vm.readyToUnlock}"/>
+            app:shouldHide="@{vm.readyToUnlock}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

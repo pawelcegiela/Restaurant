@@ -33,7 +33,7 @@ class PreviewWorkerFragment : AbstractPreviewItemFragment() {
     ): View {
         _binding = FragmentPreviewWorkerBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }

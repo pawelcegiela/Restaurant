@@ -20,7 +20,6 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDiscountBinding? = null
     val binding get() = _binding!!
 
-    override val linearLayout get() = binding.linearLayout
     override val progressBar get() = binding.progress.progressBar
     override val toolbarNavigation get() = binding.toolbarNavigation
     override var itemId = ""
@@ -35,14 +34,9 @@ abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
         _binding = FragmentModifyDiscountBinding.inflate(inflater, container, false)
         binding.vm = _viewModel
         binding.fragment = this
-        binding.lifecycleOwner = this
-        linearLayout.visibility = View.INVISIBLE
+        binding.lifecycleOwner = viewLifecycleOwner
         _viewModel.setList(activityViewModel.list.value ?: ArrayList())
         return binding.root
-    }
-
-    override fun initializeUI() {
-        finishLoading()
     }
 
     fun onClickExpirationDate() {
