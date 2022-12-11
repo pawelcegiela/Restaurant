@@ -8,6 +8,10 @@
         <import type="pi.restaurantapp.logic.utils.StringFormatUtils" />
 
         <variable
+            name="fragment"
+            type="pi.restaurantapp.ui.fragments.management.restaurantdata.RDMainFragment" />
+
+        <variable
             name="vm"
             type="pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel" />
     </data>
@@ -299,6 +303,47 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{StringFormatUtils.formatAddress(vm.item.basic.location)}" />
+
+                        <com.mapbox.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/mapView"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="5dp"
+                            mapbox:mapbox_cameraTargetLat="52.069167"
+                            mapbox:mapbox_cameraTargetLng="19.480556"
+                            mapbox:mapbox_cameraZoom="4.0" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/buttonZoomOut"
+                                style="?android:attr/buttonBarButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/minus"
+                                android:textColor="@color/light_grey"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:onClick="@{() -> fragment.onClickZoom(false)}" />
+
+                            <Button
+                                android:id="@+id/buttonZoomIn"
+                                style="?android:attr/buttonBarButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/plus"
+                                android:textColor="@color/light_grey"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:onClick="@{() -> fragment.onClickZoom(true)}" />
+                        </LinearLayout>
 
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>

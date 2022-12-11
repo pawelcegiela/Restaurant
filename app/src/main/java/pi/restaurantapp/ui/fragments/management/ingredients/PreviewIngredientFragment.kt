@@ -46,8 +46,8 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
             _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.DELIVERY, setNewAmount = { newAmount ->
                 binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
             }, addNewAmountChange = { newAmountChange ->
-                _viewModel.amountChanges.add(newAmountChange)
-                binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(_viewModel.amountChanges.size - 1)
+                _viewModel.amountChanges.value?.add(0, newAmountChange)
+                binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(0)
             })
         }
     }
@@ -62,7 +62,7 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
             _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.CORRECTION, setNewAmount = { newAmount ->
                 binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
             }, addNewAmountChange = { newAmountChange ->
-                _viewModel.amountChanges.add(0, newAmountChange)
+                _viewModel.amountChanges.value?.add(0, newAmountChange)
                 binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(0)
             })
         }

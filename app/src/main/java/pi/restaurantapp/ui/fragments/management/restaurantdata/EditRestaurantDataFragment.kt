@@ -10,7 +10,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentEditRestaurantDataBinding
 import pi.restaurantapp.logic.utils.UserInterfaceUtils
 
-class EditRestaurantData : Fragment() {
+class EditRestaurantDataFragment : Fragment() {
     private var _binding: FragmentEditRestaurantDataBinding? = null
     private val binding get() = _binding!!
 

@@ -129,6 +129,14 @@
                             android:onCheckedChanged="@{(_, checked) -> fragment.onCheckedChangedSubDish(checked)}"
                             android:text="@string/treat_sub_dish_temp" />
 
+                        <CheckBox
+                            android:id="@+id/checkBoxShortage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:checked="@={vm.item.details.disableDishOnShortage}"
+                            android:text="@string/disable_dish_on_shortage" />
+
                     </LinearLayout>
 
                 </pi.restaurantapp.ui.CardViewPreviewElement>

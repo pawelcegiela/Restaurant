@@ -46,22 +46,36 @@ class PreviewIngredientLogic : AbstractPreviewItemLogic() {
         id: String,
         _amount: Int,
         modificationType: IngredientModificationType,
+        containingDishesIds: List<String>,
+        shouldDisable: Boolean,
         setNewAmount: (Int) -> (Unit),
         addNewAmountChange: (IngredientAmountChange) -> (Unit)
     ) {
-        var newAmount = 0
         var newAmountChange = IngredientAmountChange()
         Firebase.firestore.runTransaction { transaction ->
             val difference = _amount * (if (modificationType == IngredientModificationType.CORRECTION) -1 else 1)
             val oldAmount = transaction.get(dbRefBasic.document(id)).getLong("amount")?.toInt() ?: 0
-            newAmount = Integer.max(oldAmount + difference, 0)
+            val newAmount = Integer.max(oldAmount + difference, 0)
             transaction.update(dbRefBasic.document(id), "amount", newAmount)
 
             newAmountChange = IngredientAmountChange(Firebase.auth.uid!!, difference, newAmount, modificationType.ordinal)
             transaction.update(dbRefDetails.document(id), "amountChanges.${newAmountChange.date.time}", newAmountChange)
-        }.addOnSuccessListener {
+
+            newAmount
+        }.addOnSuccessListener { newAmount ->
             setNewAmount(newAmount)
             addNewAmountChange(newAmountChange)
+            if (newAmount == 0 && shouldDisable) {
+                disableDishes(containingDishesIds)
+            }
+        }
+    }
+
+    private fun disableDishes(containingDishesIds: List<String>) {
+        Firebase.firestore.runTransaction { transaction ->
+            for (id in containingDishesIds) {
+                transaction.update(Firebase.firestore.collection("dishes-basic").document(id), "active", false)
+            }
         }
     }
 }

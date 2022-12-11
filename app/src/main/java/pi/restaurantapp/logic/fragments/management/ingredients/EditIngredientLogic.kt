@@ -13,7 +13,11 @@ class EditIngredientLogic : AbstractModifyIngredientLogic() {
 
     override fun saveDocumentToDatabase(data: SplitDataObject, transaction: Transaction) {
         transaction.update(dbRefBasic.document(data.id), "name", (data.basic as IngredientBasic).name)
-        transaction.update(dbRefDetails.document(data.id), "subIngredients", (data.details as IngredientDetails).subIngredients)
+        transaction.update(
+            dbRefDetails.document(data.id),
+            "subIngredients", (data.details as IngredientDetails).subIngredients,
+            "disableDishOnShortage", (data.details as IngredientDetails).disableDishOnShortage
+        )
     }
 
     override fun removeAdditionalElements() {

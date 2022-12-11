@@ -3,6 +3,7 @@ package pi.restaurantapp.ui.fragments.authentication
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -30,11 +31,13 @@ class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
             val repeatPassword = binding.editTextSignInPassword.text
             // TODO Checking everything - common logic with adding new worker
             if (email.isNotEmpty() && password.isNotEmpty() && password == repeatPassword) {
-                activityViewModel.createCustomer(email.toString(), password.toString()) {
+                activityViewModel.createCustomer(email.toString(), password.toString(), onSuccess = {
                     activity?.getSharedPreferences("prefs", Context.MODE_PRIVATE)?.edit()?.clear()?.apply()
                     val name = saveNewCustomer()
                     (activity as AuthenticationActivity).startMainActivity(Role.CUSTOMER.ordinal, name)
-                }
+                }, onFailure = {
+                    Toast.makeText(requireContext(), getString(R.string.could_not_create_account), Toast.LENGTH_SHORT).show()
+                })
             }
         }
     }

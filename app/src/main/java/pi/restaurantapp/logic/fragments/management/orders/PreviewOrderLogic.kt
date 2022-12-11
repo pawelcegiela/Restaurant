@@ -35,11 +35,13 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
         if (newStatus == OrderStatus.ACCEPTED.ordinal) {
             getSubDishes { subDishes ->
                 Firebase.firestore.runTransaction { transaction ->
-                    checkIngredientAmountChanges(item.details, subDishes, transaction)
+                    val ingredientsWithShortages = updateIngredientAmounts(item.details, subDishes, transaction)
                     transaction.update(dbRefBasic.document(item.id), "orderStatus", newStatus)
                     transaction.update(dbRefDetails.document(item.id), "statusChanges.$time", newStatus)
-                }.addOnSuccessListener {
+                    ingredientsWithShortages
+                }.addOnSuccessListener { ingredientsWithShortages ->
                     callback(newStatus, StringFormatUtils.formatDateTime(Date(time)) to newStatus)
+                    disableDishes(ingredientsWithShortages)
                 }
             }
         } else {
@@ -66,7 +68,11 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
         }
     }
 
-    private fun checkIngredientAmountChanges(details: OrderDetails, subDishes: LinkedHashMap<String, IngredientDetails>, transaction: Transaction) {
+    private fun updateIngredientAmounts(
+        details: OrderDetails,
+        subDishes: LinkedHashMap<String, IngredientDetails>,
+        transaction: Transaction
+    ): ArrayList<String> {
         val ingredientsToChange = getIngredientsToChange(details, subDishes)
         val newAmounts = HashMap<String, Int>()
         val newAmountChanges = HashMap<String, IngredientAmountChange>()
@@ -80,7 +86,7 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
             val newAmount = oldAmount + difference
             val newAmountChange =
                 IngredientAmountChange(
-                    Firebase.auth.uid ?: return,
+                    Firebase.auth.uid ?: return ArrayList(),
                     difference,
                     newAmount,
                     IngredientModificationType.ORDER.ordinal
@@ -90,6 +96,8 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
             newAmountChanges[ingredientId] = newAmountChange
         }
 
+        val ingredientsWithShortages = ArrayList<String>()
+
         for (ingredientId in newAmounts.keys) {
             transaction.update(dbRefIngredientsBasic.document(ingredientId), "amount", newAmounts[ingredientId])
             transaction.update(
@@ -97,7 +105,11 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
                 "amountChanges.${newAmountChanges[ingredientId]!!.date.time}",
                 newAmountChanges[ingredientId]
             )
+            if (newAmounts[ingredientId] == 0) {
+                ingredientsWithShortages.add(ingredientId)
+            }
         }
+        return ingredientsWithShortages
     }
 
     private fun getIngredientsToChange(details: OrderDetails, subDishes: LinkedHashMap<String, IngredientDetails>): HashMap<String, BigDecimal> {
@@ -124,6 +136,20 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
             }
         }
         return ingredients
+    }
+
+    private fun disableDishes(ingredientsWithShortages: ArrayList<String>) {
+        for (ingredientId in ingredientsWithShortages) {
+            Firebase.firestore.runTransaction { transaction ->
+                val details =
+                    transaction.get(Firebase.firestore.collection("ingredients-details").document(ingredientId)).toObject<IngredientDetails>()
+                        ?: IngredientDetails()
+                val containingDishesIds = details.containingDishes.map { it.key }
+                for (id in containingDishesIds) {
+                    transaction.update(Firebase.firestore.collection("dishes-basic").document(id), "active", false)
+                }
+            }
+        }
     }
 
     fun updateDeliverer(itemId: String, oldDelivererId: String, newDelivererId: String, callback: () -> Unit) {

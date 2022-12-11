@@ -429,4 +429,7 @@
     <string name="reward_values_should_be">Wartości powinny być co najmniej: 5 (całkowita wartość), 1 (minimalna wartość) i 7 (dni)</string>
     <string name="days">Dni</string>
     <string name="days_colon">Zamówienia liczące się do nagród z ostatnich dni:</string>
+    <string name="disabled">Pozycja wyłączona</string>
+    <string name="could_not_create_account">Konto nie mogło być założone. Podany e-mail może być już w użyciu lub występują problemy z połączeniem.</string>
+    <string name="disable_dish_on_shortage">Wyłączyć zawierające dania przy brakach magazynowych składnika?</string>
 </resources>

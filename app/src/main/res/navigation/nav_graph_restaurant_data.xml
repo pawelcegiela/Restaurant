@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/EditRestaurantDataFragment"
-        android:name="pi.restaurantapp.ui.fragments.management.restaurantdata.EditRestaurantData"
+        android:name="pi.restaurantapp.ui.fragments.management.restaurantdata.EditRestaurantDataFragment"
         android:label="@string/edit_restaurant_data"
         tools:layout="@layout/fragment_edit_restaurant_data">
 

@@ -11,39 +11,38 @@ import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
 import pi.restaurantapp.objects.enums.IngredientModificationType
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
-import java.lang.Integer.max
+import java.lang.Integer.min
 
 class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewIngredientLogic()
 
-    var containingDishes = ArrayList<String>()
-    var containingSubDishes = ArrayList<String>()
+    var containingDishes = MutableLiveData<ArrayList<String>>(ArrayList())
+    var containingSubDishes = MutableLiveData<ArrayList<String>>(ArrayList())
 
     private val _item: MutableLiveData<Ingredient> = MutableLiveData()
     val item: LiveData<Ingredient> = _item
 
-    var amountChanges: MutableList<IngredientAmountChange> = ArrayList()
+    var amountChanges = MutableLiveData<ArrayList<IngredientAmountChange>>(ArrayList())
 
     override fun getItem(snapshotsPair: SnapshotsPair) {
         val basic = snapshotsPair.basic?.toObject<IngredientBasic>() ?: IngredientBasic()
         val details = snapshotsPair.details?.toObject<IngredientDetails>() ?: IngredientDetails()
         _item.value = Ingredient(itemId, basic, details)
 
-        getAmountChanges(details.amountChanges)
+        setAmountChanges(details.amountChanges)
 
         logic.getContainingDishes(
             details.containingDishes.map { it.key },
             details.containingSubDishes.map { it.key }) { _containingDishes, _containingSubDishes ->
-            containingDishes = _containingDishes
-            containingSubDishes = _containingSubDishes
+            containingDishes.value?.addAll(_containingDishes)
+            containingSubDishes.value?.addAll(_containingSubDishes)
             setReadyToUnlock()
         }
     }
 
-    private fun getAmountChanges(amountChangesHashMap: HashMap<String, IngredientAmountChange>) {
-        val firstIndex = max(amountChangesHashMap.size - 10, 0)
-        val lastIndex = amountChangesHashMap.size
-        amountChanges = amountChangesHashMap.map { it.value }.sortedByDescending { it.date }.subList(firstIndex, lastIndex).toMutableList()
+    private fun setAmountChanges(amountChangesHashMap: HashMap<String, IngredientAmountChange>) {
+        val lastIndex = min(9, amountChangesHashMap.size)
+        amountChanges.value?.addAll(amountChangesHashMap.map { it.value }.sortedByDescending { it.date }.subList(0, lastIndex))
     }
 
     override fun isDisabled(): Boolean {
@@ -57,7 +56,14 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
         setNewAmount: (Int) -> (Unit),
         addNewAmountChange: (IngredientAmountChange) -> (Unit)
     ) {
-        logic.updateIngredientAmount(id, _amount, modificationType, setNewAmount, addNewAmountChange)
+        logic.updateIngredientAmount(
+            id,
+            _amount,
+            modificationType,
+            item.value?.details?.containingDishes?.map { it.key } ?: ArrayList(),
+            item.value?.details?.disableDishOnShortage ?: false,
+            setNewAmount,
+            addNewAmountChange)
     }
 
 }

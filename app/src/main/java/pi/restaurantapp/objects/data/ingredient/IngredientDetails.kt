@@ -7,6 +7,7 @@ class IngredientDetails : AbstractDataObject {
     var containingDishes: HashMap<String, Boolean> = HashMap()
     var containingSubDishes: HashMap<String, Boolean> = HashMap()
     var amountChanges: HashMap<String, IngredientAmountChange> = HashMap()
+    var disableDishOnShortage: Boolean = false
 
     @Suppress("unused")
     constructor()
