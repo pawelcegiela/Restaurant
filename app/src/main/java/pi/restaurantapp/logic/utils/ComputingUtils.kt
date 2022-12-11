@@ -1,5 +1,6 @@
 package pi.restaurantapp.logic.utils
 
+import com.google.common.collect.Comparators.max
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.data.dish.DishItem
@@ -7,6 +8,7 @@ import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.DiscountValueType
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,8 +46,8 @@ class ComputingUtils {
         @JvmStatic
         fun countFullOrderPrice(dishesList: MutableList<DishItem>, collectionTypeId: Int, deliveryOptions: DeliveryBasic?): String {
             var price = dishesList.sumOf { BigDecimal(it.finalPrice) }
-            if (collectionTypeId == CollectionType.DELIVERY.ordinal) {
-                if (price < BigDecimal(deliveryOptions?.minimumPriceFreeDelivery ?: return price.toString())) {
+            if (collectionTypeId == CollectionType.DELIVERY.ordinal && deliveryOptions != null) {
+                if (!deliveryOptions.freeDeliveryAvailable || price < BigDecimal(deliveryOptions.minimumPriceFreeDelivery)) {
                     price += BigDecimal(deliveryOptions.extraDeliveryFee)
                 }
             }
@@ -58,9 +60,9 @@ class ComputingUtils {
                 return price
             }
             if (discount.valueType == DiscountValueType.ABSOLUTE.ordinal) {
-                return (priceBD - BigDecimal(discount.amount)).toString()
+                return (max(priceBD - BigDecimal(discount.amount), BigDecimal.ZERO)).toString()
             }
-            return (priceBD - (priceBD * BigDecimal(discount.amount) / BigDecimal(100))).toString()
+            return (priceBD - (priceBD * BigDecimal(discount.amount) * BigDecimal(0.01))).setScale(2, RoundingMode.HALF_DOWN).toString()
         }
 
         fun getMonthAgoDate(): Date {

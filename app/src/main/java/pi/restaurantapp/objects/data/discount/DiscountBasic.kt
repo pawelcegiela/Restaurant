@@ -49,6 +49,13 @@ class DiscountBasic : AbstractDataObject {
         this.usageType = usageType
     }
 
+    constructor(amount: String, valueType: Int, hasThreshold: Boolean, thresholdValue: String) {
+        this.amount = amount
+        this.valueType = valueType
+        this.hasThreshold = hasThreshold
+        this.thresholdValue = thresholdValue
+    }
+
     fun onNumberOfDiscountsChanged(s: CharSequence) {
         try {
             this.numberOfDiscounts = s.toString().toInt()
