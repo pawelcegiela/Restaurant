@@ -72,6 +72,11 @@
         <action
             android:id="@+id/actionPreviewOrderToEditOrder"
             app:destination="@id/EditOrderFragment" />
+
+        <action
+            android:id="@+id/actionPreviewOrderToOrderChat"
+            app:destination="@id/OrderChatFragment" />
+
         <action
             android:id="@+id/actionPreviewOrderToOrders"
             app:destination="@id/OrdersMainFragment"
@@ -88,6 +93,12 @@
             android:id="@+id/actionChooseDishToCustomizeDish"
             app:destination="@id/CustomizeDishFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/OrderChatFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.orders.OrderChatFragment"
+        android:label="@string/chat"
+        tools:layout="@layout/fragment_chat_client_management" />
 
     <fragment
         android:id="@+id/CustomizeDishFragment"

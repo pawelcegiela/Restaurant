@@ -23,11 +23,21 @@
         tools:layout="@layout/fragment_client_preview_order">
 
         <action
+            android:id="@+id/actionClientPreviewOrderToOrderChat"
+            app:destination="@id/OrderChatFragment" />
+
+        <action
             android:id="@+id/actionClientPreviewOrderToOrders"
             app:destination="@id/ClientOrdersMainFragment"
             app:popUpTo="@id/ClientOrdersMainFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/OrderChatFragment"
+        android:name="pi.restaurantapp.ui.fragments.management.orders.OrderChatFragment"
+        android:label="@string/chat"
+        tools:layout="@layout/fragment_chat_client_management" />
 
     <activity
         android:id="@+id/ClientMainActivity"

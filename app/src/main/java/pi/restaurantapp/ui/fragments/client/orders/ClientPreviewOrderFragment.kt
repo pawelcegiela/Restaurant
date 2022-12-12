@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientPreviewOrderBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
@@ -67,5 +68,12 @@ class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
         _viewModel.delivererName.observe(viewLifecycleOwner) { name ->
             binding.textViewDeliveryPerson.text = name
         }
+    }
+
+    fun onClickButtonChat() {
+        val bundle = Bundle()
+        bundle.putString("id", viewModel.itemId)
+
+        findNavController().navigate(R.id.actionClientPreviewOrderToOrderChat, bundle)
     }
 }

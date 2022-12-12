@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentPreviewOrderBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.enums.OrderStatus
+import pi.restaurantapp.objects.enums.OrderType
+import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.ui.dialogs.SetDelivererDialog
 import pi.restaurantapp.ui.dialogs.YesNoDialog
@@ -54,6 +59,9 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         } else if (_viewModel.delivererId.isNotEmpty() && _viewModel.possibleDeliverers.value == null) {
             binding.textViewDeliveryPerson.text = getString(R.string.loading_deliverer)
         }
+        if (Firebase.auth.uid == _viewModel.delivererId && _viewModel.item.value?.details?.orderType?.equals(OrderType.CLIENT_APP.ordinal) == true) {
+            binding.buttonChat.visibility = View.VISIBLE
+        }
 
         viewModel.setReadyToUnlock()
     }
@@ -73,10 +81,19 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
     }
 
     fun onClickDeliveryPerson() {
-        SetDelivererDialog(requireContext(), _viewModel.possibleDeliverers, getString(R.string.select_deliverer)) { newDeliverer ->
-            _viewModel.updateDeliverer(newDeliverer.id)
-            binding.textViewDeliveryPerson.text = newDeliverer.getFullName()
+        if (Role.isAtLeastManager(_viewModel.userRole.value)) {
+            SetDelivererDialog(requireContext(), _viewModel.possibleDeliverers, getString(R.string.select_deliverer)) { newDeliverer ->
+                _viewModel.updateDeliverer(newDeliverer.id)
+                binding.textViewDeliveryPerson.text = newDeliverer.getFullName()
+            }
         }
+    }
+
+    fun onClickButtonChat() {
+        val bundle = Bundle()
+        bundle.putString("id", viewModel.itemId)
+
+        findNavController().navigate(R.id.actionPreviewOrderToOrderChat, bundle)
     }
 
     private fun setLiveDataListeners(item: Order) {

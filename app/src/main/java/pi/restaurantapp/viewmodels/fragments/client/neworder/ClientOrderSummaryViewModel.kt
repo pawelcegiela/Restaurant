@@ -16,7 +16,7 @@ class ClientOrderSummaryViewModel : AbstractPreviewItemViewModel() {
     override val logic = ClientOrderSummaryLogic()
 
     private val _possibleDiscounts = MutableLiveData<MutableList<DiscountBasic>>()
-    val possibleDiscounts: LiveData<MutableList<DiscountBasic>> get() = _possibleDiscounts
+    val possibleDiscounts: LiveData<MutableList<DiscountBasic>> = _possibleDiscounts
 
     private val _item: MutableLiveData<Order> = MutableLiveData()
     val item: LiveData<Order> = _item
@@ -28,6 +28,12 @@ class ClientOrderSummaryViewModel : AbstractPreviewItemViewModel() {
         val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
         _item.value = Order(itemId, basic, details)
 
+        dishesList.addAll(_item.value!!.details.dishes.toList().map { it.second })
+        getPossibleDiscounts()
+        setReadyToUnlock()
+    }
+
+    fun initializeElements() {
         dishesList.addAll(_item.value!!.details.dishes.toList().map { it.second })
         getPossibleDiscounts()
         setReadyToUnlock()

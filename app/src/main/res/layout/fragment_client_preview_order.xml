@@ -11,6 +11,8 @@
 
         <import type="pi.restaurantapp.objects.enums.OrderStatus" />
 
+        <import type="pi.restaurantapp.objects.enums.OrderType" />
+
         <import type="pi.restaurantapp.objects.enums.CollectionType" />
 
         <import type="pi.restaurantapp.objects.enums.OrderPlace" />
@@ -272,6 +274,15 @@
                             android:onClick="@{() -> fragment.onClickButtonCancelOrder()}"
                             android:text="@string/cancel_order"
                             android:visibility="@{vm.item.basic.orderStatus > OrderStatus.NEW.ordinal ? View.GONE : View.VISIBLE}" />
+
+                        <Button
+                            android:id="@+id/buttonChat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:onClick="@{() -> fragment.onClickButtonChat()}"
+                            android:text="@string/chat"
+                            android:visibility="@{vm.item.basic.collectionType == CollectionType.DELIVERY.ordinal ? View.VISIBLE : View.GONE}" />
                     </LinearLayout>
 
                 </pi.restaurantapp.ui.CardViewPreviewElement>

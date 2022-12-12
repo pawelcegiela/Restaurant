@@ -35,7 +35,7 @@ class ChatsMainFragment : Fragment() {
         )
 
         UserInterfaceUtils.setCardView(
-            binding.cardNewOrder, R.drawable.forum, R.string.worker_forum,
+            binding.cardForum, R.drawable.forum, R.string.worker_forum,
             findNavController(), R.id.actionChatsToForum
         )
     }

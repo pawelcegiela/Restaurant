@@ -4,10 +4,11 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.dish.DishItem
+import pi.restaurantapp.objects.enums.OrderType
 import java.util.*
 
 class OrderDetails : AbstractDataObject {
-    var orderType: Int = 0
+    var orderType: Int = OrderType.CLIENT_APP.ordinal
     var orderDate: Date = Date()
     var modificationDate: Date = Date()
     var orderPlace: Int = 0

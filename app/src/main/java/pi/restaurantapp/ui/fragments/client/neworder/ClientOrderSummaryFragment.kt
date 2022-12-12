@@ -39,6 +39,7 @@ class ClientOrderSummaryFragment : AbstractPreviewItemFragment() {
             activityViewModel.reset()
             addLiveDataObservers()
             viewModel.initializeData(activityViewModel.savedOrder.value?.id ?: "")
+            _viewModel.initializeElements()
         }
     }
 

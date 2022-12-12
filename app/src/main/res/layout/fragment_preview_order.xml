@@ -352,6 +352,15 @@
                             android:onClick="@{() -> fragment.onClickButtonCloseOrder()}"
                             android:text="@string/close_order_without_realizing"
                             android:visibility="@{OrderStatus.isFinished(vm.item.basic.orderStatus) ? View.GONE : View.VISIBLE}" />
+
+                        <Button
+                            android:id="@+id/buttonChat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:onClick="@{() -> fragment.onClickButtonChat()}"
+                            android:text="@string/chat"
+                            android:visibility="gone" />
                     </LinearLayout>
 
                 </pi.restaurantapp.ui.CardViewPreviewElement>

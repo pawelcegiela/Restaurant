@@ -22,7 +22,7 @@
                 layout="@layout/card_view_wide" />
 
             <include
-                android:id="@+id/cardNewOrder"
+                android:id="@+id/cardForum"
                 layout="@layout/card_view_wide" />
 
         </LinearLayout>
