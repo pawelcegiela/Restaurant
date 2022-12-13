@@ -4,7 +4,6 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.address.AddressBasic
 import pi.restaurantapp.objects.data.dish.DishItem
-import pi.restaurantapp.objects.enums.OrderType
 import java.util.*
 
 /**
@@ -12,7 +11,6 @@ import java.util.*
  * @see pi.restaurantapp.objects.data.order.Order
  */
 class OrderDetails : AbstractDataObject {
-    var orderType: Int = OrderType.CLIENT_APP.ordinal
     var orderDate: Date = Date()
     var modificationDate: Date = Date()
     var orderPlace: Int = 0
@@ -29,7 +27,6 @@ class OrderDetails : AbstractDataObject {
 
     constructor(
         id: String,
-        orderType: Int,
         orderDate: Date,
         modificationDate: Date,
         orderPlace: Int,
@@ -41,7 +38,6 @@ class OrderDetails : AbstractDataObject {
         comments: String
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
-        this.orderType = orderType
         this.orderDate = orderDate
         this.modificationDate = modificationDate
         this.orderPlace = orderPlace

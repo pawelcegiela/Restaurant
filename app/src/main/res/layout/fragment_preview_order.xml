@@ -175,7 +175,7 @@
                             android:id="@+id/textViewType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{OrderType.getString(vm.item.details.orderType, context)}" />
+                            android:text="@{OrderType.getString(vm.item.basic.orderType, context)}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewOrderDateTitle"

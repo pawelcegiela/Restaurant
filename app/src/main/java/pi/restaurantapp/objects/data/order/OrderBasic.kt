@@ -2,6 +2,7 @@ package pi.restaurantapp.objects.data.order
 
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
+import pi.restaurantapp.objects.enums.OrderType
 import java.util.*
 
 /**
@@ -15,6 +16,7 @@ class OrderBasic : AbstractDataObject {
     var value: String = "0.0"
     var name: String = ""
     var userId: String = ""
+    var orderType: Int = OrderType.CLIENT_APP.ordinal
     var disabled: Boolean = false
 
     @Suppress("unused")
@@ -27,7 +29,8 @@ class OrderBasic : AbstractDataObject {
         collectionType: Int,
         value: String,
         name: String,
-        userId: String
+        userId: String,
+        orderType: Int
     ) {
         this.id = id.ifEmpty { StringFormatUtils.formatId() }
         this.orderStatus = orderStatus
@@ -35,6 +38,7 @@ class OrderBasic : AbstractDataObject {
         this.collectionType = collectionType
         this.value = value
         this.name = name
+        this.orderType = orderType
         this.userId = userId
     }
 

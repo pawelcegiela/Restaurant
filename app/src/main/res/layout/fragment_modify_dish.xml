@@ -93,6 +93,9 @@
                                 android:src="@drawable/dish" />
 
                             <pi.restaurantapp.ui.textviews.EditTextItemName
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -129,6 +132,9 @@
                             android:text="@string/base_price_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextBasePrice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -160,6 +166,9 @@
                                 android:onCheckedChanged="@{(_, changed) -> fragment.onCheckBoxChanged(changed)}" />
 
                             <EditText
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextDiscountPrice"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -182,6 +191,9 @@
                             android:text="@string/description_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -199,6 +211,9 @@
                             android:text="@string/recipe_and_info_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextRecipe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -237,6 +252,9 @@
                             android:orientation="horizontal">
 
                             <EditText
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextAmount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

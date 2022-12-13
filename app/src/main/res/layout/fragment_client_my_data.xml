@@ -94,6 +94,9 @@
                             android:text="@string/first_name_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -111,6 +114,9 @@
                             android:text="@string/last_name_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextLastName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -128,6 +134,9 @@
                             android:text="@string/email_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -163,6 +172,9 @@
                             android:text="@string/contact_phone_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextContactPhone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

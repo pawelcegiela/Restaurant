@@ -90,6 +90,9 @@
                                 android:src="@drawable/order" />
 
                             <pi.restaurantapp.ui.textviews.EditTextItemName
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -147,7 +150,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adapter="@{SpinnerAdapter.createNew(context, OrderType.getArrayOfStrings(context))}"
-                            android:selectedItemPosition="@={vm.item.details.orderType}"
+                            android:selectedItemPosition="@={vm.item.basic.orderType}"
                             android:visibility="@{fragment instanceof ClientFinalizeOrderFragment ? View.GONE : View.VISIBLE}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
@@ -228,6 +231,9 @@
                             android:text="@string/contact_phone_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextContactPhone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -245,6 +251,9 @@
                             android:text="@string/comments_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextComments"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

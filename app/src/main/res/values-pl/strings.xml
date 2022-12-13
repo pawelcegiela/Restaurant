@@ -432,4 +432,7 @@
     <string name="disabled">Pozycja wyłączona</string>
     <string name="could_not_create_account">Konto nie mogło być założone. Podany e-mail może być już w użyciu lub występują problemy z połączeniem.</string>
     <string name="disable_dish_on_shortage">Wyłączyć zawierające dania przy brakach magazynowych składnika?</string>
+    <string name="rewards_have_been_generated">Nagrody zostały wygenerowane. Liczba i wartości rabatów są wyświetlone na ekranie</string>
+    <string name="rewards_couldnt_be_generated">Nagrody nie mogły zostać wygenerowane</string>
+    <string name="generated_rewards">Wygenerowane nagrody</string>
 </resources>

@@ -52,6 +52,9 @@ class UserInterfaceUtils {
         fun bitmapFromDrawableRes(context: Context, @DrawableRes resourceId: Int) =
             convertDrawableToBitmap(AppCompatResources.getDrawable(context, resourceId))
 
+        /**
+         * Source: Mapbox documentation
+         */
         private fun convertDrawableToBitmap(sourceDrawable: Drawable?): Bitmap? {
             if (sourceDrawable == null) {
                 return null

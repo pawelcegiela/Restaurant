@@ -91,10 +91,13 @@
                             android:id="@+id/editTextTotalRewardValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:backgroundTint="@color/light_grey"
                             android:hint="@string/total_value_of_rewards"
                             android:importantForAutofill="no"
                             android:inputType="numberDecimal"
-                            android:text="@={vm.totalValue}" />
+                            android:text="@={vm.totalValue}"
+                            android:textColor="@color/light_grey"
+                            android:textColorHint="@color/darker_light_grey" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewMinimumValueTitle"
@@ -108,10 +111,13 @@
                             android:id="@+id/editTextMinimumValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:backgroundTint="@color/light_grey"
                             android:hint="@string/minimum_value"
                             android:importantForAutofill="no"
                             android:inputType="numberDecimal"
-                            android:text="@={vm.minimumValue}" />
+                            android:text="@={vm.minimumValue}"
+                            android:textColor="@color/light_grey"
+                            android:textColorHint="@color/darker_light_grey" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
                             android:id="@+id/textViewDaysTitle"
@@ -125,10 +131,13 @@
                             android:id="@+id/editTextDays"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:backgroundTint="@color/light_grey"
                             android:hint="@string/days"
                             android:importantForAutofill="no"
                             android:inputType="numberDecimal"
-                            android:text="@={vm.days}" />
+                            android:text="@={vm.days}"
+                            android:textColor="@color/light_grey"
+                            android:textColorHint="@color/darker_light_grey" />
 
                         <Button
                             android:id="@+id/buttonGenerate"
@@ -138,6 +147,36 @@
                             android:layout_marginTop="30dp"
                             android:onClick="@{() -> vm.generateDiscounts()}"
                             android:text="@string/generate" />
+                    </LinearLayout>
+                </pi.restaurantapp.ui.CardViewPreviewElement>
+
+                <pi.restaurantapp.ui.CardViewPreviewElement
+                    android:id="@+id/cardRewardGenerated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="25dp"
+                        android:orientation="vertical">
+
+                        <pi.restaurantapp.ui.textviews.TextViewCardTitle
+                            android:id="@+id/textViewGeneratedRewards"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="25dp"
+                            android:text="@string/generated_rewards" />
+
+                        <pi.restaurantapp.ui.textviews.TextViewDetail
+                            android:id="@+id/textViewGeneratedRewardsDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
                     </LinearLayout>
                 </pi.restaurantapp.ui.CardViewPreviewElement>
             </LinearLayout>

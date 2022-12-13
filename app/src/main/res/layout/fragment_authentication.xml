@@ -45,6 +45,9 @@
                         android:text="@string/e_mail_colon" />
 
                     <EditText
+                        android:textColorHint="@color/darker_light_grey"
+                        android:backgroundTint="@color/light_grey"
+                        android:textColor="@color/light_grey"
                         android:id="@+id/editTextLogInEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -60,6 +63,9 @@
                         android:text="@string/password_colon" />
 
                     <EditText
+                        android:textColorHint="@color/darker_light_grey"
+                        android:backgroundTint="@color/light_grey"
+                        android:textColor="@color/light_grey"
                         android:id="@+id/editTextLogInPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,6 +113,9 @@
                         android:text="@string/e_mail_colon" />
 
                     <EditText
+                        android:textColorHint="@color/darker_light_grey"
+                        android:backgroundTint="@color/light_grey"
+                        android:textColor="@color/light_grey"
                         android:id="@+id/editTextSignInEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -122,6 +131,9 @@
                         android:text="@string/password_colon" />
 
                     <EditText
+                        android:textColorHint="@color/darker_light_grey"
+                        android:backgroundTint="@color/light_grey"
+                        android:textColor="@color/light_grey"
                         android:id="@+id/editTextSignInPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -137,6 +149,9 @@
                         android:text="@string/repeat_password_colon" />
 
                     <EditText
+                        android:textColorHint="@color/darker_light_grey"
+                        android:backgroundTint="@color/light_grey"
+                        android:textColor="@color/light_grey"
                         android:id="@+id/editTextSignInRepeatPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -184,6 +199,9 @@
                         android:text="@string/e_mail_colon" />
 
                     <EditText
+                        android:textColorHint="@color/darker_light_grey"
+                        android:backgroundTint="@color/light_grey"
+                        android:textColor="@color/light_grey"
                         android:id="@+id/editTextResetPassEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

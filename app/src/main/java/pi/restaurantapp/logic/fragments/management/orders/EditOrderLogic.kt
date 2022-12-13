@@ -19,10 +19,10 @@ class EditOrderLogic : AbstractModifyOrderLogic() {
             "collectionDate" to basic.collectionDate,
             "collectionType" to basic.collectionType,
             "value" to basic.value,
-            "name" to basic.name
+            "name" to basic.name,
+            "orderType" to basic.orderType
         )
         val detailsToChange = hashMapOf(
-            "orderType" to details.orderType,
             "modificationDate" to details.modificationDate,
             "orderPlace" to details.orderPlace,
             "dishes" to details.dishes,

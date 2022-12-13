@@ -45,6 +45,11 @@ class AddRewardFragment : Fragment() {
         binding.toolbarNavigation.cardBack.root.setOnClickListener {
             findNavController().navigate(R.id.actionAddRewardToDiscounts)
         }
+        viewModel.rewardsToDisplay.observe(viewLifecycleOwner) { rewardsToDisplay ->
+            binding.cardRewardDetails.visibility = View.GONE
+            binding.cardRewardGenerated.visibility = View.VISIBLE
+            binding.textViewGeneratedRewardsDetails.text = rewardsToDisplay
+        }
     }
 
 }

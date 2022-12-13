@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.R
 import pi.restaurantapp.logic.fragments.management.discounts.AddRewardLogic
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.viewmodels.fragments.AbstractFragmentViewModel
 
 /**
@@ -21,6 +22,9 @@ class AddRewardViewModel : AbstractFragmentViewModel() {
     private val _toastMessage: MutableLiveData<Int> = MutableLiveData<Int>()
     val toastMessage: LiveData<Int> = _toastMessage
 
+    private val _rewardsToDisplay = MutableLiveData<String>()
+    val rewardsToDisplay: LiveData<String> = _rewardsToDisplay
+
     fun generateDiscounts() {
         if (totalValue.value?.toLong() == null || minimumValue.value?.toLong() == null || days.value?.toLong() == null) {
             _toastMessage.value = R.string.enter_reward_values
@@ -35,6 +39,13 @@ class AddRewardViewModel : AbstractFragmentViewModel() {
             return
         }
 
-        logic.generateDiscountRewards(totalValueL, minimumValueL, daysL)
+        logic.generateDiscountRewards(totalValueL, minimumValueL, daysL) { success, rewards ->
+            if (success) {
+                _toastMessage.value = R.string.rewards_have_been_generated
+                _rewardsToDisplay.value = StringFormatUtils.formatRewardsToDisplay(rewards)
+            } else {
+                _toastMessage.value = R.string.rewards_couldnt_be_generated
+            }
+        }
     }
 }

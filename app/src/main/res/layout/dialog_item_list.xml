@@ -14,6 +14,9 @@
         android:textStyle="bold" />
 
     <EditText
+        android:textColorHint="@color/darker_light_grey"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/light_grey"
         android:id="@+id/editTextSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

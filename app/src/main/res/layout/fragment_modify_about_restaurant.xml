@@ -70,6 +70,9 @@
                                 android:src="@drawable/about_restaurant" />
 
                             <pi.restaurantapp.ui.textviews.EditTextItemName
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextRestaurantName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -91,6 +94,9 @@
                             android:text="@string/description_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/editTextRestaurantDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

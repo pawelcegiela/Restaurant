@@ -83,6 +83,9 @@
                                 android:src="@drawable/discount" />
 
                             <pi.restaurantapp.ui.textviews.EditTextItemName
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextCode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -112,6 +115,9 @@
                             android:orientation="horizontal">
 
                             <EditText
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextAmount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -157,6 +163,9 @@
                                 android:enabled="@{fragment instanceof AddDiscountFragment}" />
 
                             <EditText
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextThreshold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -227,6 +236,9 @@
                             android:text="@string/number_of_discounts_colon" />
 
                         <EditText
+                            android:textColorHint="@color/darker_light_grey"
+                            android:backgroundTint="@color/light_grey"
+                            android:textColor="@color/light_grey"
                             android:id="@+id/edit_text_total_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.data.address.AddressBasic
+import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.DiscountValueType
@@ -114,6 +115,19 @@ class StringFormatUtils {
         @JvmStatic
         fun formatDiscountValue(amount: String?, type: Int, context: Context): String {
             return "$amount ${DiscountValueType.getString(type, context)}"
+        }
+
+        fun formatRewardId(userId: String): String {
+            return "R-${userId.hashCode()}-${Date().hashCode()}"
+        }
+
+        fun formatRewardsToDisplay(rewards: ArrayList<DiscountBasic>): String {
+            var text = ""
+
+            for (reward in rewards) {
+                text += "#${rewards.indexOf(reward) + 1}  -  ${reward.amount} PLN\n"
+            }
+            return text
         }
     }
 }

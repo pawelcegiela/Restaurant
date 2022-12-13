@@ -1,5 +1,8 @@
 <resources>
+
     <style name="Theme.Restaurant" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="android:windowLightStatusBar">false</item>
 
         <item name="colorPrimary">@color/blue_5</item>
         <item name="colorSecondary">@color/blue_2a</item>
@@ -7,12 +10,30 @@
         <item name="colorOnPrimary">@color/light_grey</item>
 
         <item name="android:textColor">@color/light_grey</item>
+        <item name="alternativeTextColor">@color/dark_grey</item>
 
         <item name="android:colorBackground">@color/light_grey</item>
         <item name="android:colorBackgroundFloating">@color/medium_grey</item>
 
         <item name="android:forceDarkAllowed">false</item>
-<!--        <item name="fontFamily">@font/app_font</item>-->
+        <item name="drawerArrowStyle">@style/RestaurantDrawerArrowStyle</item>
+        <item name="checkboxStyle">@style/RestaurantCheckBoxStyle</item>
+        <item name="spinnerStyle">@style/RestaurantSpinnerStyle</item>
+    </style>
+
+    <style name="RestaurantDrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/light_grey</item>
+    </style>
+
+    <style name="RestaurantSpinnerStyle" parent="@style/Widget.AppCompat.Spinner">
+        <item name="backgroundTint">@color/light_grey</item>
+    </style>
+
+    <style name="RestaurantCheckBoxStyle" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/light_grey</item>
+        <item name="android:textColor">@color/light_grey</item>
+        <item name="buttonIconTint">@color/blue_5</item>
     </style>
 
     <style name="RestaurantAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
@@ -30,13 +51,13 @@
         <item name="tabTextColor">@color/light_grey</item>
     </style>
 
-    <style name="Theme.Restaurant.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Restaurant.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.Restaurant.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/blue_5</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/restaurant_small</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
         <item name="windowSplashScreenAnimationDuration">200</item>
         <item name="postSplashScreenTheme">@style/Theme.Restaurant</item>
     </style>

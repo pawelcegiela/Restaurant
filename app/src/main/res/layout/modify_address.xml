@@ -42,6 +42,9 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:textColorHint="@color/darker_light_grey"
+                    android:backgroundTint="@color/light_grey"
+                    android:textColor="@color/light_grey"
                     android:id="@+id/editTextStreet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,6 +56,9 @@
                     android:text="@={street}" />
 
                 <EditText
+                    android:textColorHint="@color/darker_light_grey"
+                    android:backgroundTint="@color/light_grey"
+                    android:textColor="@color/light_grey"
                     android:id="@+id/editTextHouseNumber"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
@@ -66,6 +72,9 @@
                     tools:ignore="TextFields" />
 
                 <EditText
+                    android:textColorHint="@color/darker_light_grey"
+                    android:backgroundTint="@color/light_grey"
+                    android:textColor="@color/light_grey"
                     android:id="@+id/editTextFlatNumber"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
@@ -85,6 +94,9 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:textColorHint="@color/darker_light_grey"
+                    android:backgroundTint="@color/light_grey"
+                    android:textColor="@color/light_grey"
                     android:id="@+id/editTextPostalCode"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -97,6 +109,9 @@
                     android:text="@={postalCode}" />
 
                 <EditText
+                    android:textColorHint="@color/darker_light_grey"
+                    android:backgroundTint="@color/light_grey"
+                    android:textColor="@color/light_grey"
                     android:id="@+id/editTextCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

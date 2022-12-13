@@ -25,7 +25,7 @@ class ClientFinalizeOrderViewModel : AbstractModifyOrderViewModel() {
         val details = snapshotsPair.details?.toObject<OrderDetails>() ?: OrderDetails()
         setItem(Order(itemId, basic, details))
 
-        details.orderType = OrderType.CLIENT_APP.ordinal
+        basic.orderType = OrderType.CLIENT_APP.ordinal
         setToolbarType()
     }
 

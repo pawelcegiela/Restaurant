@@ -63,7 +63,7 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
         } else if (_viewModel.delivererId.isNotEmpty() && _viewModel.possibleDeliverers.value == null) {
             binding.textViewDeliveryPerson.text = getString(R.string.loading_deliverer)
         }
-        if (Firebase.auth.uid == _viewModel.delivererId && _viewModel.item.value?.details?.orderType?.equals(OrderType.CLIENT_APP.ordinal) == true) {
+        if (Firebase.auth.uid == _viewModel.delivererId && _viewModel.item.value?.basic?.orderType?.equals(OrderType.CLIENT_APP.ordinal) == true) {
             binding.buttonChat.visibility = View.VISIBLE
         }
 

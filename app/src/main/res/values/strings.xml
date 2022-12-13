@@ -448,4 +448,7 @@
     <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoidHNsaXBhIiwiYSI6ImNsYmNrczlsczA4MnYzbm1pcGJ0eDE1cTQifQ.IMSyE4t-turnxiUFi9PJUQ</string>
     <string name="could_not_create_account">The account could not be created. Given email might have been already used or you have network connection issues.</string>
     <string name="disable_dish_on_shortage">Disable containing dishes on ingredient\'s shortage?</string>
+    <string name="rewards_have_been_generated">Rewards have been generated. Number and values of discounts are displayed on the screen</string>
+    <string name="rewards_couldnt_be_generated">Rewards couldn\'t be generated</string>
+    <string name="generated_rewards">Generated rewards</string>
 </resources>

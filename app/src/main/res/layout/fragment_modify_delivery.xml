@@ -110,6 +110,9 @@
                                 android:text="@string/minimum_order_price_colon" />
 
                             <EditText
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextMinimumPrice"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -127,6 +130,9 @@
                                 android:text="@string/extra_delivery_fee_colon" />
 
                             <EditText
+                                android:textColorHint="@color/darker_light_grey"
+                                android:backgroundTint="@color/light_grey"
+                                android:textColor="@color/light_grey"
                                 android:id="@+id/editTextExtraFee"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -157,6 +163,9 @@
                                     android:checked="@={vm.item.basic.freeDeliveryAvailable}" />
 
                                 <EditText
+                                    android:textColorHint="@color/darker_light_grey"
+                                    android:backgroundTint="@color/light_grey"
+                                    android:textColor="@color/light_grey"
                                     android:id="@+id/editTextFreeThreshold"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

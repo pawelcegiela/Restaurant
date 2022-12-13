@@ -2,6 +2,7 @@ package pi.restaurantapp.objects.data.discount
 
 import pi.restaurantapp.logic.utils.ComputingUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
+import pi.restaurantapp.objects.enums.DiscountValueType
 import java.util.*
 
 /**
@@ -51,6 +52,21 @@ class DiscountBasic : AbstractDataObject {
         this.redeemedDiscounts = redeemedDiscounts
         this.receiverType = receiverType
         this.usageType = usageType
+    }
+
+    constructor(
+        id: String,
+        amount: String,
+        userId: String
+    ) {
+        this.id = id
+        this.amount = amount
+        this.valueType = DiscountValueType.ABSOLUTE.ordinal
+        this.hasThreshold = false
+        this.creationDate = Date()
+        this.expirationDate = ComputingUtils.getInitialExpirationDate()
+        this.numberOfDiscounts = 1
+        this.assignedDiscounts = arrayListOf(userId)
     }
 
     constructor(amount: String, valueType: Int, hasThreshold: Boolean, thresholdValue: String) {
