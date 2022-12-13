@@ -8,6 +8,11 @@ import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.OrderStatus
 import java.util.*
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for ClientPreviewOrderFragment.
+ * @see pi.restaurantapp.ui.fragments.client.orders.ClientPreviewOrderFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.client.orders.ClientPreviewOrderViewModel ViewModel layer
+ */
 class ClientPreviewOrderLogic : AbstractPreviewItemLogic() {
     override val databasePath = "orders"
 

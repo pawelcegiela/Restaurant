@@ -11,6 +11,11 @@ import pi.restaurantapp.databinding.FragmentItemListBinding
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for fragments inheriting AbstractItemListFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.AbstractItemListLogic Model layer
+ */
 abstract class AbstractItemListFragment : Fragment() {
 
     private var _binding: FragmentItemListBinding? = null

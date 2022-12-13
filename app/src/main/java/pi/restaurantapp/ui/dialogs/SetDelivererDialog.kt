@@ -7,6 +7,9 @@ import androidx.lifecycle.LiveData
 import pi.restaurantapp.R
 import pi.restaurantapp.objects.data.user.UserBasic
 
+/**
+ * Dialog with a list of possible deliverers to set.
+ */
 class SetDelivererDialog(
     fragmentContext: Context,
     private val liveList: LiveData<MutableList<UserBasic>>,

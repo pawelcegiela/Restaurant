@@ -12,6 +12,11 @@ import pi.restaurantapp.objects.data.aboutrestaurant.AboutRestaurantDetails
 import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditAboutRestaurantFragment.
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.EditAboutRestaurantLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.restaurantdata.EditAboutRestaurantFragment View layer
+ */
 class EditAboutRestaurantViewModel : AbstractModifyItemViewModel() {
     override val logic = EditAboutRestaurantLogic()
 

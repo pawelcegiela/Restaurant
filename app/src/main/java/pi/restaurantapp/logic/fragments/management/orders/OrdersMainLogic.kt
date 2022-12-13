@@ -10,6 +10,11 @@ import pi.restaurantapp.logic.utils.ComputingUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.order.OrderBasic
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for OrdersMainFragment.
+ * @see pi.restaurantapp.ui.fragments.management.orders.OrdersMainFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.orders.OrdersMainViewModel ViewModel layer
+ */
 class OrdersMainLogic : AbstractItemListLogic() {
     override val databasePath = "orders"
     override val dbRef

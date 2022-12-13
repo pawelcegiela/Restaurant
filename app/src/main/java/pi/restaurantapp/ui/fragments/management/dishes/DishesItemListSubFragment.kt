@@ -14,6 +14,9 @@ import pi.restaurantapp.ui.adapters.DishesRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.viewmodels.activities.management.DishesViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for AllergensItemListSubFragment.
+ */
 class DishesItemListSubFragment(
     private var list: MutableList<DishBasic>,
     private val position: Int,

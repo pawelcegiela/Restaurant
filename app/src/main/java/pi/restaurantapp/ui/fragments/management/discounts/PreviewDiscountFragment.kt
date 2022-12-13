@@ -14,6 +14,11 @@ import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.discounts.PreviewDiscountViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for PreviewDiscountFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.discounts.PreviewDiscountViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.discounts.PreviewDiscountLogic Model layer
+ */
 class PreviewDiscountFragment : AbstractPreviewItemFragment() {
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = R.id.actionPreviewDiscountToEditDiscount

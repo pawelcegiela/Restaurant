@@ -29,6 +29,11 @@ import pi.restaurantapp.ui.textviews.TextViewDetail
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for RDMainFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.RDMainLogic Model layer
+ */
 class RDMainFragment : AbstractPreviewItemFragment() {
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override var editActionId = R.id.actionRDToEditRestaurantData

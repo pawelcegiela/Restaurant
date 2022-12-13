@@ -14,6 +14,11 @@ import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.viewmodels.fragments.management.discounts.DiscountsMainViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for DiscountsMainFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.discounts.DiscountsMainViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.discounts.DiscountsMainLogic Model layer
+ */
 @Suppress("UNCHECKED_CAST")
 class DiscountsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDiscountsToAddDiscount

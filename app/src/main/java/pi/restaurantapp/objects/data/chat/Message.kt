@@ -4,6 +4,9 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import java.util.*
 
+/**
+ * Data class containing chat message.
+ */
 class Message : AbstractDataObject {
     var message: String = ""
     var timestamp: Long = Date().time

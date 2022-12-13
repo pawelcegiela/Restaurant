@@ -7,6 +7,11 @@ import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.dish.Dish
 import pi.restaurantapp.objects.data.dish.DishDetails
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for EditDishFragment.
+ * @see pi.restaurantapp.ui.fragments.management.dishes.EditDishFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.dishes.EditDishViewModel ViewModel layer
+ */
 class EditDishLogic : AbstractModifyDishLogic() {
     var item: Dish? = null
 

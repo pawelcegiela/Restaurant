@@ -6,6 +6,9 @@ import android.util.AttributeSet
 import android.view.Gravity
 import pi.restaurantapp.R
 
+/**
+ * Custom text view element for types of items.
+ */
 class TextViewItemType(context: Context?, attrs: AttributeSet?) : androidx.appcompat.widget.AppCompatTextView(context!!, attrs) {
     init {
         textSize = 16F

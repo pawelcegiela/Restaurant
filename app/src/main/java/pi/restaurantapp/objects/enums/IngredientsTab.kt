@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing tab names of all ingredients list.
+ */
 enum class IngredientsTab(val stringResourceId: Int) {
     ALL(R.string.all_),
     SUB_DISHES(R.string.sub_dishes),

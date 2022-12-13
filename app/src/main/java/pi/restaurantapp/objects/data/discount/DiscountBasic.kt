@@ -4,6 +4,10 @@ import pi.restaurantapp.logic.utils.ComputingUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import java.util.*
 
+/**
+ * Data class containing basic information of Discount.
+ * @see pi.restaurantapp.objects.data.discount.Discount
+ */
 class DiscountBasic : AbstractDataObject {
     var amount: String = "0.0"
     var valueType: Int = 0

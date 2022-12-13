@@ -15,6 +15,11 @@ import androidx.navigation.NavController
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.CardViewWideBinding
 
+/**
+ * Class responsible for changing or checking user interface settings,
+ * such as checking if all required fields have been filled or converting drawable to bitmap.
+ * It separates common logic from other layers.
+ */
 class UserInterfaceUtils {
     companion object {
         fun checkRequiredFields(map: Map<EditText, Int>, fragment: Fragment): Boolean {

@@ -3,6 +3,10 @@ package pi.restaurantapp.objects.data.dish
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Data class containing basic information of Dish.
+ * @see pi.restaurantapp.objects.data.dish.Dish
+ */
 class DishBasic : AbstractDataObject {
     var name: String = ""
     var isActive = true

@@ -16,6 +16,11 @@ import pi.restaurantapp.ui.dialogs.YesNoDialog
 import pi.restaurantapp.ui.fragments.management.workers.EditWorkerFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for fragments inheriting AbstractModifyItemFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.AbstractModifyItemLogic Model layer
+ */
 abstract class AbstractModifyItemFragment : Fragment() {
     abstract val viewModel: AbstractModifyItemViewModel
 

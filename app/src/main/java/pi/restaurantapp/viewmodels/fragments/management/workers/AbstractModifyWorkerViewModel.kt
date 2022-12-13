@@ -8,6 +8,11 @@ import pi.restaurantapp.objects.data.user.User
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Abstract class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AbstractModifyWorkerFragment.
+ * @see pi.restaurantapp.logic.fragments.management.workers.AbstractModifyWorkerLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.workers.AbstractModifyWorkerFragment View layer
+ */
 abstract class AbstractModifyWorkerViewModel : AbstractModifyItemViewModel() {
 
     private val _item: MutableLiveData<User> = MutableLiveData()

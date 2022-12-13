@@ -13,6 +13,11 @@ import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for PreviewWorkerFragment.
+ * @see pi.restaurantapp.logic.fragments.management.workers.PreviewWorkerLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.workers.PreviewWorkerFragment View layer
+ */
 class PreviewWorkerViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewWorkerLogic()
 

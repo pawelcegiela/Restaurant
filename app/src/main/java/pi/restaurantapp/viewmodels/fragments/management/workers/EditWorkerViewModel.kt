@@ -10,6 +10,11 @@ import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditWorkerFragment.
+ * @see pi.restaurantapp.logic.fragments.management.workers.EditWorkerLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.workers.EditWorkerFragment View layer
+ */
 class EditWorkerViewModel : AbstractModifyWorkerViewModel() {
     override val logic = EditWorkerLogic()
 

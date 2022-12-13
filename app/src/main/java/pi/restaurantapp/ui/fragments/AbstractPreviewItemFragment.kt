@@ -7,6 +7,11 @@ import androidx.navigation.fragment.findNavController
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for fragments inheriting AbstractPreviewItemFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.AbstractPreviewItemLogic Model layer
+ */
 abstract class AbstractPreviewItemFragment : Fragment() {
     abstract val viewModel: AbstractPreviewItemViewModel
 

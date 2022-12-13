@@ -7,6 +7,11 @@ import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
 import pi.restaurantapp.objects.enums.ToolbarType
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AddIngredientFragment.
+ * @see pi.restaurantapp.logic.fragments.management.ingredients.AddIngredientLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.ingredients.AddIngredientFragment View layer
+ */
 class AddIngredientViewModel : AbstractModifyIngredientViewModel() {
     override val logic = AddIngredientLogic()
 

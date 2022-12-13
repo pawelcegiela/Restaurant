@@ -8,6 +8,11 @@ import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Abstract class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AbstractModifyDiscountFragment.
+ * @see pi.restaurantapp.logic.fragments.management.discounts.AbstractModifyDiscountLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.discounts.AbstractModifyDiscountFragment View layer
+ */
 abstract class AbstractModifyDiscountViewModel : AbstractModifyItemViewModel() {
     private val _item: MutableLiveData<Discount> = MutableLiveData()
     val item: LiveData<Discount> = _item

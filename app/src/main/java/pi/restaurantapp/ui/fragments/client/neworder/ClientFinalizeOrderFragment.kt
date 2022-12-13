@@ -17,6 +17,11 @@ import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientFinalizeOrderViewModel
 
 //TODO Ustawienia z cache'a
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientFinalizeOrderFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.client.neworder.ClientFinalizeOrderViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.client.neworder.ClientFinalizeOrderLogic Model layer
+ */
 class ClientFinalizeOrderFragment : AbstractModifyOrderFragment() {
 
     override val nextActionId = R.id.actionClientFinalizeOrderToOrderSummary

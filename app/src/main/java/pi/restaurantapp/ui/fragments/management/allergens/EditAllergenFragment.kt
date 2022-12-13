@@ -7,6 +7,11 @@ import pi.restaurantapp.objects.data.allergen.AllergenDetails
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.allergens.EditAllergenViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditAllergenFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.allergens.EditAllergenViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.allergens.EditAllergenLogic Model layer
+ */
 class EditAllergenFragment : AbstractModifyAllergenFragment() {
 
     override val nextActionId = R.id.actionEditAllergenToAllergens

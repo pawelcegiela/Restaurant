@@ -11,7 +11,11 @@ import pi.restaurantapp.objects.enums.OrderPlace
 import pi.restaurantapp.ui.fragments.management.orders.CustomizeDishFragment
 import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientCustomizeDishFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.orders.CustomizeDishLogic Model layer
+ */
 class ClientCustomizeDishFragment : CustomizeDishFragment() {
     override val activityViewModel: ClientNewOrderViewModel by activityViewModels()
 

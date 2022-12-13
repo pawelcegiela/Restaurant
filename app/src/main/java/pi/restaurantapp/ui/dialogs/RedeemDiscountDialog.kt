@@ -5,6 +5,9 @@ import android.widget.AdapterView
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 
+/**
+ * Dialog with a list of discounts to redeem.
+ */
 class RedeemDiscountDialog(
     private val fragmentContext: Context,
     private val discounts: MutableList<DiscountBasic>,

@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing tab names of all discounts list.
+ */
 enum class DiscountsTab(val stringResourceId: Int) {
     ALL(R.string.all_),
     ACTIVE(R.string.active),

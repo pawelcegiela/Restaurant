@@ -9,6 +9,11 @@ import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.viewmodels.fragments.management.ingredients.IngredientsMainViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for IngredientsMainFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.ingredients.IngredientsMainViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.ingredients.IngredientsMainLogic Model layer
+ */
 class IngredientsMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionIngredientsToAddIngredient
     override val viewModel: AbstractItemListViewModel get() = _viewModel

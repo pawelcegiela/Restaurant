@@ -2,6 +2,9 @@ package pi.restaurantapp.objects.data.ingredient
 
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Data class containing ingredient item, used in dishes and sub-dishes.
+ */
 class IngredientItem : AbstractDataObject {
     var name: String = ""
     var amount: String = "0.0"

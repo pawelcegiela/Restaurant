@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import pi.restaurantapp.databinding.DialogRemovalBinding
 
+/**
+ * Dialog with a choice for administrators whether they want to disable or remove an item.
+ */
 class RemovalDialog(fragment: Fragment, disable: () -> (Unit), remove: () -> (Unit)) : Dialog(fragment.requireContext()) {
     val binding: DialogRemovalBinding = DialogRemovalBinding.inflate(layoutInflater, null, false)
 

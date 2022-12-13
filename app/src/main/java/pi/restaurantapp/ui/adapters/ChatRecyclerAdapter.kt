@@ -14,6 +14,9 @@ import pi.restaurantapp.databinding.ItemChatBinding
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.chat.Message
 
+/**
+ * Custom adapter for recycler view with chat messages.
+ */
 class ChatRecyclerAdapter(
     private val dataSet: MutableList<Message>,
     private val fragment: Fragment,

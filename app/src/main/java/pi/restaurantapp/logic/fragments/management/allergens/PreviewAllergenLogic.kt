@@ -4,6 +4,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.logic.fragments.AbstractPreviewItemLogic
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for PreviewAllergenFragment.
+ * @see pi.restaurantapp.ui.fragments.management.allergens.PreviewAllergenFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.allergens.PreviewAllergenViewModel ViewModel layer
+ */
 class PreviewAllergenLogic : AbstractPreviewItemLogic() {
     override val databasePath = "allergens"
 

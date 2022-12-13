@@ -13,6 +13,11 @@ import pi.restaurantapp.objects.enums.IngredientModificationType
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import java.lang.Integer.min
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for PreviewIngredientFragment.
+ * @see pi.restaurantapp.logic.fragments.management.ingredients.PreviewIngredientLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.ingredients.PreviewIngredientFragment View layer
+ */
 class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewIngredientLogic()
 

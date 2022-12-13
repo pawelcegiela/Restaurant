@@ -10,6 +10,11 @@ import pi.restaurantapp.databinding.FragmentModifyWorkerBinding
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.management.workers.AbstractModifyWorkerViewModel
 
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for AbstractModifyWorkerFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.workers.AbstractModifyWorkerViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.workers.AbstractModifyWorkerLogic Model layer
+ */
 abstract class AbstractModifyWorkerFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyWorkerBinding? = null
     val binding get() = _binding!!

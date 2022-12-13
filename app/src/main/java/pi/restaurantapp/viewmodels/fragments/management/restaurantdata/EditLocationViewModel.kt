@@ -13,6 +13,11 @@ import pi.restaurantapp.objects.data.address.AddressDetails
 import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditLocationFragment.
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.EditLocationLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.restaurantdata.EditLocationFragment View layer
+ */
 class EditLocationViewModel : AbstractModifyItemViewModel() {
     override val logic = EditLocationLogic()
 

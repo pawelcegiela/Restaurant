@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.DialogInterface
 import pi.restaurantapp.R
 
+/**
+ * Custom dialog with yes and no options.
+ */
 class YesNoDialog(context: Context?, title: Int, message: Int, positiveButtonFunction: DialogInterface.OnClickListener) :
     AlertDialog.Builder(context, R.style.RestaurantAlertDialog) {
 

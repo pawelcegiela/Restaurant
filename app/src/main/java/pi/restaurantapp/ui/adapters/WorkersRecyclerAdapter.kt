@@ -16,7 +16,9 @@ import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.Role
 import java.util.*
 
-
+/**
+ * Custom adapter for recycler view with workers.
+ */
 class WorkersRecyclerAdapter(
     private val dataSet: MutableList<UserBasic>,
     private val fragment: Fragment,

@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing discount's usage types (how many times can a discount be used per person).
+ */
 enum class DiscountUsageType(val stringResourceId: Int) {
     ONE_TIME(R.string.one_time_per_person),
     MULTIPLE_TIMES(R.string.multiple_times_per_person);

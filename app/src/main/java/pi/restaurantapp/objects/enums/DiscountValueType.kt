@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing discount's value types - relative or absolute.
+ */
 enum class DiscountValueType(val stringResourceId: Int) {
     RELATIVE(R.string.relative_discount_ending),
     ABSOLUTE(R.string.absolute_discount_ending);

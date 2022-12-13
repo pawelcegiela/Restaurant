@@ -6,6 +6,10 @@ import androidx.databinding.library.baseAdapters.BR
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 
+/**
+ * Class responsible for observing and updating fields (ViewModel layer) for CustomizeDishViewModel.
+ * @see pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel ViewModel
+ */
 class CustomizeDishObserver : BaseObservable() {
     @get:Bindable
     var baseIngredients: MutableList<IngredientItem> = ArrayList()

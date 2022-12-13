@@ -4,6 +4,9 @@ import android.content.Context
 import android.widget.AdapterView
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 
+/**
+ * Dialog with a list of allergens to add.
+ */
 class AddAllergenDialog(
     fragmentContext: Context,
     private val allergensList: MutableList<AllergenBasic>,

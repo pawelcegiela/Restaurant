@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.ItemContainingBinding
 
-
+/**
+ * Custom adapter for recycler view with items containing an allergen or ingredient.
+ */
 class ContainingItemsRecyclerAdapter(
     private val dataSet: List<String>,
     private val fragment: Fragment

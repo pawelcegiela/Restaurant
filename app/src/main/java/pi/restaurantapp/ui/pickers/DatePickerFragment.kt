@@ -8,6 +8,9 @@ import androidx.fragment.app.DialogFragment
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
+/**
+ * Custom date picker fragment.
+ */
 class DatePickerFragment(private val initialDate: Date, val function: (String) -> (Unit)) : DialogFragment(),
     DatePickerDialog.OnDateSetListener {
 

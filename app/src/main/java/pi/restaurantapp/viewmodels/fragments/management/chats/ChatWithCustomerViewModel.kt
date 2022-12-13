@@ -6,6 +6,11 @@ import androidx.lifecycle.ViewModel
 import pi.restaurantapp.logic.fragments.management.chats.ChatWithCustomerLogic
 import pi.restaurantapp.objects.data.chat.Message
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for ChatWithCustomerFragment.
+ * @see pi.restaurantapp.logic.fragments.management.chats.ChatWithCustomerLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.chats.ChatWithCustomerFragment View layer
+ */
 class ChatWithCustomerViewModel : ViewModel() {
     private val logic = ChatWithCustomerLogic()
     var customerId = ""

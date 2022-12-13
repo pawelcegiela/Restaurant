@@ -12,6 +12,11 @@ import pi.restaurantapp.objects.data.delivery.DeliveryDetails
 import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditDeliveryFragment.
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.EditDeliveryLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.restaurantdata.EditDeliveryFragment View layer
+ */
 class EditDeliveryViewModel : AbstractModifyItemViewModel() {
     override val logic = EditDeliveryLogic()
 

@@ -12,6 +12,11 @@ import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Abstract class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AbstractModifyDishFragment.
+ * @see pi.restaurantapp.logic.fragments.management.dishes.AbstractModifyDishLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.dishes.AbstractModifyDishFragment View layer
+ */
 abstract class AbstractModifyDishViewModel : AbstractModifyItemViewModel() {
     private val _logic: AbstractModifyDishLogic get() = logic as AbstractModifyDishLogic
 

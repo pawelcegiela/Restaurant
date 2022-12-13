@@ -5,6 +5,11 @@ import pi.restaurantapp.R
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.discounts.EditDiscountViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditDiscountFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.discounts.EditDiscountViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.discounts.EditDiscountLogic Model layer
+ */
 class EditDiscountFragment : AbstractModifyDiscountFragment() {
 
     override val nextActionId = R.id.actionEditDiscountToDiscounts

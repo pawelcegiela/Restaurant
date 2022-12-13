@@ -11,6 +11,11 @@ import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.management.orders.AbstractModifyOrderViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for ClientFinalizeOrderFragment.
+ * @see pi.restaurantapp.logic.fragments.client.neworder.ClientFinalizeOrderLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.client.neworder.ClientFinalizeOrderFragment View layer
+ */
 class ClientFinalizeOrderViewModel : AbstractModifyOrderViewModel() {
     override val logic = ClientFinalizeOrderLogic()
     override var lowestRole = Role.CUSTOMER.ordinal

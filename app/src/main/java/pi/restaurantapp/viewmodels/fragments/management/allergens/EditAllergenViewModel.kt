@@ -9,6 +9,11 @@ import pi.restaurantapp.objects.data.allergen.AllergenDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditAllergenFragment.
+ * @see pi.restaurantapp.logic.fragments.management.allergens.EditAllergenLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.allergens.EditAllergenFragment View layer
+ */
 class EditAllergenViewModel : AbstractModifyAllergenViewModel() {
     override val logic = EditAllergenLogic()
 

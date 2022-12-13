@@ -5,6 +5,9 @@ import android.content.Context
 import android.view.ViewGroup
 import pi.restaurantapp.databinding.DialogAddDiscountBinding
 
+/**
+ * Dialog with a list of discounts to add.
+ */
 class AddDiscountDialog(
     fragmentContext: Context,
     private val save: (String) -> (Unit)

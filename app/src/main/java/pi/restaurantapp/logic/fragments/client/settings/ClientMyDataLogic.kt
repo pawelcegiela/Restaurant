@@ -6,6 +6,11 @@ import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for ClientMyDataFragment.
+ * @see pi.restaurantapp.ui.fragments.client.settings.ClientMyDataFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.client.settings.ClientMyDataViewModel ViewModel layer
+ */
 class ClientMyDataLogic : AbstractModifyItemLogic() {
     override val databasePath = "users"
 

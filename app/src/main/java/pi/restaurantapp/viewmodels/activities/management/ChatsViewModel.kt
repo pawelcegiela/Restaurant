@@ -2,7 +2,10 @@ package pi.restaurantapp.viewmodels.activities.management
 
 import androidx.lifecycle.MutableLiveData
 
-
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for Chats activity.
+ * @see pi.restaurantapp.ui.activities.management.ChatsActivity View layer
+ */
 class ChatsViewModel : AbstractActivityViewModel() {
     private val _showActive = MutableLiveData(true)
     private val _showDisabled = MutableLiveData(false)

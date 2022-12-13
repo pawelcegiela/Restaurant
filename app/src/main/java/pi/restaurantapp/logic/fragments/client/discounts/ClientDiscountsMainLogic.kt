@@ -14,6 +14,11 @@ import pi.restaurantapp.objects.enums.DiscountReceiverType
 import pi.restaurantapp.objects.enums.DiscountUsageType
 import java.util.*
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for ClientDiscountsMainFragment.
+ * @see pi.restaurantapp.ui.fragments.client.discounts.ClientDiscountsMainFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.client.discounts.ClientDiscountsMainViewModel ViewModel layer
+ */
 class ClientDiscountsMainLogic : AbstractItemListLogic() {
     override val databasePath = "discounts"
     override val dbRef get() = super.dbRef.whereArrayContains("assignedDiscounts", Firebase.auth.uid!!).whereGreaterThan("expirationDate", Date())

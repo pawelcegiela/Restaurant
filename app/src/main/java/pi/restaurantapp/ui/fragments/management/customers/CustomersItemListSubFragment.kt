@@ -12,7 +12,9 @@ import pi.restaurantapp.ui.adapters.CustomersRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.viewmodels.activities.management.CustomersViewModel
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for CustomersItemListSubFragment.
+ */
 class CustomersItemListSubFragment(
     private var list: MutableList<UserBasic>,
     fabFilter: FloatingActionButton,

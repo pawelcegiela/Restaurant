@@ -8,6 +8,10 @@ import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.Precondition
 import java.math.BigDecimal
 
+/**
+ * Class responsible for checking preconditions before save.
+ * It separates common logic from other layers.
+ */
 class PreconditionUtils {
     companion object {
         fun checkUserPasswords(password1: String, password2: String): Precondition {

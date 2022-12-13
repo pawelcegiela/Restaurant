@@ -11,6 +11,11 @@ import pi.restaurantapp.objects.data.discount.DiscountDetails
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for PreviewDiscountFragment.
+ * @see pi.restaurantapp.logic.fragments.management.discounts.PreviewDiscountLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.discounts.PreviewDiscountFragment View layer
+ */
 class PreviewDiscountViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewDiscountLogic()
 

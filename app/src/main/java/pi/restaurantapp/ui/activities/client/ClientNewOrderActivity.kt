@@ -13,6 +13,10 @@ import com.google.android.material.navigation.NavigationView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityClientNewOrderBinding
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientNewOrderActivity
+ * @see pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel ViewModel layer
+ */
 class ClientNewOrderActivity : AppCompatActivity() {
     lateinit var binding: ActivityClientNewOrderBinding
     private lateinit var appBarConfiguration: AppBarConfiguration

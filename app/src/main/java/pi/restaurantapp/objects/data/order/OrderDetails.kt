@@ -7,6 +7,10 @@ import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.enums.OrderType
 import java.util.*
 
+/**
+ * Data class containing details of Order.
+ * @see pi.restaurantapp.objects.data.order.Order
+ */
 class OrderDetails : AbstractDataObject {
     var orderType: Int = OrderType.CLIENT_APP.ordinal
     var orderDate: Date = Date()

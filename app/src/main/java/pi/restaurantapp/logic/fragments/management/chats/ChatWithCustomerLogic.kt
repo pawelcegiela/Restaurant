@@ -5,6 +5,11 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.data.chat.Message
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for ChatWithCustomerFragment.
+ * @see pi.restaurantapp.ui.fragments.management.chats.ChatWithCustomerFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.chats.ChatWithCustomerViewModel ViewModel layer
+ */
 class ChatWithCustomerLogic {
     private val dbRefDetails get() = Firebase.firestore.collection("chats-details")
     private val dbRefBasic get() = Firebase.firestore.collection("chats-basic")

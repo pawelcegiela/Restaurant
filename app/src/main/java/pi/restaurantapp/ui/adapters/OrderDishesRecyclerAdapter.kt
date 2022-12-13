@@ -14,7 +14,9 @@ import pi.restaurantapp.ui.fragments.client.orders.ClientPreviewOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment
 import pi.restaurantapp.ui.fragments.management.orders.PreviewOrderFragment
 
-
+/**
+ * Custom adapter for recycler view with dishes in an order.
+ */
 class OrderDishesRecyclerAdapter(
     private val dataSet: List<DishItem>,
     private val fragment: Fragment,

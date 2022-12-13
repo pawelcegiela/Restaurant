@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import pi.restaurantapp.databinding.DialogFilterBinding
 
+/**
+ * Dialog with filtering settings.
+ */
 class FilterDialog(
     val fragment: Fragment,
     showActive: Boolean,

@@ -12,6 +12,9 @@ import pi.restaurantapp.ui.adapters.ChatInfoRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.viewmodels.activities.management.ChatsViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ChatsItemListSubFragment.
+ */
 class ChatsItemListSubFragment(private val list: MutableList<ChatInfo>, fabFilter: FloatingActionButton, searchView: SearchView) :
     ItemListSubFragment(fabFilter, searchView) {
     private val _activityViewModel: ChatsViewModel by activityViewModels()

@@ -3,6 +3,10 @@ package pi.restaurantapp.objects.data.ingredient
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Data class containing basic information of Ingredient.
+ * @see pi.restaurantapp.objects.data.ingredient.Ingredient
+ */
 class IngredientBasic : AbstractDataObject {
     var name: String = ""
     var amount: Int = 0

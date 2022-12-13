@@ -6,6 +6,10 @@ import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for Orders activity.
+ * @see pi.restaurantapp.ui.activities.management.OrdersActivity View layer
+ */
 open class OrdersViewModel : AbstractActivityViewModel() {
     private val _showActive = MutableLiveData(true)
     private val _showDisabled = MutableLiveData(false)

@@ -6,6 +6,11 @@ import pi.restaurantapp.R
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.workers.AddWorkerViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for AddWorkerFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.workers.AddWorkerViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.workers.AddWorkerLogic Model layer
+ */
 class AddWorkerFragment : AbstractModifyWorkerFragment() {
 
     override val nextActionId = R.id.actionAddWorkerToWorkers

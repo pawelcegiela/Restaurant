@@ -2,6 +2,9 @@ package pi.restaurantapp.ui.pickers
 
 import pi.restaurantapp.databinding.CustomNumberPickerBinding
 
+/**
+ * Custom number picker with min value, max value and a step.
+ */
 class CustomNumberPicker(
     private val numberPicker: CustomNumberPickerBinding,
     private val minimumValue: Int,

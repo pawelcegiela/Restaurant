@@ -5,6 +5,11 @@ import pi.restaurantapp.R
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.dishes.EditDishViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditDishFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.dishes.EditDishViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.dishes.EditDishLogic Model layer
+ */
 class EditDishFragment : AbstractModifyDishFragment() {
 
     override val nextActionId = R.id.actionEditDishToDishes

@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing order types (how the order was placed).
+ */
 enum class OrderType(val stringResourceId: Int) {
     IN_RESTAURANT(R.string.in_restaurant),
     PHONE_CALL(R.string.phone_call),

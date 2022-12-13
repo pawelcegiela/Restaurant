@@ -14,6 +14,11 @@ import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import java.util.*
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for PreviewOrderFragment.
+ * @see pi.restaurantapp.logic.fragments.management.orders.PreviewOrderLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.orders.PreviewOrderFragment View layer
+ */
 class PreviewOrderViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewOrderLogic()
 

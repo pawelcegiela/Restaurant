@@ -12,7 +12,9 @@ import pi.restaurantapp.databinding.FragmentAuthenticationBinding
 import pi.restaurantapp.ui.activities.AuthenticationActivity
 import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
 
-
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for authentication fragments.
+ */
 abstract class AbstractAuthenticationFragment : Fragment() {
     private var _binding: FragmentAuthenticationBinding? = null
     val binding get() = _binding!!

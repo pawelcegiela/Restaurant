@@ -16,6 +16,11 @@ import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditOpeningHoursFragment.
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.EditOpeningHoursLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.restaurantdata.EditOpeningHoursFragment View layer
+ */
 class EditOpeningHoursViewModel : AbstractModifyItemViewModel() {
     override val logic = EditOpeningHoursLogic()
 

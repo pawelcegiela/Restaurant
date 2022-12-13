@@ -12,6 +12,9 @@ import pi.restaurantapp.ui.adapters.AbstractRecyclerAdapter
 import pi.restaurantapp.ui.dialogs.FilterDialog
 import pi.restaurantapp.viewmodels.activities.management.AbstractActivityViewModel
 
+/**
+ * Open class responsible for direct communication and displaying information to the user (View layer) for fragments inheriting ItemListSubFragment.
+ */
 open class ItemListSubFragment(private val fabFilter: FloatingActionButton, private val searchView: SearchView) : Fragment() {
     private var _binding: FragmentItemListSubBinding? = null
     protected val binding get() = _binding!!

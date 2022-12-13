@@ -10,11 +10,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.ui.adapters.AllergensRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
-import pi.restaurantapp.viewmodels.activities.management.IngredientsViewModel
+import pi.restaurantapp.viewmodels.activities.management.AllergensViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for AllergensItemListSubFragment.
+ */
 class AllergensItemListSubFragment(private val list: MutableList<AllergenBasic>, fabFilter: FloatingActionButton, searchView: SearchView) :
     ItemListSubFragment(fabFilter, searchView) {
-    private val _activityViewModel: IngredientsViewModel by activityViewModels()
+    private val _activityViewModel: AllergensViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         activityViewModel = _activityViewModel

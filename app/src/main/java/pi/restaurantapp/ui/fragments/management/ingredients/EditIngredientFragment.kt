@@ -7,7 +7,11 @@ import pi.restaurantapp.objects.data.ingredient.IngredientDetails
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.ingredients.EditIngredientViewModel
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditIngredientFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.ingredients.EditIngredientViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.ingredients.EditIngredientLogic Model layer
+ */
 class EditIngredientFragment : AbstractModifyIngredientFragment() {
 
     override val nextActionId = R.id.actionEditIngredientToIngredients

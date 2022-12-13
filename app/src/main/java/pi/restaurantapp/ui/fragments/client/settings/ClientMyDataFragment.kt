@@ -15,6 +15,11 @@ import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.client.settings.ClientMyDataViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientMyDataFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.client.settings.ClientMyDataViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.client.settings.ClientMyDataLogic Model layer
+ */
 class ClientMyDataFragment : AbstractModifyItemFragment() {
 
     override var nextActionId = R.id.actionClientMyDataToSettings

@@ -14,6 +14,9 @@ import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
 import java.util.*
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for AllergensItemListSubFragment.
+ */
 class DiscountsItemListSubFragment(
     private var list: MutableList<DiscountBasic>,
     private val position: Int,

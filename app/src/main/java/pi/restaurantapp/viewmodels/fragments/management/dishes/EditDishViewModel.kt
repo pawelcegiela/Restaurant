@@ -9,6 +9,11 @@ import pi.restaurantapp.objects.data.dish.DishDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditDishFragment.
+ * @see pi.restaurantapp.logic.fragments.management.dishes.EditDishLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.dishes.EditDishFragment View layer
+ */
 class EditDishViewModel : AbstractModifyDishViewModel() {
     override val logic = EditDishLogic()
 

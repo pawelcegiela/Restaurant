@@ -4,6 +4,10 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 
+/**
+ * Data class containing details of Dish.
+ * @see pi.restaurantapp.objects.data.dish.Dish
+ */
 class DishDetails : AbstractDataObject {
     var description: String = ""
     var recipe: String = ""

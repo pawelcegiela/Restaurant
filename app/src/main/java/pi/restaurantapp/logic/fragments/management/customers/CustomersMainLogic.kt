@@ -9,6 +9,11 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.Role
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for CustomersMainFragment.
+ * @see pi.restaurantapp.ui.fragments.management.customers.CustomersMainFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.customers.CustomersMainViewModel ViewModel layer
+ */
 class CustomersMainLogic : AbstractItemListLogic() {
     override val databasePath = "users"
     override val dbRef get() = Firebase.firestore.collection("$databasePath-basic").whereEqualTo("role", Role.CUSTOMER.ordinal)

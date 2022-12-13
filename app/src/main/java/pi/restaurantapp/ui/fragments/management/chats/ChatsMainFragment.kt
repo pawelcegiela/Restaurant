@@ -10,6 +10,9 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentChatsMainBinding
 import pi.restaurantapp.logic.utils.UserInterfaceUtils
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ChatsMainFragment.
+ */
 class ChatsMainFragment : Fragment() {
     private var _binding: FragmentChatsMainBinding? = null
     private val binding get() = _binding!!

@@ -5,6 +5,9 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import java.io.Serializable
 
+/**
+ * Data class containing dish item used in orders.
+ */
 class DishItem : AbstractDataObject, Serializable {
     lateinit var dish: Dish
     var amount: Int = 1

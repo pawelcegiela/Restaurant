@@ -12,6 +12,11 @@ import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for ClientOrderSummaryFragment.
+ * @see pi.restaurantapp.logic.fragments.client.neworder.ClientOrderSummaryLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.client.neworder.ClientOrderSummaryFragment View layer
+ */
 class ClientOrderSummaryViewModel : AbstractPreviewItemViewModel() {
     override val logic = ClientOrderSummaryLogic()
 

@@ -11,6 +11,11 @@ import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 
+/**
+ * Abstract class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AbstractModifyItemFragment.
+ * @see pi.restaurantapp.logic.fragments.AbstractModifyItemLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.AbstractModifyItemFragment View layer
+ */
 abstract class AbstractModifyItemViewModel : AbstractFragmentViewModel() {
     private val _logic: AbstractModifyItemLogic get() = logic as AbstractModifyItemLogic
 

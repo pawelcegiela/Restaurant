@@ -2,6 +2,10 @@ package pi.restaurantapp.objects.data.delivery
 
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Data class containing basic information of Delivery.
+ * @see pi.restaurantapp.objects.data.delivery.Delivery
+ */
 class DeliveryBasic : AbstractDataObject {
     override var id = "delivery"
     var available: Boolean = false

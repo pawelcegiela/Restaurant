@@ -15,7 +15,9 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import java.util.*
 
-
+/**
+ * Custom adapter for recycler view with ingredients.
+ */
 class IngredientsRecyclerAdapter(
     private val dataSet: MutableList<IngredientBasic>,
     private val fragment: Fragment,

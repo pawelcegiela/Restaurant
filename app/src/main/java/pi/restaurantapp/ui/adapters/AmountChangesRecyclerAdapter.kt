@@ -11,7 +11,9 @@ import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
 import pi.restaurantapp.objects.enums.IngredientModificationType
 import pi.restaurantapp.objects.enums.Unit
 
-
+/**
+ * Custom adapter for recycler view with ingredient amount changes.
+ */
 class AmountChangesRecyclerAdapter(
     private val dataSet: List<IngredientAmountChange>,
     private val fragment: Fragment,

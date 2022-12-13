@@ -2,6 +2,9 @@ package pi.restaurantapp.objects.data.ingredient
 
 import java.util.*
 
+/**
+ * Data class containing ingredient amount change tuple.
+ */
 class IngredientAmountChange {
     var date: Date = Date()
     var userId: String = ""

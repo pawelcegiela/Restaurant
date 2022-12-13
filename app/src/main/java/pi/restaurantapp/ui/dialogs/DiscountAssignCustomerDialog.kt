@@ -6,6 +6,9 @@ import androidx.lifecycle.LiveData
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.ui.fragments.management.discounts.PreviewDiscountFragment
 
+/**
+ * Dialog with a list of customers to assign to a discount.
+ */
 class DiscountAssignCustomerDialog(
     private val fragment: PreviewDiscountFragment,
     getCustomers: () -> (Unit),

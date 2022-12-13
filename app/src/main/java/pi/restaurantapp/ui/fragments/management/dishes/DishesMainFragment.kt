@@ -11,6 +11,11 @@ import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.viewmodels.fragments.management.dishes.DishesMainViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for DishesMainFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.dishes.DishesMainViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.dishes.DishesMainLogic Model layer
+ */
 class DishesMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionDishesToAddDish
     override val viewModel: AbstractItemListViewModel get() = _viewModel

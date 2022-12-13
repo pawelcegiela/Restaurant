@@ -17,7 +17,9 @@ import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.ui.activities.management.DiscountsActivity
 import java.util.*
 
-
+/**
+ * Custom adapter for recycler view with discounts.
+ */
 class DiscountsRecyclerAdapter(
     private val dataSet: MutableList<DiscountBasic>,
     private val fragment: Fragment,

@@ -9,6 +9,11 @@ import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.viewmodels.fragments.client.orders.ClientOrdersMainViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientOrdersMainFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.client.orders.ClientOrdersMainViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.client.orders.ClientOrdersMainLogic Model layer
+ */
 class ClientOrdersMainFragment : AbstractItemListFragment() {
     override val addActionId = 0
     override val viewModel: AbstractItemListViewModel get() = _viewModel

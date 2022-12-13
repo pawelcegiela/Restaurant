@@ -14,7 +14,9 @@ import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.AuthenticationActivity
 import java.util.*
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientAuthenticationFragment.
+ */
 class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -14,7 +14,11 @@ import pi.restaurantapp.ui.dialogs.IngredientPropertiesDialog
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel
 
-
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for AbstractModifyIngredientFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.ingredients.AbstractModifyIngredientLogic Model layer
+ */
 abstract class AbstractModifyIngredientFragment : AbstractModifyItemFragment() {
 
     private var _binding: FragmentModifyIngredientBinding? = null

@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing tab names of all workers list.
+ */
 enum class WorkersTab(val stringResourceId: Int) {
     ALL(R.string.all_),
     ADMINS(R.string.admins),

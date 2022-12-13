@@ -5,6 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.logic.fragments.AbstractItemListLogic
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Abstract class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AbstractItemListFragment.
+ * @see pi.restaurantapp.logic.fragments.AbstractItemListLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.AbstractItemListFragment View layer
+ */
 abstract class AbstractItemListViewModel : AbstractFragmentViewModel() {
     private val _logic: AbstractItemListLogic get() = logic as AbstractItemListLogic
 

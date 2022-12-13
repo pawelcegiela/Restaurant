@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing order statuses.
+ */
 enum class OrderStatus(val stringResourceId: Int) {
     NEW(R.string.new_s),
     ACCEPTED(R.string.accepted),

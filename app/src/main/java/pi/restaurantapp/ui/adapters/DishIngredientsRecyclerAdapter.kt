@@ -15,7 +15,9 @@ import pi.restaurantapp.ui.fragments.management.dishes.AbstractModifyDishFragmen
 import pi.restaurantapp.ui.fragments.management.ingredients.AbstractModifyIngredientFragment
 import pi.restaurantapp.ui.fragments.management.orders.CustomizeDishFragment
 
-
+/**
+ * Custom adapter for recycler view with ingredients in a dish.
+ */
 class DishIngredientsRecyclerAdapter(
     private val dataSet: List<IngredientItem>,
     private val fragment: Fragment,

@@ -10,6 +10,11 @@ import pi.restaurantapp.databinding.FragmentModifyAllergenBinding
 import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.management.allergens.AbstractModifyAllergenViewModel
 
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for AbstractModifyAllergenFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.allergens.AbstractModifyAllergenViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.allergens.AbstractModifyAllergenLogic Model layer
+ */
 abstract class AbstractModifyAllergenFragment : AbstractModifyItemFragment() {
 
     private var _binding: FragmentModifyAllergenBinding? = null

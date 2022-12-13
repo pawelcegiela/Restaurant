@@ -8,6 +8,11 @@ import pi.restaurantapp.logic.fragments.client.discounts.ClientDiscountsMainLogi
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for ClientDiscountsMainFragment.
+ * @see pi.restaurantapp.logic.fragments.client.discounts.ClientDiscountsMainLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.client.discounts.ClientDiscountsMainFragment View layer
+ */
 class ClientDiscountsMainViewModel : AbstractItemListViewModel() {
     override val logic = ClientDiscountsMainLogic()
 

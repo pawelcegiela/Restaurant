@@ -4,6 +4,10 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Data class containing basic information of OpeningHours.
+ * @see pi.restaurantapp.objects.data.openinghours.OpeningHours
+ */
 class OpeningHoursBasic : AbstractDataObject() {
     override var id = "openingHours"
 

@@ -12,7 +12,10 @@ import com.google.android.material.navigation.NavigationView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityDiscountsBinding
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for DiscountsActivity
+ * @see pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel ViewModel layer
+ */
 class DiscountsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDiscountsBinding
     private lateinit var appBarConfiguration: AppBarConfiguration

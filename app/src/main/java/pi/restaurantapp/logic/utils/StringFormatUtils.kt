@@ -15,6 +15,10 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Class responsible for formatting string values used by multiple classes or data binding.
+ * It separates common logic from other layers.
+ */
 class StringFormatUtils {
     companion object {
         @JvmStatic

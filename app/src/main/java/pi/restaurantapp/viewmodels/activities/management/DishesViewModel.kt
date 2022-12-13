@@ -2,7 +2,10 @@ package pi.restaurantapp.viewmodels.activities.management
 
 import androidx.lifecycle.MutableLiveData
 
-
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for Dishes activity.
+ * @see pi.restaurantapp.ui.activities.management.DishesActivity View layer
+ */
 class DishesViewModel : AbstractActivityViewModel() {
     private val _showActive = MutableLiveData(true)
     private val _showDisabled = MutableLiveData(false)

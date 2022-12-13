@@ -14,6 +14,9 @@ import pi.restaurantapp.ui.adapters.OrdersRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for AllergensItemListSubFragment.
+ */
 class OrdersItemListSubFragment(
     private var list: MutableList<OrderBasic>,
     private val position: Int,

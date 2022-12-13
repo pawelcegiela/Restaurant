@@ -11,7 +11,9 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
 
-
+/**
+ * Custom adapter for recycler view with ingredients in a dish preview.
+ */
 class PreviewDishIngredientRecyclerAdapter(
     private val dataSet: List<Pair<IngredientItem, IngredientStatus>>,
     private val fragment: Fragment

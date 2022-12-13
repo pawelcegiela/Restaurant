@@ -2,6 +2,9 @@ package pi.restaurantapp.objects.data.openinghours
 
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Data class containing id, basic information and details for opening hours.
+ */
 class OpeningHours : AbstractDataObject {
     override var id = "openingHours"
     var basic: OpeningHoursBasic = OpeningHoursBasic()

@@ -18,7 +18,9 @@ import pi.restaurantapp.ui.fragments.client.orders.ClientOrdersItemListSubFragme
 import pi.restaurantapp.ui.fragments.management.orders.OrdersItemListSubFragment
 import java.util.*
 
-
+/**
+ * Custom adapter for recycler view with orders.
+ */
 class OrdersRecyclerAdapter(
     private val dataSet: MutableList<OrderBasic>,
     private val fragment: Fragment,

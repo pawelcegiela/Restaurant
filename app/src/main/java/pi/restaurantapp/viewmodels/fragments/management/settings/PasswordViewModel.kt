@@ -5,6 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pi.restaurantapp.logic.fragments.management.settings.PasswordLogic
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for PasswordFragment.
+ * @see pi.restaurantapp.logic.fragments.management.settings.PasswordLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.settings.PasswordFragment View layer
+ */
 class PasswordViewModel : ViewModel() {
     private val logic = PasswordLogic()
 

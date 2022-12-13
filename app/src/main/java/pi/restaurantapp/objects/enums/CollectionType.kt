@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing order collection types.
+ */
 enum class CollectionType(val stringResourceId: Int) {
     DELIVERY(R.string.delivery),
     SELF_PICKUP(R.string.self_pickup);

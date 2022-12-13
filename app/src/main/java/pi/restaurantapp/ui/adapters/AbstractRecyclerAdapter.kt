@@ -5,6 +5,9 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.objects.data.AbstractDataObject
 import java.util.*
 
+/**
+ * Abstract adapter for recycler view - base class for custom adapters.
+ */
 abstract class AbstractRecyclerAdapter<RecyclerHolder : RecyclerView.ViewHolder?> :
     RecyclerView.Adapter<RecyclerHolder>() {
     abstract val allDataSet: List<AbstractDataObject>

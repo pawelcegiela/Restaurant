@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing dish types.
+ */
 enum class DishType(val stringResourceId: Int) {
     DISH(R.string.dish),
     WARM_DISH(R.string.warm_dish),

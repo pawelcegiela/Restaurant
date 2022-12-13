@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import pi.restaurantapp.databinding.DialogIngredientChangesBinding
 import pi.restaurantapp.objects.enums.Unit
 
+/**
+ * Dialog responsible for changing of ingredient warehouse state amount.
+ */
 class IngredientChangesDialog(
     private val fragmentContext: Context,
     private val unit: Int,

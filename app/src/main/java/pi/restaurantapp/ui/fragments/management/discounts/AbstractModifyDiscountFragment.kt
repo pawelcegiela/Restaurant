@@ -15,6 +15,11 @@ import pi.restaurantapp.ui.pickers.DatePickerFragment
 import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
 import pi.restaurantapp.viewmodels.fragments.management.discounts.AbstractModifyDiscountViewModel
 
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for AbstractModifyDiscountFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.discounts.AbstractModifyDiscountViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.discounts.AbstractModifyDiscountLogic Model layer
+ */
 abstract class AbstractModifyDiscountFragment : AbstractModifyItemFragment() {
 
     private var _binding: FragmentModifyDiscountBinding? = null

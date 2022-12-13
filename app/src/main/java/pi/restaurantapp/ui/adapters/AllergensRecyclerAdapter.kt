@@ -14,7 +14,9 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import java.util.*
 
-
+/**
+ * Custom adapter for recycler view with allergens.
+ */
 class AllergensRecyclerAdapter(
     private val dataSet: MutableList<AllergenBasic>,
     private val fragment: Fragment

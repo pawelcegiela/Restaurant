@@ -14,7 +14,11 @@ import pi.restaurantapp.objects.data.chat.Message
 import pi.restaurantapp.ui.adapters.ChatRecyclerAdapter
 import pi.restaurantapp.viewmodels.fragments.client.chats.ClientChatsMainViewModel
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientChatsMainFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.client.chats.ClientChatsMainViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.client.chats.ClientChatsMainLogic Model layer
+ */
 class ClientChatsMainFragment : Fragment() {
     private var _binding: FragmentChatClientManagementBinding? = null
     private val binding get() = _binding!!

@@ -6,6 +6,9 @@ import androidx.cardview.widget.CardView
 import pi.restaurantapp.R
 import pi.restaurantapp.logic.utils.UserInterfaceUtils
 
+/**
+ * Custom card view element used in the app.
+ */
 class CardViewPreviewElement(context: Context, attrs: AttributeSet?) : CardView(context, attrs) {
     init {
         backgroundTintList = context.resources.getColorStateList(R.color.blue_2a, null)

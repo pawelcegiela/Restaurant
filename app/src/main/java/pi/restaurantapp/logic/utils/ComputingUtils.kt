@@ -12,6 +12,10 @@ import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Class responsible for computing values used by multiple classes or data binding.
+ * It separates common logic from other layers.
+ */
 class ComputingUtils {
     companion object {
         private const val millisecondsInMinute = 1000 * 60

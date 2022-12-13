@@ -7,6 +7,11 @@ import pi.restaurantapp.logic.fragments.AbstractPreviewItemLogic
 import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
 import pi.restaurantapp.objects.enums.IngredientModificationType
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for PreviewIngredientFragment.
+ * @see pi.restaurantapp.ui.fragments.management.ingredients.PreviewIngredientFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.ingredients.PreviewIngredientViewModel ViewModel layer
+ */
 class PreviewIngredientLogic : AbstractPreviewItemLogic() {
     override val databasePath = "ingredients"
 

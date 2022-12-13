@@ -2,7 +2,9 @@ package pi.restaurantapp.objects.data.discount
 
 import pi.restaurantapp.objects.data.AbstractDataObject
 
-
+/**
+ * Data class containing id, basic information and details for discount.
+ */
 class Discount : AbstractDataObject {
     lateinit var basic: DiscountBasic
     lateinit var details: DiscountDetails

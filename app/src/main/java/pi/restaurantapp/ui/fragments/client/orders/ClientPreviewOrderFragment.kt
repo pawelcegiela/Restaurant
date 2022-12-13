@@ -16,6 +16,11 @@ import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.client.orders.ClientPreviewOrderViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientPreviewOrderFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.client.orders.ClientPreviewOrderViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.client.orders.ClientPreviewOrderLogic Model layer
+ */
 class ClientPreviewOrderFragment : AbstractPreviewItemFragment() {
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0 // Warning: unused

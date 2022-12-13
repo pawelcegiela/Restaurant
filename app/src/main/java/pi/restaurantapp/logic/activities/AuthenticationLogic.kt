@@ -7,6 +7,11 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for Authentication activity.
+ * @see pi.restaurantapp.viewmodels.activities.AuthenticationViewModel ViewModel layer
+ * @see pi.restaurantapp.ui.activities.AuthenticationActivity View layer
+ */
 class AuthenticationLogic {
     fun getUserBasic(callback: (UserBasic?) -> (Unit)) {
         Firebase.firestore.collection("users-basic").document(Firebase.auth.uid!!).get().addOnSuccessListener { snapshot ->

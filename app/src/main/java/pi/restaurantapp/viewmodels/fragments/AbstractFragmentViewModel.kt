@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel
 import pi.restaurantapp.logic.fragments.AbstractFragmentLogic
 import pi.restaurantapp.objects.enums.Role
 
+/**
+ * Abstract base class responsible for presentation logic and binding between data/model and view (ViewModel layer).
+ * @see pi.restaurantapp.logic.fragments.AbstractFragmentLogic Model layer
+ */
 abstract class AbstractFragmentViewModel : ViewModel() {
     abstract val logic: AbstractFragmentLogic
 

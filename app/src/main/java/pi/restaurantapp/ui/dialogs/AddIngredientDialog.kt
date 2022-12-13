@@ -6,6 +6,9 @@ import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
 
+/**
+ * Dialog with a list of ingredients to add.
+ */
 class AddIngredientDialog(
     private var fragment: Fragment,
     private val recyclerList: MutableList<IngredientItem>,

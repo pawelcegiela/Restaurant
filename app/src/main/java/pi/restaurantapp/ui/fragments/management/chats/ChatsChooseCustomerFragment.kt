@@ -10,6 +10,11 @@ import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.viewmodels.fragments.management.chats.ChatsChooseCustomerViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ChatsChooseCustomerFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.chats.ChatsChooseCustomerViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.chats.ChatsChooseCustomerLogic Model layer
+ */
 class ChatsChooseCustomerFragment : AbstractItemListFragment() {
     override val addActionId = 0
     override val viewModel: AbstractItemListViewModel get() = _viewModel

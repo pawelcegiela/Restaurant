@@ -9,6 +9,10 @@ import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
 
+/**
+ * Class responsible for observing and updating fields (ViewModel layer) for AbstractModifyOrderViewModel.
+ * @see pi.restaurantapp.viewmodels.fragments.management.orders.AbstractModifyOrderViewModel ViewModel
+ */
 class ModifyOrderObserver(private val item: MutableLiveData<Order>, private val updateFullPrice: () -> (Unit)) : BaseObservable() {
     @get:Bindable
     var dishesList: MutableList<DishItem> = ArrayList()

@@ -6,6 +6,10 @@ import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.OrderPlace
 import java.util.*
 
+/**
+ * Data class containing details of AboutRestaurant.
+ * @see pi.restaurantapp.objects.data.user.User
+ */
 class UserDetails : AbstractDataObject {
     var email: String = ""
     var creationDate: Date = Date()

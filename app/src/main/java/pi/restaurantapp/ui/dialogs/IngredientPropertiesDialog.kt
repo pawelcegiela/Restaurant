@@ -12,6 +12,9 @@ import pi.restaurantapp.ui.fragments.management.dishes.AbstractModifyDishFragmen
 import pi.restaurantapp.ui.fragments.management.ingredients.AbstractModifyIngredientFragment
 import java.math.BigDecimal
 
+/**
+ * Dialog responsible for setting or changing ingredient item's properties.
+ */
 class IngredientPropertiesDialog(
     val fragment: Fragment,
     private val item: Pair<IngredientItem, IngredientStatus>,

@@ -12,6 +12,11 @@ import pi.restaurantapp.objects.enums.DiscountUsageType
 import pi.restaurantapp.objects.enums.Role
 import java.util.*
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for PreviewDiscountFragment.
+ * @see pi.restaurantapp.ui.fragments.management.discounts.PreviewDiscountFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.discounts.PreviewDiscountViewModel ViewModel layer
+ */
 class PreviewDiscountLogic : AbstractPreviewItemLogic() {
     override val databasePath = "discounts"
 

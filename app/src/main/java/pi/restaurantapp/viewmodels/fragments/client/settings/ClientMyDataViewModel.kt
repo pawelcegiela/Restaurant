@@ -13,6 +13,11 @@ import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for ClientMyDataFragment.
+ * @see pi.restaurantapp.logic.fragments.client.settings.ClientMyDataLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.client.settings.ClientMyDataFragment View layer
+ */
 class ClientMyDataViewModel : AbstractModifyItemViewModel() {
     override val logic = ClientMyDataLogic()
     override var lowestRole = Role.CUSTOMER.ordinal

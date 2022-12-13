@@ -10,6 +10,11 @@ import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.allergen.AllergenDetails
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for PreviewAllergenFragment.
+ * @see pi.restaurantapp.logic.fragments.management.allergens.PreviewAllergenLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.allergens.PreviewAllergenFragment View layer
+ */
 class PreviewAllergenViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewAllergenLogic()
 

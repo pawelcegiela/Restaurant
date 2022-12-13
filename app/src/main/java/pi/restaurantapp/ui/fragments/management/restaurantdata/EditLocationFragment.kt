@@ -23,6 +23,11 @@ import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditLocationViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditLocationFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditLocationViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.EditLocationLogic Model layer
+ */
 class EditLocationFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyLocationBinding? = null
     private val binding get() = _binding!!

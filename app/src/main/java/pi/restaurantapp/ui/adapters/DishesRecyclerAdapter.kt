@@ -18,7 +18,9 @@ import pi.restaurantapp.ui.activities.management.DishesActivity
 import pi.restaurantapp.ui.activities.management.OrdersActivity
 import java.util.*
 
-
+/**
+ * Custom adapter for recycler view with dishes.
+ */
 class DishesRecyclerAdapter(
     private val dataSet: MutableList<DishBasic>,
     private val fragment: Fragment,

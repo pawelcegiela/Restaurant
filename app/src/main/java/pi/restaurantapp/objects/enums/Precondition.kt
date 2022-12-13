@@ -2,6 +2,9 @@ package pi.restaurantapp.objects.enums
 
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing save preconditions.
+ */
 enum class Precondition(val nameRes: Int) {
     OK(0),
     PASSWORDS_DIFFER(R.string.passwords_differ),

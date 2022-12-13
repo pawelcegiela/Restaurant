@@ -2,6 +2,10 @@ package pi.restaurantapp.objects.data.address
 
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Data class containing basic information of Address.
+ * @see pi.restaurantapp.objects.data.address.Address
+ */
 class AddressBasic : AbstractDataObject {
     override var id = "location"
     var city = ""

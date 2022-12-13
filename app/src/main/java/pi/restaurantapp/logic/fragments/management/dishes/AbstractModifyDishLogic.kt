@@ -9,6 +9,11 @@ import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 
+/**
+ * Abstract class responsible for business logic and communication with database (Model layer) for AbstractModifyDishFragment.
+ * @see pi.restaurantapp.ui.fragments.management.dishes.AbstractModifyDishFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.dishes.AbstractModifyDishViewModel ViewModel layer
+ */
 abstract class AbstractModifyDishLogic : AbstractModifyItemLogic() {
     override val databasePath = "dishes"
 

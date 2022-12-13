@@ -32,6 +32,9 @@ import pi.restaurantapp.ui.fragments.management.ingredients.IngredientsItemListS
 import pi.restaurantapp.ui.fragments.management.orders.OrdersItemListSubFragment
 import pi.restaurantapp.ui.fragments.management.workers.WorkersItemListSubFragment
 
+/**
+ * Custom pager adapter for tab layouts.
+ */
 @Suppress("UNCHECKED_CAST")
 class PagerAdapter<Tab>(
     fragmentManager: FragmentManager,

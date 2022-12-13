@@ -13,7 +13,9 @@ import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.chat.ChatInfo
 import java.util.*
 
-
+/**
+ * Custom adapter for recycler view with basic chat information.
+ */
 class ChatInfoRecyclerAdapter(
     private val dataSet: MutableList<ChatInfo>,
     private val fragment: Fragment

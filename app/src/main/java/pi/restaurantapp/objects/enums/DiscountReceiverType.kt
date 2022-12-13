@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing discount's receiver types (people who can use the discount).
+ */
 enum class DiscountReceiverType(val stringResourceId: Int) {
     SPECIFIC_PEOPLE(R.string.for_specific_people),
     ANYONE(R.string.for_anyone_knowing_the_code);

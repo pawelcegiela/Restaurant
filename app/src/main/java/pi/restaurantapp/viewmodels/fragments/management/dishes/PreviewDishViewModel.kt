@@ -13,6 +13,11 @@ import pi.restaurantapp.objects.data.ingredient.IngredientItem
 import pi.restaurantapp.objects.enums.IngredientStatus
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for PreviewDishFragment.
+ * @see pi.restaurantapp.logic.fragments.management.dishes.PreviewDishLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.dishes.PreviewDishFragment View layer
+ */
 class PreviewDishViewModel : AbstractPreviewItemViewModel() {
     override val logic = PreviewDishLogic()
 

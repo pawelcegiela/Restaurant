@@ -19,7 +19,11 @@ import pi.restaurantapp.ui.activities.client.ClientMainActivity
 import pi.restaurantapp.ui.activities.management.MainActivity
 import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for AuthenticationActivity
+ * @see pi.restaurantapp.viewmodels.activities.AuthenticationViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.activities.AuthenticationLogic Model layer
+ */
 class AuthenticationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthenticationBinding
     private var keepSplashScreen = true

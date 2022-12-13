@@ -13,6 +13,11 @@ import pi.restaurantapp.ui.pickers.TimePickerFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditOpeningHoursViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditOpeningHoursFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditOpeningHoursViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.EditOpeningHoursLogic Model layer
+ */
 class EditOpeningHoursFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyOpeningHoursBinding? = null
     private val binding get() = _binding!!

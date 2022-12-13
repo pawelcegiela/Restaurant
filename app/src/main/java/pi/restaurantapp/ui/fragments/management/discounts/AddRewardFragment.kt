@@ -12,6 +12,11 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentAddRewardBinding
 import pi.restaurantapp.viewmodels.fragments.management.discounts.AddRewardViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for AddRewardFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.discounts.AddRewardViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.discounts.AddRewardLogic Model layer
+ */
 class AddRewardFragment : Fragment() {
 
     private var _binding: FragmentAddRewardBinding? = null

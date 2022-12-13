@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import pi.restaurantapp.databinding.ItemStatusChangeBinding
 import pi.restaurantapp.logic.utils.StringFormatUtils
 
-
+/**
+ * Custom adapter for recycler view with order status changes.
+ */
 class StatusChangesRecyclerAdapter(
     private val dataSet: List<Pair<String, Int>>,
     private val fragment: Fragment,

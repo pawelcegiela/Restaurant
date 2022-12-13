@@ -21,7 +21,11 @@ import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for CustomizeDishFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.orders.CustomizeDishViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.orders.CustomizeDishLogic Model layer
+ */
 open class CustomizeDishFragment : AbstractPreviewItemFragment() {
     override val toolbarNavigation: ToolbarNavigationPreviewBinding get() = binding.toolbarNavigation
     override val editActionId = 0

@@ -8,6 +8,11 @@ import pi.restaurantapp.logic.fragments.AbstractFragmentLogic
 import pi.restaurantapp.logic.utils.ComputingUtils
 import java.util.HashMap
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for AddRewardFragment.
+ * @see pi.restaurantapp.ui.fragments.management.discounts.AddRewardFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.discounts.AddRewardViewModel ViewModel layer
+ */
 class AddRewardLogic : AbstractFragmentLogic() {
     override val databasePath = ""
 

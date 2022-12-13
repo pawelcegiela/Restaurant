@@ -13,6 +13,11 @@ import pi.restaurantapp.objects.enums.Precondition
 import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 
+/**
+ * Abstract class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AbstractModifyOrderFragment.
+ * @see pi.restaurantapp.logic.fragments.management.orders.AbstractModifyOrderLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.orders.AbstractModifyOrderFragment View layer
+ */
 abstract class AbstractModifyOrderViewModel : AbstractModifyItemViewModel() {
     private val _logic: AbstractModifyOrderLogic get() = logic as AbstractModifyOrderLogic
 

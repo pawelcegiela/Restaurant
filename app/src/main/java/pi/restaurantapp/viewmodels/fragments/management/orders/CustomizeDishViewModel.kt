@@ -13,6 +13,11 @@ import pi.restaurantapp.objects.enums.ToolbarType
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 import java.math.BigDecimal
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for CustomizeDishFragment.
+ * @see pi.restaurantapp.logic.fragments.management.orders.CustomizeDishLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.orders.CustomizeDishFragment View layer
+ */
 class CustomizeDishViewModel : AbstractPreviewItemViewModel() {
     override val logic = CustomizeDishLogic()
 

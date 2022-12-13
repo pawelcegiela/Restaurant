@@ -5,7 +5,11 @@ import pi.restaurantapp.logic.activities.AuthenticationLogic
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 
-
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for Authentication activity.
+ * @see pi.restaurantapp.logic.activities.AuthenticationLogic Model layer
+ * @see pi.restaurantapp.ui.activities.AuthenticationActivity View layer
+ */
 class AuthenticationViewModel : ViewModel() {
     private val logic = AuthenticationLogic()
 

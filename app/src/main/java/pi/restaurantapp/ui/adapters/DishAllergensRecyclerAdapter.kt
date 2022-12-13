@@ -11,7 +11,9 @@ import pi.restaurantapp.databinding.ItemSubItemBinding
 import pi.restaurantapp.objects.data.allergen.AllergenBasic
 import pi.restaurantapp.ui.fragments.management.dishes.AbstractModifyDishFragment
 
-
+/**
+ * Custom adapter for recycler view with allergens in a dish.
+ */
 class DishAllergensRecyclerAdapter(
     private val dataSet: List<AllergenBasic>,
     private val fragment: Fragment,

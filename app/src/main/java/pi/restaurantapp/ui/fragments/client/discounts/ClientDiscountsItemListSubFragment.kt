@@ -12,6 +12,9 @@ import pi.restaurantapp.ui.adapters.DiscountsRecyclerAdapter
 import pi.restaurantapp.ui.fragments.ItemListSubFragment
 import pi.restaurantapp.viewmodels.activities.client.ClientDiscountsViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientDiscountsItemListSubFragment.
+ */
 class ClientDiscountsItemListSubFragment(
     private var list: MutableList<DiscountBasic>,
     fabFilter: FloatingActionButton,

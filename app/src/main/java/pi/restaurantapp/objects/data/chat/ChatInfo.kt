@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.data.chat
 import pi.restaurantapp.objects.data.AbstractDataObject
 import java.util.*
 
+/**
+ * Data class containing chat basic information.
+ */
 class ChatInfo : AbstractDataObject {
     var lastMessageDate: Long = Date().time
     var authorName: String = ""

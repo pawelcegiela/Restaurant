@@ -3,6 +3,9 @@ package pi.restaurantapp.objects.enums
 import android.content.Context
 import pi.restaurantapp.R
 
+/**
+ * Enumeration class containing user roles.
+ */
 enum class Role(val stringResourceId: Int) {
     ADMIN(R.string.admin),
     OWNER(R.string.owner),

@@ -7,6 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.objects.data.ingredient.Ingredient
 import pi.restaurantapp.objects.data.ingredient.IngredientItem
 
+/**
+ * Class responsible for observing and updating fields (ViewModel layer) for AbstractModifyIngredientViewModel.
+ * @see pi.restaurantapp.viewmodels.fragments.management.ingredients.AbstractModifyIngredientViewModel ViewModel
+ */
 class ModifyIngredientObserver(private val item: MutableLiveData<Ingredient>) : BaseObservable() {
     @get:Bindable
     var subIngredients: MutableList<IngredientItem> = ArrayList()

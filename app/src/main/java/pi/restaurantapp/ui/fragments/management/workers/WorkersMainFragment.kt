@@ -9,6 +9,11 @@ import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 import pi.restaurantapp.viewmodels.fragments.management.workers.WorkersMainViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for WorkersMainFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.workers.WorkersMainViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.workers.WorkersMainLogic Model layer
+ */
 class WorkersMainFragment : AbstractItemListFragment() {
     override val addActionId = R.id.actionWorkersToAddWorker
     override val viewModel: AbstractItemListViewModel get() = _viewModel

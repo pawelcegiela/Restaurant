@@ -6,6 +6,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Abstract class responsible for business logic and communication with database (Model layer) for AbstractItemListFragment.
+ * @see pi.restaurantapp.ui.fragments.AbstractItemListFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel ViewModel layer
+ */
 abstract class AbstractItemListLogic : AbstractFragmentLogic() {
     protected open val dbRef: Query get() = Firebase.firestore.collection("$databasePath-basic")
 

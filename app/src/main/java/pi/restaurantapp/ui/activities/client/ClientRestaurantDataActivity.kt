@@ -12,7 +12,9 @@ import com.google.android.material.navigation.NavigationView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityClientRestaurantDataBinding
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientRestaurantDataActivity
+ */
 class ClientRestaurantDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClientRestaurantDataBinding
     private lateinit var appBarConfiguration: AppBarConfiguration

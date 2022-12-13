@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for Discounts activity.
+ * @see pi.restaurantapp.ui.activities.management.DiscountsActivity View layer
+ */
 class DiscountsViewModel : AbstractActivityViewModel() {
     private val _showActive = MutableLiveData(true)
     private val _showDisabled = MutableLiveData(false)

@@ -22,7 +22,11 @@ import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 import pi.restaurantapp.viewmodels.fragments.management.orders.AbstractModifyOrderViewModel
 import java.util.*
 
-
+/**
+ * Abstract class responsible for direct communication and displaying information to the user (View layer) for AbstractModifyOrderFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.orders.AbstractModifyOrderViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.orders.AbstractModifyOrderLogic Model layer
+ */
 abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
 
     private var _binding: FragmentModifyOrderBinding? = null

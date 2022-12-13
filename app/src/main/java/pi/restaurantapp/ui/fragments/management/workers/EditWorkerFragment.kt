@@ -11,6 +11,11 @@ import pi.restaurantapp.ui.activities.management.SettingsActivity
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.workers.EditWorkerViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditWorkerFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.workers.EditWorkerViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.workers.EditWorkerLogic Model layer
+ */
 class EditWorkerFragment : AbstractModifyWorkerFragment() {
 
     override var nextActionId = R.id.actionEditWorkerToWorkers

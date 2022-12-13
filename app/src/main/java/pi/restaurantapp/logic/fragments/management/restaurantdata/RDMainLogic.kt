@@ -10,6 +10,11 @@ import pi.restaurantapp.objects.data.restaurantdata.RestaurantData
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantDataBasic
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantDataDetails
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for RDMainFragment.
+ * @see pi.restaurantapp.ui.fragments.management.restaurantdata.RDMainFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.restaurantdata.RDMainViewModel ViewModel layer
+ */
 class RDMainLogic : AbstractPreviewItemLogic() {
     override val databasePath = "restaurantData"
 

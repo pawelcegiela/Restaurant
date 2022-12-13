@@ -5,6 +5,11 @@ import pi.restaurantapp.objects.data.SplitDataObject
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for EditOrderFragment.
+ * @see pi.restaurantapp.ui.fragments.management.orders.EditOrderFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.orders.EditOrderViewModel ViewModel layer
+ */
 class EditOrderLogic : AbstractModifyOrderLogic() {
     override fun saveDocumentToDatabase(data: SplitDataObject, transaction: Transaction) {
         val basic = data.basic as OrderBasic

@@ -12,6 +12,11 @@ import pi.restaurantapp.ui.fragments.AbstractModifyItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditDeliveryViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for EditDeliveryFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.restaurantdata.EditDeliveryViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.EditDeliveryLogic Model layer
+ */
 class EditDeliveryFragment : AbstractModifyItemFragment() {
     private var _binding: FragmentModifyDeliveryBinding? = null
     private val binding get() = _binding!!

@@ -10,6 +10,9 @@ import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientMainBinding
 import pi.restaurantapp.logic.utils.UserInterfaceUtils
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for ClientMainFragment.
+ */
 class ClientMainFragment : Fragment() {
     private var _binding: FragmentClientMainBinding? = null
     private val binding get() = _binding!!

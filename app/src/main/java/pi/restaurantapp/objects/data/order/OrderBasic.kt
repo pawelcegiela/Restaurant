@@ -4,6 +4,10 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import java.util.*
 
+/**
+ * Data class containing basic information of Order.
+ * @see pi.restaurantapp.objects.data.order.Order
+ */
 class OrderBasic : AbstractDataObject {
     var orderStatus: Int = 0
     var collectionDate: Date = Date()

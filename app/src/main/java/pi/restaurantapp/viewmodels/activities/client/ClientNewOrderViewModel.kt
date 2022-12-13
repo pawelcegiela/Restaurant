@@ -14,6 +14,10 @@ import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.viewmodels.activities.management.OrdersViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for client New Order activity.
+ * @see pi.restaurantapp.ui.activities.client.ClientNewOrderActivity View layer
+ */
 class ClientNewOrderViewModel : OrdersViewModel() {
     init {
         setActionSave(R.id.actionClientCustomizeDishToNewOrder)

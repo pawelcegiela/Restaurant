@@ -8,6 +8,9 @@ import android.view.Gravity
 import android.view.View
 import pi.restaurantapp.R
 
+/**
+ * Custom edit text element for item names.
+ */
 class EditTextItemName(context: Context?, attrs: AttributeSet?) : androidx.appcompat.widget.AppCompatEditText(context!!, attrs) {
     init {
         textSize = 26F

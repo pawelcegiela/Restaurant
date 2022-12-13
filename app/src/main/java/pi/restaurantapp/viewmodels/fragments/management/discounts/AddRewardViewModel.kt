@@ -6,6 +6,11 @@ import pi.restaurantapp.R
 import pi.restaurantapp.logic.fragments.management.discounts.AddRewardLogic
 import pi.restaurantapp.viewmodels.fragments.AbstractFragmentViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for AddRewardFragment.
+ * @see pi.restaurantapp.logic.fragments.management.discounts.AddRewardLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.discounts.AddRewardFragment View layer
+ */
 class AddRewardViewModel : AbstractFragmentViewModel() {
     override val logic = AddRewardLogic()
 

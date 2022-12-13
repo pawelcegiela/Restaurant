@@ -9,6 +9,9 @@ import androidx.fragment.app.DialogFragment
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import java.util.*
 
+/**
+ * Custom time picker fragment.
+ */
 class TimePickerFragment(private val initialDate: Date, val function: (String) -> (Unit)) : DialogFragment(),
     TimePickerDialog.OnTimeSetListener {
 

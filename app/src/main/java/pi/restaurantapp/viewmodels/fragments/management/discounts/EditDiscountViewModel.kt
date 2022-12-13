@@ -9,6 +9,11 @@ import pi.restaurantapp.objects.data.discount.DiscountDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.objects.enums.ToolbarType
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for EditDiscountFragment.
+ * @see pi.restaurantapp.logic.fragments.management.discounts.EditDiscountLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.discounts.EditDiscountFragment View layer
+ */
 class EditDiscountViewModel : AbstractModifyDiscountViewModel() {
     override val logic = EditDiscountLogic()
 

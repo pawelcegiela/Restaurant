@@ -3,6 +3,10 @@ package pi.restaurantapp.objects.data.allergen
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 
+/**
+ * Data class containing details of Allergen.
+ * @see pi.restaurantapp.objects.data.allergen.Allergen
+ */
 class AllergenDetails : AbstractDataObject {
     var description: String = ""
     var containingDishes: HashMap<String, Boolean> = HashMap()

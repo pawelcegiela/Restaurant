@@ -12,7 +12,10 @@ import com.google.android.material.navigation.NavigationView
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.ActivityWorkersBinding
 
-
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for WorkersActivity
+ * @see pi.restaurantapp.viewmodels.activities.management.WorkersViewModel ViewModel layer
+ */
 class WorkersActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWorkersBinding
     private lateinit var appBarConfiguration: AppBarConfiguration

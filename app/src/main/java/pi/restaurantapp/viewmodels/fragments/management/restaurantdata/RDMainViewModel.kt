@@ -7,6 +7,11 @@ import pi.restaurantapp.objects.SnapshotsPair
 import pi.restaurantapp.objects.data.restaurantdata.RestaurantData
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
 
+/**
+ * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for RDMainFragment.
+ * @see pi.restaurantapp.logic.fragments.management.restaurantdata.RDMainLogic Model layer
+ * @see pi.restaurantapp.ui.fragments.management.restaurantdata.RDMainFragment View layer
+ */
 class RDMainViewModel : AbstractPreviewItemViewModel() {
     override val logic = RDMainLogic()
 

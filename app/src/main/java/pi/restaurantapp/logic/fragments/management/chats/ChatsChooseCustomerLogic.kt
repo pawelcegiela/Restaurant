@@ -9,6 +9,11 @@ import pi.restaurantapp.logic.fragments.AbstractItemListLogic
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.chat.ChatInfo
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for ChatsChooseCustomerFragment.
+ * @see pi.restaurantapp.ui.fragments.management.chats.ChatsChooseCustomerFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.chats.ChatsChooseCustomerViewModel ViewModel layer
+ */
 class ChatsChooseCustomerLogic : AbstractItemListLogic() {
     override val databasePath = "chats"
     override val dbRef get() = Firebase.firestore.collection("$databasePath-basic").orderBy("lastMessageDate", Query.Direction.DESCENDING)

@@ -10,6 +10,11 @@ import androidx.fragment.app.viewModels
 import pi.restaurantapp.databinding.FragmentPasswordBinding
 import pi.restaurantapp.viewmodels.fragments.management.settings.PasswordViewModel
 
+/**
+ * Class responsible for direct communication and displaying information to the user (View layer) for PasswordFragment.
+ * @see pi.restaurantapp.viewmodels.fragments.management.settings.PasswordViewModel ViewModel layer
+ * @see pi.restaurantapp.logic.fragments.management.settings.PasswordLogic Model layer
+ */
 class PasswordFragment : Fragment() {
     private var _binding: FragmentPasswordBinding? = null
     private val binding get() = _binding!!

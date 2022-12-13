@@ -14,7 +14,9 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.data.user.UserBasic
 
-
+/**
+ * Custom adapter for recycler view with customers.
+ */
 class CustomersRecyclerAdapter(
     private val dataSet: MutableList<UserBasic>,
     private val fragment: Fragment,

@@ -5,6 +5,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.objects.enums.Role
 
+/**
+ * Abstract class responsible for business logic and communication with database (Model layer) for all fragments.
+ */
 abstract class AbstractFragmentLogic {
     abstract val databasePath: String
 

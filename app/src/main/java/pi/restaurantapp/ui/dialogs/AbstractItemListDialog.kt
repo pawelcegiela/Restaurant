@@ -8,6 +8,9 @@ import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import pi.restaurantapp.databinding.DialogItemListBinding
 
+/**
+ * Abstract custom dialog with a list of items.
+ */
 abstract class AbstractItemListDialog(fragmentContext: Context, var itemList: List<String>, private val title: String) : Dialog(fragmentContext) {
     val binding: DialogItemListBinding = DialogItemListBinding.inflate(layoutInflater, null, false)
 

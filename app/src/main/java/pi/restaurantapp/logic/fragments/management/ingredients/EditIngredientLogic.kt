@@ -8,6 +8,11 @@ import pi.restaurantapp.objects.data.ingredient.Ingredient
 import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
 
+/**
+ * Class responsible for business logic and communication with database (Model layer) for EditIngredientFragment.
+ * @see pi.restaurantapp.ui.fragments.management.ingredients.EditIngredientFragment View layer
+ * @see pi.restaurantapp.viewmodels.fragments.management.ingredients.EditIngredientViewModel ViewModel layer
+ */
 class EditIngredientLogic : AbstractModifyIngredientLogic() {
     var item: Ingredient? = null
 
