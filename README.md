@@ -5,58 +5,56 @@ a także foldery Dokumentacja oraz Kod.
 
 Z powodu ograniczeń w przesyłaniu plików do systemu APD (maksymalnie 10 MB na plik i wyłącznie wybrane formaty), w systemie pliki
 zostały zamieszczone w formie archiwów ZIP. W celu podglądu plików należy zastosować się do poniższej instrukcji:
-Krok 1: Pobranie wszystkich plików z rozszerzeniem .zip Krok 2: Wypakowanie wszystkich pobranych plików do jednego folderu Krok 3:
-Wśród wypakowanych plików odnalezienie i wypakowanie pliku Praca.zip Krok 4: W folderze z wypakowanymi plikami z archiwum
-Praca.zip znajdują się wszystkie załączniki.
+Krok 1: Pobranie wszystkich plików z rozszerzeniem .zip
+Krok 2: Wypakowanie zawartości wszystkich pobranych plików do jednego folderu
+Krok 3: Wśród wypakowanych plików odnalezienie i wypakowanie pliku Praca.zip
+Krok 4: W folderze z wypakowanymi plikami z archiwum Praca.zip znajdują się wszystkie załączniki.
 
 Uwaga: w przypadku samodzielnej kompilacji do działania funkcjonalności map z biblioteki Mapbox jest potrzebny klucz prywatny,
 który nie jest zamieszczony w kodzie. Osoba sprawdzająca może samodzielnie wygenerować i podać klucz w ramach instrukcji:
 https://docs.mapbox.com/android/maps/guides/install/
 Załączony plik w formacie .APK zawiera działającą funkcjonalność map (projekt skompilowano z kluczem prywatnym).
 
+
 2. Instalacja środowiska Android Studio i kompilacja oraz uruchomienie aplikacji:
 
-Krok 1: Należy pobrać IDE Android Studio (link: https://developer.android.com/studio). Krok 2: Należy przejść proces instalacji
-programu (instalacja z Virtual Device) i uruchomić go. Krok 3: Podczas pierwszego uruchomienia Android Studio należy przejść
-konfigurację standardową ścieżką
-(instalując wszystkie wybrane domyślnie komponenty: Android SDK, API 33, Performance i Android Virtual Device). Krok 4: Należy
-otworzyć folder z kodem źródłowym jako istniejący projekt. Ścieżka projektu nie powinna zawierać polskich znaków. Ewentualna
-informacja o zmianie ścieżki Android SDK jest do zignorowania. Krok 5a: W celu kompilacji aplikacji należy podążać za instrukcjami
-zamieszczonymi na stronie https://docs.mapbox.com/android/maps/guides/install/
-
+Krok 1: Należy pobrać IDE Android Studio (link: https://developer.android.com/studio).
+Krok 2: Należy przejść proces instalacji programu (instalacja z Virtual Device) i uruchomić go.
+Krok 3: Podczas pierwszego uruchomienia Android Studio należy przejść konfigurację standardową ścieżką
+(instalując wszystkie wybrane domyślnie komponenty: Android SDK, API 33, Performance i Android Virtual Device).
+Krok 4: Należy otworzyć folder z kodem źródłowym jako istniejący projekt. Ścieżka projektu nie powinna zawierać polskich znaków.
+Ewentualna informacja o zmianie ścieżki Android SDK jest do zignorowania. Krok 5a: W celu kompilacji aplikacji należy podążać
+za instrukcjami zamieszczonymi na stronie https://docs.mapbox.com/android/maps/guides/install/
 - należy wygenerować i dodać do ustawień Gradle własny tajny token Mapbox oraz zmienić w pliku strings.xml klucz publiczny Mapbox.
-  Instalacja na wirtualnym urządzeniu przebiega po naciśnięciu zielonego trójkąta. Krok 5b: Analogicznie można zainstalować na
-  urządzeniu wirtualnym skompilowaną aplikację (plik app.apk), przenosząc ją na ekran urządzenia wirtualnego.
+Instalacja na wirtualnym urządzeniu przebiega po naciśnięciu zielonego trójkąta.
+W przypadku informacji o nieprawidłowej wersji należy zmienić wersję JDK na 17 (w Settings -> Build... -> Build Tools -> Gradle).
+Krok 5b: Analogicznie można zainstalować na  urządzeniu wirtualnym skompilowaną aplikację (plik app.apk),
+- przenosząc ją na ekran urządzenia wirtualnego.
+
+Konto klienckie tworzy się samodzielnie, natomiast konto administratora, z poziomu którego można m.in. stworzyć inne konta pracowników,
+zostało stworzone i można się na nie zalogować jako: email admin@administrator.pl; hasło Admin123
 
 
 3. Pliki ikon wykorzystane w pracy (atrybucja zgodna z zasadami Flaticon.com):
 
-<a href="https://www.flaticon.com/free-icons/restaurant" title="restaurant icons">Restaurant icons created by nawicon -
-Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/image-comics" title="Image Comics icons">Image Comics icons created by Freepik -
-Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/restaurant" title="restaurant icons">Restaurant icons created by nawicon - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/image-comics" title="Image Comics icons">Image Comics icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/login" title="login icons">Login icons created by tuktukdesign - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/info" title="info icons">Info icons created by Those Icons - Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/home-button" title="home button icons">Home button icons created by Freepik -
-Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/home-button" title="home button icons">Home button icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/male" title="male icons">Male icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/discount" title="discount icons">Discount icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/dish" title="dish icons">Dish icons created by Freepik - Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/gluten-free" title="gluten free icons">Gluten free icons created by Freepik -
-Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/gluten-free" title="gluten free icons">Gluten free icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/list" title="list icons">List icons created by Pixel perfect - Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/food" title="food icons">Food icons created by amonrat rungreangfangsai -
-Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Pixel perfect -
-Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/food" title="food icons">Food icons created by amonrat rungreangfangsai - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Pixel perfect - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/logout" title="logout icons">Logout icons created by Smashicons - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by riajulislam - Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/password" title="password icons">Password icons created by Pixel perfect -
-Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/password" title="password icons">Password icons created by Pixel perfect - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/clock" title="clock icons">Clock icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/delivery" title="delivery icons">Delivery icons created by Freepik - Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/details" title="details icons">Details icons created by Andrean Prabowo -
-Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/details" title="details icons">Details icons created by Andrean Prabowo - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/save" title="save icons">Save icons created by Yogi Aprelliyanto - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/return" title="return icons">Return icons created by Kiranshastry - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/editing" title="editing icons">Editing icons created by Freepik - Flaticon</a>
@@ -70,8 +68,8 @@ Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/next" title="next icons">Next icons created by Jesus Chavarria - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/customer" title="customer icons">Customer icons created by fjstudio - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/reset" title="reset icons">Reset icons created by Freepik - Flaticon</a>
-<a href="https://www.flaticon.com/free-icons/notification-bell" title="notification bell icons">Notification bell icons created by
-Pixel perfect - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/notification-bell" title="notification bell icons">Notification bell icons created by Pixel perfect - Flaticon</a>
+
 
 4. Bezpośrednie linki do źródeł ikon wykorzystanych w pracy:
 

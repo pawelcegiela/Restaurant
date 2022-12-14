@@ -296,7 +296,7 @@
     <string name="owners">Właściciele</string>
     <string name="executives">Kierownicy</string>
     <string name="managers">Menedżerowie</string>
-    <string name="expired">Wygasło</string>
+    <string name="expired">Wygasłe</string>
     <string name="delivery_settings_changed">Ustawienia dostawy zostały pomyślnie zmienione</string>
     <string name="is_delivery_available">Czy dostawa jest dostępna?</string>
     <string name="minimum_order_price_colon">Minimalna cena zamówienia:</string>
