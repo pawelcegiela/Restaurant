@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -79,6 +81,23 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
                 numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromDate(item.details.orderDate, item.basic.collectionDate))
             }
         }
+
+        binding.spinnerCollectionType.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                _viewModel.item.value?.basic?.collectionType = position
+                if (position == CollectionType.DELIVERY.ordinal) {
+                    binding.linearLayoutDeliveryDetails.visibility = View.VISIBLE
+                    binding.spinnerPlace.setSelection(CollectionType.SELF_PICKUP.ordinal)
+                } else {
+                    binding.linearLayoutDeliveryDetails.visibility = View.GONE
+                }
+                binding.spinnerPlace.isEnabled = position == CollectionType.SELF_PICKUP.ordinal
+                _viewModel.observer.notifyPropertyChanged(BR.dishesList)
+                _viewModel.updateFullPrice()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 
     private fun refreshCollectionDate() {
@@ -91,18 +110,6 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         activityViewModel.setSavedOrder(Order(sdo.id, sdo.basic as OrderBasic, sdo.details as OrderDetails))
         activityViewModel.setEditedDish(dishItem)
         findNavController().navigate(editDishActionId)
-    }
-
-    fun onItemSelectedCollectionType(position: Int) {
-        _viewModel.item.value?.basic?.collectionType = position
-        if (position == CollectionType.DELIVERY.ordinal) {
-            binding.linearLayoutDeliveryDetails.visibility = View.VISIBLE
-            binding.spinnerPlace.setSelection(CollectionType.SELF_PICKUP.ordinal)
-        } else {
-            binding.linearLayoutDeliveryDetails.visibility = View.GONE
-        }
-        binding.spinnerPlace.isEnabled = position == CollectionType.SELF_PICKUP.ordinal
-        _viewModel.observer.notifyPropertyChanged(BR.dishesList)
     }
 
     fun onClickButtonAddDish() {

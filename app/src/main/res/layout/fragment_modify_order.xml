@@ -119,7 +119,6 @@
                             android:layout_height="wrap_content"
                             android:adapter="@{SpinnerAdapter.createNew(context, CollectionType.getArrayOfStrings(context))}"
                             android:enabled="@{vm.observer.deliveryOptions.available}"
-                            android:onItemSelected="@{(x, y, position, z) -> fragment.onItemSelectedCollectionType(position)}"
                             android:selectedItemPosition="@{vm.observer.deliveryOptions.available ? vm.item.basic.collectionType : CollectionType.SELF_PICKUP.ordinal}" />
 
                         <pi.restaurantapp.ui.textviews.TextViewDetailTitle
