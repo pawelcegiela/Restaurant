@@ -1,6 +1,7 @@
 package pi.restaurantapp.viewmodels.fragments.management.chats
 
 import pi.restaurantapp.logic.fragments.management.chats.ChatsChooseCustomerLogic
+import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.viewmodels.fragments.AbstractItemListViewModel
 
 /**
@@ -12,4 +13,14 @@ class ChatsChooseCustomerViewModel : AbstractItemListViewModel() {
     override val logic = ChatsChooseCustomerLogic()
 
     override fun displayFAB() = false
+
+    override fun loadData() {
+        logic.loadData { list ->
+            if (Role.isAtLeastManager(userRole.value)) {
+                setDataList(list)
+            } else {
+                setDataList(ArrayList())
+            }
+        }
+    }
 }

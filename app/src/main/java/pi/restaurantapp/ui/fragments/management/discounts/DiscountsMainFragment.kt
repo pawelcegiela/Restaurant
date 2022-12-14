@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import pi.restaurantapp.R
 import pi.restaurantapp.objects.data.discount.DiscountBasic
 import pi.restaurantapp.objects.enums.DiscountsTab
+import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.adapters.PagerAdapter
 import pi.restaurantapp.ui.fragments.AbstractItemListFragment
 import pi.restaurantapp.viewmodels.activities.management.DiscountsViewModel
@@ -29,7 +30,9 @@ class DiscountsMainFragment : AbstractItemListFragment() {
 
     override fun addViewPagerAdapters() {
         activityViewModel.setList((viewModel.dataList.value ?: ArrayList()) as ArrayList<DiscountBasic>)
-        binding.fabReward.visibility = View.VISIBLE
+        if (Role.isAtLeastManager(viewModel.userRole.value)) {
+            binding.fabReward.visibility = View.VISIBLE
+        }
         binding.fabReward.setOnClickListener {
             findNavController().navigate(R.id.actionDiscountsToAddReward)
         }
