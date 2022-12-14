@@ -90,8 +90,8 @@ class StringFormatUtils {
         fun formatIngredientItemHeader(item: IngredientItem, status: IngredientStatus, context: Context): String {
             var text = "${item.name} [${formatAmountWithUnit(context, item.amount, item.unit)}"
 
-            if (status == IngredientStatus.POSSIBLE || BigDecimal(item.extraPrice) != BigDecimal.ZERO) {
-                text += "    + ${formatPrice(item.extraPrice)}"
+            if (status == IngredientStatus.POSSIBLE && BigDecimal(item.extraPrice) != BigDecimal.ZERO) {
+                text += ",  + ${formatPrice(item.extraPrice)}"
             }
             return "$text]"
         }

@@ -1,5 +1,6 @@
 package pi.restaurantapp.logic.fragments.client.neworder
 
+import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
@@ -54,6 +55,8 @@ class ClientOrderSummaryLogic : AbstractPreviewItemLogic() {
             )
         }.addOnSuccessListener {
             callback(success)
+        }.addOnFailureListener {
+            Log.e("a", it.stackTrace.toString())
         }
     }
 }

@@ -19,7 +19,9 @@ class ChatWithCustomerLogic {
 
     fun setFirebaseListener(customerId: String, callback: (MutableList<Message>) -> Unit) {
         dbRefDetails.document(customerId).collection("messages").orderBy("timestamp").limitToLast(50).addSnapshotListener { snapshot, _ ->
-            callback(snapshot?.mapNotNull { documentSnapshot -> documentSnapshot.toObject<Message>() }?.toMutableList() ?: ArrayList())
+            if (snapshot != null) {
+                callback(snapshot.mapNotNull { documentSnapshot -> documentSnapshot.toObject<Message>() }.toMutableList())
+            }
         }
     }
 

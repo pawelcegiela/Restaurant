@@ -22,18 +22,21 @@
             android:id="@+id/radioBaseIngredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
             android:text="@string/base_ingredient" />
 
         <RadioButton
             android:id="@+id/radioOtherIngredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
             android:text="@string/other_ingredient" />
 
         <RadioButton
             android:id="@+id/radioPossibleIngredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/light_grey"
             android:text="@string/possible_ingredient" />
     </RadioGroup>
 

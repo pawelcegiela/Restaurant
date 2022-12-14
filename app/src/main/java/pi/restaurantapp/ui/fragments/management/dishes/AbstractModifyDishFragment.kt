@@ -102,18 +102,21 @@ abstract class AbstractModifyDishFragment : AbstractModifyItemFragment() {
     ) {
         if (isNew) {
             lists[newItem.second.ordinal].add(newItem.first)
+            recyclers[newItem.second.ordinal].adapter?.notifyItemInserted(lists[newItem.second.ordinal].indexOf(newItem.first))
         } else if (oldItem.second == newItem.second) {
+            val position = lists[oldItem.second.ordinal].indexOf(oldItem.first)
             lists[newItem.second.ordinal]
                 .find { it == oldItem.first }.also { it?.amount = newItem.first.amount }
                 .also { it?.extraPrice = newItem.first.extraPrice }
+            recyclers[newItem.second.ordinal].adapter?.notifyItemChanged(position)
         } else {
             val oldListPosition = lists[oldItem.second.ordinal].indexOf(oldItem.first)
             lists[oldItem.second.ordinal].remove(oldItem.first)
             lists[newItem.second.ordinal].add(newItem.first)
 
             recyclers[oldItem.second.ordinal].adapter?.notifyItemRemoved(oldListPosition)
+            recyclers[newItem.second.ordinal].adapter?.notifyItemInserted(lists[newItem.second.ordinal].indexOf(newItem.first))
         }
-        recyclers[newItem.second.ordinal].adapter?.notifyItemInserted(lists[newItem.second.ordinal].indexOf(newItem.first))
     }
 
     fun removeAllergenItem(allergenItem: AllergenBasic) {

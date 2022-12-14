@@ -51,7 +51,7 @@ class ClientOrderSummaryViewModel : AbstractPreviewItemViewModel() {
     }
 
     fun redeemDiscount(oldPrice: String, discountToRedeem: DiscountBasic, callback: (Boolean) -> Unit) {
-        logic.redeemDiscount(itemId, oldPrice, discountToRedeem, callback)
+        logic.redeemDiscount(item.value?.basic?.id ?: "", oldPrice, discountToRedeem, callback)
     }
 
     fun setItem(order: Order) {
