@@ -16,12 +16,16 @@ abstract class AbstractItemListViewModel : AbstractFragmentViewModel() {
     private val _dataList: MutableLiveData<MutableList<AbstractDataObject>> = MutableLiveData<MutableList<AbstractDataObject>>()
     val dataList: LiveData<MutableList<AbstractDataObject>> = _dataList
 
-    fun loadData() {
+    open fun loadData() {
         _logic.loadData { list ->
             _dataList.value = list
         }
     }
 
     open fun displayFAB() = true
+
+    fun setDataList(list: MutableList<AbstractDataObject>) {
+        _dataList.value = list
+    }
 
 }

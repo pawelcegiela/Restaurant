@@ -6,7 +6,9 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.logic.fragments.AbstractPreviewItemLogic
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.discount.DiscountBasic
+import pi.restaurantapp.objects.data.notification.Notification
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.DiscountUsageType
 import pi.restaurantapp.objects.enums.Role
@@ -46,6 +48,14 @@ class PreviewDiscountLogic : AbstractPreviewItemLogic() {
                     Firebase.firestore.collection("discounts-basic").document(itemId),
                     "assignedDiscounts", FieldValue.arrayUnion(customer.id)
                 )
+                val notification = Notification(
+                    id = StringFormatUtils.formatId(),
+                    date = Date(),
+                    text = "Przypisano nowy rabat / New discount has been assigned",
+                    targetGroup = -1,
+                    targetUserId = customer.id
+                )
+                transaction.set(Firebase.firestore.collection("notifications").document(notification.id), notification)
                 success = true
             }
         }.addOnSuccessListener {

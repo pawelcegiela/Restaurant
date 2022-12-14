@@ -33,6 +33,11 @@ class ClientMainFragment : Fragment() {
 
     private fun setCardViews() {
         UserInterfaceUtils.setCardView(
+            binding.cardNotifications, R.drawable.bell, R.string.notification_center,
+            findNavController(), R.id.actionClientMainToNotifications
+        )
+
+        UserInterfaceUtils.setCardView(
             binding.cardRestaurantData, R.drawable.restaurant_data, R.string.restaurant_data,
             findNavController(), R.id.actionClientMainToRestaurantData
         )

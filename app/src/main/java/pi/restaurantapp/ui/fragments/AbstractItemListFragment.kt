@@ -40,7 +40,6 @@ abstract class AbstractItemListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getUserRole()
-        viewModel.loadData()
         addLiveDataObservers()
     }
 
@@ -52,6 +51,7 @@ abstract class AbstractItemListFragment : Fragment() {
 
         viewModel.userRole.observe(viewLifecycleOwner) { role ->
             if (role != Role.getPlaceholder()) {
+                viewModel.loadData()
                 if (Role.isAtLeast(role, lowestRole) && viewModel.displayFAB()) {
                     binding.fabAdd.visibility = View.VISIBLE
                 }

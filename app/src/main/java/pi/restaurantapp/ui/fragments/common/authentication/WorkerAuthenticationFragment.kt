@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.fragments.authentication
+package pi.restaurantapp.ui.fragments.common.authentication
 
 import android.os.Bundle
 import android.view.View

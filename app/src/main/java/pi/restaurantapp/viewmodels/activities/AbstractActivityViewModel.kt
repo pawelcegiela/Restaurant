@@ -1,4 +1,4 @@
-package pi.restaurantapp.viewmodels.activities.management
+package pi.restaurantapp.viewmodels.activities
 
 import androidx.lifecycle.ViewModel
 

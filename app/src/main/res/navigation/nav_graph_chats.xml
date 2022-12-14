@@ -35,15 +35,13 @@
         android:id="@+id/ChatWithCustomerFragment"
         android:name="pi.restaurantapp.ui.fragments.management.chats.ChatWithCustomerFragment"
         android:label="@string/chat"
-        tools:layout="@layout/fragment_chat_client_management">
-    </fragment>
+        tools:layout="@layout/fragment_chat_client_management" />
 
     <fragment
         android:id="@+id/ChatWorkersForumFragment"
         android:name="pi.restaurantapp.ui.fragments.management.chats.ChatWorkersForumFragment"
         android:label="@string/worker_forum"
-        tools:layout="@layout/fragment_chat_client_management">
-    </fragment>
+        tools:layout="@layout/fragment_chat_client_management" />
 
 
     <activity
@@ -108,7 +106,7 @@
 
     <activity
         android:id="@+id/LogOut"
-        android:name="pi.restaurantapp.ui.activities.AuthenticationActivity"
+        android:name="pi.restaurantapp.ui.activities.common.AuthenticationActivity"
         android:label="@string/log_out"
         tools:layout="@layout/activity_authentication">
 

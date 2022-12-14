@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/CustomerAuthenticationFragment"
-        android:name="pi.restaurantapp.ui.fragments.authentication.ClientAuthenticationFragment"
+        android:name="pi.restaurantapp.ui.fragments.common.authentication.ClientAuthenticationFragment"
         android:label="@string/customer_authentication"
         tools:layout="@layout/fragment_authentication">
 
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/WorkerAuthenticationFragment"
-        android:name="pi.restaurantapp.ui.fragments.authentication.WorkerAuthenticationFragment"
+        android:name="pi.restaurantapp.ui.fragments.common.authentication.WorkerAuthenticationFragment"
         android:label="@string/worker_authentication"
         tools:layout="@layout/fragment_authentication">
 

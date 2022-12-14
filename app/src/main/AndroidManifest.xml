@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Restaurant"
         tools:targetApi="31">
         <activity
-            android:name="pi.restaurantapp.ui.activities.AuthenticationActivity"
+            android:name="pi.restaurantapp.ui.activities.common.AuthenticationActivity"
             android:exported="true"
             android:screenOrientation="nosensor"
             android:theme="@style/Theme.App.Starting">
@@ -75,6 +75,9 @@
             android:screenOrientation="nosensor" />
         <activity
             android:name="pi.restaurantapp.ui.activities.client.ClientDiscountsActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="pi.restaurantapp.ui.activities.common.NotificationsActivity"
             android:screenOrientation="nosensor" />
     </application>
 

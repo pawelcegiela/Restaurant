@@ -9,8 +9,7 @@
         android:id="@+id/ClientChatsMainFragment"
         android:name="pi.restaurantapp.ui.fragments.client.chats.ClientChatsMainFragment"
         android:label="@string/chat"
-        tools:layout="@layout/fragment_chat_client_management">
-    </fragment>
+        tools:layout="@layout/fragment_chat_client_management" />
 
     <activity
         android:id="@+id/ClientMainActivity"
@@ -56,7 +55,7 @@
 
     <activity
         android:id="@+id/LogOut"
-        android:name="pi.restaurantapp.ui.activities.AuthenticationActivity"
+        android:name="pi.restaurantapp.ui.activities.common.AuthenticationActivity"
         android:label="@string/log_out"
         tools:layout="@layout/activity_authentication">
 

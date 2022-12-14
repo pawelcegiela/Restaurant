@@ -122,6 +122,7 @@ class StringFormatUtils {
         }
 
         fun formatRewardsToDisplay(rewards: ArrayList<DiscountBasic>): String {
+            rewards.sortByDescending { it.amount.toInt() }
             var text = ""
 
             for (reward in rewards) {

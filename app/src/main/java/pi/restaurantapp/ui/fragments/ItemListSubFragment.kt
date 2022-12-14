@@ -10,7 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pi.restaurantapp.databinding.FragmentItemListSubBinding
 import pi.restaurantapp.ui.adapters.AbstractRecyclerAdapter
 import pi.restaurantapp.ui.dialogs.FilterDialog
-import pi.restaurantapp.viewmodels.activities.management.AbstractActivityViewModel
+import pi.restaurantapp.viewmodels.activities.AbstractActivityViewModel
 
 /**
  * Open class responsible for direct communication and displaying information to the user (View layer) for fragments inheriting ItemListSubFragment.

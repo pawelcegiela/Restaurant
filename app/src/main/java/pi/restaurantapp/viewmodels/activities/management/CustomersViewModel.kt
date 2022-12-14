@@ -1,6 +1,7 @@
 package pi.restaurantapp.viewmodels.activities.management
 
 import androidx.lifecycle.MutableLiveData
+import pi.restaurantapp.viewmodels.activities.AbstractActivityViewModel
 
 /**
  * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for Customers activity.

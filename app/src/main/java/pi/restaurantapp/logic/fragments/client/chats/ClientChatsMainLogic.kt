@@ -1,11 +1,15 @@
-package pi.restaurantapp.logic.fragments.client.chats;
+package pi.restaurantapp.logic.fragments.client.chats
 
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.chat.ChatInfo
 import pi.restaurantapp.objects.data.chat.Message
+import pi.restaurantapp.objects.data.notification.Notification
+import pi.restaurantapp.objects.enums.Role
+import java.util.*
 
 /**
  * Class responsible for business logic and communication with database (Model layer) for ClientChatsMainFragment.
@@ -25,5 +29,14 @@ class ClientChatsMainLogic {
     fun addMessage(message: Message) {
         dbRefDetails.collection("messages").document(message.id).set(message)
         dbRefBasic.set(ChatInfo(message.authorId, message.timestamp, message.authorName))
+
+        val notification = Notification(
+            id = StringFormatUtils.formatId(),
+            date = Date(),
+            text = "Nowa wiadomość / New message\nAutor / Author: ${message.authorName}",
+            targetGroup = Role.MANAGER.ordinal,
+            targetUserId = ""
+        )
+        Firebase.firestore.collection("notifications").document(notification.id).set(notification)
     }
 }

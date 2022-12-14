@@ -63,6 +63,7 @@ class PreviewIngredientViewModel : AbstractPreviewItemViewModel() {
     ) {
         logic.updateIngredientAmount(
             id,
+            item.value?.basic?.name ?: "",
             _amount,
             modificationType,
             item.value?.details?.containingDishes?.map { it.key } ?: ArrayList(),

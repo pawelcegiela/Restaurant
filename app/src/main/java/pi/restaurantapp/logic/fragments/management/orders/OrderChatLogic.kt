@@ -3,7 +3,11 @@ package pi.restaurantapp.logic.fragments.management.orders
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.chat.Message
+import pi.restaurantapp.objects.data.notification.Notification
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Class responsible for business logic and communication with database (Model layer) for OrderChatFragment.
@@ -19,7 +23,16 @@ class OrderChatLogic {
         }
     }
 
-    fun addMessage(message: Message, customerId: String) {
-        dbRef.document(customerId).collection("messages").document(message.id).set(message)
+    fun addMessage(message: Message, orderId: String, messageRecipientId: String) {
+        dbRef.document(orderId).collection("messages").document(message.id).set(message)
+
+        val notification = Notification(
+            id = StringFormatUtils.formatId(),
+            date = Date(),
+            text = "Nowa wiadomość o zamówieniu / New message about order",
+            targetGroup = -1,
+            targetUserId = messageRecipientId
+        )
+        Firebase.firestore.collection("notifications").document(notification.id).set(notification)
     }
 }

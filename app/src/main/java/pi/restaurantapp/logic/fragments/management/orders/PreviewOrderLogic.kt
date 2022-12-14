@@ -8,13 +8,17 @@ import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.logic.fragments.AbstractPreviewItemLogic
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
+import pi.restaurantapp.objects.data.ingredient.IngredientBasic
 import pi.restaurantapp.objects.data.ingredient.IngredientDetails
+import pi.restaurantapp.objects.data.notification.Notification
 import pi.restaurantapp.objects.data.order.Order
 import pi.restaurantapp.objects.data.order.OrderDetails
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.enums.CollectionType
 import pi.restaurantapp.objects.enums.IngredientModificationType
 import pi.restaurantapp.objects.enums.OrderStatus
+import pi.restaurantapp.objects.enums.Role
+import java.lang.Integer.max
 import java.math.BigDecimal
 import java.util.*
 
@@ -88,7 +92,7 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
         for (ingredientId in ingredientsToChange.keys) {
             val oldAmount = transaction.get(dbRefIngredientsBasic.document(ingredientId)).getLong("amount")?.toInt() ?: 0
             val difference = ingredientsToChange[ingredientId]?.toInt()?.times(-1) ?: 0
-            val newAmount = oldAmount + difference
+            val newAmount = max(oldAmount + difference, 0)
             val newAmountChange =
                 IngredientAmountChange(
                     Firebase.auth.uid ?: return ArrayList(),
@@ -129,7 +133,7 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
                 dish.usedPossibleIngredients.map { ingredient -> ingredient.id }.toMutableList().contains(it.id)
             })
             for (ingredient in usedIngredients) {
-                if (subDishes[ingredient.id] == null) {
+                if (subDishes[ingredient.id] == null || subDishes[ingredient.id]?.subIngredients == null || subDishes[ingredient.id]?.subIngredients?.isEmpty() == true) {
                     ingredients[ingredient.id] = ((ingredients[ingredient.id] ?: BigDecimal.ZERO) + BigDecimal(ingredient.amount)) * multiplier
                 } else {
                     val subMultiplier = BigDecimal(ingredient.amount) * multiplier
@@ -146,6 +150,9 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
     private fun disableDishes(ingredientsWithShortages: ArrayList<String>) {
         for (ingredientId in ingredientsWithShortages) {
             Firebase.firestore.runTransaction { transaction ->
+                val basic =
+                    transaction.get(Firebase.firestore.collection("ingredients-basic").document(ingredientId)).toObject<IngredientBasic>()
+                        ?: IngredientBasic()
                 val details =
                     transaction.get(Firebase.firestore.collection("ingredients-details").document(ingredientId)).toObject<IngredientDetails>()
                         ?: IngredientDetails()
@@ -153,6 +160,14 @@ class PreviewOrderLogic : AbstractPreviewItemLogic() {
                 for (id in containingDishesIds) {
                     transaction.update(Firebase.firestore.collection("dishes-basic").document(id), "active", false)
                 }
+                val notification = Notification(
+                    id = StringFormatUtils.formatId(),
+                    date = Date(),
+                    text = "Składnik ${basic.name.trim()} się skończył. Wszystkie zawierające go dania zostały wyłączone w menu. / We have run out of ingredient ${basic.name.trim()}. All containing dishes have been disabled in the menu.",
+                    targetGroup = Role.WORKER.ordinal,
+                    targetUserId = ""
+                )
+                transaction.set(Firebase.firestore.collection("notifications").document(notification.id), notification)
             }
         }
     }

@@ -96,6 +96,7 @@ class PreviewOrderFragment : AbstractPreviewItemFragment() {
     fun onClickButtonChat() {
         val bundle = Bundle()
         bundle.putString("id", viewModel.itemId)
+        bundle.putString("recipientId", _viewModel.item.value?.basic?.userId ?: return)
 
         findNavController().navigate(R.id.actionPreviewOrderToOrderChat, bundle)
     }

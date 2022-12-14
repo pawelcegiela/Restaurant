@@ -451,4 +451,5 @@
     <string name="rewards_have_been_generated">Rewards have been generated. Number and values of discounts are displayed on the screen</string>
     <string name="rewards_couldnt_be_generated">Rewards couldn\'t be generated</string>
     <string name="generated_rewards">Generated rewards</string>
+    <string name="notification_center">Notification center</string>
 </resources>

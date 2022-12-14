@@ -8,8 +8,10 @@ import pi.restaurantapp.logic.fragments.AbstractFragmentLogic
 import pi.restaurantapp.logic.utils.ComputingUtils
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.discount.DiscountBasic
+import pi.restaurantapp.objects.data.notification.Notification
 import pi.restaurantapp.objects.data.order.OrderBasic
 import pi.restaurantapp.objects.enums.OrderType
+import java.util.*
 
 /**
  * Class responsible for business logic and communication with database (Model layer) for AddRewardFragment.
@@ -43,6 +45,14 @@ class AddRewardLogic : AbstractFragmentLogic() {
         Firebase.firestore.runTransaction { transaction ->
             for (discount in discountsToAdd) {
                 transaction.set(Firebase.firestore.collection("discounts-basic").document(discount.id), discount)
+                val notification = Notification(
+                    id = StringFormatUtils.formatId(),
+                    date = Date(),
+                    text = "Dodano nagrodę - rabat. Dziękujemy, że jesteś z nami! / A reward - discount - has been added. Thank you for being with us!",
+                    targetGroup = -1,
+                    targetUserId = discount.assignedDiscounts[0]
+                )
+                transaction.set(Firebase.firestore.collection("notifications").document(notification.id), notification)
             }
         }.addOnSuccessListener {
             callback(true, discountsToAdd)

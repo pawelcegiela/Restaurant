@@ -39,6 +39,7 @@
 
     <style name="RestaurantAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="android:background">@color/medium_grey</item>
+        <item name="android:textColor">@color/light_grey</item>
     </style>
 
     <style name="RestaurantTabLayout" parent="Widget.Material3.TabLayout">

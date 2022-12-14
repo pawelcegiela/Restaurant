@@ -18,6 +18,10 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include
+                android:id="@+id/cardNotifications"
+                layout="@layout/card_view_wide" />
+
+            <include
                 android:id="@+id/cardOrders"
                 layout="@layout/card_view_wide" />
 

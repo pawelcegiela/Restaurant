@@ -89,7 +89,7 @@
 
     <activity
         android:id="@+id/LogOut"
-        android:name="pi.restaurantapp.ui.activities.AuthenticationActivity"
+        android:name="pi.restaurantapp.ui.activities.common.AuthenticationActivity"
         android:label="@string/log_out"
         tools:layout="@layout/activity_authentication">
 

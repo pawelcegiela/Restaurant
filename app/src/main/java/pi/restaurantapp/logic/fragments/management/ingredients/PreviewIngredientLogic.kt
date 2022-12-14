@@ -4,8 +4,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.logic.fragments.AbstractPreviewItemLogic
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.ingredient.IngredientAmountChange
+import pi.restaurantapp.objects.data.notification.Notification
 import pi.restaurantapp.objects.enums.IngredientModificationType
+import pi.restaurantapp.objects.enums.Role
+import java.util.*
 
 /**
  * Class responsible for business logic and communication with database (Model layer) for PreviewIngredientFragment.
@@ -49,6 +53,7 @@ class PreviewIngredientLogic : AbstractPreviewItemLogic() {
 
     fun updateIngredientAmount(
         id: String,
+        name: String,
         _amount: Int,
         modificationType: IngredientModificationType,
         containingDishesIds: List<String>,
@@ -71,16 +76,24 @@ class PreviewIngredientLogic : AbstractPreviewItemLogic() {
             setNewAmount(newAmount)
             addNewAmountChange(newAmountChange)
             if (newAmount == 0 && shouldDisable) {
-                disableDishes(containingDishesIds)
+                disableDishes(containingDishesIds, name)
             }
         }
     }
 
-    private fun disableDishes(containingDishesIds: List<String>) {
+    private fun disableDishes(containingDishesIds: List<String>, name: String) {
         Firebase.firestore.runTransaction { transaction ->
             for (id in containingDishesIds) {
                 transaction.update(Firebase.firestore.collection("dishes-basic").document(id), "active", false)
             }
+            val notification = Notification(
+                id = StringFormatUtils.formatId(),
+                date = Date(),
+                text = "Składnik ${name.trim()} się skończył. Wszystkie zawierające go dania zostały wyłączone w menu. / We have run out of ingredient ${name.trim()}. All containing dishes have been disabled in the menu.",
+                targetGroup = Role.WORKER.ordinal,
+                targetUserId = ""
+            )
+            transaction.set(Firebase.firestore.collection("notifications").document(notification.id), notification)
         }
     }
 }

@@ -9,8 +9,8 @@ import pi.restaurantapp.objects.data.user.UserDetails
 
 /**
  * Class responsible for business logic and communication with database (Model layer) for Authentication activity.
- * @see pi.restaurantapp.viewmodels.activities.AuthenticationViewModel ViewModel layer
- * @see pi.restaurantapp.ui.activities.AuthenticationActivity View layer
+ * @see pi.restaurantapp.viewmodels.activities.common.AuthenticationViewModel ViewModel layer
+ * @see pi.restaurantapp.ui.activities.common.AuthenticationActivity View layer
  */
 class AuthenticationLogic {
     fun getUserBasic(callback: (UserBasic?) -> (Unit)) {

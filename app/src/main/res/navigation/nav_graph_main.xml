@@ -48,6 +48,10 @@
             app:destination="@id/CustomersActivity" />
 
         <action
+            android:id="@+id/actionMainToNotifications"
+            app:destination="@id/NotificationsActivity" />
+
+        <action
             android:id="@+id/actionMainToSettings"
             app:destination="@id/SettingsActivity" />
     </fragment>
@@ -107,6 +111,12 @@
         tools:layout="@layout/activity_customers" />
 
     <activity
+        android:id="@+id/NotificationsActivity"
+        android:name="pi.restaurantapp.ui.activities.common.NotificationsActivity"
+        android:label="@string/notification_center"
+        tools:layout="@layout/activity_notifications" />
+
+    <activity
         android:id="@+id/SettingsActivity"
         android:name="pi.restaurantapp.ui.activities.management.SettingsActivity"
         android:label="@string/action_settings"
@@ -114,7 +124,7 @@
 
     <activity
         android:id="@+id/LogOut"
-        android:name="pi.restaurantapp.ui.activities.AuthenticationActivity"
+        android:name="pi.restaurantapp.ui.activities.common.AuthenticationActivity"
         android:label="@string/log_out"
         tools:layout="@layout/activity_authentication">
 

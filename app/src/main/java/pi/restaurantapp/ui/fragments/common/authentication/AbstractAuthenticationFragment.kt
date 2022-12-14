@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.fragments.authentication
+package pi.restaurantapp.ui.fragments.common.authentication
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentAuthenticationBinding
-import pi.restaurantapp.ui.activities.AuthenticationActivity
-import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
+import pi.restaurantapp.ui.activities.common.AuthenticationActivity
+import pi.restaurantapp.viewmodels.activities.common.AuthenticationViewModel
 
 /**
  * Abstract class responsible for direct communication and displaying information to the user (View layer) for authentication fragments.

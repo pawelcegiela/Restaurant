@@ -14,6 +14,7 @@ import pi.restaurantapp.objects.data.chat.Message
 class OrderChatViewModel : ViewModel() {
     private val logic = OrderChatLogic()
     var orderId = ""
+    var messageRecipientId = ""
 
     val messagesList: LiveData<MutableList<Message>> get() = _messagesList
     private val _messagesList = MutableLiveData<MutableList<Message>>()
@@ -25,6 +26,6 @@ class OrderChatViewModel : ViewModel() {
     }
 
     fun addMessage(message: Message) {
-        logic.addMessage(message, orderId)
+        logic.addMessage(message, orderId, messageRecipientId)
     }
 }

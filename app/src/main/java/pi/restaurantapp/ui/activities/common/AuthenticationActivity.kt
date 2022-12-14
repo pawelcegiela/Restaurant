@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.activities
+package pi.restaurantapp.ui.activities.common
 
 import android.content.Context
 import android.content.Intent
@@ -17,11 +17,11 @@ import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.activities.client.ClientMainActivity
 import pi.restaurantapp.ui.activities.management.MainActivity
-import pi.restaurantapp.viewmodels.activities.AuthenticationViewModel
+import pi.restaurantapp.viewmodels.activities.common.AuthenticationViewModel
 
 /**
  * Class responsible for direct communication and displaying information to the user (View layer) for AuthenticationActivity
- * @see pi.restaurantapp.viewmodels.activities.AuthenticationViewModel ViewModel layer
+ * @see pi.restaurantapp.viewmodels.activities.common.AuthenticationViewModel ViewModel layer
  * @see pi.restaurantapp.logic.activities.AuthenticationLogic Model layer
  */
 class AuthenticationActivity : AppCompatActivity() {

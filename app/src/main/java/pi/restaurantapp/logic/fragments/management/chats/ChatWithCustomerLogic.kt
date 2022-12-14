@@ -3,7 +3,10 @@ package pi.restaurantapp.logic.fragments.management.chats
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.chat.Message
+import pi.restaurantapp.objects.data.notification.Notification
+import java.util.*
 
 /**
  * Class responsible for business logic and communication with database (Model layer) for ChatWithCustomerFragment.
@@ -23,5 +26,14 @@ class ChatWithCustomerLogic {
     fun addMessage(message: Message, customerId: String) {
         dbRefDetails.document(customerId).collection("messages").document(message.id).set(message)
         dbRefBasic.document(customerId).update("lastMessageDate", message.timestamp)
+
+        val notification = Notification(
+            id = StringFormatUtils.formatId(),
+            date = Date(),
+            text = "Nowa wiadomość / New message\nAutor / Author: ${message.authorName}",
+            targetGroup = -1,
+            targetUserId = customerId
+        )
+        Firebase.firestore.collection("notifications").document(notification.id).set(notification)
     }
 }

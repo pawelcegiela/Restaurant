@@ -36,6 +36,7 @@ class OrderChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.orderId = arguments?.getString("id").toString()
+        viewModel.messageRecipientId = arguments?.getString("recipientId").toString()
         setButtonOnClickListener()
         viewModel.setFirebaseListener()
         viewModel.messagesList.observe(viewLifecycleOwner) { data ->

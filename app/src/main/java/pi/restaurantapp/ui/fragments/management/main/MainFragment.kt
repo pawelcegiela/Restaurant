@@ -33,6 +33,11 @@ class MainFragment : Fragment() {
 
     private fun setCardViews() {
         UserInterfaceUtils.setCardView(
+            binding.cardNotifications, R.drawable.bell, R.string.notification_center,
+            findNavController(), R.id.actionMainToNotifications
+        )
+
+        UserInterfaceUtils.setCardView(
             binding.cardOrders, R.drawable.order, R.string.orders,
             findNavController(), R.id.actionMainToOrders
         )

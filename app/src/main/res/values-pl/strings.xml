@@ -435,4 +435,5 @@
     <string name="rewards_have_been_generated">Nagrody zostały wygenerowane. Liczba i wartości rabatów są wyświetlone na ekranie</string>
     <string name="rewards_couldnt_be_generated">Nagrody nie mogły zostać wygenerowane</string>
     <string name="generated_rewards">Wygenerowane nagrody</string>
+    <string name="notification_center">Centrum powiadomień</string>
 </resources>

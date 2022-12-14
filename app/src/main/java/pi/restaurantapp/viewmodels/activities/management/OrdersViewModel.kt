@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import pi.restaurantapp.objects.data.delivery.DeliveryBasic
 import pi.restaurantapp.objects.data.dish.DishItem
 import pi.restaurantapp.objects.data.order.Order
+import pi.restaurantapp.viewmodels.activities.AbstractActivityViewModel
 
 /**
  * Class responsible for presentation logic and binding between data/model and view (ViewModel layer) for Orders activity.

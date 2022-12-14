@@ -1,4 +1,4 @@
-package pi.restaurantapp.ui.fragments.authentication
+package pi.restaurantapp.ui.fragments.common.authentication
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import pi.restaurantapp.R
 import pi.restaurantapp.objects.data.user.UserBasic
 import pi.restaurantapp.objects.data.user.UserDetails
 import pi.restaurantapp.objects.enums.Role
-import pi.restaurantapp.ui.activities.AuthenticationActivity
+import pi.restaurantapp.ui.activities.common.AuthenticationActivity
 import java.util.*
 
 /**
