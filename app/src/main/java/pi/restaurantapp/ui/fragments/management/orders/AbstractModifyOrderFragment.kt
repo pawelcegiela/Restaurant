@@ -74,17 +74,16 @@ abstract class AbstractModifyOrderFragment : AbstractModifyItemFragment() {
         numberPickerCollectionTime =
             CustomNumberPicker(binding.numberPickerCollectionTime, 30, 150, 5) { refreshCollectionDate() }
 
-        // TODO Przenieść
-        val data = _viewModel.item.value
-        if (data != null) {
-            numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromDate(data.details.orderDate, data.basic.collectionDate))
+        _viewModel.item.observe(viewLifecycleOwner) { item ->
+            if (item != null) {
+                numberPickerCollectionTime.setValue(ComputingUtils.getMinutesFromDate(item.details.orderDate, item.basic.collectionDate))
+            }
         }
     }
 
     private fun refreshCollectionDate() {
         _viewModel.item.value?.basic?.collectionDate =
             ComputingUtils.getDateTimeXMinutesAfterDate(_viewModel.item.value?.details?.orderDate ?: Date(), numberPickerCollectionTime.getValue())
-        // TODO Checking whether it's not too late
     }
 
     fun editDish(dishItem: DishItem) {

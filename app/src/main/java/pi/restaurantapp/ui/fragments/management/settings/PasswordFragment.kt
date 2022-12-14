@@ -49,7 +49,6 @@ class PasswordFragment : Fragment() {
     }
 
     private fun setViewModelObservers() {
-        // TODO Wyjście z fragmentu po sukcesie, nakaz wypełnienia wszystkich pól
         viewModel.currentPassword.observe(viewLifecycleOwner) { value ->
             binding.editTextCurrentPassword.setText(value)
         }

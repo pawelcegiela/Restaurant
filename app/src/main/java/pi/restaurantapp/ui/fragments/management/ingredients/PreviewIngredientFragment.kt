@@ -10,6 +10,7 @@ import pi.restaurantapp.databinding.FragmentPreviewIngredientBinding
 import pi.restaurantapp.databinding.ToolbarNavigationPreviewBinding
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.enums.IngredientModificationType
+import pi.restaurantapp.objects.enums.Role
 import pi.restaurantapp.ui.dialogs.IngredientChangesDialog
 import pi.restaurantapp.ui.fragments.AbstractPreviewItemFragment
 import pi.restaurantapp.viewmodels.fragments.AbstractPreviewItemViewModel
@@ -42,34 +43,38 @@ class PreviewIngredientFragment : AbstractPreviewItemFragment() {
     }
 
     fun onClickButtonDelivery(id: String, unit: Int) {
-        IngredientChangesDialog(
-            requireContext(),
-            unit,
-            getString(R.string.delivery),
-            getString(R.string.delivery_description, binding.textViewAmount.text)
-        ) { amount ->
-            _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.DELIVERY, setNewAmount = { newAmount ->
-                binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
-            }, addNewAmountChange = { newAmountChange ->
-                _viewModel.amountChanges.value?.add(0, newAmountChange)
-                binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(0)
-            })
+        if (Role.isAtLeastManager(viewModel.userRole.value)) {
+            IngredientChangesDialog(
+                requireContext(),
+                unit,
+                getString(R.string.delivery),
+                getString(R.string.delivery_description, binding.textViewAmount.text)
+            ) { amount ->
+                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.DELIVERY, setNewAmount = { newAmount ->
+                    binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
+                }, addNewAmountChange = { newAmountChange ->
+                    _viewModel.amountChanges.value?.add(0, newAmountChange)
+                    binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(0)
+                })
+            }
         }
     }
 
     fun onClickButtonCorrection(id: String, unit: Int) {
-        IngredientChangesDialog(
-            requireContext(),
-            unit,
-            getString(R.string.correction),
-            getString(R.string.correction_description, binding.textViewAmount.text)
-        ) { amount ->
-            _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.CORRECTION, setNewAmount = { newAmount ->
-                binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
-            }, addNewAmountChange = { newAmountChange ->
-                _viewModel.amountChanges.value?.add(0, newAmountChange)
-                binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(0)
-            })
+        if (Role.isAtLeastManager(viewModel.userRole.value)) {
+            IngredientChangesDialog(
+                requireContext(),
+                unit,
+                getString(R.string.correction),
+                getString(R.string.correction_description, binding.textViewAmount.text)
+            ) { amount ->
+                _viewModel.updateIngredientAmount(id, amount, IngredientModificationType.CORRECTION, setNewAmount = { newAmount ->
+                    binding.textViewAmount.text = StringFormatUtils.formatAmountWithUnit(requireContext(), newAmount.toString(), unit)
+                }, addNewAmountChange = { newAmountChange ->
+                    _viewModel.amountChanges.value?.add(0, newAmountChange)
+                    binding.recyclerViewAmountChanges.adapter?.notifyItemInserted(0)
+                })
+            }
         }
     }
 }

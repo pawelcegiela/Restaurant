@@ -7,7 +7,6 @@ import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.chat.Message
 import pi.restaurantapp.objects.data.notification.Notification
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Class responsible for business logic and communication with database (Model layer) for OrderChatFragment.

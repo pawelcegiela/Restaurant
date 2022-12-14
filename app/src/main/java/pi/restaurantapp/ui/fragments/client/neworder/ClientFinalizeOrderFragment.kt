@@ -16,7 +16,6 @@ import pi.restaurantapp.viewmodels.activities.client.ClientNewOrderViewModel
 import pi.restaurantapp.viewmodels.fragments.AbstractModifyItemViewModel
 import pi.restaurantapp.viewmodels.fragments.client.neworder.ClientFinalizeOrderViewModel
 
-//TODO Ustawienia z cache'a
 /**
  * Class responsible for direct communication and displaying information to the user (View layer) for ClientFinalizeOrderFragment.
  * @see pi.restaurantapp.viewmodels.fragments.client.neworder.ClientFinalizeOrderViewModel ViewModel layer

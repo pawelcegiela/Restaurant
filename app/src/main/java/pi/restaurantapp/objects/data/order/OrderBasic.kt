@@ -1,5 +1,6 @@
 package pi.restaurantapp.objects.data.order
 
+import pi.restaurantapp.logic.utils.ComputingUtils
 import pi.restaurantapp.logic.utils.StringFormatUtils
 import pi.restaurantapp.objects.data.AbstractDataObject
 import pi.restaurantapp.objects.enums.OrderType
@@ -11,7 +12,7 @@ import java.util.*
  */
 class OrderBasic : AbstractDataObject {
     var orderStatus: Int = 0
-    var collectionDate: Date = Date()
+    var collectionDate: Date = ComputingUtils.getInitialCollectionDate()
     var collectionType: Int = 0
     var value: String = "0.0"
     var name: String = ""

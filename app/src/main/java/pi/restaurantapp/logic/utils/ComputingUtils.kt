@@ -110,5 +110,9 @@ class ComputingUtils {
             }
             return discountValues
         }
+
+        fun getInitialCollectionDate(): Date {
+            return Date(Date().time + 60000 * 46)
+        }
     }
 }

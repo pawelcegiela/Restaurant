@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.viewModels
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import pi.restaurantapp.R
 import pi.restaurantapp.databinding.FragmentClientMyDataBinding
 import pi.restaurantapp.logic.utils.StringFormatUtils
@@ -43,6 +45,7 @@ class ClientMyDataFragment : AbstractModifyItemFragment() {
         binding.vm = _viewModel
         binding.fragment = this
         binding.lifecycleOwner = viewLifecycleOwner
+        itemId = Firebase.auth.uid!!
         return binding.root
     }
 

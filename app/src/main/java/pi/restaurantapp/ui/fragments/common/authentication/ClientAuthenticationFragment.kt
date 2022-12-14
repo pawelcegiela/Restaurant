@@ -31,7 +31,7 @@ class ClientAuthenticationFragment : AbstractAuthenticationFragment() {
             val email = binding.editTextSignInEmail.text
             val password = binding.editTextSignInPassword.text
             val repeatPassword = binding.editTextSignInPassword.text
-            // TODO Checking everything - common logic with adding new worker
+
             if (email.isNotEmpty() && password.isNotEmpty() && password == repeatPassword) {
                 activityViewModel.createCustomer(email.toString(), password.toString(), onSuccess = {
                     activity?.getSharedPreferences("prefs", Context.MODE_PRIVATE)?.edit()?.clear()?.apply()
