@@ -15,7 +15,7 @@ class DiscountsMainLogic : AbstractItemListLogic() {
     override val databasePath = "discounts"
 
     override fun retrieveDataList(snapshot: QuerySnapshot, callback: (MutableList<AbstractDataObject>) -> Unit) {
-        val dataList = snapshot.map { document -> document.toObject<DiscountBasic>() }.toMutableList<AbstractDataObject>()
+        val dataList = snapshot.map { document -> document.toObject<DiscountBasic>() }.sortedByDescending { it.expirationDate }.toMutableList<AbstractDataObject>()
         callback(dataList)
     }
 }
